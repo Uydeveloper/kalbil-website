@@ -58,8 +58,9 @@ export default function MainSection() {
 
         <div>
           <img
-            src="/images/image05.png"
-            alt="Students learning"
+            src={`${process.env.PUBLIC_URL}/images/image05.png`}
+            alt="KalBil Logo"
+           
             className="w-full rounded-lg shadow-lg object-cover"
           />
         </div>
