@@ -1,0 +1,933 @@
+[
+  {
+    "id": "python01",
+    "title": "Python Basics پايسان ئاساسى بىلىم ",
+    "description": "Learn the basics of Python.",
+    "instructor": "KawulJan",
+    "startDate": "2025-08-15",
+    "duration": "4 weeks",
+    "image": "/images/image01.png",
+    "video": "",
+    "likes": 0,
+    "views": 0,
+    "comments": [],
+    "category": "Programming", 
+
+
+    "topics": [
+      {
+        "id": "print_hello",
+        "title": "Let's whet your appetite",
+        "description": "چىقىرىش، پىتوننىڭ ئەڭ ئاددىي كودى",
+        "code": "print('Hello, Python!')"
+      },
+      {
+        "id": "components1",
+        "title": "Using the Python Interpreter",
+        "description": "پىتون ئىنتېرپىرېتاتورىدا ئاددىي ماتېماتىكىلىق ھېسابلاش",
+        "code": "result = 3 + 5\nprint(result)"
+      },
+      {
+        "id": "hooks1",
+        "title": "Easy Introduction",
+        "description": "بىرلەشتۈرۈپ چىقىرىش",
+        "code": "name = 'Alice'\nage = 25\nprint(name + ' is ' + str(age))"
+      },
+      {
+        "id": "int1",
+        "title": "Control Structure Tools",
+        "description": "سانلارنى جۈپ-تاقلىقىغا قاراپ تەكشۈرۈش.",
+        "code": "x = 7\nif x % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')"
+      },
+      {
+        "id": "components2",
+        "title": "Data Structures",
+        "description": "تىزىملىككە يېڭى ئېلېمېنت قوشۇش.",
+        "code": "fruits = ['apple', 'banana']\nfruits.append('cherry')\nprint(fruits)"
+      },
+      {
+        "id": "hooks2",
+        "title": "Modules",
+        "description": "مودۇلىدىن تاسادىپىي سان ھاسىل قىلىش",
+        "code": "import random\nprint(random.randint(1, 10))"
+      },
+      {
+        "id": "hooks3",
+        "title": "Input/Output",
+        "description": "input() فۇنكتسىيەسى ئارقىلىق ئىشلەتكۈچىدىن مەلۇمات ئېلىش.",
+        "code": "name = input('Ismingizni kiriting: ')\nprint('Salam, ' + name)"
+      },
+      {
+        "id": "hooks4",
+        "title": "Errors and Exceptions",
+        "description": "try-except ئارقىلىق خاتالىقنى بىر تەرەپ قىلىش.",
+        "code": "try:\n    x = int('abc')\nexcept ValueError:\n    print('Xataliq boldi!')"
+      },
+      {
+        "id": "hooks5",
+        "title": "Class",
+        "description": "كلاسس يارىتىش ۋە ئوبيېكت ئارقىلىق مېتود چاقىرىش",
+        "code": "class Person:\n    def __init__(self, name):\n        self.name = name\n\n    def greet(self):\n        print('Hi, I am ' + self.name)\n\np = Person('Ali')\np.greet()"
+      },
+      {
+        "id": "int2",
+        "title": "Standard Library Tour",
+        "description": "math مودۇلىدىكى ماتېماتىكىلىق تۇراقلىق قىممەت",
+        "code": "import math\nprint(math.pi)"
+      },
+      {
+        "id": "components3",
+        "title": "Standard Library Tour - Part II",
+        "description": "Counter ئارقىلىق ئېلېمېنتلارنىڭ سانىنى ھېسابلاش.",
+        "code": "from collections import Counter\nnums = [1, 2, 2, 3, 3, 3]\nprint(Counter(nums))"
+      },
+      {
+        "id": "hooks6",
+        "title": "Virtual Environments and Packages",
+        "description": "venv بىلەن مەۋھۇم مۇھىت يارىتىش ۋە pip بىلەن بوغچا ئورنىتىش.",
+        "code": "python -m venv myenv\nsource myenv/bin/activate\npip install requests"
+      },
+      {
+        "id": "hooks7",
+        "title": "Interactive Line Editing and History Substitution",
+        "description": "قۇرۇق تېكىستتا كود تەھرىرلەشنى مەشىق قىلىش",
+        "code": "# Bash history substitution\n!!  # Repeats last command\n!python  # Runs last command starting with 'python'"
+      }
+    ]
+  },
+{
+    "id": "quantum",
+    "title": "Quantum Physics, Mechanics, and Technology ",
+    "description": "كىۋانىت فىزىكىسى، مېخانىكىسى  تېخنىكىسىنى ئۆگىنىش.",
+    "instructor": "KawulJan",
+    "startDate": "2025-08-15",
+    "duration": "6 weeks",
+    "image": "/images/image02.png",
+    "video": "https://youtu.be/XDQofg5vjrY?si=rbs7e8lZ0wyB6WyA",
+    "likes":120,
+   "views": 20,
+   "comments": [],
+   "category": "Programming", 
+
+
+    "topics": [
+        {
+            "id": "quantum_basics",
+            "title": "كىۋانىت فىزىكىسىنىڭ ئاساسلىرى",
+            "exam_percentage": "15.00%",
+            "content": "كىۋانىت ھالەتلىرى (quantum states), كىۋانىت بىتلىرى (qubits), سۇپەرپوزىتسىيە (superposition), چىچىلىش (entanglement), Heisenberg نىڭ ئېنىقسىزلىق پرىنسىپى. بۇ تېما كىۋانىت فىزىكىسىنىڭ نەزەرىيە ئاساسىنى چۈشەندۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit\nqc = QuantumCircuit(1)  # 1 كىۋانىت بىتى\nqc.h(0)  # Hadamard گېيتى (سۇپەرپوزىتسىيە)\nprint(qc)",
+            "code_description": "Qiskit بىلەن Hadamard گېيتى ئارقىلىق سۇپەرپوزىتسىيە ھالىتى يارىتىش، كىۋانىت بىتىنى |0> ۋە |1> نىڭ بىرلەشمىسىگە كەلتۈرۈش."
+        },
+        {
+            "id": "quantum_math",
+            "title": "كىۋانىت مېخانىكىسىنىڭ ماتېماتىكىلىق ئاساسلىرى",
+            "exam_percentage": "20.00%",
+            "content": "Dirac notation, ۋېكتور بوشلۇقلىرى, ئېيگېن قىممەتلىرى ۽ ئېيگېن ۋېكتورلىرى, Hermitian ۽ Unitary ماترىتسىلار, Schrödinger تەڭلىمىسى. بۇ تېما كىۋانىت مېخانىكىسىنىڭ ماتېماتىكىلىق يىلتىزىنى چوڭقۇرلاشتۇرىدۇ.",
+            "code": "import numpy as np\nstate = np.array([1, 0])  # |0> ھالىتى\nH = np.array([[1, 1], [1, -1]]) / np.sqrt(2)  # Hadamard ماترىتسىسى\nnew_state = np.dot(H, state)\nprint(new_state)",
+            "code_description": "NumPy بىلەن كىۋانىت ھالىتىگە Hadamard ماترىتسىسىنى قوللىنىپ، سۇپەرپوزىتسىيە ھالىتى يارىتىش، نەتىجە: [0.707..., 0.707...]."
+        },
+        {
+            "id": "quantum_gates",
+            "title": "كىۋانىت گېيتلىرى ۽ زەنجىرلىرى",
+            "exam_percentage": "20.00%",
+            "content": "كىۋانىت گېيتلىرى (Pauli-X/Y/Z, Hadamard, CNOT, Toffoli), كىۋانىت زەنجىرى (quantum circuits), گېيت مەشغۇلاتلىرى ۽ ئۇلارنىڭ ماتېماتىكىلىق ئىپادىلىنىشى. بۇ تېما كىۋانىت ھېسابلاشنىڭ ئاساسىي قۇرۇلۇش بۆلەكلىرىنى چۈشەندۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit\nqc = QuantumCircuit(2)  # 2 كىۋانىت بىتى\nqc.h(0)  # Hadamard گېيتى\nqc.cx(0, 1)  # CNOT گېيتى (چىچىلىش)\nprint(qc)",
+            "code_description": "Qiskit بىلەن CNOT گېيتى ئارقىلىق ئىككى كىۋانىت بىتىنى چىچىلدۇرۇش، چىچىلغان ھالەت يارىتىش."
+        },
+        {
+            "id": "quantum_algorithms",
+            "title": "كىۋانىت ئالگورىتىملىرى",
+            "exam_percentage": "15.00%",
+            "content": "Deutsch-Jozsa, Grover, Shor ئالگورىتىملىرى, كىۋانىت فورىيە ئايلاندۇرۇشى (Quantum Fourier Transform), كلاسسىك ئالگورىتىملاردىن پەرقى. بۇ تېما كىۋانىت كومپيۇتېرلىرىنىڭ كۈچلۈكلۈكىنى كۆرسىتىدۇ.",
+            "code": "from qiskit import QuantumCircuit, Aer, execute\nqc = QuantumCircuit(3, 3)\nqc.h([0, 1, 2])  # Grover ئالگورىتىمى ئۈچۈن سۇپەرپوزىتسىيە\nqc.measure([0, 1, 2], [0, 1, 2])\nsimulator = Aer.get_backend('qasm_simulator')\nresult = execute(qc, simulator).result()\nprint(result.get_counts())",
+            "code_description": "Qiskit بىلەن Grover ئالگورىتىمىنىڭ ئاددىي نۇسخىسىنى سىمۇلياتسىيە قىلىش، سۇپەرپوزىتسىيە ۽ ئۆلچەش."
+        },
+        {
+            "id": "qiskit_programming",
+            "title": "كىۋانىت تېخنىكىسى: Qiskit بىلەن پىرۇگرامما",
+            "exam_percentage": "15.00%",
+            "content": "Qiskit نى ئورنىتىش ۽ ئىشلىتىش، كىۋانىت زەنجىرى قۇرۇش، سىمۇلياتسىيە (Qiskit Aer), IBM Quantum كومپيۇتېرىدا يۈرگۈزۈش. بۇ تېما كىۋانىت تېخنىكىسىنى پىرۇگرامما شەكلىدە ئەمەلىيلەشتۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit, Aer, execute\nqc = QuantumCircuit(1, 1)\nqc.h(0)  # سۇپەرپوزىتسىيە\nqc.measure(0, 0)\nsimulator = Aer.get_backend('qasm_simulator')\nresult = execute(qc, simulator, shots=1000).result()\nprint(result.get_counts())",
+            "code_description": "Qiskit بىلەن كىۋانىت زەنجىرىنى سىمۇلياتسىيە قىلىپ، سۇپەرپوزىتسىيە نەتىجىسىنى ئۆلچەش، نەتىجە: {'0': ~500, '1': ~500}."
+        },
+        {
+            "id": "quantum_error_correction",
+            "title": "كىۋانىت خاتالىق تۈزىتىش ۽ شاۋقۇن",
+            "exam_percentage": "10.00%",
+            "content": "كىۋانىت خاتالىق تۈزىتىش كودلىرى (Shor code, Surface code), كىۋانىت شاۋقۇنى (noise models), كىۋانىت سىستېمىلىرىنىڭ مۇقىملىقى. بۇ تېما كىۋانىت كومپيۇتېرلىرىدىكى خاتالىقلارنى بىر تەرەپ قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit, Aer, execute\nfrom qiskit.providers.aer.noise import NoiseModel\nqc = QuantumCircuit(1, 1)\nqc.x(0)  # Pauli-X گېيتى\nqc.measure(0, 0)\nsimulator = Aer.get_backend('qasm_simulator')\nresult = execute(qc, simulator).result()\nprint(result.get_counts())",
+            "code_description": "Qiskit Aer بىلەن شاۋقۇنسىز كىۋانىت زەنجىرىنى سىمۇلياتسىيە قىلىش، نەتىجە: {'1': 1000}."
+        },
+        {
+            "id": "quantum_applications",
+            "title": "كىۋانىت تېخنىكىسىنىڭ قوللىنىلىشى",
+            "exam_percentage": "10.00%",
+            "content": "كىۋانىت شىفىرلىق (quantum cryptography), كىۋانىت ئەلالاشتۇرۇش (optimization), كىۋانىت ماشىنىلىق ئۆگىنىش (quantum machine learning). بۇ تېما كىۋانىت تېخنىكىسىنىڭ رېئال دۇنيادىكى قوللىنىلىشىنى كۆرسىتىدۇ.",
+            "code": "from qiskit import QuantumCircuit\nqc = QuantumCircuit(2)\nqc.h(0)\nqc.cx(0, 1)  # چىچىلغان ھالەت\nprint(qc)",
+            "code_description": "چىچىلغان ھالەت يارىتىپ، كىۋانىت شىفىرلىقىغا ئاساس يارىتىش (مەسىلەن، BB84 پروتوكولى)."
+        },
+        {
+            "id": "quantum_experiments",
+            "title": "كىۋانىت فىزىكىسىنىڭ ئەمەلىي تەجرىبىلىرى",
+            "exam_percentage": "5.00%",
+            "content": "كىۋانىت فىزىكىسى تەجرىبىلىرى (Bell ھالىتى, كىۋانىت تېلېپورتاتسىيە), Qiskit بىلەن تەجرىبە سىمۇلياتسىيە قىلىش. بۇ تېما كىۋانىت فىزىكىسىنىڭ تەجرىبە جەھەتتىكى كۆرۈنۈشلىرىنى چۈشەندۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit, Aer, execute\nqc = QuantumCircuit(2, 2)\nqc.h(0)\nqc.cx(0, 1)  # Bell ھالىتى\nqc.measure([0, 1], [0, 1])\nsimulator = Aer.get_backend('qasm_simulator')\nresult = execute(qc, simulator, shots=1000).result()\nprint(result.get_counts())",
+            "code_description": "Qiskit بىلەن Bell ھالىتىنى سىمۇلياتسىيە قىلىپ، چىچىلىشنى كۆرسىتىش، نەتىجە: {'00': ~500, '11': ~500}."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Quantum Computation and Quantum Information” (Nielsen & Chuang) نى ئوقۇڭ. بۇ كىتاب كىۋانىت فىزىكىسى ۽ مېخانىكىسىنىڭ نەزەرىيەسىنى چوڭقۇر چۈشەندۈرىدۇ. Qiskit Textbook (https://qiskit.org/learn) نى تەجرىبە ئۈچۈن ئىشلىتىڭ.",
+        "مەشىق: Qiskit نىڭ Jupyter Notebook مەشىقلىرىنى يېشىپ، كىۋانىت زەنجىرلىرىنى سىناپ بېقىڭ. IBM Quantum Lab (https://quantum-computing.ibm.com) دا ھەقسىز كىۋانىت كومپيۇتېرىدا سىناق قىلىڭ.",
+        "كود يېزىش: ھەر بىر تېمىدىن كىچىك كىۋانىت زەنجىرلىرى يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، Bell ھالىتى ياكى Grover ئالگورىتىمى).",
+        "ماتېماتىكا: سىزىقلىق ئالگېبىرا (ۋېكتورلار، ماترىتسىلار), ئېھتىمال نەزەرىيەسى ۽ دىففېرېنتسىيال تەڭلىمىلەرنى ئۆگىنىڭ (Khan Academy ياكى Coursera دىكى “Quantum Mechanics for Scientists and Engineers” كۇرسى).",
+        "مەشىق پىلاتفورمىسى: Qiskit Challenges ياكى Quantum Computing Hackathons (https://qiskit.org/events) غا قاتنىشىپ، ئەمەلىي تەجرىبە توپلاڭ."
+    ]
+},
+
+{
+    "id": "tensorflow",
+    "title": "TensorFlow Learning تېنسورفىلوۋ ئۈگنىش",
+    "description": "ئۈگنىش TensorFlow  .",
+    "instructor": "KawulJan",
+    "startDate": "2025-08-15",
+    "duration": "3 weeks",
+    "image": "/images/image03.png",
+    "video": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "likes": 30,
+   "views": 10,
+   "comments": [],
+    "category": "machine learning", 
+
+
+    "topics": [
+        {
+            "id": "tensorflow_intro",
+            "title": "TensorFlow ۽ Keras غا كىرىش",
+            "exam_percentage": "10.00%",
+            "content": "TensorFlow نىڭ چۈشەنچىسى، Keras API نىڭ ئىشلىتىلىشى، مۇھىت تەڭشەش (TensorFlow ئورنىتىش)، چوڭقۇر ئۆگىنىشتىكى رولى. بۇ تېما TensorFlow نىڭ ئاساسىي قۇرۇلمىسى ۽ قوللىنىلىشىنى تونۇشتۇرىدۇ.",
+            "code": "import tensorflow as tf\nprint(tf.__version__)",
+            "code_description": "TensorFlow نىڭ نۇسخىسىنى تەكشۈرۈش، مۇھىتنىڭ تەييارلىقىنى جەزملەشتۈرۈش."
+        },
+        {
+            "id": "data_preparation",
+            "title": "سانلىق مەلۇمات تەييارلاش",
+            "exam_percentage": "15.00%",
+            "content": "سانلىق مەلۇماتنى تازىلاش، نورماللاشتۇرۇش، كاتېگورىيەلىك مەلۇماتلارنى كودلاش، TensorFlow نىڭ tf.data API بىلەن سانلىق مەلۇمات يۈكلەش. بۇ تېما چوڭقۇر ئۆگىنىش مودېللىرى ئۈچۈن مەلۇمات تەييارلاشنى چۈشەندۈرىدۇ.",
+            "code": "import tensorflow as tf\nimport numpy as np\ndataset = np.array([[1, 2], [3, 4], [5, 6]])\ndataset = tf.data.Dataset.from_tensor_slices(dataset)\ndataset = dataset.batch(2)\nfor batch in dataset:\n    print(batch.numpy())",
+            "code_description": "tf.data API بىلەن سانلىق مەلۇمات توپلىمىنى يېشىپ، كۆپەكلەپ (batch) بىر تەرەپ قىلىش، نەتىجە: [[1, 2], [3, 4]] ۽ [[5, 6]]."
+        },
+        {
+            "id": "neural_network_structure",
+            "title": "نېرۋا تورى قۇرۇلمىسى",
+            "exam_percentage": "20.00%",
+            "content": "Keras بىلەن نېرۋا تورى قۇرۇش: يوغان قاتلام (Dense), ئاكتىپلاش فۇنكتسىيەلىرى (ReLU, Sigmoid), قاتلاملارنى رەتكە تىزىش (Sequential). بۇ تېما نېرۋا تورىنىڭ قۇرۇلمىسى ۽ ئاساسىي قۇرۇلۇش بۆلەكلىرىنى چۈشەندۈرىدۇ.",
+            "code": "from tensorflow.keras.models import Sequential\nfrom tensorflow.keras.layers import Dense\nmodel = Sequential([\n    Dense(16, activation='relu', input_shape=(2,)),\n    Dense(1, activation='sigmoid')\n])\nmodel.compile(optimizer='adam', loss='binary_crossentropy')\nprint(model.summary())",
+            "code_description": "Keras بىلەن ئىككى قاتلاملىق نېرۋا تورى قۇرۇش ۽ مودېلنىڭ خۇلاسىسىنى كۆرسىتىش."
+        },
+        {
+            "id": "neural_network_training",
+            "title": "نېرۋا تورىنى مەشىقلەندۈرۈش",
+            "exam_percentage": "20.00%",
+            "content": "گرادىيېنت تۆۋەنلەش، يوقىتىش فۇنكتسىيەلىرى (MSE, Cross-Entropy), ئوپتىمىزاتورلار (Adam, SGD), Keras بىلەن مەشىقلەندۈرۈش (fit مېتودى). بۇ تېما نېرۋا تورىنىڭ مەشىقلەندۈرۈش جەريانىنى چۈشەندۈرىدۇ.",
+            "code": "import tensorflow as tf\nimport numpy as np\nX = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])\ny = np.array([0, 1, 1, 0])  # XOR مەسىلىسى\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Dense(16, activation='relu', input_shape=(2,)),\n    tf.keras.layers.Dense(1, activation='sigmoid')\n])\nmodel.compile(optimizer='adam', loss='binary_crossentropy')\nmodel.fit(X, y, epochs=100, verbose=0)\nprint(model.predict(X))",
+            "code_description": "Keras بىلەن نېرۋا تورىنى مەشىقلەندۈرۈپ، XOR مەسىلىسىنى يېشىش، نەتىجە: تەخمىنەن [0, 1, 1, 0]."
+        },
+        {
+            "id": "mathematical_foundations",
+            "title": "ماتېماتىكىلىق ئاساسلار",
+            "exam_percentage": "15.00%",
+            "content": "سىزىقلىق ئالگېبىرا (ماترىتسا، ۋېكتور مەشغۇلاتلىرى), گرادىيېنت ۽ ئوپتىمىزاتسىيە، TensorFlow دا تېنسور مەشغۇلاتلىرى. بۇ تېما نېرۋا تورىنىڭ ماتېماتىكىلىق يىلتىزىنى چۈشەندۈرىدۇ.",
+            "code": "import tensorflow as tf\nW = tf.constant([[1, 2], [3, 4]], dtype=tf.float32)\nX = tf.constant([1, 1], dtype=tf.float32)\noutput = tf.matmul(W, tf.expand_dims(X, axis=1))\nprint(output.numpy())",
+            "code_description": "TensorFlow بىلەن ماترىتسا ۽ ۋېكتور كۆپەيتىش، نەتىجە: [[3], [7]]."
+        },
+        {
+            "id": "model_evaluation_tuning",
+            "title": "مودېلنى باھالاش ۽ تەڭشەش",
+            "exam_percentage": "15.00%",
+            "content": "مودېلنى باھالاش (accuracy, precision, recall), ھەددىدىن زىيادە ماسلىشىشنىڭ ئالدىنى ئېلىش (Dropout, Regularization), ھىپەرپارامېتىر تەڭشەش (Grid Search). بۇ تېما مودېلنىڭ ئىقتىدارىنى يۇقىرى كۆتۈرۈشنى چۈشەندۈرىدۇ.",
+            "code": "from tensorflow.keras.models import Sequential\nfrom tensorflow.keras.layers import Dense, Dropout\nmodel = Sequential([\n    Dense(16, activation='relu', input_shape=(2,)),\n    Dropout(0.2),  # 20% ياپونلارنى ئۆچۈرۈش\n    Dense(1, activation='sigmoid')\n])\nmodel.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])\nprint('مودېل تەييار!')",
+            "code_description": "Dropout قاتلىمى بىلەن ھەددىدىن زىيادە ماسلىشىشنىڭ ئالدىنى ئېلىش ۽ مودېلنى تەييارلاش."
+        },
+        {
+            "id": "visualization",
+            "title": "گرافىك سىزىش ۽ كۆرۈنمە قىلىش",
+            "exam_percentage": "10.00%",
+            "content": "مودېل نەتىجىلىرى ۽ يوقىتىش گرافىكلىرىنى كۆرۈنمە قىلىش: Matplotlib بىلەن يوقىتىش ۽ توغرىلىق گرافىكى سىزىش. بۇ تېما مەشىقلەندۈرۈش جەريانىنى كۆرۈنمە قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "import matplotlib.pyplot as plt\nhistory = model.fit(X, y, epochs=100, verbose=0)\nplt.plot(history.history['loss'])\nplt.xlabel('Epochs')\nplt.ylabel('Loss')\nplt.show()",
+            "code_description": "Matplotlib بىلەن مەشىقلەندۈرۈش جەريانىدىكى يوقىتىش گرافىكىنى سىزىش."
+        },
+        {
+            "id": "advanced_tensorflow",
+            "title": "ئىلغار TensorFlow قوللىنىشلىرى",
+            "exam_percentage": "10.00%",
+            "content": "قاتلاملىق نېرۋا تورلىرى (CNN, RNN), TensorFlow بىلەن رەسىم تونۇش، تەبىئىي تىل بىر تەرەپ قىلىش (NLP)، GPU بىلەن مەشىقلەندۈرۈش. بۇ تېما TensorFlow نىڭ ئىلغار قوللىنىلىشىنى چۈشەندۈرىدۇ.",
+            "code": "from tensorflow.keras.models import Sequential\nfrom tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense\nmodel = Sequential([\n    Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),\n    MaxPooling2D((2, 2)),\n    Flatten(),\n    Dense(10, activation='softmax')\n])\nmodel.compile(optimizer='adam', loss='categorical_crossentropy')\nprint('CNN تەييار!')",
+            "code_description": "TensorFlow بىلەن CNN مودېلى قۇرۇش (مەسىلەن، MNIST رەقەملەرنى تونۇش ئۈچۈن)."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Deep Learning with Python” (François Chollet) نى ئوقۇڭ. بۇ كىتاب TensorFlow ۽ Keras بىلەن چوڭقۇر ئۆگىنىشنى چوڭقۇر چۈشەندۈرىدۇ.",
+        "مەشىق: Kaggle (https://www.kaggle.com) دا TensorFlow بىلەن تۈرلەرنى يېشىڭ (مەسىلەن، “MNIST Digit Recognition” ياكى “Cats vs Dogs”). TensorFlow نىڭ رەسمىي دەرسلىكلىرى (https://www.tensorflow.org/learn) پايدىلىق.",
+        "كود يېزىش: ھەر بىر تېمىدىن كىچىك نېرۋا تورى مودېللىرى يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، رەسىم سىنىفلاندۇرۇش ياكى تېكىست تەھلىلى).",
+        "ماتېماتىكا: سىزىقلىق ئالگېبىرا، گرادىيېنت ئوپتىمىزاتسىيەسى ۽ ئىستاتىستىكا ئۆگىنىڭ (Coursera دىكى “Deep Learning Specialization” ياكى “Mathematics for Machine Learning”).",
+        "مەشىق پىلاتفورمىسى: Google Colab (https://colab.research.google.com) دا ھەقسىز GPU بىلەن TensorFlow مودېللىرىنى مەشىقلەندۈرۈڭ ياكى Kaggle Competitions غا قاتنىشىڭ."
+    ]
+},
+
+{
+    "id": "machine_learning",
+    "title": "Machine Learning ماشىنا ئۈگنىش ",
+    "description": "ماشىنىلىق ئۆگىنىشنىڭ  كود مىساللرى.",
+    "instructor": "KawulJan",
+    "startDate": "2025-08-15",
+    "duration": "3 weeks",
+    "image": "/images/image03.png",
+    "video": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "likes": 0,
+  "views": 0,
+  "comments": [],
+    "category": "machine learning", 
+
+
+    "topics": [
+        {
+            "id": "ml_basics",
+            "title": "ماشىنىلىق ئۆگىنىشنىڭ ئاساسلىرى",
+            "exam_percentage": "10.00%",
+            "content": "ماشىنىلىق ئۆگىنىشنىڭ چۈشەنچىسى، تۈرلىرى (نازارەتلىك، نازارەتسىز، كۈچەيتىلگەن ئۆگىنىش)، سانلىق مەلۇمات ئانالىزىدىكى رولى. بۇ تېما ماشىنىلىق ئۆگىنىشنىڭ ئومۇمىي جەريانى ۽ چۈشەنچىلىرىنى تونۇشتۇرىدۇ.",
+            "code": "print('ماشىنىلىق ئۆگىنىش: نازارەتلىك ۋە نازارەتسىز ئۆگىنىش')",
+            "code_description": "بۇ تېما ماشىنىلىق ئۆگىنىشنىڭ ئومۇمىي جەريانى ۽ چۈشەنچىلىرىنى تونۇشتۇرىدۇ، كود تەلەپ قىلىنمايدۇ."
+        },
+        {
+            "id": "data_preparation",
+            "title": "سانلىق مەلۇماتنى تەييارلاش",
+            "exam_percentage": "20.00%",
+            "content": "سانلىق مەلۇماتنى تازىلاش، نورماللاشتۇرۇش، كاتېگورىيەلىك مەلۇماتلارنى كودلاش، ئالاھىدىلىك تاللاش (feature selection). بۇ تېما ماشىنىلىق ئۆگىنىش مودېللىرى ئۈچۈن مەلۇمات تەييارلاشنى چۈشەندۈرىدۇ.",
+            "code": "import pandas as pd\nfrom sklearn.preprocessing import StandardScaler\ndf = pd.DataFrame({'score': [85, 90, None, 88]})\ndf.fillna(df.mean(), inplace=True)  # كەم قىممەتلەرنى تولدۇرۇش\nscaler = StandardScaler()\nscaled_data = scaler.fit_transform(df[['score']])\nprint(scaled_data)",
+            "code_description": "pandas بىلەن كەم سانلىق مەلۇماتلارنى تولدۇرۇش ۽ StandardScaler بىلەن نورماللاشتۇرۇش، نەتىجە: نورماللاشتۇرۇلغان قىممەتلەر."
+        },
+        {
+            "id": "supervised_learning",
+            "title": "نازارەتلىك ئۆگىنىش (Supervised Learning)",
+            "exam_percentage": "25.00%",
+            "content": "سىنىفلاندۇرۇش (classification) ۽ رېگرېسسىيە (regression): لىنىيەلىك رېگرېسسىيە، لوگىستىك رېگرېسسىيە، Decision Trees, SVM. بۇ تېما نازارەتلىك ئۆگىنىشنىڭ ئاساسىي ئالگورىتىملىرىنى چۈشەندۈرىدۇ.",
+            "code": "from sklearn.linear_model import LinearRegression\nX = [[1], [2], [3], [4]]\ny = [2, 4, 6, 8]\nmodel = LinearRegression().fit(X, y)\nprint(model.predict([[5]]))",
+            "code_description": "scikit-learn بىلەن سىزىقلىق رېگرېسسىيە مودېلى قۇرۇش ۽ پەرەز قىلىش، نەتىجە: [10]."
+        },
+        {
+            "id": "unsupervised_learning",
+            "title": "نازارەتسىز ئۆگىنىش (Unsupervised Learning)",
+            "exam_percentage": "15.00%",
+            "content": "كىلاستېرلەش (clustering: K-Means, DBSCAN), ئۆلچەم ئازايتىش (dimensionality reduction: PCA, t-SNE). بۇ تېما نازارەتسىز ئۆگىنىشنىڭ ئاساسىي ئالگورىتىملىرىنى چۈشەندۈرىدۇ.",
+            "code": "from sklearn.cluster import KMeans\nimport numpy as np\nX = np.array([[1, 2], [1, 4], [3, 2], [4, 4]])\nkmeans = KMeans(n_clusters=2).fit(X)\nprint(kmeans.labels_)",
+            "code_description": "KMeans بىلەن سانلىق مەلۇماتلارنى ئىككى گۇرۇپپىغا كىلاستېرلەش، نەتىجە: [0, 0, 1, 1]."
+        },
+        {
+            "id": "mathematical_foundations",
+            "title": "ماتېماتىكىلىق ئاساسلار",
+            "exam_percentage": "15.00%",
+            "content": "سىزىقلىق ئالگېبىرا (ماترىتسا مەشغۇلاتلىرى), ئىستاتىستىكا (ئوتتۇرىچە, ستاندارت چەتنەش), گرادىيېنت تۆۋەنلەش (gradient descent). بۇ تېما ماشىنىلىق ئۆگىنىشنىڭ ماتېماتىكىلىق يىلتىزىنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nX = np.array([[1, 2], [3, 4]])\nprint(np.dot(X, X))",
+            "code_description": "NumPy بىلەن ماترىتسا كۆپەيتىش، ماشىنىلىق ئۆگىنىش مودېللىرىدا كېرەك، نەتىجە: [[7, 10], [15, 22]]."
+        },
+        {
+            "id": "model_evaluation_tuning",
+            "title": "مودېلنى باھالاش ۋە تەڭشەش",
+            "exam_percentage": "15.00%",
+            "content": "مودېلنى باھالاش (accuracy, precision, recall, F1-score), ھەددىدىن زىيادە ماسلىشىش (overfitting), ھەددىدىن تۆۋەن ماسلىشىش (underfitting), ھىپەرپارامېتىر تەڭشەش (hyperparameter tuning). بۇ تېما مودېلنىڭ ئىقتىدارىنى يۇقىرى كۆتۈرۈشنى چۈشەندۈرىدۇ.",
+            "code": "from sklearn.metrics import accuracy_score\ny_true = [0, 1, 1, 0]\ny_pred = [0, 1, 0, 0]\nprint(accuracy_score(y_true, y_pred))",
+            "code_description": "accuracy_score بىلەن سىنىفلاندۇرۇش مودېلىنىڭ توغرىلىق دەرىجىسىنى ھېسابلاش، نەتىجە: 0.75."
+        },
+        {
+            "id": "visualization",
+            "title": "گرافىك سىزىش ۽ كۆرۈنمە قىلىش",
+            "exam_percentage": "10.00%",
+            "content": "سانلىق مەلۇمات ۽ مودېل نەتىجىلىرىنى كۆرۈنمە قىلىش: Matplotlib, Seaborn بىلەن گرافىك سىزىش (scatter plot, heatmap). بۇ تېما سانلىق مەلۇماتلارنى كۆرۈنمە قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nsns.scatterplot(x=[1, 2, 3, 4], y=[10, 20, 25, 30])\nplt.xlabel('X')\nplt.ylabel('Y')\nplt.show()",
+            "code_description": "Seaborn بىلەن تارقاق گرافىك سىزىش، سانلىق مەلۇماتلارنى كۆرۈنمە قىلىش."
+        },
+        {
+            "id": "deep_learning_intro",
+            "title": "چوڭقۇر ئۆگىنىشكە كىرىش (Deep Learning)",
+            "exam_percentage": "5.00%",
+            "content": "چوڭقۇر ئۆگىنىشنىڭ ئاساسلىرى (neural networks), TensorFlow ياكى PyTorch بىلەن ئاددىي مودېللار. بۇ تېما چوڭقۇر ئۆگىنىشنىڭ دەسلەپكى قەدەملىرىنى چۈشەندۈرىدۇ.",
+            "code": "from tensorflow.keras.models import Sequential\nfrom tensorflow.keras.layers import Dense\nmodel = Sequential([Dense(10, activation='relu', input_shape=(1,)), Dense(1)])\nmodel.compile(optimizer='adam', loss='mse')\nprint('مودېل تەييار!')",
+            "code_description": "TensorFlow بىلەن ئاددىي ياپون نېرۋا تورى قۇرۇش، چوڭقۇر ئۆگىنىشكە كىرىش."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow” (Aurélien Géron) نى ئوقۇڭ. بۇ كىتاب ماشىنىلىق ئۆگىنىشنىڭ ئەمەلىي ۽ نەزەرىيە جەھەتلىرىنى چوڭقۇر چۈشەندۈرىدۇ.",
+        "مەشىق: Kaggle (https://www.kaggle.com) دا ماشىنىلىق ئۆگىنىش تۈرلەرنى يېشىڭ (مەسىلەن، “Titanic” ياكى “House Prices”). Scikit-learn ۽ TensorFlow نىڭ رەسمىي دەرسلىكلىرى (https://scikit-learn.org, https://www.tensorflow.org/learn) پايدىلىق.",
+        "كود يېزىش: ھەر بىر تېمىدىن كىچىك مودېللار يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، سىنىفلاندۇرۇش ياكى كىلاستېرلەش تۈرلىرى).",
+        "ماتېماتىكا: سىزىقلىق ئالگېبىرا، ئىستاتىستىكا ۽ گرادىيېنت ئوپتىمىزاتسىيەسىنى ئۆگىنىڭ (Coursera دىكى “Mathematics for Machine Learning” ياكى “Deep Learning Specialization”).",
+        "مەشىق پىلاتفورمىسى: Google Colab (https://colab.research.google.com) دا ھەقسىز GPU بىلەن مودېللارنى مەشىقلەندۈرۈڭ ياكى Kaggle Competitions غا قاتنىشىڭ."
+    ]
+},
+
+{
+    "id": "quantum_content_table  كىۋانىت ماشىنا ئۈگنىش",
+    "title": "Quantum Machine Learning  كىۋانىت ماشىنا ئۈگنىش",
+    "description": "  كىۋانىت ماشىنا ئۈگنىش",
+    "instructor": "KawulJan",
+    "startDate": "2025-08-15",
+    "duration": "5 weeks",
+    "image": "/images/image02.png",
+    "video": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "likes": 30,
+   "views":139,
+   "comments": [],
+   "category": "Quantum Computing, Quantum Machine Learning.Quantum", 
+
+
+    "topics": [
+        {
+            "id": "quantum_basics",
+            "title": "كىۋانىت فىزىكىسىنىڭ ئاساسلىرى",
+            "exam_percentage": "15.00%",
+            "content": "كىۋانىت ھالەتلىرى (quantum states), كىۋانىت بىتلىرى (qubits), سۇپەرپوزىتسىيە (superposition), چىچىلىش (entanglement), Heisenberg نىڭ ئېنىقسىزلىق پرىنسىپى. بۇ تېما كىۋانىت فىزىكىسىنىڭ نەزەرىيە ئاساسىنى چۈشەندۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit\nqc = QuantumCircuit(1)  # 1 كىۋانىت بىتى\nqc.h(0)  # Hadamard گېيتى (سۇپەرپوزىتسىيە)\nprint(qc)",
+            "code_description": "Qiskit بىلەن Hadamard گېيتى ئارقىلىق سۇپەرپوزىتسىيە ھالىتى يارىتىش، كىۋانىت بىتىنى |0> ۋە |1> نىڭ بىرلەشمىسىگە كەلتۈرۈش."
+        },
+        {
+            "id": "quantum_math",
+            "title": "كىۋانىت مېخانىكىسىنىڭ ماتېماتىكىلىق ئاساسلىرى",
+            "exam_percentage": "20.00%",
+            "content": "Dirac notation, ۋېكتور بوشلۇقلىرى, ئېيگېن قىممەتلىرى ۽ ئېيگېن ۋېكتورلىرى, Hermitian ۽ Unitary ماترىتسىلار, Schrödinger تەڭلىمىسى. بۇ تېما كىۋانىت مېخانىكىسىنىڭ ماتېماتىكىلىق يىلتىزىنى چوڭقۇرلاشتۇرىدۇ.",
+            "code": "import numpy as np\nstate = np.array([1, 0])  # |0> ھالىتى\nH = np.array([[1, 1], [1, -1]]) / np.sqrt(2)  # Hadamard ماترىتسىسى\nnew_state = np.dot(H, state)  # سۇپەرپوزىتسىيە\nprint(new_state)",
+            "code_description": "NumPy بىلەن كىۋانىت ھالىتىگە Hadamard ماترىتسىسىنى قوللىنىپ، سۇپەرپوزىتسىيە ھالىتى يارىتىش، نەتىجە: [0.707..., 0.707...]."
+        },
+        {
+            "id": "quantum_gates",
+            "title": "كىۋانىت گېيتلىرى ۽ زەنجىرلىرى",
+            "exam_percentage": "20.00%",
+            "content": "كىۋانىت گېيتلىرى (Pauli-X/Y/Z, Hadamard, CNOT, Toffoli), كىۋانىت زەنجىرى (quantum circuits), گېيت مەشغۇلاتلىرى ۽ ئۇلارنىڭ ماتېماتىكىلىق ئىپادىلىنىشى. بۇ تېما كىۋانىت ھېسابلاشنىڭ ئاساسىي قۇرۇلۇش بۆلەكلىرىنى چۈشەندۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit\nqc = QuantumCircuit(2)  # 2 كىۋانىت بىتى\nqc.h(0)  # Hadamard گېيتى\nqc.cx(0, 1)  # CNOT گېيتى (چىچىلىش)\nprint(qc)",
+            "code_description": "Qiskit بىلەن CNOT گېيتى ئارقىلىق ئىككى كىۋانىت بىتىنى چىچىلدۇرۇش، چىچىلغان ھالەت يارىتىش."
+        },
+        {
+            "id": "quantum_algorithms",
+            "title": "كىۋانىت ئالگورىتىملىرى",
+            "exam_percentage": "15.00%",
+            "content": "Deutsch-Jozsa, Grover, Shor ئالگورىتىملىرى, كىۋانىت فورىيە ئايلاندۇرۇشى (Quantum Fourier Transform), كلاسسىك ئالگورىتىملاردىن پەرقى. بۇ تېما كىۋانىت كومپيۇتېرلىرىنىڭ كۈچلۈكلۈكىنى كۆرسىتىدۇ.",
+            "code": "from qiskit import QuantumCircuit, Aer, execute\nqc = QuantumCircuit(3, 3)\nqc.h([0, 1, 2])  # Grover ئالگورىتىمى ئۈچۈن سۇپەرپوزىتسىيە\nqc.measure([0, 1, 2], [0, 1, 2])\nsimulator = Aer.get_backend('qasm_simulator')\nresult = execute(qc, simulator).result()\nprint(result.get_counts())",
+            "code_description": "Qiskit بىلەن Grover ئالگورىتىمىنىڭ ئاددىي نۇسخىسىنى سىمۇلياتسىيە قىلىش، سۇپەرپوزىتسىيە ۽ ئۆلچەش."
+        },
+        {
+            "id": "qiskit_programming",
+            "title": "كىۋانىت تېخنىكىسى: Qiskit بىلەن پىرۇگرامما",
+            "exam_percentage": "15.00%",
+            "content": "Qiskit نى ئورنىتىش ۽ ئىشلىتىش، كىۋانىت زەنجىرى قۇرۇش، سىمۇلياتسىيە (Qiskit Aer), IBM Quantum كومپيۇتېرىدا يۈرگۈزۈش. بۇ تېما كىۋانىت تېخنىكىسىنى پىرۇگرامما شەكلىدە ئەمەلىيلەشتۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit, Aer, execute\nqc = QuantumCircuit(1, 1)\nqc.h(0)  # سۇپەرپوزىتسىيە\nqc.measure(0, 0)\nsimulator = Aer.get_backend('qasm_simulator')\nresult = execute(qc, simulator, shots=1000).result()\nprint(result.get_counts())",
+            "code_description": "Qiskit بىلەن كىۋانىت زەنجىرىنى سىمۇلياتسىيە قىلىپ، سۇپەرپوزىتسىيە نەتىجىسىنى ئۆلچەش، نەتىجە: {'0': ~500, '1': ~500}."
+        },
+        {
+            "id": "quantum_error_correction",
+            "title": "كىۋانىت خاتالىق تۈزىتىش ۽ شاۋقۇن",
+            "exam_percentage": "10.00%",
+            "content": "كىۋانىت خاتالىق تۈزىتىش كودلىرى (Shor code, Surface code), كىۋانىت شاۋقۇنى (noise models), كىۋانىت سىستېمىلىرىنىڭ مۇقىملىقى. بۇ تېما كىۋانىت كومپيۇتېرلىرىدىكى خاتالىقلارنى بىر تەرەپ قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit, Aer, execute\nfrom qiskit.providers.aer.noise import NoiseModel\nqc = QuantumCircuit(1, 1)\nqc.x(0)  # Pauli-X گېيتى\nqc.measure(0, 0)\nsimulator = Aer.get_backend('qasm_simulator')\nresult = execute(qc, simulator).result()\nprint(result.get_counts())",
+            "code_description": "Qiskit Aer بىلەن شاۋقۇنسىز كىۋانىت زەنجىرىنى سىمۇلياتسىيە قىلىش، نەتىجە: {'1': 1000}."
+        },
+        {
+            "id": "quantum_applications",
+            "title": "كىۋانىت تېخنىكىسىنىڭ قوللىنىلىشى",
+            "exam_percentage": "10.00%",
+            "content": "كىۋانىت شىفىرلىق (quantum cryptography), كىۋانىت ئەلالاشتۇرۇش (optimization), كىۋانىت ماشىنىلىق ئۆگىنىش (quantum machine learning). بۇ تېما كىۋانىت تېخنىكىسىنىڭ رېال دۇنيادىكى قوللىنىلىشىنى كۆرسىتىدۇ.",
+            "code": "from qiskit import QuantumCircuit\nqc = QuantumCircuit(2)\nqc.h(0)\nqc.cx(0, 1)  # چىچىلغان ھالەت\nprint(qc)",
+            "code_description": "چىچىلغان ھالەت يارىتىپ، كىۋانىت شىفىرلىقىغا ئاساس يارىتىش (مەسىلەن، BB84 پروتوكولى)."
+        },
+        {
+            "id": "quantum_experiments",
+            "title": "كىۋانىت فىزىكىسىنىڭ ئەمەلىي تەجرىبىلىرى",
+            "exam_percentage": "5.00%",
+            "content": "كىۋانىت فىزىكىسى تەجرىبىلىرى (Bell ھالىتى, كىۋانىت تېلېپورتاتسىيە), Qiskit بىلەن تەجرىبە سىمۇلياتسىيە قىلىش. بۇ تېما كىۋانىت فىزىكىسىنىڭ تەجرىبە جەھەتتىكى كۆرۈنۈشلىرىنى چۈشەندۈرىدۇ.",
+            "code": "from qiskit import QuantumCircuit, Aer, execute\nqc = QuantumCircuit(2, 2)\nqc.h(0)\nqc.cx(0, 1)  # Bell ھالىتى\nqc.measure([0, 1], [0, 1])\nsimulator = Aer.get_backend('qasm_simulator')\nresult = execute(qc, simulator, shots=1000).result()\nprint(result.get_counts())",
+            "code_description": "Qiskit بىلەن Bell ھالىتىنى سىمۇلياتسىيە قىلىپ، چىچىلىشنى كۆرسىتىش، نەتىجە: {'00': ~500, '11': ~500}."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Quantum Computation and Quantum Information” (Nielsen & Chuang) نى ئوقۇڭ. بۇ كىتاب كىۋانىت فىزىكىسى ۽ مېخانىكىسىنىڭ نەزەرىيەسىنى چوڭقۇر چۈشەندۈرىدۇ. Qiskit Textbook (https://qiskit.org/learn) نى تەجرىبە ئۈچۈن ئىشلىتىڭ.",
+        "مەشىق: Qiskit نىڭ Jupyter Notebook مەشىقلىرىنى يېشىپ، كىۋانىت زەنجىرلىرىنى سىناپ بېقىڭ. IBM Quantum Lab (https://quantum-computing.ibm.com) دا ھەقسىز كىۋانىت كومپيۇتېرىدا سىناق قىلىڭ.",
+        "كود يېزىش: ھەر بىر تېمىدىن كىچىك كىۋانىت زەنجىرلىرى يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، Bell ھالىتى ياكى Grover ئالگورىتىمى).",
+        "ماتېماتىكا: سىزىقلىق ئالگېبىرا (ۋېكتورلار، ماترىتسىلار), ئېھتىمال نەزەرىيەسى ۽ دىففېرېنتسىيال تەڭلىمىلەرنى ئۆگىنىڭ (Khan Academy ياكى Coursera دىكى “Quantum Mechanics for Scientists and Engineers” كۇرسى).",
+        "مەشىق پىلاتفورمىسى: Qiskit Challenges ياكى Quantum Computing Hackathons (https://qiskit.org/events) غا قاتنىشىپ، ئەمەلىي تەجرىبە توپلاڭ."
+    ]
+},
+
+{
+    "id": "data_analysis",
+    "title": "Data Analysis سانلق مەلۇمەت ئانالىزى",
+    "description": "سانلىق مەلۇمات ئانالىزىنىڭ ئۈگنىش.",
+    "instructor": "KawulJan",
+    "startDate": "2025-08-15",
+    "duration": "2 weeks",
+    "image": "/images/image07.png",
+    "video": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "likes": 0,
+   "views": 0,
+   "comments": [],
+   "category": "data analysis", 
+
+
+    "topics": [
+        {
+            "id": "data_engineer_role",
+            "title": "سانلىق مەلۇمات ئىنگىنېرىنىڭ رولى",
+            "exam_percentage": "5.00%",
+            "content": "سانلىق مەلۇمات ئىنگىنېرىنىڭ خىزمەت رولى، سانلىق مەلۇمات ئانالىز جەريانى (جەم قىلىش، تازىلاش، تەھلىل قىلىش)، سانلىق مەلۇمات ئىلمىدىكى پىتوننىڭ رولى. بۇ باب سانلىق مەلۇمات ئانالىزىنىڭ ئومۇمىي جەريانىنى تونۇشتۇرىدۇ.",
+            "code": "print('سانلىق مەلۇمات ئانالىزى: جەم قىلىش -> تازىلاش -> تەھلىل')",
+            "code_description": "بۇ باب سانلىق مەلۇمات ئانالىزىنىڭ ئومۇمىي جەريانىنى چۈشەندۈرىدۇ، كود تەلەپ قىلىنمايدۇ."
+        },
+        {
+            "id": "python_environment",
+            "title": "پىتون ۽ مۇھىت",
+            "exam_percentage": "10.00%",
+            "content": "پىتوننىڭ سانلىق مەلۇمات ئانالىزىدىكى ئىشلىتىلىشى، مۇھىت تەڭشەش (Anaconda, JupyterLab)، پىتوننىڭ ئاساسىي گرامماتىكىسى (ئۆزگەرگۈچىلەر، تىزىملىكلەر، فۇنكتسىيەلەر). بۇ باب پىتوننى سانلىق مەلۇمات ئانالىزىدا ئىشلىتىشنىڭ دەسلەپكى قەدەملىرىنى چۈشەندۈرىدۇ.",
+            "code": "numbers = [1, 2, 3, 4]\nprint(sum(numbers) / len(numbers))",
+            "code_description": "تىزىملىكتىكى سانلارنىڭ ئوتتۇرىچە قىممىتىنى ھېسابلاش، نەتىجە: 2.5."
+        },
+        {
+            "id": "setup_environment",
+            "title": "يۈرگۈزۈش مۇھىتىنى قۇرۇش",
+            "exam_percentage": "2.50%",
+            "content": "پىتوننى ئورنىتىش، Anaconda بىلەن مەۋھۇم مۇھىت قۇرۇش، JupyterLab نى ئىشلىتىش، بوغچا باشقۇرۇش (pip, conda). بۇ باب سانلىق مەلۇمات ئانالىزى ئۈچۈن تەييار مۇھىت قۇرۇشنى چۈشەندۈرىدۇ.",
+            "code": "print('JupyterLab مۇھىتى تەييار!')",
+            "code_description": "JupyterLab نى ئىشلىتىپ ئاددىي كود يېزىش."
+        },
+        {
+            "id": "python_basics",
+            "title": "پىتوننىڭ ئاساسى",
+            "exam_percentage": "7.50%",
+            "content": "پىتوننىڭ ئاساسىي سانلىق مەلۇمات تىپللىرى (list, dict), فۇنكتسىيەلەر، if-else, for ئايلىنىشى. بۇ باب پىتوننىڭ دەسلەپكى گرامماتىكىسىنى سانلىق مەلۇمات ئانالىزىغا ماسلاشتۇرىدۇ.",
+            "code": "def calculate_average(numbers):\n    return sum(numbers) / len(numbers)\nprint(calculate_average([1, 2, 3, 4]))",
+            "code_description": "فۇنكتسىيە يېزىپ، تىزىملىكتىكى سانلارنىڭ ئوتتۇرىچە قىممىتىنى ھېسابلاش، نەتىجە: 2.5."
+        },
+        {
+            "id": "jupyterlab_usage",
+            "title": "JupyterLab",
+            "exam_percentage": "2.50%",
+            "content": "JupyterLab نىڭ ئىشلىتىلىشى، Notebook فايلىنى يارىتىش، كود ۽ Markdown خلىيەلىرى، گرافىك چىقىرىش. بۇ باب JupyterLab نى سانلىق مەلۇمات ئانالىزىدا ئىشلىتىشنى چۈشەندۈرىدۇ.",
+            "code": "import matplotlib.pyplot as plt\nplt.plot([1, 2, 3], [10, 20, 25])\nplt.show()",
+            "code_description": "JupyterLab دا matplotlib بىلەن گرافىك سىزىش."
+        },
+        {
+            "id": "mathematical_foundations",
+            "title": "ماتېماتىكىلىق ئاساسلار",
+            "exam_percentage": "15.00%",
+            "content": "سانلىق مەلۇمات ئانالىزى ئۈچۈن ماتېماتىكىلىق بىلىملەر: سىزىقلىق ئالگېبىرا، ئانالىز، ئىستاتىستىكا. بۇ باب سانلىق مەلۇمات ئانالىزىنىڭ ماتېماتىكىلىق يىلتىزىنى چۈشەندۈرىدۇ.",
+            "code": "",
+            "code_description": "بۇ بابدا كود تەلەپ قىلىنمايدۇ، نەزەرىيە مەركەزلىك."
+        },
+        {
+            "id": "math_notation",
+            "title": "سۆزلۈك بىلىملىرى",
+            "exam_percentage": "2.50%",
+            "content": "ماتېماتىكىلىق سۆزلۈك ۽ بەلگىلەر (مەسىلەن، Σ, ∫)، سانلىق مەلۇمات ئانالىزىدىكى ماتېماتىكىلىق چۈشەنچىلەر. بۇ باب ماتېماتىكىلىق بەلگىلەرنى پىتوندا ئىشلىتىشنى چۈشەندۈرىدۇ.",
+            "code": "numbers = [1, 2, 3]\nprint(sum(numbers))",
+            "code_description": "يىغىندى بەلگىسىنىڭ پىتوندىكى ئىپادىلىنىشى، نەتىجە: 6."
+        },
+        {
+            "id": "linear_algebra",
+            "title": "سىزىقلىق ئالگېبىرا",
+            "exam_percentage": "5.00%",
+            "content": "ۋېكتورلار، ماترىتسىلار، ماترىتسا مەشغۇلاتلىرى (جەم قىلىش، كۆپەيتىش). بۇ باب سانلىق مەلۇمات ئانالىزىدىكى سىزىقلىق ئالگېبىرانى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\nprint(A + B)",
+            "code_description": "numpy بىلەن ماترىتسا جەم قىلىش، نەتىجە: [[6, 8], [10, 12]]."
+        },
+        {
+            "id": "basic_analysis",
+            "title": "ئاساسىي ئانالىز",
+            "exam_percentage": "2.50%",
+            "content": "دېرىۋاتىپ، ئىنتېگرال، فۇنكتسىيەلەرنىڭ ئانالىزى، سانلىق مەلۇمات ئانالىزىدىكى قوللىنىلىشى. بۇ باب ماتېماتىكىلىق ئانالىزنىڭ سانلىق مەلۇماتتىكى رولىنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nx = np.linspace(0, 10, 100)\ny = np.sin(x)\nprint(y[:5])",
+            "code_description": "numpy بىلەن سىنۇس فۇنكتسىيەسىنى ھېسابلاش، نەتىجە: sin فۇنكتسىيەسىنىڭ بىر قىسمى."
+        },
+        {
+            "id": "probability_statistics",
+            "title": "ئېھتىمال ۽ ئىستاتىستىكا",
+            "exam_percentage": "5.00%",
+            "content": "ئېھتىمال نەزەرىيەسى، ئىستاتىستىكىلىق ئۇسۇللار (ئوتتۇرىچە، ستاندارت چەتنەش، كوررېلياتسىيە). بۇ باب سانلىق مەلۇمات ئانالىزىدىكى ئىستاتىستىكىلىق بىلىملەرنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nscores = [85, 90, 88, 92]\nprint(np.mean(scores))\nprint(np.std(scores))",
+            "code_description": "numpy بىلەن ئوتتۇرىچە ۽ ستاندارت چەتنەشنى ھېسابلاش، نەتىجە: 88.75 ۽ ستاندارت چەتنەش."
+        },
+        {
+            "id": "numpy_analysis",
+            "title": "NumPy",
+            "exam_percentage": "15.00%",
+            "content": "NumPy بىلەن سانلىق مەلۇماتلارنى بىر تەرەپ قىلىش، ئارراي مەشغۇلاتلىرى، ماتېماتىكىلىق فۇنكتسىيەلەر. بۇ باب NumPy نى سانلىق مەلۇمات ئانالىزىدا ئىشلىتىشنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\narray = np.array([1, 2, 3, 4])\nprint(array * 2)",
+            "code_description": "NumPy ئارراي بىلەن كۆپەيتىش مەشغۇلاتى، نەتىجە: [2, 4, 6, 8]."
+        },
+        {
+            "id": "pandas_analysis",
+            "title": "pandas",
+            "exam_percentage": "17.50%",
+            "content": "pandas بىلەن سانلىق مەلۇمات جەدۋىلىنى باشقۇرۇش، فىلتىرلەش، گۇرۇپپىلاش، تازىلاش. بۇ باب pandas نى سانلىق مەلۇمات ئانالىزىدا ئىشلىتىشنى چۈشەندۈرىدۇ.",
+            "code": "import pandas as pd\ndf = pd.DataFrame({'name': ['ئەلى', 'مەمەت'], 'score': [85, 90]})\nprint(df[df['score'] > 85])",
+            "code_description": "pandas بىلەن شەرت بويىچە فىلتىرلەش، نەتىجە: مەمەت."
+        },
+        {
+            "id": "matplotlib_visualization",
+            "title": "Matplotlib",
+            "exam_percentage": "15.00%",
+            "content": "Matplotlib بىلەن گرافىك سىزىش (سىزىقلىق گرافىك، تارقاق گرافىك، گىستوگرامما). بۇ باب سانلىق مەلۇماتلارنى كۆرۈنمە قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "import matplotlib.pyplot as plt\nplt.plot([1, 2, 3], [10, 20, 30])\nplt.xlabel('X')\nplt.ylabel('Y')\nplt.show()",
+            "code_description": "Matplotlib بىلەن سىزىقلىق گرافىك سىزىش."
+        },
+        {
+            "id": "scikit_learn_analysis",
+            "title": "scikit-learn",
+            "exam_percentage": "20.00%",
+            "content": "scikit-learn بىلەن ماشىنىلىق ئۆگىنىش: سىنىفلاندۇرۇش، رېگرېسسىيە، مەلۇمات تەييارلاش. بۇ باب ماشىنىلىق ئۆگىنىشنى سانلىق مەلۇمات ئانالىزىغا قوللانشنى چۈشەندۈرىدۇ.",
+            "code": "from sklearn.linear_model import LinearRegression\nX = [[1], [2], [3]]\ny = [2, 4, 6]\nmodel = LinearRegression().fit(X, y)\nprint(model.predict([[4]]))",
+            "code_description": "scikit-learn بىلەن سىزىقلىق رېگرېسسىيە مودېلى قۇرۇش، نەتىجە: [8]."
+        },
+        {
+            "id": "data_collection_preparation",
+            "title": "سانلىق مەلۇمات جەم قىلىش ۽ تەييارلاش",
+            "exam_percentage": "0.00%",
+            "content": "سانلىق مەلۇمات جەم قىلىش (CSV, API)، مەلۇمات تازىلاش ۽ تەييارلاش. بۇ باب ئىمتىھاندا چىقمايدۇ.",
+            "code": "",
+            "code_description": "بۇ باب ئىمتىھاندا چىقمايدۇ، كود تەلەپ قىلىنمايدۇ."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Python for Data Analysis” (Wes McKinney) نى ئوقۇڭ. بۇ كىتاب pandas ۽ NumPy بىلەن سانلىق مەلۇمات ئانالىزىنى چوڭقۇر چۈشەندۈرىدۇ.",
+        "مەشىق: Kaggle (https://www.kaggle.com) دا سانلىق مەلۇمات ئانالىز تۈرلەرنى يېشىڭ (مەسىلەن، “Titanic” ياكى “House Prices”). JupyterLab دا pandas ۽ Matplotlib بىلەن مەشىق قىلىڭ.",
+        "كود يېزىش: ھەر بىر تېمىدىن كىچىك سانلىق مەلۇمات ئانالىز تۈرلىرى يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، CSV فايللىرىنى تەھلىل قىلىش ياكى گرافىك سىزىش).",
+        "ماتېماتىكا: سىزىقلىق ئالگېبىرا، ئىستاتىستىكا ۽ ئانالىز ئۆگىنىڭ (Coursera دىكى “Mathematics for Data Science” ياكى Khan Academy دىكى دەرسلەر).",
+        "مەشىق پىلاتفورمىسى: Google Colab (https://colab.research.google.com) دا Jupyter Notebook لارنى ئىشلىتىپ، pandas، NumPy ۽ Matplotlib بىلەن تەجرىبە قىلىڭ."
+    ]
+},
+
+{
+    "id": "statistics",
+    "title": "Statistics Beginner سىتاستكا دەسلەپكى سەۋىيە",
+    "description": "سىتاتىستىكىنى دەسلەپكى سەۋىيەدە ئۈگنىش.",
+    "instructor": "KawulJan",
+    "startDate": "2025-08-15",
+    "duration": "2 weeks",
+    "image": "/images/image06.png",
+    "video": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "likes": 0,
+    "views": 0,
+    "comments": [],
+    "category": "Statistics, Data Analysis, Mathematics", 
+    "topics": [
+        {
+            "id": "statistics_basics",
+            "title": "سىتاتىستىكىنىڭ ئاساسلىرى",
+            "exam_percentage": "10.00%",
+            "content": "سىتاتىستىكىنىڭ چۈشەنچىسى، تىپلىرى (تەسۋىرىي ۋە خۇلاسە سىتاتىستىكا)، سانلىق مەلۇمات ئانالىزىدىكى رولى، مەلۇمات تىپلىرى (ساپ، كاتېگورىيەلىك). بۇ تېما سىتاتىستىكىنىڭ ئومۇمىي جەريانى ۽ چۈشەنچىلىرىنى تونۇشتۇرىدۇ.",
+            "code": "print('سىتاتىستىكا: تەسۋىرىي ۋە خۇلاسە ئانالىز')",
+            "code_description": "سىتاتىستىكىنىڭ ئومۇمىي جەريانى ۽ چۈشەنچىلىرىنى تونۇشتۇرىدۇ، كود تەلەپ قىلىنمايدۇ."
+        },
+        {
+            "id": "descriptive_statistics",
+            "title": "تەسۋىرىي سىتاتىستىكا",
+            "exam_percentage": "20.00%",
+            "content": "ئوتتۇرىچە (mean, median, mode)، چەتنەش (variance, standard deviation)، تارقىلىش (range, quartiles)، سانلىق مەلۇماتنىڭ شەكلى (skewness, kurtosis). بۇ تېما سانلىق مەلۇماتنىڭ مەركىزى ۽ تارقىلىشىنى تەسۋىرلەيدۇ.",
+            "code": "import numpy as np\nscores = [85, 90, 88, 92, 87]\nprint(np.mean(scores))\nprint(np.std(scores))",
+            "code_description": "NumPy بىلەن ئوتتۇرىچە ۽ ستاندارت چەتنەشنى ھېسابلاش، نەتىجە: 88.4 ۽ ~2.42."
+        },
+        {
+            "id": "probability_theory",
+            "title": "ئېھتىمال نەزەرىيەسى",
+            "exam_percentage": "15.00%",
+            "content": "ئېھتىمال چۈشەنچىسى، ئاساسىي قائىدىلەر (جەم قىلىش، كۆپەيتىش)، شەرتىي ئېھتىمال، Bayes تېئورېمىسى. بۇ تېما سىتاتىستىكىدىكى ئېھتىمالنىڭ يىلتىزىنى چۈشەندۈرىدۇ.",
+            "code": "def bayes_theorem(p_a, p_b_given_a, p_b):\n    return (p_b_given_a * p_a) / p_b\nprint(bayes_theorem(0.01, 0.95, 0.02))",
+            "code_description": "Bayes تېئورېمىسىنى ھېسابلاش، شەرتىي ئېھتىمالنى پىتوندا ئىپادىلەش، نەتىجە: ~0.475."
+        },
+        {
+            "id": "distributions_variables",
+            "title": "تارقىلىش ۋە ئۆزگەرگۈچىلەر",
+            "exam_percentage": "15.00%",
+            "content": "ئۆزگەرگۈچىلەر (ئۇدا ۋە ئايرىم)، تارقىلىش تىپلىرى (نورمال، بىنومىيال، پوئىسون)، مەركىزىي چەك تېئورېمىسى. بۇ تېما سىتاتىستىكىلىق تارقىلىشلارنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nfrom scipy.stats import norm\nx = np.linspace(-3, 3, 100)\npdf = norm.pdf(x, 0, 1)\nprint(pdf[:5])",
+            "code_description": "SciPy بىلەن نورمال تارقىلىشنىڭ ئېھتىمال زىچلىق فۇنكتسىيەسى (PDF) نى ھېسابلاش."
+        },
+        {
+            "id": "correlation_regression",
+            "title": "كوررېلياتسىيە ۋە رېگرېسسىيە",
+            "exam_percentage": "15.00%",
+            "content": "كوررېلياتسىيە (Pearson, Spearman)، سىزىقلىق رېگرېسسىيە، كۆپ ئۆزگەرگۈچىلىك رېگرېسسىيە، مودېل باھالاش (R²). بۇ تېما ئۆزگەرگۈچىلەر ئارىسىدىكى مۇناسىۋەتنى تەھلىل قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "from scipy.stats import pearsonr\nx = [1, 2, 3, 4, 5]\ny = [2, 4, 6, 8, 10]\nprint(pearsonr(x, y)[0])",
+            "code_description": "SciPy بىلەن Pearson كوررېلياتسىيە كوئېففىتسىئېنتىنى ھېسابلاش، نەتىجە: 1.0."
+        },
+        {
+            "id": "inferential_statistics",
+            "title": "خۇلاسە سىتاتىستىكا",
+            "exam_percentage": "15.00%",
+            "content": "ھىپوتېزا تەكشۈرۈش (t-test, chi-square)، p-قىممىتى، ئىشەنچە ئارىلىقى (confidence intervals). بۇ تېما سانلىق مەلۇماتتىن خۇلاسە چىقىرىشنى چۈشەندۈرىدۇ.",
+            "code": "from scipy.stats import ttest_ind\ngroup1 = [85, 90, 88]\ngroup2 = [80, 82, 84]\nprint(ttest_ind(group1, group2).pvalue)",
+            "code_description": "SciPy بىلەن t-test ئېلىپ بېرىپ، ئىككى گۇرۇپپىنىڭ پەرقىنى تەكشۈرۈش، نەتىجە: p-قىممىتى."
+        },
+        {
+            "id": "visualization",
+            "title": "كۆرۈنمە قىلىش",
+            "exam_percentage": "10.00%",
+            "content": "سىتاتىستىكىلىق نەتىجىلەرنى كۆرۈنمە قىلىش: گىستوگرامما، قۇتى گرافىكى (box plot)، تارقاق گرافىكى، Matplotlib ۋە Seaborn بىلەن گرافىك سىزىش. بۇ تېما سانلىق مەلۇماتلارنى كۆرۈنمە قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "import matplotlib.pyplot as plt\nimport seaborn as sns\nscores = [85, 90, 88, 92, 87]\nsns.boxplot(y=scores)\nplt.ylabel('Scores')\nplt.show()",
+            "code_description": "Seaborn بىلەن قۇتى گرافىكى سىزىش، سانلىق مەلۇماتنىڭ تارقىلىشىنى كۆرۈنمە قىلىش."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Introduction to Probability and Statistics” (William Mendenhall) نى ئوقۇڭ. بۇ كىتاب سىتاتىستىكىنىڭ دەسلەپكى چۈشەنچىلىرىنى چوڭقۇر چۈشەندۈرىدۇ. “Python for Data Analysis” (Wes McKinney) نى پىتوندىكى قوللىنىشلار ئۈچۈن ئىشلىتىڭ.",
+        "مەشىق: Kaggle (https://www.kaggle.com) دا سىتاتىستىكىلىق تەھلىل تۈرلەرنى يېشىڭ (مەسىلەن، “Titanic” دىكى ياشاش نىسبىتىنى تەھلىل قىلىش). JupyterLab دا NumPy، SciPy ۽ Seaborn بىلەن مەشىق قىلىڭ.",
+        "كود يېزىش: ھەر بىر تېمىدىن كىچىك سىتاتىستىكىلىق تەھلىللەر يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، كوررېلياتسىيە تەھلىلى ياكى گىستوگرامما سىزىش).",
+        "ماتېماتىكا: ئېھتىمال نەزەرىيەسى، سىزىقلىق ئالگېبىرا ۽ ئانالىز ئۆگىنىڭ (Coursera دىكى “Statistics with Python Specialization” ياكى Khan Academy دىكى دەرسلەر).",
+        "مەشىق پىلاتفورمىسى: Google Colab (https://colab.research.google.com) دا Jupyter Notebook لارنى ئىشلىتىپ، NumPy، SciPy ۽ Seaborn بىلەن سىتاتىستىكىلىق تەھلىللەرنى سىناپ بېقىڭ."
+    ]
+},
+
+{
+    "id": "statistics_intermediate",
+    "title": "Statistics Intermediate سىتاستىكا ئوتتۇرا سەۋىيە",
+    "description": "سىتاتىستىكىنى ئوتتۇرا سەۋىيەدە ئۆگىنىشنىڭ مەزمۇنلىرى، كود مىساللىرى .",
+    "instructor": "KawulJan",
+    "startDate": "2025-08-15",
+    "duration": "6 weeks",
+    "image": "/images/image06.png",
+    "video": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "likes": 0,
+  "views": 0,
+  "comments": [],
+    "category": "Statistics, Data Analysis, Mathematics", 
+    "topics": [
+        {
+            "id": "statistical_methods",
+            "title": "ئىستاتىستىكىلىق تەھلىلنىڭ ئۇسۇللىرى",
+            "exam_percentage": "10.00%",
+            "content": "خۇلاسە سىتاتىستىكىنىڭ چوڭقۇرلىشىشى، ھىپوتېزا تەكشۈرۈشنىڭ تىپلىرى (z-test, t-test, ANOVA)، p-قىممىتى ۋە ئىشەنچە ئارىلىقىنىڭ چوڭقۇر تەھلىلى. بۇ تېما خۇلاسە سىتاتىستىكىنىڭ ئەمەلىي ئۇسۇللىرىنى چوڭقۇرلاشتۇرىدۇ.",
+            "code": "from scipy.stats import ttest_ind\ngroup1 = [85, 90, 88, 92]\ngroup2 = [80, 82, 84, 86]\nprint(ttest_ind(group1, group2))",
+            "code_description": "SciPy بىلەن t-test ئېلىپ بېرىپ، ئىككى گۇرۇپپىنىڭ ئوتتۇرىچە قىممىتىنى سېلىشتۇرۇش، نەتىجە: t-ستاتىستىكا ۋە p-قىممىتى."
+        },
+        {
+            "id": "multiple_regression",
+            "title": "كۆپ ئۆزگەرگۈچىلىك رېگرېسسىيە",
+            "exam_percentage": "15.00%",
+            "content": "كۆپ ئۆزگەرگۈچىلىك سىزىقلىق رېگرېسسىيە، لوگىستىك رېگرېسسىيە، مودېلنى باھالاش (R², AIC)، كوللىنىئارلىق (multicollinearity). بۇ تېما بىر نەچچە ئۆزگەرگۈچىنىڭ مۇناسىۋىتىنى تەھلىل قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "from sklearn.linear_model import LinearRegression\nimport numpy as np\nX = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])\ny = [3, 5, 7, 9]\nmodel = LinearRegression().fit(X, y)\nprint(model.coef_)",
+            "code_description": "scikit-learn بىلەن كۆپ ئۆزگەرگۈچىلىك رېگرېسسىيە مودېلى قۇرۇش، نەتىجە: كوئېففىتسىئېنتلار."
+        },
+        {
+            "id": "time_series_analysis",
+            "title": "ۋاقىت رىتىملىك سانلىق مەلۇمات تەھلىلى",
+            "exam_percentage": "15.00%",
+            "content": "ۋاقىت رىتىملىك سانلىق مەلۇمات (time series)، ئوتتۇرىچە ھەرىكەت (moving average)، ARIMA مودېلى، سىزىقلىق بولمىغان ۋاقىت رىتىملىرى. بۇ تېما ۋاقىت بويىچە سانلىق مەلۇمات تەھلىلىنى چۈشەندۈرىدۇ.",
+            "code": "from statsmodels.tsa.arima.model import ARIMA\nimport numpy as np\ndata = [10, 12, 14, 16, 18]\nmodel = ARIMA(data, order=(1, 0, 0)).fit()\nprint(model.forecast(1))",
+            "code_description": "statsmodels بىلەن ARIMA مودېلى قۇرۇپ، ۋاقىت رىتىملىك سانلىق مەلۇماتنى پەرەز قىلىش، نەتىجە: كېيىنكى قىممەت پەرەزى."
+        },
+        {
+            "id": "categorical_data_analysis",
+            "title": "كاتېگورىيەلىك سانلىق مەلۇمات تەھلىلى",
+            "exam_percentage": "10.00%",
+            "content": "كاتېگورىيەلىك سانلىق مەلۇماتلار بىلەن ئىشلەش، chi-square تەكشۈرۈش، كرامېر V، لوگىستىك رېگرېسسىيەنىڭ قوللىنىلىشى. بۇ تېما كاتېگورىيەلىك مەلۇماتلارنى تەھلىل قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "from scipy.stats import chi2_contingency\nimport numpy as np\ntable = np.array([[10, 20], [15, 25]])\nprint(chi2_contingency(table)[1])",
+            "code_description": "SciPy بىلەن chi-square تەكشۈرۈش ئېلىپ بېرىپ، كاتېگورىيەلىك مەلۇماتلارنىڭ مۇناسىۋىتىنى تەكشۈرۈش، نەتىجە: p-قىممىتى."
+        },
+        {
+            "id": "bayesian_statistics",
+            "title": "بايېسىيان سىتاتىستىكىسى",
+            "exam_percentage": "15.00%",
+            "content": "بايېسىيان ئېھتىمال، پىرئور ۋە پوستېرىئور تارقىلىش، بايېسىيان خۇلاسە، MCMC (Markov Chain Monte Carlo). بۇ تېما بايېسىيان يونداشنى سىتاتىستىكىغا قوللانشنى چۈشەندۈرىدۇ.",
+            "code": "import pymc3 as pm\nwith pm.Model():\n    mu = pm.Normal('mu', mu=0, sd=1)\n    obs = pm.Normal('obs', mu=mu, sd=1, observed=[1, 2, 3])\n    trace = pm.sample(1000)\nprint(pm.summary(trace))",
+            "code_description": "PyMC3 بىلەن بايېسىيان مودېل قۇرۇپ، پوستېرىئور تارقىلىشنى تەھلىل قىلىش."
+        },
+        {
+            "id": "nonlinear_models",
+            "title": "غەيرىي سىزىقلىق مودېللار",
+            "exam_percentage": "10.00%",
+            "content": "غەيرىي سىزىقلىق رېگرېسسىيە، دېسىزىيون يىلتىزى (decision trees)، GAM (Generalized Additive Models)، مودېلنى باھالاش. بۇ تېما سىزىقلىق بولمىغان مۇناسىۋەتلەرنى تەھلىل قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "from sklearn.tree import DecisionTreeRegressor\nX = [[1], [2], [3], [4]]\ny = [1, 4, 9, 16]\nmodel = DecisionTreeRegressor().fit(X, y)\nprint(model.predict([[5]]))",
+            "code_description": "scikit-learn بىلەن دېسىزىيون يىلتىزى مودېلى قۇرۇپ، غەيرىي سىزىقلىق مۇناسىۋەتنى پەرەز قىلىش، نەتىجە: ~25."
+        },
+        {
+            "id": "data_visualization_analysis",
+            "title": "مەلۇمات كۆرۈنمە قىلىش ۋە تەھلىل",
+            "exam_percentage": "15.00%",
+            "content": "چوڭقۇر كۆرۈنمە قىلىش: گىستوگرامما، ھېئاتماپ (heatmap)، ۋاقىت رىتىملىك گرافىك، Matplotlib ۋە Seaborn بىلەن ئىلغار گرافىكلار. بۇ تېما سىتاتىستىكىلىق نەتىجىلەرنى كۆرۈنمە قىلىشنى چۈشەندۈرىدۇ.",
+            "code": "import seaborn as sns\nimport pandas as pd\ndf = pd.DataFrame({'A': [1, 2, 3, 4], 'B': [2, 4, 6, 8]})\nsns.heatmap(df.corr(), annot=True)\nplt.show()",
+            "code_description": "Seaborn بىلەن ھېئاتماپ سىزىپ، ئۆزگەرگۈچىلەرنىڭ كوررېلياتسىيەسىنى كۆرۈنمە قىلىش."
+        },
+        {
+            "id": "statistical_programming",
+            "title": "سىتاتىستىكىلىق پىروگرامما",
+            "exam_percentage": "10.00%",
+            "content": "پىتوندىكى سىتاتىستىكىلىق كۈتۈپخانىلار (SciPy, statsmodels، PyMC3)، مەلۇمات تەھلىلى ۋە مودېللاش، كود ئەلالاشتۇرۇش. بۇ تېما سىتاتىستىكىلىق تەھلىلنى پىتوندا ئەمەلىيلەشتۈرۈشنى چۈشەندۈرىدۇ.",
+            "code": "import statsmodels.api as sm\nX = [[1], [2], [3], [4]]\ny = [2, 4, 6, 8]\nX = sm.add_constant(X)\nmodel = sm.OLS(y, X).fit()\nprint(model.summary())",
+            "code_description": "statsmodels بىلەن OLS رېگرېسسىيەسى قۇرۇپ، مودېلنىڭ سىتاتىستىكىلىق نەتىجىلىرىنى تەھلىل قىلىش."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Statistical Methods for Data Analysis” (Luca Lista) نى ئوقۇڭ. بۇ كىتاب سىتاتىستىكىنىڭ ئوتتۇرا سەۋىيەدىكى ئۇسۇللىرىنى چوڭقۇر چۈشەندۈرىدۇ. “Python for Data Analysis” (Wes McKinney) نى پىتوندىكى قوللىنىشلار ئۈچۈن ئىشلىتىڭ.",
+        "مەشىق: Kaggle (https://www.kaggle.com) دا ئوتتۇرا سەۋىيەلىك سىتاتىستىكىلىق تەھلىل تۈرلەرنى يېشىڭ (مەسىلەن، ۋاقىت رىتىملىك پەرەز ياكى كاتېگورىيەلىك مەلۇمات تەھلىلى). JupyterLab دا SciPy، statsmodels ۽ PyMC3 بىلەن مەشىق قىلىڭ.",
+        "كود يېزىش: ھەر بىر تېمىدىن سىتاتىستىكىلىق مودېللار يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، ARIMA مودېلى ياكى بايېسىيان تەھلىل).",
+        "ماتېماتىكا: سىزىقلىق ئالگېبىرا، ئېھتىمال نەزەرىيەسى ۽ ئانالىز ئۆگىنىڭ (Coursera دىكى “Statistics with Python Specialization” ياكى “Bayesian Statistics” كۇرسى).",
+        "مەشىق پىلاتفورمىسى: Google Colab (https://colab.research.google.com) دا Jupyter Notebook لارنى ئىشلىتىپ، SciPy، statsmodels ۽ Seaborn بىلەن سىتاتىستىكىلىق تەھلىللەرنى سىناپ بېقىڭ."
+    ]
+},
+
+{
+    "id": "linear_algebra_beginner_content_table",
+    "title": "Linear Algebra Beginner سىزىقلىق ئالگېبىرا دەسلەپكى سەۋىيە",
+    
+    "description": "سىزىقلىق ئالگېبىرا ۋە ماترىتسىلارنى دەسلەپكى سەۋىيەدە ئۆگىنىشنىڭ مەزمۇنلىرى، كود مىساللىرى.",
+     "instructor": "KawulJan",
+    "startDate": "2025-08-15",
+    "duration": "6 weeks",
+    "image": "/images/image09.png",
+    "video": "",
+    "likes": 0,
+  "views": 0,
+  "comments": [],
+    "category": "Math", 
+    "topics": [
+        {
+            "id": "linear_algebra_basics",
+            "title": "سىزىقلىق ئالگېبىرانىڭ ئاساسلىرى",
+            "exam_percentage": "10.00%",
+            "content": "سىزىقلىق ئالگېبىرانىڭ چۈشەنچىسى، سكاليار، ۋېكتور، ماترىتسا، سىزىقلىق بوشلۇق، سانلىق مەلۇمات ئانالىزىدىكى رولى. بۇ تېما سىزىقلىق ئالگېبىرانىڭ ئومۇمىي چۈشەنچىلىرىنى تونۇشتۇرىدۇ.",
+            "code": "print('سىزىقلىق ئالگېبىرا: ۋېكتورلار ۋە ماترىتسىلار')",
+            "code_description": "سىزىقلىق ئالگېبىرانىڭ ئومۇمىي چۈشەنچىلىرىنى تونۇشتۇرىدۇ، كود تەلەپ قىلىنمايدۇ."
+        },
+        {
+            "id": "vectors",
+            "title": "ۋېكتورلار",
+            "exam_percentage": "20.00%",
+            "content": "ۋېكتورلارنىڭ چۈشەنچىسى، ۋېكتور مەشغۇلاتلىرى (جەم قىلىش، ئايرىش، سكاليار كۆپەيتىش)، ۋېكتور نورمىسى، نۇقتا كۆپەيتىش (dot product). بۇ تېما ۋېكتورلارنىڭ ئاساسىي مەشغۇلاتلىرىنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nv1 = np.array([1, 2])\nv2 = np.array([3, 4])\nprint(v1 + v2)\nprint(np.dot(v1, v2))",
+            "code_description": "NumPy بىلەن ۋېكتورلارنى جەم قىلىش ۋە نۇقتا كۆپەيتىشنى ھېسابلاش، نەتىجە: [4 6] ۋە 11."
+        },
+        {
+            "id": "matrices",
+            "title": "ماترىتسىلار",
+            "exam_percentage": "20.00%",
+            "content": "ماترىتسىلارنىڭ چۈشەنچىسى، ماترىتسا مەشغۇلاتلىرى (جەم قىلىش، ئايرىش، سكاليار كۆپەيتىش)، ماترىتسا كۆپەيتىش، تىراンスپوز (transpose). بۇ تېما ماترىتسىلارنىڭ ئاساسىي مەشغۇلاتلىرىنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\nprint(A + B)\nprint(np.dot(A, B))",
+            "code_description": "NumPy بىلەن ماترىتسا جەم قىلىش ۋە كۆپەيتىشنى ھېسابلاش، نەتىجە: [[6 8] [10 12]] ۋە [[19 22] [43 50]]."
+        },
+        {
+            "id": "matrix_properties",
+            "title": "ماترىتسىلارنىڭ خاسلىقلىرى",
+            "exam_percentage": "15.00%",
+            "content": "ماترىتسىلارنىڭ دېتېرمىنانتى (determinant)، تەتۈر ماترىتسا (inverse)، ئېيگېن قىممەتلىرى ۋە ئېيگېن ۋېكتورلىرى، ماترىتسىلارنىڭ رەت تەرتىپى (rank). بۇ تېما ماترىتسىلارنىڭ ماتېماتىكىلىق خاسلىقلىرىنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nprint(np.linalg.det(A))\nprint(np.linalg.inv(A))",
+            "code_description": "NumPy بىلەن ماترىتسىنىڭ دېتېرمىنانتى ۋە تەتۈر ماترىتسىسىنى ھېسابلاش، نەتىجە: -2.0 ۽ تەتۈر ماترىتسا."
+        },
+        {
+            "id": "linear_equations",
+            "title": "سىزىقلىق تەڭلىمىلەر",
+            "exam_percentage": "15.00%",
+            "content": "سىزىقلىق تەڭلىمىلەر سىستېمىسى، ماترىتسا شەكلىدە ئىپادىلەش (Ax = b)، Gauss يوقىتىش ئۇسۇلى، ماترىتسا تەتۈرلەشتۈرۈش ئارقىلىق يېشىش. بۇ تېما سىزىقلىق تەڭلىمىلەرنى ماترىتسا ئارقىلىق يېشىشنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nA = np.array([[2, 1], [1, 2]])\nb = np.array([5, 7])\nx = np.linalg.solve(A, b)\nprint(x)",
+            "code_description": "NumPy بىلەن سىزىقلىق تەڭلىمىلەر سىستېمىسىنى يېشىش، نەتىجە: [1.666... 1.666...]."
+        },
+        {
+            "id": "vector_spaces",
+            "title": "ۋېكتور بوشلۇقلىرى",
+            "exam_percentage": "10.00%",
+            "content": "ۋېكتور بوشلۇقى چۈشەنچىسى، ئاساس ۋېكتورلار (basis)، ئۆلچەم (dimension)، سىزىقلىق مۇستەقىللىق ۋە مۇستەقىل بولماسلىق. بۇ تېما ۋېكتور بوشلۇقلىرىنىڭ ئاساسىي چۈشەنچىلىرىنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nA = np.array([[1, 2], [2, 4]])\nprint(np.linalg.matrix_rank(A))",
+            "code_description": "NumPy بىلەن ماترىتسىنىڭ رەت تەرتىپىنى ھېسابلاش، ۋېكتور بوشلۇقىنىڭ ئۆلچىمىنى كۆرسىتىش، نەتىجە: 1."
+        },
+        {
+            "id": "linear_algebra_applications",
+            "title": "سىزىقلىق ئالگېبىرانىڭ قوللىنىلىشى",
+            "exam_percentage": "10.00%",
+            "content": "سانلىق مەلۇمات ئانالىزىدا (PCA، رېگرېسسىيە)، ماشىنىلىق ئۆگىنىشتە (گرادىيېنت تۆۋەنلەش)، كومپيۇتېر گرافىكىسىدا (ئايلاندۇرۇش ماترىتسىلىرى) قوللىنىلىشى. بۇ تېما سىزىقلىق ئالگېبىرانىڭ ئەمەلىي قوللىنىلىشىنى كۆرسىتىدۇ.",
+            "code": "import numpy as np\nfrom sklearn.decomposition import PCA\nX = np.array([[1, 2], [3, 4], [5, 6]])\npca = PCA(n_components=1)\nprint(pca.fit_transform(X))",
+            "code_description": "scikit-learn بىلەن PCA ئارقىلىق ئۆلچەم ئازايتىش، سىزىقلىق ئالگېبىرانىڭ سانلىق مەلۇماتتىكى قوللىنىلىشىنى كۆرسىتىش."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Linear Algebra and Its Applications” (David C. Lay) نى ئوقۇڭ. بۇ كىتاب سىزىقلىق ئالگېبىرانىڭ دەسلەپكى چۈشەنچىلىرىنى چوڭقۇر چۈشەندۈرىدۇ. “Introduction to Linear Algebra” (Gilbert Strang) نى ئەمەلىي قوللىنىشلار ئۈچۈن ئىشلىتىڭ.",
+        "مەشىق: Khan Academy (https://www.khanacademy.org/math/linear-algebra) دىكى سىزىقلىق ئالگېبىرا دەرسلىرى ۋە مەشىقلىرىنى تاماملاڭ. JupyterLab دا NumPy بىلەن ۋېكتور ۋە ماترىتسا مەشغۇلاتلىرىنى سىناپ بېقىڭ.",
+        "كود يېزىش: ھەر بىر تېمىدىن كىچىك مەشغۇلاتلار يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، ماترىتسا كۆپەيتىش ياكى PCA تەھلىلى).",
+        "ماتېماتىكا: سىزىقلىق ئالگېبىرانىڭ ئاساسىي نەزەرىيەلىرىنى ئۆگىنىڭ (Coursera دىكى “Linear Algebra for Data Science” ياكى MIT OpenCourseWare دىكى 18.06 دەرسلىرى).",
+        "مەشىق پىلاتفورمىسى: Google Colab (https://colab.research.google.com) دا Jupyter Notebook لارنى ئىشلىتىپ، NumPy ۋە scikit-learn بىلەن سىزىقلىق ئالگېبىرا مەشغۇلاتلىرىنى سىناپ بېقىڭ."
+    ]
+},
+
+{
+  "id": "rss_higher_certificate_intro",
+  "title": "RSS Higher Certificate دەسلەپكى سەۋىيە ئىمتىھانى",
+  "description": "Royal Statistical Society Higher Certificate ئىمتىھانىغا تەييارلىق. سىتاتىستىكا بىلىملىرى، دەسلەپكى نەزىرىي ۋە ئەمەلدارلىقلار.",
+  "instructor": "KawulJan",
+  "startDate": "2025-09-01",
+  "duration": "4 weeks",
+  "image": "/images/image10.png",
+    "video": "",
+  "likes": 0,
+  "views": 0,
+  "comments": [],
+  "category": "Statistics, Data Analysis, Mathematics",
+  "overview": "RSS Higher Certificate — سىتاتىستىكا ساھەسىدە ئارقا سەۋىيەدىن يۇقرى، ئاددىيدىن ئوتتۇرا دەرىجىگە چىقىدىغان، سانلىق مەلۇمات قوشۇمچە تەھلىل، ئېھتىمال، پەرقالىش، ۋە ساددا رېگرېسىيەلەرگە تايىنىدىغان خەلقئارالىق بەلگە.",
+  "topics": [
+    {
+      "id": "module1",
+      "title": "Sanliq yighish we taswiriy ölchemler",
+      "description": "سانلىق يىغىش ئۇسۇلى، تەرتىپلەش، مەركەزلىك ئۆلچەملەر: ئۆرتەچە، ئارىلىق، ئەڭ كۆپ كۆرۈلگەن",
+      "code": "import numpy as np\nimport pandas as pd\ndata = [12, 15, 13, 17, 19]\nprint('Mean:', np.mean(data))\nprint('Median:', np.median(data))\nprint('Mode:', pd.Series(data).mode().tolist())"
+    },
+    {
+      "id": "module2",
+      "title": "Tarqulish we grafikler",
+      "description": "تارقىلىش، ئۆلچەملىك چېكى، ھىستوگرامما، بوكسپلوىت",
+      "code": "import numpy as np\nimport matplotlib.pyplot as plt\ndata = np.random.normal(50, 10, 200)\nprint('Variance:', np.var(data, ddof=1), 'Std Dev:', np.std(data, ddof=1))\nplt.hist(data, bins=10)\nplt.title('Histogram')\nplt.show()"
+    },
+    {
+      "id": "module3",
+      "title": "Ehtimal we tarqilish",
+      "description": "ئېھتىمال چۈشەندۈرۈشى، بايېس قانۇنى، نورمال تارقىلىش",
+      "code": "from scipy.stats import norm\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.linspace(-3,3,200)\nplt.plot(x, norm.pdf(x, 0, 1))\nplt.title('Standard Normal Distribution')\nplt.show()"
+    },
+    {
+      "id": "module4",
+      "title": "Infernce: confidence interval we t-test",
+      "description": "ئىشەنچلىك ئارىلىق ھېسابلاش، t-سىناق",
+      "code": "import numpy as np\nfrom scipy import stats\ndata = np.array([5.1, 5.3, 4.9, 5.0, 5.2])\nmean = data.mean()\nse = data.std(ddof=1) / np.sqrt(len(data))\nci = stats.t.interval(0.95, df=len(data)-1, loc=mean, scale=se)\nprint('95% CI:', ci)\nt_stat, p_val = stats.ttest_1samp(data, popmean=5.0)\nprint('t-stat:', t_stat, 'p-value:', p_val)"
+    },
+    {
+      "id": "module5",
+      "title": "Regression basics",
+      "description": "ساددا لىنىيەلىك رېگرېسىيە",
+      "code": "import numpy as np\nimport statsmodels.api as sm\nimport matplotlib.pyplot as plt\nx = np.arange(10)\ny = 2.5*x + np.random.normal(0, 1, 10)\nX = sm.add_constant(x)\nmodel = sm.OLS(y, X).fit()\nprint(model.summary())\nplt.scatter(x, y)\nplt.plot(x, model.predict(X), color='red')\nplt.show()"
+    },
+    {
+      "id": "module6",
+      "title": "Multiple regression & correlation",
+      "description": "كۆپلىگەن رېگرېسىيە ۋە مۇناسىۋەتلىك ماترىتسا",
+      "code": "import numpy as np\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import cross_val_score\nX = np.random.normal(size=(100, 2))\ny = 3*X[:,0] - 2*X[:,1] + np.random.normal(size=100)\nprint('Correlation matrix:\\n', np.corrcoef(X.T))\nmodel = LinearRegression()\nscores = cross_val_score(model, X, y, cv=5, scoring='r2')\nprint('Cross‑validated R²:', scores)"
+    }
+  ],
+  "study_plan": [
+    {
+      "week": 1,
+      "topic": "Sanliq yighish we taswiriy ölchemler",
+      "description": "سانلىق يىغىش، مەركەزلىك ئۆلچەملەر",
+      "python_code": "import numpy as np\nimport pandas as pd\ndata = [12, 15, 13, 17, 19]\nprint('Mean:', np.mean(data))\nprint('Median:', np.median(data))\nprint('Mode:', pd.Series(data).mode().tolist())"
+    },
+    {
+      "week": 2,
+      "topic": "Tarqulish we grafikler",
+      "description": "تارقىلىش، ھىستوگرامما، بوكسپلوىت",
+      "python_code": "import numpy as np\nimport matplotlib.pyplot as plt\ndata = np.random.normal(50, 10, 200)\nprint('Variance:', np.var(data, ddof=1), 'Std Dev:', np.std(data, ddof=1))\nplt.hist(data, bins=10)\nplt.title('Histogram')\nplt.show()"
+    },
+    {
+      "week": 3,
+      "topic": "Ehtimal we tarqilish",
+      "description": "ئېھتىمال چۈشەندۈرۈشى، نورمال تارقىلىش",
+      "python_code": "from scipy.stats import norm\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.linspace(-3,3,200)\nplt.plot(x, norm.pdf(x, 0, 1))\nplt.title('Standard Normal Distribution')\nplt.show()"
+    },
+    {
+      "week": 4,
+      "topic": "Inference: confidence interval we t-test",
+      "description": "ئىشەنچلىك ئارىلىق، t-سىناق",
+      "python_code": "import numpy as np\nfrom scipy import stats\ndata = np.array([5.1, 5.3, 4.9, 5.0, 5.2])\nmean = data.mean()\nse = data.std(ddof=1) / np.sqrt(len(data))\nci = stats.t.interval(0.95, df=len(data)-1, loc=mean, scale=se)\nprint('95% CI:', ci)\nt_stat, p_val = stats.ttest_1samp(data, popmean=5.0)\nprint('t-stat:', t_stat, 'p-value:', p_val)"
+    }
+  ]
+}
+
+]

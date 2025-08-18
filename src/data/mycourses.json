@@ -1,0 +1,368 @@
+[
+
+
+
+  {
+    "id": "python_beginner_content_table",
+    "title": "پايسان ئاساسى بىلىم",
+    "instructor":"KawulJan",
+    "duration":"5.5h",
+    "enrolledBy":"",
+    "image": "/images/image01.png",
+    "video": "/videos/QML.mp4",
+
+    "description": "پىتوننى دەسلەپكى سەۋىيەدە ئۆگىنىشنىڭ مەزمۇنلىرى، كود مىساللىرى ۽ ئىمتىھاندىكى مۇھىملىق نىسبىتى.",
+    "topics": [
+        {
+            "id": "python_introduction",
+            "title": "پىتونغا كىرىش",
+            "exam_percentage": "10.00%",
+            "content": "پىتوننىڭ ئومۇمىي چۈشەنچىسى، پىتوننى ئورنىتىش، Jupyter Notebook بىلەن ئىشلەش، ئاساسىي كود يېزىش ۋە يۈرگۈزۈش. بۇ باب پىتون پروگرامما تىلىنى تونۇشتۇرىدۇ.",
+            "codeExample": "print('پىتونغا خۇش كەلدىڭىز!')",
+            "code_description": "پىتوننىڭ ئاددىي كود يېزىش ۋە يۈرگۈزۈش جەريانىنى كۆرسىتىدۇ، ئومۇمىي تونۇشتۇرۇش ئۈچۈن كود تەلەپ قىلىنمايدۇ."
+        },
+        {
+            "id": "variables_data_types",
+            "title": "ئۆزگەرگۈچىلەر ۋە سانلىق مەلۇمات تىپللىرى",
+            "exam_percentage": "15.00%",
+            "content": "ئۆزگەرگۈچىلەرنى جاكارلاش، سانلىق مەلۇمات تىپللىرى (int, float, str, bool)، تىپ ئۆزگەرتىش، ئاساسىي مەشغۇلاتلار (جەم قىلىش، كۆپەيتىش). بۇ باب پىتوننىڭ ئاساسىي سانلىق مەلۇمات تىپللىرىنى چۈشەندۈرىدۇ.",
+            "codeExample": "x = 5\ny = 2.5\nprint(x + y)\nprint(type(x))",
+            "code_description": "پىتوندا ئۆزگەرگۈچىلەرنى جاكارلاش ۋە ئاساسىي سانلىق مەلۇمات تىپلىرى بىلەن ئىشلەشنى كۆرسىتىدۇ، نەتىجە: 7.5 ۽ <class 'int'>."
+        },
+        {
+            "id": "lists_collections",
+            "title": "تىزىملىكلەر ۋە باشقا يىغىندىلار",
+            "exam_percentage": "15.00%",
+            "content": "تىزىملىك (list), تۇپلە (tuple), سۆزلۈك (dict), يىغىندى (set)، ئىندېكسلەش، كېسىش (slicing)، تىزىملىك مەشغۇلاتلىرى (قوشۇش، ئۆچۈرۈش). بۇ باب پىتوننىڭ يىغىندى تىپلىرىنى چۈشەندۈرىدۇ.",
+            "codeExample": "my_list = [1, 2, 3, 4]\nprint(my_list[1:3])\nmy_dict = {'name': 'ئەلى', 'age': 25}\nprint(my_dict['name'])",
+            "code_description": "پىتوندا تىزىملىك ۽ سۆزلۈك بىلەن ئىشلەش، ئىندېكسلەش ۽ كېسىشنى كۆرسىتىدۇ، نەتىجە: [2, 3] ۽ ئەلى."
+        },
+        {
+            "id": "conditionals_loops",
+            "title": "شەرت بەلگىلەر ۋە ئايلىنىشلار",
+            "exam_percentage": "15.00%",
+            "content": "if-else شەرت بەلگىلەر، for ۋە while ئايلىنىشلىرى، break ۋە continue، ئايلىنىش ئىچىدە شەرت مەشغۇلاتلىرى. بۇ باب پىتوننىڭ كونترول قۇرۇلمىلىرىنى چۈشەندۈرىدۇ.",
+            "codeExample": "for i in range(5):\n    if i % 2 == 0:\n        print(i)",
+            "code_description": "پىتوندا for ئايلىنىشى ۽ if شەرتىنى بىرلەشتۈرۈپ، جۈپ سانلارنى چىقىرىشنى كۆرسىتىدۇ، نەتىجە: 0, 2, 4."
+        },
+        {
+            "id": "functions",
+            "title": "فۇنكتسىيەلەر",
+            "exam_percentage": "15.00%",
+            "content": "فۇنكتسىيە جاكارلاش (def), پارامېتىرلار ۋە قايتۇرما قىممەت، لامبدا فۇنكتسىيەسى، دائىرە (scope) ۋە ئۆزگەرگۈچىلەرنىڭ ياشاش ۋاقتى. بۇ باب پىتون فۇنكتسىيەلىرىنى چۈشەندۈرىدۇ.",
+            "codeExample": "def add_numbers(a, b):\n    return a + b\nprint(add_numbers(3, 4))\nsquare = lambda x: x**2\nprint(square(5))",
+            "code_description": "پىتوندا فۇنكتسىيە جاكارلاش ۽ لامبدا فۇنكتسىيەسىنى ئىشلىتىشنى كۆرسىتىدۇ، نەتىجە: 7 ۽ 25."
+        },
+        {
+            "id": "exception_handling",
+            "title": "مۆجىزە بىر تەرەپ قىلىش",
+            "exam_percentage": "10.00%",
+            "content": "try-except ياپمىسى، مۆجىزە تىپللىرى (ZeroDivisionError, TypeError)، مۆجىزە بىر تەرەپ قىلىش ۽ خاتالىق باشقۇرۇش. بۇ باب پىتوندا خاتالىق بىر تەرەپ قىلىشنى چۈشەندۈرىدۇ.",
+            "codeExample": "try:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    print('نۆلگە بۆلۈشكە بولمايدۇ!')",
+            "code_description": "پىتوندا try-except ياپمىسى ئارقىلىق مۆجىزە بىر تەرەپ قىلىشنى كۆرسىتىدۇ، نەتىجە: نۆلگە بۆلۈشكە بولمايدۇ!"
+        },
+        {
+            "id": "file_handling",
+            "title": "فايل بىلەن ئىشلەش",
+            "exam_percentage": "10.00%",
+            "content": "فايل ئوقۇش ۋە يېزىش (open, read, write)، CSV فايللىرى بىلەن ئىشلەش، مەلۇماتلارنى ساقلاش ۋە يۈكلەش. بۇ باب پىتوندا فايل مەشغۇلاتلىرىنى چۈشەندۈرىدۇ.",
+            "codeExample": "with open('example.txt', 'w') as file:\n    file.write('سەلەم، پىتون!')\nwith open('example.txt', 'r') as file:\n    print(file.read())",
+            "code_description": "پىتوندا فايل يېزىش ۽ ئوقۇشنى كۆرسىتىدۇ، with ياپمىسى بىلەن بىخەتەر فايل مەشغۇلاتى، نەتىجە: سەلەم، پىتون!"
+        },
+        {
+            "id": "python_libraries",
+            "title": "پىتون كۈتۈپخانىلىرى",
+            "exam_percentage": "15.00%",
+            "content": "ئاساسىي كۈتۈپخانىلار (math, random, datetime)، NumPy ۋە pandas غا كىرىش، سانلىق مەلۇمات ئانالىزى ۽ كۆرۈنمە قىلىش (Matplotlib). بۇ باب پىتوننىڭ كۈتۈپخانىلىرىنى چۈشەندۈرىدۇ.",
+            "codeExample": "import numpy as np\nimport matplotlib.pyplot as plt\nx = np.array([1, 2, 3, 4])\nplt.plot(x, x**2)\nplt.xlabel('X')\nplt.ylabel('Y')\nplt.show()",
+            "code_description": "NumPy ۽ Matplotlib بىلەن ئاددىي گرافىك سىزىشنى كۆرسىتىدۇ، پىتون كۈتۈپخانىلىرىنىڭ قوللىنىلىشى."
+        },
+        {
+            "id": "python_applications",
+            "title": "پىتوننىڭ قوللىنىشچانلىقى",
+            "exam_percentage": "10.00%",
+            "content": "پىتوننىڭ سانلىق مەلۇمات ئانالىزى، ئىنتېرنېت بېتى ياساش، ئاپتوماتلاشتۇرۇش ۋە باشقا ساھەلەردىكى قوللىنىلىشى، كىچىك تۈر يېزىش. بۇ باب پىتوننىڭ ئەمەلىي قوللىنىلىشىنى كۆرسىتىدۇ.",
+            "codeExample": "import pandas as pd\ndf = pd.DataFrame({'score': [85, 90, 88]})\nprint(df.mean())",
+            "code_description": "pandas بىلەن ئاددىي سانلىق مەلۇمات تەھلىلىنى كۆرسىتىدۇ، نەتىجە: score 87.666..."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Python Crash Course” (Eric Matthes) نى ئوقۇڭ. بۇ كىتاب پىتوننىڭ دەسلەپكى گرامماتىكىسى ۽ قوللىنىشلىرىنى چوڭقۇر چۈشەندۈرىدۇ. “Automate the Boring Stuff with Python” (Al Sweigart) نى ئەمەلىي تۈرلەر ئۈچۈن ئىشلىتىڭ.",
+        "مەشىق: Codecademy (https://www.codecademy.com/learn/learn-python-3) ياكى HackerRank (https://www.hackerrank.com/domains/python) دا پىتون مەشىقلىرىنى تاماملاڭ. JupyterLab دا كود يېزىپ سىناپ بېقىڭ.",
+        "كود يېزىش: ھەر بىر بابدىن كىچىك تۈرلەر يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، CSV فايل تەھلىلى ياكى گرافىك سىزىش).",
+        "ئەمەلىي تۈرلەر: Kaggle (https://www.kaggle.com) دا سانلىق مەلۇمات تەھلىل تۈرلىرىنى يېشىپ، pandas ۽ Matplotlib بىلەن تەجرىبە قىلىڭ.",
+        "مەشىق پىلاتفورمىسى: Google Colab (https://colab.research.google.com) دا Jupyter Notebook لارنى ئىشلىتىپ، NumPy، pandas ۽ Matplotlib بىلەن پىتون كودلىرىنى سىناپ بېقىڭ."
+    ]
+},
+
+
+{
+  "id": "statistics_intermediate",
+  "title": "سىتاتىستىكا ئوتتۇرا سەۋىيە ئۆگىنىش مەزمۇنلىرى",
+  "instructor":"KawulJan",
+    "duration":"6.5h",
+    "enrolledBy":"",
+    "image": "/images/image06.png",
+    "video": "/videos/QML.mp4",
+  "topics": [
+    {
+      "title": "ئىستاتىستىكىلىق تەھلىلنىڭ ئۇسۇللىرى",
+      "description": "خۇلاسە سىتاتىستىكىنىڭ چوڭقۇرلىشىشى، ھىپوتېزا تەكشۈرۈشنىڭ تىپلىرى (z-test, t-test, ANOVA)، p-قىممىتى ۋە ئىشەنچە ئارىلىقىنىڭ چوڭقۇر تەھلىلى.",
+      "codeExample": "from scipy.stats import ttest_ind\ngroup1 = [85, 90, 88, 92]\ngroup2 = [80, 82, 84, 86]\nprint(ttest_ind(group1, group2))"
+    },
+    {
+      "title": "كۆپ ئۆزگەرگۈچىلىك رېگرېسسىيە",
+      "description": "كۆپ ئۆزگەرگۈچىلىك سىزىقلىق رېگرېسسىيە، لوگىستىك رېگرېسسىيە، مودېلنى باھالاش (R², AIC)، كوللىنىئارلىق (multicollinearity).",
+      "codeExample": "from sklearn.linear_model import LinearRegression\nimport numpy as np\nX = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])\ny = [3, 5, 7, 9]\nmodel = LinearRegression().fit(X, y)\nprint(model.coef_)"
+    },
+    {
+      "title": "ۋاقىت رىتىملىك سانلىق مەلۇمات تەھلىلى",
+      "description": "ۋاقىت رىتىملىك سانلىق مەلۇمات (time series)، ئوتتۇرىچە ھەرىكەت (moving average)، ARIMA مودېلى، سىزىقلىق بولمىغان ۋاقىت رىتىملىرى.",
+      "codeExample": "from statsmodels.tsa.arima.model import ARIMA\nimport numpy as np\ndata = [10, 12, 14, 16, 18]\nmodel = ARIMA(data, order=(1, 0, 0)).fit()\nprint(model.forecast(1))"
+    },
+    {
+      "title": "كاتېگورىيەلىك سانلىق مەلۇمات تەھلىلى",
+      "description": "كاتېگورىيەلىك سانلىق مەلۇماتلار بىلەن ئىشلەش، chi-square تەكشۈرۈش، كرامېر V، لوگىستىك رېگرېسسىيەنىڭ قوللىنىلىشى.",
+      "codeExample": "from scipy.stats import chi2_contingency\nimport numpy as np\ntable = np.array([[10, 20], [15, 25]])\nprint(chi2_contingency(table)[1])"
+    },
+    {
+      "title": "بايېسىيان سىتاتىستىكىسى",
+      "description": "بايېسىيان ئېھتىمال، پىرئور ۋە پوستېرىئور تارقىلىش، بايېسىيان خۇلاسە، MCMC (Markov Chain Monte Carlo).",
+      "codeExample": "import pymc3 as pm\nwith pm.Model():\n    mu = pm.Normal('mu', mu=0, sd=1)\n    obs = pm.Normal('obs', mu=mu, sd=1, observed=[1, 2, 3])\n    trace = pm.sample(1000)\nprint(pm.summary(trace))"
+    },
+    {
+      "title": "غەيرىي سىزىقلىق مودېللار",
+      "description": "غەيرىي سىزىقلىق رېگرېسسىيە، دېسىزىيون يىلتىزى (decision trees)، GAM (Generalized Additive Models)، مودېلنى باھالاش.",
+      "codeExample": "from sklearn.tree import DecisionTreeRegressor\nX = [[1], [2], [3], [4]]\ny = [1, 4, 9, 16]\nmodel = DecisionTreeRegressor().fit(X, y)\nprint(model.predict([[5]]))"
+    },
+    {
+      "title": "مەلۇمات كۆرۈنمە قىلىش ۋە تەھلىل",
+      "description": "چوڭقۇر كۆرۈنمە قىلىش: گىستوگرامما، ھېئاتماپ (heatmap)، ۋاقىت رىتىملىك گرافىك، Matplotlib ۋە Seaborn بىلەن ئىلغار گرافىكلار.",
+      "codeExample": "import seaborn as sns\nimport pandas as pd\ndf = pd.DataFrame({'A': [1, 2, 3, 4], 'B': [2, 4, 6, 8]})\nsns.heatmap(df.corr(), annot=True)\nplt.show()"
+    },
+    {
+      "title": "سىتاتىستىكىلىق پىروگرامما",
+      "description": "پىتوندىكى سىتاتىستىكىلىق كۈتۈپخانىلار (SciPy, statsmodels، PyMC3)، مەلۇمات تەھلىلى ۋە مودېللاش، كود ئەلالاشتۇرۇش.",
+      "codeExample": "import statsmodels.api as sm\nX = [[1], [2], [3], [4]]\ny = [2, 4, 6, 8]\nX = sm.add_constant(X)\nmodel = sm.OLS(y, X).fit()\nprint(model.summary())"
+    }
+  ]
+},
+
+
+
+{
+    "id": "statistics_beginner",
+    "title": "Statistics Beginner سىتاستىكا ئاساسى بىلىم ",
+    "instructor":"KawulJan",
+    "duration":"3.5h",
+    "enrolledBy":"",
+    "image": "/images/image01.png",
+    "video": "/videos/QML.mp4",
+    "description": "سىتاتىستىكىنى دەسلەپكى سەۋىيەدە ئۆگىنىشنىڭ مەزمۇنلىرى، كود مىساللىرى ۽ ئۆگىنىشتىكى مۇھىملىق نىسبىتى.",
+    "topics": [
+        {
+            "id": "statistics_basics",
+            "title": "سىتاتىستىكىنىڭ ئاساسلىرى",
+            "exam_percentage": "10.00%",
+            "content": "سىتاتىستىكىنىڭ چۈشەنچىسى، تىپلىرى (تەسۋىرىي ۋە خۇلاسە سىتاتىستىكا)، سانلىق مەلۇمات ئانالىزىدىكى رولى، مەلۇمات تىپلىرى (ساپ، كاتېگورىيەلىك). بۇ تېما سىتاتىستىكىنىڭ ئومۇمىي جەريانى ۽ چۈشەنچىلىرىنى تونۇشتۇرىدۇ.",
+            "codeExample": "print('سىتاتىستىكا: تەسۋىرىي ۋە خۇلاسە ئانالىز')",
+            "code_description": "سىتاتىستىكىنىڭ ئومۇمىي جەريانى ۽ چۈشەنچىلىرىنى تونۇشتۇرىدۇ، كود تەلەپ قىلىنمايدۇ."
+        },
+        {
+            "id": "descriptive_statistics",
+            "title": "تەسۋىرىي سىتاتىستىكا",
+            "exam_percentage": "20.00%",
+            "content": "ئوتتۇرىچە (mean, median, mode)، چەتنەش (variance, standard deviation)، تارقىلىش (range, quartiles)، سانلىق مەلۇماتنىڭ شەكلى (skewness, kurtosis). بۇ تېما سانلىق مەلۇماتنىڭ مەركىزى ۽ تارقىلىشىنى تەسۋىرلەيدۇ.",
+            "codeExample": "import numpy as np\nscores = [85, 90, 88, 92, 87]\nprint(np.mean(scores))\nprint(np.std(scores))",
+            "code_description": "NumPy بىلەن ئوتتۇرىچە ۽ ستاندارت چەتنەشنى ھېسابلاش، نەتىجە: 88.4 ۽ ~2.42."
+        },
+        {
+            "id": "probability_theory",
+            "title": "ئېھتىمال نەزەرىيەسى",
+            "exam_percentage": "15.00%",
+            "content": "ئېھتىمال چۈشەنچىسى، ئاساسىي قائىدىلەر (جەم قىلىش، كۆپەيتىش)، شەرتىي ئېھتىمال، Bayes تېئورېمىسى. بۇ تېما سىتاتىستىكىدىكى ئېھتىمالنىڭ يىلتىزىنى چۈشەندۈرىدۇ.",
+            "codeExample": "def bayes_theorem(p_a, p_b_given_a, p_b):\n    return (p_b_given_a * p_a) / p_b\nprint(bayes_theorem(0.01, 0.95, 0.02))",
+            "code_description": "Bayes تېئورېمىسىنى ھېسابلاش، شەرتىي ئېھتىمالنى پىتوندا ئىپادىلەش، نەتىجە: ~0.475."
+        },
+        {
+            "id": "distributions_variables",
+            "title": "تارقىلىش ۋە ئۆزگەرگۈچىلەر",
+            "exam_percentage": "15.00%",
+            "content": "ئۆزگەرگۈچىلەر (ئۇدا ۋە ئايرىم)، تارقىلىش تىپلىرى (نورمال، بىنومىيال، پوئىسون)، مەركىزىي چەك تېئورېمىسى. بۇ تېما سىتاتىستىكىلىق تارقىلىشلارنى چۈشەندۈرىدۇ.",
+            "codeExample": "import numpy as np\nfrom scipy.stats import norm\nx = np.linspace(-3, 3, 100)\npdf = norm.pdf(x, 0, 1)\nprint(pdf[:5])",
+            "code_description": "SciPy بىلەن نورمال تارقىلىشنىڭ ئېھتىمال زىچلىق فۇنكتسىيەسى (PDF) نى ھېسابلاش."
+        },
+        {
+            "id": "correlation_regression",
+            "title": "كوررېلياتسىيە ۋە رېگرېسسىيە",
+            "exam_percentage": "15.00%",
+            "content": "كوررېلياتسىيە (Pearson, Spearman)، سىزىقلىق رېگرېسسىيە، كۆپ ئۆزگەرگۈچىلىك رېگرېسسىيە، مودېل باھالاش (R²). بۇ تېما ئۆزگەرگۈچىلەر ئارىسىدىكى مۇناسىۋەتنى تەھلىل قىلىشنى چۈشەندۈرىدۇ.",
+            "codeExample": "from scipy.stats import pearsonr\nx = [1, 2, 3, 4, 5]\ny = [2, 4, 6, 8, 10]\nprint(pearsonr(x, y)[0])",
+            "code_description": "SciPy بىلەن Pearson كوررېلياتسىيە كوئېففىتسىئېنتىنى ھېسابلاش، نەتىجە: 1.0."
+        },
+        {
+            "id": "inferential_statistics",
+            "title": "خۇلاسە سىتاتىستىكا",
+            "exam_percentage": "15.00%",
+            "content": "ھىپوتېزا تەكشۈرۈش (t-test, chi-square)، p-قىممىتى، ئىشەنچە ئارىلىقى (confidence intervals). بۇ تېما سانلىق مەلۇماتتىن خۇلاسە چىقىرىشنى چۈشەندۈرىدۇ.",
+            "codeExample": "from scipy.stats import ttest_ind\ngroup1 = [85, 90, 88]\ngroup2 = [80, 82, 84]\nprint(ttest_ind(group1, group2).pvalue)",
+            "code_description": "SciPy بىلەن t-test ئېلىپ بېرىپ، ئىككى گۇرۇپپىنىڭ پەرقىنى تەكشۈرۈش، نەتىجە: p-قىممىتى."
+        },
+        {
+            "id": "visualization",
+            "title": "كۆرۈنمە قىلىش",
+            "exam_percentage": "10.00%",
+            "content": "سىتاتىستىكىلىق نەتىجىلەرنى كۆرۈنمە قىلىش: گىستوگرامما، قۇتى گرافىكى (box plot)، تارقاق گرافىكى، Matplotlib ۋە Seaborn بىلەن گرافىك سىزىش. بۇ تېما سانلىق مەلۇماتلارنى كۆرۈنمە قىلىشنى چۈشەندۈرىدۇ.",
+            "codeExample": "import matplotlib.pyplot as plt\nimport seaborn as sns\nscores = [85, 90, 88, 92, 87]\nsns.boxplot(y=scores)\nplt.ylabel('Scores')\nplt.show()",
+            "code_description": "Seaborn بىلەن قۇتى گرافىكى سىزىش، سانلىق مەلۇماتنىڭ تارقىلىشىنى كۆرۈنمە قىلىش."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Introduction to Probability and Statistics” (William Mendenhall) نى ئوقۇڭ. بۇ كىتاب سىتاتىستىكىنىڭ دەسلەپكى چۈشەنچىلىرىنى چوڭقۇر چۈشەندۈرىدۇ. “Python for Data Analysis” (Wes McKinney) نى پىتوندىكى قوللىنىشلار ئۈچۈن ئىشلىتىڭ.",
+        "مەشىق: Kaggle (https://www.kaggle.com) دا سىتاتىستىكىلىق تەھلىل تۈرلەرنى يېشىڭ (مەسىلەن، “Titanic” دىكى ياشاش نىسبىتىنى تەھلىل قىلىش). JupyterLab دا NumPy، SciPy ۽ Seaborn بىلەن مەشىق قىلىڭ.",
+        "كود يېزىش: ھەر بىر تېمىدىن كىچىك سىتاتىستىكىلىق تەھلىللەر يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، كوررېلياتسىيە تەھلىلى ياكى گىستوگرامما سىزىش).",
+        "ماتېماتىكا: ئېھتىمال نەزەرىيەسى، سىزىقلىق ئالگېبىرا ۽ ئانالىز ئۆگىنىڭ (Coursera دىكى “Statistics with Python Specialization” ياكى Khan Academy دىكى دەرسلەر).",
+        "مەشىق پىلاتفورمىسى: Google Colab (https://colab.research.google.com) دا Jupyter Notebook لارنى ئىشلىتىپ، NumPy، SciPy ۽ Seaborn بىلەن سىتاتىستىكىلىق تەھلىللەرنى سىناپ بېقىڭ."
+    ]
+},
+
+{
+    "id": "data analysis",
+    "title": "Data Analysis سانلىق مەلۇمات ئانالىزى",
+    "instructor":"KawulJan",
+    "duration":"5.5h",
+    "enrolledBy":"",
+    "image": "/images/image07.png",
+    "video": "/videos/QML.mp4",
+    "description": "سانلىق مەلۇمات ئانالىزىنىڭ ھەر بىر تېمىسىنىڭ مەزمۇنلىرى، كود مىساللىرى ۽ ئۆگىنىشتىكى مۇھىملىق نىسبىتى.",
+    "topics": [
+        {
+            "id": "data_engineer_role",
+            "title": "سانلىق مەلۇمات ئىنگىنېرىنىڭ رولى",
+            "exam_percentage": "5.00%",
+            "content": "سانلىق مەلۇمات ئىنگىنېرىنىڭ خىزمەت رولى، سانلىق مەلۇمات ئانالىز جەريانى (جەم قىلىش، تازىلاش، تەھلىل قىلىش)، سانلىق مەلۇمات ئىلمىدىكى پىتوننىڭ رولى. بۇ باب سانلىق مەلۇمات ئانالىزىنىڭ ئومۇمىي جەريانىنى تونۇشتۇرىدۇ.",
+            "codeExample": "print('سانلىق مەلۇمات ئانالىزى: جەم قىلىش -> تازىلاش -> تەھلىل')",
+            "code_description": "بۇ باب سانلىق مەلۇمات ئانالىزىنىڭ ئومۇمىي جەريانىنى چۈشەندۈرىدۇ، كود تەلەپ قىلىنمايدۇ."
+        },
+        {
+            "id": "python_environment",
+            "title": "پىتون ۽ مۇھىت",
+            "exam_percentage": "10.00%",
+            "content": "پىتوننىڭ سانلىق مەلۇمات ئانالىزىدىكى ئىشلىتىلىشى، مۇھىت تەڭشەش (Anaconda, JupyterLab)، پىتوننىڭ ئاساسىي گرامماتىكىسى (ئۆزگەرگۈچىلەر، تىزىملىكلەر، فۇنكتسىيەلەر). بۇ باب پىتوننى سانلىق مەلۇمات ئانالىزىدا ئىشلىتىشنىڭ دەسلەپكى قەدەملىرىنى چۈشەندۈرىدۇ.",
+            "code": "numbers = [1, 2, 3, 4]\nprint(sum(numbers) / len(numbers))",
+            "code_description": "تىزىملىكتىكى سانلارنىڭ ئوتتۇرىچە قىممىتىنى ھېسابلاش، نەتىجە: 2.5."
+        },
+        {
+            "id": "setup_environment",
+            "title": "يۈرگۈزۈش مۇھىتىنى قۇرۇش",
+            "exam_percentage": "2.50%",
+            "content": "پىتوننى ئورنىتىش، Anaconda بىلەن مەۋھۇم مۇھىت قۇرۇش، JupyterLab نى ئىشلىتىش، بوغچا باشقۇرۇش (pip, conda). بۇ باب سانلىق مەلۇمات ئانالىزى ئۈچۈن تەييار مۇھىت قۇرۇشنى چۈشەندۈرىدۇ.",
+            "codeExample": "print('JupyterLab مۇھىتى تەييار!')",
+            "code_description": "JupyterLab نى ئىشلىتىپ ئاددىي كود يېزىش."
+        },
+        {
+            "id": "python_basics",
+            "title": "پىتوننىڭ ئاساسى",
+            "exam_percentage": "7.50%",
+            "content": "پىتوننىڭ ئاساسىي سانلىق مەلۇمات تىپللىرى (list, dict), فۇنكتسىيەلەر، if-else, for ئايلىنىشى. بۇ باب پىتوننىڭ دەسلەپكى گرامماتىكىسىنى سانلىق مەلۇمات ئانالىزىغا ماسلاشتۇرىدۇ.",
+            "code": "def calculate_average(numbers):\n    return sum(numbers) / len(numbers)\nprint(calculate_average([1, 2, 3, 4]))",
+            "code_description": "فۇنكتسىيە يېزىپ، تىزىملىكتىكى سانلارنىڭ ئوتتۇرىچە قىممىتىنى ھېسابلاش، نەتىجە: 2.5."
+        },
+        {
+            "id": "jupyterlab_usage",
+            "title": "JupyterLab",
+            "exam_percentage": "2.50%",
+            "content": "JupyterLab نىڭ ئىشلىتىلىشى، Notebook فايلىنى يارىتىش، كود ۽ Markdown خلىيەلىرى، گرافىك چىقىرىش. بۇ باب JupyterLab نى سانلىق مەلۇمات ئانالىزىدا ئىشلىتىشنى چۈشەندۈرىدۇ.",
+            "codeExample": "import matplotlib.pyplot as plt\nplt.plot([1, 2, 3], [10, 20, 25])\nplt.show()",
+            "code_description": "JupyterLab دا matplotlib بىلەن گرافىك سىزىش."
+        },
+        {
+            "id": "mathematical_foundations",
+            "title": "ماتېماتىكىلىق ئاساسلار",
+            "exam_percentage": "15.00%",
+            "content": "سانلىق مەلۇمات ئانالىزى ئۈچۈن ماتېماتىكىلىق بىلىملەر: سىزىقلىق ئالگېبىرا، ئانالىز، ئىستاتىستىكا. بۇ باب سانلىق مەلۇمات ئانالىزىنىڭ ماتېماتىكىلىق يىلتىزىنى چۈشەندۈرىدۇ.",
+            "code": "",
+            "code_description": "بۇ بابدا كود تەلەپ قىلىنمايدۇ، نەزەرىيە مەركەزلىك."
+        },
+        {
+            "id": "math_notation",
+            "title": "سۆزلۈك بىلىملىرى",
+            "exam_percentage": "2.50%",
+            "content": "ماتېماتىكىلىق سۆزلۈك ۽ بەلگىلەر (مەسىلەن، Σ, ∫)، سانلىق مەلۇمات ئانالىزىدىكى ماتېماتىكىلىق چۈشەنچىلەر. بۇ باب ماتېماتىكىلىق بەلگىلەرنى پىتوندا ئىشلىتىشنى چۈشەندۈرىدۇ.",
+            "codeExample": "numbers = [1, 2, 3]\nprint(sum(numbers))",
+            "code_description": "يىغىندى بەلگىسىنىڭ پىتوندىكى ئىپادىلىنىشى، نەتىجە: 6."
+        },
+        {
+            "id": "linear_algebra",
+            "title": "سىزىقلىق ئالگېبىرا",
+            "exam_percentage": "5.00%",
+            "content": "ۋېكتورلار، ماترىتسىلار، ماترىتسا مەشغۇلاتلىرى (جەم قىلىش، كۆپەيتىش). بۇ باب سانلىق مەلۇمات ئانالىزىدىكى سىزىقلىق ئالگېبىرانى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\nprint(A + B)",
+            "code_description": "numpy بىلەن ماترىتسا جەم قىلىش، نەتىجە: [[6, 8], [10, 12]]."
+        },
+        {
+            "id": "basic_analysis",
+            "title": "ئاساسىي ئانالىز",
+            "exam_percentage": "2.50%",
+            "content": "دېرىۋاتىپ، ئىنتېگرال، فۇنكتسىيەلەرنىڭ ئانالىزى، سانلىق مەلۇمات ئانالىزىدىكى قوللىنىلىشى. بۇ باب ماتېماتىكىلىق ئانالىزنىڭ سانلىق مەلۇماتتىكى رولىنى چۈشەندۈرىدۇ.",
+            "codeExample": "import numpy as np\nx = np.linspace(0, 10, 100)\ny = np.sin(x)\nprint(y[:5])",
+            "code_description": "numpy بىلەن سىنۇس فۇنكتسىيەسىنى ھېسابلاش، نەتىجە: sin فۇنكتسىيەسىنىڭ بىر قىسمى."
+        },
+        {
+            "id": "probability_statistics",
+            "title": "ئېھتىمال ۽ ئىستاتىستىكا",
+            "exam_percentage": "5.00%",
+            "content": "ئېھتىمال نەزەرىيەسى، ئىستاتىستىكىلىق ئۇسۇللار (ئوتتۇرىچە، ستاندارت چەتنەش، كوررېلياتسىيە). بۇ باب سانلىق مەلۇمات ئانالىزىدىكى ئىستاتىستىكىلىق بىلىملەرنى چۈشەندۈرىدۇ.",
+            "code": "import numpy as np\nscores = [85, 90, 88, 92]\nprint(np.mean(scores))\nprint(np.std(scores))",
+            "code_description": "numpy بىلەن ئوتتۇرىچە ۽ ستاندارت چەتنەشنى ھېسابلاش، نەتىجە: 88.75 ۽ ستاندارت چەتنەش."
+        },
+        {
+            "id": "numpy_analysis",
+            "title": "NumPy",
+            "exam_percentage": "15.00%",
+            "content": "NumPy بىلەن سانلىق مەلۇماتلارنى بىر تەرەپ قىلىش، ئارراي مەشغۇلاتلىرى، ماتېماتىكىلىق فۇنكتسىيەلەر. بۇ باب NumPy نى سانلىق مەلۇمات ئانالىزىدا ئىشلىتىشنى چۈشەندۈرىدۇ.",
+            "codeExample": "import numpy as np\narray = np.array([1, 2, 3, 4])\nprint(array * 2)",
+            "code_description": "NumPy ئارراي بىلەن كۆپەيتىش مەشغۇلاتى، نەتىجە: [2, 4, 6, 8]."
+        },
+        {
+            "id": "pandas_analysis",
+            "title": "pandas",
+            "exam_percentage": "17.50%",
+            "content": "pandas بىلەن سانلىق مەلۇمات جەدۋىلىنى باشقۇرۇش، فىلتىرلەش، گۇرۇپپىلاش، تازىلاش. بۇ باب pandas نى سانلىق مەلۇمات ئانالىزىدا ئىشلىتىشنى چۈشەندۈرىدۇ.",
+            "code": "import pandas as pd\ndf = pd.DataFrame({'name': ['ئەلى', 'مەمەت'], 'score': [85, 90]})\nprint(df[df['score'] > 85])",
+            "code_description": "pandas بىلەن شەرت بويىچە فىلتىرلەش، نەتىجە: مەمەت."
+        },
+        {
+            "id": "matplotlib_visualization",
+            "title": "Matplotlib",
+            "exam_percentage": "15.00%",
+            "content": "Matplotlib بىلەن گرافىك سىزىش (سىزىقلىق گرافىك، تارقاق گرافىك، گىستوگرامما). بۇ باب سانلىق مەلۇماتلارنى كۆرۈنمە قىلىشنى چۈشەندۈرىدۇ.",
+            "codeExample": "import matplotlib.pyplot as plt\nplt.plot([1, 2, 3], [10, 20, 30])\nplt.xlabel('X')\nplt.ylabel('Y')\nplt.show()",
+            "code_description": "Matplotlib بىلەن سىزىقلىق گرافىك سىزىش."
+        },
+        {
+            "id": "scikit_learn_analysis",
+            "title": "scikit-learn",
+            "exam_percentage": "20.00%",
+            "content": "scikit-learn بىلەن ماشىنىلىق ئۆگىنىش: سىنىفلاندۇرۇش، رېگرېسسىيە، مەلۇمات تەييارلاش. بۇ باب ماشىنىلىق ئۆگىنىشنى سانلىق مەلۇمات ئانالىزىغا قوللانشنى چۈشەندۈرىدۇ.",
+            "code": "from sklearn.linear_model import LinearRegression\nX = [[1], [2], [3]]\ny = [2, 4, 6]\nmodel = LinearRegression().fit(X, y)\nprint(model.predict([[4]]))",
+            "code_description": "scikit-learn بىلەن سىزىقلىق رېگرېسسىيە مودېلى قۇرۇش، نەتىجە: [8]."
+        },
+        {
+            "id": "data_collection_preparation",
+            "title": "سانلىق مەلۇمات جەم قىلىش ۽ تەييارلاش",
+            "exam_percentage": "0.00%",
+            "content": "سانلىق مەلۇمات جەم قىلىش (CSV, API)، مەلۇمات تازىلاش ۽ تەييارلاش. بۇ باب ئىمتىھاندا چىقمايدۇ.",
+            "codeExample": "",
+            "code_description": "بۇ باب ئىمتىھاندا چىقمايدۇ، كود تەلەپ قىلىنمايدۇ."
+        }
+    ],
+    "preparation_tips": [
+        "دەرسلىك: “Python for Data Analysis” (Wes McKinney) نى ئوقۇڭ. بۇ كىتاب pandas ۽ NumPy بىلەن سانلىق مەلۇمات ئانالىزىنى چوڭقۇر چۈشەندۈرىدۇ.",
+        "مەشىق: Kaggle (https://www.kaggle.com) دا سانلىق مەلۇمات ئانالىز تۈرلەرنى يېشىڭ (مەسىلەن، “Titanic” ياكى “House Prices”). JupyterLab دا pandas ۽ Matplotlib بىلەن مەشىق قىلىڭ.",
+        "كود يېزىش: ھەر بىر تېمىدىن كىچىك سانلىق مەلۇمات ئانالىز تۈرلىرى يېزىپ، GitHub دا پورتفولىيو قۇرۇڭ (مەسىلەن، CSV فايللىرىنى تەھلىل قىلىش ياكى گرافىك سىزىش).",
+        "ماتېماتىكا: سىزىقلىق ئالگېبىرا، ئىستاتىستىكا ۽ ئانالىز ئۆگىنىڭ (Coursera دىكى “Mathematics for Data Science” ياكى Khan Academy دىكى دەرسلەر).",
+        "مەشىق پىلاتفورمىسى: Google Colab (https://colab.research.google.com) دا Jupyter Notebook لارنى ئىشلىتىپ، pandas، NumPy ۽ Matplotlib بىلەن تەجرىبە قىلىڭ."
+    ]
+}
+]

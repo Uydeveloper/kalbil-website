@@ -1,0 +1,35 @@
+[
+  {
+    "id": "Quantum",
+    "title": "JSX",
+    "description": "JSX allows you to write HTML inside JavaScript. It's the syntax used in React components.",
+    "image": "https://source.unsplash.com/400x250/?jsx,code",
+    "details": [
+      "JSX stands for JavaScript XML.",
+      "It makes writing UI components more intuitive.",
+      "JSX must return a single parent element."
+    ]
+  },
+  {
+    "id": "MachineLearning",
+    "title": "Components",
+    "description": "Components are reusable UI blocks in React.",
+    "image": "https://source.unsplash.com/400x250/?react,components",
+    "details": [
+      "Components can be functional or class-based.",
+      "Props are used to pass data between components.",
+      "Components improve code reusability and readability."
+    ]
+  },
+  {
+    "id": "hooks",
+    "title": "Hooks",
+    "description": "Hooks let you use state and lifecycle in functional components.",
+    "image": "https://source.unsplash.com/400x250/?react,hooks",
+    "details": [
+      "useState manages local state.",
+      "useEffect handles side effects.",
+      "Custom hooks allow logic reuse."
+    ]
+  }
+]
