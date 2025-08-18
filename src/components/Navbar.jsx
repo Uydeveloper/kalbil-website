@@ -97,7 +97,8 @@ export default function Navbar() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 hover:opacity-90">
           <img
-            src="/images/image05.png"
+            src={`${process.env.PUBLIC_URL}/images/image05.png`}
+
             alt="KalBiL Logo"
             className="h-8 w-13 object-contain"
           />
