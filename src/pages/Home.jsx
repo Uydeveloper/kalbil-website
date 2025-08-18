@@ -21,7 +21,7 @@ export default function Home() {
           muted
           className="absolute inset-0 mb-10 object-cover z-0"
         >
-          <source src="/videos/QML.mp4" type="video/mp4" />
+          <source src={`${process.env.PUBLIC_URL}/videos/QML.mp4`} type="video/mp4" />
         </video>
 
         
