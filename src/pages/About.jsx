@@ -11,23 +11,23 @@ export default function About() {
 
   
   const sliderItems = [
-    {
-      src: "/images/image01.png",
-      quote: "«بىلىم — قەلبىمىزنىڭ نۇرى.»",
-    },
-    {
-      src: "/images/image02.png",
-      quote: "«تېخنىكا — قانىتىمىز!»",
-    },
-    {
-      src: "/images/image03.png",
-      quote: "«بىرلىكتە ئۆگىنىمىز، كۈچ بېرىمىز.»",
-    },
-    {
-      src: "/images/image05.png",
-      quote: "«كەلگۈسىمىز — پارلاق!»",
-    },
-  ];
+  {
+    src: `${process.env.PUBLIC_URL}/images/image01.png`,
+    quote: "«بىلىم — قەلبىمىزنىڭ نۇرى.»",
+  },
+  {
+    src: `${process.env.PUBLIC_URL}/images/image02.png`,
+    quote: "«تېخنىكا — قانىتىمىز!»",
+  },
+  {
+    src: `${process.env.PUBLIC_URL}/images/image03.png`,
+    quote: "«بىرلىكتە ئۆگىنىمىز، كۈچ بېرىمىز.»",
+  },
+  {
+    src: `${process.env.PUBLIC_URL}/images/image05.png`,
+    quote: "«كەلگۈسىمىز — پارلاق!»",
+  },
+];
 
   const sliderSettings = {
     dots: true,
@@ -69,7 +69,8 @@ export default function About() {
           <div className="text-center mb-8">
             <div className="w-full flex justify-center mt-2">
               <img
-                src="images/image05.png"
+                src={`${process.env.PUBLIC_URL}/images/image05.png`}
+
                  alt="KalBiL Logo"
                  className="w-48 md:w-64 lg:w-72 max-w-full h-auto object-contain"
                  />
