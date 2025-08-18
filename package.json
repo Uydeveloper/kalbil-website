@@ -1,10 +1,9 @@
 {
   "devDependencies": {
     "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17"
-    
-
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
@@ -28,14 +27,12 @@
     "slick-carousel": "^1.8.1"
   },
   "homepage": "https://Uydeveloper.github.io/kalbil-website",
-
   "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
-}
-,
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
   "browserslist": {
     "production": [
       ">0.2%",

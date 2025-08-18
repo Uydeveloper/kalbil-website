@@ -1,5 +1,5 @@
 // src/App.jsx
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { UserProvider } from './context/UserContext';
 
@@ -30,9 +30,9 @@ import { ToastContainer } from 'react-toastify';
 import QuantumMachineLearning from "./pages/QuantumMachineLearning";
 import TopicSlides from "./pages/TopicSlides";
 import ScrollToTop from "./components/ScrollToTop";
-import AddCourse from "./pages/AddCourse"; // يولنى توغرا تەكشۈرۈڭ
+import AddCourse from "./pages/AddCourse";
 import ScrollToTopButton from "./components/ScrollToTopButton";
-import Enroll from "./pages/Enroll"
+import Enroll from "./pages/Enroll";
 
 import "./index.css";
 
@@ -42,18 +42,16 @@ function App() {
   return (
     <UserProvider>
       <Router>
-      <ToastContainer />
+        <ToastContainer />
 
         {/* ✅ Navbar + Login Modal */}
         <Navbar onLoginClick={() => setShowLogin(true)} />
         {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
 
-        {/* ✅ Route قۇرۇلماسى */}
-       
-      <ScrollToTop />
+        <ScrollToTop />
 
+        {/* ✅ Route قۇرۇلماسى */}
         <Routes>
-          {/* ✅ ئاساسىي بەتلەر */}
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/course/:id" element={<CourseDetails />} />
@@ -68,19 +66,16 @@ function App() {
           <Route path="/courses/:id/start" element={<CourseStart />} />
           <Route path="/topic/:id" element={<TopicDetail />} />
           <Route path="/add-course" element={<AddCourse />} />
-
-          {/* ✅ خەۋەر بەتلىرى */}
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/messages/:id" element={<MessageDetail />} />
           <Route path="/admin/messages" element={<AdminMessages />} />
           <Route path="/messages/edit/:id" element={<EditMessagePage />} />
           <Route path="/course/:id" element={<CourseDetailWrapper />} />
           <Route path="/quantummachinelearning" element={<QuantumMachineLearning />} />
-          <Route path="/courses" element={<div>📖 Courses Page Coming Soon...</div>} />
-          {/* ✅ پەقەت admin role بولغانلارلا */}
           <Route path="/qml/:topicId" element={<TopicSlides />} />
           <Route path="/enroll" element={<Enroll />} />
 
+          {/* ✅ پەقەت admin role بولغانلارلا */}
           <Route
             path="/view-registration"
             element={
@@ -90,6 +85,7 @@ function App() {
             }
           />
         </Routes>
+
         {/* ✅ Scroll to Top Button */}
         <ScrollToTopButton />
 
@@ -97,10 +93,7 @@ function App() {
         <Footer />
       </Router>
     </UserProvider>
-     
-    
-
   );
 }
 
-export default App; // ✅ بۇ قۇرنى قوشسىڭىز، خاتالىق تۈزىلىدۇ
+export default App;
