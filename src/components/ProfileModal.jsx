@@ -51,7 +51,7 @@ export default function ProfileModal({ onClose }) {
   };
 
   return (
-   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start pt-24 z-50">
+   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start  pt-24 z-50">
   <div className="bg-white dark:bg-gray-900 p-6 rounded shadow-lg w-full max-w-xl relative">
 
         <button

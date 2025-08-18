@@ -104,7 +104,7 @@ export default function LoginModal({ onClose, onSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed mt-60 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[40%] z-50 w-full max-w-md ...">
       <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4 text-center">
           {isLogin ? '🔐 Login' : '🆕 Sign Up'}
@@ -197,9 +197,7 @@ export default function LoginModal({ onClose, onSuccess }) {
           </button>
         </div>
 
-        <div className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
-          🧑‍💼 <Link to="/admin" className="text-blue-500 hover:underline">باشقۇرچى</Link>
-        </div>
+       
       </div>
     </div>
   );

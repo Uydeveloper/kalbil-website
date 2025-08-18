@@ -49,7 +49,7 @@ export default function Profile() {
 
   return (
     <div className="max-w-xl mx-auto  p-6 bg-white dark:bg-gray-900 rounded shadow">
-      <h2 className="text-2xl font-bold mb-4">👤 پروفايىل ئۇچۇرى</h2>
+      <h2 className="text-2xl font-bold mb-4">👤111 پروفايىل ئۇچۇرى</h2>
 
       <label className="block mb-2 font-semibold">👤 ئىسم</label>
       <input

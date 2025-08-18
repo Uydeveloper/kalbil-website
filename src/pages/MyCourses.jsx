@@ -29,7 +29,8 @@ export default function MyCourses() {
                 />
               ) : (
                 <img
-                  src={course.image}
+                  src={`${process.env.PUBLIC_URL}${course.image}`}
+
                   alt={course.title}
                   className="w-full h-48 object-cover"
                 />

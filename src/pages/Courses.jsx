@@ -70,7 +70,7 @@ export default function Courses() {
         <div className="flex flex-col md:flex-row items-start gap-6">
           <div className="md:w-1/2 w-full">
             <img
-              src="/images/image05.png"
+              src={`${process.env.PUBLIC_URL}/images/image05.png`}
               alt="KalBiL نىڭ پەن-تېخنىكا ۋە مەدەنىيەت ئۇيغۇنلىقى"
               className="rounded-lg shadow-md w-full h-auto"
             />
