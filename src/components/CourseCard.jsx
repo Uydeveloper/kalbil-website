@@ -18,8 +18,8 @@ export default function CourseCard({ course }) {
       {/* Image + Video Hover */}
       <div className="relative">
         <img
-          src={`${process.env.PUBLIC_URL}${course.image}`}
-
+        src={`${process.env.PUBLIC_URL}/{course.image}`}
+        // src={course.image}
           alt={`Course: ${course.title}`}
           className="w-full h-48 object-cover"
         />
