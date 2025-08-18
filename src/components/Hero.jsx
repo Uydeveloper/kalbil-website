@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const images = [
-  "/images/image01.png",
-  "/images/image02.png",
-  "/images/image03.png"
+  `${process.env.PUBLIC_URL}/images/image01.png`,
+  `${process.env.PUBLIC_URL}/images/image02.png`,
+  `${process.env.PUBLIC_URL}/images/image03.png`
 ];
 
 export default function Hero() {
