@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// ✅ Use relative paths instead of PUBLIC_URL
 const images = [
-  `${process.env.PUBLIC_URL}/images/image01.png`,
-  `${process.env.PUBLIC_URL}/images/image02.png`,
-  `${process.env.PUBLIC_URL}/images/image03.png`
+  "/images/image01.png",
+  "/images/image02.png",
+  "/images/image03.png"
 ];
 
 export default function Hero() {
