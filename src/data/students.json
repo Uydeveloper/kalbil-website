@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Amina",
+    "avatar": "/avatars/amina.png",
+    "courses": [
+      {
+        "title": "Python",
+        "teacher": "Mr. Ali",
+        "duration": "3 ئاي",
+        "progress": 80,
+        "image": "/courses/python.png"
+      }
+    ]
+  }
+]

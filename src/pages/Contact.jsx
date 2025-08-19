@@ -1,4 +1,7 @@
 // src/pages/Contact.jsx
+import { useNavigate } from "react-router-dom";
+
+
 export default function Contact() {
   function handleSubmit(e) {
     e.preventDefault();
@@ -6,9 +9,16 @@ export default function Contact() {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const message = e.target.message.value;
+    const navigate = useNavigate();
 
     const mailtoLink = `mailto:kawuljan.uyghur@gmail.com?subject=KalBil ئالاقە&body=👤 ئىسمى: ${name}%0A📧 Email: ${email}%0A💬 ئۇچۇر: ${message}`;
     window.location.href = mailtoLink;
+
+    const handleClick = () => {
+    navigate("/courses");
+  };
+
+
   }
 
   return (
@@ -136,6 +146,20 @@ export default function Contact() {
             </button>
           </form>
         </div>
+
+        
+      </div>
+      <div className="max-w-5xl mx-auto space-y-12">
+        {/* ... ئالاقە فورمىسىڭىز قالسۇن ... */}
+
+        <button
+          onClick={() => navigate("/CourseTopics")}
+
+
+          className="py-3 px-10 mt-10 bg-gradient-to-r from-blue-600 to-green-500 text-white rounded hover:from-blue-700 hover:to-green-600 transition"
+        >
+          🚀 دەرسلەر
+        </button>
       </div>
     </section>
   );

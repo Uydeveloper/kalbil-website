@@ -6,6 +6,8 @@ import { ThemeProvider } from './context/ThemeContext';
 import { UserProvider } from './context/UserContext';
 import { AuthProvider } from './context/AuthContext'; // ✅ Login Context import
 import './index.css';
+import "./components/StudentCard.css"; // style قوشۇش
+
 
 const root = createRoot(document.getElementById('root'));
 

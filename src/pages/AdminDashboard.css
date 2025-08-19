@@ -1,0 +1,23 @@
+.admin-dashboard {
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.admin-dashboard h2 {
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-dashboard li {
+  margin: 0.5rem 0;
+}
+
+.admin-dashboard a {
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: bold;
+}

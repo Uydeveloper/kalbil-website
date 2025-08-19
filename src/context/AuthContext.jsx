@@ -1,66 +1,51 @@
+// src/context/AuthContext.js
 import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState("guest");
+  const [userRole, setUserRole] = useState("guest"); // "user", "admin", "guest"
+  const [username, setUsername] = useState(null);
 
-  // 🔄 Context قىممەتلىرىنى localStorage دىن ئېلىش
+  // ✅ بەت ئېچىلغاندا localStorage'dan قىممەت ئوقۇش
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser);
-        setUser(parsedUser);
-        setIsLoggedIn(true);
-        setUserRole(parsedUser.role || "guest");
-      } catch (err) {
-        console.error("❌ User parse error:", err);
-        setUser(null);
-        setIsLoggedIn(false);
-        setUserRole("guest");
-      }
-    } else {
-      setUser(null);
-      setIsLoggedIn(false);
-      setUserRole("guest");
-    }
+    const storedStatus = localStorage.getItem("isLoggedIn");
+    const storedRole = localStorage.getItem("userRole");
+    const storedName = localStorage.getItem("username");
+    setIsLoggedIn(storedStatus === "true");
+    setUserRole(storedRole || "guest");
+    setUsername(storedName || null);
   }, []);
 
-  // ✅ Login function
-  const login = (userData) => {
-    setUser(userData);
+  // ✅ login: Context + localStorage persist
+  const login = (name, role = "user") => {
     setIsLoggedIn(true);
-    setUserRole(userData.role || "user");
-    localStorage.setItem("user", JSON.stringify(userData));
+    setUserRole(role);
+    setUsername(name);
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userRole", role);
+    localStorage.setItem("username", name);
   };
 
-  // 🚪 Logout function
+  // ✅ logout: Context + localStorage clear
   const logout = () => {
-    setUser(null);
     setIsLoggedIn(false);
     setUserRole("guest");
-    localStorage.removeItem("user");
+    setUsername(null);
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("username");
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        isLoggedIn,
-        userRole,
-        login,
-        logout,
-      }}
-    >
+    <AuthContext.Provider value={{ isLoggedIn, userRole, username, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-// 🧠 Custom hook for easy access
+// ✅ Context نى ئىشلىتىش ئۈچۈن hook
 export function useAuth() {
   return useContext(AuthContext);
 }

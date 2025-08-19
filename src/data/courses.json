@@ -857,7 +857,7 @@
   "instructor": "KawulJan",
   "startDate": "2025-09-01",
   "duration": "4 weeks",
-  "image": "${process.env.PUBLIC_URL}/images/image10.png",
+  "image": "/images/image10.png",
   "video": "",
   "likes": 0,
   "views": 0,
