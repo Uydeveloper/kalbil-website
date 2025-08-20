@@ -33,7 +33,6 @@ import AdminMessages from "./pages/AdminMessages";
 import EditMessagePage from "./pages/EditMessagePage";
 import CourseDetailWrapper from "./pages/CourseDetailWrapper";
 import QuantumMachineLearning from "./pages/QuantumMachineLearning";
-import TopicSlides from "./pages/TopicSlides";
 import AddCourse from "./pages/AddCourse";
 import Enroll from "./pages/Enroll";
 import CourseTopics from "./pages/CourseTopics";
@@ -42,9 +41,9 @@ import StudentList from './components/StudentList';
 import StudentPage from './components/StudentPage';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TopicSlides from "./pages/TopicSlides";
 import AdminRoute from "./routes/AdminRoute";
 import AdminDashboard from "./pages/AdminDashboard";
-
 import StudentDetail from "./components/StudentDetail";
 
 import "./index.css";
@@ -56,6 +55,8 @@ function App() {
     <AuthProvider>
       <UserProvider>
         <CourseProvider>
+          
+
           <Router>
             <ToastContainer position="top-right" autoClose={3000} />
 
@@ -84,7 +85,7 @@ function App() {
               <Route path="/messages/:id" element={<MessageDetail />} />
               <Route path="/messages/edit/:id" element={<EditMessagePage />} />
               <Route path="/quantummachinelearning" element={<QuantumMachineLearning />} />
-              <Route path="/qml/:topicId" element={<TopicSlides />} />
+              <Route path="/qml/:id" element={<TopicSlides />} />
               <Route path="/enroll" element={<Enroll />} />
               <Route path="/CourseTopics" element={<CourseTopics />} />
               <Route path="/students" element={<StudentList />} />
