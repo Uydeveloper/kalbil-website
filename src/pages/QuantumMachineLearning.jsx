@@ -2,7 +2,7 @@ import { qmlTopics } from "../data/qmlTopics";
 import { Dialog } from "@headlessui/react";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
-
+import courses from "./Courses";
 export default function QuantumMachineLearning() {
   const [selectedTopic, setSelectedTopic] = useState(null);
 const [currentSlideIndex, setCurrentSlideIndex] = useState(0); // ✅ بۇنى قوشۇڭ
