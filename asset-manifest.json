@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/kalbil-edu/static/css/main.e42cc3bf.css",
-    "main.js": "/kalbil-edu/static/js/main.4efb9db3.js",
-    "static/media/slick.svg": "/kalbil-edu/static/media/slick.2630a3e3eab21c607e21.svg",
-    "index.html": "/kalbil-edu/index.html",
-    "static/media/slick.eot": "/kalbil-edu/static/media/slick.a4e97f5a2a64f0ab1323.eot",
-    "static/media/slick.ttf": "/kalbil-edu/static/media/slick.c94f7671dcc99dce43e2.ttf",
-    "static/media/slick.woff": "/kalbil-edu/static/media/slick.295183786cd8a1389865.woff",
-    "main.e42cc3bf.css.map": "/kalbil-edu/static/css/main.e42cc3bf.css.map",
-    "main.4efb9db3.js.map": "/kalbil-edu/static/js/main.4efb9db3.js.map"
+    "main.css": "/KalBil_edu/static/css/main.5a4528a4.css",
+    "main.js": "/KalBil_edu/static/js/main.b99a4c2e.js",
+    "static/media/slick.svg": "/KalBil_edu/static/media/slick.2630a3e3eab21c607e21.svg",
+    "index.html": "/KalBil_edu/index.html",
+    "static/media/slick.eot": "/KalBil_edu/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/KalBil_edu/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/KalBil_edu/static/media/slick.295183786cd8a1389865.woff",
+    "main.5a4528a4.css.map": "/KalBil_edu/static/css/main.5a4528a4.css.map",
+    "main.b99a4c2e.js.map": "/KalBil_edu/static/js/main.b99a4c2e.js.map"
   },
   "entrypoints": [
-    "static/css/main.e42cc3bf.css",
-    "static/js/main.4efb9db3.js"
+    "static/css/main.5a4528a4.css",
+    "static/js/main.b99a4c2e.js"
   ]
 }
