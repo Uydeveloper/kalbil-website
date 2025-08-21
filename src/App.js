@@ -45,7 +45,6 @@ import TopicSlides from "./pages/TopicSlides";
 import AdminRoute from "./routes/AdminRoute";
 import AdminDashboard from "./pages/AdminDashboard";
 import StudentDetail from "./components/StudentDetail";
-
 import "./index.css";
 
 function App() {
@@ -92,6 +91,7 @@ function App() {
               <Route path="/student/:name" element={<StudentPage />} />
               <Route path="/students" element={<StudentList />} />
               <Route path="/students/:id" element={<StudentDetail />} />
+              <Route path="/login" element={<LoginModal />} />
 
               {/* ✅ Admin-only routes */}
               <Route

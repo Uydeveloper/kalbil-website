@@ -191,7 +191,7 @@ export default function Courses() {
                 <span>💬 {course.comments?.length || 0}</span>
               </div>
 
-           {isLoggedIn && (userRole === "user" || userRole === "admin") ? (
+  {isLoggedIn && (userRole === "user" || userRole === "admin") ? (         
   <button
     onClick={() => navigate(`/outline/${course.id}`)}
     className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"

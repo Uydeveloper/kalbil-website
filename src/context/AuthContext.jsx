@@ -1,51 +1,98 @@
-// src/context/AuthContext.js
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
+import students from "../data/students.json";
 
-const AuthContext = createContext();
+// ✅ باشقۇرغۇچى credential نى constants بىلەن قۇرۇش
+// ✅ باشقۇرغۇچى credential نى موقۇم قۇرۇش
+const ADMIN_CREDENTIALS = {
+  id: "kalbil",
+  password: "kalbil3120",
+  name: "kawuljan99"
+};
 
+// ✅ Context قۇرۇش
+export const AuthContext = createContext();
+
+// ✅ Provider
 export function AuthProvider({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState("guest"); // "user", "admin", "guest"
-  const [username, setUsername] = useState(null);
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem("user");
+    return saved ? JSON.parse(saved) : null;
+  });
 
-  // ✅ بەت ئېچىلغاندا localStorage'dan قىممەت ئوقۇش
+  // ✅ user نى localStorage غا ساقلاش
   useEffect(() => {
-    const storedStatus = localStorage.getItem("isLoggedIn");
-    const storedRole = localStorage.getItem("userRole");
-    const storedName = localStorage.getItem("username");
-    setIsLoggedIn(storedStatus === "true");
-    setUserRole(storedRole || "guest");
-    setUsername(storedName || null);
-  }, []);
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
 
-  // ✅ login: Context + localStorage persist
-  const login = (name, role = "user") => {
-    setIsLoggedIn(true);
-    setUserRole(role);
-    setUsername(name);
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("userRole", role);
-    localStorage.setItem("username", name);
-  };
+  // ✅ لوگىن قىلىش
+function login(id, password) {
+  if (typeof id !== "string" || typeof password !== "string") {
+    console.error("❌ ID ياكى Password قىممەتسىز");
+    return false;
+  }
 
-  // ✅ logout: Context + localStorage clear
-  const logout = () => {
-    setIsLoggedIn(false);
-    setUserRole("guest");
-    setUsername(null);
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("username");
-  };
+  const trimmedId = id.trim();
+  const trimmedPassword = password.trim();
+
+  // ✅ باشقۇرچى تەكشۈرۈش
+  if (
+    trimmedId === "kalbil" &&
+    trimmedPassword === "kalbil3120"
+  ) {
+    const adminUser = {
+      id: "kalbil",
+      name: "kawuljan99",
+      role: "admin"
+    };
+    localStorage.setItem("id", adminUser.id);
+    localStorage.setItem("role", adminUser.role);
+    setUser(adminUser);
+    return true;
+  }
+
+  // ✅ ئوقۇغۇچى تەكشۈرۈش
+  const student = students.find(
+    (s) =>
+      String(s.id).trim() === trimmedId &&
+      s.password === trimmedPassword
+  );
+
+  if (student) {
+    const studentUser = {
+      id: student.id,
+      name: student.name,
+      role: "student"
+    };
+    localStorage.setItem("id", studentUser.id);
+    localStorage.setItem("role", studentUser.role);
+    setUser(studentUser);
+    return true;
+  }
+
+  return false;
+}
+
+  // 🚪 چىقىش
+  function logout() {
+    setUser(null);
+    localStorage.removeItem("user");
+  }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userRole, username, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-// ✅ Context نى ئىشلىتىش ئۈچۈن hook
+// ✅ Custom hook: useAuth
 export function useAuth() {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  const isAdmin = context.user?.role === "admin";
+  const isStudent = context.user?.role === "student";
+  return { ...context, isAdmin, isStudent };
 }

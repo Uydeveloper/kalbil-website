@@ -154,14 +154,18 @@ export default function Navbar() {
             Contact
           </Link>
 
-          <Link
-            to="/students"
-            className={
-              isActive("/students") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-gray-200 hover:text-blue-500"
-            }
-          >
-            Students
-          </Link>
+         
+
+          {user && (
+            <Link
+              to="/students"
+              className={
+                isActive("/students") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-gray-200 hover:text-blue-500"
+              }
+            >
+              Students
+            </Link>
+          )}
 
 
           {user && (

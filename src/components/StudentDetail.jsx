@@ -6,7 +6,10 @@ import { dracula } from "@uiw/codemirror-theme-dracula";
 import students from "../data/students.json";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { useReactToPrint } from "react-to-print";
+import { useAuth } from "../context/AuthContext";
 
+// ✅ ئوقۇغۇچى تەپسىلاتى كومپونېنتى
+// بۇ كومپونېنت ئوقۇغۇچىنىڭ تەپسىلاتىنى كۆرسىتىدۇ، Python كودىنى ئىجرا قىلىش، ئاۋاتارنى ئۆزگەرتىش قاتارلىق ئىقتىدارلارنى ئۆز ئىچىگە ئالىدۇ.
 export default function StudentDetail() {
   const { id } = useParams();
   const student = students.find((s) => String(s.id) === id);
@@ -79,7 +82,11 @@ export default function StudentDetail() {
   if (!student) {
     return <div className="p-6 text-center text-red-600">❌ ئوقۇغۇچى تېپىلمىدى</div>;
   }
-
+  const { user } = useAuth();
+if (!user) return <p>⛔ كىرگۈزۈڭ</p>;
+if (user.role === "student" && user.id !== id) {
+  return <p className="text-red-500 p-6">🚫 بۇ بەتنى كۆرۈش ھوقۇقىڭىز يوق</p>;
+}
   return (
     <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-yellow-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-lg shadow-md">
       <div ref={printRef}>

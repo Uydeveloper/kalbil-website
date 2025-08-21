@@ -1,149 +1,135 @@
 [
   {
-    "id": 1,
+    "id": "stu-001",
     "name": "Amina",
     "avatar": "/images/image05.png",
-    "courses": [
-      {
-        "title": "Python",
-        "teacher": "Mr. Ali",
-        "duration": "3 ئاي",
-        "progress": 80,
-        "image": "/courses/python.png"
-      },
-      {
-        "title": "Data Analysis",
-        "teacher": "Ms. Fatima",
-        "duration": "2 ئاي",
-        "progress": 60,
-        "image": "/courses/data.png"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Yusup",
-    "avatar": "/avatars/yusup.png",
-    "courses": [
-      {
-        "title": "JavaScript",
-        "teacher": "Mr. Omar",
-        "duration": "1.5 ئاي",
-        "progress": 90,
-        "image": "/courses/js.png"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Fatima",
-    "avatar": "/avatars/fatima.png",
-    "courses": [
-      {
-        "title": "HTML & CSS",
-        "teacher": "Ms. Zeynep",
-        "duration": "2 ئاي",
-        "progress": 100,
-        "image": "/courses/htmlcss.png"
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "name": "Abdulla",
-    "avatar": "/avatars/abdulla.png",
-    "courses": [
-      {
-        "title": "React",
-        "teacher": "Mr. Musa",
-        "duration": "3.5 ئاي",
-        "progress": 75,
-        "image": "/courses/react.png"
-      }
-    ]
-  },
-  {
-    "id": 5,
-    "name": "Nuray",
-    "avatar": "/avatars/nuray.png",
-    "courses": [
-      {
-        "title": "Machine Learning",
-        "teacher": "Dr. Karim",
-        "duration": "4 ئاي",
-        "progress": 50,
-        "image": "/courses/ml.png"
-      }
-    ]
-  },
-  {
-    "id": 6,
-    "name": "Salim",
-    "avatar": "/avatars/salim.png",
-    "courses": [
-      {
-        "title": "Node.js",
-        "teacher": "Mr. Ismail",
-        "duration": "2.5 ئاي",
-        "progress": 65,
-        "image": "/courses/node.png"
-      }
-    ]
-  },
-  {
-    "id": 7,
-    "name": "Zeynep",
-    "avatar": "/avatars/zeynep.png",
-    "courses": [
-      {
-        "title": "SQL",
-        "teacher": "Ms. Ayshe",
-        "duration": "2 ئاي",
-        "progress": 85,
-        "image": "/courses/sql.png"
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "name": "Karim",
-    "avatar": "/avatars/karim.png",
-    "courses": [
-      {
-        "title": "Cybersecurity",
-        "teacher": "Mr. Bilal",
-        "duration": "3 ئاي",
-        "progress": 40,
-        "image": "/courses/security.png"
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "name": "Leyla",
-    "avatar": "/avatars/leyla.png",
-    "courses": [
-      {
-        "title": "UI/UX Design",
-        "teacher": "Ms. Selma",
-        "duration": "2 ئاي",
-        "progress": 95,
-        "image": "/courses/uiux.png"
-      }
-    ]
-  },
-  {
-    "id": 10,
-    "name": "Mustafa",
-    "avatar": "/avatars/mustafa.png",
-    "courses": [
-      {
+    "password": "amina123",
+    "courses": [ {
         "title": "Docker & DevOps",
         "teacher": "Mr. Hamid",
         "duration": "3 ئاي",
         "progress": 70,
         "image": "/courses/devops.png"
-      }
-    ]
-  }
+      } ]
+  },
+  {
+    "id": "stu-002",
+    "name": "Yusup",
+    "avatar": "/avatars/yusup.png",
+    "password": "yusup456",
+    "courses": [ {
+        "title": "Docker & DevOps",
+        "teacher": "Mr. Hamid",
+        "duration": "3 ئاي",
+        "progress": 70,
+        "image": "/courses/devops.png"
+      } ]
+  },
+  {
+    "id": "stu-003",
+    "name": "Zehra",
+    "avatar": "/avatars/zehra.png",
+    "password": "zehra789",
+    "courses": [ {
+        "title": "Docker & DevOps",
+        "teacher": "Mr. Hamid",
+        "duration": "3 ئاي",
+        "progress": 70,
+        "image": "/courses/devops.png"
+      } ]
+  },
+  {
+    "id": "stu-004",
+    "name": "Ali",
+    "avatar": "/avatars/ali.png",
+    "password": "ali123",
+    "courses": [ {
+        "title": "Docker & DevOps",
+        "teacher": "Mr. Hamid",
+        "duration": "3 ئاي",
+        "progress": 70,
+        "image": "/courses/devops.png"
+      } ]
+  },
+  {
+    "id": "stu-005",
+    "name": "Fatima",
+    "avatar": "/avatars/fatima.png",
+    "password": "fatima456",
+    "courses": [ {
+        "title": "Docker & DevOps",
+        "teacher": "Mr. Hamid",
+        "duration": "3 ئاي",
+        "progress": 70,
+        "image": "/courses/devops.png"
+      } ]
+  },
+  {
+    "id": "stu-006",
+    "name": "Omar",
+    "avatar": "/avatars/omar.png",
+    "password": "omar789",
+    "courses": [ {
+        "title": "Docker & DevOps",
+        "teacher": "Mr. Hamid",
+        "duration": "3 ئاي",
+        "progress": 70,
+        "image": "/courses/devops.png"
+      } ]
+  },
+  {
+    "id": "stu-007",
+    "name": "Layla",
+    "avatar": "/avatars/layla.png",
+    "password": "layla123",
+    "courses": [ {
+        "title": "Docker & DevOps",
+        "teacher": "Mr. Hamid",
+        "duration": "3 ئاي",
+        "progress": 70,
+        "image": "/courses/devops.png"
+      } ]
+  },
+  {
+    "id": "stu-008",
+    "name": "Hassan",
+    "avatar": "/avatars/hassan.png",
+    "password": "hassan456",
+    "courses": [ {
+        "title": "Docker & DevOps",
+        "teacher": "Mr. Hamid",
+        "duration": "3 ئاي",
+        "progress": 70,
+        "image": "/courses/devops.png"
+      } ]
+  },
+  {
+    "id": "stu-009",
+    "name": "Sara",
+    "avatar": "/avatars/sara.png",
+    "password": "sara789",
+    "courses": [ {
+        "title": "Docker & DevOps",
+        "teacher": "Mr. Hamid",
+        "duration": "3 ئاي",
+        "progress": 70,
+        "image": "/courses/devops.png"
+      } ]
+  },
+  {
+    "id": "stu-010",
+    "name": "Kadir",
+    "avatar": "/avatars/kadir.png",
+    "password": "kadir123",
+    "courses": [ {
+        "title": "Docker & DevOps",
+        "teacher": "Mr. Hamid",
+        "duration": "3 ئاي",
+        "progress": 70,
+        "image": "/courses/devops.png"
+      } ]
+  } 
+  
 ]
+
+

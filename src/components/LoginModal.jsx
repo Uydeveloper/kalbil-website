@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
@@ -29,6 +28,12 @@ export default function LoginModal({ onClose, onSuccess }) {
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    if (!form.username.trim() || !form.password.trim()) {
+      setMessage("❌ ئىسم ۋە مەخپى نۇمۇرنى تولدۇرۇڭ!");
+      return;
+    }
+
     const users = JSON.parse(localStorage.getItem("users") || "[]");
     const found = users.find(
       (u) => u.username === form.username && u.password === form.password
@@ -57,6 +62,7 @@ export default function LoginModal({ onClose, onSuccess }) {
 
     const users = JSON.parse(localStorage.getItem("users") || "[]");
     const exists = users.find((u) => u.username === 'admin');
+
     if (!exists) {
       users.push(adminUser);
       localStorage.setItem("users", JSON.stringify(users));
@@ -72,8 +78,22 @@ export default function LoginModal({ onClose, onSuccess }) {
 
   const handleSignup = (e) => {
     e.preventDefault();
+
+    if (!form.username.trim() || !form.password.trim()) {
+      setMessage("❌ ئىسم ۋە مەخپى نۇمۇرنى تولدۇرۇڭ!");
+      return;
+    }
+
     if (form.password !== form.confirm) {
       setMessage('❌ مەخپى نۇمۇر تەستىقلىنىشى خاتا!');
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const exists = users.find((u) => u.username === form.username);
+
+    if (exists) {
+      setMessage('❌ بۇ ئىسم ئاللىقاچان تىزىملىتىلگەن!');
       return;
     }
 
@@ -84,13 +104,6 @@ export default function LoginModal({ onClose, onSuccess }) {
       avatar: form.avatar,
       role: 'user'
     };
-
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const exists = users.find((u) => u.username === form.username);
-    if (exists) {
-      setMessage('❌ بۇ ئىسم ئاللىقاچان تىزىملىتىلگەن!');
-      return;
-    }
 
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
@@ -104,9 +117,10 @@ export default function LoginModal({ onClose, onSuccess }) {
   };
 
   return (
-    <div className="fixed mt-60 inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white  dark:bg-gray-900 p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center">
+    
+    <div className="fixed mt-40 inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg w-full max-w-md mt-20">
+        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800 dark:text-white">
           {isLogin ? '🔐 Login' : '🆕 Sign Up'}
         </h2>
 
@@ -177,7 +191,11 @@ export default function LoginModal({ onClose, onSuccess }) {
           </div>
         </form>
 
-        {message && <p className="mt-4 text-center text-green-600 dark:text-green-400">{message}</p>}
+        {message && (
+          <p className="mt-4 text-center text-red-600 dark:text-red-400 font-semibold">
+            {message}
+          </p>
+        )}
 
         <div className="mt-4 text-center">
           <button
@@ -196,9 +214,8 @@ export default function LoginModal({ onClose, onSuccess }) {
             ❌ تاقاش
           </button>
         </div>
-
-        
       </div>
     </div>
+   
   );
 }

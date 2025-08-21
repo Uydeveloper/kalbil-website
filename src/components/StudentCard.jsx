@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import "./StudentCard.css";
 
-export default function StudentCard({ student }) {
+export default function StudentCard({ student, currentUser }) {
   const course = student.courses?.[0];
+  const isAdmin = currentUser?.role === "admin";
+  const isSelf = currentUser?.id === student.id;
+  const canView = isAdmin || isSelf;
 
   return (
     <div className="student-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition duration-300 ease-in-out">
@@ -35,14 +38,16 @@ export default function StudentCard({ student }) {
       )}
 
       {/* 🔗 Detail Link */}
-      <div className="mt-4 text-center">
-        <Link
-          to={`/students/${student.id}`}
-          className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-sm font-semibold"
-        >
-          تەپسىلاتى كۆرۈش
-        </Link>
-      </div>
+      {canView && (
+        <div className="mt-4 text-center">
+          <Link
+            to={`/students/${student.id}`}
+            className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-sm font-semibold"
+          >
+            تەپسىلاتى كۆرۈش
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
