@@ -1,9 +1,9 @@
-name: Deploy React App to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # ياكى 'master' بولسا، بۇنى ئۆزگەرتىڭ
 
 jobs:
   deploy:
@@ -21,10 +21,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Configure Git author
-        run: |
-          git config --global user.name "Kawuli Abudureyimu"
-          git config --global user.email "145730569+KawuliJanSetouchi@users.noreply.github.com"
+      - name: Build project
+        run: npm run build
 
       - name: Deploy to GitHub Pages
-        run: npm run deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          user_name: Kawuli Abudureyimu
+          user_email: 145730569+KawuliJanSetouchi@users.noreply.github.com
