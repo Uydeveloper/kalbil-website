@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/kalbil-edu/static/css/main.25ca8daf.css",
-    "main.js": "/kalbil-edu/static/js/main.59b2c607.js",
+    "main.css": "/kalbil-edu/static/css/main.e42cc3bf.css",
+    "main.js": "/kalbil-edu/static/js/main.4efb9db3.js",
     "static/media/slick.svg": "/kalbil-edu/static/media/slick.2630a3e3eab21c607e21.svg",
     "index.html": "/kalbil-edu/index.html",
     "static/media/slick.eot": "/kalbil-edu/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/kalbil-edu/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/kalbil-edu/static/media/slick.295183786cd8a1389865.woff",
-    "main.25ca8daf.css.map": "/kalbil-edu/static/css/main.25ca8daf.css.map",
-    "main.59b2c607.js.map": "/kalbil-edu/static/js/main.59b2c607.js.map"
+    "main.e42cc3bf.css.map": "/kalbil-edu/static/css/main.e42cc3bf.css.map",
+    "main.4efb9db3.js.map": "/kalbil-edu/static/js/main.4efb9db3.js.map"
   },
   "entrypoints": [
-    "static/css/main.25ca8daf.css",
-    "static/js/main.59b2c607.js"
+    "static/css/main.e42cc3bf.css",
+    "static/js/main.4efb9db3.js"
   ]
 }
