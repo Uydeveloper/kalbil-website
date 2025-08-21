@@ -21,8 +21,8 @@ export default function ProfileModal({ onClose }) {
   const handleSave = () => {
     setUser(form);
     const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const updated = users.map((u) =>
-      u.username === user.username ? form : u
+    const updated = users.map((U) =>
+      U.username === user.username ? form : U
     );
     localStorage.setItem("users", JSON.stringify(updated));
     alert("✅ ئۇچۇر يېڭىلاندى!");

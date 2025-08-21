@@ -16,15 +16,9 @@ export default function Courses() {
   const { isLoggedIn, userRole } = useAuth();
 
   useEffect(() => {
-    console.log("isLoggedIn:", isLoggedIn);
-    console.log("userRole:", userRole);
-  }, [isLoggedIn, userRole]);
-
-  useEffect(() => {
     AOS.init({ duration: 800 });
   }, []);
 
-  // ✅ Filter + Sort
   let filteredCourses = courses.filter((course) =>
     `${course.title} ${course.instructor}`
       .toLowerCase()
@@ -47,7 +41,6 @@ export default function Courses() {
     );
   }
 
-  // ✅ Categories set
   const allCategories = ["all", ...new Set(courses.map((c) => c.category))];
 
   return (
@@ -82,16 +75,16 @@ export default function Courses() {
               <strong>KalBiL</strong>
             </p>
             <p>
-              سۇنئىي ئەقىل بىلەن، بىلىم سىستېمىسىنى راقەملىك كەلگۈسىگە
-              باشلايدۇ. <strong>KalBiL</strong>
+              سۇنئىي ئەقىل بىلەن، بىلىم سىستېمىسىنى راقەملىك كەلگۈسىگە باشلايدۇ.{" "}
+              <strong>KalBiL</strong>
             </p>
             <p>
-              ئۇچۇر تېخنىكىسى ئارقىلىق، جامائەتنى ئۇلاش، بىلىم تارقىتىش،
-              ھەمكارلىق قۇرۇش. <strong>KalBiL</strong>
+              ئۇچۇر تېخنىكىسى ئارقىلىق، جامائەتنى ئۇلاش، بىلىم تارقىتىش، ھەمكارلىق قۇرۇش.{" "}
+              <strong>KalBiL</strong>
             </p>
             <p>
-              چوڭ سابلىق مەلۇمات بىلەن، مەدەنىيەت نۇرىنى پەن-تېخنىكا بىلەن
-              يورۇتىدۇ. <strong>KalBiL</strong>
+              چوڭ سابلىق مەلۇمات بىلەن، مەدەنىيەت نۇرىنى پەن-تېخنىكا بىلەن يورۇتىدۇ.{" "}
+              <strong>KalBiL</strong>
             </p>
           </div>
         </div>
@@ -108,7 +101,7 @@ export default function Courses() {
         </h2>
       </div>
 
-      {/* ✅ Search + Filters */}
+      {/* Search + Filters */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <input
           type="text"
@@ -142,7 +135,7 @@ export default function Courses() {
         </select>
       </div>
 
-      {/* ✅ Course Cards */}
+      {/* Course Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredCourses.map((course) => (
           <article
@@ -191,27 +184,28 @@ export default function Courses() {
                 <span>💬 {course.comments?.length || 0}</span>
               </div>
 
-  {isLoggedIn && (userRole === "user" || userRole === "admin") ? (         
-  <button
-    onClick={() => navigate(`/outline/${course.id}`)}
-    className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-  >
-    🔍 تەپسىلاتىنى كۆرۈش
-  </button>
-) : (
-  <div
-    className="mt-4 w-full bg-gray-400 text-white py-2 rounded text-center cursor-not-allowed opacity-70"
-    title="سىزنىڭ كىرشىڭىز كېرەك"
-  >
-    🔒 ئالدى بىلەن كىرىڭ
-  </div>
-)}
-
+                {/* ✅ View Details Button */}
+             
+                <button
+                  onClick={() => navigate(`/outline/${course.id}`)}
+                  className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+                >
+                  🔍 تەپسىلاتىنى كۆرۈش
+                </button>
+              
+                <div
+                  className="mt-4 w-full bg-gray-400 text-white py-2 rounded text-center cursor-not-allowed opacity-70"
+                  title="سىزنىڭ كىرىشىڭىز كېرەك"
+                >
+                  🔒 ئالدى بىلەن كىرىڭ
+                </div>
+              
             </div>
           </article>
         ))}
       </div>
 
+      {/* ✅ No Results Message */}
       {filteredCourses.length === 0 && (
         <p className="text-center mt-12 text-lg">
           😕 كورسلار تېپىلمىدى.

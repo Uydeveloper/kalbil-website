@@ -51,6 +51,9 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
 
   return (
+     
+
+
     <AuthProvider>
       <UserProvider>
         <CourseProvider>
@@ -120,6 +123,7 @@ function App() {
         </CourseProvider>
       </UserProvider>
     </AuthProvider>
+  
   );
 }
 

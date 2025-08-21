@@ -1,92 +1,203 @@
-// src/pages/CourseOutline.jsx
-import { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useParams, useNavigate } from 'react-router-dom';
 import courses from '../data/courses.json';
+import { useState, useEffect, useRef } from 'react';
 
-export default function CourseOutline() {
-  const { id } = useParams();
+export default function TopicDetails() {
+  const { id, topicId } = useParams();
+  const navigate = useNavigate();
   const course = courses.find((c) => String(c.id) === id);
+  const topic = course.topics[topicId];
 
-  const { userRole } = useAuth();
-  const isAdmin = userRole === 'admin';
+  const [pyodide, setPyodide] = useState(null);
+  const [topicOutput, setTopicOutput] = useState("");
+  const [pythonCode, setPythonCode] = useState("");
+  const [pythonOutput, setPythonOutput] = useState("");
+  const [showPythonOutput, setShowPythonOutput] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  const outputRef = useRef(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const loadPyodide = async () => {
+      const py = await window.loadPyodide();
+      await py.loadPackage("micropip");
+      setPyodide(py);
+    };
+    loadPyodide();
   }, []);
 
-  if (!course) {
-    return (
-      <div className="p-6 text-red-600 dark:text-red-400">
-        ❌ Course not found.
-        <button
-          onClick={() => window.history.back()}
-          className="mt-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-        >
-          🔙 قايتىش
-        </button>
-      </div>
-    );
-  }
+  const ensurePackagesInstalled = async (code) => {
+    const requiredPackages = [];
+    if (code.includes("numpy")) requiredPackages.push("numpy");
+    if (code.includes("pandas")) requiredPackages.push("pandas");
+    if (code.includes("matplotlib")) requiredPackages.push("matplotlib");
+
+    if (requiredPackages.length > 0) {
+      try {
+        await pyodide.runPythonAsync(`
+import micropip
+await micropip.install(${JSON.stringify(requiredPackages)})
+`);
+      } catch (err) {
+        console.error("❌ Package install error:", err);
+      }
+    }
+  };
+
+  const runPython = async (code, setOutput) => {
+    if (!pyodide) {
+      setOutput("⏳ Pyodide is still loading...");
+      return;
+    }
+
+    if (!code?.trim()) {
+      setOutput("⚠️ No Python code provided.");
+      return;
+    }
+
+    let stdout = "";
+    pyodide.setStdout({
+      batched: (msg) => {
+        stdout += msg;
+      },
+    });
+
+    try {
+      await ensurePackagesInstalled(code);
+      await pyodide.runPythonAsync(code);
+      setOutput(stdout || "✅ No output.");
+    } catch (err) {
+      setOutput("❌ Python Error: " + err.message);
+    }
+  };
+
+  const handleRunTopicCode = async () => {
+    await runPython(topic.code, setTopicOutput);
+  };
+
+  const handleRunPythonPractice = async () => {
+    await runPython(pythonCode, setPythonOutput);
+    setShowPythonOutput(true);
+    setTimeout(() => {
+      outputRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const handleCopyOutput = async () => {
+    try {
+      await navigator.clipboard.writeText(pythonOutput);
+      alert("✅ Output copied to clipboard!");
+    } catch (err) {
+      alert("❌ Failed to copy: " + err.message);
+    }
+  };
+
+  const handleSaveOutput = () => {
+    try {
+      localStorage.setItem("lastPythonOutput", pythonOutput);
+      alert("💾 Output saved to localStorage!");
+    } catch (err) {
+      alert("❌ Failed to save: " + err.message);
+    }
+  };
+
+  const handleShareOutput = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: "Python Output",
+        text: pythonOutput,
+      }).catch((err) => alert("❌ Share failed: " + err.message));
+    } else {
+      alert("⚠️ Share API not supported on this device.");
+    }
+  };
 
   return (
-    <div className="p-6 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold">{course.title} Outline</h2>
-
-        {isAdmin && (
-          <div className="flex gap-3">
-            <Link
-              to={`/courses/${id}/edit`}
-              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow-lg hover:scale-105 transition-transform animate-pulse"
-            >
-              🛠 Edit Course
-            </Link>
-            <Link
-              to={`/courses/${id}/stats`}
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg shadow-lg hover:scale-105 transition-transform animate-pulse"
-            >
-              📊 View Stats
-            </Link>
-          </div>
-        )}
+    <div className={`${darkMode ? "dark" : ""} p-6 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen`}>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold">📚 {topic.title}</h2>
       </div>
 
-      <table className="w-full table-auto border-collapse shadow-md rounded-lg overflow-hidden">
-        <thead>
-          <tr className="bg-blue-600 text-white">
-            <th className="p-3 text-left">📚 Topic</th>
-            <th className="pr-20 text-right">📝 Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {course.topics.map((topic, index) => (
-            <tr
-              key={index}
-              className="hover:bg-blue-100 dark:hover:bg-gray-800 border-b border-gray-300"
-            >
-              <td className="p-3">
-                <Link
-                  to={`/courses/${id}/topic/${index}`}
-                  className="text-blue-600 hover:underline"
-                >
-                  {topic.title}
-                </Link>
-              </td>
-              <td className="pr-10 text-right">{topic.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <p className="mb-4">📝 {topic.description}</p>
 
-      <div className="mt-6">
+      <h3 className="text-xl font-bold mb-2">🐍 Topic Python Code</h3>
+      <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm mb-2">
+        <code>{topic.code}</code>
+      </pre>
+      <button
+        onClick={handleRunTopicCode}
+        className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 mb-4"
+      >
+        ▶️ Run Topic Code
+      </button>
+
+      {topicOutput && (
+        <div className="mt-2 bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm">
+          <strong>Topic Output:</strong>
+          <pre>{topicOutput}</pre>
+        </div>
+      )}
+
+      <div className="mt-10">
+        <h3 className="text-xl font-bold mb-2">🧪 Python Code Practice</h3>
+        <textarea
+          value={pythonCode}
+          onChange={(e) => setPythonCode(e.target.value)}
+          placeholder="e.g. import numpy as np\nprint(np.array([1,2,3]))"
+          rows={6}
+          className="w-full px-4 py-2 border rounded dark:bg-gray-800 dark:text-white mb-2"
+        />
         <button
-          onClick={() => window.history.back()}
-          className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg shadow-md hover:scale-105 transition-transform"
+          onClick={handleRunPythonPractice}
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
-          🔙 قايتىش
+          ▶️ Run Practice Code
         </button>
       </div>
+
+      {showPythonOutput && (
+        <div ref={outputRef} className="mt-6 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow p-4 rounded">
+          <div className="flex justify-between items-center mb-2">
+            <strong className="text-lg">🧪 Practice Output</strong>
+            <button
+              onClick={() => setShowPythonOutput(false)}
+              className="text-sm text-red-600 hover:underline"
+            >
+              ✖ Close
+            </button>
+          </div>
+          <pre className="bg-gray-100 dark:bg-gray-900 p-3 rounded text-sm whitespace-pre-wrap mb-2">
+            <code className="text-green-600 dark:text-green-400">{pythonOutput}</code>
+          </pre>
+          <div className="flex gap-3">
+            <button
+              onClick={handleCopyOutput}
+              className="bg-gray-600 text-white py-1 px-3 rounded hover:bg-gray-700 text-sm"
+            >
+              📋 Copy
+            </button>
+            <button
+              onClick={handleSaveOutput}
+              className="bg-yellow-600 text-white py-1 px-3 rounded hover:bg-yellow-700 text-sm"
+            >
+              💾 Save
+            </button>
+            <button
+              onClick={handleShareOutput}
+              className="bg-purple-600 text-white py-1 px-3 rounded hover:bg-purple-700 text-sm"
+            >
+              📤 Share
+            </button>
+          </div>
+        </div>
+      )}
+
+      <button
+        onClick={() => navigate(-1)}
+        className="mt-6 ml-5 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
+      >
+        🔙 Back
+      </button>
     </div>
   );
 }

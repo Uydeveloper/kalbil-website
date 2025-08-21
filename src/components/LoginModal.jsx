@@ -53,8 +53,8 @@ export default function LoginModal({ onClose, onSuccess }) {
 
   const handleAdminLogin = () => {
     const adminUser = {
-      username: 'admin',
-      password: 'admin123',
+      username: 'kkkk',
+      password: 'kkk',
       role: 'admin',
       avatar: '',
       phone: ''

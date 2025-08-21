@@ -20,10 +20,29 @@ export default function TopicDetails() {
   useEffect(() => {
     const loadPyodide = async () => {
       const py = await window.loadPyodide();
+      await py.loadPackage("micropip");
       setPyodide(py);
     };
     loadPyodide();
   }, []);
+
+  const ensurePackagesInstalled = async (code) => {
+    const requiredPackages = [];
+    if (code.includes("numpy")) requiredPackages.push("numpy");
+    if (code.includes("pandas")) requiredPackages.push("pandas");
+    if (code.includes("matplotlib")) requiredPackages.push("matplotlib");
+
+    if (requiredPackages.length > 0) {
+      try {
+        await pyodide.runPythonAsync(`
+import micropip
+await micropip.install(${JSON.stringify(requiredPackages)})
+`);
+      } catch (err) {
+        console.error("❌ Package install error:", err);
+      }
+    }
+  };
 
   const runPython = async (code, setOutput) => {
     if (!pyodide) {
@@ -44,6 +63,7 @@ export default function TopicDetails() {
     });
 
     try {
+      await ensurePackagesInstalled(code);
       await pyodide.runPythonAsync(code);
       setOutput(stdout || "✅ No output.");
     } catch (err) {
@@ -94,14 +114,12 @@ export default function TopicDetails() {
 
   return (
     <div className={`${darkMode ? "dark" : ""} p-6 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen`}>
-      {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">📚 {topic.title}</h2>
       </div>
 
       <p className="mb-4">📝 {topic.description}</p>
 
-      {/* Topic Python Code */}
       <h3 className="text-xl font-bold mb-2">🐍 Topic Python Code</h3>
       <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm mb-2">
         <code>{topic.code}</code>
@@ -120,13 +138,12 @@ export default function TopicDetails() {
         </div>
       )}
 
-      {/* Python Code Practice */}
       <div className="mt-10">
         <h3 className="text-xl font-bold mb-2">🧪 Python Code Practice</h3>
         <textarea
           value={pythonCode}
           onChange={(e) => setPythonCode(e.target.value)}
-          placeholder="e.g. import math\nprint(math.pi)"
+          placeholder="e.g. import numpy as np\nprint(np.array([1,2,3]))"
           rows={6}
           className="w-full px-4 py-2 border rounded dark:bg-gray-800 dark:text-white mb-2"
         />
@@ -138,7 +155,6 @@ export default function TopicDetails() {
         </button>
       </div>
 
-      {/* Python Output Section */}
       {showPythonOutput && (
         <div ref={outputRef} className="mt-6 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow p-4 rounded">
           <div className="flex justify-between items-center mb-2">
@@ -176,7 +192,6 @@ export default function TopicDetails() {
         </div>
       )}
 
-      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
         className="mt-6 ml-5 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
