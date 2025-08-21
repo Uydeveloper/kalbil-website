@@ -1,5 +1,6 @@
 {
-  "homepage": "https://Uydeveloper.github.io/kalbil-edu",
+  "homepage": "https://Uydeveloper.github.io/KalBil_edu",
+  "name": "kalbil-edu",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
