@@ -2,11 +2,15 @@ import StudentCard from "./StudentCard";
 import studentsData from "../data/students.json";
 import { useState } from "react";
 import AddStudentForm from "./AddStudentForm";
+import { useNavigate } from "react-router-dom"; // ✅ redirect ئۈچۈن
+import JoinClass from "./JoinClass";
+
 
 export default function StudentList() {
   const [students, setStudents] = useState(studentsData);
   const [searchTerm, setSearchTerm] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const navigate = useNavigate(); // ✅ redirect function
 
   const filtered = students.filter((s) =>
     `${s.name} ${s.courses?.[0]?.title || ""}`.toLowerCase().includes(searchTerm.toLowerCase())
@@ -48,12 +52,20 @@ export default function StudentList() {
           className="w-full mb-6 px-4 py-2 border border-blue-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
 
-        <div className="flex justify-center mb-6">
+        {/* ✅ ئىككى بوتۇن: يېڭى ئوقۇغۇچى + Live دەرس */}
+        <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
           <button
             onClick={() => setShowForm(true)}
             className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 shadow"
           >
             ➕ يېڭى ئوقۇغۇچى قوشۇش
+          </button>
+
+          <button
+            onClick={() => navigate("/join-class")}
+            className="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800 shadow"
+          >
+            🎓 Live دەرسكە قاتنىشىش
           </button>
         </div>
 

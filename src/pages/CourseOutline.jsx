@@ -67,7 +67,7 @@ export default function CourseOutline() {
             to={`/courses/${id}/stats`}
             className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
           >
-            📊 View Stats
+            📊 view Stats
           </Link>
         </div>
       )}

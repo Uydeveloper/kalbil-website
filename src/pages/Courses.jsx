@@ -6,6 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Courses() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -184,21 +185,25 @@ export default function Courses() {
                 <span>💬 {course.comments?.length || 0}</span>
               </div>
 
-                {/* ✅ View Details Button */}
-             
+               
+  
+  <div className='relative w-full bottom-4'>
                 <button
                   onClick={() => navigate(`/outline/${course.id}`)}
-                  className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+                  className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
                 >
-                  🔍 تەپسىلاتىنى كۆرۈش
+                  🔍 View Details
                 </button>
-              
-                <div
-                  className="mt-4 w-full bg-gray-400 text-white py-2 rounded text-center cursor-not-allowed opacity-70"
-                  title="سىزنىڭ كىرىشىڭىز كېرەك"
-                >
-                  🔒 ئالدى بىلەن كىرىڭ
-                </div>
+              </div>
+
+  <div
+    className="mt-4 w-full bg-gray-400 text-white py-2 rounded text-center cursor-not-allowed opacity-70"
+    title="سىزنىڭ كىرىشىڭىز كېرەك"
+  >
+    🔒 ئالدى بىلەن كىرىڭ
+  </div>
+
+
               
             </div>
           </article>
@@ -214,3 +219,4 @@ export default function Courses() {
     </section>
   );
 }
+

@@ -1,6 +1,7 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from "react";
 
-export const UserContext = createContext();
+export const UserContext = createContext(null);
+export const useUser = () => useContext(UserContext);
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -8,11 +9,19 @@ export function UserProvider({ children }) {
 
   // Load user from localStorage on mount
   useEffect(() => {
-  const storedUser = localStorage.getItem("currentUser");
-  if (storedUser) {
-    setUser(JSON.parse(storedUser));
-  }
-}, []);
+    try {
+      const storedUser = localStorage.getItem("loggedInUser");
+      if (storedUser) {
+        const parsed = JSON.parse(storedUser);
+        if (parsed && typeof parsed === "object") {
+          setUser(parsed);
+          setAvatar(parsed.avatar || null);
+        }
+      }
+    } catch (err) {
+      console.error("Failed to load user:", err);
+    }
+  }, []);
 
   // Update avatar and sync with user + localStorage
   const updateAvatar = (newAvatar) => {
@@ -24,8 +33,15 @@ export function UserProvider({ children }) {
     });
   };
 
+  // Optional: logout function
+  const logout = () => {
+    localStorage.removeItem("loggedInUser");
+    setUser(null);
+    setAvatar(null);
+  };
+
   return (
-    <UserContext.Provider value={{ user, setUser, avatar, updateAvatar }}>
+    <UserContext.Provider value={{ user, setUser, avatar, updateAvatar, logout }}>
       {children}
     </UserContext.Provider>
   );

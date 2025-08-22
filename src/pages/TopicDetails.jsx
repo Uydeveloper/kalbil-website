@@ -5,8 +5,20 @@ import { useState, useEffect, useRef } from 'react';
 export default function TopicDetails() {
   const { id, topicId } = useParams();
   const navigate = useNavigate();
-  const course = courses.find((c) => String(c.id) === id);
-  const topic = course.topics[topicId];
+
+  // course نى تاپايلى
+  const course = courses.find((c) => String(c.id ) === id);
+  const topic = course.topics[topicId] ;
+
+  // ⚡ topicId نى بىر تەرەپ قىلىش: index ياكى id بولۇشى مۇمكىن
+  // let topic = null;
+  // if (course?.topics) {
+  //   // بىرىنچىدىن index بويىچە قاراپ باقىمىز
+  //   const byIndex = course.topics[Number(topicId)];
+  //   // ئىككىنچىدىن id بويىچە قاراپ باقىمىز
+  //   const byId = course.topics.find((t) => String(t.id) === topicId);
+  //   topic = byIndex || byId || null;
+  // }
 
   const [pyodide, setPyodide] = useState(null);
   const [topicOutput, setTopicOutput] = useState("");
@@ -19,9 +31,13 @@ export default function TopicDetails() {
 
   useEffect(() => {
     const loadPyodide = async () => {
-      const py = await window.loadPyodide();
-      await py.loadPackage("micropip");
-      setPyodide(py);
+      try {
+        const py = await window.loadPyodide();
+        await py.loadPackage("micropip");
+        setPyodide(py);
+      } catch (err) {
+        console.error("❌ Pyodide load error:", err);
+      }
     };
     loadPyodide();
   }, []);
@@ -72,7 +88,7 @@ await micropip.install(${JSON.stringify(requiredPackages)})
   };
 
   const handleRunTopicCode = async () => {
-    await runPython(topic.code, setTopicOutput);
+    await runPython(topic?.code, setTopicOutput);
   };
 
   const handleRunPythonPractice = async () => {
@@ -112,6 +128,23 @@ await micropip.install(${JSON.stringify(requiredPackages)})
     }
   };
 
+  // 🚫 خاتالىق بولسا fallback
+if (!course || !topic) {
+  return (
+    <div className="p-6 text-red-600 dark:text-red-400">
+      <h2 className="text-2xl font-bold mb-4">🚫 تېما ياكى دەرس تېپىلمىدى</h2>
+      <p>Course ID: <code>{courseId}</code></p>
+      <p>Topic ID: <code>{topicId}</code></p>
+      <button
+        onClick={() => navigate(-1)}
+        className="mt-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+      >
+        🔙 قايتىش
+      </button>
+    </div>
+  );
+}
+
   return (
     <div className={`${darkMode ? "dark" : ""} p-6 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen`}>
       <div className="flex justify-between items-center mb-4">
@@ -120,7 +153,7 @@ await micropip.install(${JSON.stringify(requiredPackages)})
 
       <p className="mb-4">📝 {topic.description}</p>
 
-      <h3 className="text-xl font-bold mb-2">🐍 Topic Python Code</h3>
+      <h3 className="text-xl font-bold mb-2">🐍 تېما كودى</h3>
       <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm mb-2">
         <code>{topic.code}</code>
       </pre>
@@ -128,7 +161,7 @@ await micropip.install(${JSON.stringify(requiredPackages)})
         onClick={handleRunTopicCode}
         className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 mb-4"
       >
-        ▶️ Run Topic Code
+        ▶️ كود ئىجرا قىل
       </button>
 
       {topicOutput && (
@@ -139,7 +172,7 @@ await micropip.install(${JSON.stringify(requiredPackages)})
       )}
 
       <div className="mt-10">
-        <h3 className="text-xl font-bold mb-2">🧪 Python Code Practice</h3>
+        <h3 className="text-xl font-bold mb-2">🧪 مەشىق كودى</h3>
         <textarea
           value={pythonCode}
           onChange={(e) => setPythonCode(e.target.value)}
@@ -151,19 +184,19 @@ await micropip.install(${JSON.stringify(requiredPackages)})
           onClick={handleRunPythonPractice}
           className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
-          ▶️ Run Practice Code
+          ▶️ مەشىق كودىنى ئىجرا قىل
         </button>
       </div>
 
       {showPythonOutput && (
         <div ref={outputRef} className="mt-6 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow p-4 rounded">
           <div className="flex justify-between items-center mb-2">
-            <strong className="text-lg">🧪 Practice Output</strong>
+            <strong className="text-lg">🧪 مەشىق نەتىجىسى</strong>
             <button
               onClick={() => setShowPythonOutput(false)}
               className="text-sm text-red-600 hover:underline"
             >
-              ✖ Close
+              ✖ تاقا
             </button>
           </div>
           <pre className="bg-gray-100 dark:bg-gray-900 p-3 rounded text-sm whitespace-pre-wrap mb-2">
@@ -174,19 +207,19 @@ await micropip.install(${JSON.stringify(requiredPackages)})
               onClick={handleCopyOutput}
               className="bg-gray-600 text-white py-1 px-3 rounded hover:bg-gray-700 text-sm"
             >
-              📋 Copy
+              📋 كۆچۈر
             </button>
             <button
               onClick={handleSaveOutput}
               className="bg-yellow-600 text-white py-1 px-3 rounded hover:bg-yellow-700 text-sm"
             >
-              💾 Save
+              💾 ساقلا
             </button>
             <button
               onClick={handleShareOutput}
               className="bg-purple-600 text-white py-1 px-3 rounded hover:bg-purple-700 text-sm"
             >
-              📤 Share
+              📤 ھەمبەھىرلە
             </button>
           </div>
         </div>
@@ -196,7 +229,7 @@ await micropip.install(${JSON.stringify(requiredPackages)})
         onClick={() => navigate(-1)}
         className="mt-6 ml-5 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
       >
-        🔙 Back
+        🔙 قايتىش
       </button>
     </div>
   );
