@@ -36,6 +36,8 @@ import Enroll from "./pages/Enroll";
 import Students from "./components/StudentList";
 import "./index.css";
 import JoinClass from "./components/JoinClass";
+import LectureDetail from "./components/LectureDetail";
+
 function App() {
   const [showLogin, setShowLogin] = useState(false);
 
@@ -76,6 +78,9 @@ function App() {
           <Route path="/enroll" element={<Enroll />} />
           <Route path="/students" element={<Students />} />
           <Route path="/join-class" element={<JoinClass />} />
+         <Route path="/lecture/:id" element={<LectureDetail />} />
+          
+          
           {/* ✅ پەقەت admin role بولغانلارلا */}
           <Route
             path="/view-registration"

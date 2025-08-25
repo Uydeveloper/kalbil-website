@@ -19,7 +19,7 @@ export default function ViewPage() {
     <div className={`${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'} min-h-screen flex flex-col`}>
       {/* Logo/Header */}
       <header className="flex items-center justify-between px-6 py-4 shadow bg-white dark:bg-gray-800">
-        <h1 className="text-xl font-bold">🎓 EduCourses</h1>
+        <h1 className="text-xl font-bold">🎓 KaLBiL EduCourses</h1>
         <nav className="space-x-4">
           <button onClick={() => navigate('/')} className="hover:underline">Home</button>
           <button onClick={() => navigate('/register')} className="hover:underline">Courses</button>
@@ -29,7 +29,7 @@ export default function ViewPage() {
       {/* Main Content */}
       <main className="flex-grow flex flex-col items-center justify-center px-4">
         <div className="bg-white dark:bg-gray-700 p-8 rounded shadow-md w-full max-w-md text-center">
-          <h2 className="text-2xl font-bold mb-4">📚 Online Courses Platform</h2>
+          <h2 className="text-2xl font-bold mb-4">📚KaLBiL Online Courses Platform</h2>
           <p className="mb-6">تىزىملىتىڭ ياكى تىزىملىتىلگەن ئۇچۇرلارنى كۆرۈڭ</p>
 
           <div className="space-y-4">
