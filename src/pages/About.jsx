@@ -6,37 +6,37 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
 
 export default function About() {
   const topics = Object.values(topicData);
   const [showForm, setShowForm] = useState(false);
+  const [submissions, setSubmissions] = useState([]);
+  const { user } = useContext(UserContext); 
+
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
+  e.preventDefault();
+  const formData = new FormData(e.target);
 
-    const payload = {
-      name: formData.get("name"),
-      phone: formData.get("phone"),
-      email: formData.get("email"),
-      country: formData.get("country"),
-      message: formData.get("message"),
-      image: formData.get("image")?.name || null,
-      video: formData.get("video")?.name || null,
-    };
-
-    try {
-      await fetch("https://kalbil.org/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      alert("✅ ئۇچۇر KalBiL غا يوللاندى!");
-      setShowForm(false);
-    } catch (err) {
-      alert("❌ يوللاش مەغلۇپ بولدى: " + err.message);
-    }
+  const payload = {
+    id: Date.now(), // unique ID
+    name: formData.get("name"),
+    phone: formData.get("phone"),
+    email: formData.get("email"),
+    country: formData.get("country"),
+    message: formData.get("message"),
+    image: formData.get("image")?.name || null,
+    video: formData.get("video")?.name || null,
   };
+
+  setSubmissions((prev) => [...prev, payload]);
+  e.target.reset();
+  alert("✅ ئۇچۇر يوللاندى!");
+};
+
 
   const handleReset = () => {
     document.querySelector("form").reset();
@@ -226,7 +226,7 @@ export default function About() {
         <div className="text-center mb-6 sm:mb-8 md:mb-10">
           <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold text-blue-600 dark:text-blue-400">🤝 KalBiL بىلەن ھەمكارلىشىڭ</h2>
           <p className="mt-1 sm:mt-2 text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300">
-            «بىزنى قوللىشىڭىزنى ئۈمىد قىلىمىز — بىرىكتە بىلىم تېخىمۇ كۈچلۈك، يوقالماس بولايلى!»
+            «بىزنى قوللىشىڭىزنى ئۈمىد قىلىمىز — بىرىلىكتە بىلىم تېخىمۇ كۈچلۈك، يوقالماس بولايلى»
           </p>
         </div>
 
@@ -274,6 +274,35 @@ export default function About() {
           </div>
         )}
       </section>
+
+      {submissions.length > 0 && (
+  <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {submissions.map((item) => (
+      <div key={item.id} className="bg-white dark:bg-gray-800 p-4 rounded shadow-lg">
+        <h3 className="text-lg font-bold text-blue-600 dark:text-blue-400">{item.name}</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-300">📞 {item.phone}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">✉️ {item.email}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">🌍 {item.country}</p>
+        <p className="mt-2 text-gray-700 dark:text-gray-200">📝 {item.message}</p>
+        {item.image && <p className="text-xs mt-1">📷 رەسىم: {item.image}</p>}
+        {item.video && <p className="text-xs">🎥 ۋىدىئو: {item.video}</p>}
+
+        {/* ✅ باشقۇرغۇچىلا ئۆچۈرەلەيدۇ */}
+        {user?.role === "admin" && (
+          <button
+            onClick={() => handleDelete(item.id)}
+            className="mt-3 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm"
+          >
+            🗑️ ئۆچۈرۈش
+          </button>
+        )}
+      </div>
+    ))}
+  </div>
+)}
+
+
+      
     </>
   );
 }
