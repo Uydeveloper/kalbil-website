@@ -38,11 +38,14 @@ import "./index.css";
 import JoinClass from "./components/JoinClass";
 import LectureDetail from "./components/LectureDetail";
 import StudentDetail from "./components/StudentDetail";
+import { LanguageProvider } from "./context/LanguageContext";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
 
   return (
+    <LanguageProvider>
+
     <UserProvider>
       <Router>
         <ToastContainer />
@@ -101,6 +104,7 @@ function App() {
         <Footer />
       </Router>
     </UserProvider>
+    </LanguageProvider>
   );
 }
 
