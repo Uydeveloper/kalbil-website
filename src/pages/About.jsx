@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function About() {
   const topics = Object.values(topicData);
+  
 
   
   const sliderItems = [
@@ -85,32 +86,36 @@ export default function About() {
           </div>
 
           {/* Cards Grid */}
-          <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {topics.map((t) => (
-              <Link key={t.id} to={`/topic/${t.id}`}>
-                <motion.div
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group bg-white dark:bg-gray-800 shadow-md rounded-2xl overflow-hidden hover:shadow-2xl transition duration-300"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {topics.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+            >
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  {item.slogan}
+                </p>
+
+                {/* 🔑 شۇ يەردىكى id بىلەن topicData دىكى id بىردەك بولۇشى كېرەك */}
+                <Link
+                  to={`/topic/${item.id}`}
+                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
                 >
-                  <div className="h-40 sm:h-48 w-full overflow-hidden">
-                    <img
-                      src={t.img}
-                      alt={t.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2" style={{ fontFamily: 'Amiri, serif' }}>{t.title}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3" style={{ fontFamily: 'Amiri, serif' }}>
-                      {t.description.replace(/\n/g, " ")}
-                    </p>
-                    <div className="mt-4 text-blue-600 dark:text-blue-400 font-semibold" style={{ fontFamily: 'Amiri, serif' }}>تەپسىلاتىنى كۆرۈش →</div>
-                  </div>
-                </motion.div>
-              </Link>
-            ))}
-          </div>
+                  تەپسىلاتىنى كۆرۈش
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
 
           {/* Mission Statement */}
           <motion.div

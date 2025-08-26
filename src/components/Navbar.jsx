@@ -70,7 +70,7 @@ export default function Navbar() {
         boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
         backdropFilter: "blur(0px)",
       }}
-      className={`sticky top-0 z-50 px-6 transition-all duration-300 ${
+      className={`sticky top-0 z-50  px-6 transition-all duration-300 ${
         darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-800"
       }`}
     >
@@ -179,6 +179,7 @@ export default function Navbar() {
             </Link>
           )}
         </div>
+        
 
         {/* Actions */}
         <div className="flex items-center space-x-4">

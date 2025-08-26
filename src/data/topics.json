@@ -22,8 +22,8 @@
     ]
   },
   {
-    "id": "hooks",
-    "title": "Hooks",
+    "id": "SoftwareEngineering",
+    "title": "Software Engineering",
     "description": "Hooks let you use state and lifecycle in functional components.",
     "image": "https://source.unsplash.com/400x250/?react,hooks",
     "details": [

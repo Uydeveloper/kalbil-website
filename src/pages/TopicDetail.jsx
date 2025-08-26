@@ -1,50 +1,31 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { qmlTopics } from "../data/qmlTopics";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { topicData } from "../data/topicData";
 
-export default function TopicSlides() {
-  const { topicId } = useParams();
-  const navigate = useNavigate();
-  const topic = qmlTopics.find((t) => t.id === topicId);
-
-  const [currentSlide, setCurrentSlide] = useState(0);
+export default function TopicDetail() {
+  const { id } = useParams();
+  const topic = topicData[id];
 
   if (!topic) {
-    return <div className="p-8 text-red-600">Topic not found.</div>;
+    return <p className="text-red-500">⚠️ تېما تېپىلمىدى.</p>;
   }
 
-  const slide = topic.slides[currentSlide];
-
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col items-center justify-center px-6">
-      <h1 className="text-3xl font-bold mb-6">{topic.title}</h1>
-      <div className="bg-gray-100 dark:bg-gray-800 p-8 rounded-lg shadow max-w-2xl w-full text-center">
-        <h2 className="text-2xl font-semibold mb-4">{slide.heading}</h2>
-        <p className="text-lg">{slide.content}</p>
+    <section className="py-16 px-6 md:px-12 lg:px-24">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-3xl font-bold mb-4">{topic.title}</h2>
+        <p className="italic text-indigo-600 mb-6">{topic.slogan}</p>
+        <img src={topic.img} alt={topic.title} className="w-full rounded-lg shadow mb-6" />
+        <p className="text-gray-700 whitespace-pre-line">{topic.description}</p>
+        <div className="mt-6">
+          <iframe
+            src={topic.video}
+            title={topic.title}
+            className="w-full h-96 rounded-lg shadow"
+            allowFullScreen
+          ></iframe>
+        </div>
       </div>
-
-      <div className="flex gap-4 mt-8">
-        <button
-          onClick={() => setCurrentSlide((prev) => Math.max(prev - 1, 0))}
-          disabled={currentSlide === 0}
-          className="px-4 py-2 bg-gray-300 dark:bg-gray-700 rounded disabled:opacity-50"
-        >
-          ◀ Previous
-        </button>
-        <button
-          onClick={() => setCurrentSlide((prev) => Math.min(prev + 1, topic.slides.length - 1))}
-          disabled={currentSlide === topic.slides.length - 1}
-          className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
-        >
-          Next ▶
-        </button>
-        <button
-          onClick={() => navigate("/quantummachinelearning")}
-          className="px-4 py-2 bg-green-600 text-white rounded"
-        >
-          🔙 Back to Topics
-        </button>
-      </div>
-    </div>
+    </section>
   );
 }

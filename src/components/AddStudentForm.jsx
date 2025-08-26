@@ -61,9 +61,13 @@ export default function AddStudentForm({ onAdd, onCancel }) {
       <select value={course} onChange={(e) => setCourse(e.target.value)} required className="w-full mb-2 p-2 border rounded">
         <option value="">-- دەرس تاللاڭ --</option>
         <option value="Python">Python</option>
-        <option value="JavaScript">JavaScript</option>
-        <option value="React">React</option>
-        <option value="Machine Learning">Machine Learning</option>
+        <option value="JavaScript">Machine Learning</option>
+        <option value="React">Quantum Machine Learning</option>
+        <option value="Machine Learning">Statitics base</option>
+        <option value="Machine Learning">Statistics 2</option>
+        <option value="Machine Learning">Data Analysis</option>
+        <option value="Machine Learning">Quantum Physics</option>
+        <option value="Machine Learning">Quantum Mechanecs</option>
       </select>
 
       <input type="number" value={progress} onChange={(e) => setProgress(Number(e.target.value))} placeholder="تاماملاش %" required className="w-full mb-2 p-2 border rounded" />

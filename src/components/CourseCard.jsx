@@ -68,14 +68,14 @@ export default function CourseCard({ course }) {
             onClick={() => navigate(`/outline/${course.id}`)}
             className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
           >
-            🔍 View Details
+            🔍 تەپسلاتىنى كۆرۇش
           </button>
         ) : (
           <div
             className="mt-4 w-full bg-gray-300 text-white py-2 rounded text-center cursor-not-allowed opacity-70"
             title="Please log in to view course details"
           >
-            🔒 Login required
+            🔒 تىزىملىتپ كۆرۇڭ
           </div>
         )}
       </div>

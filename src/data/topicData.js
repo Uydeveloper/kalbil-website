@@ -1,7 +1,8 @@
 // سۈپەتلىك رەسىم بۇلاقلىرى: Unsplash/Pixabay (ھەقسىز ئىجازەت)
-// ئىشلەتلىتىدىغان رەسىملەر چوقۇم HTTPS بولسۇن.
+// YouTube ۋىدىئو بۇلاقلىرى: YouTube (ھەقسىز ئىجازەت)
 
 export const topicData = {
+  
   qml: {
     id: "qml",
     title: "كىۋانت ماشىنا ئۈگىنىش",
@@ -78,3 +79,8 @@ export const topicData = {
     `,
   },
 };
+
+
+
+
+

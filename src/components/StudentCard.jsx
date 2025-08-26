@@ -38,7 +38,7 @@ export default function StudentCard({ student, currentUser }) {
       )}
 
       {/* 🔗 Detail Link */}
-      {canView && (
+      
         <div className="mt-4 text-center">
           <Link
             to={`/students/${student.id}`}
@@ -47,7 +47,7 @@ export default function StudentCard({ student, currentUser }) {
             تەپسىلاتى كۆرۈش
           </Link>
         </div>
-      )}
+      
     </div>
   );
 }

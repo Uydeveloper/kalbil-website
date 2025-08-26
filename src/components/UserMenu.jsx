@@ -41,18 +41,31 @@ export default function UserMenu() {
 
       {/* Dropdown Menu */}
       {open && (
-        <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border rounded shadow-lg z-50 animate-fade-in">
+        <div className="absolute right-0 mt-2 w-52 sm:w-56 bg-white dark:bg-gray-800 border rounded-xl shadow-xl z-50 animate-fade-in overflow-hidden">
           {user.role === "admin" && (
-            <button
-              onClick={() => {
-                navigate("/view-registration");
-                setOpen(false);
-              }}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
-            >
-              🧑‍💼 باشقۇرچى
-            </button>
+            <>
+              <button
+                onClick={() => {
+                  navigate("/view-registration");
+                  setOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                🧑‍💼 باشقۇرغۇچى
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate("/students");
+                  setOpen(false);
+                }}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                🧑‍🎓 ئوقۇغۇچىلار
+              </button>
+            </>
           )}
+
           <button
             onClick={() => {
               setShowProfile(true);
@@ -62,6 +75,7 @@ export default function UserMenu() {
           >
             👤 پروفايىل
           </button>
+
           <button
             onClick={handleLogout}
             className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600"

@@ -37,6 +37,7 @@ import Students from "./components/StudentList";
 import "./index.css";
 import JoinClass from "./components/JoinClass";
 import LectureDetail from "./components/LectureDetail";
+import StudentDetail from "./components/StudentDetail";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -79,6 +80,7 @@ function App() {
           <Route path="/students" element={<Students />} />
           <Route path="/join-class" element={<JoinClass />} />
          <Route path="/lecture/:id" element={<LectureDetail />} />
+          <Route path="/students/:id" element={<StudentDetail />} />
           
           
           {/* ✅ پەقەت admin role بولغانلارلا */}
