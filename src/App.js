@@ -33,12 +33,13 @@ import ScrollToTop from "./components/ScrollToTop";
 import AddCourse from "./pages/AddCourse";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Enroll from "./pages/Enroll";
-import Students from "./components/StudentList";
+import StudentList from "./components/StudentList";
 import "./index.css";
 import JoinClass from "./components/JoinClass";
 import LectureDetail from "./components/LectureDetail";
-import StudentDetail from "./components/StudentDetail";
 import { LanguageProvider } from "./context/LanguageContext";
+import  Students from "./components/StudentDetail";     
+
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -80,10 +81,13 @@ function App() {
           <Route path="/quantummachinelearning" element={<QuantumMachineLearning />} />
           <Route path="/qml/:topicId" element={<TopicSlides />} />
           <Route path="/enroll" element={<Enroll />} />
-          <Route path="/students" element={<Students />} />
+          <Route path="/students-list" element={<StudentList />} />
           <Route path="/join-class" element={<JoinClass />} />
-         <Route path="/lecture/:id" element={<LectureDetail />} />
-          <Route path="/students/:id" element={<StudentDetail />} />
+          <Route path="/lecture/:id" element={<LectureDetail />} />
+          <Route path="/students/:id" element={<Students />} />
+          
+         
+          
           
           
           {/* ✅ پەقەت admin role بولغانلارلا */}

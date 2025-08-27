@@ -4,8 +4,8 @@ import "./StudentCard.css";
 export default function StudentCard({ student, currentUser }) {
   const course = student.courses?.[0];
   const isAdmin = currentUser?.role === "admin";
-  const isSelf = currentUser?.id === student.id;
-  const canView = isAdmin || isSelf;
+  const isSelf = String(currentUser?.id) === String(student.id);
+ 
 
   return (
     <div className="student-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition duration-300 ease-in-out">
@@ -37,17 +37,17 @@ export default function StudentCard({ student, currentUser }) {
         <p className="text-red-500 text-sm text-center mt-2">🚫 دەرس ئۇچۇرى يوق</p>
       )}
 
-      {/* 🔗 Detail Link */}
+      {/* 🔗 Detail Link — پەقەت باشقۇرغۇچى ياكى ئۆزى كۆرەلەيدۇ */}
       
         <div className="mt-4 text-center">
           <Link
             to={`/students/${student.id}`}
             className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-sm font-semibold"
           >
-            تەپسىلاتى كۆرۈش
+            تەپسىلاتنى كۆرۈش
           </Link>
         </div>
-      
+     
     </div>
   );
 }

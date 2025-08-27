@@ -26,12 +26,12 @@ export default function StudentList() {
       {/* 🎨 باش تېما */}
       <div className="relative bg-blue-900 text-white py-12 px-6 md:px-20 text-center">
         <img
-          src="/images/education-banner.jpg"
-          alt="Education Banner"
+          src="/images/image05.png"
+          alt="KalBil Banner"
           className="absolute inset-0 w-full h-full object-cover opacity-20"
         />
         <div className="relative z-10">
-          <h1 className="text-4xl font-bold mb-4">KalBiL — بىلىم بىلەن كۈچلۈك بول</h1>
+          <h1 className="text-4xl font-bold mb-4">  بىلىم بىلەن كۈچلۈك بول — KalBiL</h1>
           <p className="text-lg max-w-3xl mx-auto">
             «بىلىم — قەلبنىڭ نۇرى، ئەقىلنىڭ قۇرى. ئۆگىنىشتىن توختىما، تىرىشچانلىق بىلەن ئۆزگىرىشنى باشلا.»
           </p>
@@ -41,7 +41,7 @@ export default function StudentList() {
       {/* 🧑‍🎓 ئوقۇغۇچىلار تىزىمى */}
       <div className="max-w-6xl mx-auto p-6 md:p-12">
         <h2 className="text-3xl font-bold text-blue-900 mb-6 text-center">
-          تىزىملىتىلگەن ئوقۇغۇچىلار
+          تىزىملاتقان ئوقۇغۇچىلار
         </h2>
 
         <input

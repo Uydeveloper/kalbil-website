@@ -278,21 +278,21 @@ export default function StudentDetail() {
           className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
           aria-label="Share task"
         >
-          📤 شەيىر قىلىش
+          📤 ھەمبەھىرلەش 
         </button>
         <button
           onClick={handleCopy}
           className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
           aria-label="Copy task and code"
         >
-          📋 كوپىلاش
+          📋 نۇسخلاش
         </button>
         <button
           onClick={handleEmail}
           className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
           aria-label="Email task and code"
         >
-          ✉️ Email يوللاش
+          ✉️ ئېلخەت يوللاش
         </button>
       </div>
     </div>

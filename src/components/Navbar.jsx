@@ -12,6 +12,7 @@ import { motion, useAnimation } from "framer-motion";
 
 import { useLang } from "../context/LanguageContext";
 import { t } from "../data/translations";
+import LoginForm from "./LoginForm";
 
 export default function Navbar() {
   const { lang, setLang } = useLang();
@@ -100,12 +101,12 @@ export default function Navbar() {
         boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
         backdropFilter: "blur(0px)",
       }}
-      className={`sticky relative top-0 z-50 py-20 px-6 transition-all duration-300 ${
+      className={`sticky relative  top-0 z-50 py-20 px-6 transition-all duration-300 ${
         darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-800"
       }`}
     >
       {/* ✅ Frases Uyghur / English */}
-      <h1 className="absolute w-full top-3 left-1/2 transform -translate-x-1/2 text-center 
+      <h1 className="absolute   w-full top-3 left-1/2 transform -translate-x-1/2 text-center 
 text-xl md:text-3xl font-bold  dark:text-yellow-400 text-blue-600 drop-shadow-lg transition-opacity duration-500 ease-in-out">
   {phrases[phraseIndex]}
 </h1>
@@ -114,10 +115,10 @@ text-xl md:text-3xl font-bold  dark:text-yellow-400 text-blue-600 drop-shadow-lg
       {showLogin && (
         <>
           <div
-            className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm z-40"
+            className="fixed inset-0  bg-black bg-opacity-40 backdrop-blur-sm z-40"
             onClick={() => setShowLogin(false)}
           />
-          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div className="fixed top-1/2 mt-40 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
             <LoginModal
               onClose={() => setShowLogin(false)}
               onSuccess={() => setShowLogin(false)}
@@ -129,21 +130,22 @@ text-xl md:text-3xl font-bold  dark:text-yellow-400 text-blue-600 drop-shadow-lg
       {/* User List Modal */}
       {showUserList && <UserListModal onClose={() => setShowUserList(false)} />}
 
-      <div className="max-w-8xl mx-auto flex items-center justify-between py-0 px-4 md:px-6 lg:px-8">
+      <div className="max-w-screen8xl mx-auto flex flex-wrap items-center justify-between py-0 px-4 md:px-6 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex mb-0 items-center gap-3 hover:opacity-90">
   <img
     src={`${process.env.PUBLIC_URL}/images/image05.png`}
     alt="KalBiL Logo"
-    className="h-14 md:h-16 w-auto object-contain drop-shadow-md"
+    className="h-8 sm:h-10 md:h-14 w-auto object-contain drop-shadow-md"
   />
   <span
-    className={`font-extrabold tracking-wide transition-all duration-300 ${
-      scrolled ? "text-3xl" : "text-4xl"
-    } text-blue-600 dark:text-blue-400 drop-shadow`}
-  >
-    KalBiL
-  </span>
+  className={`font-extrabold tracking-wide transition-all duration-300 ${
+    scrolled ? "text-xl sm:text-2xl md:text-3xl" : "text-lg sm:text-xl md:text-2xl"
+  } text-blue-600 dark:text-blue-400 drop-shadow`}
+>
+  KalBiL
+</span>
+
 </Link>
 
         {/* Hamburger */}
@@ -171,7 +173,7 @@ text-xl md:text-3xl font-bold  dark:text-yellow-400 text-blue-600 drop-shadow-lg
 
           {user && (
             <Link
-              to="/students"
+              to="/students-list"
               className={
                 isActive("/students") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-gray-200 hover:text-blue-500"
               }
@@ -191,6 +193,8 @@ text-xl md:text-3xl font-bold  dark:text-yellow-400 text-blue-600 drop-shadow-lg
              {t.mycourses[lang]}
             </Link>
           )}
+
+          
         </div>
 
         {/* Language Switcher */}
