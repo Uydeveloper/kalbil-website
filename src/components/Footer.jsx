@@ -71,7 +71,7 @@ export default function Footer() {
 
           <div className="mt-4">
             <a
-              href="/"
+              href="https://uydeveloper.github.io/kalbil-website/#/about"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-sm"
