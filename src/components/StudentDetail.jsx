@@ -39,7 +39,39 @@ function StudentInfo({ student, avatar, setAvatar, editingAvatar, setEditingAvat
     reader.readAsDataURL(file);
   };
 
+
+    // 🌟 Rotating Quotes
+  const quotes = [
+  "    بىلىم قانىتىمىز، روھ يولدىشىمىز، كەلگۈسىمىز يورۇقلۇق — KalBiL🌟" ,
+  "🌟 KalBiL — With knowledge as our wings and spirit as our guide, the future shines bright.",
+
+  "  يېڭى بىلىم بىلەن يېڭى پۇرسەت   — KalBiL🎉",
+  "🎉 A new year is more than time — it’s new knowledge and new opportunities. Begin with KalBiL!",
+
+  "  ئۆگىنىشچىلەرگە كۈچ بەھشىت قىلىپ، جەمئىيەتلەرگە نۇر سېپىدۇ — KalBiL📚",
+  "📚 KalBiL — Empowering learners with strength, and spreading light to communities.",
+
+  " ئۇيغۇر تىلىنىڭ كۈچى، ئۇيغۇر روھىنىڭ مەڭگۈلۈكى بىلەن بىلىمغا يول ئېچىدۇ —  KalBiL💡 ",
+  "💡 KalBiL — Opening the path to knowledge through the power of the Uyghur language and the eternity of its spirit.",
+
+  "  بىلىم ئارقىلىق ئارزۇلارغا، روھ ئارقىلىق يۇلتۇزلارغا يېتىش  — KalBiL🚀",
+  "🚀 KalBiL — Reaching dreams through knowledge, and stars through spirit.",
+
+  "  بىلىم دەۋرىدە ئۆسۈپ، كەلگۈسىدە مېۋە بىرىمىز  — KalBiL🌱",
+  "🌱 KalBiL — Growing in the era of knowledge, bearing fruit in the future."
+];
+
+  const [quoteIndex, setQuoteIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setQuoteIndex((prev) => (prev + 1) % quotes.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
+    <>
     <div className="flex items-center justify-center mb-6">
       <div className="text-center">
         <div className="relative inline-block">
@@ -52,7 +84,7 @@ function StudentInfo({ student, avatar, setAvatar, editingAvatar, setEditingAvat
           {editingAvatar ? (
             <input
               type="file"
-              accept="image/*"
+              accept="image/image05.png"
               onChange={handleAvatarChange}
               className="mt-2"
               aria-label="Upload new avatar"
@@ -63,14 +95,21 @@ function StudentInfo({ student, avatar, setAvatar, editingAvatar, setEditingAvat
               className="mt-2 text-sm text-blue-600 underline"
               aria-label="Change avatar"
             >
-              🖼️ ئاۋاتارنى ئۆزگەرت
+          
+              {/* 🖼️ ئاۋاتارنى ئۆزگەرت */}
             </button>
           )}
         </div>
         <h2 className="text-xl font-bold mt-2">{student.name}</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400">ID: {student.id}</p>
       </div>
+      
     </div>
+        {/* 🎡 Rotating Quote */}
+      <div className="mt-8 text-center text-sm text-blue-700 dark:text-yellow-400 italic transition-opacity duration-500 ease-in-out">
+        {quotes[quoteIndex]}
+      </div>
+  </>
   );
 }
 
@@ -141,6 +180,51 @@ export default function StudentDetail() {
   const [editingAvatar, setEditingAvatar] = useState(false);
   const [running, setRunning] = useState(false);
 
+  const [form, setForm] = useState({
+    attendance: student.attendance || "",
+    assignments: student.assignments || "",
+    punctuality: student.punctuality || "",
+    feedback: student.feedback || "",
+  });
+
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+
+
+  const handleDelete = () => {
+    const confirmed = window.confirm("❌ بۇ ئوقۇغۇچىنى ئۆچۈرەمسىز؟");
+    if (confirmed) {
+      const filtered = students.filter((s) => String(s.id) !== String(id));
+      localStorage.setItem("users", JSON.stringify(filtered));
+      alert("🗑️ ئۆچۈرۈش مۇۋاپىقىيەتلىك بولدى!");
+    }
+  };
+
+  useEffect(() => {
+  const savedHistory = localStorage.getItem(`history_${id}`);
+  console.log("📦 Raw history from localStorage:", savedHistory);
+  if (savedHistory) {
+    try {
+      const parsed = JSON.parse(savedHistory);
+      console.log("✅ Parsed history:", parsed);
+      setHistory(Array.isArray(parsed) ? parsed : []);
+    } catch (e) {
+      console.error("❌ JSON parse error:", e);
+      setHistory([]);
+    }
+  }
+}, [id]);
+
+
+
+  
+
+
+
+
   useEffect(() => {
     const savedAvatar = localStorage.getItem(`avatar-${id}`);
     if (savedAvatar) {
@@ -210,6 +294,7 @@ export default function StudentDetail() {
   }
 
   return (
+    <>
     <div className="max-w-5xl mx-auto p-4 sm:p-6 bg-yellow-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-lg shadow-md">
       <div ref={printRef}>
         <StudentInfo
@@ -308,8 +393,102 @@ export default function StudentDetail() {
           ⬅ قايتىش
         </Link>
       </div>
+    </div>
 
+
+    <div className="max-w-2xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg space-y-6">
+      <h2 className="text-2xl font-bold text-center text-blue-600 dark:text-yellow-400">
+        🧑‍🎓 ئوقۇغۇچى تەپسىلاتى
+      </h2>
+
+      <div className="space-y-4">
+        <div>
+          <label className="block font-semibold mb-1">📚 دەرسكە قاتناشقان ئەھۋالى</label>
+          <input
+            type="text"
+            name="attendance"
+            value={form.attendance}
+            onChange={handleChange}
+            className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-1">📝 تاپشۇرۇق ئىشلەش ئەھۋالى</label>
+          <input
+            type="text"
+            name="assignments"
+            value={form.assignments}
+            onChange={handleChange}
+            className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-1">⏱️ پۇرۇجىنى ۋاقىتدا ئىشلەش ئەھۋالى</label>
+          <input
+            type="text"
+            name="punctuality"
+            value={form.punctuality}
+            onChange={handleChange}
+            className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-1">🗣️ ئاخىرقى باھا</label>
+          <textarea
+            name="feedback"
+            value={form.feedback}
+            onChange={handleChange}
+            rows={4}
+            className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
+            placeholder="ئوقۇغۇچى ھەققىدە باھا يېزىڭ..."
+          />
+        </div>
+      </div>
+
+      {/* 🔘 Action Buttons */}
+      <div className="flex flex-wrap gap-4 justify-center mt-6">
+        <button
+          onClick={handleSave}
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        >
+          💾 ساقلاش
+        </button>
+        <button
+          onClick={handleEmail}
+          className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+        >
+          📧 ئۇچۇر يوللاش
+        </button>
+        <button
+          onClick={handleDelete}
+          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+        >
+          🗑️ ئۆچۈرۈش
+        </button>
+      </div>
+
+     
       
     </div>
+     {/* 🗂️ History Cards */}
+      <div className="mt-10 space-y-4">
+        <h3 className="text-xl font-bold text-gray-700 dark:text-white">🗂️ ئالدىنقى ساقلاندىغان مەزمۇنلار</h3>
+        {Array.isArray(history) && history.map((entry, index)  => (
+          <div key={index} className="p-4 border rounded bg-gray-50 dark:bg-gray-700">
+            <p><strong>🕒 ۋاقىت:</strong> {entry.timestamp}</p>
+            <p><strong>📚 قاتناشقان:</strong> {entry.attendance}</p>
+            <p><strong>📝 تاپشۇرۇق:</strong> {entry.assignments}</p>
+            <p><strong>⏱️ پۇرۇجى:</strong> {entry.punctuality}</p>
+            <p><strong>🗣️ باھا:</strong> {entry.feedback}</p>
+          </div>
+        ))}
+      </div>
+
+   
+
+    </>
   );
 }

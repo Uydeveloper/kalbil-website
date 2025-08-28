@@ -35,4 +35,4 @@ jobs:
           user_name: Kawuli Abudureyimu
           user_email: 145730569+KawuliJanSetouchi@users.noreply.github.com
           commit_message: "🚀 KalBiL auto-deploy from main branch"
-          force_orphan: true  # ✅ gh-pages نى orphan branch قىلىپ conflict نى قوغدايدۇ
+          force_orphan: true  # ✅ gh-pages نى orphan branch قىلىپ conflict بىنى تۇزەتكىن
