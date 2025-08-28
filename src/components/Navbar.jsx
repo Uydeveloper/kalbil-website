@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import { UserContext } from "../context/UserContext";
+import { UserContext , useAuth} from "../context/UserContext";
 import topics from "../data/topics.json";
 
 import LoginModal from "./LoginModal";
@@ -13,6 +13,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useLang } from "../context/LanguageContext";
 import { t } from "../data/translations";
 import LoginForm from "./LoginForm";
+
 
 export default function Navbar() {
   const { lang, setLang } = useLang();
@@ -107,7 +108,7 @@ export default function Navbar() {
     >
       {/* ✅ Frases Uyghur / English */}
       <h1 className="absolute   w-full top-3 left-1/2 transform -translate-x-1/2 text-center 
-text-xl md:text-3xl font-bold  dark:text-yellow-400 text-blue-600 drop-shadow-lg transition-opacity duration-500 ease-in-out">
+text-xl md:text-xl font-bold  dark:text-yellow-400 text-blue-600 drop-shadow-lg transition-opacity duration-500 ease-in-out">
   {phrases[phraseIndex]}
 </h1>
 
@@ -121,7 +122,10 @@ text-xl md:text-3xl font-bold  dark:text-yellow-400 text-blue-600 drop-shadow-lg
           <div className="fixed top-1/2 mt-40 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
             <LoginModal
               onClose={() => setShowLogin(false)}
-              onSuccess={() => setShowLogin(false)}
+              onSuccess={() =>{ 
+                setShowLogin(false);
+                 console.log("Logged in!");
+                 }}
             />
           </div>
         </>

@@ -1,49 +1,82 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function LoginForm() {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+export default function LoginForm({ onClose, onSuccess }) {
   const { login } = useAuth();
-  const navigate = useNavigate();
+  const [form, setForm] = useState({ id: "", password: "" });
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  // ✅ input نى يېڭىلاش
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const success = login(id, password);
+    const success = await login(form.id, form.password);
+
     if (success) {
-      navigate("/");
+      toast.success("✅ كىرىش مۇۋەپپەقىيەتلىك بولدى!", { position: "top-center" });
+      setTimeout(() => {
+        onSuccess?.(); 
+        onClose?.();   
+      }, 800);
     } else {
-      alert("❌ ID ياكى Password خاتا");
+      setMessage("❌ ID ياكى Password خاتا!");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
-      <h2 className="text-xl font-bold mb-4">👤 لوگىن</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800 dark:text-white">
+          🔐 Login
+        </h2>
 
-      <input
-        type="text"
-        placeholder="ID"
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-        className="w-full p-2 border rounded mb-4"
-      />
+        <form onSubmit={handleLogin} className="space-y-4">
+          <input
+            type="text"
+            name="id"
+            placeholder="🆔 ID"
+            value={form.id}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded dark:bg-gray-800 dark:text-white"
+            required
+          />
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 border rounded mb-4"
-      />
+          <input
+            type="password"
+            name="password"
+            placeholder="🔒 Password"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded dark:bg-gray-800 dark:text-white"
+            required
+          />
 
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-      >
-        لوگىن قىلسۇن
-      </button>
-    </form>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          >
+            🔓 تىزملىتىش
+          </button>
+        </form>
+
+        {message && (
+          <p className="mt-4 text-center text-red-600 dark:text-red-400 font-semibold">
+            {message}
+          </p>
+        )}
+
+        <div className="mt-4 text-center">
+          <button onClick={onClose} className="text-red-500 hover:underline">
+            ❌ تاقاش
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

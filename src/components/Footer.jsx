@@ -16,22 +16,22 @@ export default function Footer() {
 
   // 🌟 Rotating Quotes
   const quotes = [
-  "🌟 KalBiL — بىلىم قانىتىمىز، روھ يولدىشىمىز، كەلگۈسىمىز يورۇقلۇق.",
+  "    بىلىم قانىتىمىز، روھ يولدىشىمىز، كەلگۈسىمىز يورۇقلۇق — KalBiL🌟" ,
   "🌟 KalBiL — With knowledge as our wings and spirit as our guide, the future shines bright.",
 
-  "🎉 يېڭى يىل يېڭى پەقەت ئەمەس، يېڭى بىلىم بىلەن يېڭى پۇرسەت — KalBiL بىلەن باشلاڭ!",
+  "  يېڭى بىلىم بىلەن يېڭى پۇرسەت   — KalBiL🎉",
   "🎉 A new year is more than time — it’s new knowledge and new opportunities. Begin with KalBiL!",
 
-  "📚 KalBiL — ئۆگىنىشچىلەرگە كۈچ بەھشىت قىلىپ، جەمئىيەتلەرگە نۇر سېپىدۇ.",
+  "  ئۆگىنىشچىلەرگە كۈچ بەھشىت قىلىپ، جەمئىيەتلەرگە نۇر سېپىدۇ — KalBiL📚",
   "📚 KalBiL — Empowering learners with strength, and spreading light to communities.",
 
-  "💡 KalBiL — ئۇيغۇر تىلىنىڭ كۈچى، ئۇيغۇر روھىنىڭ مەڭگۈلۈكى بىلەن بىلىمغا يول ئېچىدۇ.",
+  " ئۇيغۇر تىلىنىڭ كۈچى، ئۇيغۇر روھىنىڭ مەڭگۈلۈكى بىلەن بىلىمغا يول ئېچىدۇ —  KalBiL💡 ",
   "💡 KalBiL — Opening the path to knowledge through the power of the Uyghur language and the eternity of its spirit.",
 
-  "🚀 KalBiL — بىلىم ئارقىلىق ئارزۇلارغا، روھ ئارقىلىق يۇلتۇزلارغا يېتىش.",
+  "  بىلىم ئارقىلىق ئارزۇلارغا، روھ ئارقىلىق يۇلتۇزلارغا يېتىش  — KalBiL🚀",
   "🚀 KalBiL — Reaching dreams through knowledge, and stars through spirit.",
 
-  "🌱 KalBiL — بىلىم دەۋرىدە ئۆسۈپ، كەلگۈسىدە مېۋە بىرىمىز.",
+  "  بىلىم دەۋرىدە ئۆسۈپ، كەلگۈسىدە مېۋە بىرىمىز  — KalBiL🌱",
   "🌱 KalBiL — Growing in the era of knowledge, bearing fruit in the future."
 ];
 
@@ -50,10 +50,10 @@ export default function Footer() {
         
         {/* 📜 ھوقۇق ئۇچۇرى */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-2">KalBiL بىلىم پلاتفورمىسى</h3>
-          <p>© 2025 KalBiL. بارلىق ھوقۇقلىرى قوغدىنىدۇ.</p>
-          <p className="text-sm mt-1">
-            🌍 KalBiL — بىلىم بىلەن قانىتىمىزنى ئېچىپ، روھ بىلەن كەلگۈسىمىزنى يورۇتايلى.
+          <h3 className="text-lg font-semibold text-white mb-2"> بىلىم سۇپىسى KalBiL</h3>
+          <p>© 2025 KalBiL.<br></br> بارلىق ھوقۇقلىرى قوغدىنىدۇ</p>
+          <p className="text-sm w-full mt-4">
+              بىلىم بىلەن قانىتىمىزنى ئېچىپ، روھ بىلەن كەلگۈسىمىزنى يورۇتايلى   — KalBiL🌍
           </p>
           <p className="text-sm mt-1 text-gray-400">
             🌍 KalBiL — Empowering futures through knowledge and spirit.
@@ -62,7 +62,7 @@ export default function Footer() {
 
         {/* 🔗 ئىجتىمائىي ئالاقىلار + CTA */}
         <div>
-          <h4 className="text-md font-semibold text-white mb-2">بىزگە ئەگەشڭ</h4>
+          <h4 className="text-md font-semibold text-white mb-2" > بىزگە ئەگىشىۋېلىڭ</h4>
           <div className="flex justify-center md:justify-start gap-4">
             <a href="#" className="hover:text-blue-400 transition" aria-label="Facebook">Facebook</a>
             <a href="#" className="hover:text-blue-400 transition" aria-label="Twitter">Twitter</a>
@@ -76,7 +76,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-sm"
             >
-              💖 KalBiL نى قوللاڭ
+                نى قوللاڭ KalBiL💖 
             </a>
           </div>
 
@@ -99,7 +99,7 @@ export default function Footer() {
           <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 justify-center md:justify-start">
             <input
               type="email"
-              placeholder="Email ئادرىسىڭىز"
+              placeholder=" ئادىرسىڭز Email " 
               className="px-4 py-2 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -135,7 +135,7 @@ export default function Footer() {
 
       {/* ❤️ Closing Line */}
       <div className="mt-6 text-center text-sm text-gray-500 italic">
-        ❤️ بىلەن قۇرۇلدى — KalBiL بىلىم گۇرۇپپىسى
+        ❤️     بىلىم سۇپىسى قۇرۇلدى، كەڭ بىلىم سۈيەر قېرنداشلارنى تەكىلىپ قىلمىز،بىرلكتە كۇچلىنەيلى  KalBiL
       </div>
     </footer>
   );

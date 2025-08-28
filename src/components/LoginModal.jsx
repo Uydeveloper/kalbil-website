@@ -62,7 +62,13 @@ export default function LoginModal({ onClose, onSuccess }) {
     }
   };
 
-  const ADMIN_CREDENTIALS = { username: "admin", password: "admin123" };
+
+//   const ADMIN_CREDENTIALS = {
+//   id: "kaalbil",
+//   password: "kalbil3120",
+//   name: "kawuuljan99"
+// };
+  const ADMIN_CREDENTIALS = { username: "kawuljan99", password: "kalbil3120" };
 
   const handleAdminLogin = () => {
     if (!form.username.trim() || !form.password.trim()) {
@@ -72,8 +78,9 @@ export default function LoginModal({ onClose, onSuccess }) {
 
     if (form.username === ADMIN_CREDENTIALS.username && form.password === ADMIN_CREDENTIALS.password) {
       const adminUser = {
-        username: "admin",
-        password: "admin123",
+        id: "kaalbil",
+        password: "kalbil3120",
+        name: "kawuljan99",
         role: "admin",
         avatar: "",
         phone: ""
@@ -195,11 +202,11 @@ export default function LoginModal({ onClose, onSuccess }) {
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
           >
-            {isLogin ? '🔓 لوگىن قىلىش' : '📝 تىزىملىتىش'}
+            {isLogin ? '🔓  تىزىملىتىش' : '📝 تىزىملىتىش'}
           </button>
 
           <div className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
-            🧑‍💼 <button type="button" onClick={handleAdminLogin} className="text-blue-500 hover:underline">باشقۇرچى</button>
+            🧑‍💼 <button type="button" onClick={handleAdminLogin} className="text-blue-500 hover:underline">باشقۇرغۇچى</button>
           </div>
         </form>
 
@@ -214,7 +221,7 @@ export default function LoginModal({ onClose, onSuccess }) {
             onClick={() => setIsLogin(!isLogin)}
             className="text-blue-500 hover:underline"
           >
-            {isLogin ? '🆕 تىزىملىتىش' : '🔐 لوگىن قايتىش'}
+            {isLogin ? '🆕 تىزىملىتىش' : '🔐 تىزىملىتشىقا قايتىش'}
           </button>
         </div>
 

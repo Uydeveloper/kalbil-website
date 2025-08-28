@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import "./StudentCard.css";
 
-export default function StudentCard({ student, currentUser }) {
+export default function StudentCard({ student, currentUser, isAuthenticated }) {
   const course = student.courses?.[0];
   const isAdmin = currentUser?.role === "admin";
   const isSelf = String(currentUser?.id) === String(student.id);
- 
 
   return (
     <div className="student-card bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition duration-300 ease-in-out">
@@ -37,17 +36,18 @@ export default function StudentCard({ student, currentUser }) {
         <p className="text-red-500 text-sm text-center mt-2">🚫 دەرس ئۇچۇرى يوق</p>
       )}
 
-      {/* 🔗 Detail Link — پەقەت باشقۇرغۇچى ياكى ئۆزى كۆرەلەيدۇ */}
-      
-        <div className="mt-4 text-center">
-          <Link
-            to={`/students/${student.id}`}
-            className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-sm font-semibold"
-          >
-            تەپسىلاتنى كۆرۈش
-          </Link>
-        </div>
-     
+      {/* 🔗 تەپسىلات كۆرۈش — پەقەت كىرىش قىلىنغاندا ۋە ئۆزى ياكى باشقۇرغۇچى بولسالا */}
+    
+  <div className="mt-4 text-center">
+    <Link
+      to={`/students/${student.id}`}
+      className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-sm font-semibold"
+    >
+      تەپسىلاتنى كۆرۈش
+    </Link>
+  </div>
+
+
     </div>
   );
 }

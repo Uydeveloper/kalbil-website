@@ -1,3 +1,4 @@
+
 import { useParams, Navigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { python } from "@codemirror/lang-python";
@@ -7,6 +8,7 @@ import students from "../data/students.json";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { useReactToPrint } from "react-to-print";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 // Constants for configuration
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
@@ -278,23 +280,36 @@ export default function StudentDetail() {
           className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
           aria-label="Share task"
         >
-          📤 ھەمبەھىرلەش 
+          📤 شەيىر قىلىش
         </button>
         <button
           onClick={handleCopy}
           className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
           aria-label="Copy task and code"
         >
-          📋 نۇسخلاش
+          📋 كوپىلاش
         </button>
         <button
           onClick={handleEmail}
           className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
           aria-label="Email task and code"
         >
-          ✉️ ئېلخەت يوللاش
+          ✉️ Email يوللاش
         </button>
+
+        
       </div>
+      {/* 🔙 Back */}
+      <div className="text-center mt-6">
+        <Link
+          to="/students-list"
+          className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        >
+          ⬅ قايتىش
+        </Link>
+      </div>
+
+      
     </div>
   );
 }

@@ -38,7 +38,8 @@ import "./index.css";
 import JoinClass from "./components/JoinClass";
 import LectureDetail from "./components/LectureDetail";
 import { LanguageProvider } from "./context/LanguageContext";
-import  Students from "./components/StudentDetail";     
+import  Students from "./components/StudentDetail";  
+import StudentInfo from "./pages/students/Students"   
 
 
 function App() {
@@ -85,7 +86,7 @@ function App() {
           <Route path="/join-class" element={<JoinClass />} />
           <Route path="/lecture/:id" element={<LectureDetail />} />
           <Route path="/students/:id" element={<Students />} />
-          
+          <Route path="studntsinfo" element={<StudentInfo />} />
          
           
           
