@@ -1,135 +1,149 @@
 [
   {
+    "id": "admin-001",
+    "name": "Admin",
+    "avatar": "/avatars/admin.png",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
     "id": "stu-001",
     "name": "Amina",
     "avatar": "/images/image05.png",
     "password": "amina123",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
   },
   {
     "id": "stu-002",
     "name": "Yusup",
     "avatar": "/avatars/yusup.png",
     "password": "yusup456",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
   },
   {
     "id": "stu-003",
     "name": "Zehra",
     "avatar": "/avatars/zehra.png",
     "password": "zehra789",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
   },
   {
     "id": "stu-004",
     "name": "Ali",
     "avatar": "/avatars/ali.png",
     "password": "ali123",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
   },
   {
     "id": "stu-005",
     "name": "Fatima",
     "avatar": "/avatars/fatima.png",
     "password": "fatima456",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
   },
   {
     "id": "stu-006",
     "name": "Omar",
     "avatar": "/avatars/omar.png",
     "password": "omar789",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
   },
   {
     "id": "stu-007",
     "name": "Layla",
     "avatar": "/avatars/layla.png",
     "password": "layla123",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
   },
   {
     "id": "stu-008",
     "name": "Hassan",
     "avatar": "/avatars/hassan.png",
     "password": "hassan456",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
   },
   {
     "id": "stu-009",
     "name": "Sara",
     "avatar": "/avatars/sara.png",
     "password": "sara789",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
   },
   {
     "id": "stu-010",
     "name": "Kadir",
     "avatar": "/avatars/kadir.png",
     "password": "kadir123",
-    "courses": [ {
-        "title": "Docker & DevOps",
-        "teacher": "Mr. Hamid",
-        "duration": "3 ئاي",
-        "progress": 70,
-        "image": "/courses/devops.png"
-      } ]
-  } 
-  
+    "role": "student",
+    "courses": [{
+      "title": "Docker & DevOps",
+      "teacher": "Mr. Hamid",
+      "duration": "3 ئاي",
+      "progress": 70,
+      "image": "/courses/devops.png"
+    }]
+  }
 ]
-
-
