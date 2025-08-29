@@ -21,21 +21,21 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-[500px] md:h-[600px] overflow-hidden">
+    <section className="relative h-[500px]  md:h-[900px] overflow-hidden">
       {/* 🔄 Fade Image Slideshow */}
       {images.map((img, index) => (
         <img
           key={index}
           src={img}
           alt={`Slide ${index}`}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+          className={`absolute inset-0  w-full h-full object-cover transition-opacity duration-1000 ${
             index === currentImage ? "opacity-100" : "opacity-0"
           }`}
         />
       ))}
 
       {/* 🌌 Overlay Content */}
-      <div className="absolute inset-0 bg-blue-900 bg-opacity-50 flex flex-col items-center justify-center text-white text-center px-6 md:px-12">
+      <div className="absolute  inset-0 bg-blue-900 bg-opacity-50 flex flex-col items-center justify-center text-white text-center px-6 md:px-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg leading-tight">
           Welcome to <span className="text-yellow-400 font-extrabold">KalBil</span> EduCourses
         </h1>

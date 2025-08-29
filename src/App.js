@@ -41,7 +41,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import  Students from "./components/StudentDetail";  
 import StudentInfo from "./pages/students/Students" 
 import Studentinfosys from "./pages/students/studentinfosystem"  
-
+import NewCourses from "./pages/NewCourses"
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -89,7 +89,7 @@ function App() {
           <Route path="/students/:id" element={<Students />} />
           <Route path="studntsinfo" element={<StudentInfo />} />
           <Route path="studentinfosys" element={<Studentinfosys/>} />
-         
+         <Route path="newcourses" element={<NewCourses/>} />+
           
           
           

@@ -1,25 +1,34 @@
 // src/pages/Contact.jsx
 import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
 
 export default function Contact() {
-  function handleSubmit(e) {
+  const navigate = useNavigate();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const name = e.target.name.value;
     const email = e.target.email.value;
     const message = e.target.message.value;
-    const navigate = useNavigate();
 
-    const mailtoLink = `mailto:kawuljan.uyghur@gmail.com?subject=KalBil ئالاقە&body=👤 ئىسمى: ${name}%0A📧 Email: ${email}%0A💬 ئۇچۇر: ${message}`;
+    const mailtoLink = `mailto:kawuljan.uyghur@gmail.com?subject=KalBil ئالاقە&body=👤 ئىسمى: ${encodeURIComponent(
+      name
+    )}%0A📧 Email: ${encodeURIComponent(email)}%0A💬 ئۇچۇر: ${encodeURIComponent(message)}`;
+    
     window.location.href = mailtoLink;
 
-    const handleClick = () => {
-    navigate("/courses");
+    // Yuborishdan keyin "New Courses" sahifasiga o'tishni xohlamasangiz, quyidagini o'chiring
+    // Agar xohlasangiz, form yuborilgandan keyin avtomatik o'tish
+    // navigate("/newcourses");
+
+    setIsSubmitted(true);
   };
 
-
-  }
+  const handleClick = () => {
+    navigate("/newcourses");
+  };
 
   return (
     <section className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8 transition-colors duration-300">
@@ -58,12 +67,12 @@ export default function Contact() {
             <div className="mt-8 space-y-4">
               <h4 className="text-lg font-semibold text-gray-800 dark:text-white">نىڭ ئورنى KalBil Lab📍 </h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                   ئوقۇتۇش ۋە پەن - تېخنىكا تەتقىقات تەرەققىيات مەركىزى KalBiL
+                ئوقۇتۇش ۋە پەن - تېخنىكا تەتقىقات تەرەققىيات مەركىزى KalBiL
               </p>
               <div className="rounded-lg overflow-hidden shadow-lg ring-1 ring-gray-200 dark:ring-gray-700">
                 <iframe
                   title="KalBil Lab Location"
-                  src="https://www.google.com/maps/place/Tianshan+District,+%C3%9Cr%C3%BCmqi,+Xinjiang,+China/@43.7152592,87.4048996,11z/data=!3m1!4b1!4m15!1m8!3m7!1s0x3806008cfd7b4dab:0xaa5952ebac7a708a!2zw5xyw7xtcWksIFhpbmppYW5nLCBDaGluYQ!3b1!8m2!3d43.8266299!4d87.61688!16zL20vMDFjOHQ2!3m5!1s0x3805fc2f86544087:0x2630f3e0a750eb78!8m2!3d43.7954699!4d87.63356!16zL20vMGdzaHI2?authuser=0&entry=ttu&g_ep=EgoyMDI1MDgxMS4wIKXMDSoASAFQAw%3D%3D"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31037.88515013778!2d87.4048996!3d43.7152592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3806008cfd7b4dab%3A0xaa5952ebac7a708a!2sUrumqi%2C%20Xinjiang%2C%20China!5e0!3m2!1sen!2s!4v1712345678901!5m2!1sen!2s"
                   width="100%"
                   height="300"
                   style={{ border: 0 }}
@@ -75,7 +84,7 @@ export default function Contact() {
               </div>
 
               <a
-                href="https://www.google.com/maps/place/%C3%9Cr%C3%BCmqi,+Xinjiang,+China/@43.8218415,87.3976013,11z/data=!3m1!4b1!4m6!3m5!1s0x3806008cfd7b4dab:0xaa5952ebac7a708a!8m2!3d43.8266299!4d87.61688!16zL20vMDFjOHQ2?authuser=0&entry=ttu&g_ep=EgoyMDI1MDgxMS4wIKXMDSoASAFQAw%3D%3D"
+                href="https://www.google.com/maps/place/Urumqi,+Xinjiang,+China/@43.8218415,87.3976013,11z"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
@@ -147,19 +156,15 @@ export default function Contact() {
           </form>
         </div>
 
-        
-      </div>
-      <div className="max-w-5xl mx-auto space-y-12">
-        {/* ... ئالاقە فورمىسىڭىز قالسۇن ... */}
-
-        <button
-          onClick={() => navigate("/CourseTopics")}
-
-
-          className="py-3 px-10 mt-10 bg-gradient-to-r from-blue-600 to-green-500 text-white rounded hover:from-blue-700 hover:to-green-600 transition"
-        >
-          🚀 دەرسلەر
-        </button>
+        {/* New Courses Button */}
+        <div className="text-center">
+          <button
+            onClick={handleClick}
+            className="py-3 px-10 mt-10 bg-gradient-to-r from-blue-600 to-green-500 text-white rounded hover:from-blue-700 hover:to-green-600 transition"
+          >
+            🚀 نەق مەيدان دەرسلەر
+          </button>
+        </div>
       </div>
     </section>
   );
