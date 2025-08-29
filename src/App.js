@@ -39,7 +39,8 @@ import JoinClass from "./components/JoinClass";
 import LectureDetail from "./components/LectureDetail";
 import { LanguageProvider } from "./context/LanguageContext";
 import  Students from "./components/StudentDetail";  
-import StudentInfo from "./pages/students/Students"   
+import StudentInfo from "./pages/students/Students" 
+import Studentinfosys from "./pages/students/studentinfosystem"  
 
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
           <Route path="/lecture/:id" element={<LectureDetail />} />
           <Route path="/students/:id" element={<Students />} />
           <Route path="studntsinfo" element={<StudentInfo />} />
+          <Route path="studentinfosys" element={<Studentinfosys/>} />
          
           
           

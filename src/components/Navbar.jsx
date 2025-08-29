@@ -177,7 +177,7 @@ text-xl md:text-xl font-bold  dark:text-yellow-400 text-blue-600 drop-shadow-lg 
 
           {user && (
             <Link
-              to="/students-list"
+              to="/studntsinfo"
               className={
                 isActive("/students") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-gray-200 hover:text-blue-500"
               }

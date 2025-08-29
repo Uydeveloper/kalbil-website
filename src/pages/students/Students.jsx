@@ -18,7 +18,7 @@ export default function Students({ onClose }) {
       setMessage(`🎉 خۇش كەپسىز ${found.name}`);
       setTimeout(() => {
         if (found.role === "admin") {
-          navigate("/admin");
+          navigate("/students-list");
         } else {
           navigate(`/students/${found.id}`);
         }

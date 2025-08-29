@@ -6,12 +6,13 @@ import ProfileModal from "./ProfileModal";
 export default function UserMenu() {
   const [open, setOpen] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  const { user, avatar, setUser } = useContext(UserContext);
+  const { user,  setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   if (!user) return null;
 
   const initial = user.username?.charAt(0).toUpperCase() || "U";
+  const avatar = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')).find(u => u.username === user.username)?.avatar : null;
 
   const handleLogout = () => {
     setUser(null);
@@ -56,7 +57,7 @@ export default function UserMenu() {
 
               <button
                 onClick={() => {
-                  navigate("/studntsinfo");
+                  navigate("/studentinfosys");
                   setOpen(false);
                 }}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"

@@ -8,13 +8,13 @@
   },
   {
     "id": "stu-001",
-    "name": "Amina",
-    "avatar": "بۇ ھايات گۈزەلدۇر",
+    "name": "ئامىنە",
+    "avatar": "/avatars/yusup.png  ",
     "password": "amina123",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "سىتاستىكا ئاساسى بىلم",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
@@ -22,13 +22,13 @@
   },
   {
     "id": "stu-002",
-    "name": "Yusup",
+    "name": "يۇسۇف",
     "avatar": "/avatars/yusup.png",
     "password": "yusup456",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "ماشىنا ئۈگنىش",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
@@ -36,13 +36,13 @@
   },
   {
     "id": "stu-003",
-    "name": "Zehra",
+    "name": "زەھرا",
     "avatar": "/avatars/zehra.png",
     "password": "zehra789",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "پايسان ئاساسى بىلم",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
@@ -50,13 +50,13 @@
   },
   {
     "id": "stu-004",
-    "name": "Ali",
+    "name": "ئەلى",
     "avatar": "/avatars/ali.png",
     "password": "ali123",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "كىۋانىت فىزىكسى",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
@@ -64,13 +64,13 @@
   },
   {
     "id": "stu-005",
-    "name": "Fatima",
+    "name": "فاتمە",
     "avatar": "/avatars/fatima.png",
     "password": "fatima456",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "سانلىق مەلۇمات ئانالىزى",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
@@ -78,13 +78,13 @@
   },
   {
     "id": "stu-006",
-    "name": "Omar",
+    "name": "ئۆمەرجان",
     "avatar": "/avatars/omar.png",
     "password": "omar789",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "كىۋانىت مىخانكىسى",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
@@ -92,13 +92,13 @@
   },
   {
     "id": "stu-007",
-    "name": "Layla",
+    "name": "گۈلنۇر",
     "avatar": "/avatars/layla.png",
     "password": "layla123",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "كىۋانىت ماشىنا ئۈگنىش",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
@@ -106,13 +106,13 @@
   },
   {
     "id": "stu-008",
-    "name": "Hassan",
+    "name": "ئاتللا",
     "avatar": "/avatars/hassan.png",
     "password": "hassan456",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "ماشىنا ئۈگنىش",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
@@ -120,13 +120,13 @@
   },
   {
     "id": "stu-009",
-    "name": "Sara",
+    "name": "سارا",
     "avatar": "/avatars/sara.png",
     "password": "sara789",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "سىتاستىكا ئاساسى بىلم",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
@@ -134,13 +134,13 @@
   },
   {
     "id": "stu-010",
-    "name": "Kadir",
+    "name": "قەدىر",
     "avatar": "/avatars/kadir.png",
     "password": "kadir123",
     "role": "student",
     "courses": [{
-      "title": "Docker & DevOps",
-      "teacher": "Mr. Hamid",
+      "title": "سانلىق مەلۇمات ئانالىزى",
+      "teacher": "Mr. KaLBil",
       "duration": "3 ئاي",
       "progress": 70,
       "image": "/courses/devops.png"
