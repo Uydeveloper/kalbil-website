@@ -127,6 +127,8 @@ const Blog115 = lazy(() => import('../components/blog/posts/Blog115'));
 const Blog116 = lazy(() => import('../components/blog/posts/Blog116'));
 const Blog117 = lazy(() => import('../components/blog/posts/Blog117'));
 const Blog118 = lazy(() => import('../components/blog/posts/Blog118'));
+const Blog119 = lazy(() => import('../components/blog/posts/Blog119'));
+
 
 // Fallback for missing components
 const FallbackComponent = ({ post }) => (
@@ -320,6 +322,8 @@ const MyBlog = () => {
       case 'Blog116': return Blog116;
       case 'Blog117': return Blog117;
       case 'Blog118': return Blog118;
+      case 'Blog119': return Blog119;
+
       
 
 
