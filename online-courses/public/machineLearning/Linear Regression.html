@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سىزىقلىق رېگرېسسىيە - ماشىنا ئۆگىنىش دەرسلىكى | Linear Regression - Machine Learning Tutorial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .bilingual-text {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin: 15px 0;
+        }
+        
+        .text-ug {
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        .text-en {
+            color: #ecf0f1;
+            font-size: 1rem;
+            font-style: italic;
+            border-top: 1px dashed rgba(255, 255, 255, 0.3);
+            padding-top: 8px;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .main-content {
+            flex: 3;
+            min-width: 300px;
+        }
+        
+        .sidebar {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            color: var(--secondary-color);
+        }
+        
+        .card-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .formula-box {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-right: 5px solid var(--secondary-color);
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            text-align: center;
+            overflow-x: auto;
+        }
+        
+        .formula-translation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .formula-term {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 5px 0;
+        }
+        
+        .term-symbol {
+            background: var(--secondary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .interactive-area {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .english-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        input[type="range"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        input[type="range"] {
+            padding: 0;
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+        
+        button {
+            background: linear-gradient(to right, var(--secondary-color), #2980b9);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        button:hover {
+            background: linear-gradient(to right, #2980b9, var(--secondary-color));
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(52, 152, 219, 0.3);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        #regressionCanvas {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+        }
+        
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .result-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 5px solid var(--secondary-color);
+        }
+        
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+        
+        .result-label {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .result-label-en {
+            font-size: 0.9rem;
+            color: #888;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-right: 5px solid var(--secondary-color);
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .step-number {
+            background: var(--secondary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-left: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .step-title-en {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        
+        ul, ol {
+            padding-right: 20px;
+            margin: 15px 0;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .li-en {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 3px;
+            padding-right: 10px;
+            font-style: italic;
+        }
+        
+        .tab-container {
+            margin-top: 25px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+        
+        .data-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .data-point {
+            background: var(--light-color);
+            padding: 12px 18px;
+            border-radius: 8px;
+            border-right: 4px solid var(--secondary-color);
+        }
+        
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .coefficient-formula {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+        
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+        
+        .lang-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .hide-en .english {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .language-switch {
+                position: static;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            
+            .lang-btn {
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <button id="toggleEnglish" class="lang-btn">
+            <i class="fas fa-language"></i> ئېنگلىزچىنى يوشۇرۇش/كۆرسىتىش | Hide/Show English
+        </button>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-line"></i> سىزىقلىق رېگرېسسىيە (Linear Regression)</h1>
+            <div class="bilingual-text">
+                <p class="text-ug">ماشىنا ئۆگىنىشنىڭ ئاساسى بولغان سىزىقلىق رېگرېسسىيە ھەققىدە تولۇق ئىنتېرئاكتىپ دەرسلىك</p>
+                <p class="text-en">A comprehensive interactive tutorial about linear regression, the foundation of machine learning</p>
+            </div>
+        </header>
+        
+        <div class="content-wrapper">
+            <main class="main-content">
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-info-circle"></i> سىزىقلىق رېگرېسسىيە دىگەن نېمە؟</h2>
+                    <p class="card-subtitle english">What is Linear Regression?</p>
+                    <p>سىزىقلىق رېگرېسسىيە بىر ياكى بىر نەچچە مۇستەقىل ئۆزگەرگۈچى (X) بىلەن بىر تۈگىملىك ئۆزگەرگۈچى (y) ئارىسىدىكى سىزىقلىق مۇناسىۋەتنى مودېللاش ئۇسۇلىدۇر.</p>
+                    <p class="english">Linear regression is a method for modeling the linear relationship between one or more independent variables (X) and a dependent variable (y).</p>
+                    
+                    <div class="formula-box">
+                        y = β₀ + β₁x + ε
+                    </div>
+                    
+                    <div class="formula-translation">
+                        <div class="formula-term">
+                            <div class="term-symbol">y</div>
+                            <div>
+                                <div>تەخمىن قىلىنىدىغان قىممەت (تۈگىملىك ئۆزگەرگۈچى)</div>
+                                <div class="english">Predicted value (dependent variable)</div>
+                            </div>
+                        </div>
+                        <div class="formula-term">
+                            <div class="term-symbol">x</div>
+                            <div>
+                                <div>مۇستەقىل ئۆزگەرگۈچى</div>
+                                <div class="english">Independent variable</div>
+                            </div>
+                        </div>
+                        <div class="formula-term">
+                            <div class="term-symbol">β₀</div>
+                            <div>
+                                <div>يىلتىز قىممىتى (intercept)</div>
+                                <div class="english">Intercept</div>
+                            </div>
+                        </div>
+                        <div class="formula-term">
+                            <div class="term-symbol">β₁</div>
+                            <div>
+                                <div>ئېگىملەش كوئېففىتسېنتى (slope)</div>
+                                <div class="english">Slope coefficient</div>
+                            </div>
+                        </div>
+                        <div class="formula-term">
+                            <div class="term-symbol">ε</div>
+                            <div>
+                                <div>خاتالىق ياكى قالدۇق (error)</div>
+                                <div class="english">Error or residual</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-calculator"></i> ئەڭ كىچىك كۋادراتلار ئۇسۇلى (OLS)</h2>
+                    <p class="card-subtitle english">Ordinary Least Squares (OLS) Method</p>
+                    <p>سىزىقلىق رېگرېسسىيەنىڭ مەقسىتى ھەقىقىي y قىممىتى بىلەن تەخمىنىي y قىممىتى (ŷ) ئارىسىدىكى پەرق (قالدۇق) لارنىڭ كۋادراتلىرىنىڭ يىغىندىسىنى مىنىمۇم قىلىش:</p>
+                    <p class="english">The goal of linear regression is to minimize the sum of squared differences (residuals) between the actual y values and the predicted y values (ŷ):</p>
+                    
+                    <div class="formula-box">
+                        Minimize: Σ(yᵢ - ŷᵢ)²
+                    </div>
+                    
+                    <p>β₀ ۋە β₁ نى ھېسابلاش فورمۇلاسى:</p>
+                    <p class="english">Formulas for calculating β₀ and β₁:</p>
+                    
+                    <div class="coefficient-formula">
+                        <div>β₁ = Σ[(xᵢ - x̄)(yᵢ - ȳ)] / Σ[(xᵢ - x̄)²]</div>
+                        <div class="english">β₁ = Σ[(xᵢ - x̄)(yᵢ - ȳ)] / Σ[(xᵢ - x̄)²]</div>
+                        <div style="margin-top: 15px;">β₀ = ȳ - β₁x̄</div>
+                        <div class="english">β₀ = ȳ - β₁x̄</div>
+                    </div>
+                </div>
+                
+                <div class="interactive-area">
+                    <h2 class="card-title"><i class="fas fa-sliders-h"></i> سىزىقلىق رېگرېسسىيە سىمۇلىياتورى</h2>
+                    <p class="card-subtitle english">Linear Regression Simulator</p>
+                    <p>تۆۋەندىكى گرافىكا ئارقىلىق سىزىقلىق رېگرېسسىيەنىڭ قانداق ئىشلەيدىغانلىقىنى كۆرۈڭ ۋە پارامېترلەرنى ئۆزگەرتىپ سىناش ئېلىپ بېرىڭ.</p>
+                    <p class="english">Use the graphics below to see how linear regression works and test by changing parameters.</p>
+                    
+                    <div class="controls">
+                        <div class="control-group">
+                            <div class="control-label">
+                                <label for="slope">ئېگىملەش كوئېففىتسېنتى (β₁): <span id="slopeValue">2.0</span></label>
+                                <span class="english-label">Slope coefficient (β₁)</span>
+                            </div>
+                            <input type="range" id="slope" min="-5" max="5" step="0.1" value="2">
+                        </div>
+                        
+                        <div class="control-group">
+                            <div class="control-label">
+                                <label for="intercept">يىلتىز قىممىتى (β₀): <span id="interceptValue">1.0</span></label>
+                                <span class="english-label">Intercept (β₀)</span>
+                            </div>
+                            <input type="range" id="intercept" min="-10" max="10" step="0.1" value="1">
+                        </div>
+                        
+                        <div class="control-group">
+                            <div class="control-label">
+                                <label for="noise">شۇخلۇق دەرىجىسى (ε): <span id="noiseValue">1.0</span></label>
+                                <span class="english-label">Noise level (ε)</span>
+                            </div>
+                            <input type="range" id="noise" min="0" max="3" step="0.1" value="1">
+                        </div>
+                        
+                        <div class="control-group">
+                            <div class="control-label">
+                                <label for="points">نۇقتا سانى: <span id="pointsValue">20</span></label>
+                                <span class="english-label">Number of points</span>
+                            </div>
+                            <input type="range" id="points" min="10" max="100" step="5" value="20">
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button id="generateData">
+                            <i class="fas fa-random"></i> يېڭى سانلىق مەلۇمات ھاسىل قىلىش
+                            <span class="english"> | Generate New Data</span>
+                        </button>
+                        <button id="calculateRegression">
+                            <i class="fas fa-calculator"></i> رېگرېسسىيە ھېسابلاش
+                            <span class="english"> | Calculate Regression</span>
+                        </button>
+                        <button id="resetData">
+                            <i class="fas fa-redo"></i> قايتا قۇرۇش
+                            <span class="english"> | Reset</span>
+                        </button>
+                    </div>
+                    
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #3498db;"></div>
+                            <span>سانلىق مەلۇمات نۇقتىلىرى <span class="english">| Data points</span></span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #2ecc71;"></div>
+                            <span>ئەسلى سىزىق (ھەقىقىي مۇناسىۋەت) <span class="english">| True line (actual relationship)</span></span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #e74c3c;"></div>
+                            <span>تەخمىنىي سىزىق (مودېل) <span class="english">| Predicted line (model)</span></span>
+                        </div>
+                    </div>
+                    
+                    <canvas id="regressionCanvas"></canvas>
+                    
+                    <div class="results">
+                        <div class="result-box">
+                            <div class="result-label">ھەقىقىي β₀ (يىلتىز)</div>
+                            <div class="result-label-en">True β₀ (Intercept)</div>
+                            <div class="result-value" id="trueIntercept">1.00</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">ھەقىقىي β₁ (ئېگىملەش)</div>
+                            <div class="result-label-en">True β₁ (Slope)</div>
+                            <div class="result-value" id="trueSlope">2.00</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">تەخمىنىي β₀</div>
+                            <div class="result-label-en">Predicted β₀</div>
+                            <div class="result-value" id="predictedIntercept">0.00</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">تەخمىنىي β₁</div>
+                            <div class="result-label-en">Predicted β₁</div>
+                            <div class="result-value" id="predictedSlope">0.00</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">R² نىسبىتى</div>
+                            <div class="result-label-en">R² Score</div>
+                            <div class="result-value" id="rSquared">0.00</div>
+                        </div>
+                        <div class="result-box">
+                            <div class="result-label">MSE (خاتالىق)</div>
+                            <div class="result-label-en">MSE (Error)</div>
+                            <div class="result-value" id="mse">0.00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-container">
+                    <div class="tabs">
+                        <div class="tab active" data-tab="applications">قوللىنىش دائىرىسى</div>
+                        <div class="tab" data-tab="assumptions">پرىزۇمپتسىيەلەر</div>
+                        <div class="tab" data-tab="limitations">چەكلىمىلىرى</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="applications">
+                        <h3>سىزىقلىق رېگرېسسىيەنىڭ ئەمەلىي قوللىنىشلىرى:</h3>
+                        <p class="english">Practical applications of linear regression:</p>
+                        
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4 class="step-title">ئۆي باھاسىنى تەخمىنلەش</h4>
+                                <p class="step-title-en">House Price Prediction</p>
+                                <p>ئۆي كەڭلىكى، يېشى، ئورنى قاتارلىقلار بويىچە باھاسىنى تەخمىنلەش</p>
+                                <p class="english">Predicting house prices based on size, age, location, etc.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4 class="step-title">ھەسىلاتنى تەخمىنلەش</h4>
+                                <p class="step-title-en">Crop Yield Prediction</p>
+                                <p>ھۆل-يېغىن، تۆپە، ئۆگۈت قاتارلىقلار بويىچە ھەسىلاتنى تەخمىنلەش</p>
+                                <p class="english">Predicting crop yield based on rainfall, fertilizer, soil quality, etc.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4 class="step-title">سېلىق خىزمەتچى ئېنىقلىشى</h4>
+                                <p class="step-title-en">Salary Estimation</p>
+                                <p>تەجرىبە، تەربىيەلەش، كەسپىي ماھارەت قاتارلىقلار بويىچە سېلىقنى تەخمىنلەش</p>
+                                <p class="english">Estimating salary based on experience, education, skills, etc.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="assumptions">
+                        <h3>سىزىقلىق رېگرېسسىيە پرىزۇمپتسىيەلىرى (شەرتلەر):</h3>
+                        <p class="english">Linear Regression Assumptions (Conditions):</p>
+                        <ol>
+                            <li><span class="highlight">سىزىقلىقلىق</span>: X بىلەن y ئارىسىدا سىزىقلىق مۇناسىۋەت بولۇشى
+                                <div class="li-en"><span class="highlight">Linearity</span>: There should be a linear relationship between X and y</div>
+                            </li>
+                            <li><span class="highlight">مۇستەقىللىق</span>: قالدۇقلار (errors) ئۆز-ئارا مۇستەقىل بولۇشى
+                                <div class="li-en"><span class="highlight">Independence</span>: Errors should be independent of each other</div>
+                            </li>
+                            <li><span class="highlight">نورماللىق</span>: قالدۇقلار نورمال تارقىلىشقا ئىگە بولۇشى
+                                <div class="li-en"><span class="highlight">Normality</span>: Errors should be normally distributed</div>
+                            </li>
+                            <li><span class="highlight">بەت-باراۋەرلىك</span>: قالدۇقلارنىڭ سەپ سەپلىرى باراۋەر بولۇشى
+                                <div class="li-en"><span class="highlight">Homoscedasticity</span>: Errors should have constant variance</div>
+                            </li>
+                            <li><span class="highlight">كوللېنېئېرلىقسىزلىق</span>: مۇستەقىل ئۆزگەرگۈچىلەر ئوتتۇرىسىدا كۈچلۈك باغلىنىش بولماسلىقى
+                                <div class="li-en"><span class="highlight">No multicollinearity</span>: Independent variables should not be strongly correlated with each other</div>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div class="tab-content" id="limitations">
+                        <h3>سىزىقلىق رېگرېسسىيەنىڭ چەكلىمىلىرى:</h3>
+                        <p class="english">Limitations of Linear Regression:</p>
+                        <ul>
+                            <li><span class="highlight">سىزىقلىق بولمىغان مۇناسىۋەتلەرنى مودېللىيالمايدۇ</span> - سىزىقلىق بولمىغان مۇناسىۋەتلەرگە پولىنومىيال رېگرېسسىيە قوللىنىش كېرەك
+                                <div class="li-en"><span class="highlight">Cannot model non-linear relationships</span> - For non-linear relationships, polynomial regression should be used</div>
+                            </li>
+                            <li><span class="highlight">ھەسسىسلىك</span> - سانلىق مەلۇماتتىكى چىقىتىۋېتىش قىممەتلىرىگە (outliers) ھەسساس
+                                <div class="li-en"><span class="highlight">Sensitive to outliers</span> - Sensitive to outliers in the data</div>
+                            </li>
+                            <li><span class="highlight">كۆپ دەرىجىلىك باغلىنىش</span> - مۇستەقىل ئۆزگەرگۈچىلەر ئارىسىدا كۈچلۈك باغلىنىش بولسا، پارامېترلەرنى باھالاش قىيىن
+                                <div class="li-en"><span class="highlight">Multicollinearity</span> - When independent variables are highly correlated, it's difficult to estimate parameters</div>
+                            </li>
+                            <li><span class="highlight">ھەددىدىن زىيادە ئوخشاشلىشىش</span> - مودېل تەربىيەلەش سانلىق مەلۇماتىغا ھەددىدىن زىيادە ئوخشاشلىشىپ، يېڭى سانلىق مەلۇماتقا ئومۇميۈزلۈك ئىشلەلمەيدۇ
+                                <div class="li-en"><span class="highlight">Overfitting</span> - Model may overfit to training data and not generalize well to new data</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+            
+            <aside class="sidebar">
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-list-ol"></i> دەرسلىك قىسقىچە مەزمۇنى</h2>
+                    <p class="card-subtitle english">Tutorial Content Summary</p>
+                    <ol>
+                        <li>سىزىقلىق رېگرېسسىيە دىگەن نېمە؟
+                            <div class="li-en">What is Linear Regression?</div>
+                        </li>
+                        <li>ئاساسىي فورمۇلا ۋە تەرىپلەر
+                            <div class="li-en">Basic Formula and Terms</div>
+                        </li>
+                        <li>ئەڭ كىچىك كۋادراتلار ئۇسۇلى (OLS)
+                            <div class="li-en">Ordinary Least Squares Method</div>
+                        </li>
+                        <li>سىزىقلىق رېگرېسسىيە سىمۇلىياتورى
+                            <div class="li-en">Linear Regression Simulator</div>
+                        </li>
+                        <li>مودېلنى باھالىش ئۆلچەملىرى
+                            <div class="li-en">Model Evaluation Metrics</div>
+                        </li>
+                        <li>پرىزۇمپتسىيەلەر ۋە چەكلىمىلىرى
+                            <div class="li-en">Assumptions and Limitations</div>
+                        </li>
+                        <li>ئەمەلىي قوللىنىش دائىرىسى
+                            <div class="li-en">Practical Applications</div>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-chart-bar"></i> مودېل باھالىش ئۆلچەملىرى</h2>
+                    <p class="card-subtitle english">Model Evaluation Metrics</p>
+                    
+                    <div class="result-box" style="margin-bottom: 15px;">
+                        <div class="result-label">R² (نىسبەت كوئېففىتسېنتى)</div>
+                        <div class="result-label-en">R² (Coefficient of Determination)</div>
+                        <div class="result-value">0.00</div>
+                        <p>مودېلنىڭ ئىزاھلىيالايدىغانلىق دەرىجىسى (0 دىن 1 گىچە)</p>
+                        <p class="english">How well the model explains the data (0 to 1)</p>
+                    </div>
+                    
+                    <div class="result-box" style="margin-bottom: 15px;">
+                        <div class="result-label">MSE</div>
+                        <div class="result-label-en">Mean Squared Error</div>
+                        <div class="result-value">0.00</div>
+                        <p>ئوتتۇرىچە كۋادرات خاتالىقى (تۆۋەنرەك ياخشىراق)</p>
+                        <p class="english">Average squared error (lower is better)</p>
+                    </div>
+                    
+                    <div class="result-box">
+                        <div class="result-label">RMSE</div>
+                        <div class="result-label-en">Root Mean Squared Error</div>
+                        <div class="result-value">0.00</div>
+                        <p>تۈپ ئوتتۇرىچە كۋادرات خاتالىقى</p>
+                        <p class="english">Square root of MSE</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-code"></i> Python دىكى ئەمەلىي كود</h2>
+                    <p class="card-subtitle english">Practical Code in Python</p>
+                    <div class="formula-box" style="text-align: left; font-size: 0.9rem;">
+                        <pre><code># سىزىقلىق رېگرېسسىيە Python دا
+# Linear Regression in Python
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# سانلىق مەلۇمات ھازىرلاش | Prepare data
+X = np.array([[1], [2], [3], [4], [5]])
+y = np.array([2, 4, 5, 4, 5])
+
+# مودېل قۇرۇش ۋە تەربىيەلەش | Build and train model
+model = LinearRegression()
+model.fit(X, y)
+
+# تەخمىنلەش | Make prediction
+y_pred = model.predict([[6]])
+print(f"تەخمىنىي قىممەت: {y_pred[0]}")
+print(f"Predicted value: {y_pred[0]}")</code></pre>
+                    </div>
+                    <button id="showMoreCode" style="margin-top: 15px; width: 100%;">
+                        <i class="fas fa-chevron-down"></i> تولۇق كودنى كۆرسىتىش
+                        <span class="english"> | Show Full Code</span>
+                    </button>
+                </div>
+                
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-database"></i> ھازىرقى سانلىق مەلۇمات</h2>
+                    <p class="card-subtitle english">Current Data Points</p>
+                    <p>سىمۇلىياتوردا ئىشلىتىلگەن سانلىق مەلۇمات نۇقتىلىرى:</p>
+                    <p class="english">Data points used in the simulator:</p>
+                    <div class="data-points" id="dataPointsContainer">
+                        <!-- Data points will be dynamically added here -->
+                    </div>
+                </div>
+            </aside>
+        </div>
+        
+        <footer>
+            <p>بۇ دەرسلىك ماشىنا ئۆگىنىش (Machine Learning) نىڭ ئاساسى بولغان سىزىقلىق رېگرېسسىيە ھەققىدە ئىنتېرئاكتىپ تونۇشتۇرۇش ئۈچۈن تەييارلاندى.</p>
+            <p class="english">This tutorial was prepared for interactive introduction to linear regression, the foundation of machine learning.</p>
+            <p style="margin-top: 10px;"><i class="fas fa-graduation-cap"></i> ماشىنا ئۆگىنىش دەرسلىكى - سىزىقلىق رېگرېسسىيە بۆلۈمى</p>
+            <p class="english">Machine Learning Tutorial - Linear Regression Section</p>
+        </footer>
+    </div>
+
+    <script>
+        // Language toggle functionality
+        const toggleEnglishBtn = document.getElementById('toggleEnglish');
+        let englishVisible = true;
+        
+        toggleEnglishBtn.addEventListener('click', function() {
+            englishVisible = !englishVisible;
+            if (englishVisible) {
+                document.body.classList.remove('hide-en');
+                toggleEnglishBtn.innerHTML = '<i class="fas fa-language"></i> ئېنگلىزچىنى يوشۇرۇش | Hide English';
+            } else {
+                document.body.classList.add('hide-en');
+                toggleEnglishBtn.innerHTML = '<i class="fas fa-language"></i> ئېنگلىزچىنى كۆرسىتىش | Show English';
+            }
+        });
+        
+        // Canvas setup
+        const canvas = document.getElementById('regressionCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas dimensions
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            draw();
+        });
+        
+        // Data storage
+        let dataPoints = [];
+        let trueSlope = 2.0;
+        let trueIntercept = 1.0;
+        let noiseLevel = 1.0;
+        let pointCount = 20;
+        
+        // Model parameters
+        let predictedSlope = 0;
+        let predictedIntercept = 0;
+        let rSquared = 0;
+        let mse = 0;
+        
+        // DOM elements
+        const slopeSlider = document.getElementById('slope');
+        const interceptSlider = document.getElementById('intercept');
+        const noiseSlider = document.getElementById('noise');
+        const pointsSlider = document.getElementById('points');
+        const slopeValue = document.getElementById('slopeValue');
+        const interceptValue = document.getElementById('interceptValue');
+        const noiseValue = document.getElementById('noiseValue');
+        const pointsValue = document.getElementById('pointsValue');
+        
+        const trueInterceptElement = document.getElementById('trueIntercept');
+        const trueSlopeElement = document.getElementById('trueSlope');
+        const predictedInterceptElement = document.getElementById('predictedIntercept');
+        const predictedSlopeElement = document.getElementById('predictedSlope');
+        const rSquaredElement = document.getElementById('rSquared');
+        const mseElement = document.getElementById('mse');
+        const dataPointsContainer = document.getElementById('dataPointsContainer');
+        
+        // Initialize
+        initializeData();
+        
+        // Event listeners for sliders
+        slopeSlider.addEventListener('input', function() {
+            trueSlope = parseFloat(this.value);
+            slopeValue.textContent = trueSlope.toFixed(1);
+            initializeData();
+        });
+        
+        interceptSlider.addEventListener('input', function() {
+            trueIntercept = parseFloat(this.value);
+            interceptValue.textContent = trueIntercept.toFixed(1);
+            initializeData();
+        });
+        
+        noiseSlider.addEventListener('input', function() {
+            noiseLevel = parseFloat(this.value);
+            noiseValue.textContent = noiseLevel.toFixed(1);
+            initializeData();
+        });
+        
+        pointsSlider.addEventListener('input', function() {
+            pointCount = parseInt(this.value);
+            pointsValue.textContent = pointCount;
+            initializeData();
+        });
+        
+        // Event listeners for buttons
+        document.getElementById('generateData').addEventListener('click', initializeData);
+        document.getElementById('calculateRegression').addEventListener('click', calculateRegression);
+        document.getElementById('resetData').addEventListener('click', resetToDefault);
+        document.getElementById('showMoreCode').addEventListener('click', showFullCode);
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and tab contents
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Initialize data points
+        function initializeData() {
+            dataPoints = [];
+            
+            // Update display values
+            trueInterceptElement.textContent = trueIntercept.toFixed(2);
+            trueSlopeElement.textContent = trueSlope.toFixed(2);
+            
+            // Generate random data points
+            for (let i = 0; i < pointCount; i++) {
+                const x = Math.random() * 18 + 1; // x between 1 and 19
+                const noise = (Math.random() - 0.5) * 2 * noiseLevel;
+                const y = trueIntercept + trueSlope * x + noise;
+                
+                dataPoints.push({ x, y });
+            }
+            
+            // Update data points display
+            updateDataPointsDisplay();
+            
+            // Draw the chart
+            draw();
+        }
+        
+        // Calculate linear regression using Ordinary Least Squares
+        function calculateRegression() {
+            if (dataPoints.length === 0) return;
+            
+            // Calculate means
+            const xMean = dataPoints.reduce((sum, point) => sum + point.x, 0) / dataPoints.length;
+            const yMean = dataPoints.reduce((sum, point) => sum + point.y, 0) / dataPoints.length;
+            
+            // Calculate slope (β₁)
+            let numerator = 0;
+            let denominator = 0;
+            
+            for (const point of dataPoints) {
+                numerator += (point.x - xMean) * (point.y - yMean);
+                denominator += (point.x - xMean) * (point.x - xMean);
+            }
+            
+            predictedSlope = numerator / denominator;
+            
+            // Calculate intercept (β₀)
+            predictedIntercept = yMean - predictedSlope * xMean;
+            
+            // Calculate predictions and metrics
+            let ssRes = 0; // Residual sum of squares
+            let ssTot = 0; // Total sum of squares
+            
+            for (const point of dataPoints) {
+                const yPred = predictedIntercept + predictedSlope * point.x;
+                ssRes += Math.pow(point.y - yPred, 2);
+                ssTot += Math.pow(point.y - yMean, 2);
+            }
+            
+            // Calculate R-squared
+            rSquared = 1 - (ssRes / ssTot);
+            
+            // Calculate MSE
+            mse = ssRes / dataPoints.length;
+            
+            // Update display
+            predictedInterceptElement.textContent = predictedIntercept.toFixed(2);
+            predictedSlopeElement.textContent = predictedSlope.toFixed(2);
+            rSquaredElement.textContent = rSquared.toFixed(4);
+            mseElement.textContent = mse.toFixed(4);
+            
+            // Update the chart
+            draw();
+        }
+        
+        // Draw everything on canvas
+        function draw() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid
+            drawGrid();
+            
+            // Draw axes
+            drawAxes();
+            
+            // Draw true line (if we know the true relationship)
+            drawTrueLine();
+            
+            // Draw regression line (if calculated)
+            if (predictedSlope !== 0 || predictedIntercept !== 0) {
+                drawRegressionLine();
+            }
+            
+            // Draw data points
+            drawDataPoints();
+            
+            // Draw legend
+            drawLegend();
+        }
+        
+        function drawGrid() {
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            
+            // Vertical grid lines
+            for (let x = 0; x <= 20; x += 2) {
+                const canvasX = x * (canvas.width / 20);
+                ctx.beginPath();
+                ctx.moveTo(canvasX, 0);
+                ctx.lineTo(canvasX, canvas.height);
+                ctx.stroke();
+            }
+            
+            // Horizontal grid lines
+            for (let y = 0; y <= 20; y += 2) {
+                const canvasY = canvas.height - y * (canvas.height / 20);
+                ctx.beginPath();
+                ctx.moveTo(0, canvasY);
+                ctx.lineTo(canvas.width, canvasY);
+                ctx.stroke();
+            }
+        }
+        
+        function drawAxes() {
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            // X-axis
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height - 10);
+            ctx.lineTo(canvas.width, canvas.height - 10);
+            ctx.stroke();
+            
+            // Y-axis
+            ctx.beginPath();
+            ctx.moveTo(10, 0);
+            ctx.lineTo(10, canvas.height);
+            ctx.stroke();
+            
+            // Axis labels
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            
+            // X-axis labels
+            for (let x = 0; x <= 20; x += 5) {
+                const canvasX = x * (canvas.width / 20);
+                ctx.fillText(x, canvasX, canvas.height - 20);
+            }
+            
+            // Y-axis labels
+            ctx.textAlign = 'right';
+            for (let y = 0; y <= 20; y += 5) {
+                const canvasY = canvas.height - y * (canvas.height / 20);
+                ctx.fillText(y, 30, canvasY + 4);
+            }
+            
+            // Axis titles
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText('X (مۇستەقىل ئۆزگەرگۈچى)', canvas.width / 2, canvas.height - 5);
+            
+            // English axis title
+            ctx.font = 'italic 14px Arial';
+            ctx.fillText('X (Independent Variable)', canvas.width / 2, canvas.height - 25);
+            
+            ctx.save();
+            ctx.translate(20, canvas.height / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText('y (تۈگىملىك ئۆزگەرگۈچى)', 0, 0);
+            
+            ctx.font = 'italic 14px Arial';
+            ctx.fillText('y (Dependent Variable)', 0, 20);
+            ctx.restore();
+        }
+        
+        function drawTrueLine() {
+            // Calculate line endpoints in data coordinates
+            const x1 = 0;
+            const y1 = trueIntercept + trueSlope * x1;
+            const x2 = 20;
+            const y2 = trueIntercept + trueSlope * x2;
+            
+            // Convert to canvas coordinates
+            const canvasX1 = x1 * (canvas.width / 20);
+            const canvasY1 = canvas.height - y1 * (canvas.height / 20);
+            const canvasX2 = x2 * (canvas.width / 20);
+            const canvasY2 = canvas.height - y2 * (canvas.height / 20);
+            
+            // Draw the line
+            ctx.strokeStyle = '#2ecc71';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(canvasX1, canvasY1);
+            ctx.lineTo(canvasX2, canvasY2);
+            ctx.stroke();
+        }
+        
+        function drawRegressionLine() {
+            // Calculate line endpoints in data coordinates
+            const x1 = 0;
+            const y1 = predictedIntercept + predictedSlope * x1;
+            const x2 = 20;
+            const y2 = predictedIntercept + predictedSlope * x2;
+            
+            // Convert to canvas coordinates
+            const canvasX1 = x1 * (canvas.width / 20);
+            const canvasY1 = canvas.height - y1 * (canvas.height / 20);
+            const canvasX2 = x2 * (canvas.width / 20);
+            const canvasY2 = canvas.height - y2 * (canvas.height / 20);
+            
+            // Draw the line
+            ctx.strokeStyle = '#e74c3c';
+            ctx.lineWidth = 3;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(canvasX1, canvasY1);
+            ctx.lineTo(canvasX2, canvasY2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+        
+        function drawDataPoints() {
+            for (const point of dataPoints) {
+                const canvasX = point.x * (canvas.width / 20);
+                const canvasY = canvas.height - point.y * (canvas.height / 20);
+                
+                // Draw point
+                ctx.fillStyle = '#3498db';
+                ctx.beginPath();
+                ctx.arc(canvasX, canvasY, 6, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw point border
+                ctx.strokeStyle = '#2980b9';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+        
+        function drawLegend() {
+            // Legend is already in HTML, so we don't need to draw it on canvas
+        }
+        
+        function updateDataPointsDisplay() {
+            dataPointsContainer.innerHTML = '';
+            
+            // Show only first 10 data points to avoid clutter
+            const displayPoints = dataPoints.slice(0, 10);
+            
+            displayPoints.forEach((point, index) => {
+                const pointElement = document.createElement('div');
+                pointElement.className = 'data-point';
+                pointElement.innerHTML = `
+                    (${point.x.toFixed(1)}, ${point.y.toFixed(1)})
+                    <div class="english" style="font-size: 0.9rem; color: #666; margin-top: 3px;">
+                        (${point.x.toFixed(1)}, ${point.y.toFixed(1)})
+                    </div>
+                `;
+                dataPointsContainer.appendChild(pointElement);
+            });
+            
+            if (dataPoints.length > 10) {
+                const moreElement = document.createElement('div');
+                moreElement.className = 'data-point';
+                moreElement.innerHTML = `
+                    ... ${dataPoints.length - 10} تېخىمۇ كۆپ
+                    <div class="english" style="font-size: 0.9rem; color: #666; margin-top: 3px;">
+                        ... ${dataPoints.length - 10} more
+                    </div>
+                `;
+                dataPointsContainer.appendChild(moreElement);
+            }
+        }
+        
+        function resetToDefault() {
+            // Reset sliders to default values
+            slopeSlider.value = 2;
+            interceptSlider.value = 1;
+            noiseSlider.value = 1;
+            pointsSlider.value = 20;
+            
+            // Reset displayed values
+            slopeValue.textContent = '2.0';
+            interceptValue.textContent = '1.0';
+            noiseValue.textContent = '1.0';
+            pointsValue.textContent = '20';
+            
+            // Reset variables
+            trueSlope = 2.0;
+            trueIntercept = 1.0;
+            noiseLevel = 1.0;
+            pointCount = 20;
+            
+            // Reset model parameters
+            predictedSlope = 0;
+            predictedIntercept = 0;
+            rSquared = 0;
+            mse = 0;
+            
+            // Update displays
+            predictedInterceptElement.textContent = '0.00';
+            predictedSlopeElement.textContent = '0.00';
+            rSquaredElement.textContent = '0.0000';
+            mseElement.textContent = '0.0000';
+            
+            // Regenerate data
+            initializeData();
+        }
+        
+        function showFullCode() {
+            const button = document.getElementById('showMoreCode');
+            const codeContainer = button.previousElementSibling;
+            
+            if (button.innerHTML.includes('chevron-down')) {
+                codeContainer.innerHTML = `
+<pre><code># سىزىقلىق رېگرېسسىيە Python دا تولۇق كود
+# Complete Linear Regression Code in Python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+# 1. سانلىق مەلۇمات ھازىرلاش | Prepare data
+np.random.seed(42)
+X = 2 * np.random.rand(100, 1)  # 100 قۇر ئەزا، 1 ئۆلچەم | 100 rows, 1 dimension
+y = 4 + 3 * X + np.random.randn(100, 1)  # سىزىقلىق مۇناسىۋەت | Linear relationship
+
+# 2. مودېل قۇرۇش | Create model
+model = LinearRegression()
+
+# 3. مودېلنى تەربىيەلەش | Train model
+model.fit(X, y)
+
+# 4. پارامېترلەرنى كۆرسىتىش | Display parameters
+print(f"يىلتىز قىممىتى (β₀): {model.intercept_[0]:.4f}")
+print(f"Intercept (β₀): {model.intercept_[0]:.4f}")
+print(f"ئېگىملەش كوئېففىتسېنتى (β₁): {model.coef_[0][0]:.4f}")
+print(f"Slope coefficient (β₁): {model.coef_[0][0]:.4f}")
+
+# 5. تەخمىنلەش | Make predictions
+X_new = np.array([[0.5], [2.0]])
+y_pred = model.predict(X_new)
+print(f"\\nX = 0.5 ئۈچۈن تەخمىن: {y_pred[0][0]:.4f}")
+print(f"Prediction for X = 0.5: {y_pred[0][0]:.4f}")
+
+# 6. مودېل باھالىش | Evaluate model
+y_all_pred = model.predict(X)
+mse = mean_squared_error(y, y_all_pred)
+r2 = r2_score(y, y_all_pred)
+
+print(f"\\nمودېل باھاسى:")
+print(f"Model Evaluation:")
+print(f"MSE: {mse:.4f}")
+print(f"R²: {r2:.4f}")
+
+# 7. گرافىك كۆرسىتىش | Display graph
+plt.scatter(X, y, alpha=0.7, label='سانلىق مەلۇمات | Data')
+plt.plot(X, y_all_pred, color='red', label='سىزىقلىق رېگرېسسىيە | Linear Regression')
+plt.xlabel('X')
+plt.ylabel('y')
+plt.title('سىزىقلىق رېگرېسسىيە | Linear Regression')
+plt.legend()
+plt.show()</code></pre>`;
+                button.innerHTML = '<i class="fas fa-chevron-up"></i> كودنى يوشۇرۇش<span class="english"> | Hide Code</span>';
+            } else {
+                codeContainer.innerHTML = `
+<pre><code># سىزىقلىق رېگرېسسىيە Python دا
+# Linear Regression in Python
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# سانلىق مەلۇمات ھازىرلاش | Prepare data
+X = np.array([[1], [2], [3], [4], [5]])
+y = np.array([2, 4, 5, 4, 5])
+
+# مودېل قۇرۇش ۋە تەربىيەلەش | Build and train model
+model = LinearRegression()
+model.fit(X, y)
+
+# تەخمىنلەش | Make prediction
+y_pred = model.predict([[6]])
+print(f"تەخمىنىي قىممەت: {y_pred[0]}")
+print(f"Predicted value: {y_pred[0]}")</code></pre>`;
+                button.innerHTML = '<i class="fas fa-chevron-down"></i> تولۇق كودنى كۆرسىتىش<span class="english"> | Show Full Code</span>';
+            }
+        }
+        
+        // Initialize everything on page load
+        window.onload = function() {
+            initializeData();
+            calculateRegression();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+<meta charset="UTF-8">
+<title>پايسان 3-باب - if/else ۋە لوگىكىلىق ئامەللەر</title>
+<style>
+body { font-family: "Arial", sans-serif; line-height: 1.6; padding: 20px; background-color: #f7f7f7; }
+h1, h2 { color: #2c3e50; }
+pre { background-color: #ecf0f1; padding: 10px; border-radius: 5px; overflow-x: auto; }
+.code-example { background-color: #dfe6e9; padding: 10px; border-left: 4px solid #0984e3; }
+</style>
+</head>
+<body>
+
+<h1>پايسان 3-باب - if/else ۋە لوگىكىلىق ئامەللەر</h1>
+
+<h2>دەرس بايانى</h2>
+<p>بۇ بابتا شەرتلىك بايانلار (if/else) ۋە لوگىكىلىق ئامەللەرنى ئۆگىنىمىز. شەرتلىك بايانلار ئارقىلىق پروگراممىڭىزغا قارار قىلىش ئىقتىدارى قوشالايسىز.</p>
+
+<h2>if/else بايانى</h2>
+<pre class="code-example">
+age = 18
+
+if age >= 18:
+    print("سىز چوڭسىز.")
+else:
+    print("سىز ياشسىز.")
+</pre>
+<p>ئەگەر <code>age</code> 18 دىن چوڭ ياكى تەڭ بولسا "سىز چوڭسىز" چىقىدۇ، ئەكسىچە بولسا "سىز ياشسىز" چىقىدۇ.</p>
+
+<h2>elif ئىشلىتىش</h2>
+<pre class="code-example">
+score = 75
+
+if score >= 90:
+    print("A دەرىجىسى")
+elif score >= 75:
+    print("B دەرىجىسى")
+elif score >= 60:
+    print("C دەرىجىسى")
+else:
+    print("F دەرىجىسى")
+</pre>
+<p>بۇنداق شەرتلىك بايانلار بىلەن كۆپ شەرتلەرنى تەكشۈرۈپ، تۈرلۈك چىقىشلارغا يېتىشىشكە بولىدۇ.</p>
+
+<h2>لوگىكىلىق ئامەللەر</h2>
+<ul>
+<li><strong>and</strong> - ھەر ئىككى شەرت توغرا بولغاندا True</li>
+<li><strong>or</strong> - ئىككى شەرتتىن بىر شەرت توغرا بولغاندا True</li>
+<li><strong>not</strong> - شەرتنى ئىنكار قىلىش</li>
+</ul>
+
+<pre class="code-example">
+x = 10
+y = 5
+
+if x > 5 and y < 10:
+    print("ھەربىر شەرت توغرا")
+    
+if x > 5 or y > 10:
+    print("ئەڭ ئاز بىر شەرت توغرا")
+    
+if not x < 5:
+    print("x 5 دىن كىچىك ئەمەس")
+</pre>
+
+<h2>مەسىل</h2>
+<p>ئىككى ساننى سېلىشتۇرۇپ، چوڭ ياكى كىچىك ساننى چىقىرىش:</p>
+<pre class="code-example">
+a = 12
+b = 20
+
+if a > b:
+    print("a چوڭ سان")
+elif a < b:
+    print("b چوڭ سان")
+else:
+    print("a ۋە b تەڭ سان")
+</pre>
+
+<h2>چۈشەندۈرۈش</h2>
+<p>بۇ بابتا if/else ۋە elif ئارقىلىق شەرتلىك قارار قىلىش، ۋە لوگىكىلىق ئامەللەرنى ئىشلىتىشنى چۈشەندۇق. بۇنى ئىشلىتىپ پروگرامما ئىچىدە قارارغا يەتمەك، سانلارنى سېلىشتۇرۇش، ۋە ئەمەلىي مەسىللىكتە ئىشلىتىشكە بولىدۇ.</p>
+
+</body>
+</html>

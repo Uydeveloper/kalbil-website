@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+<meta charset="UTF-8">
+<title>پايسان 4-باب - for/while مۇھىتى</title>
+<style>
+body { font-family: "Arial", sans-serif; line-height: 1.6; padding: 20px; background-color: #f7f7f7; }
+h1, h2 { color: #2c3e50; }
+pre { background-color: #ecf0f1; padding: 10px; border-radius: 5px; overflow-x: auto; }
+.code-example { background-color: #dfe6e9; padding: 10px; border-left: 4px solid #0984e3; }
+</style>
+</head>
+<body>
+
+<h1>پايسان 4-باب - for/while مۇھىتى</h1>
+
+<h2>دەرس بايانى</h2>
+<p>بۇ بابتا Python دا قايتىلىنىش مۇھىتى (loops) نى ئۆگىنىمىز. for ۋە while مۇھىتى ئارقىلىق سانلىق مەلۇمات ياكى تىزىملىك ئۈستىدە قايتىلىنىپ ئامەل قىلدۇرىدۇق.</p>
+
+<h2>for مۇھىتى</h2>
+<pre class="code-example">
+# تىزىملىك ئۈستىدە قايتىلاش
+fruits = ["alma", "banan", "portakal"]
+
+for fruit in fruits:
+    print(fruit)
+</pre>
+<p>ئەتىرلىكنى بىر-بىر قاراپ، ھەر بىر مىۋىنى چىقىرىدۇ.</p>
+
+<h2>range() بىلەن for مۇھىتى</h2>
+<pre class="code-example">
+# 0 دىن 4 گىچە سانلار
+for i in range(5):
+    print("سان:", i)
+</pre>
+
+<h2>while مۇھىتى</h2>
+<pre class="code-example">
+count = 0
+
+while count < 5:
+    print("count =", count)
+    count += 1  # count نى 1 قوشۇش
+</pre>
+
+<h2>break ۋە continue</h2>
+<pre class="code-example">
+for i in range(10):
+    if i == 5:
+        break   # 5 غىچە توختاش
+    print(i)
+
+for i in range(5):
+    if i == 2:
+        continue  # 2 نى ئۆتكۈزۈش
+    print(i)
+</pre>
+
+<h2>مەسىل</h2>
+<p>ئىككى ساننىڭ جەمئىيىنى ھېسابلاش ئۈچۈن for مۇھىتى ئىشلىتىش:</p>
+<pre class="code-example">
+numbers = [2, 5, 7, 10]
+total = 0
+
+for num in numbers:
+    total += num
+
+print("سانلار جەمئىيى:", total)
+</pre>
+
+<h2>چۈشەندۈرۈش</h2>
+<p>بۇ بابتا Python دا for ۋە while مۇھىتى ئارقىلىق قايتىلىنىشنى چۈشەندۇق. break ۋە continue ئارقىلىق قايتىلىنىشقا يېڭىلىق كىرگۈزۈشنى ئۆگىنىدۇق. بۇ ئۇسۇل سانلىق مەلۇمات تەھلىلى ۋە پروگرامما ئىچىدە مەسىل ھەل قىلىشتا مۇھىم.</p>
+
+</body>
+</html>

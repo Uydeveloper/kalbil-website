@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نېرۋاتور 8-باب – Transformer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>:root{--bg:#fafafa;--text-uc:#2d2d2d;--text-en:#444;--primary:#303f9f;--card-bg:#ffffff}body{background:var(--bg);padding:20px;font-family:'Amiri',serif;color:var(--text-uc);line-height:1.7;direction:rtl}h1{text-align:center;color:var(--primary);font-size:2.4rem;margin:0 0 20px}.bilingual-section{background:var(--card-bg);border-radius:12px;padding:20px;margin-bottom:30px;box-shadow:0 4px 12px rgba(0,0,0,.05);border-right:4px solid var(--primary)}.section-title-ug{font-size:1.6rem;font-weight:bold;color:var(--primary);margin-bottom:8px}.section-title-en{font-size:1.3rem;font-weight:600;color:#555;margin-bottom:15px;font-family:'Inter',sans-serif;direction:ltr;text-align:left}.en{font-family:'Inter',sans-serif;direction:ltr;text-align:left;color:var(--text-en);margin-top:12px;padding:12px;background:#f9f9f9;border-radius:8px;border-left:3px solid #ccc}ul,ol{padding-right:25px;margin:12px 0}li{margin-bottom:8px}footer{text-align:center;margin-top:40px;padding:20px;color:#666;font-size:.95rem}.highlight{background:#c5cae9;padding:3px 6px;border-radius:4px;font-weight:bold}</style>
+</head>
+<body>
+
+<div style="text-align:center;max-width:800px;margin:0 auto 30px;padding:20px;background:#e8eaf6;border-radius:12px;border-right:4px solid var(--primary)">
+  <h1>نېرۋاتور 8-باب – Transformer & Attention</h1>
+  <p><strong>Transformer</strong> — 2017-يىلى «Attention Is All You Need» دېگەن ماقالە بىلەن دۇنياغا چىقتى. بۇ مودېل <strong>RNN/CNN نى ئىشلىتىمەستىن، پۈتۈنلەي <strong>Attention Mechanism</strong> (دىققىت مېخانىزمى)</strong> ئاساسىدە ئىشلەيدۇ. بۇ مودېل زامانىۋى ماشىنا تەرجىمىسى، چات GPT لارنىڭ ئاساسى.</p>
+  <div class="en" style="margin-top:10px">The <strong>Transformer</strong> (2017) revolutionized NLP by replacing RNNs/CNNs with pure <strong>Attention</strong>. It powers BERT, GPT, and modern AI.</div>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">1. Attention مېخانىزمى نېمە؟</div>
+  <div class="section-title-en">1. What is Attention?</div>
+  <p>Attention — مودېلنىڭ جۈملىدىكى ھەر بىر سۆزگە <strong>قاتناش دەرىجىسى</strong> (Weight) بېكىتىشى. مەسىلەن: «ئۇ مەكتەپكە كەتتى» دېگەندە، «كەتتى» سۆزىگە «مەكتەپ» نىڭ قاتنىش دەرىجىسى يۇقىرى.</p>
+  <p class="en">Attention assigns <strong>weights</strong> to input tokens based on relevance. In "He went to school", "school" has high attention weight for "went".</p>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">2. Transformer نىڭ تۈزۈلمىسى</div>
+  <div class="section-title-en">2. Transformer Architecture</div>
+  <ul>
+    <li><strong>ئېنكودېر</strong> (Encoder): كىرگۈزگۈچ جۈملەنى ئوقۇپ، ھەر بىر سۆزگە دىققىت باھاسى بېرىدۇ.</li>
+    <li><strong>دېكودېر</strong> (Decoder): چىقىرىش جۈملىسىنى قۇرىدۇ، ئېنكودېر باھاسىغا دىققەت قىلىدۇ.</li>
+    <li>ھەر بىر قەۋەتتە — <strong>Multi-Head Attention</strong> ۋە <strong>Feed-Forward Network</strong>.</li>
+  </ul>
+  <ul class="en">
+    <li><strong>Encoder</strong>: Processes input sequence with self-attention.</li>
+    <li><strong>Decoder</strong>: Generates output, attending to encoder and itself.</li>
+    <li>Each layer: <strong>Multi-Head Attention</strong> + <strong>FFN</strong>.</li>
+  </ul>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">3. ئالاھىدىلىكى</div>
+  <div class="section-title-en">3. Advantages</div>
+  <ul>
+    <li>RNN/CNN نى ئىشلىتىمەيدۇ — <strong>پاراللېل ئىجرا</strong> قىلىش مۇمكىن.</li>
+    <li>ئۇزۇن جۈملىلەرنى ياخشى بايان قىلىدۇ.</li>
+    <li>زامانىۋى ماشىنا تەرجىمىسى (Google Translate)، GPT، BERT نىڭ ئاساسى.</li>
+  </ul>
+  <ul class="en">
+    <li>Fully parallelizable — much faster training than RNNs.</li>
+    <li>Excels at long-range dependencies.</li>
+    <li>Foundation of GPT, BERT, LLaMA, etc.</li>
+  </ul>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">4. قوللىنىش ساھەلىرى</div>
+  <div class="section-title-en">4. Applications</div>
+  <ul>
+    <li>ئۇيغۇرچە–ئىنگلىزچە ماشىنا تەرجىمىسى</li>
+    <li>ئاڭلاپ يازما (ئاۋاز-تېكىست)</li>
+    <li>تېكىست ئاپتوماتىك تۈزۈش (GPT)</li>
+    <li>چات بوت (تەجرىبە: سىز بىلەن بۇ چات)</li>
+  </ul>
+  <ul class="en">
+    <li>Machine translation (Uyghur ↔ English)</li>
+    <li>Speech recognition</li>
+    <li>Text generation (ChatGPT)</li>
+    <li>Chatbots</li>
+  </ul>
+</div>
+
+<footer>
+  <p>نېرۋاتور 8-باب – Transformer & Attention</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+</body>
+</html>

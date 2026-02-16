@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+<meta charset="UTF-8">
+<title>پايسان 7-باب - ئۆبىيكت ئوبژېكت قۇرۇلۇشى (OOP)</title>
+<style>
+body { font-family: "Arial", sans-serif; line-height: 1.6; padding: 20px; background-color: #f7f7f7; }
+h1, h2 { color: #2c3e50; }
+pre { background-color: #ecf0f1; padding: 10px; border-radius: 5px; overflow-x: auto; }
+.code-example { background-color: #dfe6e9; padding: 10px; border-left: 4px solid #0984e3; }
+</style>
+</head>
+<body>
+
+<h1>پايسان 7-باب - ئۆبىيكت ئوبژېكت قۇرۇلۇشى (OOP)</h1>
+
+<h2>دەرس بايانى</h2>
+<p>بۇ بابتا Python دا ئۆبىيكت ئوبژېكت قۇرۇلۇشى (OOP) نى ئۆگىنىمىز. OOP ئارقىلىق كودلارنى تېخىمۇ تۈزۈملۈك ۋە قايتىدىن ئىشلىتىشكە بولىدۇ.</p>
+
+<h2>كلاس ۋە ئۆبىيكت</h2>
+<pre class="code-example">
+# كلاس قۇرۇش
+class Car:
+    def __init__(self, brand, model, year):
+        self.brand = brand
+        self.model = model
+        self.year = year
+
+    def info(self):
+        return f"{self.year} {self.brand} {self.model}"
+
+# ئۆبىيكت قۇرۇش
+my_car = Car("Toyota", "Corolla", 2020)
+print(my_car.info())
+</pre>
+
+<h2>Attributes (ئۆزگەرگۈچلەر)</h2>
+<pre class="code-example">
+print("Brand:", my_car.brand)
+print("Model:", my_car.model)
+print("Year:", my_car.year)
+</pre>
+
+<h2>Methods (فۇنكسىيە)</h2>
+<pre class="code-example">
+# كلاس ئىچىدە info() ناملىق فۇنكسىيەنى ئالدىن بەرگەن
+print(my_car.info())
+</pre>
+
+<h2>Inheritance (ۋارىسىلىق)</h2>
+<pre class="code-example">
+# Car كلاسنىڭ يىڭى كلاسقا ۋارىس قىلىش
+class ElectricCar(Car):
+    def __init__(self, brand, model, year, battery_size):
+        super().__init__(brand, model, year)
+        self.battery_size = battery_size
+
+    def battery_info(self):
+        return f"Battery size: {self.battery_size} kWh"
+
+my_electric_car = ElectricCar("Tesla", "Model 3", 2021, 75)
+print(my_electric_car.info())
+print(my_electric_car.battery_info())
+</pre>
+
+<h2>مەسىل</h2>
+<p>ئىككى كىلاس قۇرۇپ، ئادەم ۋە ئوقۇغۇچى ئارقىلىق مەلۇماتنى ساقلاش:</p>
+<pre class="code-example">
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        print(f"ياخشىمۇسىز, {self.name}!")
+
+class Student(Person):
+    def __init__(self, name, age, student_id):
+        super().__init__(name, age)
+        self.student_id = student_id
+
+    def info(self):
+        print(f"Student: {self.name}, Age: {self.age}, ID: {self.student_id}")
+
+s = Student("قاۋۇلجان", 25, "S123")
+s.greet()
+s.info()
+</pre>
+
+<h2>چۈشەندۈرۈش</h2>
+<p>بۇ بابتا Python دا كلاس، ئۆبىيكت، فۇنكسىيە ۋە ۋارىسىلىقنى ئۆگىنىدۇق. OOP ئارقىلىق پروگرامما تەرتىپلىك، قايتىدىن ئىشلىتىشچان، چوڭ دەرىجىلىك كودلارغا ماس كېلىدۇ.</p>
+
+</body>
+</html>

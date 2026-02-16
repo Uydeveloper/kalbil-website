@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+<meta charset="UTF-8">
+<title>پايسان 3-باب - OOP ۋە فايل بىلەن ئىش</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; background: #f7f7f7; line-height: 1.6; }
+h1, h2 { color: #2c3e50; }
+pre { background: #ecf0f1; padding: 10px; border-radius: 5px; overflow-x: auto; }
+.code-example { background: #dfe6e9; border-left: 4px solid #0984e3; padding: 10px; margin-bottom: 15px; }
+</style>
+</head>
+<body>
+
+<h1>پايسان 3-باب - OOP ۋە فايل بىلەن ئىش</h1>
+
+<h2>كلاس ۋە ئۆبىيكت</h2>
+<pre class="code-example">
+class Car:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+
+    def info(self):
+        return f"{self.brand} {self.model}"
+
+my_car = Car("Toyota", "Corolla")
+print(my_car.info())
+</pre>
+
+<h2>فايل بىلەن ئىش</h2>
+<pre class="code-example">
+with open("example.txt", "w", encoding="utf-8") as file:
+    file.write("Python OOP دەرس\n")
+
+with open("example.txt", "r", encoding="utf-8") as file:
+    print(file.read())
+</pre>
+
+<h2>چۈشەندۈرۈش</h2>
+<p>OOP نىڭ ئاساسلىرى، كلاس/ئۆبىيكت ۋە فايلغا يېزىش ۋە ئوقۇشنى ئۆگىنىدۇق.</p>
+
+</body>
+</html>

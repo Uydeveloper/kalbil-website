@@ -1,0 +1,407 @@
+[
+  {
+    "id": "stat101",
+    "title": "سىتاستىكا",
+    "description": "ئاساسىي سىتاستىكا دەرسى",
+    "videos": [
+      {
+        "title": "سىتاستىكا 1-باب",
+        "url": "https://www.youtube.com/watch?v=KrkAJl8BZsQ",
+        "description": "ئاساسىي ئۇچۇرلار"
+      },
+      {
+        "title": "سىتاستىكا 2-باب",
+        "url": "https://www.youtube.com/watch?v=e-OYQ9VpOu8",
+        "description": "ئامالىي مەسىلىلەر"
+      },
+      {
+        "title": "سىتاستىكا 3-باب",
+        "url": "https://www.youtube.com/watch?v=6-YrfMubzCE",
+        "description": "ھادىسە دىگەن نىمە"
+      },
+      {
+        "title": "سىتاستىكا 4-باب",
+        "url": "https://www.youtube.com/watch?v=q_WigNELxaA",
+        "description": " قايتىش سىزقى"
+      },
+      {
+        "title": "سىتاستىكا 5-باب",
+        "url": "https://www.youtube.com/watch?v=znUAdB3oLhw",
+        "description": "ئېھتىماللىق"
+      },
+      {
+        "title": "سىتاستىكا 6-باب",
+        "url": "https://www.youtube.com/watch?v=XCpxRwCJAT8",
+        "description": " شەرىتلىك ئېھتىماللىق"
+      },
+      {
+        "title": "سىتاستىكا 7-باب",
+        "url": "https://www.youtube.com/watch?v=Shgg_4vuu2Q",
+        "description": "بايىس تېئورىيسى"
+      },
+      {
+        "title": "سىتاستىكا 8-باب",
+        "url": "https://www.youtube.com/watch?v=e0aTPPq1siM",
+        "description": " بايسى مەشىقلىرى"
+      },
+      {
+        "title": "سىتاستىكا 9-باب",
+        "url": "https://www.youtube.com/watch?v=8fNQ9GIHggY",
+        "description": "ئۈگىنىش مەنبەلىرى"
+      },
+      {
+        "title": "سىتاستىكا 10-باب",
+        "url": "https://www.youtube.com/watch?v=u1yjowSsYRk",
+        "description": "ئۈگىنىش مەنبەلىرى"
+      },
+      {
+        "title": "سىتاستىكا 11-باب",
+        "url": "https://www.youtube.com/watch?v=awKjhOzkYMA",
+        "description": "ئۈگىنىش مەنبەلىرى"
+      },
+      {
+        "title": "سىتاستىكا 12-باب",
+        "url": "https://www.youtube.com/watch?v=FU0tahqbIhE",
+        "description": "ئۈگىنىش مەنبەلىرى"
+      },
+      {
+        "title": "سىتاستىكا 13-باب",
+        "url": "https://www.youtube.com/watch?v=iZVfj30EpO4",
+        "description": "ئۈگىنىش مەنبەلىرى"
+      },
+      {
+        "title": "سىتاستىكا 14-باب",
+        "url": "https://www.youtube.com/watch?v=3Kcf-XCd6RA",
+        "description": "ئۈگىنىش مەنبەلىرى"
+      },
+      {
+        "title": "سىتاستىكا 15-باب",
+        "url": "https://www.youtube.com/watch?v=ul-lvFpwvow",
+        "description": "ئۈگىنىش مەنبەلىرى"
+      },
+      {
+        "title": "سىتاستىكا 16-باب",
+        "url": "https://www.youtube.com/watch?v=iEeWIEgCX7Q",
+        "description": "ئۈگىنىش مەنبەلىرى"
+      }
+      
+    ]
+  },{
+    "id": "stat102",
+    "title": "پايسان",
+    "description": "پايسان ئاساسى  بىلىم",
+    "videos": [
+      {
+        "title": "پايسان 1-باب",
+        "url": "https://www.youtube.com/watch?v=cpu7g9Hscj0",
+        "description": "ئاساسىي ئۇچۇرلار"
+      },
+      {
+        "title": "پايسان 2-باب",
+        "url": "https://www.youtube.com/watch?v=kgYV7PEo8GE",
+        "description": "ئامالىي مەسىلىلەر"
+      },
+      {
+        "title": "پايسان 3-باب",
+        "url": "https://www.youtube.com/watch?si=wIti6GWYzaydlBcT&v=QSAk68EQBdI&feature=youtu.be",
+        "description": " if, for,while loops,list,tuples,set"
+      },
+      {
+        "title": "پايسان 4  -باب",
+        "url": "https://www.youtube.com/watch?v=XI_zateAgbo",
+        "description": " Coffee project 02"
+      },
+      {
+        "title": "پايسان 5 -باب ",
+        "url": "https://www.youtube.com/watch?v=XI_zateAgbo",
+        "description": " Coffee project 02"
+      },
+      {
+        "title": "گىت گىتخاب 6-باب",
+        "url": "https://www.youtube.com/watch?v=xzQE24dHkFk",
+        "description": " قايتىش سىزقى"
+      },
+      {
+        "title": "پايسان 6-باب",
+        "url": "https://www.youtube.com/watch?v=aAqP3RXcb2U",
+        "description": "class, oop"
+      },
+      {
+        "title": "  گىت، گىتخاب",
+        "url": "https://www.youtube.com/watch?v=lTH8Zrkl6oE",
+        "description": " git and github"
+      },
+      
+      {
+        "title": "  گىت، گىتخاب",
+        "url": "https://www.youtube.com/watch?v=OVgDACvDk8A",
+        "description": " git and github"
+      },
+      {
+        "title": "پەنداس 1-باب",
+        "url": "https://www.youtube.com/watch?v=nhwLAXKfiPY",
+        "description": " پەندا كىرش دەرسى "
+      }, 
+       {
+        "title": "پەنداس 2-باب",
+        "url": " https://www.youtube.com/watch?v=zJYX5qIt3Kg",
+        "description": " Reading and Writing Data in Pandas"
+      },
+      {
+        "title": "پەنداس 3-باب",
+        "url": " https://www.youtube.com/watch?v=0PO6b8ABdIU",
+        "description": " Selecting and Filtering Data in Pandas"
+      },
+      {
+        "title": "پەنداس 4-باب",
+        "url": " https://www.youtube.com/watch?v=potasl0BpY0",
+        "description": " Data Cleaning and Preparation in Pandas"
+      },
+      
+      {
+        "title": "پەنداس 5-باب",
+        "url": "https://www.youtube.com/watch?v=9bwnBEiZrTE",
+        "description": " calculate summary statistics in pandas, combine datasets"
+      },
+      {
+        "title": "نامپاي 1-باب",
+        "url": "https://www.youtube.com/watch?v=Kvwy4lC4BNw",
+        "description": "  numpy introduction, array creation, indexing, slicing"
+      },
+      {
+        "title": "نامپاي 2-باب",
+        "url": "https://www.youtube.com/watch?v=LySt_e4bZ88",
+        "description": "eye, zeros, ones, random functions in numpy, norm, normalization, reshape"
+      },
+      {
+        "title": "نامپاي 3-باب",
+        "url": "https://www.youtube.com/watch?v=S9xS04VLe0w",
+        "description": "transpose, trace, inverse, matrix operations in numpy"
+      },
+
+      {
+        "title": "نامپاي 4-باب",
+        "url": "https://www.youtube.com/watch?v=RnFCjoacnM8",
+        "description": "transpose, trace, inverse, PCA, matrix operations in numpy"
+      },
+      {
+        "title": "نامپاي 5-باب",
+        "url": "https://www.youtube.com/watch?v=xoolvzINSXk",
+        "description": "transpose, trace, inverse, PCA, matrix operations in numpy"
+      },
+      {
+        "title": "سىبورن،مەتلەپ 1-باب",
+        "url": "https://www.youtube.com/watch?v=RvqRWZvff90",
+        "description": "pie chart, count plot, bar plot, histogram, dist plot"
+      },
+      {
+        "title": "سىبورن،مەتلەپ 2-باب",
+        "url": "https://www.youtube.com/watch?v=RvqRWZvff90",
+        "description": "pie chart, count plot, bar plot, histogram, dist plot"
+      },
+      {
+        "title": "سىبورن،مەتلەپ، نامپاي، پەنداس خۇلاسە    ",
+        "url": "https://www.youtube.com/watch?v=r51nEDBCTNk",
+        "description": "pie chart, count plot, bar plot, histogram, dist plot"
+      }
+    ]
+  },
+  {
+    "id": "stat103",
+    "title": " ماشىنا ئۆگىنىش",
+    "description": "ماشىنا ئۈگنىش ئاساسى  بىلىم",
+    "videos": [
+      {
+        "title": " ماشىنا ئۆگىنىش 1-باب",
+        "url": "https://www.youtube.com/watch?v=sBOoh-1XJ6k",
+        "description": "machine learning introduction"
+      },
+      {
+        "title": " ماشىنا ئۆگىنىش 2-باب",
+        "url": "https://www.youtube.com/watch?v=KazQlOe9adk",
+        "description": "machine learning types, supervised, unsupervised, reinforcement, semi-supervised, types of models"
+      },
+      {
+        "title": " ماشىنا ئۆگىنىش 3-باب",
+        "url": "https://www.youtube.com/watch?v=w-QrX5q6Bh8",
+        "description": "basic models ,  SVM, decision tree, "
+      },
+      {
+        "title": " ماشىنا ئۆگىنىش 4-باب",
+        "url": "https://www.youtube.com/watch?v=6ZNHbw3yKVA",
+        "description": " k-means, PCA"
+      },
+      {
+        "title": " ماشىنا ئۆگىنىش 5-باب",
+       "url": "https://www.youtube.com/watch?v=eeDj4kXilOk",
+        "description": " KNN, logistic regression"
+      },
+      {
+        "title": " ماشىنا ئۆگىنىش 6-باب",
+        "url": "https://www.youtube.com/watch?v=RRU008nXjSs",
+        "description": "Random forst, DBSCAN models "
+      },
+      {
+        "title": " ماشىنا ئۆگىنىش 7-باب",
+        "url": "https://www.youtube.com/watch?v=0Tk-UaEXDBA",
+        "description": "خۇلاسە: ماشىنا ئۈگنىش ئاساسى  بىلىم"
+      },
+      {
+        "title": " ماشىنا ئۆگىنىش 8-باب",
+        "url": "https://www.youtube.com/watch?v=kvYwcTfmwP8",
+        "description": "پروجەكىت "
+      }
+    ]
+  },
+  {
+    "id": "stat104",
+    "title": "نىرۋاتورى ئۆگىنىش",
+    "description": "نىرۋا تورى ئۈگنىش ئاساسى  بىلىم",
+    "videos": [
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=1BcFCGaR9JE",
+        "description": "ئاساسىي ئۇچۇرلار"
+      },
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=YWOOYEWp7Ys",
+        "description": "ئاساسىي ئاددى نىرۋا تورى"
+      },
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=AB4zcfIp0Pg",
+        "description": " قاتلاملىق نىرۋاتورى "
+      },
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=NiAIaqZW7hs",
+        "description": " قايتالىنىدىغان نېرۋا تورى"
+      }
+      ,
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=oA6gAuwcWaI",
+        "description": " Transformer model Transformer    "
+      },
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=tKg4tXQi4sE",
+        "description": " project01 imge classification "
+      }
+      
+      ,
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=vfWeXRIjkyk&list=PLcbhS-igw3X2pvApUYOX0x_-mHBSfjyB0&index=2",
+        "description": " project02 text classification "
+      }
+      ,
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=Vplu6svt6L8",
+        "description": " GAM  model     "
+      }  
+      ,
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=e4MMPIXVd_o",
+        "description": " project03 imge classification "
+      }    
+      ,
+      {
+        "title": "نىرۋاتورى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=rBwmiJVAnek",
+        "description": " TTS-ASR project01 text to speech and speech to text "
+      }
+       ,
+      {
+        "title": "ئاكىتپلاشتۇرغۇچى فونكىسيە  ",
+        "url": "https://www.youtube.com/watch?v=eWQwlu6X3dg",
+        "description": " activation functions "
+      }
+    ]
+  },
+  {
+    "id": "stat105",
+    "title": "  تېنسورفىلوۋ ئۆگىنىش",
+    "description": "كىۋانىت فىزىكىسى ئۈگنىش ئاساسى  بىلىم",
+    "videos": [
+      {
+        "title": "1-باب  تېنسورفىلوۋ ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=2o5mexfpivo",
+        "description": "ئاساسىي بىلىم كىرسش قىسمى"
+      }
+    ]
+  },
+  {
+    "id": "stat106",
+    "title": "كىۋانىت فىزىكىسى ئۆگىنىش",
+    "description": "كىۋانىت فىزىكىسى ئۈگنىش ئاساسى  بىلىم",
+    "videos": [
+      {
+        "title": "1-باب كىۋانىت فىزىكىسى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=n74LhOaoTy8",
+        "description": " كىۋانىت فىزىكىسى ئاساسى بىلىم"
+      },
+      {
+        "title": "2-باب كىۋانىت فىزىكىسى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=YmyDztQ6lWY",
+        "description": " كىۋانىت فىزىكىسى ئاساسى بىلىم"
+      },
+      {
+        "title": "3-باب كىۋانىت فىزىكىسى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=KjR3Ev5HzQI",
+        "description": " كىۋانىت فىزىكىسى ئاساسى بىلىم"
+      }
+    ]
+  },
+  
+  {
+    "id": "stat107",
+    "title": "كىۋانىت مىخانىكىسى ئۆگىنىش",
+    "description": "كىۋانىت مىخانىكىسى ئۈگنىش ئاساسى  بىلىم",
+    "videos": [
+      {
+        "title": "كىۋانىت مىخانىكىسى ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=r02l1mr-sA0",
+        "description": "ئاساسىي ئۇچۇرلار"
+      }
+    ]
+  },{
+    "id": "stat108",
+    "title": "كىۋانىت ماشىنا ئۆگىنىش",
+    "description": "كىۋانىت ماشىنا ئۈگنىش ئاساسى  بىلىم",
+    "videos": [
+      {
+        "title": "كىۋانىت ماشىنا ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=XDQofg5vjrY&t=15s",
+        "description": "ئاساسىي ئۇچۇرلار"
+      }
+    ]
+  },
+  {
+    "id": "stat109",
+    "title": "  گىت، گىتخاب",
+    "description": " گىت  ئۈگنىش ئاساسى  بىلىم",
+    "videos": [
+      {
+        "title": "   گىت، گىتخاب",
+        "url": "https://www.youtube.com/watch?v=lTH8Zrkl6oE",
+        "description": "ئاساسىي ئۇچۇرلار"
+      }
+      ,
+      {
+        "title": "  گىت، گىتخاب",
+        "url": "https://www.youtube.com/watch?v=lTH8Zrkl6oE",
+        "description": " git and github"
+      },
+      
+      {
+        "title": "  گىت، گىتخاب",
+        "url": "https://www.youtube.com/watch?v=OVgDACvDk8A",
+        "description": " git and github"
+      }
+    ]
+  }
+]

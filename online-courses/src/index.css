@@ -1,0 +1,718 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #e2e8f0;
+  min-height: 100vh;
+   font-size: 2.3rem;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.input {
+  @apply w-full mb-3 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.uyghur-slogan {
+   body {
+      font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      direction: rtl;
+      padding: 20px;
+       font-size: 2.3rem;
+    }
+}
+
+/* ئۇيغۇرچە مەزمۇن ئۈچۈن */
+.uyghur-text {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  font-size: 0.7rem;
+}
+
+/* كود بۆلۈمى */
+.code-block {
+  background: #1a1a1a;
+  border: 2px solid #374151;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.code-header {
+  background: #374151;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #4b5563;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.code-language {
+  color: #9ca3af;
+  font-size: 2.875rem;
+  font-weight: 600;
+}
+
+.code-content {
+  padding: 1.5rem;
+  overflow-x: auto;
+  background: #111827;
+}
+
+.code-content pre {
+  margin: 0;
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+/* سىنتاكس رەڭلىرى */
+.token.comment { color: #6b7280; font-style: italic; }
+.token.keyword { color: #f472b6; font-weight: bold; }
+.token.string { color: #34d399; }
+.token.number { color: #60a5fa; }
+.token.function { color: #fbbf24; }
+.token.operator { color: #93c5fd; }
+.token.punctuation { color: #cbd5e1; }
+
+/* ماتېماتىكا فورمۇلا */
+.math-formula {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 2px solid #475569;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 0.75rem;
+  color: #e2e8f0;
+}
+
+/* كاردا ئەنیماتسىيەسى */
+.post-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #334155;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.post-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+  border-color: #3b82f6;
+}
+
+/* مودال ئەنیماتسىيەسى */
+.modal-enter {
+  animation: modalEnter 0.3s ease-out;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* كۆز قوغدايدىغان رەڭلەر */
+.text-comfortable {
+  color: #e2e8f0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.bg-comfortable {
+  background: #1e293b;
+}
+
+.border-comfortable {
+  border-color: #374151;
+}
+
+/* ئىكون رەڭلىرى */
+.icon-blue { color: #60a5fa; }
+.icon-green { color: #34d399; }
+.icon-yellow { color: #fbbf24; }
+.icon-purple { color: #a78bfa; }
+.icon-red { color: #f87171; }
+
+/* كاتېگورىيە بەلگىلىرى */
+.category-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin: 0.25rem;
+}
+
+.category-physics {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.category-mathematics {
+  background: linear-gradient(135deg, #10b981, #047857);
+  color: white;
+}
+
+.category-programming {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
+}
+
+.category-philosophy {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+.category-quantum {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+}
+
+.category-technology {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.category-other {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  color: white;
+}
+
+/* يورۇقلىق ئەفېكتى */
+.glow-effect {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+.glow-effect-purple {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+}
+
+/* ئابزاس باش ھەرپى */
+.first-letter-emphasis {
+  font-size: 2.5rem;
+  line-height: 0.8;
+  font-weight: bold;
+  color: #3b82f6;
+  float: right;
+  margin-left: 0.75rem;
+  margin-top: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.english-first-letter {
+  float: left;
+  margin-right: 0.75rem;
+  margin-left: 0;
+}
+
+/* كوممېنت رەڭ پالىترىسى */
+.comment-bubble {
+  border-radius: 1.25rem;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-width: 2px;
+  backdrop-filter: blur(10px);
+}
+
+.comment-0 { background: linear-gradient(135deg, #1e40af20, #3b82f620); border-color: #3b82f6; }
+.comment-1 { background: linear-gradient(135deg, #04785720, #10b98120); border-color: #10b981; }
+.comment-2 { background: linear-gradient(135deg, #b4530920, #f59e0b20); border-color: #f59e0b; }
+.comment-3 { background: linear-gradient(135deg, #7e22ce20, #a855f720); border-color: #a855f7; }
+.comment-4 { background: linear-gradient(135deg, #be123c20, #f8717120); border-color: #f87171; }
+.comment-5 { background: linear-gradient(135deg, #0f766e20, #14b8a620); border-color: #14b8a6; }
+.comment-6 { background: linear-gradient(135deg, #78350f20, #fbbf2420); border-color: #fbbf24; }
+.comment-7 { background: linear-gradient(135deg, #5b21b620, #8b5cf620); border-color: #8b5cf6; }
+.comment-8 { background: linear-gradient(135deg, #83184320, #ec489920); border-color: #ec4899; }
+.comment-9 { background: linear-gradient(135deg, #164e6320, #06b6d420); border-color: #06b6d4; }
+
+/* خەت چوڭلۇقى تەڭشەش */
+.font-size-small { font-size: 0.575rem; }
+.font-size-normal { font-size: 0.7rem; }
+.font-size-large { font-size: 1.075rem; }
+.font-size-xlarge { font-size: 1.15rem; }
+
+/* مۇناسىۋەتلىك يازمىلار */
+.related-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ئىزدەش نەتىجىسى */
+.search-highlight {
+  background: linear-gradient(135deg, #fef3c7, #f59e0b);
+  color: #1f2937;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+}
+
+/* يۈكلەش ئەنیماتسىيەسى */
+.loading-spinner {
+  border: 3px solid #374151;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* تەڭشەش تۇمىلىرى */
+.tool-button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+}
+
+.tool-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tool-button:active {
+  transform: translateY(0);
+}
+
+/* مۇۋاپىقلىق خەۋەرلىرى */
+.success-message {
+  background: linear-gradient(135deg, #10b981, #047857);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  animation: slideIn 0.3s ease-out;
+}
+
+.error-message {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* تىزىملىك ستىلى */
+.styled-list {
+  list-style: none;
+  padding: 0;
+}
+
+.styled-list li {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+  transition: all 0.3s ease;
+}
+
+.styled-list li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(8px);
+}
+
+/* تەڭشەش پانېلى */
+.settings-panel {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 2px solid #374151;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.settings-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #374151;
+}
+
+.settings-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* مۇناسىۋەتلىك يازمىلار */
+.related-post-card {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.related-post-card:hover {
+  border-color: #3b82f6;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+}
+
+/* تىزىملىك كۆرۈنۈش */
+.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* تەرتىپ تۇمىلىرى */
+.sort-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #3b82f6;
+}
+
+.sort-button.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+/* PostsModal ئالاھىدە ستىللار */
+.posts-modal {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+.posts-modal textarea {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+.posts-modal input {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+.posts-modal select {
+ font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئۇيغۇرچە تەرجىمە */
+.uyghur-translation {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.english-translation {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+  direction: ltr;
+  text-align: left;
+}
+
+/* ماتېماتىكا ۋە كود بۆلۈمى */
+.math-block {
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+}
+
+.code-block {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* كاردا ستىلى */
+.post-card-content {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+.post-card-title {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+  font-weight: 700;
+}
+
+/* مودال ستىلى */
+.modal-overlay {
+  backdrop-filter: blur(10px);
+}
+
+.modal-content {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئىزدەش ۋە فيلترلەش */
+.search-filter {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* باشقۇرغۇچى پانېلى */
+.admin-panel {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* كوممېنتلار */
+.comment-section {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* تەڭشەش تۇمىلىرى */
+.action-buttons {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* خەت چوڭلۇقى تەڭشەش */
+.font-size-controls {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* كاتېگورىيە بەلگىلىرى */
+.category-tags {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* مەدىيا پرىۋىيۇسى */
+.media-preview {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئابزاس قوشۇش قورالى */
+.paragraph-tool {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ماتېماتىكا بەلگىلىرى */
+.math-symbols {
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+}
+
+/* مۇۋەپپەقىيەت خەۋەرلىرى */
+.notification {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* يۈكلەش ئەنیماتسىيەسى */
+.loading-indicator {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* تىزىملىك كۆرۈنۈش */
+.view-toggle {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* تەرتىپ تۇمىلىرى */
+.sort-options {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* مۇناسىۋەتلىك يازمىلار */
+.related-content {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* تەپسىلىي كۆرۈنۈش */
+.detail-view {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئىنتېرئاكتىپ ئېلېمېنتلار */
+.interactive-elements {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* فورم ئېلېمېنتلىرى */
+.form-elements {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* بوتونلار */
+.buttons {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئىنپۇتلار */
+.inputs {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* تاللاش مېنىلىرى */
+.select-menus {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* تېكىست رايونلىرى */
+.text-areas {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ماكارونلار */
+.headers {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+  font-weight: 700;
+}
+
+/* ئىچكى مەزمۇن */
+.content-body {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئىستاتىستىكا */
+.statistics {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* تارىخ خاتىرىلىرى */
+.history-records {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* كاتېگورىيە ئىستاتىستىكىسى */
+.category-stats {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئۆچۈرۈش تارىخى */
+.deletion-history {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* باشقۇرۇش ھەرىكەتلىرى */
+.admin-actions {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئىزدەش نەتىجىسى */
+.search-results {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* فيلترلەش نەتىجىسى */
+.filter-results {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* بوش نەتىجە */
+.empty-state {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* يازما يېزىش كۇنۇپكىسى */
+.create-post-btn {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* كاردا ئىشلەر */
+.card-actions {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* تەپسىلىي كۆرۈش */
+.view-details {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئىدىت قىلىش */
+.edit-actions {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئۆچۈرۈش */
+.delete-actions {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ياقتۇرۇش */
+.like-actions {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* كوممېنت قىلىش */
+.comment-actions {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ئابزاس قوشۇش */
+.add-paragraph {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ماتېماتىكا بەلگىسى قوشۇش */
+.add-math {
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+}
+
+/* كود قوشۇش */
+.add-code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+/* مەدىيا قوشۇش */
+.add-media {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* كاتېگورىيە تاللاش */
+.select-category {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* ساقلاش ھەرىكىتى */
+.save-actions {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* بىكار قىلىش */
+.cancel-actions {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}
+
+/* يېپىش ھەرىكىتى */
+.close-actions {
+  font-family: "UKIJ Tuz", "UKIJ Nasq", "Microsoft Uighur", sans-serif;
+}

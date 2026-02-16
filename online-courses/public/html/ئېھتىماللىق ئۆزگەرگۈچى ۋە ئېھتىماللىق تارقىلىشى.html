@@ -1,0 +1,893 @@
+
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ئېھتىماللىق ئۆزگەرگۈچى ۋە ئېھتىماللىق تارقىلىشى — مۇكەممەل دەرسلىك</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #2980b9;
+            --bg-light: #f9f9f9;
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 50px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        
+        .tab-btn:hover {
+            background: var(--light);
+        }
+        
+        .tab-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .bilingual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+        
+        .uyghur, .english {
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--bg-light);
+            font-size: 1.05rem;
+        }
+        
+        .uyghur {
+            border-right: 4px solid var(--accent);
+            direction: rtl;
+            text-align: right;
+            font-family: "Microsoft Uighur", "Segoe UI", sans-serif;
+        }
+        
+        .english {
+            border-left: 4px solid var(--info);
+            direction: ltr;
+            text-align: left;
+            font-family: "Georgia", "Times New Roman", serif;
+        }
+        
+        .formula {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            overflow-x: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+        }
+        
+        .example {
+            background: linear-gradient(to right, #fffde7, #e8f4f8);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px dashed var(--warning);
+        }
+        
+        .term {
+            font-weight: bold;
+            color: var(--success);
+            padding: 3px 5px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 5px;
+            margin: 0 2px;
+        }
+        
+        .concept-box {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--success);
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .example-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 3px solid var(--warning);
+        }
+        
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .diagram img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .problem {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent);
+        }
+        
+        .solution {
+            background: #e8f8f5;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--success);
+            display: none;
+        }
+        
+        .show-solution {
+            background: var(--info);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .show-solution:hover {
+            background: var(--primary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        @media (max-width: 768px) {
+            .bilingual {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* ئۇيغۇرچە خەتكە ماس كېلىدىغان فونت تەڭشىكى */
+        @font-face {
+            font-family: 'UKIJ Tuz Tom';
+            src: local('UKIJ Tuz Tom'), local('UKIJ Tuz'), url('https://cdn.jsdelivr.net/gh/UyghurKitabxana/fonts/UKIJTuzTom.ttf') format('truetype');
+        }
+
+        .uyghur {
+            font-family: 'UKIJ Tuz Tom', 'Microsoft Uighur', 'Segoe UI', sans-serif;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1rem;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .step {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--secondary);
+        }
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .step-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ئېھتىماللىق ئۆزگەرگۈچى ۋە ئېھتىماللىق تارقىلىشى</h1>
+        <p class="subtitle">Probability Variable and Probability Distribution</p>
+    </header>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab(0)"><i class="fas fa-home"></i> كىرىش</button>
+            <button class="tab-btn" onclick="showTab(1)"><i class="fas fa-dice"></i> ئېھتىماللىق ئۆزگەرگۈچى</button>
+            <button class="tab-btn" onclick="showTab(2)"><i class="fas fa-chart-bar"></i> دائىملىق تارقىلىش</button>
+            <button class="tab-btn" onclick="showTab(3)"><i class="fas fa-wave-square"></i> ئۈزلۈكسىز تارقىلىش</button>
+            <button class="tab-btn" onclick="showTab(4)"><i class="fas fa-flask"></i> ئېھتىماللىق زىچلىقى</button>
+            <button class="tab-btn" onclick="showTab(5)"><i class="fas fa-book"></i> تارقىلىش تۈرلىرى</button>
+        </div>
+
+        <!-- كىرىش قىسمى -->
+        <div class="tab-content active">
+            <h2 class="section-title"><i class="fas fa-home"></i> كىرىش</h2>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p><span class="term">ئېھتىماللىق ئۆزگەرگۈچى</span>: بىر ئۆزگەرگۈچىنىڭ قىممىتىنىڭ ئېلىنىش ئېھتىماللىقى بار بولغان ئۆزگەرگۈچى. مەسىلەن، زار ئاتقاندا چىققان نۇمۇر {1, 2, 3, 4, 5, 6} نىڭ ھەر قايسىسى بولۇپ، ھەر بىر نۇمۇرنىڭ چىقىش ئېھتىماللىقى بولغاچقا، زار ئاتقاندا چىققان نۇمۇر ئېھتىماللىق ئۆزگەرگۈچى دەپ ئېيتىلىدۇ.</p>
+                    <p><span class="term">ئېھتىماللىق تارقىلىشى</span>: ئېھتىماللىق ئۆزگەرگۈچىنىڭ ئېلىدىغان قىممىتى ۋە بۇ قىممەتنىڭ ئېلىنىش ئېھتىماللىقىنىڭ مۇناسىۋىتى. مەسىلەن، زار ئاتقاندا، 1 دىن 6 غىچە بولغان ئېھتىماللىق ئۆزگەرگۈچى قىممىتىگە ھەر قايسىسى ئېھتىماللىقى مۇناسىۋەتلىك بولغانلىقى ئۈچۈن، بۇ ئېھتىماللىق تارقىلىشى دەپ ئېيتىلىدۇ.</p>
+                </div>
+                <div class="english">
+                    <p><span class="term">Random variable</span>: A variable whose value has a probability of occurrence. For example, when rolling a die, the outcome is one of {1, 2, 3, 4, 5, 6}, and since each number has a probability of occurring, the outcome of rolling a die is called a random variable.</p>
+                    <p><span class="term">Probability distribution</span>: The relationship between the values a random variable can take and the probability of taking those values. For example, when rolling a die, since each value from 1 to 6 is associated with a probability of , this is called a probability distribution.</p>
+                </div>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h4>مىسال 1: زار ئاتقان</h4>
+                    <p>زار ئاتقاندا چىققان نۇمۇر ئېھتىماللىق ئۆزگەرگۈچى. ھەر بىر نۇمۇرنىڭ چىقىش ئېھتىماللىقى بولىدۇ.</p>
+                </div>
+                <div class="example-card">
+                    <h4>مىسال 2: تەڭگە ئاتقان</h4>
+                    <p>تەڭگە ئاتقاندا، قارا يۈزگە «1»، ئارقى يۈزگە «0» دەپ قارايسۇن. قارا يۈز ۋە ئارقى يۈزنىڭ چىقىش ئېھتىماللىقى بولغاچقا، بۇمۇ ئېھتىماللىق ئۆزگەرگۈچى.</p>
+                </div>
+                <div class="example-card">
+                    <h4>مىسال 3: ئوقۇغۇچىلارنىڭ ئىمتىھان نەتىجىسى</h4>
+                    <p>بىر سىنىپتىكى ئوقۇغۇچىلارنىڭ ئىمتىھان نەتىجىسى ئېھتىماللىق ئۆزگەرگۈچى بولۇپ، ھەر بىر نەتىجىنىڭ ئېلىنىش ئېھتىماللىقى بار.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ئېھتىماللىق ئۆزگەرگۈچى قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-dice"></i> ئېھتىماللىق ئۆزگەرگۈچى (Random Variable)</h2>
+            
+            <div class="concept-box">
+                <h3>ئېھتىماللىق ئۆزگەرگۈچى نېمە؟</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p><span class="term">ئېھتىماللىق ئۆزگەرگۈچى</span> دېگەندە، بىر ئۆزگەرگۈچىنىڭ قىممىتىنىڭ ئېلىنىش ئېھتىماللىقى بار بولغان ئۆزگەرگۈچى. مەسىلەن، زار ئاتقاندا چىققان نۇمۇر {1, 2, 3, 4, 5, 6} نىڭ ھەر قايسىسى بولۇپ، ھەر بىر نۇمۇرنىڭ چىقىش ئېھتىماللىقى بولغاچقا، زار ئاتقاندا چىققان نۇمۇر ئېھتىماللىق ئۆزگەرگۈچى دەپ ئېيتىلىدۇ.</p>
+                        <p>بۇ ھالەتتە، ئېھتىماللىق ئۆزگەرگۈچىنىڭ قىممىتى (يەنى زارنىڭ چىققان نۇمۇرى) X دەپ بەلگىلەنسە، تۆۋەندىكىدەك كۆرسىتىشكە بولىدۇ. ئوڭ تەرەپتىكى قاۋۇش ئىچىدىكى X نىڭ ئېلىدىغان قىممەت چېگرىسى بولۇپ، بۇ مىسالدا «ئېھتىماللىق ئۆزگەرگۈچى 1 دىن 6 غىچە بولغان تام سان قىممىتىنى ئېلىدۇ» دېگەن مەنىنى بىلدۈرىدۇ.</p>
+                        <div class="formula">
+                            X \in \{1, 2, 3, 4, 5, 6\}
+                        </div>
+                        <p>مەسىلەن «زار ئاتقاندا 3 نۇمۇر چىقىش پەزىلەتىنىڭ ئېھتىماللىقى » دېگەندە، تۆۋەندىكى ئىككى خىل ئۇسۇلنىڭ ھەر قايسىسى بىلەن يېزىشكە بولىدۇ:</p>
+                        <div class="formula">
+                            P(X=3) = \frac{1}{6} \quad \text{or} \quad P(3) = \frac{1}{6}
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>A <span class="term">random variable</span> is a variable whose value has a probability of occurrence. For example, when rolling a die, the outcome is one of {1, 2, 3, 4, 5, 6}, and since each number has a probability of occurring, the outcome of rolling a die is called a random variable.</p>
+                        <p>In this case, if we denote the value of the random variable (i.e., the outcome of the die roll) as X, it can be expressed as follows. The set in the parentheses on the right represents the range of values X can take, meaning in this example that "the random variable takes integer values from 1 to 6."</p>
+                        <div class="formula">
+                            X \in \{1, 2, 3, 4, 5, 6\}
+                        </div>
+                        <p>For example, "the probability of the event that a 3 appears when rolling a die is " can be written in either of the following two ways:</p>
+                        <div class="formula">
+                            P(X=3) = \frac{1}{6} \quad \text{or} \quad P(3) = \frac{1}{6}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-box">
+                <h3>سانسىز پەزىلەتلەرنىڭ ئېھتىماللىق ئۆزگەرگۈچىسى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>زار ئاتقاندا، چىققان نۇمۇرنىڭ قىممىتىنى ئېھتىماللىق ئۆزگەرگۈچىنىڭ قىممىتى قىلىشقا بولىدۇ. لېكىن، پەزىلەتنىڭ رەقەملىرى بولمىغان ھالەتتىمۇ، ھەر بىر پەزىلەتكە سان قىممىتى بەلگىلەش ئارقىلىق ئېھتىماللىق ئۆزگەرگۈچىنىڭ قىممىتى قىلىشقا بولىدۇ. مەسىلەن، بىر خىل تەڭگە ئاتقاندا، قارا يۈز چىققان پەزىلەتكە «1»، ئارقى يۈز چىققان پەزىلەتكە «0» دەپ مۇناسىۋەت بەلگىلەنسە، X ئېھتىماللىق ئۆزگەرگۈچى بولىدۇ.</p>
+                        <p>قارا يۈز چىققان پەزىلەت ۋە ئارقى يۈز چىققان پەزىلەتنىڭ ھەر قايسىسىنىڭ ئېھتىماللىقى بولغاچقا، ئېھتىماللىق ئۆزگەرگۈچىنى ئىشلىتىپ تۆۋەندىكىدەك يېزىشكە بولىدۇ:</p>
+                        <div class="formula">
+                            P(X=1) = \frac{1}{2}, \quad P(X=0) = \frac{1}{2}
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>In the case of rolling a die, the outcome's value can be used as the value of the random variable. However, even when events do not have numerical values, assigning numerical values to each event can make them values of a random variable. For example, when tossing a coin, if we assign "1" to the event of heads and "0" to the event of tails, X becomes a random variable.</p>
+                        <p>Since both the event of heads and the event of tails have a probability of , we can write using the random variable as follows:</p>
+                        <div class="formula">
+                            P(X=1) = \frac{1}{2}, \quad P(X=0) = \frac{1}{2}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-box">
+                <h3>ئېھتىماللىق تارقىلىشى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>ئېھتىماللىق ئۆزگەرگۈچىنىڭ ئېلىدىغان قىممىتى ۋە بۇ قىممەتنىڭ ئېلىنىش ئېھتىماللىقىنىڭ مۇناسىۋىتى «<span class="term">ئېھتىماللىق تارقىلىشى</span>» دەپ ئاتىلىدۇ. مەسىلەن، زار ئاتقان مىسالىدا، 1 دىن 6 غىچە بولغان ئېھتىماللىق ئۆزگەرگۈچى قىممىتىگە ھەر قايسىسى ئېھتىماللىقى مۇناسىۋەتلىك بولغانلىقى ئۈچۈن، ئېھتىماللىق تارقىلىشى دەپ ئېيتىلىدۇ.</p>
+                        <table>
+                            <tr>
+                                <th>زارنىڭ چىققان نۇمۇرى</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                            </tr>
+                            <tr>
+                                <td>ئېھتىماللىق</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                            </tr>
+                        </table>
+                        <p>تەڭگە ئاتقان مىسالىدا، 0 ۋە 1 بولغان ئېھتىماللىق ئۆزگەرگۈچى قىممىتىگە ھەر قايسىسى ئېھتىماللىقى مۇناسىۋەتلىك بولغانلىقى ئۈچۈن، ئوخشىمۇق ئېھتىماللىق تارقىلىشى دەپ ئېيتىلىدۇ.</p>
+                        <table>
+                            <tr>
+                                <th>تەڭگەنىڭ ئارقى-قارا يۈزى</th>
+                                <th>قارا (=1)</th>
+                                <th>ئارقى (=0)</th>
+                            </tr>
+                            <tr>
+                                <td>ئېھتىماللىق</td>
+                                <td>\(\frac{1}{2}\)</td>
+                                <td>\(\frac{1}{2}\)</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="english">
+                        <p>The relationship between the values a random variable can take and the probability of taking those values is called a "<span class="term">probability distribution</span>". For example, in the die rolling example, since each value from 1 to 6 is associated with a probability of , this is called a probability distribution.</p>
+                        <table>
+                            <tr>
+                                <th>Die outcome</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                            </tr>
+                            <tr>
+                                <td>Probability</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                                <td>\(\frac{1}{6}\)</td>
+                            </tr>
+                        </table>
+                        <p>In the coin tossing example, since the values 0 and 1 are each associated with a probability of , this is similarly called a probability distribution.</p>
+                        <table>
+                            <tr>
+                                <th>Coin side</th>
+                                <th>Heads (=1)</th>
+                                <th>Tails (=0)</th>
+                            </tr>
+                            <tr>
+                                <td>Probability</td>
+                                <td>\(\frac{1}{2}\)</td>
+                                <td>\(\frac{1}{2}\)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- دائىملىق تارقىلىش قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-chart-bar"></i> دائىملىق ئېھتىماللىق تارقىلىشى (Discrete Probability Distribution)</h2>
+            
+            <div class="concept-box">
+                <h3>دائىملىق ئېھتىماللىق ئۆزگەرگۈچىسى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p><span class="term">دائىملىق ئۆزگەرگۈچى</span> بولسا، ئۈزۈلۈشلۈك قىممەتلەرنى ئېلىدىغان ئۆزگەرگۈچى بولۇپ، قوشنى سانلار ئارىسىدا قىممەت يوق. دائىملىق ئۆزگەرگۈچىگە، زارنىڭ چىققان نۇمۇرى، ئادەم سانى قاتارلىقلار كىرىدۇ. مەسىلەن، زارنىڭ 3 نۇمۇرىدىن كېيىنكىسى 4 بولۇپ، ئۇنىڭ ئارىسىدا 3.2 ياكى 3.5 قاتارلىق سانلار يوق.</p>
+                        <p>تۆۋەندىكى جەدۋەلدىكىدەك، دائىملىق ئۆزگەرگۈچىنىڭ ئېلىدىغان قىممىتى (\(x_i\)) ھەر قايسىسىغا مۇناسىۋەتلىك ئېھتىماللىق بار بولسا، بۇ ئۆزگەرگۈچى «<span class="term">دائىملىق ئېھتىماللىق ئۆزگەرگۈچىسى</span>» دەپ ئاتىلىدۇ.</p>
+                        <table>
+                            <tr>
+                                <th>X</th>
+                                <th>\(x_1\)</th>
+                                <th>\(x_2\)</th>
+                                <th>...</th>
+                                <th>\(x_n\)</th>
+                            </tr>
+                            <tr>
+                                <td>P(X)</td>
+                                <td>\(p_1\)</td>
+                                <td>\(p_2\)</td>
+                                <td>...</td>
+                                <td>\(p_n\)</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="english">
+                        <p>A <span class="term">discrete variable</span> is a variable that takes discrete values, with no values existing between adjacent numbers. Discrete variables include die outcomes, number of people, etc. For example, after 3 on a die comes 4, with no values like 3.2 or 3.5 in between.</p>
+                        <p>If, as shown in the table below, each value (\(x_i\)) that a discrete variable can take has a corresponding probability, this variable is called a "<span class="term">discrete random variable</span>".</p>
+                        <table>
+                            <tr>
+                                <th>X</th>
+                                <th>\(x_1\)</th>
+                                <th>\(x_2\)</th>
+                                <th>...</th>
+                                <th>\(x_n\)</th>
+                            </tr>
+                            <tr>
+                                <td>P(X)</td>
+                                <td>\(p_1\)</td>
+                                <td>\(p_2\)</td>
+                                <td>...</td>
+                                <td>\(p_n\)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-box">
+                <h3>دائىملىق ئېھتىماللىق تارقىلىشى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>ئېھتىماللىق ئۆزگەرگۈچىسى دائىملىق بولغان ھالەتتىكى ئېھتىماللىق تارقىلىشى «<span class="term">دائىملىق ئېھتىماللىق تارقىلىشى</span>» ياكى «<span class="term">دائىملىق تارقىلىش</span>» دەپ ئاتىلىدۇ. تۆۋەندىكى رەسىم دائىملىق ئېھتىماللىق تارقىلىشىنىڭ كۆرۈنۈشىنى كۆرسىتىدۇ. گورىزونتال ئوق ئېھتىماللىق ئۆزگەرگۈچىنى، ۋېرتىكال ئوق X نىڭ ئېھتىماللىقى \(P(X)\) نى كۆرسىتىدۇ.</p>
+                        <div class="diagram">
+                            <svg width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10%" y="250" width="80%" height="30" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="20%" y="200" width="10%" height="80" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="30%" y="150" width="10%" height="130" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="40%" y="100" width="10%" height="180" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="50%" y="150" width="10%" height="130" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="60%" y="200" width="10%" height="80" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="70%" y="250" width="10%" height="30" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <line x1="10%" y1="280" x2="90%" y2="280" stroke="#2c3e50" stroke-width="2"/>
+                                <text x="25%" y="300" text-anchor="middle" fill="#2c3e50">1</text>
+                                <text x="35%" y="300" text-anchor="middle" fill="#2c3e50">2</text>
+                                <text x="45%" y="300" text-anchor="middle" fill="#2c3e50">3</text>
+                                <text x="55%" y="300" text-anchor="middle" fill="#2c3e50">4</text>
+                                <text x="65%" y="300" text-anchor="middle" fill="#2c3e50">5</text>
+                                <text x="75%" y="300" text-anchor="middle" fill="#2c3e50">6</text>
+                                <text x="50%" y="320" text-anchor="middle" fill="#2c3e50">ئېھتىماللىق ئۆزگەرگۈچى</text>
+                                <text x="5%" y="150" text-anchor="start" fill="#2c3e50" transform="rotate(-90, 5%, 150%)">ئېھتىماللىق</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>When a random variable is discrete, the probability distribution is called a "<span class="term">discrete probability distribution</span>" or "<span class="term">discrete distribution</span>". The figure below shows the appearance of a discrete probability distribution. The horizontal axis represents the random variable, and the vertical axis represents the probability \(P(X)\) of X.</p>
+                        <div class="diagram">
+                            <svg width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10%" y="250" width="80%" height="30" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="20%" y="200" width="10%" height="80" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="30%" y="150" width="10%" height="130" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="40%" y="100" width="10%" height="180" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="50%" y="150" width="10%" height="130" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="60%" y="200" width="10%" height="80" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <rect x="70%" y="250" width="10%" height="30" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+                                <line x1="10%" y1="280" x2="90%" y2="280" stroke="#2c3e50" stroke-width="2"/>
+                                <text x="25%" y="300" text-anchor="middle" fill="#2c3e50">1</text>
+                                <text x="35%" y="300" text-anchor="middle" fill="#2c3e50">2</text>
+                                <text x="45%" y="300" text-anchor="middle" fill="#2c3e50">3</text>
+                                <text x="55%" y="300" text-anchor="middle" fill="#2c3e50">4</text>
+                                <text x="65%" y="300" text-anchor="middle" fill="#2c3e50">5</text>
+                                <text x="75%" y="300" text-anchor="middle" fill="#2c3e50">6</text>
+                                <text x="50%" y="320" text-anchor="middle" fill="#2c3e50">Random Variable</text>
+                                <text x="5%" y="150" text-anchor="start" fill="#2c3e50" transform="rotate(-90, 5%, 150%)">Probability</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-box">
+                <h3>ئېھتىماللىق مەسىلىسى فۇنكسىيىسى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>دائىملىق ئېھتىماللىق ئۆزگەرگۈچىسى بىر قىممەتنى ئېلىش ئېھتىماللىقىنى فۇنكسىيە قىلغاندا، بۇ «<span class="term">ئېھتىماللىق مەسىلىسى فۇنكسىيىسى</span>» دەپ ئاتىلىدۇ. \(f(x)\) نى ئىشلىتىپ، \(X=x\) (بىر قىممەت) بولۇش ئېھتىماللىقى تۆۋەندىكىدەك كۆرسىتىشكە بولىدۇ:</p>
+                        <div class="formula">
+                            P(X=x) = f(x)
+                        </div>
+                        <p>ئېھتىماللىقنىڭ بىر كېلىشىمى بولۇپ، «بارلىق پەزىلەتلەرنىڭ كۆرۈلۈش ئېھتىماللىقى 1 بولىدۇ» دېگەنلىك 9-1-بەتتە ئۆگىنىلگەن. بۇ دېگەندە، دائىملىق ئېھتىماللىق تارقىلىشىدا تۆۋەندىكىدەك كۆرسىتىشكە بولىدۇ:</p>
+                        <div class="formula">
+                            \sum_{i=1}^{n} P(X=x_i) = \sum_{i=1}^{n} f(x_i) = 1
+                        </div>
+                        <p>زارنى بىر قېتىم ئاتقان ھالەتنى مىسال قىلىپ ئېلىپ باقايلى. ئېھتىماللىق ئۆزگەرگۈچىسى X نى زارنىڭ چىققان نۇمۇرى دەپ قارايمىز، ھەر بىر \(x_i\) ئۈچۈن \(P(X=x_i)=\frac{1}{6}\) بولغاچقا، بۇ ئېھتىماللىقلارنىڭ جەمئىيىتى تۆۋەندىكىدەك «1» بولۇپ ھېسابلىنىدۇ:</p>
+                        <div class="formula">
+                            \sum_{i=1}^{6} P(X=x_i) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = 1
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>When the probability that a discrete random variable takes a certain value is expressed as a function, it is called a "<span class="term">probability mass function</span>". Using \(f(x)\), the probability that \(X=x\) (a certain value) can be expressed as follows:</p>
+                        <div class="formula">
+                            P(X=x) = f(x)
+                        </div>
+                        <p>One of the agreements of probability is that "the probability of all events occurring is 1," as learned in Chapter 9-1. This means that in a discrete probability distribution, it can be expressed as follows:</p>
+                        <div class="formula">
+                            \sum_{i=1}^{n} P(X=x_i) = \sum_{i=1}^{n} f(x_i) = 1
+                        </div>
+                        <p>Taking the example of rolling a die once. Let the random variable X be the outcome of the die roll, since for each \(x_i\), \(P(X=x_i)=\frac{1}{6}\), the sum of these probabilities is calculated as "1" as follows:</p>
+                        <div class="formula">
+                            \sum_{i=1}^{6} P(X=x_i) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = 1
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ئۈزلۈكسىز تارقىلىش قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-wave-square"></i> ئۈزلۈكسىز ئېھتىماللىق تارقىلىشى (Continuous Probability Distribution)</h2>
+            
+            <div class="concept-box">
+                <h3>ئۈزلۈكسىز ئېھتىماللىق ئۆزگەرگۈچىسى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p><span class="term">ئۈزلۈكسىز ئۆزگەرگۈچى</span> بولسا، سالماق، تېمپېراتۇرا قاتارلىقلارغا ئوخشاش، ئۈزلۈكسىز قىممەتلەرنى ئېلىدىغان ئۆزگەرگۈچى. مەسىلەن، سالماقنىڭ 50kg بىلەن 51kg ئارىسىدا 50.5kg، 50.1kg، 50.000001kg قاتارلىق چەكسىز كۆپ قىممەت بار.</p>
+                        <p>ئۈزلۈكسىز ئۆزگەرگۈچىنىڭ ئېلىدىغان قىممىتىگە مۇناسىۋەتلىك ئېھتىماللىق بار بولسا، بۇ ئۆزگەرگۈچى «<span class="term">ئۈزلۈكسىز ئېھتىماللىق ئۆزگەرگۈچىسى</span>» دەپ ئاتىلىدۇ. ئېھتىماللىق ئۆزگەرگۈچىسى ئۈزلۈكسىز بولغان ھالەتتىكى ئېھتىماللىق تارقىلىشى «<span class="term">ئۈزلۈكسىز ئېھتىماللىق تارقىلىشى</span>» ياكى «<span class="term">ئۈزلۈكسىز تارقىلىش</span>» دەپ ئاتىلىدۇ.</p>
+                    </div>
+                    <div class="english">
+                        <p>A <span class="term">continuous variable</span> is a variable that takes continuous values, such as weight or temperature. For example, between 50kg and 51kg of weight, there are infinitely many values such as 50.5kg, 50.1kg, 50.000001kg, etc.</p>
+                        <p>If a continuous variable has a probability corresponding to the values it can take, this variable is called a "<span class="term">continuous random variable</span>". When a random variable is continuous, the probability distribution is called a "<span class="term">continuous probability distribution</span>" or "<span class="term">continuous distribution</span>".</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example">
+                <h3>مىسال: ئۈزلۈكسىز ئېھتىماللىق ئۆزگەرگۈچىسى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>ئۈزلۈكسىز ئېھتىماللىق ئۆزگەرگۈچىسى X نىڭ ئېلىدىغان قىممىتى 1 دىن 6 غىچە بولغان ھەقىقىي سان بولسۇن. X نىڭ ھەر قايسى ساننى ئېلىش ئېھتىماللىقى باراۋەر بولسا، \(P(X=3)\) نىڭ ئېھتىماللىقى قانچە؟</p>
+                        <p>11-2-بەتتىكى دائىملىق ئېھتىماللىق ئۆزگەرگۈچىسى بىلەن ئوخشىمۇق ئويلاپ، \(P(X=3)=\frac{1}{6}\) دەپ قاراش خاتا. ئۈزلۈكسىز تارقىلىشتا، ئېھتىماللىق ئۆزگەرگۈچىسىنىڭ بىر نۇقتىدىكى قىممىتىنى بەلگىلەشكە ئېھتىماللىقى «0» بولىدۇ، بۇ توغرا جاۋاب.</p>
+                        <p>ئۈزلۈكسىز ئېھتىماللىق ئۆزگەرگۈچىسى ھالىتىدە، 1 دىن 6 غىچە X نىڭ ئېلىدىغان قىممىتى چەكسىز. مەسىلەن، 1 بىلەن 1.1 ئارىسىدا 1.01، 1.00001 قاتارلىق قىممەتلەر چەكسىز بار. X نىڭ ھەر قايسى قىممىتىنى ئېلىش ئېھتىماللىقى باراۋەر بولسا، بۇ ئېھتىماللىقلارنىڭ جەمئىيىتى 1 بولۇپ، ياكى چەكسىز بار بولغان قىممەتلەرنىڭ ئىچىدىكى بىر نۇقتا بولغانلىقى ئۈچۈن، \(P(X=3)\) تۆۋەندىكىدەك «0» بولىدۇ:</p>
+                        <div class="formula">
+                            P(X=3) = 0
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>Let the continuous random variable X take real values from 1 to 6. If the probability of X taking any numerical value is equal, what is the probability of \(P(X=3)\)?</p>
+                        <p>It is incorrect to think similarly to the discrete random variable in Chapter 11-2 and consider \(P(X=3)=\frac{1}{6}\). In a continuous distribution, when the value of the random variable is fixed at a certain point, the probability of taking that value is "0", which is the correct answer.</p>
+                        <p>In the case of a continuous random variable, there are infinitely many values that X can take between 1 and 6. For example, between 1 and 1.1, there are infinitely many values such as 1.01, 1.00001, etc. If the probability of X taking each value is equal, the sum of these probabilities is 1, or since it is one point among infinitely many values, \(P(X=3)\) is "0" as follows:</p>
+                        <div class="formula">
+                            P(X=3) = 0
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ئېھتىماللىق زىچلىقى قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-flask"></i> ئېھتىماللىق زىچلىقى ۋە ئېھتىماللىق زىچلىقى فۇنكسىيىسى</h2>
+            
+            <div class="concept-box">
+                <h3>ئېھتىماللىق زىچلىقى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>تۆۋەندىكى رەسىم ئۈزلۈكسىز ئېھتىماللىق تارقىلىشىنىڭ كۆرۈنۈشىنى كۆرسىتىدۇ. گورىزونتال ئوق ئېھتىماللىق ئۆزگەرگۈچىنى كۆرسىتىدۇ. 11-3-بەتتە ئۆگىنىلگەندەك، ئۈزلۈكسىز ئېھتىماللىق ئۆزگەرگۈچىسى ھالىتىدە ئېھتىماللىق ئۆزگەرگۈچىسىنىڭ بىر نۇقتىدىكى قىممىتىنىڭ ئېھتىماللىقى 0 بولغاچقا، ۋېرتىكال ئوق ئېھتىماللىق ئەمەس، «<span class="term">ئېھتىماللىق زىچلىقى</span>» دەپ ئاتىلىدىغان نەرسىنى ئىشلىتىمىز. ئېھتىماللىق زىچلىقى بەلگىلىك رايون ئىچىدىكى X نىڭ قىممىتىنىڭ «نىسبىي چىقىش ئاسانلىقى» نى كۆرسىتىدۇ.</p>
+                        <div class="diagram">
+                            <svg width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 10% 250 Q 50% 50 90% 250" stroke="#3498db" stroke-width="3" fill="none"/>
+                                <line x1="10%" y1="250" x2="90%" y2="250" stroke="#2c3e50" stroke-width="2"/>
+                                <text x="50%" y="270" text-anchor="middle" fill="#2c3e50">ئېھتىماللىق ئۆزگەرگۈچى</text>
+                                <text x="5%" y="150" text-anchor="start" fill="#2c3e50" transform="rotate(-90, 5%, 150%)">ئېھتىماللىق زىچلىقى</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>The figure below shows the appearance of a continuous probability distribution. The horizontal axis represents the random variable. As learned in Chapter 11-3, in the case of a continuous random variable, since the probability of the random variable taking a value at a certain point is 0, the vertical axis does not represent probability, but uses something called "<span class="term">probability density</span>". Probability density represents the "relative likelihood" of the value of X within a defined range.</p>
+                        <div class="diagram">
+                            <svg width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 10% 250 Q 50% 50 90% 250" stroke="#3498db" stroke-width="3" fill="none"/>
+                                <line x1="10%" y1="250" x2="90%" y2="250" stroke="#2c3e50" stroke-width="2"/>
+                                <text x="50%" y="270" text-anchor="middle" fill="#2c3e50">Random Variable</text>
+                                <text x="5%" y="150" text-anchor="start" fill="#2c3e50" transform="rotate(-90, 5%, 150%)">Probability Density</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-box">
+                <h3>ئېھتىماللىق زىچلىقى فۇنكسىيىسى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>ئۈزلۈكسىز ئېھتىماللىق ئۆزگەرگۈچىسى X نىڭ بىر قىممەت x نى ئېلىش ئېھتىماللىق زىچلىقىنى فۇنكسىيە قىلغاندا، بۇ «<span class="term">ئېھتىماللىق زىچلىقى فۇنكسىيىسى</span>» دەپ ئاتىلىدۇ. ئېھتىماللىقتىن ئوخشىمايدىكى، \(f(x)>1\) بولۇشى مۇمكىن.</p>
+                    </div>
+                    <div class="english">
+                        <p>When the probability density of a continuous random variable X taking a certain value x is expressed as a function, it is called a "<span class="term">probability density function</span>". Unlike probability, \(f(x)>1\) is possible.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example">
+                <h3>مىسال 1: ئېھتىماللىق زىچلىقى فۇنكسىيىسى</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>ئېھتىماللىق ئۆزگەرگۈچىسى X نىڭ ئېلىدىغان قىممىتى 0 دىن 3 غىچە بولغان ھەقىقىي سان بولسا، تۆۋەندىكى ئېھتىماللىق زىچلىقى فۇنكسىيىسىنى ئانىقلايمىز. بۇ فۇنكسىيەدىن نېمە دېگەن نەتىجىگە ئېرىشكىلى بولىدۇ؟</p>
+                        <div class="formula">
+                            f(x) = \frac{x}{3} \quad (0 \leq x \leq 3)
+                        </div>
+                        <p>\(f(1)\) ۋە \(f(3)\) نىڭ قىممىتىنى تاپىمىز:</p>
+                        <div class="formula">
+                            f(1) = \frac{1}{3}, \quad f(3) = \frac{3}{3} = 1
+                                                    </div>
+                        <p>مەسىلەن، $f(1)=\frac{1}{3}$، $f(3)=1$ بولىدۇ. بۇ يەردە $f(x)$ نىڭ قىممىتى «ئېھتىماللىق» ئەمەس، بەلكى «ئېھتىماللىق زىچلىقى»دۇر.</p>
+                        <p>ئېھتىماللىق زىچلىقى فۇنكسىيىسىدىن بىر رايوندىكى ئېھتىماللىقنى تاپقاندا، ئىنتېگرال ئىشلىتىمىز:</p>
+                        <div class="formula">
+                            P(a \leq X \leq b) = \int_a^b f(x)\,dx
+                        </div>
+                        <p>مەسىلەن، $P(1 \leq X \leq 2)$ نى ھېسابلايمىز:</p>
+                        <div class="formula">
+                            P(1 \leq X \leq 2) = \int_1^2 \frac{x}{3}\,dx = \left[\frac{x^2}{6}\right]_1^2 = \frac{4}{6} - \frac{1}{6} = \frac{1}{2}
+                        </div>
+                        <p>دېمەك، $X$ نىڭ 1 بىلەن 2 ئارىلىقىدا بولۇش ئېھتىماللىقى 0.5 (يەنى 50%) بولىدۇ.</p>
+                    </div>
+                    <div class="english">
+                        <p>For example, $f(1)=\frac{1}{3}$ and $f(3)=1$. Here, the value of $f(x)$ is not a "probability" but a "probability density".</p>
+                        <p>To find the probability over an interval from the probability density function, we use the integral:</p>
+                        <div class="formula">
+                            P(a \leq X \leq b) = \int_a^b f(x)\,dx
+                        </div>
+                        <p>For example, let's calculate $P(1 \leq X \leq 2)$:</p>
+                        <div class="formula">
+                            P(1 \leq X \leq 2) = \int_1^2 \frac{x}{3}\,dx = \left[\frac{x^2}{6}\right]_1^2 = \frac{4}{6} - \frac{1}{6} = \frac{1}{2}
+                        </div>
+                        <p>Thus, the probability that $X$ lies between 1 and 2 is 0.5 (i.e., 50%).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- تارقىلىش تۈرلىرى قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-book"></i> ئادەتتىكى ئېھتىماللىق تارقىلىش تۈرلىرى</h2>
+            
+            <div class="concept-box">
+                <h3>1. بىنوم تارقىلىش (Binomial Distribution)</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>بىنوم تارقىلىش — بىر پەزىلەتنىڭ «ئۈلگۈرۈش/ئۈلگۈرەمسىزلىك» شەكلىدە بولغاندا، ئۇنى $n$ قېتىم تەكرارلىغاندا ئېرىشىلىدىغان تارقىلىش. فورمۇلا:</p>
+                        <div class="formula">
+                            P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>The binomial distribution arises when an experiment has two outcomes (success/failure) and is repeated $n$ times. The formula is:</p>
+                        <div class="formula">
+                            P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-box">
+                <h3>2. پوئسون تارقىلىش (Poisson Distribution)</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>پوئسون تارقىلىش — بەلگىلەنگەن ۋاقىت ياكى رايوندا ئوتتۇرىچە $\lambda$ قېتىم كۆرۈلىدىغان پەزىلەتنىڭ ئېھتىماللىق تارقىلىشى:</p>
+                        <div class="formula">
+                            P(X=k) = \frac{e^{-\lambda} \lambda^k}{k!}
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>The Poisson distribution describes the probability of observing $k$ events in a fixed interval, when the average number of occurrences is $\lambda$:</p>
+                        <div class="formula">
+                            P(X=k) = \frac{e^{-\lambda} \lambda^k}{k!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-box">
+                <h3>3. نورمال تارقىلىش (Normal Distribution)</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>نورمال تارقىلىش — مەركىزىي چەكلەنمە تېئورىيىسى بىلەن بەك مۇھىم. ئۇنىڭ فورمۇلاسى:</p>
+                        <div class="formula">
+                            f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>The normal distribution is fundamental due to the central limit theorem. Its formula is:</p>
+                        <div class="formula">
+                            f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>📘 Probability & Statistics Tutorial — KaLBiL Edu (Uyghur & English)</p>
+    </footer>
+
+    <script>
+        function showTab(index) {
+            const contents = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+            contents.forEach((c, i) => {
+                c.classList.remove('active');
+                buttons[i].classList.remove('active');
+            });
+            contents[index].classList.add('active');
+            buttons[index].classList.add('active');
+        }
+    </script>
+</body>
+</html>

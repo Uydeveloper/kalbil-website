@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ug" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بايس نەزەرىيىسى — بەلگىلىك ماتېماتىكا قورالى (Uyghur & English)</title>
+    <!-- MathJax Configuration -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent-uyghur: #d35400;
+            --accent-english: #27ae60;
+            --bg-formula: #f8f9fa;
+            --bg-example: #fff8e1;
+            --border-example: #ffd54f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin: 35px 0 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .formula {
+            background-color: var(--bg-formula);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            border-left: 5px solid var(--secondary);
+            overflow-x: auto;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .example {
+            background-color: var(--bg-example);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 35px 0;
+            border: 1px solid var(--border-example);
+            box-shadow: 0 3px 8px rgba(255, 213, 79, 0.15);
+        }
+
+        .bilingual {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+            align-items: flex-start;
+        }
+
+        .uyghur-column, .english-column {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .uyghur-column {
+            background-color: #fdf6f0;
+            border: 1px solid #fae0d4;
+            font-weight: 500;
+            color: var(--accent-uyghur);
+            font-family: "Microsoft Uighur", "Segoe UI", sans-serif;
+            font-size: 1.05rem;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .english-column {
+            background-color: #f0f7f4;
+            border: 1px solid #d0ebe1;
+            color: var(--accent-english);
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.05rem;
+            text-align: left;
+        }
+
+        .term {
+            font-weight: bold;
+            color: #e67e22;
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin: 0 2px;
+        }
+
+        .english .term {
+            color: #27ae60;
+            background: #e8f5e9;
+        }
+
+        ul {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 25px auto;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .summary-box h3 {
+            color: white;
+            border: none;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .bilingual {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* ئۇيغۇرچە خەتكە ماس كېلىدىغان فونت تەڭشىكى */
+        @font-face {
+            font-family: 'UKIJ Tuz';
+            src: local('UKIJ Tuz'), local('UKIJ Tuz Tom'), url('https://cdn.jsdelivr.net/gh/UyghurKitabxana/fonts/UKIJTuz.ttf') format('truetype');
+        }
+
+        .uyghur-column {
+            font-family: 'UKIJ Tuz', 'Microsoft Uighur', 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>بايس نەزەرىيىسى (Bayes’ Theorem)</h1>
+
+        <!-- قىسم 1: نەزەرىيە تەسۋىرلىشى -->
+        <div class="section">
+            <h2>1. نەزەرىيە تەسۋىرلىشى / Theoretical Foundation</h2>
+            <div class="bilingual">
+                <div class="uyghur-column">
+                    <p>بىر قانچە ساقچۇقنىڭ ئىچىدە قىزىل ۋە ئاق تۆپ بار. بۇ ساقچۇقلارنىڭ بىرىدىن بىر نەچچە تۆپ چىقىرىۋېلىندى دەيسۇن. چىقىرىۋېلىنغان تۆپنىڭ رەڭگى (نەتىجە) ئاساسىدا، قايسى ساقچۇقتىن چىقىرىۋېلىنغانلىقىنى (سەۋەب) باھالاش كېرەك. بۇ يەردە قوللىنىدىغان نەزەرىيە «بايس نەزەرىيىسى» دەپ ئاتىلىدۇ.</p>
+                    <p>پەزىلەت A شەرتى ئاستىدا، k خىل ئۆزئارا ئايرىم پەزىلەت: <span class="formula">\( B_1, B_2, \dots, B_k \)</span> كۆرۈلىدۇ. بۇ ۋاقىتتا، پەزىلەت A شەرتى ئاستىدا، <span class="formula">\( B_i \)</span> پەزىلەت كۆرۈلىش ئېھتىماللىقى تۆۋەندىكى فورمىلا بىلەن ھېسابلىنىدۇ:</p>
+                    <div class="formula">
+                        \[ P(B_i|A) = \frac{P(B_i) \cdot P(A|B_i)}{P(A)} \quad \textcircled{\small 1} \]
+                    </div>
+                    <p>بۇ يەردە كۆپەيتىش قانۇنىنى ① غا ئالماشتۇرساق، بۇ بايس نەزەرىيىسىنىڭ ئاساسىي فورمىلىسى بولىدۇ.</p>
+                    <p><span class="formula">\( P(A) \)</span> نى <span class="formula">\( P(A) = \sum_{k=1}^{n} P(B_k) \cdot P(A|B_k) \)</span> دەپ يېزىشقا بولىدۇ. بۇ فورمىلا ② غا ئالماشتۇرۇlsa:</p>
+                    <div class="formula">
+                        \[ P(B_i|A) = \frac{P(B_i) \cdot P(A|B_i)}{\sum_{k=1}^{n} P(B_k) \cdot P(A|B_k)} \quad \textcircled{\small 2} \]
+                    </div>
+                </div>
+                <div class="english-column">
+                    <p>Suppose several bags contain red and white balls. One bag is selected at random, and a ball is drawn. Based on the ball’s color (effect), we wish to infer which bag it came from (cause). This is where <strong>Bayes’ Theorem</strong> is applied.</p>
+                    <p>Given that event A occurs, suppose k mutually exclusive events \( B_1, B_2, \dots, B_k \) may occur. The conditional probability of \( B_i \) given A is:</p>
+                    <div class="formula">
+                        \[ P(B_i|A) = \frac{P(B_i) \cdot P(A|B_i)}{P(A)} \quad \textcircled{\small 1} \]
+                    </div>
+                    <p>Substituting the Law of Total Probability for \( P(A) \), we obtain the standard form of Bayes’ Theorem:</p>
+                    <div class="formula">
+                        \[ P(B_i|A) = \frac{P(B_i) \cdot P(A|B_i)}{\sum_{k=1}^{n} P(B_k) \cdot P(A|B_k)} \quad \textcircled{\small 2} \]
+                    </div>
+                    <p>This formula updates our belief about the cause \( B_i \) after observing effect A.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- مىسال 1: ساقچۇق مىسالى -->
+        <div class="section">
+            <h2>2. مىسال: ساقچۇقلار / Example: Bags of Balls</h2>
+            <div class="example">
+                <div class="bilingual">
+                    <div class="uyghur-column">
+                        <p><span class="term">مىسال:</span> ئۈچ ساقچۇق بار، تۆۋەندىكىدەك قىزىل ۋە ئاق تۆپلەر بار:</p>
+                        <ul>
+                            <li>ساقچۇق 1: 4 قىزىل، 1 ئاق</li>
+                            <li>ساقچۇق 2: 3 قىزىل، 3 ئاق</li>
+                            <li>ساقچۇق 3: 2 قىزىل، 4 ئاق</li>
+                        </ul>
+                        <p>قەيسى بىر ساقچۇقتىن بىر تۆپ چىقىرىۋېلىندى، ئاق تۆپ چىقتى. بۇ تۆپنىڭ ساقچۇق 2 دىن چىقىرىۋېلىنغانلىقىنىڭ ئېھتىماللىقى قانچە؟</p>
+                        <p>ئاق تۆپ چىقىش پەزىلەتىنى A دەپ، ساقچۇق 1 دىن تۆپ چىقىش پەزىلەتىنى \( B_1 \)، ساقچۇق 2 دىن تۆپ چىقىش پەزىلەتىنى \( B_2 \)، ساقچۇق 3 دىن تۆپ چىقىش پەزىلەتىنى \( B_3 \) دەپ بەلگىلەيسۇن. ساقچۇق ئۈچ خىل، ھەر بىرىنىڭ تاللىنىش ئېھتىماللىقى باراۋەر دەپ قارىلىدۇ:</p>
+                        <div class="formula">
+                            \[ P(B_1) = P(B_2) = P(B_3) = \frac{1}{3} \]
+                        </div>
+                        <p>ئاق تۆپ چىقىش ئېھتىماللىقى:</p>
+                        <div class="formula">
+                            \[ P(A|B_1) = \frac{1}{5}, \quad P(A|B_2) = \frac{3}{6} = \frac{1}{2}, \quad P(A|B_3) = \frac{4}{6} = \frac{2}{3} \]
+                        </div>
+                        <p>بايس نەزەرىيىسى فورمىلىسىغا قويۇپ ھېسابلايساق:</p>
+                        <div class="formula">
+                            \[ P(B_2|A) = \frac{\frac{1}{3} \cdot \frac{1}{2}}{\frac{1}{3} \cdot \frac{1}{5} + \frac{1}{3} \cdot \frac{1}{2} + \frac{1}{3} \cdot \frac{2}{3}} = \frac{\frac{1}{6}}{\frac{1}{15} + \frac{1}{6} + \frac{2}{9}} = \frac{15}{41} \approx 0.366 \]
+                        </div>
+                        <p>دېمەك، چىقىرىۋېلىنغان تۆپ ئاق بولغاندا، بۇنىڭ ساقچۇق 2 دىن چىققانلىقىنىڭ ئېھتىماللىقى <strong>0.366</strong>.</p>
+                    </div>
+                    <div class="english-column">
+                        <p><span class="term">Example:</span> Three bags contain red and white balls as follows:</p>
+                        <ul>
+                            <li>Bag 1: 4 red, 1 white</li>
+                            <li>Bag 2: 3 red, 3 white</li>
+                            <li>Bag 3: 2 red, 4 white</li>
+                        </ul>
+                        <p>A ball is drawn from one randomly selected bag, and it is white. What is the probability it came from Bag 2?</p>
+                        <p>Let A = drawing a white ball.<br>
+                           Let \( B_1, B_2, B_3 \) = selecting Bag 1, 2, or 3 respectively.<br>
+                           Assuming equal prior probability:</p>
+                        <div class="formula">
+                            \[ P(B_1) = P(B_2) = P(B_3) = \frac{1}{3} \]
+                        </div>
+                        <p>Likelihoods (conditional probabilities):</p>
+                        <div class="formula">
+                            \[ P(A|B_1) = \frac{1}{5}, \quad P(A|B_2) = \frac{1}{2}, \quad P(A|B_3) = \frac{2}{3} \]
+                        </div>
+                        <p>Applying Bayes’ Theorem:</p>
+                        <div class="formula">
+                            \[ P(B_2|A) = \frac{\frac{1}{3} \cdot \frac{1}{2}}{\frac{1}{3} \cdot \frac{1}{5} + \frac{1}{3} \cdot \frac{1}{2} + \frac{1}{3} \cdot \frac{2}{3}} = \frac{15}{41} \approx 0.366 \]
+                        </div>
+                        <p>Thus, given a white ball was drawn, the probability it came from Bag 2 is <strong>0.366</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- قىسم 3: ئالدىنقى ۋە كېيىنكى ئېھتىماللىق -->
+        <div class="section">
+            <h2>3. ئالدىنقى ۋە كېيىنكى ئېھتىماللىق / Prior and Posterior Probability</h2>
+            <div class="bilingual">
+                <div class="uyghur-column">
+                    <p><span class="term">ئالدىنقى ئېھتىماللىق (Prior Probability):</span> پەزىلەت A كۆرۈلمىگەن، يەنى تۆپ چىقىرىلمىغان ۋاقىتتا، ساقچۇق 2 دىن تۆپ چىقىش پەزىلەتىنىڭ ئېھتىماللىقى <span class="formula">\( P(B_2) \)</span> دەپ ئېلىنىدۇ. بۇ «ئالدىنقى ئېھتىماللىق» دەپ ئاتىلىدۇ — يەنى «پەزىلەت A كۆرۈلمىش بۇرۇن».</p>
+                    <p><span class="term">كېيىنكى ئېھتىماللىق (Posterior Probability):</span> تۆپ چىقىرىۋېتىپ، ئاق تۆپ چىققاندا، ساقچۇق 2 دىن تۆپ چىققانلىقىنىڭ ئېھتىماللىقى <span class="formula">\( P(B_2|A) \)</span> بولۇپ قالىدۇ. بۇ «پەزىلەت A كۆرۈلگەندىن كېيىن» نى بايان قىلىدۇ.</p>
+                    <p><span class="term">مىسال:</span> بىر USB خوتىرىسى A، B، C شىركىتى تەرىپىدىن ئىشلەنگەن. بازار پايشىلىرى مۇۋاپىق 60%، 30%، 10%. يەنە، سېتىۋېلىنغان USB خوتىرىلىرىنىڭ ئىناۋەتسىزلىك سەۋەبلىك قايتۇرۇلۇش نىسبىتى مۇۋاپىق 1%، 3%، 10%. سېتىۋېلىنغان USB خوتىرىسىنىڭ C شىركىتىنىكى بولۇش ئېھتىماللىقى ۋە ئىناۋەتسىز بولۇپ قايتۇرۇلغاندا بۇنىڭ C شىركىتىنىكى بولۇش ئېھتىماللىقى قانچە؟</p>
+                    <div class="formula">
+                        \[ P(B_3) = 0.10 \quad \text{(ئالدىنقى ئېھتىماللىق)} \]
+                    </div>
+                    <div class="formula">
+                        \[ P(A|B_1) = 0.01, \quad P(A|B_2) = 0.03, \quad P(A|B_3) = 0.10 \]
+                    </div>
+                    <p>بايس نەزەرىيىسى بويىچە:</p>
+                    <div class="formula">
+                        \[ P(B_3|A) = \frac{0.10 \times 0.10}{0.60 \times 0.01 + 0.30 \times 0.03 + 0.10 \times 0.10} = \frac{0.01}{0.025} = 0.40 \]
+                    </div>
+                    <p>بۇ نەتىجىدىن، قايتۇرۇلغان USB خوتىرىلىرىنىڭ <strong>40%</strong> C شىركىتىنىكى ئىكەنلىكىنى بىلىمىز. قايتۇرۇلغان USB خوتىرىلىرىغا قارىغاندا، C شىركىتىنىڭ مەھسۇلات سۈپىتىنىڭ يامانلىقى ئېنىق كۆرۈنىدۇ.</p>
+                </div>
+                <div class="english-column">
+                    <p><span class="term">Prior Probability:</span> The initial belief before observing evidence A. For example, \( P(B_2) = \frac{1}{3} \) — the probability of selecting Bag 2 before drawing any ball.</p>
+                    <p><span class="term">Posterior Probability:</span> The updated belief after observing evidence. For example, \( P(B_2|A) \approx 0.366 \) — probability it was Bag 2, given we drew a white ball.</p>
+                    <p><span class="term">Example:</span> A USB drive is manufactured by companies A (60% market share), B (30%), or C (10%). Defect return rates: A=1%, B=3%, C=10%. What is the probability a returned defective drive is from Company C?</p>
+                    <div class="formula">
+                        \[ P(B_3) = 0.10 \quad \text{(Prior)} \]
+                    </div>
+                    <div class="formula">
+                        \[ P(A|B_1) = 0.01, \quad P(A|B_2) = 0.03, \quad P(A|B_3) = 0.10 \]
+                    </div>
+                    <p>By Bayes’ Theorem:</p>
+                    <div class="formula">
+                        \[ P(B_3|A) = \frac{0.10 \times 0.10}{0.60 \times 0.01 + 0.30 \times 0.03 + 0.10 \times 0.10} = 0.40 \]
+                    </div>
+                    <p>Thus, <strong>40%</strong> of defective returns are from Company C — highlighting its disproportionately poor quality relative to market share.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- قىسم 4: تىببىي تەكشۈرۈش مىسالى -->
+        <div class="section">
+            <h2>4. تىببىي تەكشۈرۈش مىسالى / Medical Testing Example</h2>
+            <div class="example">
+                <div class="bilingual">
+                    <div class="uyghur-column">
+                        <p><span class="term">مىسال:</span> يەپونىيە خەلقىنىڭ 0.01% نىڭ بىر خىل كېسەلگە چاللىنىشى مۇقىم. بۇ كېسەلنىڭ تەكشۈرۈش ئۇسۇلىدا، چوقۇم كېسەلگە چاللىنىپ قالغانلارنىڭ 95% نىڭ مۇسبەت دېگەن ھۆكۈمگە ئېرىشىش ئېھتىماللىقى بار، كېسەلگە چاللىنمىغانلارنىڭ 80% نىڭ سالبىي دېگەن ھۆكۈمگە ئېرىشىش ئېھتىماللىقى بار دېيىلگەن. بىر كىشى بۇ كېسەلنى تەكشۈرتۈپ، مۇسبەت دېگەن ھۆكۈمگە ئېرىشكەن بولسا، بۇ كىشى چوقۇم بۇ كېسەلگە چاللىنىپ قالغانلىقىنىڭ ئېھتىماللىقى قانچە؟</p>
+                        <p>تەكشۈرۈش نەتىجىسى مۇسبەت بولۇش پەزىلەتىنى A دەپ، سالبىي بولۇش پەزىلەتىنى \( A^c \)، چوقۇم كېسەلگە چاللىنىش پەزىلەتىنى \( B_1 \)، چاللىنماسلىق پەزىلەتىنى \( B_2 \) دەپ بەلگىلەيسۇن. بايس نەزەرىيىسى بويىچە، ئىزدەۋاتقان ئېھتىماللىق <span class="formula">\( P(B_1|A) \)</span> بولىدۇ.</p>
+                        <div class="formula">
+                            \[ P(B_1|A) = \frac{P(B_1) \cdot P(A|B_1)}{P(B_1) \cdot P(A|B_1) + P(B_2) \cdot P(A|B_2)} \quad \textcircled{\small 1} \]
+                        </div>
+                        <ul>
+                            <li>كېسەلگە چاللىنىش ئېھتىماللىقى: <span class="formula">\( P(B_1) = 0.0001 \)</span></li>
+                            <li>كېسەلگە چاللىنماسلىق ئېھتىماللىقى: <span class="formula">\( P(B_2) = 0.9999 \)</span></li>
+                            <li>چاللىنىپ قالغانلارنىڭ تەكشۈرۈشتە مۇسبەت بولۇش ئېھتىماللىقى: <span class="formula">\( P(A|B_1) = 0.95 \)</span></li>
+                            <li>چاللىنمىغانلارنىڭ تەكشۈرۈشتە سالبىي بولۇش ئېھتىماللىقى: <span class="formula">\( P(A^c|B_2) = 0.80 \)</span></li>
+                            <li>چاللىنمىغانلارنىڭ تەكشۈرۈشتە مۇسبەت بولۇش ئېھتىماللىقى: <span class="formula">\( P(A|B_2) = 0.20 \)</span></li>
+                        </ul>
+                        <div class="formula">
+                            \[ P(B_1|A) = \frac{0.0001 \times 0.95}{0.0001 \times 0.95 + 0.9999 \times 0.20} \approx 0.000475 \]
+                        </div>
+                        <p>دېمەك، تەكشۈرۈشتە مۇسبەت دېگەن ھۆكۈمگە ئېرىشكەندە، چوقۇم بۇ كېسەلگە چاللىنىپ قالغانلىقىنىڭ ئېھتىماللىقى <strong>0.0475%</strong> بولۇپ قالىدۇ. شۇڭا بۇ تەكشۈرۈش ئۇسۇلى ئۈچۈن، مۇسبەت دېگەن ھۆكۈمگە ئېرىشكەن بولسىمۇ، ناچارلىققا چۆكمەسلىك كېرەك.</p>
+                        <p><span class="term">تىببىي ئاتالغۇلار:</span></p>
+                        <ul>
+                            <li><span class="term">ھېسسىيات (Sensitivity):</span> كېسەللىك كىشىلەرنىڭ مۇسبەت تەكشۈرۈلۈش نىسبىتى.</li>
+                            <li><span class="term">ئالاھىدىلىك (Specificity):</span> ساغلام كىشىلەرنىڭ سالبىي تەكشۈرۈلۈش نىسبىتى.</li>
+                            <li><span class="term">يالغان مۇسبەت (False Positive):</span> ساغلام بولۇپمۇ مۇسبەت نەتىجە.</li>
+                            <li><span class="term">يالغان سالبىي (False Negative):</span> كېسەللىك بولۇپمۇ سالبىي نەتىجە.</li>
+                        </ul>
+                    </div>
+                    <div class="english-column">
+                        <p><span class="term">Example:</span> 0.01% of the population has a disease. A test is 95% sensitive (if you have it, 95% chance of positive) and 80% specific (if you don’t have it, 80% chance of negative). If you test positive, what’s the probability you actually have the disease?</p>
+                        <p>Let A = test positive, \( B_1 \) = has disease, \( B_2 \) = no disease.</p>
+                        <div class="formula">
+                            \[ P(B_1|A) = \frac{P(B_1) \cdot P(A|B_1)}{P(B_1) \cdot P(A|B_1) + P(B_2) \cdot P(A|B_2)} \]
+                        </div>
+                        <ul>
+                            <li>Disease prevalence: \( P(B_1) = 0.0001 \)</li>
+                            <li>No disease: \( P(B_2) = 0.9999 \)</li>
+                            <li>Sensitivity: \( P(A|B_1) = 0.95 \)</li>
+                            <li>Specificity: \( P(A^c|B_2) = 0.80 \) → \( P(A|B_2) = 0.20 \)</li>
+                        </ul>
+                        <div class="formula">
+                            \[ P(B_1|A) = \frac{0.0001 \times 0.95}{0.0001 \times 0.95 + 0.9999 \times 0.20} \approx 0.000475 \]
+                        </div>
+                        <p>Even with a positive test, the probability of actually having the disease is only <strong>0.0475%</strong>. This counterintuitive result arises due to the disease’s rarity.</p>
+                        <p><span class="term">Medical Terminology (Oxford Dictionary Compliant):</span></p>
+                        <ul>
+                            <li><span class="term">Sensitivity:</span> True positive rate — proportion of diseased correctly identified.</li>
+                            <li><span class="term">Specificity:</span> True negative rate — proportion of healthy correctly identified.</li>
+                            <li><span class="term">False Positive:</span> Healthy person incorrectly tests positive.</li>
+                            <li><span class="term">False Negative:</span> Diseased person incorrectly tests negative.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- قىسم 5: خۇلاسە -->
+        <div class="section">
+            <div class="summary-box">
+                <h3>5. خۇلاسە / Summary</h3>
+                <div class="bilingual">
+                    <div class="uyghur-column">
+                        <p>بايس نەزەرىيىسى — نەتىجىدىن سەۋەبنى باھالاشنىڭ مۇھىم قورىلى. ئالدىنقى بىلىش (ئالدىنقى ئېھتىماللىق) ۋە يېڭى كۆزىتىش (پەزىلەت A) ئارقىلىق كېيىنكى باھا (كېيىنكى ئېھتىماللىق) نى قۇرۇشقا ياردەم بېرىدۇ. تىببىيەت، ماشىنا ئۆگىنىش، قارار قىلىش سىستېمىلىرى قاتارلىق كۆپ ساھەلەردە كەڭ قوللىنىلىدۇ.</p>
+                    </div>
+                    <div class="english-column">
+                        <p>Bayes’ Theorem is a cornerstone of probabilistic reasoning — updating beliefs with evidence. It transforms prior probabilities into posterior probabilities using observed data. Essential in medicine, machine learning, AI, finance, and scientific inference.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

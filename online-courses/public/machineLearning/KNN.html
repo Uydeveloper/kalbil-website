@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ماشىنا ئۈگىنىش 7-باب – K-يېقىن قوۋشۇق (KNN)</title>
+
+  <!-- Amiri for Uyghur, Inter for English -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text-ug: #2d2d2d;
+      --text-en: #444;
+      --primary: #5d4037; /* brown for "neighbor" warmth */
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      padding: 20px;
+      font-family: 'Amiri', serif;
+      color: var(--text-ug);
+      line-height: 1.7;
+      direction: rtl;
+    }
+
+    .bilingual-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-right: 4px solid var(--primary);
+    }
+
+    .section-title-ug {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .section-title-en {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 15px;
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 20px;
+      background: #f3e5f5;
+      border-radius: 12px;
+      border-right: 4px solid var(--primary);
+    }
+
+    .intro h1 {
+      color: var(--primary);
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+    }
+
+    .intro-en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: center;
+      color: var(--text-en);
+      margin-top: 10px;
+    }
+
+    ul, ol {
+      padding-right: 25px;
+      margin: 12px 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+      color: var(--text-en);
+      margin-top: 12px;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 3px solid #ccc;
+    }
+
+    .code-container {
+      margin: 15px 0;
+    }
+
+    .CodeMirror {
+      direction: ltr !important;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .code-label {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .highlight {
+      background-color: #e1bee7;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f3e5f5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro">
+    <h1>ماشىنا ئۈگىنىش 7-باب – K-يېقىن قوۋشۇق (KNN)</h1>
+    <p>
+      <strong>K-يېقىن قوۋشۇق</strong> (K-Nearest Neighbors, KNN) — ماشىنا ئۈگىنىشنىڭ ئەڭ سادە، لېكىن قۇۋۋەتلىك ئالگورىتملىرىنىڭ بىرىدۇر.
+      بۇ ئالگورىتم <strong>يېڭى نۇمۇنە قايسى سىنىپقا تەۋە بولۇشىنى</strong>،
+      ئۇنىڭ <strong>يېقىن قوۋشۇقلۇرىنىڭ سىنىپى بويىچە</strong> باھالايدۇ.
+    </p>
+    <p>
+      <span class="highlight">"قاراڭ، سەنگە ئەڭ يېقىن K دانە دوستىڭ نېمە دەيدۇ؟ شۇنى قىلىش كېرەك!"</span>
+    </p>
+    <div class="intro-en">
+      <strong>K-Nearest Neighbors (KNN)</strong> is one of the simplest yet powerful machine learning algorithms.
+      It predicts the class of a new data point based on the <strong>classes of its K nearest neighbors</strong> in feature space.
+      <br><br>
+      <em>"Tell me your closest K friends, and I’ll tell you who you are!"</em>
+    </div>
+  </div>
+
+  <!-- ============ 1. KNN نېمە؟ / What is KNN? ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">1. KNN نېمە؟</div>
+    <div class="section-title-en">1. What is KNN?</div>
+    <p>
+      KNN — <strong>ئۈگىنىش سىز</strong> (lazy learning) ئالگورىتمى. بۇنىڭ مەنىسى:
+      تەربىيەلەش جەريانىدا ھېچقانداق مودېل قۇرمايدۇ، بەلكى بارلىق مەلۇماتنى ساقلايدۇ.
+      نەتىجە چىقىرىش ۋاقتىدا، يېڭى نۇمۇنە بىلەن بارلىق مەلۇماتنى <strong>مەسافە</strong> (Distance) بويىچە سېلىشتۇرىدۇ.
+    </p>
+    <p>
+      ئەڭ كۆپ ئىشلىتىلىدىغان مەسافە ئۆلچىمى — <strong>Euclidean مەسافىسى</strong>.
+    </p>
+    <p class="en">
+      KNN is a <strong>lazy learning</strong> algorithm: it does not build a model during training. Instead, it memorizes the entire dataset.
+      At prediction time, it computes the <strong>distance</strong> between the new sample and all training samples.
+    </p>
+    <p class="en">
+      The most common distance metric is the <strong>Euclidean distance</strong>.
+    </p>
+  </div>
+
+  <!-- ============ 2. قانداق ئىشلەيدۇ؟ / How it works ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">2. قانداق ئىشلەيدۇ؟</div>
+    <div class="section-title-en">2. How Does It Work?</div>
+    <ol>
+      <li>يېڭى نۇمۇنە ئۈچۈن بارلىق تەربىيەلەنگەن نۇمۇنە بىلەن <strong>مەسافىنى</strong> ھېسابلاش.</li>
+      <li>ئەڭ كىچىك مەسافىلىك <strong>K دانە قوۋشۇقنى</strong> تاللاش.</li>
+      <li>كلاسسىفىكاتسىيە بولسا — <strong>K قوۋشۇقنىڭ ئىچىدىكى ئەڭ كۆپ سىنىپنى</strong> (majority vote) تاللاش.</li>
+      <li>رېگرېسسىيە بولسا — <strong>K قوۋشۇقنىڭ ئوتتۇرا قىممىتىنى</strong> ھېسابلاش.</li>
+    </ol>
+    <ol class="en">
+      <li>Compute the <strong>distance</strong> between the new sample and every training sample.</li>
+      <li>Select the <strong>K nearest neighbors</strong> (smallest distances).</li>
+      <li>For classification: assign the <strong>most frequent class</strong> among the K neighbors.</li>
+      <li>For regression: return the <strong>average value</strong> of the K neighbors.</li>
+    </ol>
+  </div>
+
+  <!-- ============ 3. K نى قانداق تاللاش كېرەك؟ ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">3. K نى قانداق تاللاش كېرەك؟</div>
+    <div class="section-title-en">3. How to Choose K?</div>
+    <ul>
+      <li>K بولسا <strong>تاق سان</strong> بولۇشى كېرەك (كلاسسىفىكاتسىيەدا تەڭ بولۇشنىڭ ئالدىنى ئېلىش ئۈچۈن).</li>
+      <li>K بەك كىچىك بولسا — <strong>ئاشۇرۇپ ئۈگىنىش</strong> (Overfitting) خەۋىپى.</li>
+      <li>K بەك چوڭ بولسا — <strong>ئۈگىنىش يېتەرلىك بولمىسلىق</strong> (Underfitting) خەۋىپى.</li>
+      <li>ئادەتتە K = 3, 5, 7, 9 قاتارلىقلار تاللىنىدۇ.</li>
+      <li>ئەڭ ياخشى K نى <strong>cross-validation</strong> بىلەن باھالاش مۇمكىن.</li>
+    </ul>
+    <ul class="en">
+      <li>K should be an <strong>odd number</strong> to avoid ties in classification.</li>
+      <li>Too small K → <strong>overfitting</strong> (sensitive to noise).</li>
+      <li>Too large K → <strong>underfitting</strong> (too general).</li>
+      <li>Common choices: <strong>K = 3, 5, 7, 9</strong>.</li>
+      <li>Best K can be found using <strong>cross-validation</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 4. نېمە ئۈچۈن ئىشلىتىلىدۇ؟ ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">4. نېمە ئۈچۈن ئىشلىتىلىدۇ؟</div>
+    <div class="section-title-en">4. When to Use KNN?</div>
+    <ul>
+      <li>مەلۇمات <strong>سادە، غىير مۇرەككەپ بولغان ھالەتلەردە</strong>.</li>
+      <li>تەربىيەلەش ۋاقتى <strong>قىسقۇچ</strong> بولغاندا.</li>
+      <li>ئالگورىتمنىڭ <strong>مەنتىقىسىنى تۈسۈش كېرەك بولغان ھالەتلەردە</strong>.</li>
+      <li>ئاز سانلىق سىنىپ (2–5) بولغان كلاسسىفىكاتسىيە مەسىلىلىرى.</li>
+    </ul>
+    <ul class="en">
+      <li>When the dataset is <strong>small and simple</strong>.</li>
+      <li>When <strong>quick prototyping</strong> is needed.</li>
+      <li>When model <strong>interpretability</strong> is important.</li>
+      <li>Classification problems with <strong>few classes</strong> (2–5).</li>
+    </ul>
+  </div>
+
+  <!-- ============ 5. ئالاھىدىلىكى ۋە كەمچىلىكى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">5. ئالاھىدىلىكى ۋە كەمچىلىكى</div>
+    <div class="section-title-en">5. Advantages and Disadvantages</div>
+
+    <h3>ئالاھىدىلىكى:</h3>
+    <ul>
+      <li>ئالگورىتم بەك <strong>سانلىق بىلەن سادە</strong>.</li>
+      <li>تەربىيەلەش جەريانىدا <strong>مودېل قۇرمايدۇ</strong>، شۇڭا <strong>تەربىيەلەش تېز</strong>.</li>
+      <li>يېڭى سىنىپ قوشۇلغاندا، قايتا تەربىيەلەش كېرەك ئەمەس.</li>
+      <li>چوڭ مەلۇماتتىكى تەسىرگۈچ ئۆزگەرگۈچلەرنى بايان قىلىش مۇمكىن.</li>
+    </ul>
+
+    <h3 class="en">Advantages:</h3>
+    <ul class="en">
+      <li>Extremely <strong>simple and intuitive</strong>.</li>
+      <li><strong>Fast training</strong> (just stores data).</li>
+      <li>Easy to add new classes without retraining.</li>
+      <li>No assumptions about data distribution.</li>
+    </ul>
+
+    <h3>كەمچىلىكى:</h3>
+    <ul>
+      <li>بۇرۇن-كېيىن <strong>ئۆزگەرگۈچلەر</strong> (Feature Scaling) قىلىش كېرەك.</li>
+      <li>چوڭ مەلۇماتدا <strong>باھالاش ۋاقتى بەك ئۇزۇن</strong> (ھەر قېتىم بارلىق مەلۇمات بىلەن مەسافە ھېسابلىنىدۇ).</li>
+      <li>كامىتىل مەلۇمات (missing values) بىلەن ئىشلىيالمىسۇ.</li>
+      <li>K نى تاللاش قىيىن.</li>
+    </ul>
+
+    <h3 class="en">Disadvantages:</h3>
+    <ul class="en">
+      <li>Requires <strong>feature scaling</strong> (e.g., StandardScaler).</li>
+      <li><strong>Slow prediction</strong> on large datasets (computes distance to all points).</li>
+      <li>Does not handle <strong>missing values</strong> well.</li>
+      <li>Performance highly depends on choice of <strong>K and distance metric</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 6. مىسال كود ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">6. مىسال كود (Scikit-learn بىلەن)</div>
+    <div class="section-title-en">6. Code Examples (with Scikit-learn)</div>
+
+    <div class="code-container">
+      <div class="code-label">مېسال 1: KNN – كلاسسىفىكاتسىيە</div>
+      <div class="code-label en" style="direction: ltr; text-align: left;">Example 1: KNN – Classification</div>
+      <textarea id="c1" style="display:none;">
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report
+
+# 1. مەلۇمات يۈكلەش
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# 2. بولۇقىغا بۆلۈش
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# 3. ئۆزگەرگۈچلەرنى نورماللاشتۇرۇش (KNN ئۈچۈن مۇھىم!)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# 4. KNN مودېلى قۇرۇش
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train, y_train)
+
+# 5. باھالاش
+y_pred = knn.predict(X_test)
+print("دەللىك:", accuracy_score(y_test, y_pred))
+print("\\nتەپسىلى باھا:")
+print(classification_report(y_test, y_pred, target_names=iris.target_names))
+      </textarea>
+    </div>
+
+    <div class="code-container">
+      <div class="code-label">مېسال 2: KNN – رېگرېسسىيە</div>
+      <div class="code-label en" style="direction: ltr; text-align: left;">Example 2: KNN – Regression</div>
+      <textarea id="c2" style="display:none;">
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error
+import numpy as np
+
+# مەلۇمات يۈكلەش
+data = fetch_california_housing()
+X, y = data.data, data.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# نورماللاشتۇرۇش
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# KNN رېگرېسسىيە مودېلى
+knn_reg = KNeighborsRegressor(n_neighbors=5)
+knn_reg.fit(X_train, y_train)
+
+# باھالاش
+y_pred = knn_reg.predict(X_test)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+print(f"RMSE: {rmse:.2f}")
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 7. KNN گە كېرەكلىك تەگدەم ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">7. KNN گە كېرەكلىك تەگدەم</div>
+    <div class="section-title-en">7. Essential Preprocessing for KNN</div>
+    <ul>
+      <li><strong>Feature Scaling</strong>: Euclidean مەسافىسى ئۆزگەرگۈچنىڭ مىقدارىغا تەسىر قىلىدۇ. شۇڭا ھەر بىر ئۆزگەرگۈچنى <code>StandardScaler</code> ياكى <code>MinMaxScaler</code> بىلەن نورماللاشتۇرۇش كېرەك.</li>
+      <li><strong>كامىتىل مەلۇماتنى تولدۇرۇش</strong>: KNN كامىتىل مەلۇمات بىلەن ئىشلىيەلمەيدۇ.</li>
+      <li><strong>ئۆزگەرگۈچ تاللاش</strong>: ئەھمىيەتسىز ئۆزگەرگۈچلەر مەسافىنى بۇزۇپ قويىدۇ.</li>
+    </ul>
+    <ul class="en">
+      <li><strong>Feature Scaling</strong>: Euclidean distance is sensitive to feature magnitude. Always scale features using <code>StandardScaler</code> or <code>MinMaxScaler</code>.</li>
+      <li><strong>Handle missing values</strong>: KNN cannot compute distance with missing data.</li>
+      <li><strong>Feature selection</strong>: Irrelevant features add noise and reduce accuracy.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>ماشىنا ئۈگىنىش 7-باب – K-يېقىن قوۋشۇق (KNN)</p>
+    <p>دەرسلىك: ئۇيغۇرچە | English • تەييارلاندى: 2025-يىلى 4-دېكابىر</p>
+    <p>كۆچۈرۈش، ئىشلىتىش ۋە تارقىتىش ھەققى ھەممىگە بار</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const textareas = document.querySelectorAll('textarea[id^="c"]');
+      textareas.forEach(ta => {
+        CodeMirror.fromTextArea(ta, {
+          mode: "python",
+          readOnly: true,
+          lineNumbers: true,
+          theme: "default",
+          direction: "ltr",
+          viewportMargin: Infinity
+        });
+      });
+    });
+  </script>
+</body>
+</html>

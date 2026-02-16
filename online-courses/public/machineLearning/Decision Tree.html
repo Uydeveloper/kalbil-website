@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ماشىنا ئۈگىنىش 4-باب – قەرر دەرىخى (Decision Tree)</title>
+
+  <!-- Amiri font for Uyghur/Arabic script -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CodeMirror for beautiful code display -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text: #2d2d2d;
+      --primary: #2e7d32; /* green for tree */
+      --card-bg: #ffffff;
+      --code-bg: #282c34;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Amiri', serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 20px;
+      direction: rtl;
+    }
+
+    h1, h2, h3 {
+      margin: 20px 0 15px;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.4rem;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 20px;
+      background: #f1f8e9;
+      border-radius: 12px;
+      border-right: 4px solid var(--primary);
+    }
+
+    .section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-right: 4px solid var(--primary);
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    ul, ol {
+      padding-right: 25px;
+      margin: 12px 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .code-container {
+      margin: 15px 0;
+    }
+
+    .CodeMirror {
+      direction: ltr !important;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .code-label {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .highlight {
+      background-color: #e8f5e9;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ماشىنا ئۈگىنىش 4-باب – قەرر دەرىخى (Decision Tree)</h1>
+
+  <div class="intro">
+    <p>
+      <strong>قەرر دەرىخى</strong> (Decision Tree) — ماشىنا ئۈگىنىشنىڭ ئەڭ تۈسۈنۈشگە ئاسان، جەدۋەل شەكلىدىكى مەلۇماتلار بىلەن ئىشلەيدىغان
+      <span class="highlight">كلاسسىك ئالگورىتم</span>لىرىنىڭ بىرىدۇر.
+      بۇ ئالگورىتم <strong>ئاھىرلىق قەررگە يېتىش ئۈچۈن سۇئال-جاۋابلار (ئۆزگەرگۈچلەر) ئاساسىدا قادام-قادام قەرر قىلىدۇ</strong>،
+      نەتىجىدە <strong>دەرىخ شەكلىدە ھەل قىلىش مودېلى</strong> ھاسىل بولىدۇ.
+    </p>
+  </div>
+
+  <!-- ============ 1. قەرر دەرىخى نېمە؟ ============ -->
+  <div class="section">
+    <h2 class="section-title">1. قەرر دەرىخى نېمە؟</h2>
+    <p>
+      قەرر دەرىخى — مەلۇماتنىڭ <strong>ئۆزگەرگۈچلىرى (Features)</strong> بويىچە <strong>ئايرىش</strong> (Split) ئارقىلىق
+      <strong>نەتىجىنى</strong> (Target) بايان قىلىش ئۈچۈن قۇرۇلغان <strong>ئېگىزلىك دەرىجىلىك قۇرۇلۇم</strong>.
+    </p>
+    <p>
+      مەسىلەن:  
+      <em>"ئەگەر يېشى > 30 ۋە كىرۇش > 5000 بولسا، كرېدىت بېرىلىدۇ، يەنە ئەگەر كىرۇش < 3000 بولسا، قىيىنچىلىقتا قويۇلىدۇ..."</em>
+    </p>
+    <p>
+      <strong>دەرىختىكى ئاساسىي بۆلەكلەر:</strong>
+    </p>
+    <ul>
+      <li><strong>Root Node</strong> (تامىر نۇرۇقى): بارلىق مەلۇماتنى ئالىدىغان باشلىنىش نۇقتىسى.</li>
+      <li><strong>Internal Node</strong> (ئىچكى نۇرۇق): بىر ئۆزگەرگۈچ بويىچە ئايرىش ئورنى.</li>
+      <li><strong>Leaf Node</strong> (ياپراق نۇرۇقى): ئاخىرقى نەتىجە (مەسىلەن: "ھەئە" ياكى "ياق").</li>
+      <li><strong>Branch</strong> (بۇتاق): بىر قەرر يولى.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 2. قانداق ئىشلەيدۇ؟ ============ -->
+  <div class="section">
+    <h2 class="section-title">2. قانداق ئىشلەيدۇ؟</h2>
+    <p>
+      Decision Tree <strong>ئېنتروپىيە</strong> (Entropy) ياكى <strong>گىنى ئىندېكسى</strong> (Gini Index) دېگەن ئۆلچەم بويىچە
+      ھەر قانداق ئۆزگەرگۈچنىڭ <strong>ئايرىش سۈپىتىنى</strong> (Split Quality) باھالايدۇ.
+    </p>
+    <p>
+      <strong>ئېنتروپىيە</strong> — مەلۇماتنىڭ <em>قاتىشىق دەرىجىسى</em>نى كۆرسىتىدۇ. قاتىشىق قانچە كۆپ بولسا، ئېنتروپىيە شۇنچە يۇقىرى.
+      <br>
+      <strong>گىنى ئىندېكسى</strong> — ھەر بىر گۇرۇھنىڭ <em>توپىلاڭغۇچلىق دەرىجىسى</em>نى ئۆلچەيدۇ.
+    </p>
+    <p>
+      <strong>ئالگورىتم قەدەم-قەدەم:</strong>
+    </p>
+    <ol>
+      <li>بارلىق مەلۇماتنى باش نۇرۇققا (Root) يىغىش.</li>
+      <li>ئەڭ ياخشى ئۆزگەرگۈچنى (ئېنتروپىيە/گىنى نىڭ ئەڭ كىچىك قىممىتى بولغان) تاللاش.</li>
+      <li>مەلۇماتنى ئىككى قىسمغا ئايرىش.</li>
+      <li>ھەر بىر قىسىمغا يەنە شۇ جەرياننى تەكرارلاش.</li>
+      <li>بېكىت شەرتى بېكىتىلگەندە (مەسىلەن: بارلىق سان ھەئە ياكى يەنە ئۆزگەرگۈچ يوق) دۇرغۇچ قويۇش.</li>
+    </ol>
+  </div>
+
+  <!-- ============ 3. نېمە ئۈچۈن ئىشلىتىلىدۇ؟ ============ -->
+  <div class="section">
+    <h2 class="section-title">3. نېمە ئۈچۈن ئىشلىتىلىدۇ؟</h2>
+    <p>
+      Decision Tree نىڭ ئاساسىي ئىشلىتىش دائىرىسى:
+    </p>
+    <ul>
+      <li>كلاسسىفىكاتسىيە (مەسىلەن: كرېدىت مۇۋاپىقلىقى، كىسىلدىك مۇقىملىتىش).</li>
+      <li>رېگرېسسىيە (سان نەتىجىسى: مەسىلەن، ئۈي باھاسى).</li>
+      <li>ئالگورىتمنى تەپسىلى تەھلىل قىلىش، نەش ئۈچۈن شۇنداق باھالاندى دېگەن سوئالغا جاۋاب بېرىش.</li>
+      <li>ئىككى ياكى ئۇندىن ئارتۇق ئۆزگەرگۈچلۈك مۇراسىمەتلىك مۇناسىۋەتلەرنى بايان قىلىش.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 4. ئالاھىدىلىكى ۋە كەمچىلىكى ============ -->
+  <div class="section">
+    <h2 class="section-title">4. ئالاھىدىلىكى ۋە كەمچىلىكى</h2>
+
+    <h3>ئالاھىدىلىكى:</h3>
+    <ul>
+      <li>تۈسۈنىش ئاسان، <strong>ئىنسانلارغا ئوخشاش مەنتىقىي</strong> قەرر قىلىش.</li>
+      <li>تەربىيەلەش ۋاقتى تېز.</li>
+      <li>نورماللاشتۇرۇش (Normalization) ياكى Standardization كېرەك ئەمەس.</li>
+      <li>كىرگۈزگۈچ مەلۇماتنىڭ تارقىلىشىغا تەسىر قىلىشى كېرەك ئەمەس.</li>
+      <li>تۈرلۈك مەلۇمات (سانلىق، كاتېگورىيىلىك) بىلەن ئىشلەيدۇ.</li>
+    </ul>
+
+    <h3>كەمچىلىكى:</h3>
+    <ul>
+      <li><strong>ئاشۇرۇپ ئۈگىنىش</strong> (Overfitting) ھالىتى كۆپ يۈز بېرىدۇ (ئالاھىدە قۇرۇق دەرىخ بولغاندا).</li>
+      <li>كىچىك ئۆزگىرىش مەلۇماتتا چوڭ ئۆزگىرىش كەلتۈرۈپ چىقىرىدۇ (ئىناۋەتسىزلىك).</li>
+      <li>يەنە بىر ياخشى ھەل — <strong>Random Forest</strong> (تەقدىم قىلىنىدۇ).</li>
+    </ul>
+  </div>
+
+  <!-- ============ 5. مىسال كود ============ -->
+  <div class="section">
+    <h2 class="section-title">5. مىسال كود (Scikit-learn بىلەن)</h2>
+
+    <p>
+      تۆۋەندىكى مىسالدا، <strong>تۇيماق كىسىلدىك مۇقىملىتىش</strong> مەلۇماتى (Iris dataset) ئىشلىتىلىدۇ.
+    </p>
+
+    <div class="code-container">
+      <div class="code-label">مېسال 1: سادە Decision Tree (كلاسسىفىكاتسىيە)</div>
+      <textarea id="c1" style="display:none;">
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+import matplotlib.pyplot as plt
+
+# 1. مەلۇمات يۈكلەش
+iris = load_iris()
+X = iris.data  # ئۆزگەرگۈچلەر (sepal length, width, etc.)
+y = iris.target  # نەتىجە (3 خىل گۈل)
+
+# 2. مودېل قۇرۇش ۋە تەربىيەلەش
+clf = DecisionTreeClassifier(max_depth=3, random_state=42)
+clf.fit(X, y)
+
+# 3. دەرىخنى سۈرەتكە چىزىش
+plt.figure(figsize=(12, 8))
+plot_tree(clf, 
+          feature_names=iris.feature_names,
+          class_names=iris.target_names,
+          filled=True)
+plt.title("قەرر دەرىخى (Iris Dataset)")
+plt.show()
+      </textarea>
+    </div>
+
+    <div class="code-container">
+      <div class="code-label">مېسال 2: پىرودۇكتسىيە بارلىقى (ئىشلەتكىلى بولىدىغان)</div>
+      <textarea id="c2" style="display:none;">
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+
+# مەلۇماتنى ئۈگىتىش/سىناق قىلىش بولىكىغا بۆلۈش
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# يېڭى مودېل قۇرۇش
+clf = DecisionTreeClassifier(max_depth=3)
+clf.fit(X_train, y_train)
+
+# باھالاش
+y_pred = clf.predict(X_test)
+print("دەللىك (Accuracy):", accuracy_score(y_test, y_pred))
+print("\\nتەپسىلى باھا:")
+print(classification_report(y_test, y_pred, target_names=iris.target_names))
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 6. قەرر دەرىخىنى قانداق تەھلىل قىلىش كېرەك؟ ============ -->
+  <div class="section">
+    <h2 class="section-title">6. قەرر دەرىخىنى قانداق تەھلىل قىلىش كېرەك؟</h2>
+    <p>
+      دەرىخ چىزىلغاندىن كېيىن، <strong>نىمەگە دىققەت قىلىش</strong> كېرەك؟
+    </p>
+    <ul>
+      <li><strong>ھەر بىر نۇرۇقتىكى شەرت</strong> (مەسىلەن: <code>petal length <= 2.45</code>) — بۇ ئالگورىتم قانداق قەرر قىلىدىغانلىقىنى كۆرسىتىدۇ.</li>
+      <li><strong>نۇرۇقتىكى سان</strong> (samples) — بۇ قىسىمدا قانچە نۇمۇنە بارلىقى.</li>
+      <li><strong>نۇرۇقتىكى نەتىجە</strong> (value = [50, 0, 0]) — ھەر بىر سىنىپقا قانچە نۇمۇنە تەۋە بولۇشى.</li>
+      <li><strong>نۇرۇقتىكى جەڭگۈزۈك</strong> (gini = 0.0) — قانچە "تەمىز" (pure) ئىكەنلىكى. 0 بولسا، پۇتۇنلىقى بىر سىنىپ.</li>
+      <li><strong>دەرىخنىڭ چوڭلۇقى</strong> (max_depth) — ئاشۇرۇپ ئۈگىنىشنىڭ بارلىقى ياكى يوقلۇقى.</li>
+    </ul>
+    <p>
+      <strong>ئەگەر دەرىخ بەك چوڭ بولسا:</strong> قۇرۇق (overfit)، سىناق مەلۇماتتا دەللىك تۆۋەن.
+      <br>
+      <strong>ئەگەر دەرىخ بەك كىچىك بولسا:</strong> ئۈگىنىش يېتەرلىك ئەمەس (underfit).
+    </p>
+  </div>
+
+  <!-- ============ 7. ياخشى دەرىخ قۇرۇش ئۈچۈن كېرەكلىك تەگدەم ============ -->
+  <div class="section">
+    <h2 class="section-title">7. ياخشى دەرىخ قۇرۇش ئۈچۈن كېرەكلىك تەگدەم</h2>
+    <ul>
+      <li><strong>max_depth</strong>: دەرىخنىڭ چوڭلۇقىنى چەكلەش (مەسىلەن: 3–5).</li>
+      <li><strong>min_samples_split</strong>: نۇرۇقنى بۆلۈش ئۈچۈن كامىدە نەچچە نۇمۇنە كېرەك.</li>
+      <li><strong>min_samples_leaf</strong>: دۇرغۇچ نۇرۇقتا كامىدە نەچچە نۇمۇنە بولۇشى كېرەك.</li>
+      <li><strong>criterion</strong>: `"gini"` ياكى `"entropy"` نى تاللاش.</li>
+    </ul>
+    <p>
+      <strong>ئەڭ ياخشى ھەل:</strong> <code>Random Forest</code> — بىر قانچە Decision Tree نى بىرلەشتۈرۈش.
+    </p>
+  </div>
+
+  <footer>
+    <p>ماشىنا ئۈگىنىش 4-باب – قەرر دەرىخى (Decision Tree)</p>
+    <p>ئۇيغۇرچە تىل دەستىكى • دەرسلىك 2025-يىلى 4-دېكابىر تەييارلاندى</p>
+    <p>كۆچۈرۈش، ئىشلىتىش ۋە تارقىتىش ھەققى ھەممىگە بار</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const textareas = document.querySelectorAll('textarea[id^="c"]');
+      textareas.forEach(ta => {
+        CodeMirror.fromTextArea(ta, {
+          mode: "python",
+          readOnly: true,
+          lineNumbers: true,
+          theme: "default",
+          direction: "ltr",
+          viewportMargin: Infinity
+        });
+      });
+    });
+  </script>
+</body>
+</html>

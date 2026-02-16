@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "Welcome to KalBiL",
+    "body": "This is a sample message.",
+    "author": "Admin",
+    "avatar": "/images/UyRobut02.png",
+    "time": "2025-08-13 14:00",
+    "image": "/images/UyRobut02.png",
+    "likes": 0,
+    "views": 0,
+    "comments": []
+  }
+]

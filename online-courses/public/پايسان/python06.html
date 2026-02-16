@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+<meta charset="UTF-8">
+<title>پايسان 6-باب - فايل بىلەن ئىش</title>
+<style>
+body { font-family: "Arial", sans-serif; line-height: 1.6; padding: 20px; background-color: #f7f7f7; }
+h1, h2 { color: #2c3e50; }
+pre { background-color: #ecf0f1; padding: 10px; border-radius: 5px; overflow-x: auto; }
+.code-example { background-color: #dfe6e9; padding: 10px; border-left: 4px solid #0984e3; }
+</style>
+</head>
+<body>
+
+<h1>پايسان 6-باب - فايل بىلەن ئىش</h1>
+
+<h2>دەرس بايانى</h2>
+<p>بۇ بابتا Python دا فايللارنى ئېچىش، يېزىش، ئوقۇش ۋە يېپىشنى ئۆگىنىمىز.</p>
+
+<h2>فايل ئېچىش ۋە يېزىش</h2>
+<pre class="code-example">
+# write مودىنى ئىشلىتىپ يېڭى فايلغا يېزىش
+with open("example.txt", "w", encoding="utf-8") as file:
+    file.write("Python دەرسلىكى\n")
+    file.write("قاۋۇلجانغا سالام\n")
+</pre>
+
+<h2>فايلنى ئوقۇش</h2>
+<pre class="code-example">
+# read مودىنى ئىشلىتىپ فايلنى ئوقۇش
+with open("example.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+    print(content)
+</pre>
+
+<h2>line by line ئوقۇش</h2>
+<pre class="code-example">
+with open("example.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print(line.strip())  # سۈزۈش (strip) ئارقىلىق بوش بەلگە چىقىرىشنى توختىتىش
+</pre>
+
+<h2>ئاۋارەتىش (append) ھالىتى</h2>
+<pre class="code-example">
+with open("example.txt", "a", encoding="utf-8") as file:
+    file.write("Python دا فايل بىلەن ئىشلىتىش\n")
+</pre>
+
+<h2>مەسىل</h2>
+<p>ئىشلەتكۈچىدىن ئۇچۇر ئالىپ، ئۇنى فايلغا ساقلاش ۋە ئاندىن قايتا ئوقۇش:</p>
+<pre class="code-example">
+name = input("ئىسمىڭىزنى كىرگۈزۈڭ: ")
+
+with open("user.txt", "w", encoding="utf-8") as file:
+    file.write("ئىسم: " + name + "\n")
+
+with open("user.txt", "r", encoding="utf-8") as file:
+    print(file.read())
+</pre>
+
+<h2>چۈشەندۈرۈش</h2>
+<p>بۇ بابتا Python دا فايل بىلەن ئىشلىتىشنى چۈشەندۇق. write، read ۋە append مودىنى ئىشلىتىش ئارقىلىق فايلغا يېزىش، ئوقۇش ۋە يېڭىلىق قوشۇشقا بولىدۇ. with open() ئارقىلىق فايلنى ئاپتوماتىك يېپىش ھەم قۇلايلىق.</p>
+
+</body>
+</html>

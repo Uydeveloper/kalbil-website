@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>كىۋانىت فىزىكىسى 3-باب – Superposition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/python/python.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+  <style>
+    :root {
+      --bg: #f9f7f0;
+      --text-ug: #2a2a2a;
+      --text-en: #333;
+      --primary: #1a237e;
+      --card: #ffffff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg); font-family:'Amiri',serif; color:var(--text-ug);
+      line-height:1.7; padding:20px; direction:rtl;
+    }
+    h1 { text-align:center; color:var(--primary); font-size:2.3rem; margin:0 0 25px; }
+    .intro {
+      background: #e8eaf6; padding:25px; border-radius:14px; margin-bottom:30px;
+      border-right:5px solid var(--primary); text-align:center;
+    }
+    .section {
+      background: var(--card); padding:22px; margin-bottom:28px;
+      border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.06);
+      border-right:4px solid var(--primary);
+    }
+    .title-ug { font-size:1.6rem; font-weight:bold; color:var(--primary); margin-bottom:10px; }
+    .title-en { font-size:1.25rem; font-family:'Inter',sans-serif; color:#555;
+      direction:ltr; text-align:left; margin-bottom:15px; }
+    .en { font-family:'Inter',sans-serif; direction:ltr; text-align:left;
+      background:#f8f9fa; padding:12px; border-radius:8px; margin-top:12px;
+      border-left:3px solid #607d8b; }
+    .graph {
+      text-align:center; margin:18px 0; padding:15px; background:#f5f7ff;
+      border-radius:10px; direction:ltr;
+    }
+    .code-container { margin:18px 0; }
+    .CodeMirror {
+      direction:ltr !important; font-family:'Fira Code',monospace; font-size:14px;
+      border-radius:8px; overflow:hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>كىۋانىت فىزىكىسى 3-باب – Superposition (قۇشۇلۇش ھالىتى)</h1>
+  <p>
+    كىۋانىت زەررىسى «0» ياكى «1» دە ئەمەس، بەلكى <strong>«0 ۋە 1» نىڭ قۇشۇلۇشى</strong> دە بولۇشى مۇمكىن.
+    بۇ ھالەت — <strong>قۇشۇلۇش</strong> (Superposition) دەپ ئاتىلىدۇ.
+    زەررىنى ئۆلچىگەندەلا، بۇ ھالەت «0» ياكى «1» گە «ئوقۇلىدۇ».
+  </p>
+  <div class="en">A quantum particle can exist in multiple states at once (e.g., 0 and 1). Only upon measurement does it "collapse" to a definite state.</div>
+</div>
+
+<div class="section">
+  <div class="title-ug">1. ماتېماتىك فورماتى</div>
+  <div class="title-en">1. Mathematical Representation</div>
+  <div class="katex-display" style="direction:ltr;text-align:center;">
+    \( |\psi\rangle = \alpha |0\rangle + \beta |1\rangle \)
+  </div>
+  <p>بۇ يەردە:</p>
+  <ul>
+    <li>\( |0\rangle, |1\rangle \) = ئاساسىي ھالەتلەر</li>
+    <li>\( \alpha, \beta \) = كومپلېكس سان (ئىمكىدارىيەت ئامپلىتۇدى)</li>
+    <li>\( |\alpha|^2 + |\beta|^2 = 1 \) — ئىمكىدارىيەت قوشۇلمىسى 100%</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="title-ug">2. گىرافىك: بىت vs Qubit</div>
+  <div class="title-en">2. Classical Bit vs Qubit</div>
+  <div class="graph">
+    <svg width="450" height="120" style="background:#fff;border-radius:8px;padding:10px;">
+      <!-- Classical Bit -->
+      <text x="60" y="25" font-family="Amiri" font-size="16" fill="#1a237e">كىلاسسىك بىت</text>
+      <rect x="40" y="40" width="60" height="40" fill="#bbdefb" stroke="#1976d2" />
+      <text x="65" y="65" font-family="Amiri" font-size="24" fill="#1976d2">0</text>
+      <text x="65" y="100" font-family="Amiri" font-size="14">ياكى</text>
+      <rect x="120" y="40" width="60" height="40" fill="#bbdefb" stroke="#1976d2" />
+      <text x="145" y="65" font-family="Amiri" font-size="24" fill="#1976d2">1</text>
+
+      <!-- Qubit -->
+      <text x="280" y="25" font-family="Amiri" font-size="16" fill="#1a237e">كىۋانىت بىت (Qubit)</text>
+      <circle cx="330" cy="60" r="40" fill="#f8bbd0" stroke="#c2185b" />
+      <text x="310" y="65" font-family="Amiri" font-size="20" fill="#c2185b">0+1</text>
+      <text x="310" y="100" font-family="Amiri" font-size="14">قۇشۇلۇش</text>
+    </svg>
+  </div>
+</div>
+
+<div class="section">
+  <div class="title-ug">3. مىسال كود: Qiskit بىلەن قۇشۇلۇش ھالىتى</div>
+  <div class="title-en">3. Code Example with Qiskit</div>
+  <div class="code-container">
+    <textarea id="c1" style="display:none;">
+# Qiskit بىلەن قۇشۇلۇش ھالىتى قۇرۇش
+from qiskit import QuantumCircuit, Aer, execute
+
+# 1 بىتلىق سىستېما
+qc = QuantumCircuit(1, 1)
+
+# Hadamard قەۋىتى — |0> نى قۇشۇلۇش ھالىتىگە ئايلاندۇرىدۇ
+qc.h(0)
+
+# ئۆلچەش
+qc.measure(0, 0)
+
+# سىمىلاتوردا ئىجرا قىلىش
+simulator = Aer.get_backend('qasm_simulator')
+result = execute(qc, simulator, shots=1000).result()
+counts = result.get_counts(qc)
+
+print("ئۆلچەش نەتىجىسى:", counts)  # ~50% 0, ~50% 1
+    </textarea>
+  </div>
+</div>
+
+<footer style="text-align:center; margin-top:40px; padding:20px; color:#666;">
+  <p>كىۋانىت فىزىكىسى 3-باب – Superposition</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textareas = document.querySelectorAll('textarea[id^="c"]');
+  textareas.forEach(ta => {
+    CodeMirror.fromTextArea(ta, {
+      mode: "python", readOnly: true, lineNumbers: true,
+      theme: "default", direction: "ltr", viewportMargin: Infinity
+    });
+  });
+});
+</script>
+</body>
+</html>

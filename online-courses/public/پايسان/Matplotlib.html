@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python سانلىق مەلۇمات كۆرسىتىش دەرسلىكى</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        nav {
+            background-color: var(--dark-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-item {
+            color: white;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-item:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        section {
+            background-color: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .intro {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .intro p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .library-section {
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1.5rem;
+        }
+        
+        .code-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            position: relative;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #a0aec0;
+        }
+        
+        .copy-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .plot-container {
+            background-color: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .plot-placeholder {
+            background-color: white;
+            border: 1px dashed var(--secondary-color);
+            padding: 3rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .comparison-table th {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+        
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: var(--success-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .interactive-demo {
+            background-color: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+        
+        .demo-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-controls select, .demo-controls button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--secondary-color);
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .demo-controls button {
+            background-color: var(--secondary-color);
+            color: white;
+            cursor: pointer;
+        }
+        
+        .demo-controls button:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .demo-plot {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 6px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-item {
+                text-align: center;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Python سانلىق مەلۇمات كۆرسىتىش دەرسلىكى</h1>
+            <p>Matplotlib، Seaborn، Bokeh ۋە Plotly كۈتۇپخانىلىرى ئارقىلىق سانلىق مەلۇماتنى كۆرسىتىش</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <a href="#intro" class="nav-item">كىرىسۆز</a>
+            <a href="#matplotlib" class="nav-item">Matplotlib</a>
+            <a href="#seaborn" class="nav-item">Seaborn</a>
+            <a href="#bokeh" class="nav-item">Bokeh</a>
+            <a href="#plotly" class="nav-item">Plotly</a>
+            <a href="#comparison" class="nav-item">سېلىشتۇرۇش</a>
+            <a href="#demo" class="nav-item">دېمو</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="intro" class="intro">
+            <h2>سانلىق مەلۇمات كۆرسىتىش ھەققىدە</h2>
+            <p>بۈگۈنكى كۈندە، كۈندىلىك تۇرمۇشتا نۇرغۇن سانلىق مەلۇماتلار بارلىققا كېلىدۇ. بۇ سانلىق مەلۇماتلارنى ئىلمىي تەھلىل قىلىش ئۈچۈن ئۇلارنىڭ خام شەكلىدىكى ئالاقىسىزلىقىنى چۈشىنىش تەس بولۇشى مۇمكىن. بۇ مەسىلىنى ھەل قىلىش ئۈچۈن سانلىق مەلۇمات كۆرسىتىش ئىشلىتىلىدۇ. سانلىق مەلۇمات كۆرسىتىش سانلىق مەلۇماتلارنى چۈشىنىش، كۆزىتىش ۋە تەھلىل قىلىشنى ئاسانلاشتۇرىدىغان ياخشى تەشكىللەنگەن رەسىملىك كۆرسىتىشنى تەمىنلەيدۇ.</p>
+            <p>بۇ دەرسلىكتە، بىز Python نىڭ تۆرلۈك كۈتۇپخانىلىرى ئارقىلىق سانلىق مەلۇماتلارنى قانداق كۆرسىتىش توغرىسىدا مۇزاكىرە قىلىمىز.</p>
+        </section>
+        
+        <section id="database">
+            <h2>ئىشلىتىلگەن سانلىق مەلۇمات بازىسى</h2>
+            <h3>Tips سانلىق مەلۇمات بازىسى</h3>
+            <p>Tips سانلىق مەلۇپات بازىسى 1990-يىللارنىڭ باشلىرىدا ئىككى يېرىم ئاي داۋامىدا رېستوراندا خېرىدارلار تەرىپىدىن بېرىلگەن چەك تىزىملىكىدۇر. ئۇ total_bill، tip، sex، smoker، day، time، size قاتارلىق 6 ستۇندىن تەركىب تاپقان.</p>
+            <p>Tips سانلىق مەلۇمات بازىسىنى <a href="https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv" target="_blank">بۇ يەردىن</a> چۈشۈرەلەيسىز.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>سانلىق مەلۇمات بازىسىنى يۈكلەش</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+# ئالدىنقى 10 قۇرنى چىقىرىش
+display(data.head(10))</code></pre>
+            </div>
+            
+            <div class="plot-container">
+                <h3>سانلىق مەلۇمات بازىسىنىڭ ئالدىنقى 10 قۇرى</h3>
+                <div class="plot-placeholder">
+                    <p>بۇ يەردە سانلىق مەلۇمات بازىسىنىڭ ئالدىنقى 10 قۇرى كۆرۈنىدۇ</p>
+                    <p>(بۇ دېمو ئۈچۈن، بۇ رەسىم ئورنىغا قويۇلغان)</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="matplotlib" class="library-section">
+            <h2>Matplotlib</h2>
+            <p>Matplotlib ئاسان ئىشلىتىشچان، تۆۋەن سەۋىيىلىك سانلىق مەلۇمات كۆرسىتىش كۈتۇپخانىسى بولۇپ، NumPy تىزىملىكلىرى ئۈستىدە قۇرۇلغان. ئۇ تارقاق نۇقتا گرافىكى، سىزىق گرافىكى، ستون گرافىكى قاتارلىق تۈرلۈك گرافىكىلارنى ئۆز ئىچىگە ئالىدۇ. Matplotlib نۇرغۇن ئىشلىنىشچانلىقنى تەمىنلەيدۇ.</p>
+            
+            <h3>ئورنىتىش</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Matplotlib نى ئورنىتىش</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>pip install matplotlib</code></pre>
+            </div>
+            
+            <h3>تارقاق نۇقتا گرافىكى (Scatter Plot)</h3>
+            <p>تارقاق نۇقتا گرافىكى ئۆزگەرگۈچىلەر ئارىسىدىكى مۇناسىۋەتنى كۆزىتىش ئۈچۈن ئىشلىتىلىدۇ ۋە ئۇلار ئارىسىدىكى مۇناسىۋەتنى كۆرسىتىش ئۈچۈن نۇقتىلارنى ئىشلىتىدۇ. matplotlib كۈتۇپخانىسىدىكى scatter() ئۇسۇلى تارقاق نۇقتا گرافىكىنى سىزىش ئۈچۈن ئىشلىتىلىدۇ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ئاددىي تارقاق نۇقتا گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+# كۈنگە قارشى چەك ئۈچۈن تارقاق نۇقتا گرافىكى
+plt.scatter(data['day'], data['tip'])
+
+# گرافىكىغا ماۋزۇ قوشۇش
+plt.title("تارقاق نۇقتا گرافىكى")
+
+# X ۋە Y بەلگىلىرىنى تەڭشەش
+plt.xlabel('كۈن')
+plt.ylabel('چەك')
+
+plt.show()</code></pre>
+            </div>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>رەڭ ۋە چوڭلۇق بىلەن تارقاق نۇقتا گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+# كۈنگە قارشى چەك ئۈچۈن تارقاق نۇقتا گرافىكى
+plt.scatter(data['day'], data['tip'], c=data['size'], 
+            s=data['total_bill'])
+
+# گرافىكىغا ماۋزۇ قوشۇش
+plt.title("تارقاق نۇقتا گرافىكى")
+
+# X ۋە Y بەلگىلىرىنى تەڭشەش
+plt.xlabel('كۈن')
+plt.ylabel('چەك')
+
+plt.colorbar()
+plt.show()</code></pre>
+            </div>
+            
+            <h3>سىزىق گرافىكى (Line Chart)</h3>
+            <p>سىزىق گرافىكى ئوخشىمىغان ئوكۇلاردىكى ئىككى سانلىق مەلۇمات X ۋە Y ئارىسىدىكى مۇناسىۋەتنى كۆرسىتىش ئۈچۈن ئىشلىتىلىدۇ. ئۇ plot() فۇنكسىيەسى ئارقىلىق سىزىلىدۇ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>سىزىق گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+# چەككە قارشى كۈن ئۈچۈن تارقاق نۇقتا گرافىكى
+plt.plot(data['tip'])
+plt.plot(data['size'])
+
+# گرافىكىغا ماۋزۇ قوشۇش
+plt.title("سىزىق گرافىكى")
+
+# X ۋە Y بەلگىلىرىنى تەڭشەش
+plt.xlabel('كۈن')
+plt.ylabel('چەك')
+
+plt.show()</code></pre>
+            </div>
+            
+            <h3>ستون گرافىكى (Bar Chart)</h3>
+            <p>ستون گرافىكى ياكى ستون دىئاگراممىسى ئۇلار كۆرسىتىدىغان قىممەتلەرگە مۇناسىۋەتلىك ئۇزۇنلۇق ۋە ئېگىزلىك بىلەن سانلىق مەلۇمات تۈرىنى تەمىنلەيدىغان تىك تۆت تەرەپلىك ستونلار بىلەن ۋەكىللىك قىلىنغان گرافىكتۇر. ئۇ bar() ئۇسۇلى ئارقىلىق قۇرۇلالايدۇ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ستون گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+# چەككە قارشى كۈن ئۈچۈن ستون گرافىكى
+plt.bar(data['day'], data['tip'])
+
+plt.title("ستون گرافىكى")
+
+# X ۋە Y بەلگىلىرىنى تەڭشەش
+plt.xlabel('كۈن')
+plt.ylabel('چەك')
+
+plt.show()</code></pre>
+            </div>
+            
+            <h3>ھىستوگرامما (Histogram)</h3>
+            <p>ھىستوگرامما ئاساسەن بەزى گۇرۇپپىلار شەكلىدىكى سانلىق مەلۇماتلارنى كۆرسىتىش ئۈچۈن ئىشلىتىلىدۇ. ئۇ X-ئوك بىن دائىرىسىنى ۋەكىللىك قىلغاندا، Y-ئوك يىغىندىق سانى ھەققىدە ئۇچۇر بېرىدىغان ستون دىئاگراممىسىنىڭ بىر تۈرىدۇر. hist() فۇنكسىيەسى ھىستوگرامما ھېسابلاش ۋە قۇرۇش ئۈچۈن ئىشلىتىلىدۇ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ھىستوگرامما</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+# total_bills نىڭ ھىستوگراممىسى
+plt.hist(data['total_bill'])
+
+plt.title("ھىستوگرامما")
+
+plt.show()</code></pre>
+            </div>
+        </section>
+        
+        <section id="seaborn" class="library-section">
+            <h2>Seaborn</h2>
+            <p>Seaborn ماتپلوتلىبنىڭ ئۈستىگە قۇرۇلغان يۇقىرى سەۋىيە ئارالمىسىدۇر. ئۇ تېخىمۇ جەلپكار گرافىكىلارنى قۇرۇش ئۈچۈن گۈزەل دىزايىن ئۇسلۇبلىرى ۋە رەڭ پالېتلىرىنى تەمىنلەيدۇ.</p>
+            
+            <h3>ئورنىتىش</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Seaborn نى ئورنىتىش</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>pip install seaborn</code></pre>
+            </div>
+            
+            <p>Seaborn ماتپلوتلىبنىڭ ئۈستىگە قۇرۇلغان بولغاچقا، ئۇ ماتپلوتلىب بىلەن بىرلىكتە ئىشلىتىلەلەيدۇ. ماتپلوتلىب ۋە Seaborn نى بىرلىكتە ئىشلىتىش بەك ئاددىي جەرياندۇر. بىز ئادەتتىكىدەك Seaborn سىزىش فۇنكسىيەسىنى چاقىرىشىمىز كېرەك، ئاندىن ماتپلوتلىبنىڭ ماسلاشتۇرۇش فۇنكسىيەسىنى ئىشلىتەلەيمىز.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Seaborn ۋە Matplotlib نى بىرلىكتە ئىشلىتىش</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code># كۈتۇپخانىلارنى ئەكىرەش
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+# سىزىق گرافىكىسىنى سىزىش
+sns.lineplot(x="sex", y="total_bill", data=data)
+
+# ماتپلوتلىب فۇنكسىيەسى ئارقىلىق ماۋزۇنى تەڭشەش
+plt.title('ماتپلوتلىب فۇنكسىيەسى ئارقىلىق ماۋزۇ')
+
+plt.show()</code></pre>
+            </div>
+            
+            <h3>تارقاق نۇقتا گرافىكى (Scatter Plot)</h3>
+            <p>تارقاق نۇقتا گرافىكى scatterplot() ئۇسۇلى ئارقىلىق سىزىلىدۇ. بۇ ماتپلوتلىبقا ئوخشاش، ئەمما قوشۇمچە data دەلىلىنى تەلەپ قىلىدۇ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ئاددىي تارقاق نۇقتا گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code># كۈتۇپخانىلارنى ئەكىرەش
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+sns.scatterplot(x='day', y='tip', data=data)
+plt.show()</code></pre>
+            </div>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>جىنس بويىچە رەڭلەنگەن تارقاق نۇقتا گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code># كۈتۇپخانىلارنى ئەكىرەش
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+sns.scatterplot(x='day', y='tip', data=data,
+               hue='sex')
+plt.show()</code></pre>
+            </div>
+            
+            <h3>سىزىق گرافىكى (Line Plot)</h3>
+            <p>Seaborn دىكى سىزىق گرافىكى lineplot() ئۇسۇلى ئارقىلىق سىزىلىدۇ. بۇ يەردە، بىز پەقەت data دەلىلىنىمۇ بېرىپ قويالايمىز.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>سىزىق گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code># كۈتۇپخانىلارنى ئەكىرەش
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+sns.lineplot(x='day', y='tip', data=data)
+plt.show()</code></pre>
+            </div>
+            
+            <h3>ستون گرافىكى (Bar Plot)</h3>
+            <p>Seaborn دىكى ستون گرافىكى barplot() ئۇسۇلى ئارقىلىق قۇرۇلالايدۇ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ستون گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code># كۈتۇپخانىلارنى ئەكىرەش
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+sns.barplot(x='day',y='tip', data=data, 
+            hue='sex')
+
+plt.show()</code></pre>
+            </div>
+            
+            <h3>ھىستوگرامما (Histogram)</h3>
+            <p>Seaborn دىكى ھىستوگرامما histplot() فۇنكسىيەسى ئارقىلىق سىزىلالايدۇ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ھىستوگرامما</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code># كۈتۇپخانىلارنى ئەكىرەش
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+sns.histplot(x='total_bill', data=data, kde=True, hue='sex')
+
+plt.show()</code></pre>
+            </div>
+        </section>
+        
+        <section id="bokeh" class="library-section">
+            <h2>Bokeh</h2>
+            <p>بىزنىڭ تىزىملىكىمىزنىڭ ئۈچىنچى كۈتۇپخانىسىغا يۆتكىلىمىز. Bokeh ئاساسەن ئۇنىڭ ئىنتېراكتىپ گرافىكا كۆرسىتىشى ئۈچۈن مەشھۇردۇر. Bokeh زامانىۋى تور كۆرگۈچلەرنى زىننەتلىك، قىسقا قۇرۇلمىلىق يۇقىرى سەۋىيەلىك ئىنتېراكتىپلىق بىلەن تەقدىم قىلىش ئۈچۈن HTML ۋە JavaScript نى ئىشلىتىپ گرافىكىلىرىنى رەنده قىلىدۇ.</p>
+            
+            <h3>ئورنىتىش</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Bokeh نى ئورنىتىش</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>pip install bokeh</code></pre>
+            </div>
+            
+            <h3>تارقاق نۇقتا گرافىكى (Scatter Plot)</h3>
+            <p>Bokeh دىكى تارقاق نۇقتا گرافىكى plotting مودۇلىنىڭ scatter() ئۇسۇلى ئارقىلىق سىزىلالايدۇ. بۇ يەردە ماس ھالدا x ۋە y كووردىناتلىرىنى بېرىڭ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>تارقاق نۇقتا گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code># مودۇللارنى ئەكىرەش
+from bokeh.plotting import figure, output_file, show
+from bokeh.palettes import magma
+import pandas as pd
+
+# شەكىل نەرسىسىنى مىسال قىلىش
+graph = figure(title = "Bokeh تارقاق نۇقتا گرافىكى")
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+color = magma(256)
+
+# گرافىكىنى سىزىش
+graph.scatter(data['total_bill'], data['tip'], color=color)
+
+# مودېلنى كۆرسىتىش
+show(graph)</code></pre>
+            </div>
+            
+            <h3>ئىنتېراكتىپ سانلىق مەلۇمات كۆرسىتىش</h3>
+            <p>Bokeh نىڭ ئاساسلىق ئالاھىدىلىكى گرافىكىلارغا ئىنتېراكتىپلىق قوشۇش. بىز قوشۇلالايدىغان تۈرلۈك ئىنتېراكتىپلىقلارنى كۆرۈپ چىقايلى.</p>
+            
+            <h4>ئىنتېراكتىپ ئۇلانما (Legend)</h4>
+            <p>click_policy خاسلىقى ئۇلانمىنى ئىنتېراكتىپ قىلىدۇ. ئىككى خىل ئىنتېراكتىپلىق بار:</p>
+            <ul>
+                <li>يوشۇرۇش: گلىفلارنى يوشۇرىدۇ.</li>
+                <li>ئاۋازسىز: گلىفنى يوشۇرۇش ئۇنى پۈتۈنلەي يوق قىلىدۇ، ئەمما گلىفنى ئاۋازسىز قىلىش گلىفنى پارامېترلارغا ئاساسەن پەقەت ئاستىلىققا چۈشۈرىدۇ.</li>
+            </ul>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ئىنتېراكتىپ ئۇلانما</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code># مودۇللارنى ئەكىرەش
+from bokeh.plotting import figure, output_file, show
+import pandas as pd
+
+# شەكىل نەرسىسىنى مىسال قىلىش
+graph = figure(title = "Bokeh ستون گرافىكى")
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+# گرافىكىنى سىزىش
+graph.vbar(data['total_bill'], top=data['tip'], 
+           legend_label = "ھېساب چەككە قارشى", color='green')
+
+graph.vbar(data['tip'], top=data['size'], 
+           legend_label = "چەك ئۆلچەمگە قارشى", color='red')
+
+graph.legend.click_policy = "hide"
+
+# مودېلنى كۆرسىتىش
+show(graph)</code></pre>
+            </div>
+            
+            <h4>ۋىدجېتلارنى قوشۇش</h4>
+            <p>Bokeh توپچا، سىزغۇچ، تەكشۈرۈش رامكىسى قاتارلىق HTML جەدۋەللىرىگە ئوخشاش GUI ئالاھىدىلىكلىرىنى تەمىنلەيدۇ. بۇلار گرافىكىنىڭ پارامېترلىرىنى ئۆزگەرتىش، گرافىكا سانلىق مەلۇماتلىرىنى ماسلاشتۇرۇش قاتارلىقلارغا يول قويىدىغان گرافىكىغا ئىنتېراكتىپ ئارالمىنى تەمىنلەيدۇ. ئادەتتىكى ئىشلىتىلىدىغان ۋىدجېتلارنى قانداق ئىشلىتىش ۋە قوشۇشنى كۆرۈپ چىقايلى.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>ۋىدجېتلارنى قوشۇش</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>from bokeh.io import show
+from bokeh.models import Button, CheckboxGroup, RadioGroup, CustomJS
+
+button = Button(label="GFG")
+
+button.js_on_click(CustomJS(
+    code="console.log('button: click!', this.toString())"))
+
+# تەكشۈرۈش رامكىسى ۋە راديو توپچىسى ئۈچۈن بەلگىلەر
+L = ["بىرىنچى", "ئىككىنچى", "ئۈچىنچى"]
+
+# active پارامېتىرى سەيلەنگەن قىممەتنى سەكسىز تەڭشەيدۇ
+checkbox_group = CheckboxGroup(labels=L, active=[0, 2])
+
+checkbox_group.js_on_click(CustomJS(code="""
+    console.log('checkbox_group: active=' + this.active, this.toString())
+"""))
+
+# active پارامېتىرى سەيلەنگەن قىممەتنى سەكسىز تەڭشەيدۇ
+radio_group = RadioGroup(labels=L, active=1)
+
+radio_group.js_on_click(CustomJS(code="""
+    console.log('radio_group: active=' + this.active, this.toString())
+"""))
+
+show(button)
+show(checkbox_group)
+show(radio_group)</code></pre>
+            </div>
+        </section>
+        
+        <section id="plotly" class="library-section">
+            <h2>Plotly</h2>
+            <p>بۇ بىزنىڭ تىزىملىكىمىزنىڭ ئاخىرقى كۈتۇپخانىسى ۋە سىز Plotly نىڭ نېمە ئۈچۈنلىكىنى ئويلىشىڭىز مۇمكىن. بۇ يەردە سەۋەبى:</p>
+            <ul class="feature-list">
+                <li>Plotly نىڭ چوڭايتىلغان كۈتۈك قورالى بار، بۇ بىزگە نۇرغۇن سانلىق مەلۇمات نۇقتىلىرىدىكى ھەر قانداق نورمالسىزلىق ياكى گەپسەتنى بايقاشتا يول قويىدۇ.</li>
+                <li>ئۇ تېخىمۇ كۆپ ماسلاشتۇرۇشنى يول قويىدۇ.</li>
+                <li>ئۇ گرافىكىنى كۆرۈنۈشتە تېخىمۇ جەلپكار قىلىدۇ.</li>
+            </ul>
+            
+            <h3>ئورنىتىش</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Plotly نى ئورنىتىش</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>pip install plotly</code></pre>
+            </div>
+            
+            <h3>تارقاق نۇقتا گرافىكى (Scatter Plot)</h3>
+            <p>Plotly دىكى تارقاق نۇقتا گرافىكى plotly.express نىڭ scatter() ئۇسۇلى ئارقىلىق قۇرۇلالايدۇ. Seaborn غا ئوخشاش، بۇ يەردىمۇ قوشۇمچە data دەلىلى تەلەپ قىلىنىدۇ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>تارقاق نۇقتا گرافىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>import plotly.express as px
+import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+# تارقاق نۇقتا گرافىكىنى سىزىش
+fig = px.scatter(data, x="day", y="tip", color='sex')
+
+# گرافىكىنى كۆرسىتىش
+fig.show()</code></pre>
+            </div>
+            
+            <h3>ئىنتېراكتىپلىق قوشۇش</h3>
+            <p>Bokeh غا ئوخشاش، plotly مۇ تۈرلۈك ئىنتېراكتىپلىقلارنى تەمىنلەيدۇ. بىز ئۇلارنىڭ بەزىلىرىنى مۇزاكىرە قىلايلى.</p>
+            
+            <h4>تۆۋەنگە تاشلاش تىزىملىكىنى قۇرۇش</h4>
+            <p>تۆۋەنگە تاشلاش تىزىملىكى ھەمىشە ئېكراندا كۆرۈنىدىغان تىزىملىك توپچىسىنىڭ بىر قىسمىدۇر. ھەر بىر تىزىملىك توپچىسى چېكىلگەندە شۇ تىزىملىك توپچىسى ئۈچۈن تاللاشلارنى كۆرسىتەلەيدىغان Menu ۋىدجېتى بىلەن باغلىنىشلىق. Plotly دىكى گرافىكىلارنى ئۆزگەرتىش ئۈچۈن updatemenu ئۇسۇلى بىلەن 4 خىل مۇمكىن ئۇسۇل بار.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>تۆۋەنگە تاشلاش تىزىملىكى</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>import plotly.graph_objects as px
+import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+
+plot = px.Figure(data=[px.Scatter(
+    x=data['day'],
+    y=data['tip'],
+    mode='markers',)
+])
+
+# تۆۋەنگە تاشلاش تىزىملىكىنى قوشۇش
+plot.update_layout(
+    updatemenus=[
+        dict(
+            buttons=list([
+                dict(
+                    args=["type", "scatter"],
+                    label="تارقاق نۇقتا گرافىكى",
+                    method="restyle"
+                ),
+                dict(
+                    args=["type", "bar"],
+                    label="ستون گرافىكى",
+                    method="restyle"
+                )
+            ]),
+            direction="down",
+        ),
+    ]
+)
+
+plot.show()</code></pre>
+            </div>
+            
+            <h4>سىزغۇچ ۋە تاللىغۇچلارنى قۇرۇش</h4>
+            <p>Plotly دىكى دائىرە سىزغۇچى ئىختىيارىي دائىرە تىپىدىكى كىرگۈزۈش كونتروللىرىدۇر. ئۇ بەلگىلەنگەن ئەڭ تۆۋەن ۋە ئەڭ يۇقىرى دائىرە ئارىسىدىكى بىر قىممەت ياكى دائىرە قىممەتلىرىنى تاللاشقا يول قويىدۇ. دائىرە تاللىغۇچى بولسا گرافىكىدا كۆرسىتىش ئۈچۈن دائىرە تاللاش ئۈچۈن قورال. ئۇ گرافىكىدا ئالدىن تەڭشەلگەن دائىرىلەرنى تاللاش ئۈچۈن توپچىلارنى تەمىنلەيدۇ. ئۇ ئەڭ تۆۋەن ۋە ئەڭ يۇقىرى چېسلا ھەم قولدا كىرگۈزۈش رامكىلىرىنىمۇ تەمىنلەيدۇ.</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>سىزغۇچ ۋە تاللىغۇچلار</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code>import plotly.graph_objects as px
+import pandas as pd
+
+# سانلىق مەلۇمات بازىسىنى ئوقۇش
+data = pd.read_csv("tips.csv")
+
+plot = px.Figure(data=[px.Scatter(
+    y=data['tip'],
+    mode='lines',)
+])
+
+plot.update_layout(
+    xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                    step="day",
+                    stepmode="backward"),
+            ])
+        ),
+        rangeslider=dict(
+            visible=True
+        ),
+    )
+)
+
+plot.show()</code></pre>
+            </div>
+        </section>
+        
+        <section id="comparison">
+            <h2>كۈتۇپخانىلارنى سېلىشتۇرۇش</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>كۈتۇپخانا</th>
+                        <th>ئالاھىدىلىكى</th>
+                        <th>ياخشى تەرەپلىرى</th>
+                        <th>يامان تەرەپلىرى</th>
+                        <th>ئىشلىتىش ئورنى</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Matplotlib</td>
+                        <td>تۆۋەن سەۋىيە، كۆپ ئىشلىنىشچانلىق</td>
+                        <td>كۆپ ماسلاشتۇرۇش، كەڭ قوللىنىش</td>
+                        <td>كۆپ كود يېزىش كېرەك، ئىنتېراكتىپلىق تۆۋەن</td>
+                        <td>ئادەتتىكى گرافىكىلار، ئىلمىي تەتقىقات</td>
+                    </tr>
+                    <tr>
+                        <td>Seaborn</td>
+                        <td>يۇقىرى سەۋىيە، ماتپلوتلىب ئاساسىدا</td>
+                        <td>ئاز كود بىلەن ياخشى نەتىجە، گۈزەل دىزايىن</td>
+                        <td>ماسلاشتۇرۇش چەكلىك، ماتپلوتلىب كېرەك</td>
+                        <td>ستاتىستىكىلىق گرافىكىلار، سانلىق مەلۇمات تەھلىلى</td>
+                    </tr>
+                    <tr>
+                        <td>Bokeh</td>
+                        <td>ئىنتېراكتىپ، تور ئاساسىدىكى</td>
+                        <td>يۇقىرى ئىنتېراكتىپلىق، تور كۆرسىتىش</td>
+                        <td>ئۆگىنىش قىيىن، كۆپ كود كېرەك</td>
+                        <td>تور ئەپلىرى، دېشبوردلار</td>
+                    </tr>
+                    <tr>
+                        <td>Plotly</td>
+                        <td>ئىنتېراكتىپ، يۇقىرى سەۋىيە</td>
+                        <td>يۇقىرى ئىنتېراكتىپلىق، ئاز كود، گۈزەل گرافىكىلار</td>
+                        <td>ئېچىۋېتىش مۇرەككەپ، چوڭ ھەجىملىك</td>
+                        <td>دېشبوردلار، تور ئەپلىرى، سانلىق مەلۇمات تەھلىلى</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="demo" class="interactive-demo">
+            <h2>ئىنتېراكتىپ دېمو</h2>
+            <p>بۇ يەردە سىز تۆت كۈتۇپخانىنىڭ گرافىكا تۈرلىرىنى سېلىشتۇرۇپ كۆرەلەيسىز.</p>
+            
+            <div class="demo-controls">
+                <select id="library-select">
+                    <option value="matplotlib">Matplotlib</option>
+                    <option value="seaborn">Seaborn</option>
+                    <option value="bokeh">Bokeh</option>
+                    <option value="plotly">Plotly</option>
+                </select>
+                
+                <select id="plot-type-select">
+                    <option value="scatter">تارقاق نۇقتا گرافىكى</option>
+                    <option value="line">سىزىق گرافىكى</option>
+                    <option value="bar">ستون گرافىكى</option>
+                    <option value="histogram">ھىستوگرامما</option>
+                </select>
+                
+                <button id="generate-plot-btn">گرافىكا ھاسىل قىلىش</button>
+            </div>
+            
+            <div class="demo-plot">
+                <p>گرافىكا بۇ يەردە كۆرۈنىدۇ. يۇقىرىدىكى كونتروللارنى ئىشلىتىپ گرافىكا تۈرى ۋە كۈتۇپخانىنى تاللاڭ.</p>
+            </div>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span>تاللانغان كود</span>
+                    <button class="copy-btn" onclick="copyCode(this)">كودنى كۆچۈرۈش</button>
+                </div>
+                <pre><code id="demo-code"># گرافىكا تۈرى ۋە كۈتۇپخانىنى تاللاڭ</code></pre>
+            </div>
+        </section>
+        
+        <section id="conclusion">
+            <h2>خۇلاسە</h2>
+            <p>بۇ دەرسلىكتە، بىز تۆت ئوخشىمىغان Python سىزىش مودۇللىرى يەنى Matplotlib، Seaborn، Bokeh، ۋە Plotly ياردىمى بىلەن tips سانلىق مەلۇمات بازىسىنى سىزدۇق. ھەر بىر مودۇل گرافىكىنى ئۆزىنىڭ ئالاھىدە ئۇسۇلىدا كۆرسەتتى ۋە ھەر بىرىنىڭ ماتپلوتلىب كۆپ ئىشلىنىشچانلىقنى تەمىنلەيدۇ، ئەمما كۆپ كود يېزىش تەلەپ قىلىدۇ، Seaborn بولسا يۇقىرى سەۋىيەلىك تىل بولۇپ، ئوخشاش نەتىجىگە ئاز كود بىلەن ئېرىشىشنى يول قويىدۇ قاتارلىق ئۆزىنىڭ ئالاھىدىلىكلىرىگە ئىگە. ھەر بىر مودۇل بىز قىلماقچى بولغان ۋەزىپىگە قاراپ ئىشلىتىلەلەيدۇ.</p>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Python سانلىق مەلۇمات كۆرسىتىش دەرسلىكى &copy; 2023</p>
+            <p>بۇ دەرسلىك Python دىكى سانلىق مەلۇمات كۆرسىتىش كۈتۇپخانىلىرى ھەققىدە تولۇق چۈشەنچە بېرىش ئۈچۈن تەييارلانغان.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // كودنى كۆچۈرۈش فۇنكسىيەسى
+        function copyCode(button) {
+            const codeBlock = button.parentElement.parentElement;
+            const code = codeBlock.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'كۆچۈرۈلدى!';
+                setTimeout(() => {
+                    button.textContent = 'كودنى كۆچۈرۈش';
+                }, 2000);
+            });
+        }
+        
+        // ئىنتېراكتىپ دېمو فۇنكسىيەسى
+        document.getElementById('generate-plot-btn').addEventListener('click', function() {
+            const library = document.getElementById('library-select').value;
+            const plotType = document.getElementById('plot-type-select').value;
+            const demoPlot = document.querySelector('.demo-plot');
+            const demoCode = document.getElementById('demo-code');
+            
+            // گرافىكا ئورنىغا قويۇش
+            demoPlot.innerHTML = `<p>${library} بىلەن ${plotType} گرافىكىسى</p><p>(بۇ دېمو ئۈچۈن، بۇ رەسىم ئورنىغا قويۇلغان)</p>`;
+            
+            // ماس كودنى كۆرسىتىش
+            let code = '';
+            if (library === 'matplotlib') {
+                if (plotType === 'scatter') {
+                    code = `import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("tips.csv")
+plt.scatter(data['day'], data['tip'])
+plt.title("تارقاق نۇقتا گرافىكى")
+plt.xlabel('كۈن')
+plt.ylabel('چەك')
+plt.show()`;
+                } else if (plotType === 'line') {
+                    code = `import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("tips.csv")
+plt.plot(data['tip'])
+plt.title("سىزىق گرافىكى")
+plt.xlabel('ئىندېكس')
+plt.ylabel('چەك')
+plt.show()`;
+                } else if (plotType === 'bar') {
+                    code = `import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("tips.csv")
+plt.bar(data['day'], data['tip'])
+plt.title("ستون گرافىكى")
+plt.xlabel('كۈن')
+plt.ylabel('چەك')
+plt.show()`;
+                } else if (plotType === 'histogram') {
+                    code = `import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("tips.csv")
+plt.hist(data['total_bill'])
+plt.title("ھىستوگرامما")
+plt.xlabel('ئومۇمىي ھېساب')
+plt.show()`;
+                }
+            } else if (library === 'seaborn') {
+                if (plotType === 'scatter') {
+                    code = `import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+sns.scatterplot(x='day', y='tip', data=data, hue='sex')
+plt.show()`;
+                } else if (plotType === 'line') {
+                    code = `import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+sns.lineplot(x='day', y='tip', data=data)
+plt.show()`;
+                } else if (plotType === 'bar') {
+                    code = `import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+sns.barplot(x='day', y='tip', data=data, hue='sex')
+plt.show()`;
+                } else if (plotType === 'histogram') {
+                    code = `import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+sns.histplot(x='total_bill', data=data, kde=True, hue='sex')
+plt.show()`;
+                }
+            } else if (library === 'bokeh') {
+                if (plotType === 'scatter') {
+                    code = `from bokeh.plotting import figure, show
+from bokeh.palettes import magma
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+graph = figure(title="Bokeh تارقاق نۇقتا گرافىكى")
+color = magma(256)
+graph.scatter(data['total_bill'], data['tip'], color=color)
+show(graph)`;
+                } else if (plotType === 'line') {
+                    code = `from bokeh.plotting import figure, show
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+graph = figure(title="Bokeh سىزىق گرافىكى")
+df = data['tip'].value_counts()
+graph.line(df, data['tip'])
+show(graph)`;
+                } else if (plotType === 'bar') {
+                    code = `from bokeh.plotting import figure, show
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+graph = figure(title="Bokeh ستون گرافىكى")
+graph.vbar(data['total_bill'], top=data['tip'])
+show(graph)`;
+                } else if (plotType === 'histogram') {
+                    code = `# Bokeh دىكى ھىستوگرامما ئۈچۈن، سىز quad ئۇسۇلىنى ئىشلىتىشىڭىز كېرەك
+from bokeh.plotting import figure, show
+import numpy as np
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+hist, edges = np.histogram(data['total_bill'], bins=20)
+graph = figure(title="Bokeh ھىستوگرامما")
+graph.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:], fill_color="blue", line_color="white")
+show(graph)`;
+                }
+            } else if (library === 'plotly') {
+                if (plotType === 'scatter') {
+                    code = `import plotly.express as px
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+fig = px.scatter(data, x="day", y="tip", color='sex')
+fig.show()`;
+                } else if (plotType === 'line') {
+                    code = `import plotly.express as px
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+fig = px.line(data, y='tip', color='sex')
+fig.show()`;
+                } else if (plotType === 'bar') {
+                    code = `import plotly.express as px
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+fig = px.bar(data, x='day', y='tip', color='sex')
+fig.show()`;
+                } else if (plotType === 'histogram') {
+                    code = `import plotly.express as px
+import pandas as pd
+
+data = pd.read_csv("tips.csv")
+fig = px.histogram(data, x='total_bill', color='sex')
+fig.show()`;
+                }
+            }
+            
+            demoCode.textContent = code;
+        });
+        
+        // تىزىملىك تاللاش ئۆزگەرگەندە، مۇمكىن بولغان گرافىكا تۈرلىرىنى تەڭشەش
+        document.getElementById('library-select').addEventListener('change', function() {
+            const library = this.value;
+            const plotTypeSelect = document.getElementById('plot-type-select');
+            
+            // Bokeh دىكى ھىستوگرامما ئۈچۈن ئالاھىدە ھالەت
+            if (library === 'bokeh') {
+                // Bokeh دىكى ھىستوگرامما ئۈچۈن ئالاھىدە ئۇسۇل كېرەك
+                // بۇ يەردە ئادەتتىكى تاللاشلارنى ساقلايمىز
+            }
+        });
+    </script>
+</body>
+</html>

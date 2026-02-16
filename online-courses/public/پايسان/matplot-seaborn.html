@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ماشىنا ئۈگىنىش ۋە مەلۇمات تەھلىلى ئۈچۈن 10 تۈرلۈك گىرافىك</title>
+
+  <!-- Amiri font for Uyghur/Arabic script -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text: #2d2d2d;
+      --primary: #1e88e5;
+      --card-bg: #ffffff;
+      --code-bg: #282c34;
+      --code-text: #abb2bf;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Amiri', serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 20px;
+      direction: rtl;
+    }
+
+    h1, h2, h3 {
+      margin: 20px 0 15px;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.3rem;
+    }
+
+    .intro, .libs-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 18px;
+      background: #f0f8ff;
+      border-radius: 12px;
+      border-right: 4px solid var(--primary);
+    }
+
+    .chart-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-right: 4px solid var(--primary);
+    }
+
+    .chart-title {
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    .chart-desc, .usage, .strength, .reading-tips {
+      margin-bottom: 15px;
+    }
+
+    .code-container {
+      margin: 15px 0;
+    }
+
+    .CodeMirror {
+      direction: ltr !important;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .code-label {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    ul, ol {
+      padding-right: 25px;
+      margin: 10px 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ماشىنا ئۈگىنىش ۋە مەلۇمات تەھلىلى ئۈچۈن 10 تۈرلۈك گىرافىك</h1>
+
+  <!-- ============ Matplotlib & Seaborn Intro ============ -->
+  <div class="libs-intro">
+    <h2>Matplotlib ۋە Seaborn دېگىنىمىز نېمە؟</h2>
+    <p>
+      <strong>Matplotlib</strong> — Python نىڭ ئەڭ ئاساسىي گىرافىك قۇرۇش كۈتۈخانىسى. ھەممە تۈرلۈك گىرافىكنى ئىشلەتكىلى بولىدۇ، لېكىن ئىنتايىن تەپسىلى ھەم قۇرۇلۇشچان.
+      <br><br>
+      <strong>Seaborn</strong> — Matplotlib نىڭ ئۈستىدىكى يەنە بىر ئېگىز دەرىجىلىك كۈتۈخانا. سىزنىڭ مەلۇماتىڭىزغا ئاساسەن ئاپتوماتىك گىرافىك شەكىللەرنى ھاسىل قىلىدۇ، كۆركەم، ئىناۋەتلىك ۋە كۆپچىلىك تەھلىلچىلەر تەلىپ قىلىدۇ.
+    </p>
+    <p><strong>پەرقى نېمە؟</strong></p>
+    <ul style="text-align: right; margin-top: 10px;">
+      <li>	Matplotlib — قۇرۇلۇشچان، بىرەر خىزىت، نۇقتا ياكى تىك تۆت بۇلۇڭنى ئۆزىڭىز قۇرۇش كېرەك.</li>
+      <li>	Seaborn — مەلۇمات جەدۋىلى (DataFrame) بىلەن ئىشلەيدۇ، بىر قۇر بىلەن ئىناۋەتلىك گىرافىكنى بېرىدۇ.</li>
+      <li>	Seaborn دا رەڭ تاللاش، legend، title كۆپىنچىسى ئاپتوماتىك.</li>
+      <li>	Matplotlib — باشقى كۈتۈخانىلار (Pandas, Seaborn) نىڭ ئۈستى قەۋىتى.</li>
+    </ul>
+    <p><strong>قانداق ئىشلىتىمىز؟</strong> Matplotlib نىڭ ئاساسىي ئامالى: <code>plt.plot()</code>، <code>plt.scatter()</code>، <code>plt.hist()</code>. Seaborn نىڭ ئاساسىي ئامالى: <code>sns.scatterplot()</code>، <code>sns.boxplot()</code>، <code>sns.heatmap()</code>.</p>
+  </div>
+
+  <!-- ============ 1. Histogram ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">1. ھىستوگرامما (Histogram)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> ئۈزلۈكسىز سانلىق مەلۇماتنىڭ <strong>تارقىلىش دەرىجىسى</strong>نى كۆرسىتىدۇ.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> ياش، بەھا، باھا، تېمپېراتۇرا كۆرۈنۈشىدەك تارقىلىشنى كۆرسىتىش ئۈچۈن.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>ئۈزلۈكسىز ئۆزگەرگۈچلەرگە ماس.</li>
+        <li>KDE (Kernel Density Estimate) بىلەن بىرلەشتۈرۈش مۇمكىن.</li>
+        <li>نورمال، چىككە، چوقۇر تارقىلىشنى بايان قىلىدۇ.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>بار ئېگىزلىكى — بۇ ئارىلىقتىكى مەلۇمات سانى كۆپ.</li>
+        <li>سولغا قايلۇق — كىچىك قىممەتلەر كۆپ.</li>
+        <li>ئوڭغا قايلۇق — چوڭ قىممەتلەر كۆپ.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Matplotlib):</div>
+      <textarea id="c1" style="display:none;">
+import matplotlib.pyplot as plt
+import numpy as np
+
+ages = np.random.normal(30, 10, 1000)
+plt.hist(ages, bins=30, color='skyblue', edgecolor='black')
+plt.title('Yash Tarqilishi')
+plt.xlabel('Yash')
+plt.ylabel('سانى')
+plt.show()
+      </textarea>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Seaborn):</div>
+      <textarea id="c2" style="display:none;">
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({'scores': np.random.normal(75, 10, 500)})
+sns.histplot(data=df, x='scores', kde=True, color='purple')
+plt.title('بېھى تارقىلىشى (KDE بىلەن)')
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 2. Box Plot ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">2. بۇكس پلوت (Box Plot)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> مەلۇماتنىڭ <strong>Q1, Q2 (Mediaan), Q3, outliers</strong> نى كۆرسىتىدۇ.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> گۇرۇھلارنى سېلىشتۇرۇش، چىقىرىق قىممەتلەرنى تېكشۈرۈش.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>توربىقىنىڭ ئىچىدە Mediaan بار.</li>
+        <li>چىتىندىكى نۇقتىلار — outliers.</li>
+        <li>تارقىلىش دائىرىسى كۆزگە كۆرۈنەرلىك.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>توربىقىنىڭ ئۇزۇنلۇقى — مەلۇماتنىڭ تارقىلىش ئېنىقلىقى.</li>
+        <li>توربىقىنىڭ ئوتتۇرىسى خىزىت — Mediaan.</li>
+        <li>نۇقتىلار چىتىندە بولسا — تاللاش ياكى چىكارىش كېرەك.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Matplotlib):</div>
+      <textarea id="c3" style="display:none;">
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = [np.random.normal(0, std, 100) for std in range(1, 4)]
+plt.boxplot(data, labels=['Gr1', 'Gr2', 'Gr3'])
+plt.title('Box Plot - گۇرۇھلارنى سېلىشتۇرۇش')
+plt.ylabel('قىممەت')
+plt.show()
+      </textarea>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Seaborn):</div>
+      <textarea id="c4" style="display:none;">
+import seaborn as sns
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="total_bill", data=tips)
+plt.title("كۈنلەر بويىچە ھېسابات تارقىلىشى")
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 3. Scatter Plot ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">3. چېچىلىش گىرافىكى (Scatter Plot)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> ئىككى سانلىق ئۆزگەرگۈچ ئوتتۇرىسىدىكى <strong>باغلىنىش</strong> (correlation) نى كۆرسىتىدۇ.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> باغلىنىش بارمۇ، مۇسبەت/سالبىت، ياكى يوقمۇ دېگەن سوئالغا جاۋاب ئىزدەش.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>ھەر بىر نۇقتا — (x, y) قىممىتى.</li>
+        <li>خىزىت قوشۇپ كوررېلاتسىيە دەرىجىسىنى كۆرسىتىش مۇمكىن.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>نۇقتىلار خىزىت سۈپىتىدە بولسا — كۈچلۈك باغلىنىش.</li>
+        <li>نۇقتىلار تارقىلىپ كەتسە — باغلىنىش يوق.</li>
+        <li>ئايرىلۋېتىلگەن نۇقتا — outlier بولۇشى مۇمكىن.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Matplotlib):</div>
+      <textarea id="c5" style="display:none;">
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.random.randn(100)
+y = 2 * x + np.random.randn(100) * 0.5
+plt.scatter(x, y, alpha=0.6, color='green')
+plt.title('Scatter Plot - باغلىنىش')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.show()
+      </textarea>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Seaborn):</div>
+      <textarea id="c6" style="display:none;">
+import seaborn as sns
+iris = sns.load_dataset("iris")
+sns.scatterplot(data=iris, x="sepal_length", y="sepal_width", hue="species")
+plt.title("گۈلنىڭ سېپال ئۇزۇنلۇقى ۋە كەڭلىكى")
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 4. Line Plot ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">4. خىزىت گىرافىكى (Line Plot)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> ۋاقىت بويىچە ياكى تەرتىپلىك ئۆزگەرگۈچنىڭ <strong>داۋاملىق ئۆزگىرىشى</strong>نى كۆرسىتىدۇ.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> ھەر كۈنكى سېتىش، دۆلەت بويىچە ئىقتىسادىي ئۆسۈش، تېمپېراتۇرا ئۆزگىرىشى.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>ۋاقىت سىرىيىسىگە ماس.</li>
+        <li>خىزىت بىلەن داۋاملىق ھەرىكەتنى كۆرسىتىدۇ.</li>
+        <li>بىر نەچچە خىزىت بىلەن سېلىشتۇرۇش مۇمكىن.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>خىزىت يۇقىرى بارسا — ئۆسۈش.</li>
+        <li>خىزىت تۆۋەن كەتسە — كېمۈش.</li>
+        <li>توپىلاڭغۇچ بولسا — مۇرەككەپ ئۆزگىرىش.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Matplotlib):</div>
+      <textarea id="c7" style="display:none;">
+import matplotlib.pyplot as plt
+
+days = range(1, 8)
+temps = [22, 24, 19, 24, 27, 30, 28]
+plt.plot(days, temps, marker='o', color='red')
+plt.title('ھەپتەلىك ھاۋا ھالىتى')
+plt.xlabel('كۈن')
+plt.ylabel('گىرادۇس')
+plt.show()
+      </textarea>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Seaborn):</div>
+      <textarea id="c8" style="display:none;">
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    'date': pd.date_range('2025-01-01', periods=30),
+    'sales': np.cumsum(np.random.randn(30)) + 100
+})
+sns.lineplot(data=df, x='date', y='sales')
+plt.title('دەللىك سېتىش داۋاملىقلىقى')
+plt.xticks(rotation=45)
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 5. Bar Plot ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">5. تىك تۆت بۇلۇڭ گىرافىكى (Bar Plot)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> <strong>كاتېگورىيىلىك</strong> (Category) مەلۇماتلارنى <strong>سانلىق سېلىشتۇرۇش</strong>.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> دۆلەت بويىچە ئەھالى، مەھسۇلات بويىچە سېتىش، ۋاقىت بويىچە باھا.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>كاتېگورىيىلارنى سېلىشتۇرۇشقا ئەڭ ئاسان ئۇسۇل.</li>
+        <li>تىك ياكى ياتما (horizontal) بولىدۇ.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>بار ئېگىزلىكى — قىممەت چوڭ بولغان.</li>
+        <li>بارلارنىڭ تەرتىپى — سېلىشتۇرۇش ئۈچۈن مۇھىم.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Matplotlib):</div>
+      <textarea id="c9" style="display:none;">
+import matplotlib.pyplot as plt
+
+countries = ['ئۇيغۇر رايونى', 'جۇڭگو', 'ئامېرىكا']
+pop = [20, 1400, 330]
+plt.bar(countries, pop, color=['blue', 'red', 'green'])
+plt.title('دۆلەت بويىچە ئەھالى')
+plt.ylabel('مىليون')
+plt.show()
+      </textarea>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Seaborn):</div>
+      <textarea id="c10" style="display:none;">
+import seaborn as sns
+tips = sns.load_dataset("tips")
+sns.barplot(x="day", y="tip", data=tips)
+plt.title("كۈنلەر بويىچە بالدۇق مىقدارى")
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 6. Heatmap ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">6. ئىسسىقلىق خەرىتىسى (Heatmap)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> ماترىتسا شەكلىدىكى مەلۇماتنى <strong>رەڭ زىچلىقى</strong> بىلەن كۆرسىتىدۇ.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> كوررېلاتسىيە ماترىتسىسى، كۆپ ئۆزگەرگۈچلۈك مۇناسىۋەتنى بايان قىلىش.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>بىر قارايدىلا مۇناسىۋەتنى بايقالىدۇ.</li>
+        <li>رەڭ قانچە قىزىل/كۆك بولسا، شۇنچە مۇسبەت/سالبىت باغلىنىش.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>قارا/ئاق رەڭ — زىچلىق نولگە يېقىن.</li>
+        <li>قارا رەڭ ياكى يېشىل — مۇسبەت كۈچلۈك باغلىنىش.</li>
+        <li>كۆك — سالبىت باغلىنىش.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Seaborn):</div>
+      <textarea id="c11" style="display:none;">
+import seaborn as sns
+import pandas as pd
+
+iris = sns.load_dataset("iris")
+corr = iris.corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("گۈل ئۆلچىمى بويىچە كوررېلاتسىيە")
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 7. Pie Chart ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">7. ئاي سۈرەت (Pie Chart)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> بۇجىت ياكى بۆلەك <strong>نىسبىتى</strong>نى دائىرە شەكلىدە كۆرسىتىدۇ.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> بۇجىت بۆلەكلىرى، زېمىن ئىشلىتىش نىسبىتى، بازىرىڭ ھېسمى.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>بۆلەك نىسبىتىنى قانچىلىك كۆرسىتىدۇ.</li>
+        <li>5 تىن ئاز بۆلەك ئۈچۈن ئىشلىتىش كېرەك.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>بۆلەك چوڭ بولسا — نىسبىتى يۇقىرى.</li>
+        <li>بۆلەك سانى كۆپ بولسا — ئوقۇش قىيىن.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Matplotlib):</div>
+      <textarea id="c12" style="display:none;">
+import matplotlib.pyplot as plt
+
+labels = ['ئوقۇش', 'ئىش', 'ئۈي', 'دەم ئالىش']
+sizes = [30, 40, 20, 10]
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
+plt.title('كۈندەلۈك ۋاقىت تەقسىماتى')
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 8. Violin Plot ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">8. ۋىيولىن پلوت (Violin Plot)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> Box Plot + KDE = مەلۇماتنىڭ <strong>تارقىلىش شەكلى</strong>نى جىلۋىلىك كۆرسىتىدۇ.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> تارقىلىشنىڭ شەكلىنى Box Plot تەك چەكلىمىگەن ھالەتتە بايان قىلىش.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>Box Plot نىڭ ئىقتىدارى + KDE نىڭ شەكلى.</li>
+        <li>چوقۇر يېتىلغان ئورۇن — مەلۇمات زىچلىقى يۇقىرى.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>چوقۇر — زىچلىق يۇقىرى.</li>
+        <li>توربىقىنىڭ ئوتتۇرىسى — Mediaan.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Seaborn):</div>
+      <textarea id="c13" style="display:none;">
+import seaborn as sns
+tips = sns.load_dataset("tips")
+sns.violinplot(x="day", y="total_bill", data=tips)
+plt.title('كۈنلەر بويىچە ھېسابات تارقىلىشى (Violin)')
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 9. Pair Plot ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">9. جۈپ گىرافىك (Pair Plot)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> بىر قانچە ئۆزگەرگۈچنىڭ <strong>ھەممە بىر-بىرى بىلەن چېچىلىشى</strong>نى بىر جەدۋەلدىكى گىرافىقلاردا كۆرسىتىدۇ.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> ماشىنا ئۈگىنىش بۇرۇن مەلۇماتنىڭ بىر-بىرى بىلەن بولغان باغلىنىشىنى تەكشۈرۈش.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>بىر قۇر بىلەن كۆپ ئۆزگەرگۈچلۈك مۇناسىۋەت كۆرۈنىدۇ.</li>
+        <li>ھەر بىر دىياگونالدا ھىستوگرامما ياكى KDE بولىدۇ.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>خىزىت سۈپىتىدە نۇقتىلار بولسا — كۈچلۈك باغلىنىش.</li>
+        <li>تارقىلىپ كەتسە — باغلىنىش يوق.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Seaborn):</div>
+      <textarea id="c14" style="display:none;">
+import seaborn as sns
+iris = sns.load_dataset("iris")
+sns.pairplot(iris, hue="species")
+plt.suptitle("گۈل ئۆلچىمى جۈپ گىرافىكى", y=1.02)
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 10. Count Plot ============ -->
+  <div class="chart-section">
+    <h2 class="chart-title">10. ھېساب گىرافىكى (Count Plot)</h2>
+    <div class="chart-desc"><strong>نېمە؟</strong> ھەر بىر <strong>كاتېگورىيىنىڭ تەكرارلىنىش سانى</strong>نى كۆرسىتىدۇ.</div>
+    <div class="usage"><strong>قانداق ئىشلىتىلىدۇ؟</strong> كۈنلەر بويىچە ترانزاكىتسىيە سانى، ئومايدىكى ھالەتلەر سانى.</div>
+    <div class="strength"><strong>ئالاھىدىلىكى:</strong>
+      <ul>
+        <li>Bar Plot نىڭ ئاپتوماتىك نۇسخىسى.</li>
+        <li>ئۆزىڭىز ھېسابلاشقا ھاجەت يوق.</li>
+      </ul>
+    </div>
+    <div class="reading-tips"><strong>نىمەگە دىققەت قىلىش كېرەك؟</strong>
+      <ul>
+        <li>بار ئېگىزلىكى — بۇ كاتېگورىيىنىڭ سانى كۆپ.</li>
+        <li>سالىشتۇرۇش ئۈچۈن ئەڭ ئاسان ئۇسۇل.</li>
+      </ul>
+    </div>
+    <div class="code-container">
+      <div class="code-label">مېسال (Seaborn):</div>
+      <textarea id="c15" style="display:none;">
+import seaborn as sns
+tips = sns.load_dataset("tips")
+sns.countplot(x="day", data=tips)
+plt.title("كۈنلەر بويىچە ھېسابات سانى")
+plt.show()
+      </textarea>
+    </div>
+  </div>
+
+  <footer>
+    <p>دەرسلىك: ماشىنا ئۈگىنىش ۋە مەلۇمات ئانالىزى ئۈچۈن 10 گىرافىك • تەييارلاندى: 2025-يىلى 4-سىنتەبىر</p>
+    <p>ئۇيغۇرچە تىل دەرسلىكى، KeLBiL Uyghur RTL، Professional Design • كۆچۈرۈش ۋە ئىشلىتىش ھەققى ھەممىگە بار KeLBiL</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const textareas = document.querySelectorAll('textarea[id^="c"]');
+      textareas.forEach(ta => {
+        CodeMirror.fromTextArea(ta, {
+          mode: "python",
+          readOnly: true,
+          lineNumbers: true,
+          theme: "default",
+          direction: "ltr",
+          viewportMargin: Infinity
+        });
+      });
+    });
+  </script>
+</body>
+</html>

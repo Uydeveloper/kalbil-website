@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>كىۋانىت فىزىكىسى 2-باب – فوتون ۋە قۇۋۋەت</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/python/python.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+  <style>
+    :root {
+      --bg: #f9f7f0;
+      --text-ug: #2a2a2a;
+      --text-en: #333;
+      --primary: #1a237e;
+      --card: #ffffff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg); font-family:'Amiri',serif; color:var(--text-ug);
+      line-height:1.7; padding:20px; direction:rtl;
+    }
+    h1 { text-align:center; color:var(--primary); font-size:2.3rem; margin:0 0 25px; }
+    .intro {
+      background: #e8eaf6; padding:25px; border-radius:14px; margin-bottom:30px;
+      border-right:5px solid var(--primary); text-align:center;
+    }
+    .section {
+      background: var(--card); padding:22px; margin-bottom:28px;
+      border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.06);
+      border-right:4px solid var(--primary);
+    }
+    .title-ug { font-size:1.6rem; font-weight:bold; color:var(--primary); margin-bottom:10px; }
+    .title-en { font-size:1.25rem; font-family:'Inter',sans-serif; color:#555;
+      direction:ltr; text-align:left; margin-bottom:15px; }
+    .en { font-family:'Inter',sans-serif; direction:ltr; text-align:left;
+      background:#f8f9fa; padding:12px; border-radius:8px; margin-top:12px;
+      border-left:3px solid #607d8b; }
+    .graph {
+      text-align:center; margin:18px 0; padding:15px; background:#f5f7ff;
+      border-radius:10px; direction:ltr;
+    }
+    .code-container { margin:18px 0; }
+    .CodeMirror {
+      direction:ltr !important; font-family:'Fira Code',monospace; font-size:14px;
+      border-radius:8px; overflow:hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>كىۋانىت فىزىكىسى 2-باب – فوتون ۋە قۇۋۋەت</h1>
+  <p>
+    <strong>فوتون</strong> — يورۇقلۇقنىڭ كىۋانىتى. بۇ زەررىنىڭ ئېنېرگىيىسى تولۇقنىڭ <strong>تېخى</strong> (frequency) ياكى <strong>دولغۇن ئۇزۇنلۇقى</strong> (wavelength) بىلەن مۇناسىۋىتى بار.
+    تېخى قانچە يۇقىرى بولسا، ئېنېرگىيە شۇنچە يۇقىرى.
+  </p>
+  <div class="en">A photon is a quantum of light. Its energy is directly proportional to its frequency, and inversely proportional to its wavelength.</div>
+</div>
+
+<div class="section">
+  <div class="title-ug">1. ئاساسىي فورمىلا</div>
+  <div class="title-en">1. Key Formula</div>
+  <div class="katex-display" style="direction:ltr;text-align:center;">
+    \( E = h \nu = \frac{hc}{\lambda} \)
+  </div>
+  <p>بۇ يەردە:</p>
+  <ul>
+    <li>\( E \) = فوتوننىڭ ئېنېرگىيىسى (Joule)</li>
+    <li>\( h \) = بلانك دوۋامى = \( 6.626 \times 10^{-34}  \text{J·s} \)</li>
+    <li>\( \nu \) = تېخى (Hz)</li>
+    <li>\( c \) = يورۇقلۇق سۈرئىتى = \( 3 \times 10^8  \text{m/s} \)</li>
+    <li>\( \lambda \) = دولغۇن ئۇزۇنلۇقى (مېتىر)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="title-ug">2. رەڭ ۋە ئېنېرگىيە باغلىنىشى</div>
+  <div class="title-en">2. Color vs Energy</div>
+  <div class="graph">
+    <svg width="500" height="80" style="background:#fff;border-radius:8px;padding:10px;">
+      <!-- Spectrum -->
+      <rect x="0" y="20" width="50" height="30" fill="violet" />
+      <rect x="50" y="20" width="50" height="30" fill="blue" />
+      <rect x="100" y="20" width="50" height="30" fill="cyan" />
+      <rect x="150" y="20" width="100" height="30" fill="green" />
+      <rect x="250" y="20" width="100" height="30" fill="yellow" />
+      <rect x="350" y="20" width="70" height="30" fill="orange" />
+      <rect x="420" y="20" width="80" height="30" fill="red" />
+      <text x="0" y="70" font-family="Amiri" font-size="12" fill="#333">زىچ (يۇقىرى E)</text>
+      <text x="400" y="70" font-family="Amiri" font-size="12" fill="#333">سۈزۈك (تۆۋەن E)</text>
+    </svg>
+    <p style="font-family:Amiri; margin-top:8px;">كۆك نۇر (400 نانومېتىر) نىڭ ئېنېرگىيىسى، قىزىل نۇر (700 نانومېتىر) نىڭكىدىن يۇقىرى.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="title-ug">3. مىسال كود: فوتون ئېنېرگىيىسى ھېسابلاش</div>
+  <div class="title-en">3. Code Example</div>
+  <div class="code-container">
+    <textarea id="c1" style="display:none;">
+# فوتون ئېنېرگىيىسى ھېسابلاش
+h = 6.626e-34  # J·s
+c = 3e8         # m/s
+
+def photon_energy(wavelength_nm):
+    """دولغۇن ئۇزۇنلۇقى (نانومېتىر) بويىچە ئېنېرگىيىنى ھېسابلاش"""
+    lam = wavelength_nm * 1e-9  # نانومېتىردىن مېتىرغا
+    return h * c / lam
+
+# مىسال: قىزىل ۋە كۆك نۇر
+print(f"قىزىل نۇر (700 nm): {photon_energy(700):.3e} J")
+print(f"كۆك نۇر (400 nm): {photon_energy(400):.3e} J")  # كۆك نۇر ئېنېرگىيەسى يۇقىرى!
+    </textarea>
+  </div>
+</div>
+
+<footer style="text-align:center; margin-top:40px; padding:20px; color:#666;">
+  <p>كىۋانىت فىزىكىسى 2-باب – فوتون ۋە قۇۋۋەت</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textareas = document.querySelectorAll('textarea[id^="c"]');
+  textareas.forEach(ta => {
+    CodeMirror.fromTextArea(ta, {
+      mode: "python", readOnly: true, lineNumbers: true,
+      theme: "default", direction: "ltr", viewportMargin: Infinity
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>كىۋانىت ماشىنا ئۆگىنىش 5-باب – Quantum Neural Networks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/python/python.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+  <style>
+    :root {
+      --bg: #f9f7f0;
+      --text-ug: #2a2a2a;
+      --text-en: #333;
+      --primary: #00695c;
+      --card: #ffffff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg); font-family:'Amiri',serif; color:var(--text-ug);
+      line-height:1.7; padding:20px; direction:rtl;
+    }
+    h1 { text-align:center; color:var(--primary); font-size:2.3rem; margin:0 0 25px; }
+    .intro {
+      background: #e0f2f1; padding:25px; border-radius:14px; margin-bottom:30px;
+      border-right:5px solid var(--primary); text-align:center;
+    }
+    .section {
+      background: var(--card); padding:22px; margin-bottom:28px;
+      border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.06);
+      border-right:4px solid var(--primary);
+    }
+    .title-ug { font-size:1.6rem; font-weight:bold; color:var(--primary); margin-bottom:10px; }
+    .title-en { font-size:1.25rem; font-family:'Inter',sans-serif; color:#555;
+      direction:ltr; text-align:left; margin-bottom:15px; }
+    .en { font-family:'Inter',sans-serif; direction:ltr; text-align:left;
+      background:#f8f9fa; padding:12px; border-radius:8px; margin-top:12px;
+      border-left:3px solid #00796b; }
+    .graph {
+      text-align:center; margin:18px 0; padding:15px; background:#f0f9f8;
+      border-radius:10px; direction:ltr;
+    }
+    .code-container { margin:18px 0; }
+    .CodeMirror {
+      direction:ltr !important; font-family:'Fira Code',monospace; font-size:14px;
+      border-radius:8px; overflow:hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>كىۋانىت ماشىنا ئۆگىنىش 5-باب – Quantum Neural Networks</h1>
+  <p>
+    <strong>Quantum Neural Network (QNN)</strong> — كىۋانىت ئاماللىرى ئارقىلىق نېرۋا تورىنى سىمىلاتسىيە قىلىش.
+    بۇ مودېل <strong>پارامېتىرلىك كىۋانىت سېستىمىسى</strong> نى ئىشلىتىپ،
+    مەلۇماتنىڭ ئالاھىدىلىكىنى ئۆگىنىدۇ.
+  </p>
+  <div class="en">A Quantum Neural Network (QNN) uses parameterized quantum circuits to mimic classical neural networks, leveraging quantum effects for feature encoding and learning.</div>
+</div>
+
+<div class="section">
+  <div class="title-ug">1. QNN نىڭ تۈزۈلمىسى</div>
+  <div class="title-en">1. QNN Architecture</div>
+  <ul>
+    <li><strong>كىرگۈزگۈچ ئەزالىتىش قەۋىتى</strong> (Encoding Layer): كلاسسىك مەلۇماتنى Qubit ھالىتىگە ئايلاندۇرىدۇ.</li>
+    <li><strong>ياردەمچى قەۋەتلەر</strong> (Ansatz): ئۆگىنىش بارلىقى قەۋەتلەر.</li>
+    <li><strong>چىقىرىش</strong>: PauliZ ياكى باشقا ئۆلچەش ئامالى.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="title-ug">2. كىرگۈزگۈچ ئەزالىتىش</div>
+  <div class="title-en">2. Data Encoding</div>
+  <p>كلاسسىك مەلۇماتنى كىۋانىت دۇنياسىغا كىرگۈزۈش ئۇسۇللىرى:</p>
+  <ul>
+    <li><strong>Amplitude Encoding</strong>: مەلۇماتنى Qubit نىڭ ئامپلىتۇدسىغا قويۇش (ئەڭ قۇۋۋەتلىك، لېكىن قىيىن).</li>
+    <li><strong>Angle Encoding</strong>: RY، RZ قەۋەتلەر بىلەن مەلۇماتنى بۇلۇڭ بۇلۇڭ قىلىش (ئادەتتىكى ئۇسلۇب).</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="title-ug">3. مىسال كود: QNN بىلەن كلاسسىفىكاتسىيە</div>
+  <div class="title-en">3. Code Example</div>
+  <div class="code-container">
+    <textarea id="c1" style="display:none;">
+import pennylane as qml
+from pennylane import numpy as np
+
+# دېۋایس
+dev = qml.device('default.qubit', wires=2)
+
+# QNN مودېلى
+@qml.qnode(dev)
+def qnn_model(weights, features):
+    # Angle Encoding
+    qml.RX(features[0], wires=0)
+    qml.RY(features[1], wires=1)
+    
+    # Ansatz
+    qml.CNOT(wires=[0, 1])
+    qml.RY(weights[0], wires=0)
+    qml.RX(weights[1], wires=1)
+    
+    return qml.expval(qml.PauliZ(0))
+
+# مەلۇمات
+X = np.array([[0.1, 0.2], [0.9, 0.8]])
+y = np.array([1, -1])
+
+# باشلانغۇچ پارامېتىر
+weights = np.random.random(2)
+
+# چىقىرىش
+for i in range(len(X)):
+    pred = qnn_model(weights, X[i])
+    print(f"نۇمۇنە {i}: چىقىرىش = {pred:.3f}, ھەقىقىي = {y[i]}")
+    </textarea>
+  </div>
+</div>
+
+<footer style="text-align:center; margin-top:40px; padding:20px; color:#666;">
+  <p>كىۋانىت ماشىنا ئۆگىنىش 5-باب – Quantum Neural Networks</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textareas = document.querySelectorAll('textarea[id^="c"]');
+  textareas.forEach(ta => {
+    CodeMirror.fromTextArea(ta, {
+      mode: "python", readOnly: true, lineNumbers: true,
+      theme: "default", direction: "ltr", viewportMargin: Infinity
+    });
+  });
+});
+</script>
+</body>
+</html>

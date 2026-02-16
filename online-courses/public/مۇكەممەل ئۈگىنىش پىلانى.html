@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مۇكەممەل ئۈگىنىش پىلانى - تەپسىلىي دەرس مەزمۇنلىرى</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --python: #3776ab;
+            --ml: #f39c12;
+            --dl: #9b59b6;
+            --nlp: #1abc9c;
+            --genai: #e67e22;
+            --llm: #34495e;
+            --warning: #f39c12;
+            --info: #3498db;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            position: relative;
+        }
+        .learning-path {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+        .step {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-right: 6px solid var(--python);
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        .step.ml {
+            border-right-color: var(--ml);
+        }
+        .step.dl {
+            border-right-color: var(--dl);
+        }
+        .step.nlp {
+            border-right-color: var(--nlp);
+        }
+        .step.genai {
+            border-right-color: var(--genai);
+        }
+        .step.llm {
+            border-right-color: var(--llm);
+        }
+        .step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.12);
+        }
+        .step-number {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border-bottom-right-radius: 12px;
+            z-index: 2;
+            box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-right: 70px;
+        }
+        .step-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .step-subtitle {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        .step-icon {
+            font-size: 2.8rem;
+            margin-left: 25px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+        .step-content {
+            margin-bottom: 25px;
+        }
+        .learning-topics {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 4px solid var(--secondary);
+        }
+        .learning-topics h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .learning-topics h3::before {
+            content: "🎯";
+            margin-left: 10px;
+        }
+        .topic-category {
+            margin-bottom: 25px;
+        }
+        .topic-category h4 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .topic-category h4::before {
+            content: "▶";
+            margin-left: 12px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        .topic-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 15px;
+        }
+        .topic-item {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 3px solid var(--secondary);
+        }
+        .topic-item:hover {
+            transform: translateX(-8px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.12);
+        }
+        .topic-item::before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            margin-left: 15px;
+            font-size: 1.2rem;
+        }
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+        .code-example::before {
+            content: "🐍";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.2rem;
+        }
+        .code-comment {
+            color: #75715e;
+        }
+        .code-keyword {
+            color: #f92672;
+        }
+        .code-function {
+            color: #66d9ef;
+        }
+        .code-string {
+            color: #e6db74;
+        }
+        .formula {
+            background: #f8f9fa;
+            border-right: 5px solid var(--accent);
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Cambria Math', serif;
+            font-size: 1.3rem;
+            border-radius: 10px 0 0 10px;
+            box-shadow: -2px 2px 6px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .formula-label {
+            font-size: 1rem;
+            color: var(--dark);
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+        }
+        .visualization {
+            margin-top: 25px;
+            text-align: center;
+        }
+        .chart {
+            width: 100%;
+            height: 220px;
+            background: var(--light);
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        .bar {
+            width: 12%;
+            background: var(--secondary);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            transition: height 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .bar-value {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        .resources {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid var(--info);
+        }
+        .resources h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .resources h3::before {
+            content: "📚";
+            margin-left: 10px;
+        }
+        .resources ul {
+            list-style-type: none;
+        }
+        .resources li {
+            margin-bottom: 12px;
+            padding-right: 15px;
+            position: relative;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .resources li::before {
+            content: "📖";
+            margin-left: 10px;
+            color: var(--info);
+        }
+        .progress-container {
+            margin: 50px 0;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--success);
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .progress-bar {
+            height: 15px;
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent), var(--success));
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 8px;
+        }
+        .progress-percentage {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: var(--dark);
+            font-size: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            border-top: 3px solid var(--primary);
+        }
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        @media (max-width: 768px) {
+            .step-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .step-icon {
+                margin-left: 0;
+                margin-bottom: 15px;
+                font-size: 2.2rem;
+            }
+            .topic-list {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            .step-title {
+                font-size: 1.6rem;
+            }
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            .step {
+                padding: 20px;
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+        .step:nth-child(4) { animation-delay: 0.4s; }
+        .step:nth-child(5) { animation-delay: 0.5s; }
+        .step:nth-child(6) { animation-delay: 0.6s; }
+        
+        /* Enhanced SVG styling */
+        .neural-network-svg {
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        /* Interactive elements */
+        .step {
+            cursor: pointer;
+        }
+        .step.completed {
+            border-right-color: var(--success);
+            background: linear-gradient(to right, #f8fff8, white);
+        }
+        .step.completed .step-number {
+            background: var(--success);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>مۇكەممەل ئۈگىنىش پىلانى</h1>
+            <p class="subtitle">تەپسىلىي دەرس مەزمۇنلىرى بىلەن تېخنىكا ۋە سۇنئىي ئەقىل ساھەسى</p>
+        </header>
+        <div class="progress-container">
+            <div class="progress-header">
+                <span>ئۈگىنىش پىلانىنىڭ ئومۇمىي پىششىقاقلىقى</span>
+                <span id="progress-text">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="overall-progress"></div>
+                <div class="progress-percentage" id="progress-percentage">0%</div>
+            </div>
+        </div>
+        <div class="learning-path">
+            <!-- Step 1: Python -->
+            <div class="step" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-header">
+                    <div>
+                        <h2 class="step-title">Python</h2>
+                        <p class="step-subtitle">Harvard CS50's Python Programming Course</p>
+                    </div>
+                    <div class="step-icon">🐍</div>
+                </div>
+                <div class="step-content">
+                    <p>Python نۆۋەتتىكى ئەڭ مۇھىم پروگرامما تىلى بولۇپ، سۇنئىي ئەقىل تەتقىقاتىنىڭ ئاساسىدۇر. بۇ قەدەمدە Python دىكى ئاساسىي ئۇسۇللار، مەلۇمات قۇرۇلمىسى ۋە كىتاپخانا ئىشلىتىش ئۆگىنىلىدۇ.</p>
+                    <div class="learning-topics">
+                        <h3>ئۆگىنىدىغان مەزمۇنلار:</h3>
+                        <div class="topic-category">
+                            <h4>ئاساسىي سىنتاكس ۋە ئىپادىلەر</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">print() ۋە input() فۇنكسىيىلىرى</div>
+                                <div class="topic-item">ئۆزگەرگۈچىلەر ۋە مەلۇمات تىپلىرى (int, float, str, bool)</div>
+                                <div class="topic-item">ئىپادىلەر ۋە operatorلار (+, -, *, /, %)</div>
+                                <div class="topic-item">قوش ۋە سېلىشتۇرما operatorلار (==, !=, <, >, <=, >=)</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>شەرتلىك ئىپادىلەر ۋە loopلار</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">if, elif, else ئىپادىلىرى</div>
+                                <div class="topic-item">for loop ۋە range() فۇنكسىيىسى</div>
+                                <div class="topic-item">while loop</div>
+                                <div class="topic-item">break ۋە continue ئىپادىلىرى</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>فۇنكسىيەلەر ۋە مودۇللار</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">فۇنكسىيە ياساش ۋە چاقىرىش</div>
+                                <div class="topic-item">پارامېتىرلار ۋە قايتۇرما قىممەت</div>
+                                <div class="topic-item">lambda فۇنكسىيىلىرى</div>
+                                <div class="topic-item">مودۇل ئىشلىتىش (import)</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>مەلۇمات قۇرۇلمىلىرى</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">List (تىزىملىك) ۋە ئۇستىدە ئەمەللىيەتلەر</div>
+                                <div class="topic-item">Tuple (تىزىملىك) ۋە ئۇنىڭ ئالاھىدىلىكى</div>
+                                <div class="topic-item">Dictionary (لۇغەت) ۋە key-value جۈپلىرى</div>
+                                <div class="topic-item">Set (جەمئىيەت) ۋە ئىشلىتىش ئۇسۇلى</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>كىتاپخانا ۋە قوراللار</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">NumPy - سانلىق ھېسابلاش كىتاپخانىسى</div>
+                                <div class="topic-item">Pandas - مەلۇمات تەھلىل قىلىش كىتاپخانىسى</div>
+                                <div class="topic-item">Matplotlib ۋە Seaborn - گرافىك كۆرسىتىش</div>
+                                <div class="topic-item">Jupyter Notebook ئىشلىتىش</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-example">
+                        <span class="code-comment"># Python ئاساسىي كود مىسالى</span><br>
+                        <span class="code-keyword">def</span> <span class="code-function">salom_ber</span>(ism):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">print</span>(<span class="code-string">f"سالوم {ism}!"</span>)<br><br>
+                        <span class="code-comment"># List بىلەن ئىشلەش</span><br>
+                        ئىسىملار = [<span class="code-string">"ئەخمەت"</span>, <span class="code-string">"زەينەپ"</span>, <span class="code-string">"مەمەت"</span>]<br>
+                        <span class="code-keyword">for</span> ئىسىم <span class="code-keyword">in</span> ئىسىملار:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;salom_ber(ئىسىم)<br><br>
+                        <span class="code-comment"># NumPy ئىشلىتىش</span><br>
+                        <span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np<br>
+                        سانلار = np.array([1, 2, 3, 4, 5])<br>
+                        <span class="code-keyword">print</span>(<span class="code-string">"ئوتتۇرىچە قىممەت:"</span>, np.mean(سانلار))
+                    </div>
+                    <div class="resources">
+                        <h3>ئۆگىنىش مەنبەلىرى:</h3>
+                        <ul>
+                            <li>Harvard CS50's Python Programming Course (ئەڭ ياخشى باشلانغۇچ دەرس)</li>
+                            <li>Python ئاساسىي كود يېزىش ئۇسۇللىرى</li>
+                            <li>NumPy ۋە Pandas كىتاپخانىلىرىنى ئۆگىنىش</li>
+                            <li>Python بىلەن ماتېماتىكىلىق ھېسابلاش ماھارىتى</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 2: Machine Learning -->
+            <div class="step ml" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-header">
+                    <div>
+                        <h2 class="step-title">ماشىنا ئۆگىنىش</h2>
+                        <p class="step-subtitle">CS229: Machine Learning (Stanford University)</p>
+                    </div>
+                    <div class="step-icon">🤖</div>
+                </div>
+                <div class="step-content">
+                    <p>ماشىنا ئۆگىنىش سۇنئىي ئەقىلنىڭ مۇھىم تارماقلىرىنىڭ بىرى بولۇپ، كومپيۇتېرلارنىڭ مەلۇمات ئاساسىدا ئۆگىنىش ئىقتىدارىنى تەرەققىي قىلدۇرىدۇ.</p>
+                    <div class="learning-topics">
+                        <h3>ئۆگىنىدىغان مەزمۇنلار:</h3>
+                        <div class="topic-category">
+                            <h4>ئاساسىي نەزەرىيە ۋە ئالگورىتملار</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">سىزىقلىق رىگرېسسىيە (Linear Regression)</div>
+                                <div class="topic-item">لوجىستىك رىگرېسسىيە (Logistic Regression)</div>
+                                <div class="topic-item">قارار دارىخىسى (Decision Trees)</div>
+                                <div class="topic-item">ك-ئەڭ يېقىن كۆرۈنەشلەر (K-Nearest Neighbors)</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>مودېل باھالاش ۋە تەڭشەش</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">Train/Test/Validation ئايرىش</div>
+                                <div class="topic-item">Cross-Validation ئۇسۇلى</div>
+                                <div class="topic-item">Confusion Matrix ۋە مېترىكىلار</div>
+                                <div class="topic-item">Hyperparameter تەڭشەش</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>كىتاپخانا ۋە ئەمەلىيلەشتۈرۈش</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">Scikit-learn كىتاپخانىسى</div>
+                                <div class="topic-item">مەلۇمات ئايرىش ۋە normalizatsiya</div>
+                                <div class="topic-item">Pipeline قۇرۇش</div>
+                                <div class="topic-item">مودېل ساقلاش ۋە يۈكلەش</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="formula">
+                        h<sub>θ</sub>(x) = θ<sub>0</sub> + θ<sub>1</sub>x<sub>1</sub> + θ<sub>2</sub>x<sub>2</sub> + ... + θ<sub>n</sub>x<sub>n</sub>
+                    </div>
+                    <p class="formula-label">يۇقىرىدىكى فورمۇلا سىزىقلىق رىگرىسىيەنىڭ ئاساسىي فورمۇلىسىدۇر.</p>
+                    <div class="code-example">
+                        <span class="code-comment"># Scikit-learn بىلەن ماشىنا ئۆگىنىش مىسالى</span><br>
+                        <span class="code-keyword">from</span> sklearn.model_selection <span class="code-keyword">import</span> train_test_split<br>
+                        <span class="code-keyword">from</span> sklearn.linear_model <span class="code-keyword">import</span> LinearRegression<br>
+                        <span class="code-keyword">from</span> sklearn.metrics <span class="code-keyword">import</span> mean_squared_error<br><br>
+                        <span class="code-comment"># مەلۇماتنى ئايرىش</span><br>
+                        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)<br><br>
+                        <span class="code-comment"># مودېل ياساش ۋە ئۆگىتىش</span><br>
+                        model = LinearRegression()<br>
+                        model.fit(X_train, y_train)<br><br>
+                        <span class="code-comment"># پىششىقاقلىقنى باھالاش</span><br>
+                        predictions = model.predict(X_test)<br>
+                        mse = mean_squared_error(y_test, predictions)<br>
+                        <span class="code-keyword">print</span>(<span class="code-string">"ئوتتۇرىچە kvadrat خاتالىق:"</span>, mse)
+                    </div>
+                    <div class="resources">
+                        <h3>ئۆگىنىش مەنبەلىرى:</h3>
+                        <ul>
+                            <li>Stanford University CS229: Machine Learning</li>
+                            <li>Andrew Ng'ning Coursera دىكى ماشىنا ئۆگىنىش دەرسلىكى</li>
+                            <li>Scikit-learn كىتاپخانىسىنى ئىشلىتىش</li>
+                            <li>ماشىنا ئۆگىنىش ئالگورىتملىرىنى چۈشىنىش ۋە ئەمەلىيلەشتۈرۈش</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 3: Deep Learning -->
+            <div class="step dl" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-header">
+                    <div>
+                        <h2 class="step-title">چوڭقۇر ئۆگىنىش</h2>
+                        <p class="step-subtitle">[Practical] Deep Learning Full Course from fast.ai</p>
+                    </div>
+                    <div class="step-icon">🧠</div>
+                </div>
+                <div class="step-content">
+                    <p>چوڭقۇر ئۆگىنىش ماشىنا ئۆگىنىشنىڭ ئالاھىدە بىر تۈرى بولۇپ، كۆپ قاتلاملىق ياساما سېزىش تورى (Neural Network) ئارقىلىق مۇرەككەپ مەسىلىلەرنى ھەل قىلىدۇ.</p>
+                    <div class="learning-topics">
+                        <h3>ئۆگىنىدىغان مەزمۇنلار:</h3>
+                        <div class="topic-category">
+                            <h4>ياساما سېزىش تورى ئاساسلىرى</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">Perceptron ۋە ئۇنىڭ خۇسۇسىيىتى</div>
+                                <div class="topic-item">ئاكتىۋلاش فۇنكسىيىلىرى (Sigmoid, ReLU, Tanh)</div>
+                                <div class="topic-item">ئارقىغا تارقىتىش (Backpropagation)</div>
+                                <div class="topic-item">گرادىيەنت تۈشۈش (Gradient Descent)</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>تور قۇرۇلمىلىرى</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">CNN (Convolutional Neural Networks)</div>
+                                <div class="topic-item">RNN (Recurrent Neural Networks)</div>
+                                <div class="topic-item">LSTM ۋە GRU</div>
+                                <div class="topic-item">Autoencoder ۋە GAN</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>ئەمەلىي ئىشلىتىش ۋە كىتاپخانىلار</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">TensorFlow ۋە Keras</div>
+                                <div class="topic-item">PyTorch ۋە ئۇنىڭ ئالاھىدىلىكى</div>
+                                <div class="topic-item">Transfer Learning ئۇسۇلى</div>
+                                <div class="topic-item">مودېل optimizatsiya ئۇسۇللىرى</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualization">
+                        <h3>ياساما سېزىش تورى قۇرۇلمىسى</h3>
+                        <svg class="neural-network-svg" width="800" height="220" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Input Layer -->
+                            <circle cx="100" cy="110" r="18" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+                            <circle cx="100" cy="60" r="18" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+                            <circle cx="100" cy="160" r="18" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+                            <text x="100" y="200" text-anchor="middle" fill="#2c3e50" font-weight="bold" font-size="14">كىرگۈزۈش قاتلىمى</text>
+                            <!-- Hidden Layers -->
+                            <circle cx="300" cy="50" r="18" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+                            <circle cx="300" cy="110" r="18" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+                            <circle cx="300" cy="170" r="18" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+                            <circle cx="500" cy="50" r="18" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+                            <circle cx="500" cy="110" r="18" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+                            <circle cx="500" cy="170" r="18" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+                            <text x="400" y="200" text-anchor="middle" fill="#2c3e50" font-weight="bold" font-size="14">يوشۇرۇن قاتلamlار</text>
+                            <!-- Output Layer -->
+                            <circle cx="700" cy="110" r="18" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                            <text x="700" y="200" text-anchor="middle" fill="#2c3e50" font-weight="bold" font-size="14">چىقىرىش قاتلىمى</text>
+                            <!-- Connections -->
+                            <line x1="118" y1="60" x2="282" y2="50" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="118" y1="110" x2="282" y2="50" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="118" y1="160" x2="282" y2="50" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="118" y1="60" x2="282" y2="110" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="118" y1="110" x2="282" y2="110" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="118" y1="160" x2="282" y2="110" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="118" y1="60" x2="282" y2="170" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="118" y1="110" x2="282" y2="170" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="118" y1="160" x2="282" y2="170" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            
+                            <line x1="318" y1="50" x2="482" y2="50" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="318" y1="110" x2="482" y2="50" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="318" y1="170" x2="482" y2="50" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="318" y1="50" x2="482" y2="110" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="318" y1="110" x2="482" y2="110" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="318" y1="170" x2="482" y2="110" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="318" y1="50" x2="482" y2="170" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="318" y1="110" x2="482" y2="170" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="318" y1="170" x2="482" y2="170" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            
+                            <line x1="518" y1="50" x2="682" y2="110" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="518" y1="110" x2="682" y2="110" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                            <line x1="518" y1="170" x2="682" y2="110" stroke="#bdc3c7" stroke-width="1.5" opacity="0.7"/>
+                        </svg>
+                    </div>
+                    <div class="code-example">
+                        <span class="code-comment"># PyTorch بىلەن ياساما سېزىش تورى مىسالى</span><br>
+                        <span class="code-keyword">import</span> torch<br>
+                        <span class="code-keyword">import</span> torch.nn <span class="code-keyword">as</span> nn<br>
+                        <span class="code-keyword">import</span> torch.optim <span class="code-keyword">as</span> optim<br><br>
+                        <span class="code-comment"># ياساما سېزىش تورى ئانىقلىمىسى</span><br>
+                        <span class="code-keyword">class</span> SimpleNN(nn.Module):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(SimpleNN, self).__init__()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.layer1 = nn.Linear(10, 50)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.layer2 = nn.Linear(50, 1)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.relu = nn.ReLU()<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">forward</span>(self, x):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = self.relu(self.layer1(x))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = self.layer2(x)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> x<br><br>
+                        <span class="code-comment"># مودېل ۋە optimizer ياساش</span><br>
+                        model = SimpleNN()<br>
+                        optimizer = optim.Adam(model.parameters(), lr=0.001)<br>
+                        criterion = nn.MSELoss()
+                    </div>
+                    <div class="resources">
+                        <h3>ئۆگىنىش مەنبەلىرى:</h3>
+                        <ul>
+                            <li>fast.ai نىڭ ئەمەلىي چوڭقۇر ئۆگىنىش دەرسلىكى</li>
+                            <li>PyTorch ياكى TensorFlow دىن بىرىنى ئۆگىنىش</li>
+                            <li>CNN (Convolutional Neural Networks) ئارقىلىق رەسىم تونۇش</li>
+                            <li>RNN (Recurrent Neural Networks) ئارقىلىق ۋاقىت قاتارلىق مەلۇماتلارنى بىر تەرەپ قىلىش</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 4: NLP -->
+            <div class="step nlp" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-header">
+                    <div>
+                        <h2 class="step-title">تەبىئىي تىل بىر تەرەپ قىلىش (NLP)</h2>
+                        <p class="step-subtitle">CS224N/Ling284: Natural Language Processing with Deep Learning</p>
+                    </div>
+                    <div class="step-icon">💬</div>
+                </div>
+                <div class="step-content">
+                    <p>تەبىئىي تىل بىر تەرەپ قىلىش (NLP) كومپيۇتېرلارنىڭ ئىنسان تىلىنى چۈشىنىش ۋە بىر تەرەپ قىلىش ئىقتىدارىنى تەرەققىي قىلدۇرىدۇ.</p>
+                    <div class="learning-topics">
+                        <h3>ئۆگىنىدىغان مەزمۇنلار:</h3>
+                        <div class="topic-category">
+                            <h4>تىل مودېللىرى ۋە ئىشلەش</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">N-gram مودېللىرى</div>
+                                <div class="topic-item">Word2Vec ۋە GloVe</div>
+                                <div class="topic-item">Transformer ئارخىتېكتۇرىسى</div>
+                                <div class="topic-item">BERT ۋە GPT مودېللىرى</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>تىل پاراشلاش ۋە تىپۇزلاش</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">Tokenization ۋە stemming</div>
+                                <div class="topic-item">Part-of-Speech تىپۇزلاش</div>
+                                <div class="topic-item">Named Entity Recognition (NER)</div>
+                                <div class="topic-item">Dependency parsing</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>تىل ئىشلەپچىقىرىش ۋە چۈشىنىش</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">تېكىست سىناقلاش (Sentiment Analysis)</div>
+                                <div class="topic-item">تىل ئايلاندۇرۇش (Machine Translation)</div>
+                                <div class="topic-item">سۇئال جاۋابلاش (Question Answering)</div>
+                                <div class="topic-item">تېكىست قىسقارتىش (Text Summarization)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="formula">
+                        Attention(Q, K, V) = softmax(QK<sup>T</sup>/√d<sub>k</sub>)V
+                    </div>
+                    <p class="formula-label">يۇقىرىدىكى فورمۇلا Transformer دىكى دىققەت مېخانىزمىنىڭ ئاساسىي فورمۇلىسىدۇر.</p>
+                    <div class="code-example">
+                        <span class="code-comment"># Hugging Face Transformers كىتاپخانىسى بىلەن NLP مىسالى</span><br>
+                        <span class="code-keyword">from</span> transformers <span class="code-keyword">import</span> pipeline, AutoTokenizer, AutoModelForSequenceClassification<br><br>
+                        <span class="code-comment"># سىناق پىپىلىنىسى ياساش</span><br>
+                        classifier = pipeline(<span class="code-string">"sentiment-analysis"</span>)<br>
+                        result = classifier(<span class="code-string">"بۇ كىتاب ناھايىتى ياخشى!"</span>)<br>
+                        <span class="code-keyword">print</span>(result)<br><br>
+                        <span class="code-comment"># Tokenizer ۋە مودېل يۈكلەش</span><br>
+                        tokenizer = AutoTokenizer.from_pretrained(<span class="code-string">"bert-base-uncased"</span>)<br>
+                        model = AutoModelForSequenceClassification.from_pretrained(<span class="code-string">"bert-base-uncased"</span>)<br><br>
+                        <span class="code-comment"># تېكىستنى token قىلىش</span><br>
+                        inputs = tokenizer(<span class="code-string">"بۇ مىسال جۈملىسى"</span>, return_tensors=<span class="code-string">"pt"</span>)<br>
+                        outputs = model(**inputs)
+                    </div>
+                    <div class="resources">
+                        <h3>ئۆگىنىش مەنبەلىرى:</h3>
+                        <ul>
+                            <li>Stanford CS224N: Natural Language Processing with Deep Learning</li>
+                            <li>Transformer ئارخىتېكتۇرىسىنى چۈشىنىش</li>
+                            <li>BERT, GPT قاتارلىق زامانىۋى NLP مودېللىرىنى ئۆگىنىش</li>
+                            <li>NLP ئۈچۈن مەلۇمات توپلاش ۋە بىر تەرەپ قىلىش</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 5: Generative AI -->
+            <div class="step genai" data-step="5">
+                <div class="step-number">5</div>
+                <div class="step-header">
+                    <div>
+                        <h2 class="step-title">يېتىلدۈرۈشچان سۇنئىي ئەقىل</h2>
+                        <p class="step-subtitle">Generative AI - [General] University</p>
+                    </div>
+                    <div class="step-icon">🎨</div>
+                </div>
+                <div class="step-content">
+                    <p>يېتىلدۈرۈشچان سۇنئىي ئەقىل يېڭى مەزمۇنلارنى يارىتىش ئىقتىدارىغا ئىگە بولۇپ، رەسىم، تېكىست، ئاۋاز ۋە باشقا مەلۇمات تۈرلىرىنى يېتىلدۈرەلەيدۇ.</p>
+                    <div class="learning-topics">
+                        <h3>ئۆگىنىدىغان مەزمۇنلار:</h3>
+                        <div class="topic-category">
+                            <h4>يېتىلدۈرۈشچان مودېللار</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">GAN (Generative Adversarial Networks)</div>
+                                <div class="topic-item">VAE (Variational Autoencoders)</div>
+                                <div class="topic-item">Diffusion Model لار</div>
+                                <div class="topic-item">Flow-based Model لار</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>يېتىلدۈرۈشچان تېخنىكىلار</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">تېكىست يېتىلدۈرۈش (Text Generation)</div>
+                                <div class="topic-item">رەسىم يېتىلدۈرۈش (Image Generation)</div>
+                                <div class="topic-item">ئاۋاز يېتىلدۈرۈش (Audio Generation)</div>
+                                <div class="topic-item">ۋىدىئو يېتىلدۈرۈش (Video Generation)</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>ئەمەلىي قوللىنىش</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">Stable Diffusion ۋە DALL-E</div>
+                                <div class="topic-item">GPT مودېللىرى بىلەن تېكىست يېتىلدۈرۈش</div>
+                                <div class="topic-item">Prompt Engineering ئۇسۇللىرى</div>
+                                <div class="topic-item">Conditional Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualization">
+                        <h3>يېتىلدۈرۈشچان سۇنئىي ئەقىل تەرەققىياتى</h3>
+                        <div class="chart">
+                            <div class="bar" style="height: 50%;">
+                                <span class="bar-value">50%</span>
+                                <div class="bar-label">GANs</div>
+                            </div>
+                            <div class="bar" style="height: 70%;">
+                                <span class="bar-value">70%</span>
+                                <div class="bar-label">VAEs</div>
+                            </div>
+                            <div class="bar" style="height: 85%;">
+                                <span class="bar-value">85%</span>
+                                <div class="bar-label">Transformer</div>
+                            </div>
+                            <div class="bar" style="height: 90%;">
+                                <span class="bar-value">90%</span>
+                                <div class="bar-label">Diffusion</div>
+                            </div>
+                            <div class="bar" style="height: 95%;">
+                                <span class="bar-value">95%</span>
+                                <div class="bar-label">LLMs</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-example">
+                        <span class="code-comment"># GAN ئاساسىي قۇرۇلمىسى مىسالى</span><br>
+                        <span class="code-keyword">import</span> torch<br>
+                        <span class="code-keyword">import</span> torch.nn <span class="code-keyword">as</span> nn<br><br>
+                        <span class="code-comment"># Generator ئانىقلىمىسى</span><br>
+                        <span class="code-keyword">class</span> Generator(nn.Module):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(Generator, self).__init__()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.main = nn.Sequential(<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.Linear(100, 256),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.ReLU(),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.Linear(256, 512),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.ReLU(),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.Linear(512, 784),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.Tanh()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">forward</span>(self, x):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> self.main(x)<br><br>
+                        <span class="code-comment"># Discriminator ئانىقلىمىسى</span><br>
+                        <span class="code-keyword">class</span> Discriminator(nn.Module):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(Discriminator, self).__init__()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.main = nn.Sequential(<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.Linear(784, 512),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.LeakyReLU(0.2),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.Linear(512, 256),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.LeakyReLU(0.2),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.Linear(256, 1),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nn.Sigmoid()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+                    </div>
+                    <div class="resources">
+                        <h3>ئۆگىنىش مەنبەلىرى:</h3>
+                        <ul>
+                            <li>يېتىلدۈرۈشچان سۇنئىي ئەقىلنىڭ ئاساسىي نەزەرىيىسى</li>
+                            <li>GAN (Generative Adversarial Networks) لارنى ئۆگىنىش</li>
+                            <li>Diffusion Model لارنى چۈشىنىش</li>
+                            <li>يېتىلدۈرۈشچان سۇنئىي ئەقىل ئەخلاقى ۋە چەكلىمىلىرى</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 6: LLM -->
+            <div class="step llm" data-step="6">
+                <div class="step-number">6</div>
+                <div class="step-header">
+                    <div>
+                        <h2 class="step-title">چوڭ تىل مودېللىرى (LLM)</h2>
+                        <p class="step-subtitle">[Concrete] LLM University</p>
+                    </div>
+                    <div class="step-icon">📚</div>
+                </div>
+                <div class="step-content">
+                    <p>چوڭ تىل مودېللىرى (LLM) نۆۋەتتىكى ئەڭ ئىلغار سۇنئىي ئەقىل تېخنىكىسى بولۇپ، كۆپلىگەن تېكىست مەلۇماتلىرىدا ئۆگىتىلگەن چوڭ كۆلەملىك ياساما سېزىش تورلىرىدۇر.</p>
+                    <div class="learning-topics">
+                        <h3>ئۆگىنىدىغان مەزمۇنلار:</h3>
+                        <div class="topic-category">
+                            <h4>LLM ئاساسىي نەزەرىيىسى</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">Transformer ئارخىتېكتۇرىسىنى تەپسىلىي چۈشىنىش</div>
+                                <div class="topic-item">Attention مېخانىزمى ۋە ئۇنىڭ خۇسۇسىيىتى</div>
+                                <div class="topic-item">Positional Encoding ئۇسۇلى</div>
+                                <div class="topic-item">Multi-Head Attention ئىشلىتىش</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>LLM ياساش ۋە ئۆگىتىش</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">Pre-training ۋە Fine-tuning</div>
+                                <div class="topic-item">Prompt Engineering ئۇسۇللىرى</div>
+                                <div class="topic-item">Instruction Tuning</div>
+                                <div class="topic-item">Parameter-Efficient Fine-tuning (PEFT)</div>
+                            </div>
+                        </div>
+                        <div class="topic-category">
+                            <h4>LLM قوللىنىش ۋە optimizatsiya</h4>
+                            <div class="topic-list">
+                                <div class="topic-item">LLM لارنى خاس ئەھۋالغا ماسلاشتۇرۇش</div>
+                                <div class="topic-item">Model quantization ۋە compression</div>
+                                <div class="topic-item">Inference optimizatsiya</div>
+                                <div class="topic-item">LLM بىخەتەرلىكى ۋە ئەخلاقىي مەسىلىلەر</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="formula">
+                        P(w<sub>1</sub>, w<sub>2</sub>, ..., w<sub>n</sub>) = Π<sub>i=1</sub><sup>n</sup> P(w<sub>i</sub> | w<sub>1</sub>, ..., w<sub>i-1</sub>)
+                    </div>
+                    <p class="formula-label">يۇقىرىدىكى فورمۇلا تىل مودېللىرىنىڭ ئاساسىي پىرىنسىپىنى كۆرسىتىدۇ.</p>
+                    <div class="code-example">
+                        <span class="code-comment"># Transformer دىكى دىققەت مېخانىزمى مىسالى</span><br>
+                        <span class="code-keyword">import</span> torch<br>
+                        <span class="code-keyword">import</span> torch.nn <span class="code-keyword">as</span> nn<br>
+                        <span class="code-keyword">import</span> torch.nn.functional <span class="code-keyword">as</span> F<br><br>
+                        <span class="code-comment"># دىققەت مېخانىزمى ئانىقلىمىسى</span><br>
+                        <span class="code-keyword">class</span> Attention(nn.Module):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, dim):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(Attention, self).__init__()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.dim = dim<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.query = nn.Linear(dim, dim)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.key = nn.Linear(dim, dim)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.value = nn.Linear(dim, dim)<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">forward</span>(self, x):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q = self.query(x)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = self.key(x)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V = self.value(x)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attention_weights = F.softmax(Q @ K.transpose(-2, -1) / (self.dim ** 0.5), dim=-1)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output = attention_weights @ V<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> output
+                    </div>
+                    <div class="resources">
+                        <h3>ئۆگىنىش مەنبەلىرى:</h3>
+                        <ul>
+                            <li>LLM University دىكى كونكرېت دەرسلەر</li>
+                            <li>Transformer ئارخىتېكتۇرىسىنى تەپسىلىي ئۆگىنىش</li>
+                            <li>Prompt Engineering ماھارىتىنى ئىگىلەش</li>
+                            <li>LLM لارنى خاس ئەھۋالغا ماسلاشتۇرۇش ۋە يېنىكلىتىش</li>
+                            <li>LLM لارنىڭ بىخەتەرلىكى ۋە ئەخلاقىي مەسىلىلىرى</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-content">
+                <p>بۇ ئۈگىنىش پىلانى تېخنىكا ۋە سۇنئىي ئەقىل ساھەسىدىكى كەسپىي تەرەققىيات ئۈچۈن تەييارلاندى. ھەربىر قەدەمدە تەپسىلىي چۈشەندۈرۈلۈپ، كېرەكلىك مەنبەلەر بىلەن تەمىنلەندى.</p>
+                <p>KaLBil  تېخنىكا ۋە سۇنئىي ئەقىل ئۈگىنىش مەركىزى <b><span>© 2025</span></b></p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Enhanced progress bar animation with percentage display
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.getElementById('overall-progress');
+            const progressText = document.getElementById('progress-text');
+            const progressPercentage = document.getElementById('progress-percentage');
+            const steps = document.querySelectorAll('.step');
+            
+            // Initialize progress
+            let currentProgress = 0;
+            const totalSteps = steps.length;
+            const stepProgress = 100 / totalSteps;
+            
+            // Animate initial progress
+            const animateInitialProgress = () => {
+                if (currentProgress < stepProgress) {
+                    currentProgress += 0.5;
+                    updateProgress(currentProgress);
+                    requestAnimationFrame(animateInitialProgress);
+                }
+            };
+            
+            // Start initial animation
+            setTimeout(animateInitialProgress, 500);
+            
+            // Add click event to steps to update progress
+            steps.forEach((step, index) => {
+                step.addEventListener('click', () => {
+                    // Mark as completed
+                    step.classList.add('completed');
+                    
+                    // Calculate new progress
+                    const clickedStep = parseInt(step.dataset.step);
+                    const newProgress = clickedStep * stepProgress;
+                    
+                    // Animate to new progress
+                    const animateToProgress = () => {
+                        if (currentProgress < newProgress) {
+                            currentProgress += 1;
+                            if (currentProgress > newProgress) currentProgress = newProgress;
+                            updateProgress(currentProgress);
+                            requestAnimationFrame(animateToProgress);
+                        }
+                    };
+                    
+                    animateToProgress();
+                });
+            });
+            
+            function updateProgress(value) {
+                progressBar.style.width = value + '%';
+                const roundedValue = Math.round(value);
+                progressText.textContent = roundedValue + '%';
+                progressPercentage.textContent = roundedValue + '%';
+            }
+            
+            // Add scroll animation for steps
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+            
+            steps.forEach(step => {
+                observer.observe(step);
+                step.style.animationPlayState = 'paused';
+            });
+        });
+    </script>
+</body>
+</html>

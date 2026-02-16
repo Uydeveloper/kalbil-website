@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>كىۋانىت ماشىنا ئۆگىنىش 7-باب – ئامالىي مەسىلىلەر</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/python/python.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+  <style>
+    :root {
+      --bg: #f9f7f0;
+      --text-ug: #2a2a2a;
+      --text-en: #333;
+      --primary: #00695c;
+      --card: #ffffff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg); font-family:'Amiri',serif; color:var(--text-ug);
+      line-height:1.7; padding:20px; direction:rtl;
+    }
+    h1 { text-align:center; color:var(--primary); font-size:2.3rem; margin:0 0 25px; }
+    .intro {
+      background: #e0f2f1; padding:25px; border-radius:14px; margin-bottom:30px;
+      border-right:5px solid var(--primary); text-align:center;
+    }
+    .section {
+      background: var(--card); padding:22px; margin-bottom:28px;
+      border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.06);
+      border-right:4px solid var(--primary);
+    }
+    .title-ug { font-size:1.6rem; font-weight:bold; color:var(--primary); margin-bottom:10px; }
+    .title-en { font-size:1.25rem; font-family:'Inter',sans-serif; color:#555;
+      direction:ltr; text-align:left; margin-bottom:15px; }
+    .en { font-family:'Inter',sans-serif; direction:ltr; text-align:left;
+      background:#f8f9fa; padding:12px; border-radius:8px; margin-top:12px;
+      border-left:3px solid #00796b; }
+    .graph {
+      text-align:center; margin:18px 0; padding:15px; background:#f0f9f8;
+      border-radius:10px; direction:ltr;
+    }
+    .code-container { margin:18px 0; }
+    .CodeMirror {
+      direction:ltr !important; font-family:'Fira Code',monospace; font-size:14px;
+      border-radius:8px; overflow:hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>كىۋانىت ماشىنا ئۆگىنىش 7-باب – ئامالىي مەسىلىلەر</h1>
+  <p>
+    كىۋانىت ماشىنا ئۈگىنىش ھازىر يەنە ئىلىم-تەربىيە دەرىجىسىدە بولسىمۇ،
+    بەزى <strong>ئامالىي مەسىلىلەر</strong>دە دەللىكلىك كۆرسىتىپ باشلىدى.
+    بۇ يەرگە ئۇلارنىڭ بەزىلىرىنى كەلتۈرۈش.
+  </p>
+  <div class="en">While still emerging, QML shows promise in real-world applications like drug discovery, finance, and optimization.</div>
+</div>
+
+<div class="section">
+  <div class="title-ug">1. دەرماكولوگىيە – مولېكۇلا بايان قىلىش</div>
+  <div class="title-en">1. Drug Discovery – Molecular Simulation</div>
+  <p>
+    VQE (Variational Quantum Eigensolver) ئىشلىتىپ،
+    مولېكۇلىنىڭ ئېنېرگىيە سەۋىيىلىرىنى ھېسابلاش.
+    بۇ يېڭى دەرماك تەتقىقاتىغا ياردەم قىلىدۇ.
+  </p>
+  <p class="en">
+    VQE can simulate molecular ground states, accelerating drug discovery.
+  </p>
+</div>
+
+<div class="section">
+  <div class="title-ug">2. مالىيە – پورتپولىيو ئوپتىمىزاتسىيه</div>
+  <div class="title-en">2. Finance – Portfolio Optimization</div>
+  <p>
+    QAOA (Quantum Approximate Optimization Algorithm) ئىشلىتىپ،
+    خەۋپ ۋە تىكللىققا ئاساسەن، ئەڭ ياخشى سېھەم بولۇقىنى تاللاش.
+  </p>
+  <p class="en">
+    QAOA optimizes investment portfolios by balancing risk and return.
+  </p>
+</div>
+
+<div class="section">
+  <div class="title-ug">3. ماشىنا ئۈگىنىش – كىچىك مەلۇماتلىق كلاسسىفىكاتسىيە</div>
+  <div class="title-en">3. ML – Classification with Small Datasets</div>
+  <p>
+    كىۋانىت Kernel ماشىنىسى (QSVM) ئىشلىتىپ،
+    <strong>كام مەلۇماتلىق</strong> (Few-shot) مەسىلىلەرنى ھەل قىلىش مۇمكىن.
+  </p>
+  <p class="en">
+    Quantum kernels can classify data with very few samples, outperforming classical SVMs in some cases.
+  </p>
+</div>
+
+<div class="section">
+  <div class="title-ug">4. چەكلىمىلەر ۋە كەلگۈسى</div>
+  <div class="title-en">4. Challenges and Future</div>
+  <ul>
+    <li><strong>Noise</strong>: ھازىرقى كىۋانىت كومپيۇتېرلار شاۋقانلىق (Noise) كۆپ.</li>
+    <li><strong>Qubit سانى</strong>: زور مەسىلىلەرگە يېتەرلىك Qubit يوق.</li>
+    <li><strong>Hybrid ئۇسلۇب</strong>: كېلەرخى قەدەم — كىۋانىت + كلاسسىك مودېللار.</li>
+  </ul>
+</div>
+
+<footer style="text-align:center; margin-top:40px; padding:20px; color:#666;">
+  <p>كىۋانىت ماشىنا ئۆگىنىش 7-باب – ئامالىي مەسىلىلەر</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+// KaTeX auto-render already loaded
+</script>
+</body>
+</html>

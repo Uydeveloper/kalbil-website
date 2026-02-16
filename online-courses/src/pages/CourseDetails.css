@@ -1,0 +1,31 @@
+.course-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.course-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.course-description {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.topics-list {
+  list-style: none;
+  padding: 0;
+}
+
+.topic-item {
+  margin-bottom: 1rem;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+}

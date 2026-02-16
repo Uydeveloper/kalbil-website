@@ -1,0 +1,2910 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كۋانتۇم ماشىنا ئۆگىنىش 2-باب: كۋبىت ۋە كۋانتۇم ئېشىكلىرى | Qubits & Quantum Gates</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --quantum-blue: #0d47a1;
+            --quantum-purple: #7b1fa2;
+            --quantum-teal: #00695c;
+            --quantum-cyan: #00acc1;
+            --quantum-pink: #ad1457;
+            --quantum-gold: #ff8f00;
+            --quantum-green: #2e7d32;
+            --quantum-red: #c62828;
+            --quantum-indigo: #3949ab;
+            --light-color: #f8f9fa;
+            --dark-color: #0a0e17;
+            --shadow: 0 12px 50px rgba(0, 0, 0, 0.2);
+            --transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient-quantum: linear-gradient(135deg, var(--quantum-indigo), var(--quantum-purple), var(--quantum-cyan));
+            --gradient-qubit: linear-gradient(135deg, #7b1fa2, #00acc1, #0d47a1);
+            --gradient-gate: linear-gradient(135deg, #ff8f00, #ad1457, #7b1fa2);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0e17 0%, #1a237e 100%);
+            color: #e0e0e0;
+            line-height: 1.8;
+            min-height: 100vh;
+            padding-bottom: 60px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+        
+        /* Quantum Header */
+        .qubit-header {
+            background: var(--gradient-qubit);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 35px;
+            box-shadow: var(--shadow);
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .qubit-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(123, 31, 162, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 172, 193, 0.2) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+            z-index: -1;
+            animation: qubitAnimation 15s infinite linear;
+        }
+        
+        @keyframes qubitAnimation {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 400% 100%; }
+        }
+        
+        .qubit-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .qubit-particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: qubitFloat 3s infinite ease-in-out;
+        }
+        
+        @keyframes qubitFloat {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translate(20px, -20px) scale(1.5);
+                opacity: 1;
+            }
+        }
+        
+        .chapter-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(123, 31, 162, 0.5), 0 0 60px rgba(0, 172, 193, 0.3);
+            position: relative;
+            background: linear-gradient(to right, #fff, #f3e5f5, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            opacity: 0.95;
+            max-width: 1200px;
+            margin: 0 auto 35px;
+            font-weight: 300;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .bilingual-text {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 35px 0;
+        }
+        
+        .text-ug {
+            color: white;
+            font-size: 1.5rem;
+            line-height: 2;
+        }
+        
+        .text-en {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            font-style: italic;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            padding-top: 25px;
+            line-height: 1.8;
+        }
+        
+        /* Main Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 60px;
+            margin-bottom: 70px;
+        }
+        
+        @media (max-width: 1200px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        
+        /* Quantum Card Styles */
+        .qubit-card {
+            background: rgba(123, 31, 162, 0.1);
+            border-radius: 35px;
+            padding: 60px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            border: 2px solid rgba(0, 172, 193, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .qubit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 100%;
+            background: var(--gradient-qubit);
+            opacity: 0.8;
+            border-radius: 0 35px 35px 0;
+        }
+        
+        .qubit-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #7b1fa2, #00acc1, #0d47a1, #7b1fa2);
+            border-radius: 37px;
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .qubit-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 
+                0 35px 80px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(123, 31, 162, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .qubit-card:hover::after {
+            opacity: 0.3;
+            animation: borderGlow 3s infinite linear;
+        }
+        
+        @keyframes borderGlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 400% 0%; }
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 3px solid rgba(123, 31, 162, 0.3);
+            position: relative;
+        }
+        
+        .card-icon {
+            background: var(--gradient-qubit);
+            color: white;
+            width: 90px;
+            height: 90px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-left: 40px;
+            flex-shrink: 0;
+            box-shadow: 
+                0 15px 40px rgba(123, 31, 162, 0.4),
+                0 0 30px rgba(0, 172, 193, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: iconQubit 3s infinite alternate;
+        }
+        
+        @keyframes iconQubit {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(5deg); }
+        }
+        
+        .card-title {
+            color: #f3e5f5;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            flex: 1;
+            position: relative;
+            text-shadow: 0 0 20px rgba(123, 31, 162, 0.3);
+        }
+        
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            right: 0;
+            width: 100px;
+            height: 5px;
+            background: var(--gradient-qubit);
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(123, 31, 162, 0.5);
+        }
+        
+        .card-subtitle {
+            font-size: 1.5rem;
+            color: #e1bee7;
+            font-style: italic;
+            font-weight: 300;
+        }
+        
+        /* Qubit State Container */
+        .qubit-state-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 25px;
+            padding: 45px;
+            margin: 40px 0;
+            border: 2px solid rgba(123, 31, 162, 0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .qubit-state-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(123, 31, 162, 0.05) 50%, transparent 70%);
+            animation: stateScan 10s infinite linear;
+        }
+        
+        @keyframes stateScan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .state-main {
+            font-family: 'Cambria Math', 'Latin Modern Math', serif;
+            font-size: 3.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ba68c8;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 25px rgba(186, 104, 200, 0.5);
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            border: 2px solid rgba(186, 104, 200, 0.2);
+        }
+        
+        .state-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .state-card {
+            background: rgba(123, 31, 162, 0.15);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            border: 2px solid rgba(0, 172, 193, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .state-card:hover {
+            transform: translateY(-15px);
+            border-color: #ba68c8;
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(186, 104, 200, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .state-card-title {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .state-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: white;
+            flex-shrink: 0;
+            background: var(--gradient-qubit);
+            box-shadow: 0 10px 30px rgba(186, 104, 200, 0.3);
+        }
+        
+        .state-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f3e5f5;
+            text-shadow: 0 0 10px rgba(186, 104, 200, 0.3);
+        }
+        
+        .state-equation {
+            font-family: 'Courier New', monospace;
+            font-size: 1.8rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-right: 5px solid #ba68c8;
+            direction: ltr;
+            text-align: center;
+            overflow-x: auto;
+            color: #4fc3f7;
+            text-shadow: 0 0 10px rgba(79, 195, 247, 0.3);
+        }
+        
+        .state-properties {
+            list-style: none;
+            padding: 0;
+            margin-top: 25px;
+        }
+        
+        .state-properties li {
+            padding: 15px 0;
+            border-bottom: 2px dashed rgba(186, 104, 200, 0.2);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            line-height: 1.7;
+        }
+        
+        .state-properties li:last-child {
+            border-bottom: none;
+        }
+        
+        .property-icon {
+            color: #ba68c8;
+            font-size: 1.5rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+            text-shadow: 0 0 10px rgba(186, 104, 200, 0.5);
+        }
+        
+        /* Qubit Visualization */
+        .qubit-visualization {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 50px 0;
+            border: 2px solid rgba(186, 104, 200, 0.3);
+            position: relative;
+            overflow: hidden;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .viz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .viz-title {
+            color: #f3e5f5;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            text-shadow: 0 0 20px rgba(186, 104, 200, 0.3);
+        }
+        
+        .viz-controls {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .viz-btn {
+            background: rgba(123, 31, 162, 0.3);
+            color: #e1bee7;
+            border: 2px solid rgba(186, 104, 200, 0.3);
+            padding: 18px 35px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .viz-btn:hover {
+            background: rgba(186, 104, 200, 0.3);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(186, 104, 200, 0.3);
+            border-color: #ba68c8;
+        }
+        
+        .viz-btn.active {
+            background: var(--gradient-qubit);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 10px 35px rgba(123, 31, 162, 0.4);
+        }
+        
+        .viz-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            border-radius: 20px;
+            border: 2px solid rgba(186, 104, 200, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        #qubitCanvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Quantum Gates Comparison */
+        .gate-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin: 50px 0;
+        }
+        
+        .gate-card {
+            background: rgba(123, 31, 162, 0.15);
+            border-radius: 25px;
+            padding: 45px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            border: 2px solid rgba(0, 172, 193, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gate-card:hover {
+            transform: translateY(-15px);
+            border-color: #ba68c8;
+            box-shadow: 
+                0 30px 70px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(186, 104, 200, 0.2);
+        }
+        
+        .gate-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .gate-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            background: var(--gradient-gate);
+            box-shadow: 0 15px 40px rgba(255, 143, 0, 0.3);
+        }
+        
+        .gate-title {
+            font-size: 2.2rem;
+            color: #f3e5f5;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(186, 104, 200, 0.3);
+        }
+        
+        .gate-properties {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+        
+        .gate-properties li {
+            padding: 15px 0;
+            border-bottom: 2px dashed rgba(186, 104, 200, 0.2);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        
+        .gate-properties li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Quantum Gate Simulation */
+        .gate-simulation {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 25px;
+            padding: 45px;
+            margin: 50px 0;
+            border: 2px solid rgba(186, 104, 200, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .simulation-container {
+            height: 500px;
+            position: relative;
+            margin: 40px 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(0, 172, 193, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gate-element {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            background: rgba(0, 172, 193, 0.2);
+            border: 3px solid #00acc1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00acc1;
+            font-weight: bold;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 172, 193, 0.3);
+        }
+        
+        .gate-element:hover {
+            background: rgba(0, 172, 193, 0.4);
+            transform: scale(1.2);
+            box-shadow: 0 0 40px rgba(0, 172, 193, 0.5);
+        }
+        
+        .qubit-line {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ba68c8, transparent);
+        }
+        
+        /* Controls */
+        .quantum-controls {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 50px 0;
+            border: 2px solid rgba(123, 31, 162, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 45px;
+            margin: 45px 0;
+        }
+        
+        .control-group {
+            background: rgba(123, 31, 162, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(186, 104, 200, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .control-group:hover {
+            border-color: #ba68c8;
+            box-shadow: 0 20px 50px rgba(186, 104, 200, 0.2);
+            transform: translateY(-8px);
+        }
+        
+        .control-group::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 100%;
+            background: var(--gradient-qubit);
+            opacity: 0.3;
+        }
+        
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .control-title {
+            font-weight: 700;
+            color: #ba68c8;
+            font-size: 1.6rem;
+            text-shadow: 0 0 10px rgba(186, 104, 200, 0.3);
+        }
+        
+        .english-label {
+            font-size: 1.1rem;
+            color: #e1bee7;
+            font-style: italic;
+        }
+        
+        .control-value {
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: #ba68c8;
+            text-align: center;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(186, 104, 200, 0.3);
+            text-shadow: 0 0 15px rgba(186, 104, 200, 0.5);
+        }
+        
+        /* Range Slider */
+        .range-container {
+            position: relative;
+            margin: 30px 0;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 15px;
+            border-radius: 10px;
+            background: linear-gradient(to right, rgba(123, 31, 162, 0.5), rgba(0, 172, 193, 0.5));
+            outline: none;
+            -webkit-appearance: none;
+            position: relative;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--gradient-qubit);
+            cursor: pointer;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 
+                0 8px 25px rgba(186, 104, 200, 0.5),
+                0 0 20px rgba(0, 172, 193, 0.5);
+            transition: var(--transition);
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.3);
+            box-shadow: 
+                0 12px 35px rgba(186, 104, 200, 0.7),
+                0 0 30px rgba(0, 172, 193, 0.7);
+        }
+        
+        .range-ticks {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 0 15px;
+        }
+        
+        .range-tick {
+            font-size: 1rem;
+            color: #e1bee7;
+            font-weight: 500;
+        }
+        
+        /* Quantum Buttons */
+        .quantum-buttons {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 60px 0;
+        }
+        
+        .quantum-btn {
+            background: var(--gradient-qubit);
+            color: white;
+            border: none;
+            padding: 25px 45px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            flex: 1;
+            min-width: 280px;
+            box-shadow: 
+                0 15px 50px rgba(186, 104, 200, 0.4),
+                0 0 40px rgba(123, 31, 162, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quantum-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.6s;
+        }
+        
+        .quantum-btn:hover {
+            transform: translateY(-12px) scale(1.05);
+            box-shadow: 
+                0 25px 70px rgba(186, 104, 200, 0.6),
+                0 0 60px rgba(123, 31, 162, 0.5);
+        }
+        
+        .quantum-btn:hover::before {
+            left: 100%;
+        }
+        
+        .quantum-btn-secondary {
+            background: linear-gradient(135deg, #37474f, #263238);
+        }
+        
+        .quantum-btn-secondary:hover {
+            box-shadow: 0 25px 70px rgba(38, 50, 56, 0.6);
+        }
+        
+        .quantum-btn-gold {
+            background: linear-gradient(135deg, var(--quantum-gold), #ff6f00);
+        }
+        
+        .quantum-btn-gold:hover {
+            box-shadow: 0 25px 70px rgba(255, 143, 0, 0.6);
+        }
+        
+        /* Quantum Table */
+        .quantum-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 60px 0;
+            background: rgba(123, 31, 162, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(186, 104, 200, 0.3);
+        }
+        
+        .quantum-table th {
+            background: var(--gradient-qubit);
+            color: white;
+            padding: 35px;
+            text-align: right;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: relative;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .quantum-table th::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .quantum-table td {
+            padding: 32px 35px;
+            border-bottom: 2px solid rgba(186, 104, 200, 0.2);
+            transition: var(--transition);
+            font-size: 1.3rem;
+        }
+        
+        .quantum-table tr:hover td {
+            background: rgba(186, 104, 200, 0.1);
+        }
+        
+        .quantum-table .qubit-highlight {
+            color: #ba68c8;
+            font-weight: 700;
+            position: relative;
+            text-shadow: 0 0 10px rgba(186, 104, 200, 0.5);
+        }
+        
+        .quantum-table .qubit-highlight::before {
+            content: '⨁';
+            position: absolute;
+            right: -35px;
+            color: #00acc1;
+            font-size: 1.8rem;
+            animation: qubitSpin 3s infinite linear;
+        }
+        
+        @keyframes qubitSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Quantum Tabs */
+        .quantum-tabs {
+            margin-top: 70px;
+        }
+        
+        .tabs-header {
+            display: flex;
+            border-bottom: 4px solid rgba(186, 104, 200, 0.3);
+            margin-bottom: 55px;
+            flex-wrap: wrap;
+            gap: 5px;
+            background: rgba(123, 31, 162, 0.1);
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .quantum-tab {
+            padding: 25px 50px;
+            cursor: pointer;
+            font-weight: 700;
+            color: #e1bee7;
+            transition: var(--transition);
+            border-bottom: 5px solid transparent;
+            font-size: 1.4rem;
+            position: relative;
+            background: none;
+            border: none;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .quantum-tab::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background: var(--gradient-qubit);
+            transition: var(--transition);
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .quantum-tab:hover {
+            color: #ba68c8;
+            transform: translateY(-5px);
+        }
+        
+        .quantum-tab:hover::before {
+            width: 100%;
+        }
+        
+        .quantum-tab.active {
+            color: #ba68c8;
+        }
+        
+        .quantum-tab.active::before {
+            width: 100%;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: quantumSlide 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 50px;
+            background: rgba(123, 31, 162, 0.1);
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            margin-top: -20px;
+        }
+        
+        @keyframes quantumSlide {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Sidebar Cards */
+        .sidebar-card {
+            background: rgba(123, 31, 162, 0.1);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(186, 104, 200, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sidebar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--gradient-qubit);
+            border-radius: 30px 30px 0 0;
+        }
+        
+        .sidebar-title {
+            color: #ba68c8;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid rgba(186, 104, 200, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            text-shadow: 0 0 15px rgba(186, 104, 200, 0.3);
+        }
+        
+        .sidebar-title i {
+            color: #ba68c8;
+        }
+        
+        .topic-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .topic-item {
+            margin-bottom: 35px;
+            padding-bottom: 35px;
+            border-bottom: 3px dashed rgba(186, 104, 200, 0.2);
+            position: relative;
+            padding-right: 60px;
+            transition: var(--transition);
+        }
+        
+        .topic-item:hover {
+            transform: translateX(-20px);
+        }
+        
+        .topic-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .topic-item::before {
+            content: '⊗';
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #ba68c8;
+            font-size: 2.5rem;
+            font-weight: bold;
+            opacity: 0.5;
+            transition: var(--transition);
+            text-shadow: 0 0 10px rgba(186, 104, 200, 0.5);
+        }
+        
+        .topic-item:hover::before {
+            opacity: 1;
+            transform: translateX(-15px);
+        }
+        
+        .topic-title {
+            font-weight: 700;
+            color: #f3e5f5;
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+        }
+        
+        .topic-desc {
+            font-size: 1.2rem;
+            color: #e1bee7;
+            line-height: 1.8;
+        }
+        
+        /* Quantum Code Container */
+        .quantum-code {
+            background: #0a0e17;
+            border-radius: 25px;
+            padding: 50px;
+            margin: 40px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            position: relative;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(123, 31, 162, 0.3);
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid rgba(186, 104, 200, 0.3);
+        }
+        
+        .code-language {
+            color: #ba68c8;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(186, 104, 200, 0.5);
+        }
+        
+        .code-copy {
+            background: rgba(123, 31, 162, 0.3);
+            color: #e1bee7;
+            border: 2px solid rgba(186, 104, 200, 0.3);
+            padding: 15px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .code-copy:hover {
+            background: rgba(186, 104, 200, 0.3);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(186, 104, 200, 0.3);
+        }
+        
+        .code-line {
+            color: #e0e0e0;
+            margin-bottom: 18px;
+            font-size: 1.3rem;
+            line-height: 1.9;
+            padding-left: 50px;
+            position: relative;
+            counter-increment: line;
+        }
+        
+        .code-line::before {
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            color: #ba68c8;
+            width: 50px;
+            text-align: right;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(186, 104, 200, 0.5);
+        }
+        
+        .code-comment {
+            color: #78909c;
+            font-style: italic;
+        }
+        
+        .code-keyword {
+            color: #4fc3f7;
+            font-weight: bold;
+        }
+        
+        .code-function {
+            color: #ce93d8;
+        }
+        
+        .code-string {
+            color: #80cbc4;
+        }
+        
+        .code-number {
+            color: #ffab91;
+        }
+        
+        /* Language Switch */
+        .language-switch {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: rgba(123, 31, 162, 0.3);
+            color: #ba68c8;
+            border: 3px solid rgba(186, 104, 200, 0.3);
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            font-size: 1.3rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lang-btn:hover {
+            background: rgba(186, 104, 200, 0.3);
+            color: white;
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 
+                0 20px 50px rgba(186, 104, 200, 0.4),
+                0 0 40px rgba(123, 31, 162, 0.3);
+        }
+        
+        .hide-en .english {
+            display: none;
+        }
+        
+        /* Quantum Footer */
+        footer {
+            text-align: center;
+            margin-top: 90px;
+            padding-top: 60px;
+            border-top: 3px solid rgba(186, 104, 200, 0.3);
+            color: #e1bee7;
+        }
+        
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 70px;
+            flex-wrap: wrap;
+            gap: 35px;
+        }
+        
+        .nav-btn {
+            padding: 30px 50px;
+            border-radius: 25px;
+            background: rgba(123, 31, 162, 0.2);
+            color: #ba68c8;
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            border: 3px solid rgba(186, 104, 200, 0.3);
+            flex: 1;
+            min-width: 350px;
+            justify-content: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .nav-btn:hover {
+            background: rgba(186, 104, 200, 0.2);
+            color: white;
+            transform: translateY(-10px);
+            box-shadow: 
+                0 25px 60px rgba(186, 104, 200, 0.3),
+                0 0 50px rgba(123, 31, 162, 0.2);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.2rem;
+            }
+            
+            .content-wrapper {
+                gap: 50px;
+            }
+            
+            .qubit-card {
+                padding: 50px;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gate-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .quantum-buttons {
+                flex-direction: column;
+            }
+            
+            .quantum-btn {
+                min-width: 100%;
+            }
+            
+            .language-switch {
+                position: static;
+                margin-bottom: 50px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+            }
+            
+            .lang-btn {
+                display: inline-flex;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .qubit-card {
+                padding: 35px;
+            }
+            
+            .state-main {
+                font-size: 2.2rem;
+            }
+            
+            .state-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs-header {
+                flex-direction: column;
+            }
+            
+            .quantum-tab {
+                width: 100%;
+                text-align: right;
+            }
+            
+            .quantum-table {
+                font-size: 0.9rem;
+            }
+            
+            .quantum-table th,
+            .quantum-table td {
+                padding: 25px;
+            }
+            
+            .qubit-visualization {
+                padding: 35px;
+            }
+            
+            .viz-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-btn {
+                min-width: 100%;
+            }
+        }
+        
+        /* Quantum Effects */
+        .qubit-pulse {
+            animation: qubitPulse 2s infinite alternate;
+        }
+        
+        @keyframes qubitPulse {
+            0% { 
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            100% { 
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+        
+        .qubit-rotate {
+            animation: qubitRotate 5s infinite linear;
+        }
+        
+        @keyframes qubitRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .qubit-fade {
+            animation: qubitFade 1.5s infinite alternate;
+        }
+        
+        @keyframes qubitFade {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <button id="toggleEnglish" class="lang-btn">
+            <i class="fas fa-language"></i> ئېنگلىزچىنى يوشۇرۇش/كۆرسىتىش
+        </button>
+    </div>
+    
+    <div class="container">
+        <header class="qubit-header">
+            <div class="qubit-particles" id="qubitParticles"></div>
+            <div class="chapter-tag">كۋانتۇم ماشىنا ئۆگىنىش 2-باب | Quantum Machine Learning Chapter 2</div>
+            <h1><i class="fas fa-qubit"></i> كۋبىت ۋە كۋانتۇم ئېشىكلىرى (Qubits & Quantum Gates)</h1>
+            <div class="bilingual-text">
+                <p class="text-ug">كۋانتۇم كومپيۇتېرلىرىنىڭ ئاساسىي بۇلۇڭ تاشلىرى - كۋبىتلەر ۋە كۋانتۇم ئېشىكلىرى بىلەن تونۇشۇش</p>
+                <p class="text-en">Building Blocks of Quantum Computers - Introduction to Qubits and Quantum Gates</p>
+            </div>
+        </header>
+        
+        <div class="content-wrapper">
+            <main class="main-content">
+                <!-- Qubit Basics Section -->
+                <section class="qubit-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div>
+                            <h2 class="card-title">كۋبىت (Qubit) دىگەن نېمە؟</h2>
+                            <p class="card-subtitle english">What is a Qubit?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bilingual-text">
+                        <p class="text-ug">كۋبىت (كۋانتۇم بىت) كۋانتۇم كومپيۇتېرلىرىنىڭ ئاساسىي ئۇچۇر بىرلىكى بولۇپ، ئادەتتىكى بىتلەردىن پەرقلىق ئورۇنلاش ھالىتىدە بولۇش ئىقتىدارىغا ئىگە. بىر كۋبىت بىر ۋاقىتتا ھەم 0 ھەم 1 قىممىتىنى ئېلىپ، ئورۇنلاش ھالىتىدە بولالايدۇ.</p>
+                        <p class="text-en">A Qubit (Quantum Bit) is the basic unit of information in quantum computers, differing from classical bits by its ability to exist in superposition states. A single qubit can simultaneously take both 0 and 1 values, existing in superposition state.</p>
+                    </div>
+                    
+                    <div class="qubit-state-container">
+                        <div class="state-main">
+                            \( |\psi\rangle = \alpha|0\rangle + \beta|1\rangle \)
+                        </div>
+                        
+                        <div class="state-grid">
+                            <div class="state-card">
+                                <div class="state-card-title">
+                                    <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink));">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <div class="state-name">ئورۇنلاش ھالىتى (Superposition)</div>
+                                </div>
+                                <div class="state-equation">\( |\psi\rangle = \alpha|0\rangle + \beta|1\rangle \)</div>
+                                <ul class="state-properties">
+                                    <li><i class="fas fa-infinity property-icon"></i> بىر ۋاقىتتا ھەممە ھالەتتە بولۇش</li>
+                                    <li class="english">Being in all states simultaneously</li>
+                                    <li><i class="fas fa-balance-scale property-icon"></i> α ۋە β مۇرەككەپ ئامپلىتۇدلار</li>
+                                    <li class="english">α and β are complex amplitudes</li>
+                                    <li><i class="fas fa-ruler property-icon"></i> نورماللاشتۇرۇش: |α|² + |β|² = 1</li>
+                                    <li class="english">Normalization: |α|² + |β|² = 1</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="state-card">
+                                <div class="state-card-title">
+                                    <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-cyan), var(--quantum-blue));">
+                                        <i class="fas fa-sphere"></i>
+                                    </div>
+                                    <div class="state-name">بىلوك شەرىتى (Bloch Sphere)</div>
+                                </div>
+                                <div class="state-equation">\( |\psi\rangle = \cos\frac{\theta}{2}|0\rangle + e^{i\phi}\sin\frac{\theta}{2}|1\rangle \)</div>
+                                <ul class="state-properties">
+                                    <li><i class="fas fa-globe property-icon"></i> كۋبىت ھالىتىنىڭ كۆرۈنۈشى</li>
+                                    <li class="english">Visualization of qubit state</li>
+                                    <li><i class="fas fa-compass property-icon"></i> ئېگىزلىك بۇلۇڭى θ ۋە فازا بۇلۇڭى φ</li>
+                                    <li class="english">Elevation angle θ and phase angle φ</li>
+                                    <li><i class="fas fa-vector-square property-icon"></i> ئىككى ئۆلچەملىك ھالەت بوشلۇقى</li>
+                                    <li class="english">Two-dimensional state space</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="state-card">
+                                <div class="state-card-title">
+                                    <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-indigo));">
+                                        <i class="fas fa-link"></i>
+                                    </div>
+                                    <div class="state-name">كۋانتۇم ئۇچۇرشىش (Quantum Entanglement)</div>
+                                </div>
+                                <div class="state-equation">\( |\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}} \)</div>
+                                <ul class="state-properties">
+                                    <li><i class="fas fa-infinity property-icon"></i> ئىككى كۋبىتنىڭ ئۇچۇرشىپ كېتىشى</li>
+                                    <li class="english">Two qubits becoming entangled</li>
+                                    <li><i class="fas fa-bolt property-icon"></i> ھەسسىياتلىق مەزمۇن كۆپىيىشى</li>
+                                    <li class="english">Exponential information growth</li>
+                                    <li><i class="fas fa-sync property-icon"></i> بىر كۋبىتنى ئۆلچەش ئىككىنچىسىنى بەلگىلەيدۇ</li>
+                                    <li class="english">Measuring one qubit determines the other</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Qubit vs Bit Comparison -->
+                <section class="qubit-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div>
+                            <h2 class="card-title">كۋبىت ۋە بىت سېلىشتۇرۇشى</h2>
+                            <p class="card-subtitle english">Qubit vs Bit Comparison</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gate-comparison">
+                        <div class="gate-card">
+                            <div class="gate-header">
+                                <div class="gate-icon" style="background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-cyan));">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                                <div class="gate-title">ئادەتتىكى بىت (Classical Bit)</div>
+                            </div>
+                            
+                            <div class="bilingual-text">
+                                <p class="text-ug">ئادەتتىكى كومپيۇتېرلاردىكى ئاساسىي ئۇچۇر بىرلىكى. ھەر بىر بىت پەقەت 0 ياكى 1 قىممىتىنى ئالالايدۇ.</p>
+                                <p class="text-en">The basic unit of information in classical computers. Each bit can only take the value 0 or 1.</p>
+                            </div>
+                            
+                            <ul class="gate-properties">
+                                <li><i class="fas fa-check-circle property-icon"></i> پەقەت 2 ھالەت: 0 ياكى 1</li>
+                                <li class="english">Only 2 states: 0 or 1</li>
+                                <li><i class="fas fa-check-circle property-icon"></i> سىزىقلىق ھېسابلاش</li>
+                                <li class="english">Linear computation</li>
+                                <li><i class="fas fa-check-circle property-icon"></i> بىر ۋاقىتتا بىر ھېسابلاش</li>
+                                <li class="english">One calculation at a time</li>
+                                <li><i class="fas fa-check-circle property-icon"></i> ئايرىم ئىشلەش</li>
+                                <li class="english">Independent operation</li>
+                                <li><i class="fas fa-check-circle property-icon"></i> مۇقىم ھالەت</li>
+                                <li class="english">Deterministic state</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="gate-card">
+                            <div class="gate-header">
+                                <div class="gate-icon" style="background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink));">
+                                    <i class="fas fa-atom"></i>
+                                </div>
+                                <div class="gate-title">كۋانتۇم كۋبىت (Quantum Qubit)</div>
+                            </div>
+                            
+                            <div class="bilingual-text">
+                                <p class="text-ug">كۋانتۇم كومپيۇتېرلاردىكى ئاساسىي ئۇچۇر بىرلىكى. بىر ۋاقىتتا ھەم 0 ھەم 1 قىممىتىنى ئېلىپ، ئورۇنلاش ھالىتىدە بولالايدۇ.</p>
+                                <p class="text-en">The basic unit of information in quantum computers. Can take both 0 and 1 values simultaneously, existing in superposition state.</p>
+                            </div>
+                            
+                            <ul class="gate-properties">
+                                <li><i class="fas fa-infinity property-icon"></i> چەكسىز كۆپ ھالەت</li>
+                                <li class="english">Infinite multiple states</li>
+                                <li><i class="fas fa-wave-square property-icon"></i> سىزىقلىق بولمىغان ھېسابلاش</li>
+                                <li class="english">Non-linear computation</li>
+                                <li><i class="fas fa-bolt property-icon"></i> بىر ۋاقىتتا كۆپ ھېسابلاش</li>
+                                <li class="english">Multiple calculations simultaneously</li>
+                                <li><i class="fas fa-link property-icon"></i> ئۇچۇرشىپ ئىشلەش</li>
+                                <li class="english">Entangled operation</li>
+                                <li><i class="fas fa-random property-icon"></i> ئېھتىماللىقىي ھالەت</li>
+                                <li class="english">Probabilistic state</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="quantum-table">
+                        <tr>
+                            <th>خۇسۇسىيەت</th>
+                            <th>ئادەتتىكى بىت</th>
+                            <th class="qubit-highlight">كۋانتۇم كۋبىت</th>
+                        </tr>
+                        <tr>
+                            <td>ھالەت سانى</td>
+                            <td>2 (0 ياكى 1)</td>
+                            <td class="qubit-highlight">چەكسىز كۆپ (بىلوك شەرىتى)</td>
+                        </tr>
+                        <tr>
+                            <td>ئورۇنلاش</td>
+                            <td>يوق</td>
+                            <td class="qubit-highlight">بار</td>
+                        </tr>
+                        <tr>
+                            <td>ئۇچۇرشىش</td>
+                            <td>يوق</td>
+                            <td class="qubit-highlight">بار</td>
+                        </tr>
+                        <tr>
+                            <td>ھېسابلاش سۈرئىتى</td>
+                            <td>سىزىقلىق O(n)</td>
+                            <td class="qubit-highlight">ئەۋزەللىك O(2ⁿ)</td>
+                        </tr>
+                        <tr>
+                            <td>ئىمكانىيەت دائىرىسى</td>
+                            <td>چەكلەنگەن</td>
+                            <td class="qubit-highlight">كەڭ</td>
+                        </tr>
+                        <tr>
+                            <td>ئۆلچەش نەتىجىسى</td>
+                            <td>بەلگىلەنگەن</td>
+                            <td class="qubit-highlight">ئېھتىماللىقىي</td>
+                        </tr>
+                    </div>
+                </section>
+                
+                <!-- Qubit Visualization -->
+                <section class="qubit-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div>
+                            <h2 class="card-title">كۋبىت ھالىتى كۆرۈنۈشى</h2>
+                            <p class="card-subtitle english">Qubit State Visualization</p>
+                        </div>
+                    </div>
+                    
+                    <div class="qubit-visualization">
+                        <div class="viz-header">
+                            <div class="viz-title">
+                                <i class="fas fa-globe"></i> بىلوك شەرىتىدە كۋبىت ھالىتى
+                                <span class="english"> | Qubit State on Bloch Sphere</span>
+                            </div>
+                            <div class="viz-controls">
+                                <button class="viz-btn active" data-mode="single">
+                                    <i class="fas fa-circle"></i> بىر كۋبىت
+                                </button>
+                                <button class="viz-btn" data-mode="two">
+                                    <i class="fas fa-atom"></i> ئىككى كۋبىت
+                                </button>
+                                <button class="viz-btn" data-mode="entangled">
+                                    <i class="fas fa-link"></i> ئۇچۇرشقان كۋبىتلار
+                                </button>
+                                <button class="viz-btn" data-mode="multiple">
+                                    <i class="fas fa-layer-group"></i> كۆپ كۋبىتلار
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="viz-container">
+                            <canvas id="qubitCanvas"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="quantum-controls">
+                        <div class="controls-grid">
+                            <div class="control-group">
+                                <div class="control-label">
+                                    <div class="control-title">ئېگىزلىك بۇلۇڭى (θ):</div>
+                                    <span class="english-label">Elevation Angle (θ)</span>
+                                </div>
+                                <div class="range-container">
+                                    <input type="range" id="thetaSlider" min="0" max="180" step="1" value="90">
+                                    <div class="control-value" id="thetaValue">θ = 90°</div>
+                                    <div class="range-ticks">
+                                        <span class="range-tick">0°</span>
+                                        <span class="range-tick">90°</span>
+                                        <span class="range-tick">180°</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="control-label">
+                                    <div class="control-title">فازا بۇلۇڭى (φ):</div>
+                                    <span class="english-label">Phase Angle (φ)</span>
+                                </div>
+                                <div class="range-container">
+                                    <input type="range" id="phiSlider" min="0" max="360" step="1" value="0">
+                                    <div class="control-value" id="phiValue">φ = 0°</div>
+                                    <div class="range-ticks">
+                                        <span class="range-tick">0°</span>
+                                        <span class="range-tick">180°</span>
+                                        <span class="range-tick">360°</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="control-label">
+                                    <div class="control-title">كۋبىت ھالىتى:</div>
+                                    <span class="english-label">Qubit State</span>
+                                </div>
+                                <select id="qubitStateSelect" class="control-value" style="width: 100%; padding: 25px; font-size: 1.4rem; background: rgba(0,0,0,0.4); color: #ba68c8; border: 2px solid rgba(186,104,200,0.3);">
+                                    <option value="zero">|0⟩ = (θ=0°, φ=0°)</option>
+                                    <option value="one">|1⟩ = (θ=180°, φ=0°)</option>
+                                    <option value="plus">|+⟩ = (θ=90°, φ=0°)</option>
+                                    <option value="minus">|-⟩ = (θ=90°, φ=180°)</option>
+                                    <option value="plusi">|+i⟩ = (θ=90°, φ=90°)</option>
+                                    <option value="minusi">|-i⟩ = (θ=90°, φ=270°)</option>
+                                    <option value="custom">ئۆزگەرتكۈچى</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="quantum-buttons">
+                            <button class="quantum-btn" id="entangleBtn">
+                                <i class="fas fa-link"></i> كۋبىتلارنى ئۇچۇرشىش
+                                <span class="english"> | Entangle Qubits</span>
+                            </button>
+                            <button class="quantum-btn quantum-btn-secondary" id="measureBtn">
+                                <i class="fas fa-ruler"></i> كۋبىتنى ئۆلچەش
+                                <span class="english"> | Measure Qubit</span>
+                            </button>
+                            <button class="quantum-btn quantum-btn-gold" id="resetQubitBtn">
+                                <i class="fas fa-redo"></i> قايتا قۇرۇش
+                                <span class="english"> | Reset</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Quantum Gates -->
+                <section class="qubit-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div>
+                            <h2 class="card-title">كۋانتۇم ئېشىكلىرى (Quantum Gates)</h2>
+                            <p class="card-subtitle english">Building Blocks of Quantum Computation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gate-simulation">
+                        <div class="simulation-container" id="gateSimulation">
+                            <!-- Gates will be added by JavaScript -->
+                        </div>
+                        
+                        <div class="quantum-buttons">
+                            <button class="quantum-btn" id="addGateBtn">
+                                <i class="fas fa-plus-circle"></i> كۋانتۇم ئېشىكى قوشۇش
+                                <span class="english"> | Add Quantum Gate</span>
+                            </button>
+                            <button class="quantum-btn quantum-btn-secondary" id="runGateBtn">
+                                <i class="fas fa-play"></i> ئېشىكنى ئىجرا قىلىش
+                                <span class="english"> | Run Gate</span>
+                            </button>
+                            <button class="quantum-btn quantum-btn-gold" id="clearGatesBtn">
+                                <i class="fas fa-trash"></i> ھەممىنى تازىلاش
+                                <span class="english"> | Clear All</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="state-grid">
+                        <div class="state-card">
+                            <div class="state-card-title">
+                                <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink));">
+                                    H
+                                </div>
+                                <div class="state-name">ھادامارد ئېشىكى (Hadamard Gate)</div>
+                            </div>
+                            <div class="state-equation">\( H = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1 \\ 1 & -1\end{bmatrix} \)</div>
+                            <ul class="state-properties">
+                                <li><i class="fas fa-balance-scale property-icon"></i> بىتنى ئورۇنلاش ھالىتىگە ئايلاندۇرىدۇ</li>
+                                <li class="english">Transforms bit into superposition state</li>
+                                <li><i class="fas fa-random property-icon"></i> |0⟩ → |+⟩, |1⟩ → |-⟩</li>
+                                <li class="english">|0⟩ → |+⟩, |1⟩ → |-⟩</li>
+                                <li><i class="fas fa-wave-square property-icon"></i> كۋانتۇم تالاشنى ھاسىل قىلىدۇ</li>
+                                <li class="english">Creates quantum interference</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="state-card">
+                            <div class="state-card-title">
+                                <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-cyan), var(--quantum-blue));">
+                                    X
+                                </div>
+                                <div class="state-name">پاولى-X ئېشىكى (Pauli-X Gate)</div>
+                            </div>
+                            <div class="state-equation">\( X = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} \)</div>
+                            <ul class="state-properties">
+                                <li><i class="fas fa-exchange-alt property-icon"></i> كۋبىتنى ئايلاندۇرىدۇ (0 → 1, 1 → 0)</li>
+                                <li class="english">Rotates qubit (0 → 1, 1 → 0)</li>
+                                <li><i class="fas fa-not-equal property-icon"></i> كۋانتۇم NOT ئېشىكى</li>
+                                <li class="english">Quantum NOT gate</li>
+                                <li><i class="fas fa-retweet property-icon"></i> بىلوك شەرىتىدە X ئوكسى بويىچە 180° ئايلاندۇرىدۇ</li>
+                                <li class="english">Rotates 180° around X-axis on Bloch sphere</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="state-card">
+                            <div class="state-card-title">
+                                <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-indigo));">
+                                    CNOT
+                                </div>
+                                <div class="state-name">كۇنتىروللىق NOT ئېشىكى (CNOT Gate)</div>
+                            </div>
+                            <div class="state-equation">\( CNOT = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix} \)</div>
+                            <ul class="state-properties">
+                                <li><i class="fas fa-link property-icon"></i> ئىككى كۋبىتنى ئۇچۇرشىپ بىرىدۇ</li>
+                                <li class="english">Entangles two qubits</li>
+                                <li><i class="fas fa-code-branch property-icon"></i> كۋانتۇم ئەمەلىيەتتە ئاساسىي بىرلەشمە</li>
+                                <li class="english">Fundamental quantum universal gate</li>
+                                <li><i class="fas fa-sync property-icon"></i> كۇنتىرول كۋبىتىگە باغلىق</li>
+                                <li class="english">Conditional on control qubit</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="state-card">
+                            <div class="state-card-title">
+                                <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-indigo), var(--quantum-purple));">
+                                    R<sub>Y</sub>
+                                </div>
+                                <div class="state-name">ئايلانما ئېشىكلىرى (Rotation Gates)</div>
+                            </div>
+                            <div class="state-equation">\( R_Y(\theta) = \begin{bmatrix}\cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix} \)</div>
+                            <ul class="state-properties">
+                                <li><i class="fas fa-sync-alt property-icon"></i> بىلوك شەرىتىدە ئايلاندۇرىدۇ</li>
+                                <li class="english">Rotates on Bloch sphere</li>
+                                <li><i class="fas fa-adjust property-icon"></i> پارامېتېرلىق ئېشىكلەر</li>
+                                <li class="english">Parametric gates</li>
+                                <li><i class="fas fa-sliders-h property-icon"></i> ماشىنا ئۆگىنىشتىكى ئۆگىنىش پارامېتېرلىرى</li>
+                                <li class="english">Learning parameters in machine learning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Quantum Gate Operations -->
+                <section class="quantum-tabs">
+                    <div class="tabs-header">
+                        <button class="quantum-tab active" data-tab="single">بىر كۋبىتلىك ئېشىكلەر</button>
+                        <button class="quantum-tab" data-tab="multi">كۆپ كۋبىتلىك ئېشىكلەر</button>
+                        <button class="quantum-tab" data-tab="universal">ئەمەلىيلەشتۈرۈش ئېشىكلىرى</button>
+                        <button class="quantum-tab" data-tab="qml">كۋانتۇم ماشىنا ئۆگىنىش ئېشىكلىرى</button>
+                    </div>
+                    
+                    <!-- Single Qubit Gates -->
+                    <div class="tab-content active" id="single">
+                        <div class="quantum-table">
+                            <tr>
+                                <th>ئېشىك</th>
+                                <th>ماترىسىسى</th>
+                                <th class="qubit-highlight">ھەرىكىتى</th>
+                                <th>ئىشلىتىلىشى</th>
+                            </tr>
+                            <tr>
+                                <td>I (Identity)</td>
+                                <td>\(\begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}\)</td>
+                                <td class="qubit-highlight">ھېچقانداق ئۆزگەرتىش يوق</td>
+                                <td>ۋاقىت كېچىكتۈرۈش</td>
+                            </tr>
+                            <tr>
+                                <td>X (Pauli-X)</td>
+                                <td>\(\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\)</td>
+                                <td class="qubit-highlight">|0⟩ ↔ |1⟩ ئالماشتۇرۇش</td>
+                                <td>كۋانتۇم NOT</td>
+                            </tr>
+                            <tr>
+                                <td>Y (Pauli-Y)</td>
+                                <td>\(\begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}\)</td>
+                                <td class="qubit-highlight">Y ئوكسى بويىچە ئايلاندۇرۇش</td>
+                                <td>فازا ئۆزگەرتىش</td>
+                            </tr>
+                            <tr>
+                                <td>Z (Pauli-Z)</td>
+                                <td>\(\begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}\)</td>
+                                <td class="qubit-highlight">|1⟩ → -|1⟩ فازا ئۆزگەرتىش</td>
+                                <td>فازا ئېشىكى</td>
+                            </tr>
+                            <tr>
+                                <td>H (Hadamard)</td>
+                                <td>\(\frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1 \\ 1 & -1\end{bmatrix}\)</td>
+                                <td class="qubit-highlight">ئورۇنلاش ھاسىل قىلىش</td>
+                                <td>سۇپەرپوزىتسىيە ھاسىل قىلىش</td>
+                            </tr>
+                            <tr>
+                                <td>S (Phase)</td>
+                                <td>\(\begin{bmatrix}1 & 0 \\ 0 & i\end{bmatrix}\)</td>
+                                <td class="qubit-highlight">π/2 فازا ئۆزگەرتىش</td>
+                                <td>كۋانتۇم خاتىرىلەش</td>
+                            </tr>
+                            <tr>
+                                <td>T (π/8)</td>
+                                <td>\(\begin{bmatrix}1 & 0 \\ 0 & e^{i\pi/4}\end{bmatrix}\)</td>
+                                <td class="qubit-highlight">π/4 فازا ئۆزگەرتىش</td>
+                                <td>ئەمەلىيلەشتۈرۈش ئېشىكى</td>
+                            </tr>
+                            <tr>
+                                <td>R<sub>Y</sub>(θ)</td>
+                                <td>\(\begin{bmatrix}\cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{bmatrix}\)</td>
+                                <td class="qubit-highlight">Y ئوكسى بويىچە ئايلاندۇرۇش</td>
+                                <td>پارامېتېرلىق ئېشىك</td>
+                            </tr>
+                        </div>
+                    </div>
+                    
+                    <!-- Multi Qubit Gates -->
+                    <div class="tab-content" id="multi">
+                        <div class="state-grid">
+                            <div class="state-card">
+                                <div class="state-card-title">
+                                    <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink));">
+                                        CNOT
+                                    </div>
+                                    <div class="state-name">كۇنتىروللىق NOT (CNOT)</div>
+                                </div>
+                                <div class="state-equation">\( CNOT = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes X \)</div>
+                                <ul class="state-properties">
+                                    <li><i class="fas fa-code-branch property-icon"></i> كۇنتىرول كۋبىتى |1⟩ بولسا، نىشان كۋبىتىنى ئالماشتۇرىدۇ</li>
+                                    <li class="english">If control qubit is |1⟩, flips target qubit</li>
+                                    <li><i class="fas fa-link property-icon"></i> ئۇچۇرشىش ھاسىل قىلىش</li>
+                                    <li class="english">Creates entanglement</li>
+                                    <li><i class="fas fa-cubes property-icon"></i> كۋانتۇم سىخىتلارنىڭ ئاساسى</li>
+                                    <li class="english">Basis of quantum circuits</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="state-card">
+                                <div class="state-card-title">
+                                    <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-cyan), var(--quantum-blue));">
+                                        SWAP
+                                    </div>
+                                    <div class="state-name">ئالماشتۇرۇش ئېشىكى (SWAP Gate)</div>
+                                </div>
+                                <div class="state-equation">\( SWAP = \begin{bmatrix}1&0&0&0\\0&0&1&0\\0&1&0&0\\0&0&0&1\end{bmatrix} \)</div>
+                                <ul class="state-properties">
+                                    <li><i class="fas fa-exchange-alt property-icon"></i> ئىككى كۋبىتنى ئالماشتۇرىدۇ</li>
+                                    <li class="english">Swaps two qubits</li>
+                                    <li><i class="fas fa-retweet property-icon"></i> |01⟩ ↔ |10⟩</li>
+                                    <li class="english">|01⟩ ↔ |10⟩</li>
+                                    <li><i class="fas fa-sync property-icon"></i> سىخىتتىكى ئۇچۇر تارقىلىشى</li>
+                                    <li class="english">Information routing in circuits</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="state-card">
+                                <div class="state-card-title">
+                                    <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-indigo));">
+                                        Toffoli
+                                    </div>
+                                    <div class="state-name">توفولى ئېشىكى (Toffoli Gate)</div>
+                                </div>
+                                <div class="state-equation">\( |a,b,c\rangle → |a,b,c ⊕ (a·b)\rangle \)</div>
+                                <ul class="state-properties">
+                                    <li><i class="fas fa-calculator property-icon"></i> ئۈچ كۋبىتلىك كۇنتىروللىق-كۇنتىروللىق NOT</li>
+                                    <li class="english">Three-qubit controlled-controlled-NOT</li>
+                                    <li><i class="fas fa-microchip property-icon"></i> كىلاسسىك ئەمەلىيلەشتۈرۈشنى كۋانتۇم دا ساقلايدۇ</li>
+                                    <li class="english">Preserves classical computation in quantum</li>
+                                    <li><i class="fas fa-infinity property-icon"></i> كۋانتۇم ئەمەلىيەتتىكى ئاساسىي ئېشىك</li>
+                                    <li class="english">Fundamental gate in quantum universality</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="state-card">
+                                <div class="state-card-title">
+                                    <div class="state-icon" style="background: linear-gradient(135deg, var(--quantum-indigo), var(--quantum-purple));">
+                                        CZ
+                                    </div>
+                                    <div class="state-name">كۇنتىروللىق Z ئېشىكى (CZ Gate)</div>
+                                </div>
+                                <div class="state-equation">\( CZ = \begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&-1\end{bmatrix} \)</div>
+                                <ul class="state-properties">
+                                    <li><i class="fas fa-code-branch property-icon"></i> كۇنتىروللىق فازا ئۆزگەرتىش</li>
+                                    <li class="english">Conditional phase shift</li>
+                                    <li><i class="fas fa-wave-square property-icon"></i> ئىككى كۋبىت |11⟩ ھالىتىگە -1 كۆپەيتىدۇ</li>
+                                    <li class="english">Multiplies two-qubit |11⟩ state by -1</li>
+                                    <li><i class="fas fa-link property-icon"></i> ئۇچۇرشىش ھاسىل قىلىش</li>
+                                    <li class="english">Creates entanglement</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Universal Gates -->
+                    <div class="tab-content" id="universal">
+                        <div class="quantum-code">
+                            <div class="code-header">
+                                <div class="code-language">Qiskit: كۋانتۇم ئېشىكلىرىنى ئىشلىتىش</div>
+                                <button class="code-copy">
+                                    <i class="fas fa-copy"></i> كۆچۈرۈش
+                                </button>
+                            </div>
+                            <div class="code-line"><span class="code-comment"># Qiskit بىلەن كۋانتۇم ئېشىكلىرىنى ئىشلىتىش | Using Quantum Gates with Qiskit</span></div>
+                            <div class="code-line"><span class="code-keyword">from</span> qiskit <span class="code-keyword">import</span> QuantumCircuit, Aer, execute</div>
+                            <div class="code-line"><span class="code-keyword">from</span> qiskit.visualization <span class="code-keyword">import</span> plot_bloch_multivector, plot_histogram</div>
+                            <div class="code-line"><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 1. ئاساسىي كۋانتۇم سىخىتى | Basic quantum circuit</span></div>
+                            <div class="code-line">qc = QuantumCircuit(<span class="code-number">3</span>, <span class="code-number">3</span>)  <span class="code-comment"># 3 كۋبىت، 3 ئادەتتىكى بىت</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 2. كۋانتۇم ئېشىكلىرى | Quantum gates</span></div>
+                            <div class="code-line">qc.h(<span class="code-number">0</span>)  <span class="code-comment"># ھادامارد ئېشىكى | Hadamard gate</span></div>
+                            <div class="code-line">qc.x(<span class="code-number">1</span>)  <span class="code-comment"># Pauli-X ئېشىكى | Pauli-X gate</span></div>
+                            <div class="code-line">qc.y(<span class="code-number">2</span>)  <span class="code-comment"># Pauli-Y ئېشىكى | Pauli-Y gate</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 3. كۆپ كۋبىتلىك ئېشىكلەر | Multi-qubit gates</span></div>
+                            <div class="code-line">qc.cx(<span class="code-number">0</span>, <span class="code-number">1</span>)  <span class="code-comment"># CNOT ئېشىكى (كۇنتىروللىق NOT) | CNOT gate</span></div>
+                            <div class="code-line">qc.cz(<span class="code-number">1</span>, <span class="code-number">2</span>)  <span class="code-comment"># CZ ئېشىكى | CZ gate</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 4. ئايلانما ئېشىكلىرى | Rotation gates</span></div>
+                            <div class="code-line">qc.ry(np.pi/<span class="code-number">4</span>, <span class="code-number">0</span>)  <span class="code-comment"># RY ئېشىكى (π/4) | RY gate (π/4)</span></div>
+                            <div class="code-line">qc.rx(np.pi/<span class="code-number">2</span>, <span class="code-number">1</span>)  <span class="code-comment"># RX ئېشىكى (π/2) | RX gate (π/2)</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 5. ئۇچۇرشىش | Entanglement</span></div>
+                            <div class="code-line">qc.h(<span class="code-number">2</span>)</div>
+                            <div class="code-line">qc.cx(<span class="code-number">2</span>, <span class="code-number">0</span>)</div>
+                            <div class="code-line">qc.cx(<span class="code-number">0</span>, <span class="code-number">1</span>)</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 6. ئۆلچەش | Measurement</span></div>
+                            <div class="code-line">qc.measure([<span class="code-number">0</span>, <span class="code-number">1</span>, <span class="code-number">2</span>], [<span class="code-number">0</span>, <span class="code-number">1</span>, <span class="code-number">2</span>])</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 7. سىخىتنى كۆرسىتىش | Display circuit</span></div>
+                            <div class="code-line"><span class="code-function">print</span>(<span class="code-string">"كۋانتۇم سىخىتى:"</span>)</div>
+                            <div class="code-line"><span class="code-function">print</span>(qc.draw())</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 8. ئىجرا قىلىش | Execute</span></div>
+                            <div class="code-line">simulator = Aer.get_backend(<span class="code-string">'qasm_simulator'</span>)</div>
+                            <div class="code-line">result = execute(qc, simulator, shots=<span class="code-number">1000</span>).result()</div>
+                            <div class="code-line">counts = result.get_counts(qc)</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 9. نەتىجىلەرنى كۆرسىتىش | Display results</span></div>
+                            <div class="code-line"><span class="code-function">print</span>(<span class="code-string">"\nئۆلچەش نەتىجىلىرى:"</span>)</div>
+                            <div class="code-line"><span class="code-keyword">for</span> state, count <span class="code-keyword">in</span> counts.items():</div>
+                            <div class="code-line">    <span class="code-function">print</span>(<span class="code-string">f"ھالەت: </span>{state}<span class="code-string">, سانى: </span>{count}<span class="code-string">"</span>)</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="code-comment"># 10. بىلوك شەرىتى كۆرۈنۈشى | Bloch sphere visualization</span></div>
+                            <div class="code-line"><span class="code-keyword">from</span> qiskit.quantum_info <span class="code-keyword">import</span> Statevector</div>
+                            <div class="code-line">state = Statevector.from_instruction(qc)</div>
+                            <div class="code-line">plot_bloch_multivector(state)</div>
+                        </div>
+                    </div>
+                    
+                    <!-- QML Gates -->
+                    <div class="tab-content" id="qml">
+                        <div class="gate-comparison">
+                            <div class="gate-card">
+                                <div class="gate-header">
+                                    <div class="gate-icon" style="background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink));">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <div class="gate-title">پارامېتېرلىق ئايلانما ئېشىكلىرى</div>
+                                </div>
+                                
+                                <ul class="gate-properties">
+                                    <li><i class="fas fa-sliders-h property-icon"></i> ماشىنا ئۆگىنىشتىكى ئۆگىنىش پارامېتېرلىرى</li>
+                                    <li class="english">Learning parameters in machine learning</li>
+                                    <li><i class="fas fa-sync-alt property-icon"></i> R<sub>X</sub>(θ), R<sub>Y</sub>(θ), R<sub>Z</sub>(θ)</li>
+                                    <li class="english">R<sub>X</sub>(θ), R<sub>Y</sub>(θ), R<sub>Z</sub>(θ)</li>
+                                    <li><i class="fas fa-chart-line property-icon"></i> گرادىيېنت ئاساسىدا ياخشىلاش</li>
+                                    <li class="english">Optimization based on gradient</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="gate-card">
+                                <div class="gate-header">
+                                    <div class="gate-icon" style="background: linear-gradient(135deg, var(--quantum-cyan), var(--quantum-blue));">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <div class="gate-title">مەركەزلەشتۈرۈش ئېشىكلىرى</div>
+                                </div>
+                                
+                                <ul class="gate-properties">
+                                    <li><i class="fas fa-compress property-icon"></i> سانلىق مەلۇماتنى كۋانتۇم ھالەتكە كىرگۈزۈش</li>
+                                    <li class="english">Encoding data into quantum state</li>
+                                    <li><i class="fas fa-wave-square property-icon"></i> ئامپلىتۇد كىرگۈزۈش (Amplitude Encoding)</li>
+                                    <li class="english">Amplitude Encoding</li>
+                                    <li><i class="fas fa-angle-double-right property-icon"></i> ئاڭلىما كىرگۈزۈش (Angle Encoding)</li>
+                                    <li class="english">Angle Encoding</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="gate-card">
+                                <div class="gate-header">
+                                    <div class="gate-icon" style="background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-indigo));">
+                                        <i class="fas fa-network-wired"></i>
+                                    </div>
+                                    <div class="gate-title">كۋانتۇم نېرۋاتور قۇرۇلمىسى</div>
+                                </div>
+                                
+                                <ul class="gate-properties">
+                                    <li><i class="fas fa-project-diagram property-icon"></i> ئايلانما ئېشىكلىرىنىڭ قاتلاملىق تەشكىلى</li>
+                                    <li class="english">Layered organization of rotation gates</li>
+                                    <li><i class="fas fa-link property-icon"></i> ئۇچۇرشىش قۇرۇلمىسى</li>
+                                    <li class="english">Entanglement structure</li>
+                                    <li><i class="fas fa-sitemap property-icon"></i> پارامېتېرلىق كۋانتۇم سىخىتى</li>
+                                    <li class="english">Parametric quantum circuit</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="quantum-buttons" style="margin-top: 50px;">
+                            <button class="quantum-btn" id="qmlCircuitBtn">
+                                <i class="fas fa-project-diagram"></i> كۋانتۇم ماشىنا ئۆگىنىش سىخىتى
+                                <span class="english"> | QML Circuit Example</span>
+                            </button>
+                            <button class="quantum-btn quantum-btn-secondary" id="trainingBtn">
+                                <i class="fas fa-graduation-cap"></i> كۋانتۇم مودېل تەربىيەلەش
+                                <span class="english"> | Quantum Model Training</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title"><i class="fas fa-list-ol"></i> دەرسلىك مەزمۇنى</h3>
+                    <ul class="topic-list">
+                        <li class="topic-item">
+                            <div class="topic-title">كۋبىت دىگەن نېمە؟</div>
+                            <div class="topic-desc english">What is a Qubit?</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">كۋبىت ۋە بىت سېلىشتۇرۇشى</div>
+                            <div class="topic-desc english">Qubit vs Bit Comparison</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">كۋبىت ھالىتى كۆرۈنۈشى</div>
+                            <div class="topic-desc english">Qubit State Visualization</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">كۋانتۇم ئېشىكلىرى</div>
+                            <div class="topic-desc english">Quantum Gates</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">بىر كۋبىتلىك ئېشىكلەر</div>
+                            <div class="topic-desc english">Single Qubit Gates</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">كۆپ كۋبىتلىك ئېشىكلەر</div>
+                            <div class="topic-desc english">Multi Qubit Gates</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">ئەمەلىيلەشتۈرۈش ئېشىكلىرى</div>
+                            <div class="topic-desc english">Universal Gates</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">كۋانتۇم ماشىنا ئۆگىنىش ئېشىكلىرى</div>
+                            <div class="topic-desc english">QML Gates</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title"><i class="fas fa-history"></i> تارىخىي تەرەققىيات</h3>
+                    <div class="topic-list">
+                        <li class="topic-item">
+                            <div class="topic-title">1980: كۋبىت پىكىرى</div>
+                            <div class="topic-desc">Richard Feynman ۋە Paul Benioff كۋانتۇم كومپيۇتېر پىكىرىنى تەرەققىي قىلدۇرۇش</div>
+                            <div class="english-label">Richard Feynman and Paul Benioff develop quantum computer concept</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">1995: بىرلەشمە كۋانتۇم ئېشىكلىرى</div>
+                            <div class="topic-desc">ئالدىنقى كۋانتۇم ئېشىكلىرىنىڭ بىرلەشمە ئېشىكلىرىگە ئايلىنىشى</div>
+                            <div class="english-label">Early quantum gates developed into universal gates</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">2000: كۋبىت ئەمەلىيلەشتۈرۈش</div>
+                            <div class="topic-desc">ئەمەلىي كۋبىتلەرنى ئەمەلىيلەشتۈرۈش (سۇپېرھۆتكۈچۈر، تونۇللاش)</div>
+                            <div class="english-label">Practical qubit implementations (superconducting, trapped ions)</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">2010s: كۋانتۇم ئارتىقچىلىق</div>
+                            <div class="topic-desc">Google, IBM قاتارلىق شىركەتلەر كۋبىتلارنى ئىشلەپچىقىرىش</div>
+                            <div class="english-label">Companies like Google, IBM produce qubits</div>
+                        </li>
+                    </div>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title"><i class="fas fa-lightbulb"></i> مۇھىم ئەسكەرتىشلەر</h3>
+                    <div class="topic-list">
+                        <li class="topic-item">
+                            <div class="topic-title">كۋبىتنىڭ ھالەت بوشلۇقى</div>
+                            <div class="topic-desc">كۋبىت ئىككى ئۆلچەملىك مۇرەككەپ ۋېكتور بوشلۇقى. ئادەتتىكى بىت بۇنىڭ ئىككى چېكى بولۇپلا قالمايدۇ</div>
+                            <div class="english-label">Qubit is 2D complex vector space. Classical bits are just two points in this space</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">ئۆلچەش مەسىلىسى</div>
+                            <div class="topic-desc">كۋبىتنى ئۆلچەش ئۇنىڭ ئورۇنلاش ھالىتىنى بۇزىدۇ. ئۆلچەش نەتىجىسى ئېھتىماللىقىي بولۇپ، |α|² ۋە |β|² بويىچە بېرىلىدۇ</div>
+                            <div class="english-label">Measuring qubit collapses its superposition state. Result is probabilistic based on |α|² and |β|²</div>
+                        </li>
+                        <li class="topic-item">
+                            <div class="topic-title">كۋانتۇم ئېشىكلىرىنىڭ چېكى</div>
+                            <div class="topic-desc">كۋانتۇم ئېشىكلىرى بىرلىك ئۆزگەرتىش (unitary transformation). بۇ ئېشىكلەرنىڭ تەسىرى قايتۇرۇلغۇچى بولۇشىنى كاپالەتلەندۈرىدۇ</div>
+                            <div class="english-label">Quantum gates are unitary transformations. This ensures gates are reversible</div>
+                        </li>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="chapter-nav">
+            <a href="#" class="nav-btn">
+                <i class="fas fa-arrow-right"></i> ئالدىنقى بۆلەك: كۋانتۇم ماشىنا ئۆگىنىش كىرىش
+            </a>
+            <a href="#" class="nav-btn">
+                كېيىنكى بۆلەك: كۋانتۇم سىخىتلىرى ۋە ئالگورىزىملىرى
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+        
+        <!-- Footer -->
+        <footer>
+            <p>بۇ دەرسلىك كۋانتۇم ماشىنا ئۆگىنىش 2-باب: كۋبىت ۋە كۋانتۇم ئېشىكلىرى ھەققىدە ئىنتېرئاكتىپ تونۇشتۇرۇش ئۈچۈن تەييارلاندى.</p>
+            <p class="english">This tutorial was prepared for interactive introduction to Quantum Machine Learning Chapter 2: Qubits & Quantum Gates.</p>
+            <p style="margin-top: 40px;"><i class="fas fa-graduation-cap"></i> كۋانتۇم ماشىنا ئۆگىنىش دەرسلىكى - 2-باب</p>
+            <p class="english">Quantum Machine Learning Tutorial - Chapter 2</p>
+        </footer>
+    </div>
+
+    <script>
+        // Language Toggle
+        const toggleEnglishBtn = document.getElementById('toggleEnglish');
+        let englishVisible = true;
+        
+        toggleEnglishBtn.addEventListener('click', function() {
+            englishVisible = !englishVisible;
+            if (englishVisible) {
+                document.body.classList.remove('hide-en');
+                toggleEnglishBtn.innerHTML = '<i class="fas fa-language"></i> ئېنگلىزچىنى يوشۇرۇش';
+            } else {
+                document.body.classList.add('hide-en');
+                toggleEnglishBtn.innerHTML = '<i class="fas fa-language"></i> ئېنگلىزچىنى كۆرسىتىش';
+            }
+        });
+        
+        // Create Qubit Particles
+        function createQubitParticles() {
+            const container = document.getElementById('qubitParticles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'qubit-particle';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 3}s`;
+                particle.style.animationDuration = `${2 + Math.random() * 4}s`;
+                particle.style.width = particle.style.height = `${3 + Math.random() * 4}px`;
+                particle.style.background = `rgba(${Math.floor(Math.random() * 155 + 100)}, ${Math.floor(Math.random() * 100)}, ${Math.floor(Math.random() * 155 + 100)}, ${0.4 + Math.random() * 0.3})`;
+                container.appendChild(particle);
+            }
+        }
+        
+        // Qubit State Visualization
+        const qubitCanvas = document.getElementById('qubitCanvas');
+        const qubitCtx = qubitCanvas.getContext('2d');
+        let currentMode = 'single';
+        let theta = 90; // Elevation angle in degrees
+        let phi = 0;    // Phase angle in degrees
+        let animationId = null;
+        
+        // Set canvas dimensions
+        function resizeQubitCanvas() {
+            const container = document.querySelector('.viz-container');
+            qubitCanvas.width = container.clientWidth;
+            qubitCanvas.height = container.clientHeight;
+            drawQubitState();
+        }
+        
+        // Draw Bloch Sphere
+        function drawBlochSphere() {
+            const width = qubitCanvas.width;
+            const height = qubitCanvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(width, height) * 0.25;
+            
+            // Clear canvas
+            qubitCtx.clearRect(0, 0, width, height);
+            
+            // Draw sphere outline
+            qubitCtx.beginPath();
+            qubitCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            qubitCtx.strokeStyle = 'rgba(123, 31, 162, 0.5)';
+            qubitCtx.lineWidth = 2;
+            qubitCtx.stroke();
+            
+            // Draw axes
+            qubitCtx.beginPath();
+            // X axis
+            qubitCtx.moveTo(centerX - radius, centerY);
+            qubitCtx.lineTo(centerX + radius, centerY);
+            // Y axis
+            qubitCtx.moveTo(centerX, centerY - radius);
+            qubitCtx.lineTo(centerX, centerY + radius);
+            // Z axis
+            qubitCtx.moveTo(centerX, centerY);
+            qubitCtx.lineTo(centerX, centerY - radius);
+            qubitCtx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            qubitCtx.lineWidth = 1;
+            qubitCtx.stroke();
+            
+            // Draw axis labels
+            qubitCtx.fillStyle = '#ba68c8';
+            qubitCtx.font = 'bold 16px Arial';
+            qubitCtx.textAlign = 'center';
+            qubitCtx.fillText('|0⟩', centerX, centerY - radius - 20);
+            qubitCtx.fillText('|1⟩', centerX, centerY + radius + 20);
+            qubitCtx.fillText('|+⟩', centerX + radius + 20, centerY);
+            qubitCtx.fillText('|-⟩', centerX - radius - 20, centerY);
+            
+            // Calculate qubit state position
+            const thetaRad = theta * Math.PI / 180;
+            const phiRad = phi * Math.PI / 180;
+            
+            const x = radius * Math.sin(thetaRad) * Math.cos(phiRad);
+            const y = radius * Math.sin(thetaRad) * Math.sin(phiRad);
+            const z = radius * Math.cos(thetaRad);
+            
+            // Draw state vector
+            qubitCtx.beginPath();
+            qubitCtx.moveTo(centerX, centerY);
+            qubitCtx.lineTo(centerX + x, centerY - z); // Y is up in canvas
+            qubitCtx.strokeStyle = '#ff8f00';
+            qubitCtx.lineWidth = 3;
+            qubitCtx.stroke();
+            
+            // Draw state point
+            qubitCtx.beginPath();
+            qubitCtx.arc(centerX + x, centerY - z, 8, 0, Math.PI * 2);
+            qubitCtx.fillStyle = '#ff8f00';
+            qubitCtx.fill();
+            qubitCtx.strokeStyle = '#ffffff';
+            qubitCtx.lineWidth = 2;
+            qubitCtx.stroke();
+            
+            // Draw state label
+            qubitCtx.fillStyle = '#4fc3f7';
+            qubitCtx.font = 'bold 18px Arial';
+            qubitCtx.textAlign = 'center';
+            
+            // Calculate α and β
+            const alpha = Math.cos(thetaRad / 2);
+            const beta = Math.sin(thetaRad / 2) * Math.exp(1j * phiRad);
+            
+            qubitCtx.fillText(`|ψ⟩ = ${alpha.toFixed(2)}|0⟩ + ${beta.toFixed(2)}|1⟩`, centerX, centerY + radius + 40);
+            qubitCtx.fillText(`θ = ${theta}°, φ = ${phi}°`, centerX, centerY + radius + 70);
+        }
+        
+        // Draw two qubits
+        function drawTwoQubits() {
+            const width = qubitCanvas.width;
+            const height = qubitCanvas.height;
+            const centerY = height / 2;
+            
+            // Clear canvas
+            qubitCtx.clearRect(0, 0, width, height);
+            
+            // Draw two Bloch spheres side by side
+            const sphereRadius = Math.min(width, height) * 0.2;
+            const leftCenterX = width * 0.3;
+            const rightCenterX = width * 0.7;
+            
+            // Left sphere
+            qubitCtx.beginPath();
+            qubitCtx.arc(leftCenterX, centerY, sphereRadius, 0, Math.PI * 2);
+            qubitCtx.strokeStyle = 'rgba(123, 31, 162, 0.5)';
+            qubitCtx.lineWidth = 2;
+            qubitCtx.stroke();
+            
+            // Right sphere
+            qubitCtx.beginPath();
+            qubitCtx.arc(rightCenterX, centerY, sphereRadius, 0, Math.PI * 2);
+            qubitCtx.strokeStyle = 'rgba(0, 172, 193, 0.5)';
+            qubitCtx.lineWidth = 2;
+            qubitCtx.stroke();
+            
+            // Draw connection line
+            qubitCtx.beginPath();
+            qubitCtx.moveTo(leftCenterX + sphereRadius, centerY);
+            qubitCtx.lineTo(rightCenterX - sphereRadius, centerY);
+            qubitCtx.strokeStyle = 'rgba(255, 143, 0, 0.5)';
+            qubitCtx.lineWidth = 2;
+            qubitCtx.stroke();
+            
+            // Draw labels
+            qubitCtx.fillStyle = '#ba68c8';
+            qubitCtx.font = 'bold 20px Arial';
+            qubitCtx.textAlign = 'center';
+            qubitCtx.fillText('كۋبىت 1', leftCenterX, centerY + sphereRadius + 40);
+            qubitCtx.fillText('كۋبىت 2', rightCenterX, centerY + sphereRadius + 40);
+            qubitCtx.fillText('ئۇچۇرشقان', width / 2, centerY - sphereRadius - 20);
+        }
+        
+        // Draw entangled qubits
+        function drawEntangledQubits() {
+            const width = qubitCanvas.width;
+            const height = qubitCanvas.height;
+            const centerY = height / 2;
+            
+            // Clear canvas
+            qubitCtx.clearRect(0, 0, width, height);
+            
+            // Draw Bell state equation
+            qubitCtx.fillStyle = '#4fc3f7';
+            qubitCtx.font = 'bold 30px Arial';
+            qubitCtx.textAlign = 'center';
+            qubitCtx.fillText('|Φ⁺⟩ = (|00⟩ + |11⟩)/√2', width / 2, 80);
+            
+            // Draw entangled state visualization
+            const centerX = width / 2;
+            const radius = Math.min(width, height) * 0.15;
+            
+            // Draw two entangled spheres
+            qubitCtx.beginPath();
+            qubitCtx.arc(centerX - radius, centerY, radius, 0, Math.PI * 2);
+            qubitCtx.strokeStyle = 'rgba(123, 31, 162, 0.7)';
+            qubitCtx.lineWidth = 3;
+            qubitCtx.stroke();
+            
+            qubitCtx.beginPath();
+            qubitCtx.arc(centerX + radius, centerY, radius, 0, Math.PI * 2);
+            qubitCtx.strokeStyle = 'rgba(0, 172, 193, 0.7)';
+            qubitCtx.lineWidth = 3;
+            qubitCtx.stroke();
+            
+            // Draw quantum connection
+            qubitCtx.beginPath();
+            for (let x = centerX - radius; x <= centerX + radius; x += 5) {
+                const y = centerY + Math.sin((x - centerX) * 0.1) * 20;
+                if (x === centerX - radius) {
+                    qubitCtx.moveTo(x, y);
+                } else {
+                    qubitCtx.lineTo(x, y);
+                }
+            }
+            qubitCtx.strokeStyle = 'rgba(255, 143, 0, 0.7)';
+            qubitCtx.lineWidth = 3;
+            qubitCtx.stroke();
+            
+            // Draw correlation explanation
+            qubitCtx.fillStyle = '#e1bee7';
+            qubitCtx.font = '18px Arial';
+            qubitCtx.textAlign = 'center';
+            qubitCtx.fillText('بىرىنى ئۆلچەش ئىككىنچىسىنى بەلگىلەيدۇ', width / 2, centerY + radius + 60);
+            qubitCtx.fillText('Measuring one determines the other', width / 2, centerY + radius + 90);
+        }
+        
+        // Draw multiple qubits
+        function drawMultipleQubits() {
+            const width = qubitCanvas.width;
+            const height = qubitCanvas.height;
+            
+            // Clear canvas
+            qubitCtx.clearRect(0, 0, width, height);
+            
+            // Draw quantum register visualization
+            qubitCtx.fillStyle = '#4fc3f7';
+            qubitCtx.font = 'bold 30px Arial';
+            qubitCtx.textAlign = 'center';
+            qubitCtx.fillText('كۋانتۇم رېگىستىرى (Quantum Register)', width / 2, 60);
+            
+            // Draw multiple qubits as circles
+            const qubitCount = 5;
+            const qubitSpacing = width / (qubitCount + 1);
+            const qubitRadius = Math.min(qubitSpacing * 0.4, 40);
+            const centerY = height / 2;
+            
+            for (let i = 0; i < qubitCount; i++) {
+                const x = qubitSpacing * (i + 1);
+                
+                // Draw qubit circle
+                qubitCtx.beginPath();
+                qubitCtx.arc(x, centerY, qubitRadius, 0, Math.PI * 2);
+                qubitCtx.fillStyle = `rgba(${100 + i * 30}, ${50 + i * 40}, ${150 + i * 20}, 0.3)`;
+                qubitCtx.fill();
+                qubitCtx.strokeStyle = `rgba(${100 + i * 30}, ${50 + i * 40}, ${150 + i * 20}, 0.8)`;
+                qubitCtx.lineWidth = 3;
+                qubitCtx.stroke();
+                
+                // Draw qubit label
+                qubitCtx.fillStyle = '#ffffff';
+                qubitCtx.font = 'bold 20px Arial';
+                qubitCtx.textAlign = 'center';
+                qubitCtx.fillText(`Q${i}`, x, centerY + 5);
+                
+                // Draw superposition indicator
+                qubitCtx.beginPath();
+                qubitCtx.arc(x, centerY, qubitRadius * 0.7, 0, Math.PI * 2);
+                qubitCtx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                qubitCtx.lineWidth = 1;
+                qubitCtx.stroke();
+            }
+            
+            // Draw entanglement connections
+            qubitCtx.beginPath();
+            for (let i = 0; i < qubitCount - 1; i++) {
+                const x1 = qubitSpacing * (i + 1);
+                const x2 = qubitSpacing * (i + 2);
+                qubitCtx.moveTo(x1 + qubitRadius, centerY);
+                qubitCtx.lineTo(x2 - qubitRadius, centerY);
+            }
+            qubitCtx.strokeStyle = 'rgba(255, 143, 0, 0.5)';
+            qubitCtx.lineWidth = 2;
+            qubitCtx.stroke();
+            
+            // Draw state description
+            qubitCtx.fillStyle = '#e1bee7';
+            qubitCtx.font = '18px Arial';
+            qubitCtx.textAlign = 'center';
+            qubitCtx.fillText(`${qubitCount} كۋبىتلىك رېگىستىر: 2^${qubitCount} = ${2**qubitCount} ھالەت`, width / 2, height - 50);
+            qubitCtx.fillText(`${qubitCount}-qubit register: 2^${qubitCount} = ${2**qubitCount} states`, width / 2, height - 20);
+        }
+        
+        // Main drawing function
+        function drawQubitState() {
+            switch(currentMode) {
+                case 'single':
+                    drawBlochSphere();
+                    break;
+                case 'two':
+                    drawTwoQubits();
+                    break;
+                case 'entangled':
+                    drawEntangledQubits();
+                    break;
+                case 'multiple':
+                    drawMultipleQubits();
+                    break;
+            }
+        }
+        
+        // Visualization mode buttons
+        const vizButtons = document.querySelectorAll('.viz-btn');
+        vizButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                vizButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentMode = this.dataset.mode;
+                drawQubitState();
+            });
+        });
+        
+        // Qubit controls
+        const thetaSlider = document.getElementById('thetaSlider');
+        const phiSlider = document.getElementById('phiSlider');
+        const thetaValue = document.getElementById('thetaValue');
+        const phiValue = document.getElementById('phiValue');
+        const qubitStateSelect = document.getElementById('qubitStateSelect');
+        const entangleBtn = document.getElementById('entangleBtn');
+        const measureBtn = document.getElementById('measureBtn');
+        const resetQubitBtn = document.getElementById('resetQubitBtn');
+        
+        // Update theta and phi values
+        function updateQubitState() {
+            theta = parseInt(thetaSlider.value);
+            phi = parseInt(phiSlider.value);
+            
+            thetaValue.textContent = `θ = ${theta}°`;
+            phiValue.textContent = `φ = ${phi}°`;
+            
+            drawQubitState();
+        }
+        
+        thetaSlider.addEventListener('input', updateQubitState);
+        phiSlider.addEventListener('input', updateQubitState);
+        
+        // Qubit state presets
+        qubitStateSelect.addEventListener('change', function() {
+            const state = this.value;
+            
+            switch(state) {
+                case 'zero':
+                    theta = 0;
+                    phi = 0;
+                    break;
+                case 'one':
+                    theta = 180;
+                    phi = 0;
+                    break;
+                case 'plus':
+                    theta = 90;
+                    phi = 0;
+                    break;
+                case 'minus':
+                    theta = 90;
+                    phi = 180;
+                    break;
+                case 'plusi':
+                    theta = 90;
+                    phi = 90;
+                    break;
+                case 'minusi':
+                    theta = 90;
+                    phi = 270;
+                    break;
+                case 'custom':
+                    return;
+            }
+            
+            thetaSlider.value = theta;
+            phiSlider.value = phi;
+            updateQubitState();
+        });
+        
+        // Quantum entanglement simulation
+        entangleBtn.addEventListener('click', function() {
+            // Create Bell state: (|00⟩ + |11⟩)/√2
+            currentMode = 'entangled';
+            vizButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-mode="entangled"]').classList.add('active');
+            
+            alert('ئىككى كۋبىت ئۇچۇرشىپ بىرىلدى: |Φ⁺⟩ = (|00⟩ + |11⟩)/√2\n\nTwo qubits have been entangled: |Φ⁺⟩ = (|00⟩ + |11⟩)/√2');
+            
+            drawQubitState();
+            
+            // Visual effect
+            this.style.animation = 'qubitPulse 0.5s';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 500);
+        });
+        
+        // Quantum measurement simulation
+        measureBtn.addEventListener('click', function() {
+            const thetaRad = theta * Math.PI / 180;
+            const prob0 = Math.cos(thetaRad / 2) ** 2;
+            const random = Math.random();
+            const result = random < prob0 ? '|0⟩' : '|1⟩';
+            
+            alert(`كۋبىت ئۆلچەش نەتىجىسى: ${result}\nئېھتىماللىق: ${(result === '|0⟩' ? (prob0*100).toFixed(1) : ((1-prob0)*100).toFixed(1))}%\n\nQubit measurement result: ${result}\nProbability: ${(result === '|0⟩' ? (prob0*100).toFixed(1) : ((1-prob0)*100).toFixed(1))}%`);
+            
+            // Visual effect
+            this.style.animation = 'qubitPulse 0.5s';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 500);
+        });
+        
+        // Reset qubit state
+        resetQubitBtn.addEventListener('click', function() {
+            theta = 90;
+            phi = 0;
+            thetaSlider.value = theta;
+            phiSlider.value = phi;
+            qubitStateSelect.value = 'plus';
+            currentMode = 'single';
+            vizButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-mode="single"]').classList.add('active');
+            updateQubitState();
+            
+            // Visual effect
+            this.style.animation = 'qubitRotate 1s';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 1000);
+        });
+        
+        // Quantum gate simulation
+        const gateSimulation = document.getElementById('gateSimulation');
+        const addGateBtn = document.getElementById('addGateBtn');
+        const runGateBtn = document.getElementById('runGateBtn');
+        const clearGatesBtn = document.getElementById('clearGatesBtn');
+        
+        let gateElements = [];
+        let gateId = 0;
+        
+        function drawGateSimulation() {
+            gateSimulation.innerHTML = '';
+            
+            // Draw qubit lines
+            for (let i = 0; i < 3; i++) {
+                const line = document.createElement('div');
+                line.className = 'qubit-line';
+                line.style.top = `${40 + i * 100}px`;
+                gateSimulation.appendChild(line);
+                
+                // Draw qubit label
+                const label = document.createElement('div');
+                label.style.position = 'absolute';
+                label.style.left = '20px';
+                label.style.top = `${35 + i * 100}px`;
+                label.style.color = '#ba68c8';
+                label.style.fontSize = '1.5rem';
+                label.style.fontWeight = 'bold';
+                label.textContent = `Q${i}`;
+                gateSimulation.appendChild(label);
+            }
+            
+            // Draw gates
+            gateElements.forEach(gate => {
+                const gateElement = document.createElement('div');
+                gateElement.className = 'gate-element';
+                gateElement.textContent = gate.type;
+                gateElement.style.top = `${gate.qubit * 100 + 20}px`;
+                gateElement.style.left = `${gate.position}px`;
+                gateElement.dataset.id = gate.id;
+                
+                // Add click to remove
+                gateElement.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.dataset.id);
+                    gateElements = gateElements.filter(g => g.id !== id);
+                    drawGateSimulation();
+                });
+                
+                gateSimulation.appendChild(gateElement);
+            });
+        }
+        
+        addGateBtn.addEventListener('click', function() {
+            const gateTypes = ['H', 'X', 'Y', 'Z', 'CNOT', 'SWAP', 'CZ'];
+            const randomType = gateTypes[Math.floor(Math.random() * gateTypes.length)];
+            const randomQubit = Math.floor(Math.random() * 3);
+            
+            gateElements.push({
+                id: gateId++,
+                type: randomType,
+                qubit: randomQubit,
+                position: Math.floor(Math.random() * (gateSimulation.clientWidth - 80))
+            });
+            
+            drawGateSimulation();
+        });
+        
+        runGateBtn.addEventListener('click', function() {
+            if (gateElements.length === 0) {
+                alert('ئالدى بىلەن كۋانتۇم ئېشىكى قوشۇڭ!\n\nAdd quantum gates first!');
+                return;
+            }
+            
+            const gateStr = gateElements.map(g => `${g.type}${g.qubit + 1}`).join(' → ');
+            alert(`كۋانتۇم ئېشىكلىرى ئىجرا قىلىندى:\n${gateStr}\n\nQuantum gates executed:\n${gateStr}`);
+            
+            // Visual effect
+            this.style.animation = 'qubitPulse 0.5s';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 500);
+        });
+        
+        clearGatesBtn.addEventListener('click', function() {
+            gateElements = [];
+            drawGateSimulation();
+            
+            // Visual effect
+            this.style.animation = 'qubitRotate 1s';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 1000);
+        });
+        
+        // Quantum tabs
+        const quantumTabs = document.querySelectorAll('.quantum-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        quantumTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetTab = this.dataset.tab;
+                
+                // Update active tab
+                quantumTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show target content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === targetTab) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Copy code functionality
+        const copyCodeBtn = document.querySelector('.code-copy');
+        if (copyCodeBtn) {
+            copyCodeBtn.addEventListener('click', function() {
+                const code = document.querySelector('.quantum-code').innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> كۆچۈرۈلدى';
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+        }
+        
+        // QML circuit example
+        const qmlCircuitBtn = document.getElementById('qmlCircuitBtn');
+        if (qmlCircuitBtn) {
+            qmlCircuitBtn.addEventListener('click', function() {
+                const qmlCircuitText = `
+كۋانتۇم ماشىنا ئۆگىنىش سىخىتى مىسالى:
+
+1. سانلىق مەلۇمات كىرگۈزۈش قۇرۇلمىسى:
+   - ئاڭلىما كىرگۈزۈش (Angle Encoding): R_Y(x_i)
+   - ئامپلىتۇد كىرگۈزۈش (Amplitude Encoding)
+
+2. پارامېتېرلىق كۋانتۇم سىخىتى:
+   [R_Y(θ₁)] -- [R_Z(θ₂)] -- [CNOT] -- [R_Y(θ₃)]
+        |           |           |           |
+   [R_X(θ₄)] -- [R_Z(θ₅)] -- [CNOT] -- [R_X(θ₆)]
+
+3. ئۆلچەش:
+   - ئادەتتىكى بىتلەرگە ئۆلچەش
+   - ئېھتىماللىق تارقىلىشى
+
+Quantum Machine Learning Circuit Example:
+
+1. Data encoding structure:
+   - Angle Encoding: R_Y(x_i)
+   - Amplitude Encoding
+
+2. Parametric quantum circuit:
+   [R_Y(θ₁)] -- [R_Z(θ₂)] -- [CNOT] -- [R_Y(θ₃)]
+        |           |           |           |
+   [R_X(θ₄)] -- [R_Z(θ₅)] -- [CNOT] -- [R_X(θ₆)]
+
+3. Measurement:
+   - Measurement to classical bits
+   - Probability distribution
+                `;
+                alert(qmlCircuitText);
+            });
+        }
+        
+        // Training button
+        const trainingBtn = document.getElementById('trainingBtn');
+        if (trainingBtn) {
+            trainingBtn.addEventListener('click', function() {
+                const trainingText = `
+كۋانتۇم مودېل تەربىيەلەش قەدەملىرى:
+
+1. باشلانغۇچ پارامېتېرلارنى بەلگىلەش
+2. كۋانتۇم سىخىتىنى ئىجرا قىلىش
+3. ئۆلچەش نەتىجىلىرىنى ھېسابلاش
+4. مەقسەت فۇنكسىيەنى ھېسابلاش (Loss)
+5. گرادىيېنت ھېسابلاش (پەرقلىق ئۆتكۈزۈش)
+6. پارامېتېرلارنى ياخشىلاش (ئادەتتىكى گرادىيېنت چۈشۈش)
+7. قايتا قايتا تەكرارلاش
+
+Quantum Model Training Steps:
+
+1. Initialize parameters
+2. Execute quantum circuit
+3. Calculate measurement results
+4. Compute objective function (Loss)
+5. Calculate gradient (parameter shift)
+6. Optimize parameters (gradient descent)
+7. Repeat iteratively
+                `;
+                alert(trainingText);
+            });
+        }
+        
+        // Navigation buttons
+        const navButtons = document.querySelectorAll('.nav-btn');
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('بۇ دەرسلىك ھازىرلا 2-بابنىلا ئۆز ئىچىگە ئالىدۇ. كېيىنكى بۆلەكلەر تەييارلىنىۋاتىدۇ.\n\nThis tutorial currently only includes Chapter 2. Subsequent sections are being prepared.');
+            });
+        });
+        
+        // Initialize everything
+        window.addEventListener('load', function() {
+            createQubitParticles();
+            resizeQubitCanvas();
+            drawGateSimulation();
+            MathJax.typeset();
+            
+            // Draw initial qubit state
+            updateQubitState();
+        });
+        
+        window.addEventListener('resize', function() {
+            resizeQubitCanvas();
+            drawGateSimulation();
+        });
+        
+        // Add floating qubit particles animation
+        setInterval(() => {
+            const particles = document.querySelectorAll('.qubit-particle');
+            particles.forEach(particle => {
+                if (Math.random() > 0.5) {
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                }
+            });
+        }, 4000);
+    </script>
+</body>
+</html>

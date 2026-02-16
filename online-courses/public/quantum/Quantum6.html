@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كوانت فىزىكىسى تولۇق دەرسلىكى - KeLBiL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ئومۇمىي بەلگىلەر */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #7c3aed;
+            --secondary-color: #00f0ff;
+            --accent-color: #5fff03;
+            --text-color: #e5e7eb;
+            --bg-dark: #020617;
+            --bg-medium: #1e1b4b;
+            --bg-light: rgba(30, 27, 75, 0.7);
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, "Noto Sans Arabic", sans-serif;
+            background: linear-gradient(135deg, var(--bg-medium), var(--bg-dark));
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        /* بېشەت */
+        .header {
+            background: rgba(2, 6, 23, 0.9);
+            padding: 1.5rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo i {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--secondary-color);
+        }
+
+        /* ئاساسىي مەزمۇن */
+        .container {
+            max-width: 1400px;
+            margin: 120px auto 40px;
+            padding: 0 20px;
+        }
+
+        .main-title {
+            text-align: center;
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        /* تۇرلۇك بۆلەكلەر */
+        .section {
+            background: rgba(2, 6, 23, 0.85);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            padding-right: 1rem;
+            border-right: 5px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin: 1.5rem 0 1rem;
+            padding-right: 0.8rem;
+            border-right: 3px solid var(--primary-color);
+        }
+
+        /* تېكىست ۋە پاراگرافلار */
+        p {
+            font-size: 1.25rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+            color: #d1d5db;
+        }
+
+        /* تىزىملىكلەر */
+        ul, ol {
+            margin-right: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            padding-right: 0.8rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            position: absolute;
+            right: -1.2rem;
+            top: 0;
+        }
+
+        /* ھۆججەت قۇتىلىرى */
+        .card {
+            background: rgba(124, 58, 237, 0.15);
+            border-radius: 15px;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid var(--secondary-color);
+            border-right: 5px solid var(--primary-color);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
+        }
+
+        .warning-card {
+            background: rgba(255, 100, 100, 0.15);
+            border-color: #ff6666;
+        }
+
+        .info-card {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--secondary-color);
+        }
+
+        /* ماتېماتىكىلىق فورمۇلالار */
+        .equation {
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            font-family: "Cambria Math", "Times New Roman", serif;
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            text-align: center;
+            direction: ltr;
+            overflow-x: auto;
+        }
+
+        /* جەدۋەللەر */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(2, 6, 23, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: right;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+        }
+
+        th {
+            background: rgba(124, 58, 237, 0.3);
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        td {
+            font-size: 1.1rem;
+        }
+
+        /* سىمۇلياتسىيە بۆلەكلىرى */
+        .simulation-section {
+            background: linear-gradient(135deg, rgba(2, 6, 23, 0.9), rgba(30, 27, 75, 0.9));
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--primary-color);
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 400px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border: 2px solid var(--secondary-color);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border: none;
+            border-radius: 8px;
+            color: var(--bg-dark);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, var(--secondary-color), #00ccff);
+        }
+
+        .slider-container {
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(124, 58, 237, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        /* پارتىكۇل كارتا بۆلەكلىرى */
+        .particle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .particle-card {
+            background: rgba(124, 58, 237, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .particle-card:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .particle-card.active {
+            background: rgba(0, 240, 255, 0.15);
+            border-color: var(--secondary-color);
+        }
+
+        .particle-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .particle-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+        }
+
+        .particle-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+        }
+
+        /* پەرەز قىلىش بۆلەكى */
+        .prediction-box {
+            background: linear-gradient(135deg, rgba(95, 255, 3, 0.1), rgba(0, 240, 255, 0.1));
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--accent-color);
+            text-align: center;
+        }
+
+        /* تارىخىي ئۇچۇرلار */
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+            padding-right: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-right: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -2.5rem;
+            top: 0.5rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 3px solid var(--bg-dark);
+        }
+
+        .timeline-year {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background: rgba(124, 58, 237, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border-right: 3px solid var(--primary-color);
+        }
+
+        /* پايدىلىق بايلىقلار */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background: rgba(30, 27, 75, 0.5);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            transition: all 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
+            border-color: var(--secondary-color);
+        }
+
+        /* تەگلىك */
+        footer {
+            background: rgba(2, 6, 23, 0.95);
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 2px solid var(--primary-color);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        /* كىچىك ئېكرانلار ئۈچۈن */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .canvas-container {
+                height: 300px;
+            }
+            
+            .particle-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ئېنىماتسىيەلەر */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pulsing {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* كۆپىيىش ئىقتىدارى */
+        .expandable {
+            cursor: pointer;
+            position: relative;
+            padding-right: 2rem;
+        }
+
+        .expandable::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            transition: transform 0.3s;
+        }
+
+        .expandable.expanded::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        /* ئىشەنچ سەۋىيىسى */
+        .confidence-meter {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--accent-color), var(--secondary-color));
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* باشقا ياخشىلاشلار */
+        .highlight {
+            background: linear-gradient(120deg, rgba(124, 58, 237, 0.3) 0%, rgba(124, 58, 237, 0) 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        .note {
+            background: rgba(255, 255, 0, 0.1);
+            border-right: 3px solid yellow;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            color: #ffffcc;
+        }
+
+        .quote {
+            font-style: italic;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 4px solid var(--primary-color);
+            background: rgba(124, 58, 237, 0.1);
+            border-radius: 10px;
+            color: #c084fc;
+        }
+
+        .author {
+            text-align: left;
+            margin-top: 0.5rem;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- بېشەت -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fa-solid fa-star-and-crescent"></i>
+                KeLBiL كوانت فىزىكىسى
+            </div>
+            <nav class="nav-links">
+                <a href="#introduction" class="nav-link">كىرىش</a>
+                <a href="#basics" class="nav-link">ئاساسىي تۈشۈنچە</a>
+                <a href="#phenomena" class="nav-link">ھادىسىلەر</a>
+                <a href="#simulations" class="nav-link">سىمۇلياتسىيە</a>
+                <a href="#applications" class="nav-link">ئەمەلىي قوللىنىش</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ئاساسىي مەزمۇن -->
+    <main class="container">
+        <h1 class="main-title">كوانت فىزىكىسى تولۇق دەرسلىكى</h1>
+        
+        <!-- 1. كىرىش بۆلەمى -->
+        <section id="introduction" class="section">
+            <h2 class="section-title"><i class="fas fa-door-open"></i> كىرىش</h2>
+            
+            <div class="card warning-card">
+                <h3 class="section-subtitle"><i class="fas fa-exclamation-triangle"></i> دىققەت: كىلاسسىك فىزىكا بۇ يەردە ئىشلىمەيدۇ!</h3>
+                <p>كىلاسسىك فىزىكا قانۇنلىرى (نېۋتون ھەرىكەت قانۇنى، ماكسۋېل تەڭلىمىلىرى) پەقەت ماكروسكوپىك دۇنيادا (كۈندىلىك تۇرمۇش) ئىشلەيدۇ. مىكروسكوپىك دۇنيادا (ئاتوم ۋە ئۇنىڭدىن كىچىك) كوانت فىزىكىسى ئىشلەيدۇ.</p>
+            </div>
+            
+            <p>كوانت فىزىكىسى - ماددىنىڭ ۋە نۇرىنىڭ ئەڭ كىچىك تۈزۈلۈشى ۋە ھەرىكىتىنى چۈشەندۈرىدىغان فىزىكا ساھەسى. بۇ ساھە XX ئەسىرنىڭ باشلىرىدا تەرەققىي قىلغان ۋە ھازىرقى زامان تېخنىكىسىنىڭ كۆپ قىسمىنىڭ ئاساسى.</p>
+            
+            <div class="card info-card">
+                <h4><i class="fas fa-lightbulb"></i> كىلاسسىك ۋە كوانت فىزىكىسى پەرقى:</h4>
+                <ul>
+                    <li><strong>كىلاسسىك فىزىكا:</strong> توپلار، قاتتىق جىسىملار، ماكروسكوپىك ھادىسىلەر</li>
+                    <li><strong>كوانت فىزىكا:</strong> ئاتوملار، زەرەتچلەر، مىكروسكوپىك ھادىسىلەر</li>
+                    <li><strong>چوڭلۇق:</strong> كىلاسسىك > 10⁻⁹ مېتىر، كوانت < 10⁻⁹ مېتىر</li>
+                    <li><strong>ئېنېرگىيە:</strong> كىلاسسىك - چەكسىز دەۋاملىق، كوانت - چەكلىك سەۋىيىلەر</li>
+                </ul>
+            </div>
+            
+            <div class="equation">
+                پلانك ئۇزۇنلۇقى: ℓ<sub>P</sub> = √(ħG/c³) ≈ 1.616 × 10<sup>-35</sup> مېتىر
+            </div>
+            
+            <p>پلانك ئۇزۇنلۇقى كايناتنىڭ ئەڭ كىچىك مەنىلىك ئۇزۇنلۇق ئۆلچىمى. بۇنىڭدىن كىچىك ئۇزۇنلۇقلار فىزىكىلىق مەنىگە ئىگە ئەمەس.</p>
+        </section>
+        
+        <!-- 2. ئاساسىي تۈشۈنچە -->
+        <section id="basics" class="section">
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> ئاساسىي تۈشۈنچە</h2>
+            
+            <h3 class="section-subtitle">زەرەتچلەر = ئېھتىماللىق دولقۇنى</h3>
+            <p>كوانت فىزىكىسىدا، بارلىق زەرەتچلەر بىر ۋاقىتتا دولقۇن ۋە پارتىكۇل خۇسۇسىيىتىگە ئىگە (دولقۇن-پارتىكۇل ئىككىلىكى). زەرەتچلەرنىڭ ھەرىكىتى ئېھتىماللىق دولقۇنى بىلەن تەسۋىرلىنىدۇ.</p>
+            
+            <div class="equation">
+                دولقۇن فۇنكسىيەسى: ψ(x, t)
+            </div>
+            
+            <p>دولقۇن فۇنكسىيەسى |ψ(x, t)|² پارتىكۇلنىڭ ۋاقىت t دا x نۇقتىدا تېپىلىش ئېھتىماللىق زىچلىقىنى بېرىدۇ.</p>
+            
+            <div class="card">
+                <h4><i class="fas fa-wave-square"></i> دولقۇن فۇنكسىيەسىنىڭ ئالاھىدىلىكلىرى:</h4>
+                <ul>
+                    <li><strong>مۇرەككەپ قىممەت:</strong> ψ(x, t) ئادەتتە مۇرەككەپ سان (complex number)</li>
+                    <li><strong>نورماللانغان:</strong> ∫|ψ(x, t)|² dx = 1 (پارتىكۇل مەلۇم بىر جايدا بولۇشى كېرەك)</li>
+                    <li><strong>ئۆزگىرىش:</strong> Schrödinger تەڭلىمىسى بويىچە ۋاقىت بىلەن ئۆزگىرىدۇ</li>
+                    <li><strong>چۆكۈش:</strong> ئۆلچەش (measurement) دولقۇن فۇنكسىيەسىنى "چۆكۈش" قىلىدۇ</li>
+                </ul>
+            </div>
+            
+            <h3 class="section-subtitle">Schrödinger تەڭلىمىسى</h3>
+            <div class="equation">
+                iħ ∂ψ/∂t = -ħ²/2m ∂²ψ/∂x² + V(x)ψ
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>بەلگە</th>
+                        <th>مەنىسى</th>
+                        <th>قىممىتى</th>
+                    </tr>
+                    <tr>
+                        <td>i</td>
+                        <td>مۇرەككەپ سان بىرلىكى</td>
+                        <td>√(-1)</td>
+                    </tr>
+                    <tr>
+                        <td>ħ</td>
+                        <td>پلانك تۇراقلىقى / 2π</td>
+                        <td>1.0545718 × 10⁻³⁴ J·s</td>
+                    </tr>
+                    <tr>
+                        <td>ψ</td>
+                        <td>دولقۇن فۇنكسىيەسى</td>
+                        <td>مۇرەككەپ فۇنكسىيە</td>
+                    </tr>
+                    <tr>
+                        <td>m</td>
+                        <td>پارتىكۇل ماسسىسى</td>
+                        <td>پارتىكۇلغا قاراپ</td>
+                    </tr>
+                    <tr>
+                        <td>V(x)</td>
+                        <td>پوتېنسىيال ئېنېرگىيەسى</td>
+                        <td>ئورۇنغا باغلىق</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3 class="section-subtitle">پارتىكۇل تىپلىرى</h3>
+            <div class="particle-grid">
+                <div class="particle-card" onclick="showParticleInfo('electron')">
+                    <div class="particle-header">
+                        <div class="particle-icon">⚡</div>
+                        <div class="particle-title">ئېلېكترون</div>
+                    </div>
+                    <p>ئاتومنىڭ قەبىقىدىكى سەلبىي زەرەتلىك پارتىكۇل. ماسسىسى: 9.109 × 10⁻³¹ كىلوگرام.</p>
+                </div>
+                
+                <div class="particle-card" onclick="showParticleInfo('photon')">
+                    <div class="particle-header">
+                        <div class="particle-icon">☀️</div>
+                        <div class="particle-title">فوتون</div>
+                    </div>
+                    <p>نۇر پارتىكۇلىسى. ماسسىسى يوق (0)، لېكىن ئېنېرگىيە ۋە ۋەكترى بار.</p>
+                </div>
+                
+                <div class="particle-card" onclick="showParticleInfo('proton')">
+                    <div class="particle-header">
+                        <div class="particle-icon">🔴</div>
+                        <div class="particle-title">پروتون</div>
+                    </div>
+                    <p>ئاتوم نۇكلىئىدىكى ئىجابىي زەرەتلىك زەرەتچە. ماسسىسى: 1.673 × 10⁻²⁷ كىلوگرام.</p>
+                </div>
+                
+                <div class="particle-card" onclick="showParticleInfo('neutron')">
+                    <div class="particle-header">
+                        <div class="particle-icon">⚪</div>
+                        <div class="particle-title">نېۋترون</div>
+                    </div>
+                    <p>ئاتوم نۇكلىئىدىكى زەرەتسىز پارتىكۇل. ماسسىسى: 1.675 × 10⁻²⁷ كىلوگرام.</p>
+                </div>
+            </div>
+            
+            <div id="particle-details" class="card">
+                <!-- پارتىكۇل ئۇچۇرى بۇ يەرگە يۈكلەيدۇ -->
+            </div>
+        </section>
+        
+        <!-- 3. كوانت ھادىسىلىرى -->
+        <section id="phenomena" class="section">
+            <h2 class="section-title"><i class="fas fa-magic"></i> ئاساسىي كوانت ھادىسىلىرى</h2>
+            
+            <h3 class="section-subtitle">1. سۇپېرپوزىتسىيە (Superposition)</h3>
+            <p>كوانت سىستېمىسى بىر ۋاقىتتا بىر نەچچە مۇمكىن بولغان ھالەتلەردىن ئىبارەت بولالايدۇ. بۇ كىلاسسىك فىزىكا بىلەن چۈشەندۈرۈش مۇمكىن ئەمەس.</p>
+            
+            <div class="equation">
+                |ψ⟩ = α|0⟩ + β|1⟩   قەيەردە |α|² + |β|² = 1
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-layer-group"></i> مىساللار:</h4>
+                <ul>
+                    <li><strong>شرو دىڭېرنىڭ قەتىكى:</strong> بىر ۋاقىتتا تىرىك ۋە ئۆلگەن بولۇش</li>
+                    <li><strong>كوانت قۇبىت:</strong> بىر ۋاقىتتا 0 ۋە 1 ھالەتلىرىدە بولۇش</li>
+                    <li><strong>ئېلېكترون سەۋىيىسى:</strong> بىر ۋاقىتتا يۇقىرى ۋە تۆۋەن ئېنېرگىيە سەۋىيىسىدە بولۇش</li>
+                </ul>
+            </div>
+            
+            <h3 class="section-subtitle">2. ئېنتاڭگلىمېنت (Entanglement)</h3>
+            <p>ئىككى ياكى كۆپرەك كوانت پارتىكۇللارنىڭ ھالەتلىرى بىر-بىرىگە باغلىنىپ، بىر پارتىكۇلنى ئۆلچەش ئىككىنچىسىنىڭ ھالىتىنى دەرھال بېكىتىدىغان ھادىسە.</p>
+            
+            <div class="equation">
+                بېل ھالىتى: |Ψ⁺⟩ = (|01⟩ + |10⟩)/√2
+            </div>
+            
+            <div class="quote">
+                "ئۇزاقتىن قورقۇنچلۇق تەسىر" (Spooky action at a distance)
+                <div class="author">- ئالبرېت ئېنىشتېين</div>
+            </div>
+            
+            <h3 class="section-subtitle">3. تۈننېللېڭ (Quantum Tunneling)</h3>
+            <p>پارتىكۇللارنىڭ ئېنېرگىيەسى يەتمىسىمۇ توساقنى "تەش" ئۆتۈپ كېتىش ھادىسىسى. بۇ كىلاسسىك فىزىكىدا مۇمكىن ئەمەس.</p>
+            
+            <div class="equation">
+                تۈننېللېڭ ئېھتىماللىقى: T ≈ exp(-2∫√[2m(V-E)/ħ²] dx)
+            </div>
+            
+            <h3 class="section-subtitle">4. ئېنقىسزلىق پرىنسىپى (Uncertainty Principle)</h3>
+            <p>ھەيزنبېرگ ئېنقىسزلىق پرىنسىپى: پارتىكۇلنىڭ ئورنى ۋە ۋەكترىنى بىر ۋاقىتتا توغرا ئۆلچەش مۇمكىن ئەمەس.</p>
+            
+            <div class="equation">
+                Δx · Δp ≥ ħ/2
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-balance-scale"></i> ئېنقىسزلىق پرىنسىپىنىڭ ئەھمىيىتى:</h4>
+                <ul>
+                    <li>ئاتوم مودېلىنى چۈشەندۈرۈش (ئاتوم نۇكلىئىنىڭ ئەتراپىدا ئېلېكترونلار)</li>
+                    <li>كوانت كۆپلىك قۇۋۋەت (Quantum Vacuum Fluctuations)</li>
+                    <li>قارا چۇقۇرلارنىڭ پارقىراپ تۈگىشى (Hawking Radiation)</li>
+                </ul>
+            </div>
+            
+            <div class="timeline">
+                <h3 class="section-subtitle">كوانت فىزىكىسى تارىخى</h3>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">1900</div>
+                    <div class="timeline-content">
+                        <strong>ماكس پلانك:</strong> كوانتۇم نەزەرىيەسىنى تەكلىپ قىلدى. ئېنېرگىيە چەكلىك سەۋىيىلەردە بولىدۇ دېدى.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">1905</div>
+                    <div class="timeline-content">
+                        <strong>ئالبرېت ئېنىشتېين:</strong> فوتون نەزەرىيەسىنى تەكلىپ قىلىپ، نورنىڭ پارتىكۇل خۇسۇسىيىتىنى كۆرسەتتى.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">1926</div>
+                    <div class="timeline-content">
+                        <strong>ئېرۋىن شرو دىڭېر:</strong> دولقۇن مېخانىكىسى ۋە Schrödinger تەڭلىمىسىنى تەكلىپ قىلدى.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">1927</div>
+                    <div class="timeline-content">
+                        <strong>ۋېرنېر ھەيزنبېرگ:</strong> ئېنقىسزلىق پرىنسىپىنى تەكلىپ قىلدى.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">1935</div>
+                    <div class="timeline-content">
+                        <strong>ئېنىشتېين، پودولسكى، روزېن:</strong> EPR پارادىكىسىنى تەكلىپ قىلىپ، ئېنتاڭگلىمېنتنى تەنقىد قىلدى.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. سىمۇلياتسىيە بۆلەمى -->
+        <section id="simulations" class="section">
+            <h2 class="section-title"><i class="fas fa-play-circle"></i> Interactive سىمۇلياتسىيەلەر</h2>
+            
+            <div class="simulation-section">
+                <h3 class="section-subtitle">كوانت پارتىكۇل ھەرىكىتى</h3>
+                <div class="canvas-container">
+                    <canvas id="quantumCanvas"></canvas>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="changeParticleType()">
+                        <i class="fas fa-sync-alt"></i> پارتىكۇل تىپى
+                    </button>
+                    
+                    <button class="btn" onclick="toggleSuperposition()">
+                        <i class="fas fa-layer-group"></i> سۇپېرپوزىتسىيە
+                    </button>
+                    
+                    <button class="btn" onclick="toggleUncertainty()">
+                        <i class="fas fa-question-circle"></i> بېلگىسىزلىك پرىنسىپى
+                    </button>
+                    
+                    <button class="btn btn-secondary" onclick="resetSimulation()">
+                        <i class="fas fa-redo"></i> قايتا قوزغاش
+                    </button>
+                </div>
+                
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>پارتىكۇل سۈرئىتى:</span>
+                        <span id="speedValue">ئوتتۇرا</span>
+                    </div>
+                    <input type="range" min="1" max="10" value="5" id="speedSlider" oninput="updateSpeed()">
+                    
+                    <div class="slider-label">
+                        <span>توساق ئېگىزلىكى:</span>
+                        <span id="barrierValue">ئوتتۇرا</span>
+                    </div>
+                    <input type="range" min="1" max="10" value="5" id="barrierSlider" oninput="updateBarrier()">
+                </div>
+                
+                <div class="info-display" style="background: rgba(0, 240, 255, 0.1); padding: 1rem; margin-top: 1rem; border-radius: 8px;">
+                    <div id="simulation-info">پارتىكۇل: ئېلېكترون | ھالەت: سۇپېرپوزىتسىيە | سۈرئەت: ئوتتۇرا</div>
+                </div>
+            </div>
+            
+            <div class="simulation-section">
+                <h3 class="section-subtitle">دولقۇن فۇنكسىيەسى سىمۇلياتسىيەسى</h3>
+                <div class="canvas-container">
+                    <canvas id="waveCanvas"></canvas>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="changeWavePacket()">
+                        <i class="fas fa-wave-square"></i> دولقۇن باغلىمىسى
+                    </button>
+                    
+                    <button class="btn" onclick="toggleMeasurement()">
+                        <i class="fas fa-ruler"></i> ئۆلچەش (Measurement)
+                    </button>
+                    
+                    <button class="btn" onclick="showProbability()">
+                        <i class="fas fa-chart-bar"></i> ئېھتىماللىق زىچلىقى
+                    </button>
+                </div>
+                
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>دولقۇن كەڭلىكى:</span>
+                        <span id="widthValue">ئوتتۇرا</span>
+                    </div>
+                    <input type="range" min="1" max="10" value="5" id="widthSlider" oninput="updateWaveWidth()">
+                    
+                    <div class="slider-label">
+                        <span>دولقۇن ئېنېرگىيەسى:</span>
+                        <span id="energyValue">ئوتتۇرا</span>
+                    </div>
+                    <input type="range" min="1" max="10" value="5" id="energySlider" oninput="updateWaveEnergy()">
+                </div>
+            </div>
+            
+            <div class="prediction-box">
+                <h3><i class="fas fa-crystal-ball"></i> كوانت پەرەز قىلىش</h3>
+                <p>تۆۋەندىكى پارامېترلارنى ئۆزگەرتىپ، پارتىكۇلنىڭ ھەرىكىتىنى پەرەز قىلىڭ:</p>
+                
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>باشلانغۇچ ئورنى:</span>
+                        <span id="positionValue">ئوتتۇرا</span>
+                    </div>
+                    <input type="range" min="1" max="10" value="5" id="positionSlider" oninput="updatePosition()">
+                    
+                    <div class="slider-label">
+                        <span>باشلانغۇچ ۋەكترى:</span>
+                        <span id="momentumValue">ئوتتۇرا</span>
+                    </div>
+                    <input type="range" min="1" max="10" value="5" id="momentumSlider" oninput="updateMomentum()">
+                </div>
+                
+                <button class="btn" onclick="runPrediction()">
+                    <i class="fas fa-play"></i> پەرەز قىلىشنى باشلاش
+                </button>
+                
+                <div id="prediction-result" style="margin-top: 1rem; padding: 1rem; background: rgba(95, 255, 3, 0.1); border-radius: 8px;">
+                    پەرەز قىلىش نەتىجىسى بۇ يەرگە كۆرۈنىدۇ...
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5. ئەمەلىي قوللىنىش -->
+        <section id="applications" class="section">
+            <h2 class="section-title"><i class="fas fa-tools"></i> ئەمەلىي قوللىنىشلار</h2>
+            
+            <h3 class="section-subtitle">1. كوانت كومپيۇتېر</h3>
+            <div class="card">
+                <h4><i class="fas fa-microchip"></i> كيۇبىت (Qubit) vs كىلاسسىك بىت (Bit):</h4>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>خۇسۇسىيەت</th>
+                            <th>كىلاسسىك بىت</th>
+                            <th>كوانتۇم قۇبىت</th>
+                        </tr>
+                        <tr>
+                            <td>ھالەت</td>
+                            <td>0 ياكى 1</td>
+                            <td>α|0⟩ + β|1⟩</td>
+                        </tr>
+                        <tr>
+                            <td>ئۇچۇر سىغىمى</td>
+                            <td>1 بىت</td>
+                            <td>چەكسىز (نەزەرىيە)</td>
+                        </tr>
+                        <tr>
+                            <td>پارالىللىزىم</td>
+                            <td>يوق</td>
+                            <td>2<sup>N</sup> دەرىجىدە</td>
+                        </tr>
+                        <tr>
+                            <td>ئىشلەش سۈرئىتى</td>
+                            <td>تېز</td>
+                            <td>تېخىمۇ تېز (بەزى مەسىلىلەر ئۈچۈن)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <h3 class="section-subtitle">2. كوانت كرىپتوگرافىيە</h3>
+            <div class="card">
+                <h4><i class="fas fa-shield-alt"></i> كوانت كۇنۇپكا تارقىتىش (QKD):</h4>
+                <ul>
+                    <li><strong>BB84 پروتوكولى:</strong> ئەڭ كۆپ قوللىنىلىدىغان كوانت كرىپتوگرافىيە پروتوكولى</li>
+                    <li><strong>بىخەتەرلىك:</strong> قاراقچىلىق قىلىنسا، ئېنتاڭگلىمېنت بۇزۇلىدۇ - ئۇچۇر بىخەتەرلىكى قوغدىلىدۇ</li>
+                    <li><strong>ئەمەلىي قوللىنىش:</strong> بىرلەشمە دۆلەتلەر تەشكىلاتى، مالىيە ساھەسى</li>
+                </ul>
+            </div>
+            
+            <h3 class="section-subtitle">3. تۈننېللېڭنىڭ ئەمەلىي قوللىنىشى</h3>
+            <div class="card">
+                <h4><i class="fas fa-microscope"></i> ئاساسلىق قوللىنىشلار:</h4>
+                <ul>
+                    <li><strong>سكاننېللەيدىغان تۈننېللېڭ مىكروسكوپى (STM):</strong> ئاتوم سۈپىتىدە رەسىم ئېلىش</li>
+                    <li><strong>قۇياش ئېنېرگىيەسى:</strong> پروتونلارنىڭ تۈننېللېڭ ئارقىلىق قوشۇلۇشى</li>
+                    <li><strong>Flash يادرو:</strong> ئېلېكترونلارنىڭ تۈننېللېڭ ئارقىلىق ساقلىنىشى</li>
+                    <li><strong>يېرىم ئۆتكۈزگۈچلەر:</strong> ترانزىستورلار، دىيودلار</li>
+                </ul>
+            </div>
+            
+            <h3 class="section-subtitle">4. كوانت سېنسورلار</h3>
+            <div class="card">
+                <h4><i class="fas fa-ruler-combined"></i> ئالاھىدىلىكلىرى:</h4>
+                <ul>
+                    <li><strong>كىلاسسىك چەكتىن تاشقىرى ھېسساسلىق:</strong> ئاتوم سەۋىيىسىدە ئۆلچەش</li>
+                    <li><strong>گراۋىتاتسىيە دولقۇنى تېپىش:</strong> LIGO پروژىسى</li>
+                    <li><strong>ماغنېت زەررىسىنى ئۆلچەش:</strong> مېدىتسىنا ئىشلىتىش</li>
+                    <li><strong>ۋاقىت ئۆلچەش:</strong> ئاتوم سائەتلىرى</li>
+                </ul>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h4><i class="fab fa-python"></i> Python كۈتۇپخانىلىرى</h4>
+                    <p>• Qiskit (IBM)<br>• Cirq (Google)<br>• PyQuil (Rigetti)<br>• PennyLane (Xanadu)</p>
+                </div>
+                
+                <div class="resource-card">
+                    <h4><i class="fas fa-book"></i> ئوقۇش ماتېرىياللىرى</h4>
+                    <p>• "كوانت كومپيۇتېر ۋە كوانت ئۇچۇر"<br>• "ئاساسىي كوانت مېخانىكا"<br>• "كوانت فىزىكىسىغا كىرىش"</p>
+                </div>
+                
+                <div class="resource-card">
+                    <h4><i class="fas fa-video"></i> ۋىدىئو دەرسلەر</h4>
+                    <p>• MIT OpenCourseWare<br>• Stanford Online<br>• Quantum Computing for Everyone<br>• 3Blue1Brown</p>
+                </div>
+                
+                <div class="resource-card">
+                    <h4><i class="fas fa-laptop-code"></i> ئونلايەن سىمۇلىياتورلار</h4>
+                    <p>• IBM Quantum Experience<br>• Google Quantum Playground<br>• Microsoft Quantum Dev Kit<br>• Quirk</p>
+                </div>
+            </div>
+            
+            <div class="note">
+                <i class="fas fa-info-circle"></i> دىققەت: كوانت فىزىكىسىنى ئۆگىنىش ئۈچۈن ياخشى ماتېماتىكا ئاساسى كېرەك (لېنىيەر ئالجېبرا، مۇرەككەپ ھېسابلاش، ئىنتېگرال ھېسابلاش).
+            </div>
+        </section>
+        
+        <!-- خۇلاسە -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-flag-checkered"></i> خۇلاسە</h2>
+            
+            <p>كوانت فىزىكىسى بىزنىڭ كايناتنى چۈشىنىشىمىزدىكى ئەڭ مۇھىم قەدەملەرنىڭ بىرى. بۇ نەزەرىيە:</p>
+            
+            <ul>
+                <li><strong>ئاتوملار ۋە مولېكۇلالارنىڭ خۇسۇسىيىتىنى چۈشەندۈردى</strong></li>
+                <li><strong>يېڭى تېخنىكىلارنى ياراتتى</strong> (لېزېر، ترانزىستور، MRI)</li>
+                <li><strong>كەلگۈسى تېخنىكىسىنىڭ ئاساسىنى قويىدۇ</strong> (كوانت كومپيۇتېر، كوانت ئىنتېرنېت)</li>
+                <li><strong>كايناتنىڭ ئاساسىي قۇرۇلۇشى ھەققىدە يېڭى چۈشەنچە بەردى</strong></li>
+            </ul>
+            
+            <div class="card info-card">
+                <h4><i class="fas fa-rocket"></i> كەلگۈسىدىكى تەرەققىياتلار:</h4>
+                <ul>
+                    <li><strong>كوانت كومپيۇتېر:</strong> ئەنئەنەۋى كومپيۇتېرلارنى ئەسكىرىتىدىغان ھېسابلاش كۈچى</li>
+                    <li><strong>كوانت ئىنتېرنېت:</strong> ئېنتاڭگىللانغان كوانتۇم تورى</li>
+                    <li><strong>كوانت سىمۇلىيە:</strong> مولېكۇلا ۋە ماتېرىياللارنى توغرا سىمۇلىيە قىلىش</li>
+                    <li><strong>كوانت گىرائىتىكىسى:</strong> كايناتنىڭ ئاساسىي قۇرۇلۇشىنى چۈشەندۈرۈش</li>
+                </ul>
+            </div>
+            
+            <div class="quote">
+                "ئەگەر سىز كوانت مېخانىكىسىنى چۈشەندىڭز دەپ ئويلىسىڭىز، سىز ئۇنى چۈشەنمىدىڭز."
+                <div class="author">- رىچارد فەينمان</div>
+            </div>
+            
+            <p style="text-align: center; font-size: 1.5rem; color: var(--secondary-color); margin-top: 2rem;">
+                كوانت فىزىكىسى سەپەرىڭىزدە مۇۋەپپەقىيەت قازانىشىڭىزنى تىلەيمىز! ☪
+            </p>
+        </section>
+    </main>
+    
+    <!-- تەگلىك -->
+    <footer>
+        <div class="footer-content">
+            <h3 style="margin-top: 2rem; color: #a78bfa;">KeLBiL كوانت فىزىكىسى دەرسلىكى</h3>
+           
+            
+            
+            
+        </div>
+    </footer>
+    
+    <!-- JavaScript كودى -->
+    <script>
+        // ئاساسىي سىمۇلياتسىيە پارامېترلىرى
+        let particleType = "electron";
+        let showSuperposition = true;
+        let showUncertainty = false;
+        let animationSpeed = 5;
+        let barrierHeight = 5;
+        let wavePacketType = "gaussian";
+        let isMeasuring = false;
+        let showProbability = false;
+        let waveWidth = 5;
+        let waveEnergy = 5;
+        let startPosition = 5;
+        let startMomentum = 5;
+        
+        // Canvas ئېلېمېنتلىرى
+        const quantumCanvas = document.getElementById("quantumCanvas");
+        const quantumCtx = quantumCanvas.getContext("2d");
+        const waveCanvas = document.getElementById("waveCanvas");
+        const waveCtx = waveCanvas.getContext("2d");
+        
+        // Canvas ئۆلچىمىنى بېكىتىش
+        function initCanvases() {
+            quantumCanvas.width = quantumCanvas.parentElement.clientWidth;
+            quantumCanvas.height = quantumCanvas.parentElement.clientHeight;
+            
+            waveCanvas.width = waveCanvas.parentElement.clientWidth;
+            waveCanvas.height = waveCanvas.parentElement.clientHeight;
+        }
+        
+        window.addEventListener('load', initCanvases);
+        window.addEventListener('resize', initCanvases);
+        
+        // پارتىكۇل ئۇچۇرىنى كۆرسىتىش
+        function showParticleInfo(type) {
+            const detailsDiv = document.getElementById("particle-details");
+            let content = "";
+            
+            switch(type) {
+                case 'electron':
+                    content = `
+                        <h4><i class="fas fa-bolt"></i> ئېلېكترون تەپسىلاتلىرى:</h4>
+                        <ul>
+                            <li><strong>زەرەت:</strong> -1.602 × 10⁻¹⁹ كۇلومب</li>
+                            <li><strong>ماسسا:</strong> 9.109 × 10⁻³¹ كىلوگرام</li>
+                            <li><strong>سپىن:</strong> 1/2 (فېرمىيون)</li>
+                            <li><strong>تارقىلىشى:</strong> بارلىق ماتېرىياللاردا</li>
+                            <li><strong>رولى:</strong> كېمىيەۋى باغلىنىش، ئېلېكترىك ئۆتكۈزگۈچلۈك</li>
+                        </ul>
+                        <p>ئېلېكترونلار ئاتومنىڭ قەبىقىدا ھەرىكەت قىلىدۇ ۋە كېمىيەۋى باغلىنىشلارنى ھاسىل قىلىدۇ.</p>
+                    `;
+                    break;
+                    
+                case 'photon':
+                    content = `
+                        <h4><i class="fas fa-sun"></i> فوتون تەپسىلاتلىرى:</h4>
+                        <ul>
+                            <li><strong>زەرەت:</strong> 0 (زەرەتسىز)</li>
+                            <li><strong>ماسسا:</strong> 0 (ماسسىسىز)</li>
+                            <li><strong>سپىن:</strong> 1 (بوزون)</li>
+                            <li><strong>تارقىلىشى:</strong> ئېلېكتروماغنېت دولقۇن</li>
+                            <li><strong>رولى:</strong> نۇر، ئېلېكتروماغنېت كۈچ</li>
+                        </ul>
+                        <p>فوتونلار نۇرنىڭ ئاساسىي پارتىكۇللىرى. ئېنېرگىيەسى: E = hf (ھەرگىز توختىمايدۇ).</p>
+                    `;
+                    break;
+                    
+                case 'proton':
+                    content = `
+                        <h4><i class="fas fa-atom"></i> پروتون تەپسىلاتلىرى:</h4>
+                        <ul>
+                            <li><strong>زەرەت:</strong> +1.602 × 10⁻¹⁹ كۇلومب</li>
+                            <li><strong>ماسسا:</strong> 1.673 × 10⁻²⁷ كىلوگرام</li>
+                            <li><strong>سپىن:</strong> 1/2 (فېرمىيون)</li>
+                            <li><strong>تارقىلىشى:</strong> ئاتوم نۇكلىئىدا</li>
+                            <li><strong>رولى:</strong> ئاتوم نۇمۇرىنى بېكىتىش</li>
+                        </ul>
+                        <p>پروتونلار ئاتوم نۇكلىئىنىڭ مەركىزىي قىسمىنى تەشكىل قىلىدۇ ۋە ئاتومنىڭ كېمىيەۋى خۇسۇسىيىتىنى بېكىتىدۇ.</p>
+                    `;
+                    break;
+                    
+                case 'neutron':
+                    content = `
+                        <h4><i class="fas fa-dot-circle"></i> نېۋترون تەپسىلاتلىرى:</h4>
+                        <ul>
+                            <li><strong>زەرەت:</strong> 0 (زەرەتسىز)</li>
+                            <li><strong>ماسسا:</strong> 1.675 × 10⁻²⁷ كىلوگرام</li>
+                            <li><strong>سپىن:</strong> 1/2 (فېرمىيون)</li>
+                            <li><strong>تارقىلىشى:</strong> ئاتوم نۇكلىئىدا</li>
+                            <li><strong>رولى:</strong> نۇكلىئۇسنى توختىتىش، يادرو پارچىلىنىشى</li>
+                        </ul>
+                        <p>نېۋترونلار ئاتوم نۇكلىئىنى بىرلەشتۈرۈپ، يادرو پارچىلىنىشىدا مۇھىم رول ئوينايدۇ.</p>
+                    `;
+                    break;
+            }
+            
+            detailsDiv.innerHTML = content;
+            
+            // پارتىكۇل كارتا رەڭگىنى ئۆزگەرتىش
+            document.querySelectorAll('.particle-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+        
+        // سىمۇلياتسىيە كونتروللىرى
+        function changeParticleType() {
+            const particles = ["electron", "photon", "proton", "neutron"];
+            const currentIndex = particles.indexOf(particleType);
+            particleType = particles[(currentIndex + 1) % particles.length];
+            updateSimulationInfo();
+        }
+        
+        function toggleSuperposition() {
+            showSuperposition = !showSuperposition;
+            updateSimulationInfo();
+        }
+        
+        function toggleUncertainty() {
+            showUncertainty = !showUncertainty;
+        }
+        
+        function resetSimulation() {
+            particleType = "electron";
+            showSuperposition = true;
+            showUncertainty = false;
+            animationSpeed = 5;
+            barrierHeight = 5;
+            
+            document.getElementById("speedSlider").value = 5;
+            document.getElementById("barrierSlider").value = 5;
+            document.getElementById("speedValue").textContent = "ئوتتۇرا";
+            document.getElementById("barrierValue").textContent = "ئوتتۇرا";
+            
+            updateSimulationInfo();
+        }
+        
+        function updateSpeed() {
+            const slider = document.getElementById("speedSlider");
+            animationSpeed = parseInt(slider.value);
+            
+            const speedText = ["تۆۋەن", "تۆۋەن", "تۆۋەن", "تۆۋەن", "ئوتتۇرا", "ئوتتۇرا", "يۇقىرى", "يۇقىرى", "يۇقىرى", "ئېغىز"];
+            document.getElementById("speedValue").textContent = speedText[animationSpeed - 1];
+            updateSimulationInfo();
+        }
+        
+        function updateBarrier() {
+            const slider = document.getElementById("barrierSlider");
+            barrierHeight = parseInt(slider.value);
+            
+            const barrierText = ["تۆۋەن", "تۆۋەن", "تۆۋەن", "تۆۋەن", "ئوتتۇرا", "ئوتتۇرا", "يۇقىرى", "يۇقىرى", "ئېغىز", "ئېغىز"];
+            document.getElementById("barrierValue").textContent = barrierText[barrierHeight - 1];
+        }
+        
+        function updateSimulationInfo() {
+            const infoDiv = document.getElementById("simulation-info");
+            const particleNames = {
+                "electron": "ئېلېكترون",
+                "photon": "فوتون", 
+                "proton": "پروتون",
+                "neutron": "نېۋترون"
+            };
+            
+            const speedText = ["تۆۋەن", "تۆۋەن", "تۆۋەن", "تۆۋەن", "ئوتتۇرا", "ئوتتۇرا", "يۇقىرى", "يۇقىرى", "يۇقىرى", "ئېغىز"];
+            
+            infoDiv.innerHTML = `
+                پارتىكۇل: ${particleNames[particleType]} | 
+                ھالەت: ${showSuperposition ? "سۇپېرپوزىتسىيە" : "ئاددىي"} | 
+                سۈرئەت: ${speedText[animationSpeed - 1]}
+            `;
+        }
+        
+        // دولقۇن سىمۇلياتسىيە كونتروللىرى
+        function changeWavePacket() {
+            const packets = ["gaussian", "sine", "square", "double", "wavepacket"];
+            const currentIndex = packets.indexOf(wavePacketType);
+            wavePacketType = packets[(currentIndex + 1) % packets.length];
+        }
+        
+        function toggleMeasurement() {
+            isMeasuring = !isMeasuring;
+        }
+        
+        function showProbability() {
+            showProbability = !showProbability;
+        }
+        
+        function updateWaveWidth() {
+            const slider = document.getElementById("widthSlider");
+            waveWidth = parseInt(slider.value);
+            
+            const widthText = ["تار", "تار", "تار", "تار", "ئوتتۇرا", "ئوتتۇرا", "كەڭ", "كەڭ", "كەڭ", "كەڭ"];
+            document.getElementById("widthValue").textContent = widthText[waveWidth - 1];
+        }
+        
+        function updateWaveEnergy() {
+            const slider = document.getElementById("energySlider");
+            waveEnergy = parseInt(slider.value);
+            
+            const energyText = ["تۆۋەن", "تۆۋەن", "تۆۋەن", "تۆۋەن", "ئوتتۇرا", "ئوتتۇرا", "يۇقىرى", "يۇقىرى", "يۇقىرى", "ئېغىز"];
+            document.getElementById("energyValue").textContent = energyText[waveEnergy - 1];
+        }
+        
+        // پەرەز قىلىش كونتروللىرى
+        function updatePosition() {
+            const slider = document.getElementById("positionSlider");
+            startPosition = parseInt(slider.value);
+            
+            const positionText = ["سول", "سول", "سول", "سول", "ئوتتۇرا", "ئوتتۇرا", "ئوڭ", "ئوڭ", "ئوڭ", "ئوڭ"];
+            document.getElementById("positionValue").textContent = positionText[startPosition - 1];
+        }
+        
+        function updateMomentum() {
+            const slider = document.getElementById("momentumSlider");
+            startMomentum = parseInt(slider.value);
+            
+            const momentumText = ["تۆۋەن", "تۆۋەن", "تۆۋەن", "تۆۋەن", "ئوتتۇرا", "ئوتتۇرا", "يۇقىرى", "يۇقىرى", "يۇقىرى", "ئېغىز"];
+            document.getElementById("momentumValue").textContent = momentumText[startMomentum - 1];
+        }
+        
+        function runPrediction() {
+            const resultDiv = document.getElementById("prediction-result");
+            
+            // ساددە پەرەز قىلىش ئالگورىزىمى
+            let prediction = "";
+            let confidence = 0;
+            
+            if (startPosition < 3 && startMomentum > 7) {
+                prediction = "پارتىكۇل تېز ھەرىكەت قىلىپ، توساقتىن ئۆتەلەيدۇ (تۈننېللېڭ ئېھتىماللىقى يۇقىرى)";
+                confidence = 85;
+            } else if (startPosition > 7 && startMomentum < 3) {
+                prediction = "پارتىكۇل يەنىك ھەرىكەت قىلىپ، توساققا ئۇرۇلۇپ قايتىدۇ";
+                confidence = 75;
+            } else if (showSuperposition && waveWidth > 7) {
+                prediction = "كەڭ دولقۇن باغلىمىسى سەۋەبىدىن، پارتىكۇل كەڭ رايوندا تارقالىدۇ";
+                confidence = 90;
+            } else {
+                prediction = "پارتىكۇل ئادەتتىكى ھەرىكەت قىلىدۇ، توساق ئارقىلىق ياكى توساققا ئۇرۇلۇپ قايتىدۇ";
+                confidence = 60;
+            }
+            
+            resultDiv.innerHTML = `
+                <h4>پەرەز قىلىش نەتىجىسى:</h4>
+                <p>${prediction}</p>
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>ئىشەنچ دەرىجىسى:</span>
+                        <span>${confidence}%</span>
+                    </div>
+                    <div class="confidence-meter">
+                        <div class="confidence-fill" style="width: ${confidence}%"></div>
+                    </div>
+                </div>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: #a78bfa;">
+                    <i class="fas fa-info-circle"></i> بۇ پەرەز ساددەلەشتۈرۈلگەن كوانتۇم مېخانىكا پرىنسىپلىرىغا ئاساسەن قىلىنغان.
+                </p>
+            `;
+        }
+        
+        // كوانت پارتىكۇل سىمۇلياتسىيەسى
+        let quantumTime = 0;
+        function drawQuantumSimulation() {
+            const width = quantumCanvas.width;
+            const height = quantumCanvas.height;
+            
+            // تازىلاش
+            quantumCtx.fillStyle = 'rgba(2, 6, 23, 0.8)';
+            quantumCtx.fillRect(0, 0, width, height);
+            
+            // تەگلىك
+            quantumCtx.strokeStyle = 'rgba(124, 58, 237, 0.2)';
+            quantumCtx.lineWidth = 1;
+            
+            for (let i = 0; i < width; i += 50) {
+                quantumCtx.beginPath();
+                quantumCtx.moveTo(i, 0);
+                quantumCtx.lineTo(i, height);
+                quantumCtx.stroke();
+            }
+            
+            for (let i = 0; i < height; i += 50) {
+                quantumCtx.beginPath();
+                quantumCtx.moveTo(0, i);
+                quantumCtx.lineTo(width, i);
+                quantumCtx.stroke();
+            }
+            
+            // توساق
+            const barrierWidth = 80 + barrierHeight * 10;
+            const barrierX = width / 2 - barrierWidth / 2;
+            const barrierY = height / 2 - 60;
+            const barrierH = 120 + barrierHeight * 10;
+            
+            // توساق سىزىش
+            quantumCtx.fillStyle = `rgba(124, 58, 237, ${0.3 + barrierHeight * 0.05})`;
+            quantumCtx.fillRect(barrierX, barrierY, barrierWidth, barrierH);
+            
+            // توساق ئېگىزلىكى
+            quantumCtx.fillStyle = '#c084fc';
+            quantumCtx.font = '16px Arial';
+            quantumCtx.textAlign = 'center';
+            quantumCtx.fillText(`توساق (ئېگىزلىكى: ${barrierHeight}/10)`, width / 2, barrierY - 10);
+            
+            // ۋاقىت ۋە ھەرىكەت
+            const time = quantumTime * 0.02 * animationSpeed;
+            
+            // پارتىكۇل رەڭگى
+            let particleColor;
+            switch(particleType) {
+                case "electron": particleColor = "#00f0ff"; break;
+                case "photon": particleColor = "#ffcc00"; break;
+                case "proton": particleColor = "#ff6666"; break;
+                case "neutron": particleColor = "#5fff03"; break;
+            }
+            
+            // سۇپېرپوزىتسىيە كۆرسىتىش
+            if (showSuperposition) {
+                const numParticles = 3;
+                for (let i = 0; i < numParticles; i++) {
+                    const phase = (i / numParticles) * Math.PI * 2;
+                    const amplitude = 40;
+                    const frequency = 0.5 + i * 0.2;
+                    
+                    const x = width * 0.3 + Math.sin(time * frequency + phase) * 100;
+                    const y = height / 2 + Math.cos(time * frequency * 1.5 + phase) * amplitude;
+                    
+                    // دولقۇن خۇسۇسىيىتى
+                    quantumCtx.beginPath();
+                    for (let wx = x - 40; wx < x + 40; wx += 2) {
+                        const wy = y + Math.sin((wx - x) / 8 + time * 2) * 8;
+                        if (wx === x - 40) {
+                            quantumCtx.moveTo(wx, wy);
+                        } else {
+                            quantumCtx.lineTo(wx, wy);
+                        }
+                    }
+                    quantumCtx.strokeStyle = particleColor + "80";
+                    quantumCtx.lineWidth = 1.5;
+                    quantumCtx.stroke();
+                    
+                    // پارتىكۇل
+                    quantumCtx.beginPath();
+                    quantumCtx.arc(x, y, 10, 0, Math.PI * 2);
+                    quantumCtx.fillStyle = particleColor;
+                    quantumCtx.fill();
+                    
+                    // پارتىكۇل نۇرى
+                    quantumCtx.beginPath();
+                    quantumCtx.arc(x, y, 15, 0, Math.PI * 2);
+                    quantumCtx.strokeStyle = particleColor + "40";
+                    quantumCtx.lineWidth = 2;
+                    quantumCtx.stroke();
+                }
+                
+                // سۇپېرپوزىتسىيە ئۇچۇرى
+                quantumCtx.fillStyle = particleColor;
+                quantumCtx.font = '18px Arial';
+                quantumCtx.textAlign = 'left';
+                quantumCtx.fillText('سۇپېرپوزىتسىيە: بىر ۋاقىتتا بىر نەچچە ھالەت', 20, 40);
+            } else {
+                // ئاددىي پارتىكۇل
+                const amplitude = 50;
+                const frequency = 0.8;
+                
+                const x = width * 0.3 + Math.sin(time * frequency) * 150;
+                const y = height / 2 + Math.cos(time * frequency * 1.5) * amplitude;
+                
+                // دولقۇن خۇسۇسىيىتى
+                quantumCtx.beginPath();
+                for (let wx = x - 60; wx < x + 60; wx += 2) {
+                    const wy = y + Math.sin((wx - x) / 10 + time * 2) * 12;
+                    if (wx === x - 60) {
+                        quantumCtx.moveTo(wx, wy);
+                    } else {
+                        quantumCtx.lineTo(wx, wy);
+                    }
+                }
+                quantumCtx.strokeStyle = particleColor + "80";
+                quantumCtx.lineWidth = 2;
+                quantumCtx.stroke();
+                
+                // پارتىكۇل
+                quantumCtx.beginPath();
+                quantumCtx.arc(x, y, 15, 0, Math.PI * 2);
+                quantumCtx.fillStyle = particleColor;
+                quantumCtx.fill();
+                
+                // پارتىكۇل نۇرى
+                const glowRadius = 25 + Math.sin(time * 2) * 5;
+                quantumCtx.beginPath();
+                quantumCtx.arc(x, y, glowRadius, 0, Math.PI * 2);
+                quantumCtx.strokeStyle = particleColor + "30";
+                quantumCtx.lineWidth = 3;
+                quantumCtx.stroke();
+            }
+            
+            // تۈننېللېڭ كۆرسىتىش
+            const tunnelX = width * 0.7;
+            const tunnelY = height / 2;
+            const tunnelRadius = 35 + Math.sin(time * 1.5) * 10;
+            
+            quantumCtx.beginPath();
+            quantumCtx.arc(tunnelX, tunnelY, tunnelRadius, 0, Math.PI * 2);
+            quantumCtx.strokeStyle = '#5fff03';
+            quantumCtx.lineWidth = 3;
+            quantumCtx.stroke();
+            
+            quantumCtx.fillStyle = '#5fff03';
+            quantumCtx.font = '18px Arial';
+            quantumCtx.textAlign = 'center';
+            quantumCtx.fillText('تۈننېللېڭ', tunnelX, tunnelY - tunnelRadius - 15);
+            
+            // بېلگىسىزلىك پرىنسىپى
+            if (showUncertainty) {
+                const centerX = width * 0.7;
+                const centerY = height / 2 + 100;
+                const uncertaintyRadius = 30 + Math.sin(time * 2) * 15;
+                
+                quantumCtx.beginPath();
+                quantumCtx.arc(centerX, centerY, uncertaintyRadius, 0, Math.PI * 2);
+                quantumCtx.strokeStyle = 'rgba(255, 100, 100, 0.7)';
+                quantumCtx.lineWidth = 2;
+                quantumCtx.stroke();
+                
+                quantumCtx.fillStyle = '#ff6666';
+                quantumCtx.font = '16px Arial';
+                quantumCtx.textAlign = 'center';
+                quantumCtx.fillText('Δx·Δp ≥ ħ/2', centerX, centerY - uncertaintyRadius - 10);
+                quantumCtx.fillText('بېلگىسىزلىك پرىنسىپى', centerX, centerY + uncertaintyRadius + 20);
+            }
+            
+            // ۋاقىتنى ئاشۇرۇش
+            quantumTime++;
+            requestAnimationFrame(drawQuantumSimulation);
+        }
+        
+        // دولقۇن فۇنكسىيەسى سىمۇلياتسىيەسى
+        let waveTime = 0;
+        function drawWaveSimulation() {
+            const width = waveCanvas.width;
+            const height = waveCanvas.height;
+            
+            // تازىلاش
+            waveCtx.fillStyle = 'rgba(2, 6, 23, 0.8)';
+            waveCtx.fillRect(0, 0, width, height);
+            
+            // ئاساسىي خەت
+            waveCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            waveCtx.lineWidth = 1;
+            waveCtx.beginPath();
+            waveCtx.moveTo(0, height / 2);
+            waveCtx.lineTo(width, height / 2);
+            waveCtx.stroke();
+            
+            // ۋاقىت
+            const time = waveTime * 0.01;
+            
+            // ئۆلچەش (چۆكۈش) ھالىتى
+            if (isMeasuring) {
+                // چۆكۈش كۆرسىتىش
+                const collapseX = width / 2;
+                const collapseWidth = 30 + waveWidth * 5;
+                
+                waveCtx.fillStyle = 'rgba(255, 100, 100, 0.3)';
+                waveCtx.fillRect(collapseX - collapseWidth/2, 0, collapseWidth, height);
+                
+                waveCtx.fillStyle = '#ff6666';
+                waveCtx.font = '20px Arial';
+                waveCtx.textAlign = 'center';
+                waveCtx.fillText('ئۆلچەش: دولقۇن چۆكۈش ھادىسىسى', width / 2, 40);
+                
+                // چۆكۈشتىن كېيىنكى ئېھتىماللىق
+                waveCtx.beginPath();
+                for (let x = 0; x < width; x++) {
+                    const dx = (x - collapseX) / (collapseWidth * 0.5);
+                    const probability = Math.exp(-dx * dx);
+                    const y = height / 2 - probability * 100;
+                    
+                    if (x === 0) {
+                        waveCtx.moveTo(x, y);
+                    } else {
+                        waveCtx.lineTo(x, y);
+                    }
+                }
+                waveCtx.strokeStyle = '#ff00ff';
+                waveCtx.lineWidth = 3;
+                waveCtx.stroke();
+                
+                waveCtx.fillStyle = '#ff00ff';
+                waveCtx.font = '16px Arial';
+                waveCtx.fillText('|ψ(x)|² - ئېھتىماللىق زىچلىقى', width - 150, 80);
+            } else {
+                // نورمال دولقۇن فۇنكسىيەسى
+                waveCtx.beginPath();
+                for (let x = 0; x < width; x++) {
+                    const normalizedX = (x - width / 2) / (50 - waveWidth * 3);
+                    let y;
+                    
+                    switch(wavePacketType) {
+                        case "gaussian":
+                            y = Math.exp(-normalizedX * normalizedX / 4) * Math.cos(normalizedX * 2 - time * 2) * 60;
+                            break;
+                        case "sine":
+                            y = Math.sin(normalizedX * 0.8 - time * 1.5) * 50;
+                            break;
+                        case "square":
+                            y = (Math.abs(Math.sin(normalizedX * 0.5 - time)) > 0.7 ? 40 : -40);
+                            break;
+                        case "double":
+                            y = (Math.exp(-Math.pow(normalizedX - 1.5, 2)) + Math.exp(-Math.pow(normalizedX + 1.5, 2))) * Math.cos(time) * 40;
+                            break;
+                        case "wavepacket":
+                            const packet1 = Math.exp(-Math.pow(normalizedX - 1, 2)) * Math.cos((normalizedX - 1) * 3 - time * 2);
+                            const packet2 = Math.exp(-Math.pow(normalizedX + 1, 2)) * Math.cos((normalizedX + 1) * 3 + time * 2);
+                            y = (packet1 + packet2) * 30;
+                            break;
+                    }
+                    
+                    const plotY = height / 2 - y * (waveEnergy * 0.1);
+                    
+                    if (x === 0) {
+                        waveCtx.moveTo(x, plotY);
+                    } else {
+                        waveCtx.lineTo(x, plotY);
+                    }
+                }
+                
+                waveCtx.strokeStyle = '#00f0ff';
+                waveCtx.lineWidth = 3;
+                waveCtx.stroke();
+                
+                // ئېھتىماللىق زىچلىقى كۆرسىتىش
+                if (showProbability) {
+                    waveCtx.beginPath();
+                    for (let x = 0; x < width; x++) {
+                        const normalizedX = (x - width / 2) / (50 - waveWidth * 3);
+                        let amplitude;
+                        
+                        switch(wavePacketType) {
+                            case "gaussian":
+                                amplitude = Math.exp(-normalizedX * normalizedX / 4) * Math.cos(normalizedX * 2 - time * 2);
+                                break;
+                            case "sine":
+                                amplitude = Math.sin(normalizedX * 0.8 - time * 1.5);
+                                break;
+                            case "square":
+                                amplitude = Math.abs(Math.sin(normalizedX * 0.5 - time)) > 0.7 ? 1 : 0;
+                                break;
+                            case "double":
+                                amplitude = (Math.exp(-Math.pow(normalizedX - 1.5, 2)) + Math.exp(-Math.pow(normalizedX + 1.5, 2))) * Math.cos(time);
+                                break;
+                            case "wavepacket":
+                                const packet1 = Math.exp(-Math.pow(normalizedX - 1, 2)) * Math.cos((normalizedX - 1) * 3 - time * 2);
+                                const packet2 = Math.exp(-Math.pow(normalizedX + 1, 2)) * Math.cos((normalizedX + 1) * 3 + time * 2);
+                                amplitude = (packet1 + packet2) * 0.5;
+                                break;
+                        }
+                        
+                        const probability = amplitude * amplitude;
+                        const y = height / 2 - probability * 80;
+                        
+                        if (x === 0) {
+                            waveCtx.moveTo(x, y);
+                        } else {
+                            waveCtx.lineTo(x, y);
+                        }
+                    }
+                    
+                    waveCtx.strokeStyle = '#ff00ff';
+                    waveCtx.lineWidth = 2;
+                    waveCtx.stroke();
+                }
+                
+                // ئۇچۇرلار
+                waveCtx.fillStyle = '#a78bfa';
+                waveCtx.font = '18px Arial';
+                waveCtx.textAlign = 'center';
+                waveCtx.fillText('ψ(x) = دولقۇن فۇنكسىيەسى', width / 2, 40);
+                
+                if (showProbability) {
+                    waveCtx.fillStyle = '#ff00ff';
+                    waveCtx.fillText('|ψ(x)|² = ئېھتىماللىق زىچلىقى', width / 2, 70);
+                }
+            }
+            
+            // ۋاقىتنى ئاشۇرۇش
+            waveTime++;
+            requestAnimationFrame(drawWaveSimulation);
+        }
+        
+        // باشقا ئىقتىدارلار
+        function printPage() {
+            window.print();
+        }
+        
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'كوانت فىزىكىسى تولۇق دەرسلىكى',
+                    text: 'كوانت فىزىكىسىنى ئۆگىنىش ئۈچۈن تولۇق دەرسلىك',
+                    url: window.location.href
+                });
+            } else {
+                alert('ھەمبەھىرلەش ئىقتىدارى بۇ توركۆرگۈچتە قوللىنىلمايدۇ. URL نى كۆچۈرۈڭ: ' + window.location.href);
+            }
+        }
+        
+        // باشلانغۇچ پارتىكۇل ئۇچۇرى
+        showParticleInfo('electron');
+        
+        // سىمۇلياتسىيىلەرنى باشلاش
+        initCanvases();
+        drawQuantumSimulation();
+        drawWaveSimulation();
+        
+        // پارتىكۇل كارتا ھەرىكەتچانلىقى
+        document.querySelectorAll('.particle-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        });
+        
+        // كۆپىيىش ئىقتىدارى
+        document.querySelectorAll('.expandable').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+        
+        // پارتىكۇل سىمۇلياتسىيە ئۇچۇرىنى يېڭىلاش
+        updateSimulationInfo();
+    </script>
+</body>
+</html>

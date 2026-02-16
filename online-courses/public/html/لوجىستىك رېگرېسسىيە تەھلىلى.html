@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوجىستىك رېگرېسسىيە تەھلىلى - مەلۇمات تەھلىلى دەرسلىكى</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft Yahei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .wisdom-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .wisdom-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .wisdom-author {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+            opacity: 0.9;
+        }
+        
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .card-title {
+            color: #2d3748;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: right;
+        }
+        
+        .card-title-en {
+            color: #4a5568;
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-top: 5px;
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-right: 5px solid #667eea;
+            border-left: none;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: right;
+        }
+        
+        .formula-en {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-top: 10px;
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .calculation-box {
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            border: 3px solid #38b2ac;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 6px 20px rgba(56, 178, 172, 0.3);
+            text-align: right;
+        }
+        
+        .calculation-en {
+            font-size: 0.95rem;
+            color: #234e52;
+            margin-top: 8px;
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-radius: 12px;
+            border-right: 5px solid #48bb78;
+            border-left: none;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.2);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            justify-content: flex-end;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(72, 187, 120, 0.3);
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .step-title-en {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            border: 2px solid #cbd5e0;
+            padding: 16px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2d3748;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #fffacd 0%, #faf089 100%);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #744210;
+            box-shadow: 0 2px 8px rgba(116, 66, 16, 0.2);
+        }
+        
+        .result {
+            background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-right: 5px solid #38a169;
+            border-left: none;
+            box-shadow: 0 6px 20px rgba(56, 161, 105, 0.3);
+            text-align: right;
+        }
+        
+        .interpretation {
+            background: linear-gradient(135deg, #bee3f8 0%, #90cdf4 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-right: 5px solid #3182ce;
+            border-left: none;
+            box-shadow: 0 6px 20px rgba(49, 130, 206, 0.3);
+            text-align: right;
+        }
+        
+        .interpretation-en {
+            font-size: 0.95rem;
+            color: #2c5282;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-right: 5px solid #e53e3e;
+            border-left: none;
+            text-align: right;
+        }
+        
+        .bilingual-text {
+            margin: 10px 0;
+        }
+        
+        .ug-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        
+        .en-text {
+            font-size: 1rem;
+            color: #4a5568;
+            font-style: italic;
+            margin-top: 5px;
+            padding-right: 10px;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .example-box {
+            background: #edf2f7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .exercise {
+            background: #e6fffa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #38b2ac;
+        }
+        
+        .exercise-title {
+            color: #234e52;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #5a6fd8;
+        }
+        
+        .btn-check {
+            background: #38b2ac;
+        }
+        
+        .btn-check:hover {
+            background: #319795;
+        }
+        
+        .answer {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #c6f6d5;
+            border-radius: 5px;
+            border-left: 4px solid #38a169;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.6rem;
+            }
+            
+            .header p {
+                font-size: 1.2rem;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 12px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .wisdom-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- ئۇستىدىكى ئۇيغۇر ئاتا سۆزى -->
+        <div class="wisdom-section">
+            <div class="wisdom-text">"ئەقىل بىلەن ئىش قىلغان كىشى مەقسىتىگە يېتىدۇ، تەپەككۇر بىلەن يول تېپىدۇ."</div>
+            <div class="wisdom-author">— ئۇيغۇر ئاتا سۆزى</div>
+            <div class="wisdom-text" style="font-size: 1.1rem; margin-top: 10px;">"The one who works with intelligence reaches his goal, the one who thinks finds the way."</div>
+        </div>
+        
+        <div class="header">
+            <h1>لوجىستىك رېگرېسسىيە تەھلىلى</h1>
+            <h2>Logistic Regression Analysis</h2>
+            <p>ئىككى قىممەتلىك مەلۇماتلارنى تەھلىل قىلىش ئۇسۇلى</p>
+            <p>Method for analyzing binary data</p>
+        </div>
+        
+        <!-- 1. لوجىستىك رېگرېسسىيە نىمە؟ -->
+        <div class="card">
+            <h2 class="card-title">1. لوجىستىك رېگرېسسىيە نىمە؟ (ロジスティック回帰分析)</h2>
+            <div class="card-title-en">1. What is Logistic Regression? (ロジスティック回帰分析)</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>لوجىستىك رېگرېسسىيە تەھلىلى</strong> دېگەن نىشان ئۆزگەرگۈچى 0 ۋە 1 دىن ئىبارەت ئىككى قىممەتلىك مەلۇمات ياكى 0 دىن 1 گىچە بولغان ئېھتىماللىق قىممەتلىرى بولغاندا، چۈشەندۈرگۈچى ئۆزگەرگۈچىلەر ئارقىلىق ئىپادىلەش ئۇسۇلىدۇر.</div>
+                <div class="en-text"><strong>Logistic Regression Analysis</strong> is a method to express a target variable that consists of binary data (0 and 1) or probability values (0 to 1) using explanatory variables.</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>لوجىستىك رېگرېسسىيە مودېلى:</strong><br>
+                P(Y=1) = 1 / [1 + exp(-(β₀ + β₁X₁ + β₂X₂ + ... + βₖXₖ))]
+                <div class="formula-en"><strong>Logistic Regression Model:</strong><br>
+                P(Y=1) = 1 / [1 + exp(-(β₀ + β₁X₁ + β₂X₂ + ... + βₖXₖ))]</div>
+            </div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text">بۇ يەردە:</div>
+                <div class="en-text">Where:</div>
+            </div>
+            
+            <ul style="text-align: right; padding-right: 20px;">
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>Y</strong> - نىشان ئۆزگەرگۈچى (0 ياكى 1)</span>
+                    <span class="en-text"><strong>Y</strong> - Target variable (0 or 1)</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>P(Y=1)</strong> - Y نىڭ 1 بولۇش ئېھتىماللىقى</span>
+                    <span class="en-text"><strong>P(Y=1)</strong> - Probability of Y being 1</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>X₁, X₂, ..., Xₖ</strong> - چۈشەندۈرگۈچى ئۆزگەرگۈچىلەر</span>
+                    <span class="en-text"><strong>X₁, X₂, ..., Xₖ</strong> - Explanatory variables</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>β₀, β₁, ..., βₖ</strong> - رېگرېسسىيە كوئېففىتسېنتلىرى</span>
+                    <span class="en-text"><strong>β₀, β₁, ..., βₖ</strong> - Regression coefficients</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>exp()</strong> - ئېكىسپونېنتسىيال فۇنكسىيە</span>
+                    <span class="en-text"><strong>exp()</strong> - Exponential function</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 2. لوجىت ئايلاندۇرۇش ۋە لوجىستىك ئايلاندۇرۇش -->
+        <div class="card">
+            <h2 class="card-title">2. لوجىت ئايلاندۇرۇش ۋە لوجىستىك ئايلاندۇرۇش</h2>
+            <div class="card-title-en">2. Logit Transformation and Logistic Transformation</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>لوجىت ئايلاندۇرۇش</strong> دېگەن ئېھتىماللىق P نى لوجىت (log-odds) قا ئايلاندۇرۇش:</div>
+                <div class="en-text"><strong>Logit Transformation</strong> is the transformation of probability P to logit (log-odds):</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>لوجىت ئايلاندۇرۇش:</strong><br>
+                logit(P) = ln[P / (1 - P)]
+                <div class="formula-en"><strong>Logit Transformation:</strong><br>
+                logit(P) = ln[P / (1 - P)]</div>
+            </div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>لوجىستىك ئايلاندۇرۇش</strong> دېگەن لوجىت نىڭ تەتۈر ئايلاندۇرۇلۇشى:</div>
+                <div class="en-text"><strong>Logistic Transformation</strong> is the inverse transformation of logit:</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>لوجىستىك ئايلاندۇرۇش:</strong><br>
+                P = 1 / [1 + exp(-z)]<br>
+                z = β₀ + β₁X₁ + β₂X₂ + ... + βₖXₖ
+                <div class="formula-en"><strong>Logistic Transformation:</strong><br>
+                P = 1 / [1 + exp(-z)]<br>
+                z = β₀ + β₁X₁ + β₂X₂ + ... + βₖXₖ</div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="logisticChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- 3. سىگموىد فۇنكسىيە -->
+        <div class="card">
+            <h2 class="card-title">3. سىگموىد فۇنكسىيە (シグモイド関数)</h2>
+            <div class="card-title-en">3. Sigmoid Function (シグモイド関数)</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>سىگموىد فۇنكسىيە</strong> ياكى <strong>لوجىستىك فۇنكسىيە</strong> ھەرقانداق كىرگۈزۈش قىممىتى ئۈچۈن چىقىرىش قىممىتىنى 0 دىن 1 گىچە چەكلىگەن فۇنكسىيەدۇر.</div>
+                <div class="en-text"><strong>Sigmoid Function</strong> or <strong>Logistic Function</strong> is a function that limits the output value between 0 and 1 for any input value.</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>سىگموىد فۇنكسىيە:</strong><br>
+                f(z) = 1 / (1 + e⁻ᶻ)
+                <div class="formula-en"><strong>Sigmoid Function:</strong><br>
+                f(z) = 1 / (1 + e⁻ᶻ)</div>
+            </div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>سىگموىد فۇنكسىيەنىڭ ئالاھىدىلىكلىرى:</strong></div>
+                <div class="en-text"><strong>Characteristics of Sigmoid Function:</strong></div>
+            </div>
+            
+            <ul style="text-align: right; padding-right: 20px;">
+                <li class="bilingual-text">
+                    <span class="ug-text">زىيارىەت قىممىتى -∞ دىن +∞ گىچە بولسىمۇ، فۇنكسىيە قىممىتى ھەمىشە 0 دىن 1 گىچە بولىدۇ</span>
+                    <span class="en-text">Even if the input value ranges from -∞ to +∞, the function value is always between 0 and 1</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text">فۇنكسىيە S شەكىللىك قىياپەتكە ئىگە</span>
+                    <span class="en-text">The function has an S-shaped curve</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text">زىيارىەت قىممىتى 0 بولغاندا، فۇنكسىيە قىممىتى 0.5 بولىدۇ</span>
+                    <span class="en-text">When the input value is 0, the function value is 0.5</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text">فۇنكسىيە ھەسساسلىقى ئۆزگىرىدۇ (ئوتتۇرىدا ئەڭ ھەسساس)</span>
+                    <span class="en-text">Function sensitivity changes (most sensitive in the middle)</span>
+                </li>
+            </ul>
+            
+            <div class="chart-container">
+                <canvas id="sigmoidChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- 4. ئەڭ زور ئېھتىماللىق ھېسابلاش -->
+        <div class="card">
+            <h2 class="card-title">4. ئەڭ زور ئېھتىماللىق ھېسابلاش (最尤法)</h2>
+            <div class="card-title-en">4. Maximum Likelihood Estimation (最尤法)</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text">لوجىستىك رېگرېسسىيەدە رېگرېسسىيە كوئېففىتسېنتلىرىنى <strong>ئەڭ زور ئېھتىماللىق ھېسابلاش</strong> ئارقىلىق باھالىنىدۇ.</div>
+                <div class="en-text">In logistic regression, regression coefficients are estimated using <strong>Maximum Likelihood Estimation</strong>.</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>ئېھتىماللىق فۇنكسىيەسى:</strong><br>
+                L(β) = Π [Pᵢ]^Yᵢ × [1 - Pᵢ]^(1-Yᵢ)
+                <div class="formula-en"><strong>Likelihood Function:</strong><br>
+                L(β) = Π [Pᵢ]^Yᵢ × [1 - Pᵢ]^(1-Yᵢ)</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>لوجارىفملىق ئېھتىماللىق فۇنكسىيەسى:</strong><br>
+                ln L(β) = Σ [Yᵢ × ln(Pᵢ) + (1-Yᵢ) × ln(1-Pᵢ)]
+                <div class="formula-en"><strong>Log-Likelihood Function:</strong><br>
+                ln L(β) = Σ [Yᵢ × ln(Pᵢ) + (1-Yᵢ) × ln(1-Pᵢ)]</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <div>
+                        <div class="step-title">ئەڭ زور ئېھتىماللىق ھېسابلاش قەدەملىرى</div>
+                        <div class="step-title-en">Maximum Likelihood Estimation Steps</div>
+                    </div>
+                    <div class="step-number">1</div>
+                </div>
+                
+                <div class="calculation-box">
+                    <strong>1. باشلانغۇچ قىممەتلەرنى بەلگىلەش</strong><br>
+                    β₀, β₁, ..., βₖ نىڭ باشلانغۇچ قىممەتلىرىنى بەلگىلەيمىز
+                    <div class="calculation-en"><strong>1. Set initial values</strong><br>
+                    Set initial values for β₀, β₁, ..., βₖ</div>
+                </div>
+                
+                <div class="calculation-box">
+                    <strong>2. ئېھتىماللىقنى ھېسابلاش</strong><br>
+                    ھەر بىر مەلۇمات نۇقتىسى ئۈچۈن Pᵢ نى ھېسابلاپ، لوجارىفملىق ئېھتىماللىقنى ھېسابلايمىز
+                    <div class="calculation-en"><strong>2. Calculate likelihood</strong><br>
+                    Calculate Pᵢ for each data point and compute the log-likelihood</div>
+                </div>
+                
+                <div class="calculation-box">
+                    <strong>3. گرادىيېنت ۋە Hessian ماترىتسىسىنى ھېسابلاش</strong><br>
+                    نيۇتون-رافسون ئۇسۇلى ئارقىلىق كوئېففىتسېنتلارنى ياخشىلايمىز
+                    <div class="calculation-en"><strong>3. Calculate gradient and Hessian matrix</strong><br>
+                    Improve coefficients using Newton-Raphson method</div>
+                </div>
+                
+                <div class="calculation-box">
+                    <strong>4. تەكرارلاش</strong><br>
+                    ئېھتىماللىق يېقىنلاشقۇچە تەكرارلايمىز
+                    <div class="calculation-en"><strong>4. Iterate</strong><br>
+                    Repeat until likelihood converges</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 5. مىسال: خەتتەرلىك تەھلىلى -->
+        <div class="card">
+            <h2 class="card-title">5. مىسال: خەتتەرلىك تەھلىلى</h2>
+            <div class="card-title-en">5. Example: Risk Analysis</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text">بىز 10 كىشىنىڭ يېشى، قان بېسىمى ۋە يۈرەك خەتتىرى ئەھۋالى توغرىسىدىكى مەلۇماتلارنى تەھلىل قىلىمىز:</div>
+                <div class="en-text">We analyze data of 10 people regarding their age, blood pressure, and heart disease status:</div>
+            </div>
+            
+            <table>
+                <tr>
+                    <th>كىشى<br>Person</th>
+                    <th>يېشى (X₁)<br>Age (X₁)</th>
+                    <th>قان بېسىمى (X₂)<br>Blood Pressure (X₂)</th>
+                    <th>يۈرەك خەتتىرى (Y)<br>Heart Disease (Y)</th>
+                </tr>
+                <tr><td>1</td><td>45</td><td>120</td><td>0</td></tr>
+                <tr><td>2</td><td>52</td><td>140</td><td>1</td></tr>
+                <tr><td>3</td><td>38</td><td>110</td><td>0</td></tr>
+                <tr><td>4</td><td>61</td><td>150</td><td>1</td></tr>
+                <tr><td>5</td><td>47</td><td>130</td><td>0</td></tr>
+                <tr><td>6</td><td>55</td><td>145</td><td>1</td></tr>
+                <tr><td>7</td><td>42</td><td>125</td><td>0</td></tr>
+                <tr><td>8</td><td>58</td><td>155</td><td>1</td></tr>
+                <tr><td>9</td><td>49</td><td>135</td><td>0</td></tr>
+                <tr><td>10</td><td>63</td><td>160</td><td>1</td></tr>
+            </table>
+            
+            <div class="formula-box">
+                <strong>لوجىستىك رېگرېسسىيە نەتىجىسى:</strong><br>
+                logit(P) = -5.2 + 0.08 × يېشى + 0.12 × قان بېسىمى<br>
+                P = 1 / [1 + exp(-(-5.2 + 0.08X₁ + 0.12X₂))]
+                <div class="formula-en"><strong>Logistic Regression Result:</strong><br>
+                logit(P) = -5.2 + 0.08 × Age + 0.12 × Blood Pressure<br>
+                P = 1 / [1 + exp(-(-5.2 + 0.08X₁ + 0.12X₂))]</div>
+            </div>
+            
+            <div class="interpretation">
+                <h3>چۈشەندۈرۈش:</h3>
+                <div class="interpretation-en"><strong>Interpretation:</strong></div>
+                <p><strong>يېشى كوئېففىتسېنتى (0.08):</strong> يېشى ھەر بىر ياش ئاشقاندا، يۈرەك خەتتىرى بولۇش لوجىتى 0.08 گە ئاشىدۇ.</p>
+                <div class="interpretation-en"><strong>Age Coefficient (0.08):</strong> For each additional year of age, the log-odds of heart disease increases by 0.08.</div>
+                
+                <p><strong>قان بېسىمى كوئېففىتسېنتى (0.12):</strong> قان بېسىمى ھەر بىر بىرلىك ئاشقاندا، يۈرەك خەتتىرى بولۇش لوجىتى 0.12 گە ئاشىدۇ.</p>
+                <div class="interpretation-en"><strong>Blood Pressure Coefficient (0.12):</strong> For each unit increase in blood pressure, the log-odds of heart disease increases by 0.12.</div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <div>
+                        <div class="step-title">مىسال: 50 يېشىدا، 140 قان بېسىمى بولغان كىشىنىڭ يۈرەك خەتتىرى بولۇش ئېھتىماللىقى</div>
+                        <div class="step-title-en">Example: Probability of heart disease for a 50-year-old with 140 blood pressure</div>
+                    </div>
+                    <div class="step-number">2</div>
+                </div>
+                
+                <div class="calculation-box">
+                    <strong>ھېسابلاش:</strong><br>
+                    z = -5.2 + 0.08×50 + 0.12×140 = -5.2 + 4 + 16.8 = 15.6<br>
+                    P = 1 / [1 + exp(-15.6)] = 1 / [1 + 0.00000017] ≈ 0.9999998
+                    <div class="calculation-en"><strong>Calculation:</strong><br>
+                    z = -5.2 + 0.08×50 + 0.12×140 = -5.2 + 4 + 16.8 = 15.6<br>
+                    P = 1 / [1 + exp(-15.6)] = 1 / [1 + 0.00000017] ≈ 0.9999998</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 6. ئىشلىتىش دائىرىسى -->
+        <div class="card">
+            <h2 class="card-title">6. لوجىستىك رېگرېسسىيەنىڭ ئىشلىتىش دائىرىسى</h2>
+            <div class="card-title-en">6. Applications of Logistic Regression</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>لوجىستىك رېگرېسسىيە تۆۋەندىكى ساھەلەردە كەڭ ئىشلىتىلىدۇ:</strong></div>
+                <div class="en-text"><strong>Logistic regression is widely used in the following areas:</strong></div>
+            </div>
+            
+            <ul style="text-align: right; padding-right: 20px;">
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>مېدىتسىنا:</strong> كېسەل دىئاگنوزى، خەتتەرلىك تەھلىلى</span>
+                    <span class="en-text"><strong>Medicine:</strong> Disease diagnosis, risk analysis</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>مالىيە:</strong> كرېدىت خەتتىرى، ئالدىن بىلەن بەلگىلەش</span>
+                    <span class="en-text"><strong>Finance:</strong> Credit risk, prediction</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>ماركېتىڭ:</strong> خېرىدار ئالدىراش ئېھتىماللىقى، مەھسۇلات سېتىۋېلىش ئېھتىماللىقى</span>
+                    <span class="en-text"><strong>Marketing:</strong> Customer churn probability, product purchase probability</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>ئىجتىمائىي پەنلەر:</strong> سايلام نەتىجىسىنى ئالدىن بىلەن بەلگىلەش، ئىجتىمائىي پەن تەتقىقاتلىرى</span>
+                    <span class="en-text"><strong>Social Sciences:</strong> Election outcome prediction, social science research</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>ماشىنا ئۆگىنىش:</strong> تەسۋىرلەش تەھلىلى، كاتېگورىيە بەلگىلەش</span>
+                    <span class="en-text"><strong>Machine Learning:</strong> Classification analysis, category labeling</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ئاستىدىكى ئۇيغۇر ئاتا سۆزى -->
+        <div class="wisdom-section">
+            <div class="wisdom-text">"بىلىم بىلەن كۈچ بىرلەشتۈرۈلسە، ھەر قانداق مەسىلىنى ھەل قىلىشقا بولىدۇ."</div>
+            <div class="wisdom-author">— ئۇيغۇر ئاتا سۆزى</div>
+            <div class="wisdom-text" style="font-size: 1.1rem; margin-top: 10px;">"When knowledge and strength are combined, any problem can be solved."</div>
+        </div>
+    </div>
+
+    <script>
+        // لوجىستىك فۇنكسىيە گرافىكى
+        const logisticCtx = document.getElementById('logisticChart').getContext('2d');
+        
+        // لوجىستىك فۇنكسىيە مەلۇماتلىرى
+        const logisticData = [];
+        for (let z = -6; z <= 6; z += 0.1) {
+            logisticData.push({
+                x: z,
+                y: 1 / (1 + Math.exp(-z))
+            });
+        }
+        
+        const logisticChart = new Chart(logisticCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'لوجىستىك فۇنكسىيە / Logistic Function',
+                    data: logisticData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                    pointRadius: 2,
+                    showLine: true,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'z قىممىتى / z value'
+                        },
+                        min: -6,
+                        max: 6
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'P = 1/(1+e⁻ᶻ) / P = 1/(1+e⁻ᶻ)'
+                        },
+                        min: 0,
+                        max: 1
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'لوجىستىك فۇنكسىيە گرافىكى / Logistic Function Graph',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+        
+        // سىگموىد فۇنكسىيە گرافىكى
+        const sigmoidCtx = document.getElementById('sigmoidChart').getContext('2d');
+        
+        // سىگموىد فۇنكسىيە مەلۇماتلىرى
+        const sigmoidData = [];
+        for (let x = -6; x <= 6; x += 0.1) {
+            sigmoidData.push({
+                x: x,
+                y: 1 / (1 + Math.exp(-x))
+            });
+        }
+        
+        const sigmoidChart = new Chart(sigmoidCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'سىگموىد فۇنكسىيە / Sigmoid Function',
+                    data: sigmoidData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                    pointRadius: 2,
+                    showLine: true,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'كىرگۈزۈش قىممىتى / Input Value'
+                        },
+                        min: -6,
+                        max: 6
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'فۇنكسىيە قىممىتى / Function Value'
+                        },
+                        min: 0,
+                        max: 1
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'سىگموىد فۇنكسىيە گرافىكى / Sigmoid Function Graph',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

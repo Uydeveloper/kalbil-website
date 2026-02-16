@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ماشىنا ئۈگىنىش 6-باب – SVM (Support Vector Machine)</title>
+
+  <!-- Amiri for Uyghur, Inter for English -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text-ug: #2d2d2d;
+      --text-en: #444;
+      --primary: #d32f2f; /* red for SVM (common in margins) */
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      padding: 20px;
+      font-family: 'Amiri', serif;
+      color: var(--text-ug);
+      line-height: 1.7;
+      direction: rtl;
+    }
+
+    .bilingual-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-right: 4px solid var(--primary);
+    }
+
+    .section-title-ug {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .section-title-en {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 15px;
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 20px;
+      background: #ffebee;
+      border-radius: 12px;
+      border-right: 4px solid var(--primary);
+    }
+
+    .intro h1 {
+      color: var(--primary);
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+    }
+
+    .intro-en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: center;
+      color: var(--text-en);
+      margin-top: 10px;
+    }
+
+    ul, ol {
+      padding-right: 25px;
+      margin: 12px 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+      color: var(--text-en);
+      margin-top: 12px;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 3px solid #ccc;
+    }
+
+    .code-container {
+      margin: 15px 0;
+    }
+
+    .CodeMirror {
+      direction: ltr !important;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .code-label {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .highlight {
+      background-color: #ffcdd2;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ffebee;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro">
+    <h1>ماشىنا ئۈگىنىش 6-باب – SVM (Support Vector Machine)</h1>
+    <p>
+      <strong>SVM</strong> (قوشۇمچى ۋېكتور ماشىنىسى) — ماشىنا ئۈگىنىشنىڭ ئەڭ قۇۋۋەتلىك كلاسسىفىكاتسىيە ئالگورىتملىرىنىڭ بىرىدۇر.
+      بۇ ئالگورىتم <strong>ئىككى سىنىپنى ئايرىش ئۈچۈن ئەڭ كەڭ مارگىن</strong> (Margin) غا ئىگە بولغان <strong>دېگىلىك يۈز</strong> (Hyperplane) نى تاپىدۇ.
+    </p>
+    <p>
+      SVM نىڭ ئالاھىدىلىكى — <strong>چىچىرەڭ مەلۇمات ئارىلىرىنى تەسىرلىك ئاجراتالايدىغانلىقى</strong>،
+      يەنە بىر ئالاھىدىلىكى — <strong>كېرنېل تىخنىكىسى</strong> (Kernel Trick) ئارقىلىق سىزىقسىز (non-linear) مۇناسىۋەتلەرنى ھەل قىلالايدىغانلىقى.
+    </p>
+    <div class="intro-en">
+      <strong>Support Vector Machine (SVM)</strong> is one of the most powerful classification algorithms in machine learning.
+      It finds the optimal <strong>hyperplane</strong> that separates two classes with the <strong>maximum possible margin</strong>.
+      Its key strengths are:
+      <ul style="text-align: left; direction: ltr; padding-left: 20px;">
+        <li>Effective in high-dimensional spaces.</li>
+        <li>Uses the <strong>kernel trick</strong> to handle non-linear decision boundaries.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============ 1. SVM نېمە؟ / What is SVM? ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">1. SVM نېمە؟</div>
+    <div class="section-title-en">1. What is SVM?</div>
+    <p>
+      SVM — ئىككى ياكى ئۇندىن ئارتۇق سىنىپنى <strong>ئەڭ ئۈنۈملۈك دېگىلىك يۈز</strong> (Best Separating Hyperplane) بىلەن ئاجرايدىغان ئالگورىتم.
+      ئاجراتقۇچنىڭ ئىككى يېنىدا <strong>مارگىن</strong> (Margin) دەپ ئاتىلىدىغان قۇرۇق ئارىلىق بولىدۇ.
+      بۇ مارگىن ئىچىدە **قوشۇمچى ۋېكتورلار** (Support Vectors) دەپ ئاتىلىدىغان مۇھىم نۇقتىلار بار.
+    </p>
+    <p class="en">
+      SVM is an algorithm that separates classes using the <strong>best possible hyperplane</strong>.
+      The goal is to maximize the <strong>margin</strong> — the distance between the hyperplane and the nearest data points (called <strong>support vectors</strong>).
+    </p>
+  </div>
+
+  <!-- ============ 2. قانداق ئىشلەيدۇ؟ / How it Works ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">2. قانداق ئىشلەيدۇ؟</div>
+    <div class="section-title-en">2. How Does SVM Work?</div>
+    <p>
+      1. **دېگىلىك يۈز تاپىش**: ئىككى سىنىپنى ئاجرايدىغان سىزىق (2D دا) ياكى يۈز (3D دا) قۇرۇش.
+      <br>
+      2. **مارگىن ماكىسلاشتۇرۇش**: دېگىلىك يۈزگە ئەڭ يېقىن نۇقتىلاردىن ئىبارەت مارگىن ئەڭ كەڭ بولۇشى كېرەك.
+      <br>
+      3. **قوشۇمچى ۋېكتورلار**: مارگىن چېتىدىكى نۇقتىلار — بۇلار مودېلنى قۇرۇشقا مۇھىم تەسىر كۆرسىتىدۇ.
+    </p>
+    <p>
+      ئەگەر مەلۇمات <strong>سىزىق بىلەن ئاجرىمايدىغان</strong> بولسا، SVM <strong>كېرنېل تىخنىكىسى</strong> (Kernel Trick) نى ئىشلىتىپ،
+      مەلۇماتنى يۇقىرى ئۆلچەملىك فۇڭكىسىيە بۇعدىكى ئەزالىق قىلىپ، ئۇ يەردە سىزىق بىلەن ئاجرىتىدۇ.
+    </p>
+    <p class="en">
+      1. **Find the hyperplane**: A line (in 2D) or plane (in 3D) that separates classes.
+      <br>
+      2. **Maximize the margin**: The distance between the hyperplane and the closest points should be as large as possible.
+      <br>
+      3. **Support Vectors**: These are the data points that lie on the margin edges — they define the model.
+    </p>
+    <p class="en">
+      If data is <strong>not linearly separable</strong>, SVM uses the <strong>kernel trick</strong> to map the data into a higher-dimensional space where a linear separation becomes possible.
+    </p>
+  </div>
+
+  <!-- ============ 3. نېمە ئۈچۈن ئىشلىتىلىدۇ؟ / Use Cases ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">3. نېمە ئۈچۈن ئىشلىتىلىدۇ؟</div>
+    <div class="section-title-en">3. When to Use SVM?</div>
+    <ul>
+      <li>مەلۇمات سانى ئاز، لېكىن ئۆزگەرگۈچ سانى كۆپ بولغاندا (مەسىلەن: گېنومىكا).</li>
+      <li>تېببىي تەڭشەش (كىسىلدىك تەنھۇرۇشى).</li>
+      <li>تېكىست كلاسسىفىكاتسىيە (ئەخبارات تۈرلىرى، سېنتىمېنت تەھلىلى).</li>
+      <li>سانلىق ۋە كاتېگورىيىلىك مەلۇمات كىرگۈزگۈچ بولغاندا.</li>
+    </ul>
+    <ul class="en">
+      <li>When you have <strong>few samples but many features</strong> (e.g., genomics, text classification).</li>
+      <li>Medical diagnosis (e.g., cancer detection from imaging).</li>
+      <li>Text classification, image recognition, handwriting recognition.</li>
+      <li>Effective for both <strong>numerical and categorical inputs</strong> (after encoding).</li>
+    </ul>
+  </div>
+
+  <!-- ============ 4. ئالاھىدىلىكى ۋە كەمچىلىكى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">4. ئالاھىدىلىكى ۋە كەمچىلىكى</div>
+    <div class="section-title-en">4. Advantages and Disadvantages</div>
+
+    <h3>ئالاھىدىلىكى:</h3>
+    <ul>
+      <li>يۇقىرى ئۆلچەملىك مەلۇماتتا ياخشى ئىشلەيدۇ.</li>
+      <li>مارگىن ماكىسلاشتۇرۇش ئارقىلىق <strong>ئاشۇرۇپ ئۈگىنىشنى</strong> (Overfitting) چەكلىيۇدۇ.</li>
+      <li>كېرنېل تاللاش ئارقىلىق سىزىقسىز مۇناسىۋەتلەرنى ھەل قىلالايدۇ.</li>
+      <li>قوشۇمچى ۋېكتورلار سانى ئادەتتە ئاز، شۇڭا مودېل چوڭ بولمايدۇ.</li>
+    </ul>
+
+    <h3 class="en">Advantages:</h3>
+    <ul class="en">
+      <li>Performs well in <strong>high-dimensional spaces</strong>.</li>
+      <li><strong>Resistant to overfitting</strong> due to margin maximization.</li>
+      <li><strong>Kernel trick</strong> allows modeling of complex non-linear boundaries.</li>
+      <li>Only support vectors are stored — memory efficient.</li>
+    </ul>
+
+    <h3>كەمچىلىكى:</h3>
+    <ul>
+      <li>چوڭ مەلۇمات بىلەن ئىشلىگەندە <strong>ۋاقىت ئۇزۇن</strong> تۇرىدۇ.</li>
+      <li>مەلۇماتنىڭ نورماللىشى (scaling) زۆرۈر.</li>
+      <li>كېرنېل ۋە پارامېتر تاللاش <strong>تەجرۈبە تەلەپ قىلىدۇ</strong>.</li>
+      <li>كۆپ سىنىپلىق (multi-class) مەسىلىلەردە قوشۇمچە تەكشۈرۈش كېرەك.</li>
+    </ul>
+
+    <h3 class="en">Disadvantages:</h3>
+    <ul class="en">
+      <li><strong>Slow training</strong> on very large datasets.</li>
+      <li><strong>Requires feature scaling</strong> (e.g., StandardScaler).</li>
+      <li>Choosing the right <strong>kernel and parameters</strong> needs experience.</li>
+      <li>Not naturally multi-class — uses one-vs-one or one-vs-rest strategies.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 5. مۇھىم پارامېترلار ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">5. مۇھىم پارامېترلار</div>
+    <div class="section-title-en">5. Key Parameters</div>
+    <ul>
+      <li><strong>C</strong>: مارگىن قاتىشىق دەرىجىسىنى باشقۇرۇش. C چوڭ بولسا — مارگىن تار، C كىچىك بولسا — مارگىن كەڭ.</li>
+      <li><strong>kernel</strong>: <code>"linear"</code>, <code>"poly"</code>, <code>"rbf"</code> (ئەڭ كۆپ ئىشلىتىلىدىغان), <code>"sigmoid"</code>.</li>
+      <li><strong>gamma</strong>: "rbf" كېرنېلىدە مەلۇمات تەسىر دائىرىسى. gamma چوڭ بولسا — ئەگىز ئۈگىنىش، gamma كىچىك بولسا — يۇمشاق مودېل.</li>
+    </ul>
+    <ul class="en">
+      <li><strong>C</strong>: Regularization parameter. High C = narrow margin (less regularization). Low C = wider margin (more regularization).</li>
+      <li><strong>kernel</strong>: <code>"linear"</code>, <code>"poly"</code>, <code>"rbf"</code> (most common), <code>"sigmoid"</code>.</li>
+      <li><strong>gamma</strong> (for RBF): Controls influence of a single training example. High gamma = complex model, low gamma = smoother decision boundary.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 6. مىسال كود ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">6. مىسال كود (Scikit-learn بىلەن)</div>
+    <div class="section-title-en">6. Code Examples (with Scikit-learn)</div>
+
+    <div class="code-container">
+      <div class="code-label">مېسال 1: سىزىقىي SVM (Linear Kernel)</div>
+      <div class="code-label en" style="direction: ltr; text-align: left;">Example 1: Linear SVM</div>
+      <textarea id="c1" style="display:none;">
+from sklearn import svm
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score
+
+# 1. سۈنئىي مەلۇمات ياساش
+X, y = make_classification(n_samples=300, n_features=2, n_redundant=0, n_informative=2,
+                           random_state=42, n_clusters_per_class=1)
+
+# 2. مەلۇماتنى نورماللاشتۇرۇش (SVM زۆرۈر)
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+# 3. بولۇقىغا بۆلۈش
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# 4. مودېل قۇرۇش
+clf = svm.SVC(kernel='linear', C=1.0)
+clf.fit(X_train, y_train)
+
+# 5. باھالاش
+y_pred = clf.predict(X_test)
+print("دەللىك:", accuracy_score(y_test, y_pred))
+      </textarea>
+    </div>
+
+    <div class="code-container">
+      <div class="code-label">مېسال 2: RBF كېرنېل بىلەن SVM</div>
+      <div class="code-label en" style="direction: ltr; text-align: left;">Example 2: SVM with RBF Kernel</div>
+      <textarea id="c2" style="display:none;">
+from sklearn import svm
+from sklearn.datasets import load_iris
+
+# Iris مەلۇماتى بىلەن ئىشلىتىش
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# Scaling
+X = StandardScaler().fit_transform(X)
+
+# RBF Kernel بىلەن مودېل
+clf = svm.SVC(kernel='rbf', C=1.0, gamma='scale')
+clf.fit(X, y)
+
+# دەللىك باھاسى
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(clf, X, y, cv=5)
+print("ئوتتۇرا دەللىك:", scores.mean())
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 7. SVM ۋە باشقا ئالگورىتلارنىڭ پەرقى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">7. SVM ۋە باشقا ئالگورىتلارنىڭ پەرقى</div>
+    <div class="section-title-en">7. SVM vs Other Algorithms</div>
+    <table>
+      <thead>
+        <tr>
+          <th>ئالگورىتم / Algorithm</th>
+          <th>SVM</th>
+          <th>Decision Tree</th>
+          <th>Random Forest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ئاشۇرۇپ ئۈگىنىش / Overfitting</td>
+          <td>تۆۋەن / Low</td>
+          <td>بەك يۇقىرى / Very High</td>
+          <td>تۆۋەن / Low</td>
+        </tr>
+        <tr>
+          <td>چوڭ مەلۇمات / Large Data</td>
+          <td>ئەقىللىك ئەمەس / Not ideal</td>
+          <td>ياخشى / Good</td>
+          <td>ياخشى / Good</td>
+        </tr>
+        <tr>
+          <td>مۇرەككەپ مۇناسىۋەت / Non-linearity</td>
+          <td>كېرنېل بىلەن / Yes (Kernel)</td>
+          <td>ھەئە / Yes</td>
+          <td>ھەئە / Yes</td>
+        </tr>
+        <tr>
+          <td>تۈسۈنىش ئاسانلىقى / Interpretability</td>
+          <td>قاتتىق / Hard</td>
+          <td>بەك ئاسان / Very Easy</td>
+          <td>قاتتىق / Hard</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>ماشىنا ئۈگىنىش 6-باب – SVM (Support Vector Machine)</p>
+    <p>دەرسلىك: ئۇيغۇرچە | English • تەييارلاندى: 2025-يىلى 4-دېكابىر</p>
+    <p>كۆچۈرۈش، ئىشلىتىش ۋە تارقىتىش ھەققى ھەممىگە بار</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const textareas = document.querySelectorAll('textarea[id^="c"]');
+      textareas.forEach(ta => {
+        CodeMirror.fromTextArea(ta, {
+          mode: "python",
+          readOnly: true,
+          lineNumbers: true,
+          theme: "default",
+          direction: "ltr",
+          viewportMargin: Infinity
+        });
+      });
+    });
+  </script>
+</body>
+</html>

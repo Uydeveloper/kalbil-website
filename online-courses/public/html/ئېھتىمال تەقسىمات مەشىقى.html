@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ئېھتىمال ئۆزگەرگۈچى ۋە ئېھتىمال تەقسىمات مەشىقى</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #2980b9;
+            --bg-light: #f9f9f9;
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+        
+        .tab-btn:hover {
+            background: var(--light);
+        }
+        
+        .tab-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .section-title i {
+            margin-left: 10px;
+            color: var(--secondary);
+        }
+        
+        .bilingual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+        
+        .uyghur, .english {
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--bg-light);
+        }
+        
+        .uyghur {
+            border-right: 4px solid var(--accent);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .english {
+            border-left: 4px solid var(--info);
+        }
+        
+        .formula {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            overflow-x: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .example {
+            background: linear-gradient(to right, #fffde7, #e8f4f8);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px dashed var(--warning);
+        }
+        
+        .term {
+            font-weight: bold;
+            color: var(--success);
+            padding: 3px 5px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 5px;
+        }
+        
+        .exercise {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--info);
+        }
+        
+        .question {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .options {
+            margin: 15px 0;
+        }
+        
+        .option {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .option:hover {
+            background: var(--light);
+        }
+        
+        .option.selected {
+            background: var(--info);
+            color: white;
+            border-color: var(--info);
+        }
+        
+        .option.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        
+        .option.incorrect {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: var(--transition);
+            margin-top: 15px;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--success);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .card h3 i {
+            margin-left: 10px;
+            color: var(--secondary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        @media (max-width: 768px) {
+            .bilingual {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+        
+        .step {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+        }
+
+        .uyghur-text {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ئېھتىمال ئۆزگەرگۈچى ۋە ئېھتىمال تەقسىمات مەشىقى</h1>
+        <p class="subtitle">Random Variables, Probability Mass Functions, and Probability Density Functions - Practice Problems</p>
+    </header>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab(0)"><i class="fas fa-home"></i> كىرىش</button>
+            <button class="tab-btn" onclick="showTab(1)"><i class="fas fa-dice"></i> مەسىلە 1</button>
+            <button class="tab-btn" onclick="showTab(2)"><i class="fas fa-chart-bar"></i> مەسىلە 2</button>
+            <button class="tab-btn" onclick="showTab(3)"><i class="fas fa-function"></i> مەسىلە 3</button>
+            <button class="tab-btn" onclick="showTab(4)"><i class="fas fa-function"></i> مەسىلە 4</button>
+            <button class="tab-btn" onclick="showTab(5)"><i class="fas fa-dice-d6"></i> مەسىلە 5</button>
+        </div>
+
+        <!-- كىرىش قىسمى -->
+        <div class="tab-content active">
+            <h2 class="section-title"><i class="fas fa-home"></i> ئېھتىمال ئۆزگەرگۈچى ۋە ئېھتىمال تەقسىمات</h2>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p class="uyghur-text">بۇ مەشىقتە، ئېھتىمال ئۆزگەرگۈچى ۋە ئېھتىمال تەقسىمات ھەققىدىكى چۈشەنچىڭىزنى چوڭقۇرلاشتۇرىدىغان مەسىلىلەرنى ھەل قىلىسىز. تۆۋەندىكى تۈرلەرنى ئۆز ئىچىگە ئالىدۇ:</p>
+                    <ul class="uyghur-text">
+                        <li>ئايرىم ۋە داۋاملىق ئۆزگەرگۈچىلەرنى ئايرىش</li>
+                        <li>ئېھتىمال زىچلىق فۇنكسىيەسى ۋە ئېھتىمال زىچلىق فۇنكسىيەسىنىڭ خاسلىقلىرى</li>
+                        <li>ئېھتىمال زىچلىق فۇنكسىيەسى ياردىمىدە ئېھتىمالنى ھېسابلاش</li>
+                        <li>ئېھتىمال تەقسىمات شەرتلىرىنى قاندۇرىدىغان ثابىتلىرىنى بەلگىلەش</li>
+                    </ul>
+                </div>
+                <div class="english">
+                    <p>In this practice exercise, you will solve problems to deepen your understanding of random variables and probability distributions. It includes the following types of problems:</p>
+                    <ul>
+                        <li>Identifying discrete and continuous variables</li>
+                        <li>Properties of probability mass functions and probability density functions</li>
+                        <li>Calculating probabilities using probability density functions</li>
+                        <li>Determining constants that satisfy probability distribution conditions</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="summary-cards">
+                <div class="card">
+                    <h3><i class="fas fa-random"></i> ئېھتىمال ئۆزگەرگۈچى</h3>
+                    <p class="uyghur-text">ئېھتىمال ئۆزگەرگۈچى دېگەن ئىمكانىيەت فەزاسىدا ئېنىقلىنىدىغان، ئىمكانىيەت نۇقتىلىرىنى ھەقىقىي سانلارغا سىلىشتۇرىدىغان فۇنكسىيەدۇر.</p>
+                    <p>A random variable is a function defined on a sample space that maps sample points to real numbers.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-bar"></i> ئايرىم ئېھتىمال ئۆزگەرگۈچى</h3>
+                    <p class="uyghur-text">چەكتە سان ياكى سانىغا بولىدىغان سانسىز قىممەتلەرنى ئالايدىغان ئېھتىمال ئۆزگەرگۈچى.</p>
+                    <p>A random variable that takes a finite or countably infinite number of values.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> داۋاملىق ئېھتىمال ئۆزگەرگۈچى</h3>
+                    <p class="uyghur-text">قىممەتلىرى بىر ئاراللىقنى (ياكى بىر قانچە ئاراللىقنىڭ بىرلىشىشىنى) تولدۇرىدىغان ئېھتىمال ئۆزگەرگۈچى.</p>
+                    <p>A random variable whose values fill an interval (or union of intervals).</p>
+                </div>
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <h3>ئېھتىمال زىچلىق فۇنكسىيەسى (PMF)</h3>
+                    <p class="uyghur-text">ئايرىم ئېھتىمال ئۆزگەرگۈچىنىڭ ئېھتىمال زىچلىق فۇنكسىيەسى \(p(x)\) ئۆزگەرگۈچىنىڭ بەلگىلەنگەن \(x\) قىممىتىنى ئېلىش ئېھتىماللىقىنى بېرىدۇ:</p>
+                    <div class="formula">
+                        \[ p(x) = P(X = x) \]
+                    </div>
+                    <p class="uyghur-text">ئېھتىمال زىچلىق فۇنكسىيەسى تۆۋەندىكى شەرتلەرنى قاندۇرىدۇ:</p>
+                    <ol class="uyghur-text">
+                        <li>ھەممە \(x\) ئۈچۈن، \(0 \leq p(x) \leq 1\)</li>
+                        <li>\(\sum_{x} p(x) = 1\)</li>
+                    </ol>
+                </div>
+                <div class="english">
+                    <h3>Probability Mass Function (PMF)</h3>
+                    <p>The probability mass function \(p(x)\) of a discrete random variable gives the probability that the random variable takes the specific value \(x\):</p>
+                    <div class="formula">
+                        \[ p(x) = P(X = x) \]
+                    </div>
+                    <p>The probability mass function satisfies the following conditions:</p>
+                    <ol>
+                        <li>\(0 \leq p(x) \leq 1\) for all \(x\)</li>
+                        <li>\(\sum_{x} p(x) = 1\)</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <h3>ئېھتىمال زىچلىق فۇنكسىيەسى (PDF)</h3>
+                    <p class="uyghur-text">داۋاملىق ئېھتىمال ئۆزگەرگۈچىنىڭ ئېھتىمال زىچلىق فۇنكسىيەسى \(f(x)\) ئۆزگەرگۈچىنىڭ بىر قىممەت ئەتراپىدىكى ئېھتىمال زىچلىقىنى تەسۋىرلەيدۇ:</p>
+                    <div class="formula">
+                        \[ P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx \]
+                    </div>
+                    <p class="uyghur-text">ئېھتىمال زىچلىق فۇنكسىيەسى تۆۋەندىكى شەرتلەرنى قاندۇرىدۇ:</p>
+                    <ol class="uyghur-text">
+                        <li>ھەممە \(x\) ئۈچۈن، \(f(x) \geq 0\)</li>
+                        <li>\(\int_{-\infty}^{\infty} f(x) \, dx = 1\)</li>
+                    </ol>
+                </div>
+                <div class="english">
+                    <h3>Probability Density Function (PDF)</h3>
+                    <p>The probability density function \(f(x)\) of a continuous random variable describes the probability density of the random variable around a certain value:</p>
+                    <div class="formula">
+                        \[ P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx \]
+                    </div>
+                    <p>The probability density function satisfies the following conditions:</p>
+                    <ol>
+                        <li>\(f(x) \geq 0\) for all \(x\)</li>
+                        <li>\(\int_{-\infty}^{\infty} f(x) \, dx = 1\)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- مەسىلە 1 -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-dice"></i> مەسىلە 1: ئايرىم ئۆزگەرگۈچىلەرنى تونۇش</h2>
+            
+            <div class="exercise">
+                <div class="question">
+                    <p class="uyghur-text">تۆۋەندىكىلەردىن ئايرىم ئۆزگەرگۈچىلەرنى تاللاڭ:</p>
+                </div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 1)">
+                        <span class="option-number">1.</span> بىر چوڭ ياشلىق ئەرنىڭ ئېغىرلىقى X
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1)">
+                        <span class="option-number">2.</span> 10 تەڭگە ئىشلەپ، يۈزى ئۈستىگە چۈشكەن سانى X
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1)">
+                        <span class="option-number">3.</span> بىر كىتابنىڭ بەت سانى X
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1)">
+                        <span class="option-number">4.</span> ئاتموسفېرادىكى نەملىك X
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1)">
+                        <span class="option-number">5.</span> ئىچكىلىكتىكى ئالكوگول دەرىجىسى X
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1)">
+                        <span class="option-number">6.</span> بىر ئادىل تەڭگىنى يۈزى ئۈستىگە چىققۇچە ئىشلەپ چىققان قېتىم سانى X
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="checkAnswer(1)">
+                    <i class="fas fa-check"></i> جاۋابنى تەكشۈرۈش
+                </button>
+                
+                <div class="result" id="result1">
+                    <p id="resultText1"></p>
+                </div>
+                
+                <div class="explanation" id="explanation1">
+                    <h3>چۈشەندۈرۈش:</h3>
+                    <div class="bilingual">
+                        <div class="uyghur">
+                            <p class="uyghur-text">داۋاملىق ئۆزگەرگۈچى دېگەن ئېغىرلىق ۋە تېمپېراتۇرا ئوخشاش داۋاملىق قىممەتلەرنى ئالايدىغان ئۆزگەرگۈچىلەرگە ئىشارەت قىلىدۇ. تاللاش 1, 4, 5 داۋاملىق قىممەتلەرنى ئالايدىغان ئۆزگەرگۈچىلەر بولۇپ، بىر قىممەت بىلەن يەنە بىر قىممەت ئارىسىدا سانسىز قىممەتلەر بار دەپ قاراشقا بولىدۇ، شۇڭا ئۇلار داۋاملىق ئۆزگەرگۈچىلەر.</p>
+                            <p class="uyghur-text">شۇڭا، قالغان تاللاشلار "2, 3, 6" ئايرىم ئۆزگەرگۈچىلەر بولىدۇ.</p>
+                            <ul class="uyghur-text">
+                                <li><strong>تاللاش 2</strong>: 10 تەڭگە ئىشلىگەندە، يۈزى ئۈستىگە چۈشكەن سانى 0 دىن 10 گىچە پەقەت پۈتۈن سانلار بولالايدۇ، شۇڭا ئايرىم ئۆزگەرگۈچى.</li>
+                                <li><strong>تاللاش 3</strong>: كىتاب بەت سانى پۈتۈن سان، شۇڭا ئايرىم ئۆزگەرگۈچى.</li>
+                                <li><strong>تاللاش 6</strong>: يۈزى ئۈستىگە چىققۇچە تەڭگە ئىشلەش قېتىم سانى 1, 2, 3, ... ئوخشاش پۈتۈن سانلار، شۇڭا ئايرىم ئۆزگەرگۈچى.</li>
+                            </ul>
+                        </div>
+                        <div class="english">
+                            <p>Continuous variables are those that take continuous values like weight and temperature. Options 1, 4, and 5 are variables that can take continuous values, and there are countless values between one value and another, so they are continuous variables.</p>
+                            <p>Therefore, the remaining options "2, 3, 6" are discrete variables.</p>
+                            <ul>
+                                <li><strong>Option 2</strong>: When tossing 10 coins, the number of heads can only be integers from 0 to 10, so it is a discrete variable.</li>
+                                <li><strong>Option 3</strong>: The number of pages in a book is an integer, so it is a discrete variable.</li>
+                                <li><strong>Option 6</strong>: The number of times a coin is tossed until heads appear is an integer like 1, 2, 3, ..., so it is a discrete variable.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- مەسىلە 2 -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-chart-bar"></i> مەسىلە 2: ئېھتىمال زىچلىق فۇنكسىيەسى ۋە ئېھتىمال زىچلىق فۇنكسىيەسى</h2>
+            
+            <div class="exercise">
+                <div class="question">
+                    <p class="uyghur-text">ئېھتىمال زىچلىق فۇنكسىيەسى ۋە ئېھتىمال زىچلىق فۇنكسىيەسى ھەققىدە، تۆۋەندىكى 4 تاللاشتىن توغرا چۈشەندۈرۈشنى تاللاڭ:</p>
+                </div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 2)">
+                        <span class="option-number">1.</span> \(f(x)\) X نىڭ قىممىتىگە قاراپ مەنپىي بولۇشى مۇمكىن.
+                    </div>
+                    <div class="option" onclick="selectOption(this, 2)">
+                        <span class="option-number">2.</span> ئېھتىمال زىچلىق فۇنكسىيەسى 1 دىن ئېشىپ كېتىشى مۇمكىن.
+                    </div>
+                    <div class="option" onclick="selectOption(this, 2)">
+                        <span class="option-number">3.</span> ئېھتىمال زىچلىق فۇنكسىيەسى 1 دىن ئېشىپ كېتىشى مۇمكىن.
+                    </div>
+                    <div class="option" onclick="selectOption(this, 2)">
+                        <span class="option-number">4.</span> ئىككىسى 0.4 دە قىممەتكە ئىگە بولغاندا، \(f(0.4)\) ۋە \(p(0.4)\) ھەر ئىككىسى ئېھتىمال.
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="checkAnswer(2)">
+                    <i class="fas fa-check"></i> جاۋابنى تەكشۈرۈش
+                </button>
+                
+                <div class="result" id="result2">
+                    <p id="resultText2"></p>
+                </div>
+                
+                <div class="explanation" id="explanation2">
+                    <h3>چۈشەندۈرۈش:</h3>
+                    <div class="bilingual">
+                        <div class="uyghur">
+                            <p class="uyghur-text">×：ئېھتىمال زىچلىق فۇنكسىيەسى ۋە ئېھتىمال زىچلىق فۇنكسىيەسى ھەرگىز مەنپىي بولمايدۇ. ئىككىسىمۇ مەنپىي بولماسلىق شەرتini قاندۇرۇشى كېرەك.</p>
+                            <p class="uyghur-text">×：ئېھتىمال زىچلىق فۇنكسىيەسىدە ھەر بىر \(x\) گە ماس كېلىدىغان قىممەت ئېھتىمالنىڭ ئۆزى بولۇپ، شۇڭا 1 دىن ئېشىپ كېتەلمەيدۇ.</p>
+                            <p class="uyghur-text">◯：ئېھتىمال زىچلىق فۇنكسىيەسىدە ھەر بىر \(x\) گە ماس كېلىدىغان قىممەت ئېھتىمال ئەمەس بەلكى ئېھتىمال زىچلىقى بولۇپ، شۇڭا 1 دىن ئېشىپ كېتەلەيدۇ.</p>
+                            <p class="uyghur-text">×：ئېھتىمال زىچلىق فۇنكسىيەسىنىڭ بىر نۇقتىدىكى قىممىتى ئېھتىمال ئەمەس. ئېھتىمال زىچلىق فۇنكسىيەسىنىڭ بىر ئارalلىقتىكى ئىنتېگرالى ئېھتىمال بولىدۇ.</p>
+                        </div>
+                        <div class="english">
+                            <p>×：Neither probability mass functions nor probability density functions can become negative. Both must satisfy non-negativity.</p>
+                            <p>×：In a probability mass function, the value corresponding to each \(x\) is the probability itself, so it cannot exceed 1.</p>
+                            <p>◯：In a probability density function, the value corresponding to each \(x\) is not a probability but a probability density, so it can exceed 1.</p>
+                            <p>×：The value of a probability density function at a single point is not a probability. The integral of the probability density function over an interval is the probability.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- مەسىلە 3 -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-function"></i> مەسىلە 3: ئېھتىمال زىچلىق فۇنكسىيەسى بىلەن ئېھتىمال ھېسابلاش</h2>
+            
+            <div class="exercise">
+                <div class="question">
+                    <p class="uyghur-text">تۆۋەندىكى ئېھتىمال زىچلىق فۇنكسىيەسى بەرلگەندە، \(P(1 \leq X \leq 2)\) ئېھتىماللىقىنى تاپىڭ:</p>
+                    <div class="formula">
+                        \[
+                        f(x) = \begin{cases}
+                        \frac{1}{4}x & (0 \leq x \leq 2) \\
+                        -\frac{1}{4}x + 1 & (2 \leq x \leq 4) \\
+                        0 & (x < 0, x > 4)
+                        \end{cases}
+                        \]
+                    </div>
+                </div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 3)">
+                        <span class="option-number">1.</span> \(\frac{1}{8}\)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 3)">
+                        <span class="option-number">2.</span> \(\frac{3}{8}\)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 3)">
+                        <span class="option-number">3.</span> \(\frac{5}{8}\)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 3)">
+                        <span class="option-number">4.</span> \(\frac{7}{8}\)
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="checkAnswer(3)">
+                    <i class="fas fa-check"></i> جاۋابنى تەكشۈرۈش
+                </button>
+                
+                <div class="result" id="result3">
+                    <p id="resultText3"></p>
+                </div>
+                
+                <div class="explanation" id="explanation3">
+                    <h3>چۈشەندۈرۈش:</h3>
+                    <div class="bilingual">
+                        <div class="uyghur">
+                            <p class="uyghur-text">X>3 رايونىدا \(f(x)=0\) بولغاچقا، ئەتراپلىق ئويلىشىشنىڭ ھاجىتى يوق. شۇڭا، ئىنتېگرال ئارقىلىق تۆۋەندىكىدەك ھېسابلايدۇ ۋە \(\frac{3}{8}\) دىن تېپىدۇ:</p>
+                            <div class="formula">
+                                \[
+                                P(1 \leq X \leq 2) = \int_{1}^{2} \frac{1}{4}x \, dx = \left[ \frac{1}{8}x^2 \right]_{1}^{2} = \frac{1}{8}(4) - \frac{1}{8}(1) = \frac{4}{8} - \frac{1}{8} = \frac{3}{8}
+                                \]
+                            </div>
+                        </div>
+                        <div class="english">
+                            <p>Since \(f(x)=0\) for X>3, we don't need to consider that region. Therefore, using integration, we calculate as follows and get \(\frac{3}{8}\):</p>
+                            <div class="formula">
+                                \[
+                                P(1 \leq X \leq 2) = \int_{1}^{2} \frac{1}{4}x \, dx = \left[ \frac{1}{8}x^2 \right]_{1}^{2} = \frac{1}{8}(4) - \frac{1}{8}(1) = \frac{4}{8} - \frac{1}{8} = \frac{3}{8}
+                                \]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- مەسىلە 4 -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-function"></i> مەسىلە 4: ئېھتىمال زىچلىق فۇنكسىيەسى بىلەن ئېھتىمال ھېسابلاش</h2>
+            
+            <div class="exercise">
+                <div class="question">
+                    <p class="uyghur-text">تۆۋەندىكى ئېھتىمال زىچلىق فۇنكسىيەسى بەرلگەندە، \(P(X \geq 1)\) ئېھتىماللىقىنى تاپىڭ:</p>
+                    <div class="formula">
+                        \[
+                        f(x) = \begin{cases}
+                        \frac{1}{4}x & (0 \leq x \leq 2) \\
+                        -\frac{1}{4}x + 1 & (2 \leq x \leq 4) \\
+                        0 & (x < 0, x > 4)
+                        \end{cases}
+                        \]
+                    </div>
+                </div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 4)">
+                        <span class="option-number">1.</span> \(\frac{1}{8}\)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 4)">
+                        <span class="option-number">2.</span> \(\frac{3}{8}\)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 4)">
+                        <span class="option-number">3.</span> \(\frac{5}{8}\)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 4)">
+                        <span class="option-number">4.</span> \(\frac{7}{8}\)
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="checkAnswer(4)">
+                    <i class="fas fa-check"></i> جاۋابنى تەكشۈرۈش
+                </button>
+                
+                <div class="result" id="result4">
+                    <p id="resultText4"></p>
+                </div>
+                
+                <div class="explanation" id="explanation4">
+                    <h3>چۈشەندۈرۈش:</h3>
+                    <div class="bilingual">
+                        <div class="uyghur">
+                            <p class="uyghur-text">ئىنتېگرال ئارقىلىق تۆۋەندىكىدەك ھېسابلايدۇ ۋە \(\frac{7}{8}\) دىن تېپىدۇ:</p>
+                            <div class="formula">
+                                \[
+                                P(X \geq 1) = \int_{1}^{4} f(x) \, dx = \int_{1}^{2} \frac{1}{4}x \, dx + \int_{2}^{4} \left(-\frac{1}{4}x + 1\right) \, dx
+                                \]
+                                \[
+                                = \left[ \frac{1}{8}x^2 \right]_{1}^{2} + \left[ -\frac{1}{8}x^2 + x \right]_{2}^{4}
+                                \]
+                                \[
+                                = \left( \frac{4}{8} - \frac{1}{8} \right) + \left( \left( -\frac{16}{8} + 4 \right) - \left( -\frac{4}{8} + 2 \right) \right)
+                                \]
+                                \[
+                                = \frac{3}{8} + \left( (-2 + 4) - (-0.5 + 2) \right) = \frac{3}{8} + (2 - 1.5) = \frac{3}{8} + \frac{1}{2} = \frac{3}{8} + \frac{4}{8} = \frac{7}{8}
+                                \]
+                            </div>
+                        </div>
+                        <div class="english">
+                            <p>Using integration, we calculate as follows and get \(\frac{7}{8}\):</p>
+                            <div class="formula">
+                                \[
+                                P(X \geq 1) = \int_{1}^{4} f(x) \, dx = \int_{1}^{2} \frac{1}{4}x \, dx + \int_{2}^{4} \left(-\frac{1}{4}x + 1\right) \, dx
+                                \]
+                                \[
+                                = \left[ \frac{1}{8}x^2 \right]_{1}^{2} + \left[ -\frac{1}{8}x^2 + x \right]_{2}^{4}
+                                \]
+                                \[
+                                = \left( \frac{4}{8} - \frac{1}{8} \right) + \left( \left( -\frac{16}{8} + 4 \right) - \left( -\frac{4}{8} + 2 \right) \right)
+                                \]
+                                \[
+                                = \frac{3}{8} + \left( (-2 + 4) - (-0.5 + 2) \right) = \frac{3}{8} + (2 - 1.5) = \frac{3}{8} + \frac{1}{2} = \frac{3}{8} + \frac{4}{8} = \frac{7}{8}
+                                \]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- مەسىلە 5 -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-dice-d6"></i> مەسىلە 5: ئېھتىمال تەقسىمات شەرتى</h2>
+            
+            <div class="exercise">
+                <div class="question">
+                    <p class="uyghur-text">بىر قېتىم زار ئېتىپ، شۇ چاغدا چىققان نومۇرى X نى ئېھتىمال ئۆزگەرگۈچى قىلىپ بەلگىلەڭ. ئەمما، بۇ زارنىڭ ھەر بىر نومۇر چىقىش ئېھتىماللىقى تەڭ ئەمەس، نومۇرغا نىسبەتەن пропорционаلدۇر. يەنى، بىر ثابىت c نى ئىشلىتىپ، k نومۇر چىقىش ئېھتىماللىقى تۆۋەندىكىدەك ئىپادىلىنىشى مۇمكىن:</p>
+                    <div class="formula">
+                        \[
+                        P(X = k) = ck \quad (k = 1, 2, 3, 4, 5, 6)
+                        \]
+                    </div>
+                    <p class="uyghur-text">بۇنى ئېھتىمال تەقسىمات قىلىدىغان c نىڭ قىممىتىنى تاپىڭ.</p>
+                </div>
+                
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 5)">
+                        <span class="option-number">1.</span> \(\frac{1}{6}\)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 5)">
+                        <span class="option-number">2.</span> \(\frac{1}{12}\)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 5)">
+                        <span class="option-number">3.</span> \(\frac{1}{18}\)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 5)">
+                        <span class="option-number">4.</span> \(\frac{1}{21}\)
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="checkAnswer(5)">
+                    <i class="fas fa-check"></i> جاۋابنى تەكشۈرۈش
+                </button>
+                
+                <div class="result" id="result5">
+                    <p id="resultText5"></p>
+                </div>
+                
+                <div class="explanation" id="explanation5">
+                    <h3>چۈشەندۈرۈش:</h3>
+                    <div class="bilingual">
+                        <div class="uyghur">
+                            <p class="uyghur-text">ئېھتىمال تەقسىمات كېلىشىمى بويىچە، پۈتۈن ۋەقەلەر ئېھتىماللىقىنىڭ يىغىندىسى 1 گە تەڭ بولۇشى كېرەك، شۇنىڭ بويىچە c نى بەلگىلەيمىز. ئۇنىڭ ئۈستىگە، ھەممە k ئۈچۈن \(P(X=k) \geq 0\) بولغاچقا، c نۇرغۇن بولۇشى كېرەك. زارنىڭ قايسى نومۇر چىقىشى ئۆزئارا ئايرىم ۋەقەلەر بولۇپ، تۆۋەندىكى تەڭلىك ئورۇنلىشىدۇ:</p>
+                            <div class="formula">
+                                \[
+                                \sum_{k=1}^{6} P(X=k) = 1
+                                \]
+                            </div>
+                            <p class="uyghur-text">\(P(X=k)=ck\) دەپ ئىپادىلىنىشى مۇمكىن بولغاچقا، بۇ فورمۇلا تۆۋەندىكىدەك ئۆزگەرتىلىدۇ:</p>
+                            <div class="formula">
+                                \[
+                                \sum_{k=1}^{6} ck = c(1+2+3+4+5+6) = 21c = 1
+                                \]
+                            </div>
+                            <p class="uyghur-text">شۇڭا، c نىڭ قىممىتى \(\frac{1}{21}\) دەپ تاپىلىدۇ.</p>
+                        </div>
+                        <div class="english">
+                            <p>According to the requirement of probability distributions, the sum of probabilities for all events must be 1, so we determine c accordingly. Also, since \(P(X=k) \geq 0\) for all k, c must be greater than 0. The events of each face of the die appearing are mutually exclusive, so the following equation holds:</p>
+                            <div class="formula">
+                                \[
+                                \sum_{k=1}^{6} P(X=k) = 1
+                                \]
+                            </div>
+                            <p>Since it can be expressed as \(P(X=k)=ck\), this equation can be transformed as follows:</p>
+                            <div class="formula">
+                                \[
+                                \sum_{k=1}^{6} ck = c(1+2+3+4+5+6) = 21c = 1
+                                \]
+                            </div>
+                            <p>Therefore, the value of c is found to be \(\frac{1}{21}\).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>ئېھتىمال ئۆزگەرگۈچى ۋە ئېھتىمال تەقسىمات مەشىقى | Random Variables and Probability Distributions Practice</p>
+        <p>© 2025 KaLBiL ئىستاتىستىكا ۋە ئېھتىماللىق كۇرسى | Statistics and Probability Course</p>
+    </footer>
+
+    <script>
+        // تاختىما كۆرسىتىش فۇنكسىيەسى
+        function showTab(index) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            
+            tabContents.forEach(content => content.classList.remove('active'));
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            tabContents[index].classList.add('active');
+            tabButtons[index].classList.add('active');
+        }
+        
+        // تاللاش تاللاش فۇنكسىيەسى
+        function selectOption(optionElement, questionNumber) {
+            // ئوخشاش مەسىلىنىڭ باشقا تاللاشلىرىدىن selected سىنىپىنى چىقىرىۋېتىش
+            const options = optionElement.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // تاللانغان تاللاشقا selected سىنىپىنى قوشۇش
+            optionElement.classList.add('selected');
+            
+            // سانلىق مەلۇمات خاسلىقىغا تاللانغان تاللاش نومۇرىنى ساقلاش
+            optionElement.parentElement.setAttribute('data-selected', optionElement.querySelector('.option-number').textContent);
+        }
+        
+        // جاۋاب تەكشۈرۈش فۇنكسىيەسى
+        function checkAnswer(questionNumber) {
+            const selectedOption = document.querySelector(`#explanation${questionNumber}`).previousElementSibling.previousElementSibling.querySelector('.option.selected');
+            const resultElement = document.getElementById(`resultText${questionNumber}`);
+            const explanationElement = document.getElementById(`explanation${questionNumber}`);
+            const resultContainer = document.getElementById(`result${questionNumber}`);
+            
+            if (!selectedOption) {
+                resultElement.textContent = "بىر تاللاش تاللاڭ.";
+                resultContainer.style.display = 'block';
+                resultContainer.style.backgroundColor = '#f39c12';
+                return;
+            }
+            
+            // توغرا جاۋابلارنى بەلگىلەش
+            const correctAnswers = {
+                1: ['2', '3', '6'], // مەسىلە 1 نىڭ توغرا تاللاش نومۇرلىرى
+                2: ['3'], // مەسىلە 2 نىڭ توغرا تاللاش نومۇرلىرى
+                3: ['2'], // مەسىلە 3 نىڭ توغرا تاللاش نومۇرلىرى
+                4: ['4'], // مەسىلە 4 نىڭ توغرا تاللاش نومۇرلىرى
+                5: ['4']  // مەسىلە 5 نىڭ توغرا تاللاش نومۇرلىرى
+            };
+            
+            const selectedOptionNumber = selectedOption.querySelector('.option-number').textContent.trim().replace('.', '');
+            const isCorrect = correctAnswers[questionNumber].includes(selectedOptionNumber);
+            
+            // نەتىجىنى كۆرسىتىش
+            if (isCorrect) {
+                resultElement.textContent = "توغرا!";
+                resultContainer.style.backgroundColor = '#27ae60';
+                selectedOption.classList.add('correct');
+            } else {
+                resultElement.textContent = "خاتا. قايتا سىناڭ.";
+                resultContainer.style.backgroundColor = '#e74c3c';
+                selectedOption.classList.add('incorrect');
+                
+                // توغرا تاللاشلارنى يورۇتۇش
+                const options = selectedOption.parentElement.querySelectorAll('.option');
+                options.forEach(opt => {
+                    const optNumber = opt.querySelector('.option-number').textContent.trim().replace('.', '');
+                    if (correctAnswers[questionNumber].includes(optNumber)) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            resultContainer.style.display = 'block';
+            explanationElement.style.display = 'block';
+        }
+        
+        // بەت يۈكلەنگەندە باشلانغۇچ
+        window.onload = function() {
+            // بىرىنچى تاختىمىنى كۆرسىتىش
+            showTab(0);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI·ماشىنا ئوقۇشنىڭ ماتېماتىكىسى — مۇكەممەل دەرىس</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.7;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('https://assets.st-note.com/production/uploads/images/191291920/rectangle_large_type_2_c09f63c4ed50d1cb9f85b3eff4b7e01e.png?width=1200') no-repeat center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: -1;
+            transform: rotate(15deg);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .toc {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .toc h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 0.8rem 0;
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border-left: 4px solid var(--secondary);
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toc li:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateX(8px);
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            background: #fffde7;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .diagram {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px dashed #ddd;
+        }
+
+        .diagram svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--dark);
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 3rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .subtitle { font-size: 1.2rem; }
+            .container { padding: 0 1rem; }
+            .section, .toc { padding: 1.5rem; }
+        }
+
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .icon-sum { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233498db' d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/%3E%3C/svg%3E"); }
+        .icon-grad { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23e74c3c' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3C/svg%3E"); }
+        .icon-vector { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2327ae60' d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM9 17h6v-2H9v2zm0-4h6V9H9v4zm0-4h6V5H9v2z'/%3E%3C/svg%3E"); }
+        .icon-matrix { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%239b59b6' d='M3 5h18v2H3V5zm0 6h18v2H3v-2zm0 6h18v2H3v-2z'/%3E%3C/svg%3E"); }
+        .icon-prob { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f39c12' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E"); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AI · ماشىنا ئوقۇشنىڭ ماتېماتىكىسى<br>AI · Machine Learning Mathematics</h1>
+        <p class="subtitle">مۇكەممەل دەرىس — ماتېماتىكىلىق ئاساسلىرىنىڭ تەپسىلىي تۈشەندۈرۈشى<br>Comprehensive Course — Detailed Explanation of Mathematical Foundations</p>
+    </header>
+
+    <div class="container">
+
+        <div class="toc">
+            <h2>مەزمۇن ئىزدەش / Table of Contents</h2>
+            <ul>
+                <li onclick="toggleSection('section1')">四則演算 — چوڭقۇرلىقنىڭ ئاساسى<br>Arithmetic Operations — Foundation of Depth</li>
+                <li onclick="toggleSection('section2')">文字式と添字 — ھەرپ ۋە كۆرستكۈچ<br>Algebraic Expressions & Subscripts</li>
+                <li onclick="toggleSection('section3')">総和（Σ）— بارلىقىنى قوشۇش<br>Summation (Σ) — Adding Everything</li>
+                <li onclick="toggleSection('section4')">距離の計算 — پىتاغورىسنىڭ تېئورېمى<br>Distance Calculation — Pythagorean Theorem</li>
+                <li onclick="toggleSection('section5')">微分 — ئەڭ كىچىك قىلىش<br>Differentiation — Minimization</li>
+                <li onclick="toggleSection('section6')">偏微分 — كۆپ ئۇچۇرلىق ئىشلەش<br>Partial Differentiation — Multi-variable Processing</li>
+                <li onclick="toggleSection('section7')">ベクトル — چوڭقۇرلىقنى بىرلىكتە ئىشلەش<br>Vectors — Unified Depth Processing</li>
+                <li onclick="toggleSection('section8')">行列 — چوڭقۇرلىقنى جەدۋەلگە ئېلىپ كىرگۈزۈش<br>Matrices — Tabular Representation of Depth</li>
+                <li onclick="toggleSection('section9')">確率と統計 — بەلگىسىزلىقنى باشقۇرۇش<br>Probability & Statistics — Managing Uncertainty</li>
+                <li onclick="toggleSection('section10')">指数と対数 — ئەسلىي ھەرەكەت<br>Exponents & Logarithms — Fundamental Behavior</li>
+                <li onclick="toggleSection('section11')">0の取り扱い — 0نىڭ سىرلىرى<br>Handling Zero — Secrets of Zero</li>
+                <li onclick="toggleSection('section12')">行列式 — ھەجىم ۋە يۈز<br>Determinants — Volume & Area</li>
+                <li onclick="toggleSection('section13')">固有値・固有ベクトル — ماترىسنىڭ ئىچىدىكى سىر<br>Eigenvalues & Eigenvectors — Secrets Inside Matrices</li>
+            </ul>
+        </div>
+
+        <div id="section1" class="section">
+            <h2><span class="icon icon-sum"></span> 四則演算 — چوڭقۇرلىقنىڭ ئاساسى<br>Arithmetic Operations — Foundation of Depth</h2>
+            <p>AI·ماشىنا ئوقۇشنىڭ ماتېماتىكىسىنىڭ ئەڭ ئاساسىي ئۇچۇرى — <strong>قوشۇش، ئالىش، كۆپەيتىش، بۆلۈش</strong>. بارلىق ئىشلەش ئۇسۇلى — تېخى كۆپ ئىشلەش ئۇسۇلى بولۇپمۇ، ئاخىرىدا بۇ 4 تەرەپنى ئىشلىتىدۇ.<br>
+            The most fundamental concept in AI/machine learning mathematics is <strong>addition, subtraction, multiplication, and division</strong>. No matter how complex the algorithm, it ultimately relies on these four operations.</p>
+            <div class="highlight">
+                <strong>تۈشەندۈرۈش:</strong> دېرېۋاتىۋە، ئىنتېگرال، ئىتىراپ — بارلىقى بۇ 4 ئىشلەش ئۇسۇلىنىڭ تىزىقلىقى بىلەن ئىشلىتىلىدۇ.<br>
+                <strong>Explanation:</strong> Derivatives, integrals, and iterations—all are ultimately built from these four basic operations.
+            </div>
+            <p>مەسىلەن، <code>f(x) = x² + 3x - 5</code> دېگەن تېڭلىكنى دېرېۋاتىۋە قىلىشنىڭ ئۇچۇرى — <code>2x + 3</code> دېگەن نەتىجىنى چىقىرىش ئۈچۈن، كۆپەيتىش ۋە قوشۇشنى ئىشلىتىش.<br>
+            For example, differentiating <code>f(x) = x² + 3x - 5</code> yields <code>2x + 3</code> using multiplication and addition.</p>
+        </div>
+
+        <div id="section2" class="section">
+            <h2><span class="icon icon-sum"></span> 文字式と添字 — ھەرپ ۋە كۆرستكۈچ<br>Algebraic Expressions & Subscripts</h2>
+            <p>ھەرپلەر (x, y, w) — ماتېماتىكىلىق ئۇچۇرلىرىنىڭ ئومۇمىي كۆرۈنۈشى. كۆرستكۈچ (x₁, x₂, ..., xₙ) — بىر نەچچە قىممەتنى بىرلىكتە ئىشلەش ئۈچۈن.<br>
+            Letters (x, y, w) represent general mathematical quantities. Subscripts (x₁, x₂, ..., xₙ) allow us to handle multiple values collectively.</p>
+            <div class="diagram">
+                <svg width="300" height="100" viewBox="0 0 300 100">
+                    <rect x="10" y="30" width="40" height="40" fill="#3498db" rx="5"/>
+                    <text x="30" y="55" font-size="14" fill="white" text-anchor="middle">x₁</text>
+                    <rect x="70" y="30" width="40" height="40" fill="#3498db" rx="5"/>
+                    <text x="90" y="55" font-size="14" fill="white" text-anchor="middle">x₂</text>
+                    <rect x="130" y="30" width="40" height="40" fill="#3498db" rx="5"/>
+                    <text x="150" y="55" font-size="14" fill="white" text-anchor="middle">x₃</text>
+                    <text x="200" y="50" font-size="16" fill="#555">...</text>
+                    <rect x="230" y="30" width="40" height="40" fill="#3498db" rx="5"/>
+                    <text x="250" y="55" font-size="14" fill="white" text-anchor="middle">xₙ</text>
+                </svg>
+            </div>
+            <p>مەسىلەن، <code>Σᵢ₌₁ⁿ xᵢ</code> دېگەن ئىشلەش — بارلىق xᵢ قىممەتلىرىنى قوشۇش دېگەن مەنىنى بىلدۈرىدۇ.<br>
+            For example, <code>Σᵢ₌₁ⁿ xᵢ</code> means summing all xᵢ values.</p>
+        </div>
+
+        <div id="section3" class="section">
+            <h2><span class="icon icon-sum"></span> 総和（Σ）— بارلىقىنى قوشۇش<br>Summation (Σ) — Adding Everything</h2>
+            <p>Σ (سىگما) — "بارلىقىنى قوش" دېگەن مەنىنى بىلدۈرىدۇ. بۇ ماتېماتىكىلىق ئۇچۇر مۇھىم، چۈنكى مەسىلەن، كۆپلىگەن داتىلارنىڭ يېڭىلىشىنى ياكى خاتالىقىنى قوشۇش ئۈچۈن قوللىنىلىدۇ.<br>
+            Σ (sigma) means "add everything." This is crucial—for example, summing errors or updates across many data points.</p>
+            <div class="highlight">
+                <strong>مەسىلە:</strong> <code>Σᵢ₌₁⁵ (xᵢ - μ)²</code> — بارلىق داتىلارنىڭ ئورتاچىسىدىن بولغان خاتالىقىنىڭ كۋادراتىنى قوشۇش.<br>
+                <strong>Example:</strong> <code>Σᵢ₌₁⁵ (xᵢ - μ)²</code> sums the squared deviations from the mean.
+            </div>
+            <p>بۇ ئىشلەش <strong>مەخسۇس دېرېۋاتىۋە</strong> ئۈچۈن مۇھىم، چۈنكى بۇ ئىشلەشنىڭ مىنىمۇم قىلىشى — <strong>ئورتاچى قىممەت</strong>نى تاپىشنىڭ ئۇسۇلى.<br>
+            This is essential for optimization—minimizing this sum gives the <strong>mean value</strong>.</p>
+        </div>
+
+        <div id="section4" class="section">
+            <h2><span class="icon icon-grad"></span> 距離の計算 — پىتاغورىسنىڭ تېئورېمى<br>Distance Calculation — Pythagorean Theorem</h2>
+            <p>2 نۇقتا ئارىسىدىكى مەسافىنى تاپىش ئۈچۈن: <br>
+                <code>d = √[(x₂ - x₁)² + (y₂ - y₁)²]</code><br>
+                To find the distance between two points:<br>
+                <code>d = √[(x₂ - x₁)² + (y₂ - y₁)²]</code></p>
+            <div class="diagram">
+                <svg width="400" height="300" viewBox="0 0 400 300">
+                    <line x1="50" y1="250" x2="350" y2="100" stroke="#e74c3c" stroke-width="3"/>
+                    <circle cx="50" cy="250" r="6" fill="#e74c3c"/>
+                    <circle cx="350" cy="100" r="6" fill="#e74c3c"/>
+                    <line x1="50" y1="250" x2="350" y2="250" stroke="#3498db" stroke-dasharray="5,5"/>
+                    <line x1="350" y1="250" x2="350" y2="100" stroke="#3498db" stroke-dasharray="5,5"/>
+                    <text x="200" y="270" font-size="14" fill="#3498db" text-anchor="middle">(x₂ - x₁)</text>
+                    <text x="370" y="175" font-size="14" fill="#3498db" text-anchor="middle">(y₂ - y₁)</text>
+                    <text x="180" y="170" font-size="16" fill="#e74c3c">d</text>
+                    <text x="40" y="270" font-size="12" fill="#555">P₁</text>
+                    <text x="360" y="90" font-size="12" fill="#555">P₂</text>
+                </svg>
+            </div>
+            <p>بۇ ئىشلەش <strong>k-means</strong> كۈچۈلۈش ئۇسۇلىدا ئىشلىتىلىدۇ — بىر نۇقتا بىلەن بارلىق مەركەزلەرنىڭ مەسافىنى تاپىپ، يېقىن بولغان مەركەزگە ئەۋەتىش.<br>
+            This is used in <strong>k-means clustering</strong>—assigning a point to the nearest centroid by distance.</p>
+        </div>
+
+        <div id="section5" class="section">
+            <h2><span class="icon icon-grad"></span> 微分 — ئەڭ كىچىك قىلىش<br>Differentiation — Minimization</h2>
+            <p>微分 — بىر قىممەتنىڭ ئىشلەش ئۇسۇلىنىڭ ئەڭ كىچىك ياكى ئەڭ ئېگىز قىلىشىنى تاپىش ئۈچۈن.<br>
+            Differentiation finds where a function reaches its minimum or maximum.</p>
+            <div class="highlight">
+                <strong>مەسىلە:</strong> <code>f(x) = x²</code> دېگەن تېڭلىكنىڭ ئەڭ كىچىك قىممىتى؟<br>
+                دېرېۋاتىۋە: <code>f’(x) = 2x</code> → <code>2x = 0</code> → <code>x = 0</code> ← ئەڭ كىچىك نۇقتا!<br>
+                <strong>Example:</strong> Minimum of <code>f(x) = x²</code>?<br>
+                Derivative: <code>f’(x) = 2x</code> → <code>2x = 0</code> → <code>x = 0</code> ← minimum point!
+            </div>
+            <p>بۇ ئىشلەش <strong>مۇئەييەنلىك ئۇسۇلى</strong> (gradient descent) ئۈچۈن مۇھىم — بۇ ئۇسۇل مەشىن ئوقۇشنىڭ ئىچىدىكى "ئىشلەش" ئۇسۇلى.<br>
+            This is key for <strong>gradient descent</strong>—the core "learning" algorithm in machine learning.</p>
+            <div class="note">💡 <strong>تەپسىلىي:</strong> دېرېۋاتىۋە — "ئۇچۇرنىڭ قانچە تېز ئۆزگەرىدىغانلىقى".<br>💡 <strong>Detail:</strong> Derivative = "how fast the value changes."</div>
+        </div>
+
+        <div id="section6" class="section">
+            <h2><span class="icon icon-grad"></span> 偏微分 — كۆپ ئۇچۇرلىق ئىشلەش<br>Partial Differentiation — Multi-variable Processing</h2>
+            <p>بىر قىممەت بىر قانچە ئۇچۇرغا ئېگە بولسا، بىر ئۇچۇرغا ئېتىبار قىلىپ، باشقا ئۇچۇرلارنى "تۇرۇش" قىلىپ ئىشلىتىش — بۇ <strong>偏微分</strong>.<br>
+            When a function has multiple variables, partial differentiation focuses on one variable while treating others as constants.</p>
+            <div class="highlight">
+                <strong>مەسىلە:</strong> <code>L(w₁, w₂) = (y - w₁x₁ - w₂x₂)²</code><br>
+                <code>∂L/∂w₁</code> — w₁ بىلەن بولغان خاتالىقنىڭ ئۆزگەرىشى.<br>
+                <strong>Example:</strong> <code>L(w₁, w₂) = (y - w₁x₁ - w₂x₂)²</code><br>
+                <code>∂L/∂w₁</code> = how error changes with w₁.
+            </div>
+            <p>بۇ ئىشلەش <strong>نيورال نېتۋېك</strong>نىڭ "ئىشلەش" ئۇسۇلىنىڭ ئىچىدىكى <strong>بەكىتىش</strong> (backpropagation) ئۈچۈن مۇھىم.<br>
+            This is essential for <strong>backpropagation</strong> in neural networks.</p>
+        </div>
+
+        <div id="section7" class="section">
+            <h2><span class="icon icon-vector"></span> ベクトル — چوڭقۇرلىقنى بىرلىكتە ئىشلەش<br>Vectors — Unified Depth Processing</h2>
+            <p>بىر نەچچە قىممەتنى بىرلىكتە بىر ھەرپ بىلەن كۆرسىتىش — بۇ <strong>ベクトر</strong>.<br>
+            A vector represents multiple values as a single entity.</p>
+            <div class="diagram">
+                <svg width="300" height="150" viewBox="0 0 300 150">
+                    <line x1="30" y1="120" x2="250" y2="80" stroke="#27ae60" stroke-width="4" marker-end="url(#arrowhead)"/>
+                    <circle cx="30" cy="120" r="6" fill="#27ae60"/>
+                    <text x="140" y="75" font-size="16" fill="#27ae60" text-anchor="middle">[x₁, x₂, x₃]</text>
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#27ae60" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <p>ئىچىدە: <strong>قوشۇش، سانغا كۆپەيتىش، ئىچكى كۆپەيتىش</strong> (dot product).<br>
+                <code>a · b = a₁b₁ + a₂b₂ + ...</code> — بۇ <strong>ئوخشاشلىق</strong> (cosine similarity) تاپىش ئۈچۈن قوللىنىلىدۇ.<br>
+                Includes: <strong>addition, scalar multiplication, dot product</strong>.<br>
+                <code>a · b = a₁b₁ + a₂b₂ + ...</code> — used for <strong>similarity</strong> (cosine similarity).</p>
+        </div>
+
+        <div id="section8" class="section">
+            <h2><span class="icon icon-matrix"></span> 行列 — چوڭقۇرلىقنى جەدۋەلگە ئېلىپ كىرگۈزۈش<br>Matrices — Tabular Representation of Depth</h2>
+            <p>بىر نەچچە بېكتورنى بىرلىكتە جەدۋەلگە سىزىش — بۇ <strong>مەترىس</strong>.<br>
+            A matrix is a table of numbers—essentially multiple vectors arranged together.</p>
+            <div class="diagram">
+                <svg width="300" height="200" viewBox="0 0 300 200">
+                    <rect x="20" y="40" width="260" height="120" fill="#f8f9fa" stroke="#9b59b6" stroke-width="2"/>
+                    <line x1="80" y1="40" x2="80" y2="160" stroke="#9b59b6" stroke-dasharray="2,2"/>
+                    <line x1="160" y1="40" x2="160" y2="160" stroke="#9b59b6" stroke-dasharray="2,2"/>
+                    <line x1="20" y1="80" x2="280" y2="80" stroke="#9b59b6" stroke-dasharray="2,2"/>
+                    <line x1="20" y1="120" x2="280" y2="120" stroke="#9b59b6" stroke-dasharray="2,2"/>
+                    <text x="50" y="65" font-size="14" fill="#555">w₁₁</text>
+                    <text x="130" y="65" font-size="14" fill="#555">w₁₂</text>
+                    <text x="210" y="65" font-size="14" fill="#555">w₁₃</text>
+                    <text x="50" y="105" font-size="14" fill="#555">w₂₁</text>
+                    <text x="130" y="105" font-size="14" fill="#555">w₂₂</text>
+                    <text x="210" y="105" font-size="14" fill="#555">w₂₃</text>
+                    <text x="150" y="190" font-size="16" fill="#9b59b6" text-anchor="middle">W = [wᵢⱼ]</text>
+                </svg>
+            </div>
+            <p>مەترىسنىڭ ئىشلىتىلىشى: <strong>نيورال نېتۋېكنىڭ تەسىرى، ئىشلەش، قايتا تەسىرلىتىش</strong>نى بىر سىزىق بىلەن ئىشلىتىش.<br>
+            Matrices enable compact representation of <strong>neural network weights, transformations, and backpropagation</strong>.</p>
+        </div>
+
+        <div id="section9" class="section">
+            <h2><span class="icon icon-prob"></span> 確率と統計 — بەلگىسىزلىقنى باشقۇرۇش<br>Probability & Statistics — Managing Uncertainty</h2>
+            <p>ماشىنا ئوقۇشنىڭ 90%ى — <strong>بەلگىسىزلىك</strong> بىلەن ئىشلەيدۇ.<br>
+            90% of machine learning deals with <strong>uncertainty</strong>.</p>
+            <div class="highlight">
+                <strong>ئاساسىي تۈرلىرى:</strong><br>
+                • شەرتلىك ئېھتىماللىق (Conditional Probability)<br>
+                • بېيېز تېئورېمى (Bayes' Theorem): P(A|B) = P(B|A)·P(A)/P(B)<br>
+                • نورمال تارقىلىش (Gaussian Distribution)<br>
+                <strong>Key Concepts:</strong><br>
+                • Conditional Probability<br>
+                • Bayes' Theorem: P(A|B) = P(B|A)·P(A)/P(B)<br>
+                • Gaussian Distribution
+            </div>
+            <p>بېيېز تېئورېمى — <strong>ئىشلەش ئۇسۇلىنىڭ ئىچىدىكى ئېھتىماللىقنى ئىشلەش</strong> ئۈچۈن مۇھىم — مەسىلەن، ئېمەيلنى "سۈپەتلىك" ياكى "سۈپەتسىز" دېگەنلىكىنى ئىشلەش.<br>
+            Bayes' Theorem is vital for <strong>probabilistic reasoning</strong>—e.g., classifying emails as "spam" or "not spam."</p>
+            <div class="note">💡 <strong>تەپسىلىي:</strong> "بىر نەرسەنىڭ بولۇشىنى بىلگەندە، باشقا بىر نەرسەنىڭ بولۇشىنى قانچە ئېھتىمال بولۇشىنى بىلىش" — بۇ بېيېزنىڭ سىرى.<br>💡 <strong>Detail:</strong> "Given that A happened, how likely is B?" — that’s Bayes.</div>
+        </div>
+
+        <div id="section10" class="section">
+            <h2><span class="icon icon-grad"></span> 指数と対数 — ئەسلىي ھەرەكەت<br>Exponents & Logarithms — Fundamental Behavior</h2>
+            <p>ئىندېكس — بىر خىل ساننى بىر قانچە قېتىم كۆپەيتىش.<br>
+               لوغاريتم — بىر ساننىڭ قانچە قېتىم كۆپەيتىلىشىنى تاپىش.<br>
+            Exponentiation = multiplying a number by itself multiple times.<br>
+            Logarithm = finding how many times you multiplied.</p>
+            <div class="highlight">
+                <strong>مەسىلە:</strong> e ≈ 2.718 — تەبىئىي لوغاريتمنىڭ ئاساسى.<br>
+                <code>σ(x) = 1 / (1 + e⁻ˣ)</code> — <strong>sigmoid</strong> ئاكتىۋاتسىيە فۇنksiya — نېورال نېتۋېكلەردە ئىشلىتىلىدۇ.<br>
+                <strong>Example:</strong> e ≈ 2.718 — base of natural logarithm.<br>
+                <code>σ(x) = 1 / (1 + e⁻ˣ)</code> — <strong>sigmoid activation</strong> in neural networks.
+            </div>
+            <p>بۇ ئىشلەش — <strong>نورمال تارقىلىش</strong>نىڭ ھەرەكىتىنى ئىپادىلەش ئۈچۈن مۇھىم.<br>
+            This is key for modeling <strong>normal distributions</strong> and activation functions.</p>
+        </div>
+
+        <div id="section11" class="section">
+            <h2><span class="icon icon-sum"></span> 0の取り扱い — 0نىڭ سىرلىرى<br>Handling Zero — Secrets of Zero</h2>
+            <p>ئەمەس، 0 — بىر سان ئەمەس، بۇ <strong>سېزىمسىزلىقنىڭ ئىشلىتىلىشى</strong>.<br>
+            Zero isn’t just a number—it’s a special case in computation.</p>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+                <li>✅ 0⁰ = 1 (مەشىن ئوقۇشتا قۇرۇلۇشنى ئىشلىتىش ئۈچۈن)<br>✅ 0⁰ = 1 (for consistency in formulas)</li>
+                <li>❌ x/0 = تەئىينلىنىمىدۇ (بۇ سىزنىڭ دەرىسىڭىزنىڭ ئىشلىتىلىشىنى توختىتىدۇ!)<br>❌ x/0 = undefined (crashes your code!)</li>
+                <li>✅ 0! = 1 (فاكتورىال — ماتېماتىكىلىق ئىشلەشنىڭ ئاساسى)<br>✅ 0! = 1 (by definition in combinatorics)</li>
+            </ul>
+            <div class="note">⚠️ <strong>ئېسكەرتىش:</strong> مەشىن ئوقۇشتا 0-گە بۆلۈش — بارلىق كودنى چەكىپ قالىدۇ. بۇنىڭ ئۈچۈن <code>epsilon = 1e-8</code> قوشۇلىدۇ.<br>⚠️ <strong>Warning:</strong> Division by zero crashes programs. Use <code>epsilon = 1e-8</code> to avoid it.</div>
+        </div>
+
+        <div id="section12" class="section">
+            <h2><span class="icon icon-matrix"></span> 行列式 — ھەجىم ۋە يۈز<br>Determinants — Volume & Area</h2>
+            <p>مەترىسنىڭ ئىچىدىكى "ھەجىم" ياكى "يۈز"نى تاپىش — بۇ <strong>行列式</strong> (Determinant).<br>
+            The determinant measures the "signed volume" or "area" scaled by a matrix.</p>
+            <div class="diagram">
+                <svg width="200" height="200" viewBox="0 0 200 200">
+                    <polygon points="50,50 150,50 150,150 50,150" fill="#f0f0f0" stroke="#9b59b6" stroke-width="2"/>
+                    <line x1="50" y1="50" x2="150" y2="150" stroke="#e74c3c" stroke-width="2" stroke-dasharray="4,2"/>
+                    <line x1="150" y1="50" x2="50" y2="150" stroke="#e74c3c" stroke-width="2" stroke-dasharray="4,2"/>
+                    <text x="100" y="180" font-size="14" text-anchor="middle" fill="#555">det = ad - bc</text>
+                </svg>
+            </div>
+            <p>بۇ ئىشلەش — مەترىسنىڭ <strong>ئىشلىتىلىشى</strong>نى ياكى <strong>تەرەپلىك</strong>نى تاپىش ئۈچۈن قوللىنىلىدۇ.<br>
+            Used to check if a matrix is <strong>invertible</strong> or to compute geometric scaling.</p>
+        </div>
+
+        <div id="section13" class="section">
+            <h2><span class="icon icon-matrix"></span> 固有値・固有ベクトル — ماترىسنىڭ ئىچىدىكى سىر<br>Eigenvalues & Eigenvectors — Secrets Inside Matrices</h2>
+            <p>مەترىسنىڭ بىر نۇقتىسىنى ئىشلىتىش — بۇ ئۇچۇرنىڭ ئىشلىتىلىشىنى ئۆزگەرتمەيدۇ!<br>
+            An eigenvector’s direction doesn’t change under a linear transformation!</p>
+            <div class="diagram">
+                <svg width="300" height="200" viewBox="0 0 300 200">
+                    <line x1="150" y1="100" x2="250" y2="100" stroke="#27ae60" stroke-width="4" marker-end="url(#arrowhead2)"/>
+                    <circle cx="150" cy="100" r="6" fill="#27ae60"/>
+                    <text x="170" y="95" font-size="14" fill="#27ae60">Ax = λx</text>
+                    <text x="260" y="105" font-size="14" fill="#27ae60">λ: eigenvalue</text>
+                    <defs>
+                        <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#27ae60" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <p>بۇ ئىشلەش — <strong>PCA</strong> (ئىشلەشنىڭ ئىشلىتىلىشىنى ئىشلىتىش) ئۈچۈن مۇھىم — ئۇچۇرنىڭ ئەڭ ئىشلىتىلىشىنى تاپىش.<br>
+            Crucial for <strong>PCA</strong> (Principal Component Analysis)—finding directions of maximum variance.</p>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #3498db, #2c3e50); color: white; text-align: center;">
+            <h2>总结 — بۇ دەرىسنىڭ سىرى<br>Summary — The Essence of This Course</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 1.5rem;">ماتېماتىكىلىق ئاساسلىرىنى ھەر قانچە ئۇچۇر بولۇپمۇ، بۇلارنى <strong>ئىشلىتىش ئۇسۇلى</strong> سىزنىڭ ئىشلىتىشىڭىزنى ئۇچۇرلىق قىلىدۇ.<br>
+            No matter how many mathematical foundations exist, it’s your <strong>way of using them</strong> that makes your work meaningful.</p>
+            <p>Σ, ∂, W, X, e — بۇلار سىزنىڭ دەرىسىڭىزنىڭ ئىشلىتىلىشى، ئۇلارنىڭ ئىچىدىكى <strong>ئىشلىتىلىش</strong>نى تۈشىنىش.<br>
+            Σ, ∂, W, X, e — these are tools of your trade; understand their <strong>purpose</strong>.</p>
+            <p style="font-size: 1.1rem; margin-top: 1.5rem;">👉 <strong>بىر قېتىملىق ئىشلىتىش ئەمەس — بىر قېتىملىق ئىشلىتىش.<br>Not one-time use — but continuous practice.</strong></p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2025 AI·ماشىنا ئوقۇشنىڭ ماتېماتىكىسى دەرىسى | AI·Machine Learning Mathematics Course<br>
+        <a href="https://note.com/smz03_i75zat/n/neff217f2a735" target="_blank" style="color: var(--secondary); text-decoration: none;">Note.com ئۇچۇرى / Source: Note.com</a></p>
+    </footer>
+
+    <script>
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            const isOpen = section.classList.contains('open');
+            
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('open'));
+            
+            if (!isOpen) {
+                section.classList.add('open');
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        window.addEventListener('load', () => {
+            document.getElementById('section1').classList.add('open');
+        });
+
+        document.querySelectorAll('.toc li').forEach(item => {
+            item.addEventListener('click', () => {
+                const text = item.textContent;
+                let id = '';
+                if (text.includes('四則演算')) id = 'section1';
+                else if (text.includes('文字式')) id = 'section2';
+                else if (text.includes('総和')) id = 'section3';
+                else if (text.includes('距離')) id = 'section4';
+                else if (text.includes('微分')) id = 'section5';
+                else if (text.includes('偏微分')) id = 'section6';
+                else if (text.includes('ベクトル')) id = 'section7';
+                else if (text.includes('行列')) id = 'section8';
+                else if (text.includes('確率')) id = 'section9';
+                else if (text.includes('指数')) id = 'section10';
+                else if (text.includes('0の')) id = 'section11';
+                else if (text.includes('行列式')) id = 'section12';
+                else if (text.includes('固有')) id = 'section13';
+                
+                if (id) toggleSection(id);
+            });
+        });
+    </script>
+
+</body>
+</html>

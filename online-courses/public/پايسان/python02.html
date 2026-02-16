@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پايسان 4-7-باب - قايتىلىنىش، فۇنكسىيە، OOP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #2980b9;
+            --bg-light: #f9f9f9;
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf4 100%);
+            color: var(--text-dark);
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .card {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-left: 10px;
+            color: var(--secondary);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+        
+        ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        code {
+            background: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--accent);
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .code-block::before {
+            content: attr(data-language);
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        
+        .copy-btn:hover {
+            background: rgba(0,0,0,0.5);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>پايسان 4-7-باب - قايتىلىنىش، فۇنكسىيە، OOP</h1>
+        <p class="subtitle">Python دەرىجىلىك دەرىس | Python Programming Tutorial</p>
+    </header>
+
+    <div class="container">
+        <!-- كىرىش -->
+        <div class="card">
+            <h2><i class="fas fa-book"></i> دەرس بايانى</h2>
+            <p>بۇ دەرىجىلىك دەرىستە Python نىڭ قايتىلىنىش مۇھىتى (for/while)، فۇنكسىيە قۇرۇش، مودۇللار ۋە ئۆبىيكت ئوبژېكت قۇرۇلۇشى (OOP) نى ئۆگىنىمىز.</p>
+        </div>
+
+        <!-- 4-باب: for/while مۇھىتى -->
+        <div class="card">
+            <h2><i class="fas fa-redo"></i> 4-باب - for/while مۇھىتى</h2>
+            <p>بۇ بابتا Python دا قايتىلىنىش مۇھىتى (loops) نى ئۆگىنىمىز. for ۋە while مۇھىتى ئارقىلىق سانلىق مەلۇمات ياكى تىزىملىك ئۈستىدە قايتىلىنىپ ئامەل قىلدۇرىدۇق.</p>
+            
+            <h3>for مۇھىتى</h3>
+            <p>تىزىملىك ئۈستىدە قايتىلاش:</p>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                fruits = ["alma", "banan", "portakal"]<br>
+                <br>
+                for fruit in fruits:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print(fruit)
+            </div>
+            <p>ئەتىرلىكنى بىر-بىر قاراپ، ھەر بىر مىۋىنى چىقىرىدۇ.</p>
+            
+            <h3>range() بىلەن for مۇھىتى</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                # 0 دىن 4 گىچە سانلار<br>
+                for i in range(5):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print("سان:", i)
+            </div>
+            
+            <h3>while مۇھىتى</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                count = 0<br>
+                <br>
+                while count < 5:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print("count =", count)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;count += 1  # count نى 1 قوشۇش
+            </div>
+            
+            <h3>break ۋە continue</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                for i in range(10):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;if i == 5:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break   # 5 غىچە توختاش<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print(i)<br>
+                <br>
+                for i in range(5):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;if i == 2:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue  # 2 نى ئۆتكۈزۈش<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print(i)
+            </div>
+            
+            <h3>مەسىل</h3>
+            <p>ئىككى ساننىڭ جەمئىيىنى ھېسابلاش ئۈچۈن for مۇھىتى ئىشلىتىش:</p>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                numbers = [2, 5, 7, 10]<br>
+                total = 0<br>
+                <br>
+                for num in numbers:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;total += num<br>
+                <br>
+                print("سانلار جەمئىيى:", total)
+            </div>
+        </div>
+
+        <!-- 5-باب: فۇنكسىيە ۋە مودۇل -->
+        <div class="card">
+            <h2><i class="fas fa-cogs"></i> 5-باب - فۇنكسىيە ۋە مودۇل</h2>
+            <p>بۇ بابتا Python دا فۇنكسىيە قۇرۇش، ئۇنى چاقىرىش ۋە مودۇللارنى ئىشلىتىشنى ئۆگىنىمىز. فۇنكسىيە پروگراممىڭىزنى قۇراللار بىلەن بۆلۈش، قايتىدىن ئىشلىتىشكە قولايلىق بولىدۇ.</p>
+            
+            <h3>فۇنكسىيە قۇرۇش</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                # فۇنكسىيە ئېلان قىلىش<br>
+                def greet(name):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print("ياخشىمۇسىز, " + name + "!")<br>
+                <br>
+                # فۇنكسىيەنى چاقىرىش<br>
+                greet("قاۋۇلجان")
+            </div>
+            
+            <h3>قايتۇرۇش قىممىتى</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                def add(a, b):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return a + b<br>
+                <br>
+                sum = add(5, 7)<br>
+                print("جەمئىي:", sum)
+            </div>
+            
+            <h3>مودۇل ئىشلىتىش</h3>
+            <p>Python نىڭ بىرىنچى قوشۇمچە قۇراللىرىنى ئىشلىتىپ، مودۇلدىن پايدىلىنىش:</p>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                # math مودۇلنى چاقىرىش<br>
+                import math<br>
+                <br>
+                print("π قىممىتى:", math.pi)<br>
+                print("كىچىك سان:", math.sqrt(16))
+            </div>
+            
+            <h3>from ... import ...</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                # پەقەت sqrt فۇنكسىيەنى import قىلىش<br>
+                from math import sqrt<br>
+                <br>
+                print("كىچىك سان:", sqrt(25))
+            </div>
+            
+            <h3>مەسىل</h3>
+            <p>ئىككى ساننى قوشۇش ۋە ھەرىكىتىنى باشقۇرۇش فۇنكسىيەسى:</p>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                def compare_numbers(a, b):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;if a > b:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "a چوڭ"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;elif a < b:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "b چوڭ"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "a ۋە b تەڭ"<br>
+                <br>
+                result = compare_numbers(12, 15)<br>
+                print(result)
+            </div>
+        </div>
+
+        <!-- 7-باب: OOP -->
+        <div class="card">
+            <h2><i class="fas fa-object-group"></i> 7-باب - ئۆبىيكت ئوبژېكت قۇرۇلۇشى (OOP)</h2>
+            <p>بۇ بابتا Python دا ئۆبىيكت ئوبژېكت قۇرۇلۇشى (OOP) نى ئۆگىنىمىز. OOP ئارقىلىق كودلارنى تېخىمۇ تۈزۈملۈك ۋە قايتىدىن ئىشلىتىشكە بولىدۇ.</p>
+            
+            <h3>كلاس ۋە ئۆبىيكت</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                # كلاس قۇرۇش<br>
+                class Car:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, brand, model, year):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.brand = brand<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.model = model<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.year = year<br>
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;def info(self):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return f"{self.year} {self.brand} {self.model}"<br>
+                <br>
+                # ئۆبىيكت قۇرۇش<br>
+                my_car = Car("Toyota", "Corolla", 2020)<br>
+                print(my_car.info())
+            </div>
+            
+            <h3>Attributes (ئۆزگەرگۈچلەر)</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                print("Brand:", my_car.brand)<br>
+                print("Model:", my_car.model)<br>
+                print("Year:", my_car.year)
+            </div>
+            
+            <h3>Methods (فۇنكسىيە)</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                # كلاس ئىچىدە info() ناملىق فۇنكسىيەنى ئالدىن بەرگەن<br>
+                print(my_car.info())
+            </div>
+            
+            <h3>Inheritance (ۋارىسىلىق)</h3>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                # Car كلاسنىڭ يىڭى كلاسقا ۋارىس قىلىش<br>
+                class ElectricCar(Car):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, brand, model, year, battery_size):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super().__init__(brand, model, year)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.battery_size = battery_size<br>
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;def battery_info(self):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return f"Battery size: {self.battery_size} kWh"<br>
+                <br>
+                my_electric_car = ElectricCar("Tesla", "Model 3", 2021, 75)<br>
+                print(my_electric_car.info())<br>
+                print(my_electric_car.battery_info())
+            </div>
+            
+            <h3>مەسىل</h3>
+            <p>ئىككى كىلاس قۇرۇپ، ئادەم ۋە ئوقۇغۇچى ئارقىلىق مەلۇماتنى ساقلاش:</p>
+            <div class="code-block" data-language="python">
+                <button class="copy-btn" onclick="copyCode(this)">كۆچۈرۈش</button>
+                class Person:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name, age):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = name<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.age = age<br>
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;def greet(self):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"ياخشىمۇسىز, {self.name}!")<br>
+                <br>
+                class Student(Person):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name, age, student_id):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super().__init__(name, age)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.student_id = student_id<br>
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;def info(self):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Student: {self.name}, Age: {self.age}, ID: {self.student_id}")<br>
+                <br>
+                s = Student("قاۋۇلجان", 25, "S123")<br>
+                s.greet()<br>
+                s.info()
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-lightbulb"></i> چۈشەندۈرۈش</h2>
+            <p>بۇ دەرىجىلىك دەرىستە Python نىڭ قايتىلىنىش مۇھىتى (for/while)، فۇنكسىيە قۇرۇش، مودۇللار ۋە ئۆبىيكت ئوبژېكت قۇرۇلۇشى (OOP) نى ئۆگىنىدۇق. بۇ ئۇسۇل سانلىق مەلۇمات تەھلىلى، پروگرامما ئىچىدە مەسىل ھەل قىلىش، كودنى بۆلەك بۆلەك قىلىپ ئىشلىتىش، قايتىدىن ئىشلىتىش ۋە چوڭ دەرىجىلىك كودلارنى باشقۇرۇشقا قولايلىق.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Python دەرىجىلىك دەرىس | Python Programming Tutorial</p>
+    </footer>
+
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.parentElement;
+            const code = codeBlock.innerText
+                .replace('كۆچۈرۈش', '')
+                .replace(codeBlock.getAttribute('data-language'), '')
+                .replace(/&nbsp;/g, ' ')
+                .trim();
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'كۆچۈرۈلدى!';
+                button.style.backgroundColor = 'rgba(46, 204, 113, 0.8)';
+                
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.style.backgroundColor = 'rgba(0,0,0,0.3)';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

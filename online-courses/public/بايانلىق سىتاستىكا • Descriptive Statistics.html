@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>بايانلىق سىتاستىكا • Descriptive Statistics</title>
+  <!-- Fonts: Uyghur/Arabic + Latin -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1721;
+      --card:#ffffff;
+      --primary:#0fb493;
+      --primary-700:#0a8d73;
+      --muted:#6b7280;
+      --ring:rgba(15,180,147,.25);
+      --border:#e5e7eb;
+      --radius:14px;
+      --shadow:0 8px 30px rgba(0,0,0,.08);
+    }
+
+    /* CSS Reset */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:#111;line-height:1.7;-webkit-font-smoothing:antialiased}
+    img,svg{display:block;max-width:100%}
+
+    body{font-family:"Noto Naskh Arabic", system-ui, -apple-system, Segoe UI, Roboto, "Inter", sans-serif;}
+
+    .shell{max-width:1100px;margin:auto;padding:28px}
+
+    /* Header */
+    header.hero{border-radius:calc(var(--radius) + 4px);padding:44px 28px;background:linear-gradient(135deg,#0fb493, #0e7a97);color:#fff;box-shadow:var(--shadow);overflow:hidden}
+    header.hero h1{margin:0 0 6px;font-weight:700;font-size:clamp(1.6rem,3.2vw,2.4rem)}
+    header.hero p{margin:0;color:#eafaf7;font-size:clamp(.95rem,2.1vw,1.1rem)}
+
+    /* Utility */
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border)}
+    .pad{padding:22px}
+    .stack{display:grid;gap:22px}
+    .muted{color:var(--muted)}
+
+    /* Language toggle */
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:16px 0}
+    .btn{appearance:none;border:1px solid var(--border);background:#fff;color:#0b1721;padding:10px 14px;border-radius:12px;font-weight:600;cursor:pointer;transition:.2s box-shadow,.2s transform}
+    .btn[aria-pressed="true"],.btn.primary{background:var(--primary);border-color:transparent;color:#fff}
+    .btn:focus{outline:none;box-shadow:0 0 0 4px var(--ring)}
+    .btn:hover{transform:translateY(-1px)}
+
+    /* Section title */
+    h2.sec{margin:0 0 10px;font-size:clamp(1.2rem,2.2vw,1.6rem);color:#0b1721;display:flex;align-items:center;gap:10px}
+    h2.sec .bullet{width:10px;height:10px;border-radius:50%;background:var(--primary)}
+
+    /* Tables */
+    .table-wrap{overflow:auto;border-radius:12px;border:1px solid var(--border)}
+    table{border-collapse:separate;border-spacing:0;width:100%;min-width:720px;background:#fff}
+    thead th{position:sticky;top:0;background:#0e7a97;color:#fff;text-align:right;padding:12px 14px;font-weight:700;letter-spacing:.1px}
+    tbody td{padding:12px 14px;border-top:1px solid var(--border);vertical-align:top}
+    tbody tr:nth-child(even){background:#f9fafb}
+
+    /* Callouts */
+    .example{background:#f2fbf8;border-inline-start:4px solid var(--primary);padding:12px 14px;border-radius:12px}
+    .formula{display:inline-block;background:#fff3cd;border:1px dashed #f1c40f;padding:8px 10px;border-radius:10px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    blockquote{margin:12px 0;padding:10px 14px;border-inline-start:4px solid #4aa3df;background:#f5faff;border-radius:12px;color:#0b2a3c}
+
+    /* Language visibility */
+    [data-view="ug"] .en{display:none}
+    [data-view="en"] .ug{display:none}
+    [data-view="both"] .en,[data-view="both"] .ug{display:block}
+
+    /* Two-column layout for BOTH */
+    .split{display:grid;gap:18px}
+    [data-view="both"] .split{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:900px){
+      [data-view="both"] .split{grid-template-columns:1fr}
+    }
+
+    /* Print */
+    @media print{
+      body{background:#fff}
+      .shell{padding:0}
+      header.hero{box-shadow:none}
+      .btn,.toolbar{display:none!important}
+      .card{box-shadow:none}
+    }
+  </style>
+</head>
+<body data-view="both">
+  <div class="shell">
+    <header class="hero" role="banner">
+      <h1>بايانلىق سىتاستىكا • Descriptive Statistics</h1>
+      <p>سانلىق مەلۇماتنى تەرتىپلەش، بايان قىلىش ۋە تەھلىل قىلىش • Summarize & Visualize Data</p>
+    </header>
+
+    <!-- Language Toggle -->
+    <div class="toolbar" aria-label="Language view controls">
+      <div class="muted" style="font-weight:600">كۆرسىتىش / View:</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" data-toggle="ug" aria-pressed="false">پەقەت ئۇيغۇرچە</button>
+        <button class="btn" data-toggle="en" aria-pressed="false">English only</button>
+        <button class="btn primary" data-toggle="both" aria-pressed="true">ئۇيغۇرچە + English</button>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="stack">
+
+      <!-- Summary -->
+      <section class="block card pad split" aria-labelledby="s1">
+        <h2 class="sec" id="s1"><span class="bullet"></span>1. بايانلىق سىتاستىكا نىمە؟ / What is Descriptive Statistics?</h2>
+        <div class="ug" lang="ug" dir="rtl">
+          <p><strong>ئۇيغۇرچە:</strong> يىغىلغان سانلىق مەلۇماتنى <strong>تەرتىپلەش، خۇلاسىلەش، بايان قىلىش ۋە تەسۋىرلەش</strong> ئۇسۇلى. ئوتتۇرىچە، مېدىئان، تارقالغانلىق، ھىستوگرامما بىلەن مەلۇماتنىڭ خۇسۇسىيىتىنى چۈشىنىش.</p>
+          <div class="example"><strong>مىسال:</strong> 50 كىشىنىڭ باھىسىنىڭ ئوتتۇرىچىسى، تارقالغانلىقى، تۆت پەسىلىنى بايان قىلىش.</div>
+        </div>
+        <div class="en" lang="en" dir="ltr">
+          <p><strong>English:</strong> Methods to <strong>organize, summarize, describe, and visualize data</strong>. Use mean, median, variance, histograms to understand data characteristics.</p>
+          <div class="example"><strong>Example:</strong> Compute average, spread, and quartiles of 50 students' scores.</div>
+        </div>
+      </section>
+
+      <!-- 2. Mean -->
+      <section class="block card pad split" aria-labelledby="s2">
+        <h2 class="sec" id="s2"><span class="bullet"></span>2. ئوتتۇرىچە قىممەت (Mean)</h2>
+        <div class="ug" lang="ug" dir="rtl">
+          <p><strong>ئۇيغۇرچە:</strong> بارلىق سانلارنىڭ يىغىندىسىنى سان مىقدارىغا بۆلۈش. مەلۇماتنىڭ مەركىزىنى بايان قىلىدۇ.</p>
+          <div class="formula">Mean = Σx / n</div>
+          <p><strong>مىسال:</strong> 160, 165, 170, 155, 180 → (160+165+170+155+180)/5 = 830/5 = 166 cm</p>
+          <div class="example"><strong>ئەھمىيىتى:</strong> بارلىق سانلارنىڭ تەسىرى بولۇپ، چېتىشچان سانلار (outliers) بولسا، مەركىزدىن كېتىپ كېتىشى مۇمكىن.</div>
+          <p><strong>Excel:</strong> <code>=AVERAGE(مەيدانى)</code> ياكى «بيان تالقىنى» → «نەزەرىيە» → «ئاساسىي نەزەرىيە»</p>
+        </div>
+        <div class="en" lang="en" dir="ltr">
+          <p><strong>English:</strong> Sum of all values divided by number of values. Measures central tendency.</p>
+          <div class="formula">Mean = Σx / n</div>
+          <p><strong>Example:</strong> 160, 165, 170, 155, 180 → (160+165+170+155+180)/5 = 830/5 = 166 cm</p>
+          <div class="example"><strong>Note:</strong> Influenced by all data; sensitive to outliers.</div>
+          <p><strong>Excel:</strong> <code>=AVERAGE(range)</code> or Data → Data Analysis → Descriptive Statistics</p>
+        </div>
+      </section>
+
+      <!-- 3. Median -->
+      <section class="block card pad split" aria-labelledby="s3">
+        <h2 class="sec" id="s3"><span class="bullet"></span>3. مېدىئان (Median)</h2>
+        <div class="ug" lang="ug" dir="rtl">
+          <p><strong>ئۇيغۇرچە:</strong> سانلىق مەلۇماتنى چوڭلىقى بويىچە تەرتىپلەپ، مىللەتتىكى ئوتتۇرىدىكى سان.</p>
+          <p><strong>تەرتىپ:</strong> تەك سان مىقدارى → ئوتتۇرىدىكى سان؛ جۈپ سان مىقدارى → ئوتتۇرىدىكى ئىككى ساننىڭ ئوتتۇرىچىسى.</p>
+          <p><strong>مىسال:</strong> (155, 160, 165, 170, 180) → 165 cm؛ (155, 160, 165, 170, 175, 180) → (165+170)/2 = 167.5 cm</p>
+          <div class="example"><strong>ئەھمىيىتى:</strong> چېتىشچان سانلار (outliers) نىڭ تەسىرىدىن ئاز قارايدۇ.</div>
+          <p><strong>Excel:</strong> <code>=MEDIAN(مەيدانى)</code> ياكى «بيان تالقىنى» → «نەزەرىيە» → «ئاساسىي نەزەرىيە»</p>
+        </div>
+        <div class="en" lang="en" dir="ltr">
+          <p><strong>English:</strong> Middle value when data is sorted. Half values are above, half below.</p>
+          <p><strong>Rule:</strong> Odd count → middle value; even count → average of two middle values.</p>
+          <p><strong>Example:</strong> (155, 160, 165, 170, 180) → 165 cm; (155, 160, 165, 170, 175, 180) → (165+170)/2 = 167.5 cm</p>
+          <div class="example"><strong>Note:</strong> Resistant to outliers.</div>
+          <p><strong>Excel:</strong> <code>=MEDIAN(range)</code> or Data → Data Analysis → Descriptive Statistics</p>
+        </div>
+      </section>
+
+      <!-- 4. Mode -->
+      <section class="block card pad split" aria-labelledby="s4">
+        <h2 class="sec" id="s4"><span class="bullet"></span>4. مودا (Mode)</h2>
+        <div class="ug" lang="ug" dir="rtl">
+          <p><strong>ئۇيغۇرچە:</strong> مەلۇماتلاردا ئەڭ كۆپ ئۇچرايدىغان سان.</p>
+          <p><strong>مىسال:</strong> 50, 60, 70, 80, 70, 90, 80, 70 → مودا = 70</p>
+          <div class="example"><strong>ئەھمىيىتى:</strong> سانلىق ۋە سۈپەتلىك مەلۇماتلارغا ئىشلىتىلىدۇ. چېتىشچان سانلار نىڭ تەسىرىدىن ئاز قارايدۇ.</div>
+          <p><strong>Excel:</strong> <code>=MODE.SNGL(مەيدانى)</code> ياكى «بيان تالقىنى» → «نەزەرىيە» → «ئاساسىي نەزەرىيە»</p>
+        </div>
+        <div class="en" lang="en" dir="ltr">
+          <p><strong>English:</strong> The most frequently occurring value in a dataset.</p>
+          <p><strong>Example:</strong> 50, 60, 70, 80, 70, 90, 80, 70 → Mode = 70</p>
+          <div class="example"><strong>Note:</strong> Applicable to both numerical and categorical data; robust to outliers.</div>
+          <p><strong>Excel:</strong> <code>=MODE.SNGL(range)</code> or Data → Data Analysis → Descriptive Statistics</p>
+        </div>
+      </section>
+
+      <!-- 5. Variance -->
+      <section class="block card pad split" aria-labelledby="s5">
+        <h2 class="sec" id="s5"><span class="bullet"></span>5. تارقالغانلىق (Variance)</h2>
+        <div class="ug" lang="ug" dir="rtl">
+          <p><strong>ئۇيغۇرچە:</strong> ھەر بىر ساننىڭ ئوتتۇرىچىسىدىن پەرقىنىڭ كۋادراتىنىڭ ئوتتۇرىچىسى. مەلۇماتنىڭ تارقالغانلىقىنى بايان قىلىدۇ.</p>
+          <div class="formula">σ² = Σ(x−μ)² / n</div>
+          <p><strong>مىسال:</strong> سانلار: 160, 165, 170, 155, 180، ئوتتۇرىچىسى = 166 → σ² = (36+1+16+121+196)/5 = 370/5 = 74 cm²</p>
+          <div class="example"><strong>ئەھمىيىتى:</strong> بىرلىك كۋادرات بولۇپ، تۇشۇنۇشقا قىينىش مۇمكىن.</div>
+          <p><strong>Excel:</strong> <code>=VAR.P(مەيدانى)</code> (تاجاۋۇز)، <code>=VAR.S(مەيدانى)</code> (نۇسخى)</p>
+        </div>
+        <div class="en" lang="en" dir="ltr">
+          <p><strong>English:</strong> Average of squared deviations from the mean. Measures spread.</p>
+          <div class="formula">σ² = Σ(x−μ)² / n</div>
+          <p><strong>Example:</strong> Data: 160, 165, 170, 155, 180, mean=166 → σ² = (36+1+16+121+196)/5 = 370/5 = 74 cm²</p>
+          <div class="example"><strong>Note:</strong> Unit is squared; less intuitive.</div>
+          <p><strong>Excel:</strong> <code>=VAR.P(range)</code> (population), <code>=VAR.S(range)</code> (sample)</p>
+        </div>
+      </section>
+
+      <!-- 6. Standard Deviation -->
+      <section class="block card pad split" aria-labelledby="s6">
+        <h2 class="sec" id="s6"><span class="bullet"></span>6. ستاندارد ئېشىپ كېتىش (Standard Deviation)</h2>
+        <div class="ug" lang="ug" dir="rtl">
+          <p><strong>ئۇيغۇرچە:</strong> تارقالغانلىقنىڭ كىۋادرات يىلتىزى. مەلۇماتنىڭ تارقالغانلىقىنى بىرلىك بويىچە بايان قىلىدۇ.</p>
+          <div class="formula">σ = √Variance</div>
+          <p><strong>مىسال:</strong> تارقالغانلىق = 74 → σ = √74 ≈ 8.6 cm</p>
+          <div class="example"><strong>ئەھمىيىتى:</strong> چوڭ بولسا، تارقالغانلىق چوڭ؛ كىچىك بولسا، تارقالغانلىق كىچىك.</div>
+          <p><strong>Excel:</strong> <code>=STDEV.P(مەيدانى)</code> (تاجاۋۇز)، <code>=STDEV.S(مەيدانى)</code> (نۇسخى)</p>
+        </div>
+        <div class="en" lang="en" dir="ltr">
+          <p><strong>English:</strong> Square root of variance. Measures spread in original units.</p>
+          <div class="formula">σ = √Variance</div>
+          <p><strong>Example:</strong> Variance = 74 → σ = √74 ≈ 8.6 cm</p>
+          <div class="example"><strong>Note:</strong> Larger value = more spread; smaller = less spread.</div>
+          <p><strong>Excel:</strong> <code>=STDEV.P(range)</code> (population), <code>=STDEV.S(range)</code> (sample)</p>
+        </div>
+      </section>
+
+      <!-- 7. Frequency & Histogram -->
+      <section class="block card pad split" aria-labelledby="s7">
+        <h2 class="sec" id="s7"><span class="bullet"></span>7. چاستوتا تەقسىملەش / ھىستوگرامما</h2>
+        <div class="ug" lang="ug" dir="rtl">
+          <p><strong>ئۇيغۇرچە:</strong> سانلىق مەلۇماتنى دائىرىگە ئايرىپ، ھەر دائىرىدىكى سان سانىنى كۆرسىتىش. مەلۇماتنىڭ شەكلىنى، مەركىزىنى، تارقالغانلىقىنى كۆرۈشگە ياردەم بېرىدۇ.</p>
+          <div class="example"><strong>مىسال:</strong> 150-160cm: 5 كىشى، 160-170cm: 12 كىشى، 170-180cm: 8 كىشى</div>
+          <p><strong>Excel:</strong> <code>=FREQUENCY(مەيدانى, دائىرى)</code> ياكى «قۇرۇلۇش» → «گراف» → «ھىستوگرامما»</p>
+        </div>
+        <div class="en" lang="en" dir="ltr">
+          <p><strong>English:</strong> Group data into intervals and count frequency. Visualized as a histogram. Helps see shape, center, and spread.</p>
+          <div class="example"><strong>Example:</strong> 150-160cm: 5 people, 160-170cm: 12 people, 170-180cm: 8 people</div>
+          <p><strong>Excel:</strong> <code>=FREQUENCY(data_range, bins)</code> or Insert → Chart → Histogram</p>
+        </div>
+      </section>
+
+      <!-- 8. Standardization -->
+      <section class="block card pad split" aria-labelledby="s8">
+        <h2 class="sec" id="s8"><span class="bullet"></span>8. استانداردلاش (Standardization)</h2>
+        <div class="ug" lang="ug" dir="rtl">
+          <p><strong>ئۇيغۇرچە:</strong> سانلىق مەلۇماتنى ئوتتۇرىچىسى 0، ستاندارد ئېشىپ كېتىشى 1 بولۇش ئۇچۇن ئۆزگەرتىش. بۇ Z-سېنىقى (z-score) دەپ ئاتىلىدۇ.</p>
+          <div class="formula">Z = (X − μ) / σ</div>
+          <p><strong>مىسال:</strong> X=180، μ=166، σ=8.6 → Z = (180−166)/8.6 ≈ 1.63</p>
+          <div class="example"><strong>ئەھمىيىتى:</strong> تۈرلۈك بىرلىكلىك سانلارنى سالىشتۇرۇش، چېتىشچان سانلارنى تېپىش.</div>
+          <p><strong>Excel:</strong> <code>=STANDARDIZE(قىممەت, ئوتتۇرىچە, ستاندارد)</code></p>
+        </div>
+        <div class="en" lang="en" dir="ltr">
+          <p><strong>English:</strong> Transform data to have mean 0 and standard deviation 1. Resulting value is called Z-score.</p>
+          <div class="formula">Z = (X − μ) / σ</div>
+          <p><strong>Example:</strong> X=180, μ=166, σ=8.6 → Z = (180−166)/8.6 ≈ 1.63</p>
+          <div class="example"><strong>Note:</strong> Used to compare different units, detect outliers.</div>
+          <p><strong>Excel:</strong> <code>=STANDARDIZE(value, mean, std_dev)</code></p>
+        </div>
+      </section>
+
+      <!-- Summary Table -->
+      <section class="block card pad" aria-labelledby="s9">
+        <h2 class="sec" id="s9"><span class="bullet"></span>9. خۇلاسىلەش / Summary Table</h2>
+        <div class="table-wrap">
+          <table role="table" aria-label="Summary of Descriptive Statistics">
+            <thead>
+              <tr>
+                <th scope="col">تۈر / Type</th>
+                <th scope="col">ئۇيغۇرچە / Uyghur</th>
+                <th scope="col">ئىنگلىزچە / English</th>
+                <th scope="col">فورمۇلا / Formula</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>ئوتتۇرىچە قىممەت</td>
+                <td>Mean</td>
+                <td>Σx / n</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>مېدىئان</td>
+                <td>Median</td>
+                <td>ئوتتۇرىدىكى سان</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>مودا</td>
+                <td>Mode</td>
+                <td>ئەڭ كۆپ ئۇچرايدىغان</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>تارقالغانلىق</td>
+                <td>Variance</td>
+                <td>Σ(x−μ)² / n</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>ستاندارد ئېشىپ كېتىش</td>
+                <td>Standard Deviation</td>
+                <td>√Variance</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>چاستوتا / ھىستوگرامما</td>
+                <td>Frequency / Histogram</td>
+                <td>دائىرىدىكى سان</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>استانداردلاش</td>
+                <td>Standardization</td>
+                <td>(X−μ)/σ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="muted" style="text-align:center;margin:18px 0 6px">© 2025 بايانلىق سىتاستىكا دەرسى • KaLBiL (Uyghur • English)</footer>
+  </div>
+
+  <script>
+    // تىل تاللاش
+    const root = document.body;
+    const buttons = document.querySelectorAll('[data-toggle]');
+    buttons.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const mode = btn.getAttribute('data-toggle');
+        root.setAttribute('data-view', mode);
+        buttons.forEach(b=>b.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        buttons.forEach(b=>b.classList.remove('primary'));
+        btn.classList.add('primary');
+      })
+    })
+  </script>
+</body>
+</html>

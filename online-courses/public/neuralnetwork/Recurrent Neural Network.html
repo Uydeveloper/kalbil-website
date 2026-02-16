@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نېرۋاتور 6-باب – RNN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+  <style>:root{--bg:#fafafa;--text-ug:#2d2d2d;--text-en:#444;--primary:#4a148c;--card-bg:#ffffff}body{background:var(--bg);padding:20px;font-family:'Amiri',serif;color:var(--text-ug);line-height:1.7;direction:rtl}h1{text-align:center;color:var(--primary);font-size:2.4rem;margin:0 0 20px}.bilingual-section{background:var(--card-bg);border-radius:12px;padding:20px;margin-bottom:30px;box-shadow:0 4px 12px rgba(0,0,0,.05);border-right:4px solid var(--primary)}.section-title-ug{font-size:1.6rem;font-weight:bold;color:var(--primary);margin-bottom:8px}.section-title-en{font-size:1.3rem;font-weight:600;color:#555;margin-bottom:15px;font-family:'Inter',sans-serif;direction:ltr;text-align:left}.en{font-family:'Inter',sans-serif;direction:ltr;text-align:left;color:var(--text-en);margin-top:12px;padding:12px;background:#f9f9f9;border-radius:8px;border-left:3px solid #ccc}.code-container{margin:15px 0}.CodeMirror{direction:ltr!important;font-family:'Fira Code',monospace;font-size:14px;border-radius:8px;overflow:hidden}.code-label{font-weight:bold;margin-top:15px;color:#555}ul,ol{padding-right:25px;margin:12px 0}li{margin-bottom:8px}footer{text-align:center;margin-top:40px;padding:20px;color:#666;font-size:.95rem}.highlight{background:#e1bee7;padding:3px 6px;border-radius:4px;font-weight:bold}</style>
+</head>
+<body>
+
+<div style="text-align:center;max-width:800px;margin:0 auto 30px;padding:20px;background:#f3e5f5;border-radius:12px;border-right:4px solid var(--primary)">
+  <h1>نېرۋاتور 6-باب – RNN (Recurrent Neural Network)</h1>
+  <p><strong>RNN</strong> — <strong>ۋاقىتلىق قاتار مەلۇماتى</strong> (Sequential Data) بىلەن ئىشلەيدىغان نېرۋاتور. مەسىلەن: جۈملىلەر، ئاۋاز، ھەرەكەت داتچىلىرى. RNN نىڭ ئالاھىدىلىكى — <strong>ئۆتمۈش خاتىرىسىنى ساقلايدۇ</strong>.</p>
+  <div class="en" style="margin-top:10px">RNNs process sequences by maintaining a <strong>hidden state</strong> that carries information from previous time steps — ideal for text, speech, and time-series data.</div>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">1. RNN نېمە؟</div>
+  <div class="section-title-en">1. What is an RNN?</div>
+  <p>RNN — ھەر بىر قادامدا (time step) ئۆزىنىڭ <strong>يوشۇرۇن ھالىتى</strong> (hidden state) نى يېڭىلايدۇ. بۇ ھالەت ئۆتمۈش مەلۇماتنى ساقلايدۇ، شۇڭا جۈملەنىڭ ماڭىسىنى تۈسۈنىدۇ.</p>
+  <p class="en">At each time step <em>t</em>, RNN computes:  
+    \( h_t = \text{tanh}(W_{xh} x_t + W_{hh} h_{t-1} + b) \)  
+    where \( h_{t-1} \) is the memory from the previous step.</p>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">2. RNN نىڭ تۈزۈلمىسى</div>
+  <div class="section-title-en">2. Structure</div>
+  <p>كىرگۈزگۈچ: x₁, x₂, ..., xₜ → يوشۇرۇن ھالەت: h₁, h₂, ..., hₜ → چىقىرىش: y₁, y₂, ..., yₜ</p>
+  <p class="en">Input: x₁, x₂, ..., xₜ → Hidden: h₁, h₂, ..., hₜ → Output: y₁, y₂, ..., yₜ</p>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">3. قوللىنىش ساھەلىرى</div>
+  <div class="section-title-en">3. Applications</div>
+  <ul>
+    <li>ئۇيغۇرچە جۈملىنى بايان قىلىش (ئاخىرقى سۆزگە قاراپ كېيىنكى سۆزنى باسان)</li>
+    <li>ئاۋاز-تېكىست ئايلاندۇرۇش</li>
+    <li>دېڭىز بايلىقى باھاسى تەھلىلى</li>
+  </ul>
+  <ul class="en">
+    <li>Language modeling (predict next word)</li>
+    <li>Speech-to-text</li>
+    <li>Stock price forecasting</li>
+  </ul>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">4. كەمچىلىكى</div>
+  <div class="section-title-en">4. Limitations</div>
+  <ul>
+    <li><strong>Gradient Vanishing</strong> (Gradients تازىلىنىپ كېتىش): ئۇزۇن جۈملىلەرنى ئۆگىنىش قىيىن.</li>
+    <li><strong>Gradient Exploding</strong>: ۋازىنلار سانسىز چوڭ بولۇپ كېتىدۇ.</li>
+  </ul>
+  <ul class="en">
+    <li><strong>Vanishing gradients</strong>: Struggles with long-term dependencies.</li>
+    <li><strong>Exploding gradients</strong>: Weights grow uncontrollably.</li>
+  </ul>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">5. مىسال كود (Keras)</div>
+  <div class="section-title-en">5. Code Example</div>
+  <div class="code-container">
+    <textarea id="c1" style="display:none">
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import SimpleRNN, Dense
+
+model = Sequential([
+    SimpleRNN(50, return_sequences=True, input_shape=(10, 1)),  # 10 time steps
+    SimpleRNN(50),
+    Dense(1)
+])
+model.compile(optimizer='adam', loss='mse')
+    </textarea>
+  </div>
+</div>
+
+<footer>
+  <p>نېرۋاتور 6-باب – RNN (Recurrent Neural Network)</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textareas = document.querySelectorAll('textarea[id^="c"]');
+  textareas.forEach(ta => {
+    CodeMirror.fromTextArea(ta, {
+      mode: "python",
+      readOnly: true,
+      lineNumbers: true,
+      theme: "default",
+      direction: "ltr",
+      viewportMargin: Infinity
+    });
+  });
+});
+</script>
+</body>
+</html>

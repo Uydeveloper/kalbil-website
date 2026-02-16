@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NumPy ئاساسىي دەرسلىكى</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        .chapter {
+            background: #f8f9fa;
+            margin: 25px 0;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        h2 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #16a085;
+            margin: 20px 0 15px;
+            font-size: 1.4em;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            direction: ltr;
+        }
+
+        .example-box {
+            background: #e8f4f8;
+            border: 1px solid #bdc3c7;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .interactive-demo {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .demo-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .demo-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .demo-btn:hover {
+            background: #2980b9;
+        }
+
+        .output {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 100px;
+            border: 1px solid #bdc3c7;
+            font-family: 'Courier New', monospace;
+            direction: ltr;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            background: rgba(52, 152, 219, 0.9);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tab-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: #2c3e50;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NumPy ئاساسىي دەرسلىكى</h1>
+            <p class="subtitle">تولۇق مىساللار بىلەن چۈشەندۈرۈش</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showSection('basic')">ئاساسىي قۇرۇلما</button>
+            <button class="tab-btn" onclick="showSection('matrix')">ماترىتسا ھېسابلاش</button>
+            <button class="tab-btn" onclick="showSection('algebra')">سىزىقلىق ئالجىبرا</button>
+            <button class="tab-btn" onclick="showSection('advanced')">ئىلغار فۇنكسىيەلەر</button>
+        </div>
+
+        <!-- ئاساسىي قۇرۇلما بۆلۈمى -->
+        <section id="basic" class="content-section active">
+            <!-- 1. NumPy نىمە -->
+            <div class="chapter">
+                <h2>1. NumPy نىمە؟</h2>
+                <div class="example-box">
+                    <p><strong>NumPy (Numerical Python)</strong> - Python دىكى سانلىق ھېسابلاش ئۈچۈن ئاساسىي كۈتۇپخانا</p>
+                </div>
+                
+                <div class="code-block">
+import numpy as np
+
+print("NumPy نۇسخىسى:", np.__version__)
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>NumPy قانداق ئىشلىتىلىدۇ؟</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoWhatIsNumpy()">كۆرسەت</button>
+                    </div>
+                    <div class="output" id="whatIsNumpyOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. قاتار قۇرۇش -->
+            <div class="chapter">
+                <h2>2. قاتار قۇرۇش</h2>
+                <div class="code-block">
+# 1-ئۆلچەملىك قاتار
+arr1d = np.array([1, 2, 3, 4, 5])
+print("1-ئۆلچەملىك قاتار:", arr1d)
+
+# 2-ئۆلچەملىك قاتار (ماترىتسا)
+arr2d = np.array([[1, 2, 3], [4, 5, 6]])
+print("2-ئۆلچەملىك قاتار:")
+print(arr2d)
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>قاتار قۇرۇش ئۇسۇللىرى</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoArrayCreation()">قاتار قۇرۇش</button>
+                        <button class="demo-btn" onclick="demoSpecialArrays()">ئالاھىدە قاتارلار</button>
+                    </div>
+                    <div class="output" id="arrayCreationOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. تىپ ۋە تىپ ئۆزگەرتىش -->
+            <div class="chapter">
+                <h2>3. تىپ ۋە تىپ ئۆزگەرتىش</h2>
+                <div class="code-block">
+# تىپنى كۆرۈش ۋە ئۆزگەرتىش
+arr_int = np.array([1, 2, 3], dtype=np.int32)
+arr_float = arr_int.astype(np.float64)
+
+print("ئەسلى تىپى:", arr_int.dtype)
+print("ئۆزگەرتىلگەن تىپى:", arr_float.dtype)
+print("قىممەت:", arr_float)
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>تىپ ئۆزگەرتىش</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoTypeConversion()">تىپ ئۆزگەرتىش</button>
+                    </div>
+                    <div class="output" id="typeConversionOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. ۋېكتور ھېسابلاش -->
+            <div class="chapter">
+                <h2>4. ۋېكتور ھېسابلاش</h2>
+                <div class="code-block">
+# ۋېكتور ھېسابلاش
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+# قوشۇش، ئېلىش، كۆپەيتىش
+print("a + b =", a + b)
+print("a - b =", a - b)
+print("a * b =", a * b)  # ئېلېمېنت كۆپەيتىش
+print("a / b =", a / b)
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>ۋېكتور ھېسابلاش مىساللىرى</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoVectorOps()">ۋېكتور ھېسابلاش</button>
+                        <button class="demo-btn" onclick="demoDotProduct()">نۇقتا كۆپەيتىش</button>
+                    </div>
+                    <div class="output" id="vectorOpsOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ماترىتسا ھېسابلاش بۆلۈمى -->
+        <section id="matrix" class="content-section">
+            <!-- 5. ماترىتسا قۇرۇش -->
+            <div class="chapter">
+                <h2>5. ماترىتسا (2-ئۆلچەملىك قاتار) قۇرۇش</h2>
+                <div class="code-block">
+# ماترىتسا قۇرۇش
+matrix = np.array([[1, 2, 3], 
+                   [4, 5, 6], 
+                   [7, 8, 9]])
+
+print("ماترىتسا:")
+print(matrix)
+print("شەكلى:", matrix.shape)
+print("ئۆلچەم سانى:", matrix.ndim)
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>ماترىتسا خۇسۇسىيەتلىرى</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoMatrixCreation()">ماترىتسا قۇرۇش</button>
+                    </div>
+                    <div class="output" id="matrixCreationOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. ئالاھىدە ماترىتسالار -->
+            <div class="chapter">
+                <h2>6. كۆپ ئىشلىتىلىدىغان ماترىتسالار</h2>
+                <div class="code-block">
+# بىرلىك ماترىتسا
+identity_matrix = np.eye(3)
+print("بىرلىك ماترىتسا:")
+print(identity_matrix)
+
+# نۆل ماترىتسا
+zero_matrix = np.zeros((2, 3))
+print("نۆل ماترىتسا:")
+print(zero_matrix)
+
+# بىر ماترىتسا
+ones_matrix = np.ones((2, 2))
+print("بىر ماترىتسا:")
+print(ones_matrix)
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>ئالاھىدە ماترىتسالار</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoSpecialMatrices()">ماترىتسا كۆرسەت</button>
+                    </div>
+                    <div class="output" id="specialMatricesOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. ماترىتسا ھېسابلاش -->
+            <div class="chapter">
+                <h2>7. ماترىتسا ھېسابلاش</h2>
+                <div class="code-block">
+# ماترىتسا ھېسابلاش
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+
+# ماترىتسا كۆپەيتىش
+dot_product = np.dot(A, B)
+print("A × B:")
+print(dot_product)
+
+# ماترىتسا قوشۇش
+matrix_sum = A + B
+print("A + B:")
+print(matrix_sum)
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>ماترىتسا ھېسابلاش مىساللىرى</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoMatrixOps()">ماترىتسا ھېسابلاش</button>
+                    </div>
+                    <div class="output" id="matrixOpsOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. ئايلانما ماترىتسا -->
+            <div class="chapter">
+                <h2>8. ئايلانما ماترىتسا ھېسابلاش مىسالى</h2>
+                <div class="code-block">
+import math
+
+# ئايلانما ماترىتسا
+theta = math.radians(45)  # 45 گرادۇس
+rotation_matrix = np.array([
+    [math.cos(theta), -math.sin(theta)],
+    [math.sin(theta), math.cos(theta)]
+])
+
+print("45 گرادۇس ئايلانما ماترىتسا:")
+print(rotation_matrix)
+
+# نۇقتىنى ئايلاندۇرۇش
+point = np.array([1, 0])
+rotated_point = np.dot(rotation_matrix, point)
+print("ئايلاندۇرۇلغان نۇقتا:", rotated_point)
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>ئايلانما ماترىتسا</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoRotationMatrix()">ئايلاندۇرۇش</button>
+                    </div>
+                    <div class="output" id="rotationMatrixOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- سىزىقلىق ئالجىبرا بۆلۈمى -->
+        <section id="algebra" class="content-section">
+            <!-- 9. سىزىقلىق ئالجىبرا -->
+            <div class="chapter">
+                <h2>9. ئاساسىي سىزىقلىق ئالجىبرا ھېسابلاش</h2>
+                
+                <h3>9.1 نورم، نورماللاشتۇرۇش، ئورتوقوناللاشتۇرۇش</h3>
+                <div class="code-block">
+# ۋېكتور نورمى
+v = np.array([3, 4])
+norm = np.linalg.norm(v)
+print("ۋېكتور نورمى:", norm)
+
+# نورماللاشتۇرۇش
+normalized_v = v / norm
+print("نورماللاشتۇرۇلغان ۋېكتور:", normalized_v)
+print("نورماللاشتۇرۇلغان ۋېكتور نورمى:", np.linalg.norm(normalized_v))
+                </div>
+
+                <h3>9.2 ئالماشتۇرۇش، ئىز، تەتۈر ماترىتسا، ماترىتسا ئانىقلىقى</h3>
+                <div class="code-block">
+# ماترىتسا ئالماشتۇرۇش
+A = np.array([[1, 2], [3, 4]])
+A_transpose = A.T
+print("ئەسلى ماترىتسا:")
+print(A)
+print("ئالماشتۇرۇلغان ماترىتسا:")
+print(A_transpose)
+
+# ماترىتسا ئىزى
+trace = np.trace(A)
+print("ماترىتسا ئىزى:", trace)
+
+# تەتۈر ماترىتسا
+A_inv = np.linalg.inv(A)
+print("تەتۈر ماترىتسا:")
+print(A_inv)
+
+# ماترىتسا ئانىقلىقى
+det = np.linalg.det(A)
+print("ماترىتسا ئانىقلىقى:", det)
+                </div>
+
+                <h3>9.3 تەڭلىمە سىستېمىسى</h3>
+                <div class="code-block">
+# تەڭلىمە سىستېمىسى ھەل قىلىش
+# 2x + 3y = 8
+# 4x + y = 6
+A = np.array([[2, 3], [4, 1]])
+b = np.array([8, 6])
+
+x = np.linalg.solve(A, b)
+print("تەڭلىمە سىستېمىسى ھەل قىلىش:")
+print("x =", x[0], ", y =", x[1])
+                </div>
+
+                <h3>9.4 ئىگىلىك قىممەت</h3>
+                <div class="code-block">
+# ئىگىلىك قىممەت ۋە ئىگىلىك ۋېكتور
+A = np.array([[4, -2], [1, 1]])
+eigenvalues, eigenvectors = np.linalg.eig(A)
+
+print("ئىگىلىك قىممەتلەر:", eigenvalues)
+print("ئىگىلىك ۋېكتورلار:")
+print(eigenvectors)
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>سىزىقلىق ئالجىبرا مىساللىرى</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoLinearAlgebra1()">نورم ۋە نورماللاشتۇرۇش</button>
+                        <button class="demo-btn" onclick="demoLinearAlgebra2()">ماترىتسا خۇسۇسىيەتلىرى</button>
+                        <button class="demo-btn" onclick="demoLinearAlgebra3()">تەڭلىمە سىستېمىسى</button>
+                        <button class="demo-btn" onclick="demoLinearAlgebra4()">ئىگىلىك قىممەت</button>
+                    </div>
+                    <div class="output" id="linearAlgebraOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ئىلغار فۇنكسىيەلەر بۆلۈمى -->
+        <section id="advanced" class="content-section">
+            <!-- 10. ئۇنىۋېرسال فۇنكسىيە -->
+            <div class="chapter">
+                <h2>10. ئۇنىۋېرسال فۇنكسىيە نېمە؟</h2>
+                <div class="code-block">
+# ئۇنىۋېرسال فۇنكسىيە - ھەر بىر ئېلېمېنتقا ئايرىم-ئايرىم ھالدا ئىشلىتىلىدۇ
+arr = np.array([1, 4, 9, 16])
+
+# ئۇنىۋېرسال فۇنكسىيە مىسالى
+sqrt_arr = np.sqrt(arr)
+print("ئەسلى قاتار:", arr)
+print("يىلتىز ئاستىدىكى قىممەت:", sqrt_arr)
+
+# باشقا ئۇنىۋېرسال فۇنكسىيەلەر
+print("ئېكسبونېنت:", np.exp(arr))
+print("لوقارىفم:", np.log(arr))
+print("سىنۇس:", np.sin(arr))
+                </div>
+            </div>
+
+            <!-- 11. ۋەكىللىك ئۇنىۋېرسال فۇنكسىيەلەر -->
+            <div class="chapter">
+                <h2>11. ۋەكىللىك ئۇنىۋېرسال فۇنكسىيەلەر</h2>
+                <div class="code-block">
+# تۈرلۈك ئۇنىۋېرسال فۇنكسىيەلەر
+arr = np.array([-2, -1, 0, 1, 2])
+
+print("مۇتلەق قىممەت:", np.abs(arr))
+print("كۋادرات:", np.square(arr))
+print("ئىشارەت:", np.sign(arr))
+print("يۇقىرى پەل:", np.ceil([1.2, 2.7, 3.1]))
+print("تۆۋەن پەل:", np.floor([1.2, 2.7, 3.1]))
+print("يېقىملىق پەل:", np.round([1.2, 2.7, 3.1]))
+                </div>
+            </div>
+
+            <!-- 12. frompyfunc -->
+            <div class="chapter">
+                <h2>12. ئادەتتىكى فۇنكسىيەنى ئۇنىۋېرسال فۇنكسىيەگە ئايلاندۇرۇش</h2>
+                <div class="code-block">
+# ئادەتتىكى فۇنكسىيە
+def my_func(x):
+    return x**2 + 2*x + 1
+
+# ئۇنىۋېرسال فۇنكسىيەگە ئايلاندۇرۇش
+my_ufunc = np.frompyfunc(my_func, 1, 1)
+
+# ئىشلىتىش
+arr = np.array([1, 2, 3, 4])
+result = my_ufunc(arr)
+print("ئەسلى قاتار:", arr)
+print("نەتىجە:", result)
+                </div>
+            </div>
+
+            <!-- 13. تور بەلۈگى ۋە كۆرۈنۈش -->
+            <div class="chapter">
+                <h2>13. تور بەلۈگى ۋە كۆرۈنۈش</h2>
+                <div class="code-block">
+# تور بەلۈگى قۇرۇش
+x = np.linspace(-2, 2, 5)
+y = np.linspace(-2, 2, 5)
+X, Y = np.meshgrid(x, y)
+
+print("X تور بەلۈگى:")
+print(X)
+print("Y تور بەلۈگى:")
+print(Y)
+
+# فۇنكسىيە ھېسابلاش
+Z = X**2 + Y**2
+print("Z = X² + Y²:")
+print(Z)
+                </div>
+            </div>
+
+            <!-- 14. تاسادىپىي سانلار -->
+            <div class="chapter">
+                <h2>14. تاسادىپىي سانلار</h2>
+                
+                <h3>14.1 ئاساسىي تاسادىپىي سانلار</h3>
+                <div class="code-block">
+# تاسادىپىي سان بەرگۈچ
+np.random.seed(42)  # بەلگە بېكىتىش
+
+# تۈرلۈك تاسادىپىي سانلار
+print("تەڭ تەقسىملەنگەن تاسادىپىي سان:", np.random.rand())
+print("نورمال تەقسىملەنگەن تاسادىپىي سان:", np.random.randn())
+print("بۈتۈن تاسادىپىي سان (0-10):", np.random.randint(0, 11))
+
+# تاسادىپىي قاتار
+random_array = np.random.random(5)
+print("تاسادىپىي قاتار:", random_array)
+                </div>
+
+                <h3>14.2 تاسادىپىي ماترىتسا</h3>
+                <div class="code-block">
+# تاسادىپىي ماترىتسا
+random_matrix = np.random.rand(3, 3)
+print("تاسادىپىي ماترىتسا:")
+print(random_matrix)
+
+# تۈرلۈك تەقسىمەت
+uniform_matrix = np.random.uniform(0, 10, (2, 3))
+normal_matrix = np.random.normal(0, 1, (2, 2))
+
+print("تەڭ تەقسىملەنگەن ماترىتسا:")
+print(uniform_matrix)
+print("نورمال تەقسىملەنگەن ماترىتسا:")
+print(normal_matrix)
+                </div>
+
+                <h3>14.3 مونتې كارلو ئۇسۇلى</h3>
+                <div class="code-block">
+# π نى مونتې كارلو ئۇسۇلى بىلەن ھېسابلاش
+n_points = 100000
+x = np.random.random(n_points)
+y = np.random.random(n_points)
+
+inside_circle = (x**2 + y**2) <= 1
+pi_estimate = 4 * np.sum(inside_circle) / n_points
+
+print("مونتې كارلو ئۇسۇلى بىلەن ھېسابلانغان π:", pi_estimate)
+print("ھەقىقىي π:", np.pi)
+print("خاتالىق:", abs(pi_estimate - np.pi))
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>تاسادىپىي سان مىساللىرى</h3>
+                    <div class="demo-controls">
+                        <button class="demo-btn" onclick="demoRandom1()">ئاساسىي تاسادىپىي سانلار</button>
+                        <button class="demo-btn" onclick="demoRandom2()">تاسادىپىي ماترىتسا</button>
+                        <button class="demo-btn" onclick="demoRandom3()">مونتې كارلو ئۇسۇلى</button>
+                    </div>
+                    <div class="output" id="randomOutput">
+                        نەتىجە بۇ يەردە كۆرۈنىدۇ
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // بۆلەملەرنى كۆرسىتىش
+        function showSection(sectionId) {
+            // بارلىق بۆلەملەرنى يوشۇر
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // تاللانغان بۆلەمنى كۆرسەت
+            document.getElementById(sectionId).classList.add('active');
+            
+            // تاختىنى ئاكتىپ قىل
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // دىمو فۇنكسىيەلەر
+        function demoWhatIsNumpy() {
+            const output = document.getElementById('whatIsNumpyOutput');
+            output.innerHTML = `
+                <strong>NumPy ئالاھىدىلىكلىرى:</strong><br><br>
+                
+                • <strong>يۇقىرى سۈرئەت</strong> - C ۋە Fortran دىكى كودلار بىلەن ئىشلەيدۇ<br>
+                • <strong>كۆپ ئۆلچەملىك قاتار</strong> - ndarray قۇرۇلمىسى<br>
+                • <strong>سانلىق ھېسابلاش</strong> - ماتېماتىكا ۋە ئىلمىي ھېسابلاش<br>
+                • <strong>ئۇنىۋېرسال فۇنكسىيە</strong> - ھەر بىر ئېلېمېنتقا ئايرىم-ئايرىم ھالدا ئىشلىتىلىدۇ<br>
+                • <strong>سىزىقلىق ئالجىبرا</strong> - ماترىتسا ھېسابلاش ۋە تەڭلىمە ھەل قىلىش<br><br>
+                
+                <strong>قانداق ئىشلىتىلىدۇ:</strong><br>
+                <code>import numpy as np</code>
+            `;
+        }
+
+        function demoArrayCreation() {
+            const output = document.getElementById('arrayCreationOutput');
+            output.innerHTML = `
+                <strong>قاتار قۇرۇش ئۇسۇللىرى:</strong><br><br>
+                
+                <strong>1. ئادەتتىكى قاتار:</strong><br>
+                np.array([1, 2, 3, 4, 5])<br>
+                نەتىجە: [1 2 3 4 5]<br><br>
+                
+                <strong>2. نۆلدىن باشلانغان قاتار:</strong><br>
+                np.zeros(5)<br>
+                نەتىجە: [0. 0. 0. 0. 0.]<br><br>
+                
+                <strong>3. بىردىن باشلانغان قاتار:</strong><br>
+                np.ones(5)<br>
+                نەتىجە: [1. 1. 1. 1. 1.]<br><br>
+                
+                <strong>4. تەرتىپلىك قاتار:</strong><br>
+                np.arange(0, 10, 2)<br>
+                نەتىجە: [0 2 4 6 8]<br><br>
+                
+                <strong>5. سىزىقلىق بۆلۈك:</strong><br>
+                np.linspace(0, 1, 5)<br>
+                نەتىجە: [0.   0.25 0.5  0.75 1.  ]
+            `;
+        }
+
+        function demoSpecialArrays() {
+            const output = document.getElementById('arrayCreationOutput');
+            output.innerHTML = `
+                <strong>ئالاھىدە قاتارلار:</strong><br><br>
+                
+                <strong>1. كۆز قاتار:</strong><br>
+                np.eye(3)<br>
+                نەتىجە:<br>
+                [[1. 0. 0.]<br>
+                 [0. 1. 0.]<br>
+                 [0. 0. 1.]]<br><br>
+                
+                <strong>2. بوش قاتار:</strong><br>
+                np.empty(3)<br>
+                نەتىجە: [تاسادىپىي قىممەتلەر]<br><br>
+                
+                <strong>3. كۆپەيتىش قاتارى:</strong><br>
+                np.full((2,3), 7)<br>
+                نەتىجە:<br>
+                [[7 7 7]<br>
+                 [7 7 7]]<br><br>
+                
+                <strong>4. دىئاگونال قاتار:</strong><br>
+                np.diag([1, 2, 3])<br>
+                نەتىجە:<br>
+                [[1 0 0]<br>
+                 [0 2 0]<br>
+                 [0 0 3]]
+            `;
+        }
+
+        function demoTypeConversion() {
+            const output = document.getElementById('typeConversionOutput');
+            output.innerHTML = `
+                <strong>تىپ ئۆزگەرتىش مىساللىرى:</strong><br><br>
+                
+                <strong>1. ئەسلى قاتار:</strong><br>
+                arr = np.array([1, 2, 3])<br>
+                تىپى: int64<br><br>
+                
+                <strong>2. float غا ئۆزگەرتىش:</strong><br>
+                arr_float = arr.astype(np.float64)<br>
+                تىپى: float64<br>
+                قىممىتى: [1. 2. 3.]<br><br>
+                
+                <strong>3. string غا ئۆزگەرتىش:</strong><br>
+                arr_str = arr.astype(str)<br>
+                تىپى: <U21<br>
+                قىممىتى: ['1' '2' '3']<br><br>
+                
+                <strong>4. boolean غا ئۆزگەرتىش:</strong><br>
+                arr_bool = arr.astype(bool)<br>
+                تىپى: bool<br>
+                قىممىتى: [True True True]<br><br>
+                
+                <strong>مۇھىم تىپلار:</strong><br>
+                • np.int32, np.int64<br>
+                • np.float32, np.float64<br>
+                • np.bool_<br>
+                • np.complex128
+            `;
+        }
+
+        function demoVectorOps() {
+            const output = document.getElementById('vectorOpsOutput');
+            output.innerHTML = `
+                <strong>ۋېكتور ھېسابلاش:</strong><br><br>
+                
+                <strong>ئەسلى ۋېكتورلار:</strong><br>
+                a = [1, 2, 3]<br>
+                b = [4, 5, 6]<br><br>
+                
+                <strong>قوشۇش:</strong><br>
+                a + b = [5, 7, 9]<br><br>
+                
+                <strong>ئېلىش:</strong><br>
+                a - b = [-3, -3, -3]<br><br>
+                
+                <strong>كۆپەيتىش (ئېلېمېنت):</strong><br>
+                a * b = [4, 10, 18]<br><br>
+                
+                <strong>بۆلۈش:</strong><br>
+                a / b = [0.25, 0.4, 0.5]<br><br>
+                
+                <strong>كۋادرات:</strong><br>
+                a**2 = [1, 4, 9]<br><br>
+                
+                <strong>سكالار كۆپەيتىش:</strong><br>
+                2 * a = [2, 4, 6]
+            `;
+        }
+
+        function demoDotProduct() {
+            const output = document.getElementById('vectorOpsOutput');
+            output.innerHTML = `
+                <strong>نۇقتا كۆپەيتىش (Dot Product):</strong><br><br>
+                
+                <strong>ۋېكتورلار:</strong><br>
+                a = [1, 2, 3]<br>
+                b = [4, 5, 6]<br><br>
+                
+                <strong>نۇقتا كۆپەيتىش:</strong><br>
+                np.dot(a, b) = 1×4 + 2×5 + 3×6 = 32<br><br>
+                
+                <strong>سىرتقا كۆپەيتىش (Cross Product):</strong><br>
+                np.cross(a, b) = [2×6-3×5, 3×4-1×6, 1×5-2×4]<br>
+                = [12-15, 12-6, 5-8] = [-3, 6, -3]<br><br>
+                
+                <strong>ئىچكى كۆپەيتىش (Inner Product):</strong><br>
+                np.inner(a, b) = 32 (نۇقتا كۆپەيتىش بىلەن ئوخشاش)<br><br>
+                
+                <strong>سىرتقى كۆپەيتىش (Outer Product):</strong><br>
+                np.outer(a, b) = <br>
+                [[ 4  5  6]<br>
+                 [ 8 10 12]<br>
+                 [12 15 18]]
+            `;
+        }
+
+        // قىسقارتىلما دىمو فۇنكسىيەلەر
+        function demoMatrixCreation() {
+            document.getElementById('matrixCreationOutput').innerHTML = `
+                <strong>ماترىتسا قۇرۇش:</strong><br><br>
+                <strong>2x3 ماترىتسا:</strong><br>
+                [[1 2 3]<br>
+                 [4 5 6]]<br><br>
+                <strong>شەكلى:</strong> (2, 3)<br>
+                <strong>ئۆلچەم سانى:</strong> 2<br>
+                <strong>ئومۇمىي ئېلېمېنت سانى:</strong> 6
+            `;
+        }
+
+        function demoSpecialMatrices() {
+            document.getElementById('specialMatricesOutput').innerHTML = `
+                <strong>ئالاھىدە ماترىتسالار:</strong><br><br>
+                
+                <strong>بىرلىك ماترىتسا (3x3):</strong><br>
+                [[1. 0. 0.]<br>
+                 [0. 1. 0.]<br>
+                 [0. 0. 1.]]<br><br>
+                
+                <strong>نۆل ماترىتسا (2x3):</strong><br>
+                [[0. 0. 0.]<br>
+                 [0. 0. 0.]]<br><br>
+                
+                <strong>بىر ماترىتسا (2x2):</strong><br>
+                [[1. 1.]<br>
+                 [1. 1.]]<br><br>
+                
+                <strong>دىئاگونال ماترىتسا:</strong><br>
+                [[1 0 0]<br>
+                 [0 2 0]<br>
+                 [0 0 3]]
+            `;
+        }
+
+        function demoMatrixOps() {
+            document.getElementById('matrixOpsOutput').innerHTML = `
+                <strong>ماترىتسا ھېسابلاش:</strong><br><br>
+                
+                <strong>A ماترىتسا:</strong><br>
+                [[1 2]<br>
+                 [3 4]]<br><br>
+                
+                <strong>B ماترىتسا:</strong><br>
+                [[5 6]<br>
+                 [7 8]]<br><br>
+                
+                <strong>ماترىتسا كۆپەيتىش (A × B):</strong><br>
+                [[19 22]<br>
+                 [43 50]]<br><br>
+                
+                <strong>ماترىتسا قوشۇش (A + B):</strong><br>
+                [[ 6  8]<br>
+                 [10 12]]<br><br>
+                
+                <strong>ماترىتسا ئېلىش (A - B):</strong><br>
+                [[-4 -4]<br>
+                 [-4 -4]]<br><br>
+                
+                <strong>ئېلېمېنت كۆپەيتىش (A * B):</strong><br>
+                [[ 5 12]<br>
+                 [21 32]]
+            `;
+        }
+
+        function demoRotationMatrix() {
+            document.getElementById('rotationMatrixOutput').innerHTML = `
+                <strong>ئايلانما ماترىتسا:</strong><br><br>
+                
+                <strong>45 گرادۇس ئايلانما ماترىتسا:</strong><br>
+                [[ 0.707 -0.707]<br>
+                 [ 0.707  0.707]]<br><br>
+                
+                <strong>ئەسلى نۇقتا:</strong> [1, 0]<br>
+                <strong>ئايلاندۇرۇلغان نۇقتا:</strong> [0.707, 0.707]<br><br>
+                
+                <strong>90 گرادۇس ئايلانما ماترىتسا:</strong><br>
+                [[ 0. -1.]<br>
+                 [ 1.  0.]]<br><br>
+                
+                <strong>ئەسلى نۇقتا:</strong> [1, 0]<br>
+                <strong>ئايلاندۇرۇلغان نۇقتا:</strong> [0, 1]
+            `;
+        }
+
+        // سىزىقلىق ئالجىبرا دىمولىرى
+        function demoLinearAlgebra1() {
+            document.getElementById('linearAlgebraOutput').innerHTML = `
+                <strong>نورم ۋە نورماللاشتۇرۇش:</strong><br><br>
+                
+                <strong>ۋېكتور:</strong> [3, 4]<br>
+                <strong>نورم (ئۇزۇنلۇق):</strong> 5.0<br>
+                <strong>نورماللاشتۇرۇلغان ۋېكتور:</strong> [0.6, 0.8]<br>
+                <strong>نورماللاشتۇرۇلغان ۋېكتور نورمى:</strong> 1.0<br><br>
+                
+                <strong>ئورتوقوناللاشتۇرۇش:</strong><br>
+                ئىككى ۋېكتورنىڭ نۇقتا كۆپەيتىشى 0 بولسا، ئۇلار ئورتوقونال<br><br>
+                
+                <strong>مىسال:</strong><br>
+                v1 = [1, 0], v2 = [0, 1]<br>
+                np.dot(v1, v2) = 0 → ئورتوقونال
+            `;
+        }
+
+        function demoLinearAlgebra2() {
+            document.getElementById('linearAlgebraOutput').innerHTML = `
+                <strong>ماترىتسا خۇسۇسىيەتلىرى:</strong><br><br>
+                
+                <strong>ماترىتسا A:</strong><br>
+                [[1 2]<br>
+                 [3 4]]<br><br>
+                
+                <strong>ئالماشتۇرۇش (Aᵀ):</strong><br>
+                [[1 3]<br>
+                 [2 4]]<br><br>
+                
+                <strong>ئىز (trace):</strong> 5 (1 + 4)<br><br>
+                
+                <strong>تەتۈر ماترىتسا (A⁻¹):</strong><br>
+                [[-2.   1. ]<br>
+                 [ 1.5 -0.5]]<br><br>
+                
+                <strong>ماترىتسا ئانىقلىقى (det):</strong> -2.0<br><br>
+                
+                <strong>تەكشۈرۈش:</strong><br>
+                A × A⁻¹ = بىرلىك ماترىتسا
+            `;
+        }
+
+        function demoLinearAlgebra3() {
+            document.getElementById('linearAlgebraOutput').innerHTML = `
+                <strong>تەڭلىمە سىستېمىسى:</strong><br><br>
+                
+                <strong>تەڭلىمە سىستېمىسى:</strong><br>
+                2x + 3y = 8<br>
+                4x + y = 6<br><br>
+                
+                <strong>ماترىتسا شەكلى:</strong><br>
+                A = [[2, 3], [4, 1]]<br>
+                b = [8, 6]<br><br>
+                
+                <strong>ھەل قىلىش:</strong><br>
+                x = 1.0, y = 2.0<br><br>
+                
+                <strong>تەكشۈرۈش:</strong><br>
+                2×1 + 3×2 = 8 ✓<br>
+                4×1 + 1×2 = 6 ✓
+            `;
+        }
+
+        function demoLinearAlgebra4() {
+            document.getElementById('linearAlgebraOutput').innerHTML = `
+                <strong>ئىگىلىك قىممەت ۋە ئىگىلىك ۋېكتور:</strong><br><br>
+                
+                <strong>ماترىتسا A:</strong><br>
+                [[4, -2],<br>
+                 [1,  1]]<br><br>
+                
+                <strong>ئىگىلىك قىممەتلەر:</strong><br>
+                λ₁ = 3.0, λ₂ = 2.0<br><br>
+                
+                <strong>ئىگىلىك ۋېكتورلار:</strong><br>
+                v₁ = [0.894, 0.447] (λ₁ ئۈچۈن)<br>
+                v₂ = [0.707, 0.707] (λ₂ ئۈچۈن)<br><br>
+                
+                <strong>تەكشۈرۈش:</strong><br>
+                A × v₁ = λ₁ × v₁<br>
+                A × v₂ = λ₂ × v₂
+            `;
+        }
+
+        // تاسادىپىي سان دىمولىرى
+        function demoRandom1() {
+            document.getElementById('randomOutput').innerHTML = `
+                <strong>ئاساسىي تاسادىپىي سانلار:</strong><br><br>
+                
+                <strong>تەڭ تەقسىملەنگەن (0-1):</strong> 0.3745<br>
+                <strong>نورمال تەقسىملەنگەن (μ=0, σ=1):</strong> -0.2342<br>
+                <strong>بۈتۈن سان (0-10):</strong> 7<br><br>
+                
+                <strong>تاسادىپىي قاتار (5 ئېلېمېنت):</strong><br>
+                [0.123, 0.456, 0.789, 0.234, 0.567]<br><br>
+                
+                <strong>تاللاش (choice):</strong><br>
+                [1, 2, 3, 4, 5] دىن تاللاش: 3<br><br>
+                
+                <strong>ئارىلاشتۇرۇش (shuffle):</strong><br>
+                ئەسلى: [1, 2, 3, 4, 5]<br>
+                ئارىلاشقان: [3, 1, 5, 2, 4]
+            `;
+        }
+
+        function demoRandom2() {
+            document.getElementById('randomOutput').innerHTML = `
+                <strong>تاسادىپىي ماترىتسا:</strong><br><br>
+                
+                <strong>تەڭ تەقسىملەنگەن ماترىتسا (3x3):</strong><br>
+                [[0.123 0.456 0.789]<br>
+                 [0.234 0.567 0.890]<br>
+                 [0.345 0.678 0.901]]<br><br>
+                
+                <strong>نورمال تەقسىملەنگەن ماترىتسا (2x2):</strong><br>
+                [[-0.234  1.456]<br>
+                 [ 0.789 -0.123]]<br><br>
+                
+                <strong>تەڭ تەقسىملەنگەن ماترىتسا (0-10):</strong><br>
+                [[3.45 7.89 1.23]<br>
+                 [8.90 4.56 9.01]]<br><br>
+                
+                <strong>بۈتۈن سان ماترىتسا (0-100):</strong><br>
+                [[23 45 67]<br>
+                 [89 12 34]]
+            `;
+        }
+
+        function demoRandom3() {
+            document.getElementById('randomOutput').innerHTML = `
+                <strong>مونتې كارلو ئۇسۇلى بىلەن π ھېسابلاش:</strong><br><br>
+                
+                <strong>سىناق سانى:</strong> 100,000<br>
+                <strong>چەمبەرەك ئىچىدىكى نۇقتا سانى:</strong> 78,540<br>
+                <strong>ھېسابلانغان π:</strong> 3.1416<br>
+                <strong>ھەقىقىي π:</strong> 3.141592653589793<br>
+                <strong>خاتالىق:</strong> 0.000007346<br><br>
+                
+                <strong>ئۇسۇل:</strong><br>
+                1. بىرەر مەيداندا تاسادىپىي نۇقتا تاللاش<br>
+                2. چەمبەرەك ئىچىدىكى نۇقتىلارنى سانىش<br>
+                3. π ≈ 4 × (چەمبەرەك ئىچىدىكى نۇقتا سانى) / (ئومۇمىي نۇقتا سانى)
+            `;
+        }
+    </script>
+</body>
+</html>
