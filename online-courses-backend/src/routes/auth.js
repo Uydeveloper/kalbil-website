@@ -53,7 +53,9 @@ module.exports = router;
 // CLOUDINARY_API_KEY=your_api_key
 // CLOUDINARY_API_SECRET=your_api_secret
 // CLIENT_URL=http://localhost:3000
-// OPENAI_API_KEY=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
+// const openai = new OpenAI({
+//  apiKey: process.env.OPENAI_API_KEY
+//});
 
 
 // PAYPAL_CLIENT_ID=AQ... (sandbox)
