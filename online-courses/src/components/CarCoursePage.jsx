@@ -4,10 +4,14 @@ import {
   CircuitBoard, Atom, ChevronRight, Star, Target, 
   Globe, Code, Lock, Unlock, Download, Upload,
   Smartphone, Database, Cloud, Server, Coffee,
-  Gift, Users as UsersIcon, CreditCard, DollarSign
+  Gift, Users as UsersIcon, CreditCard, DollarSign,
+  Link
 } from 'lucide-react';
 
 const QuantumRoadmap2026 = () => {
+  const handleGoogleForm = () => {
+    window.open("https://docs.google.com/forms/d/1vFswu8GvhBe9toQZ1akpI0n7SYPKodmyIe4Fy1u7DKU/edit", "_blank");
+  }
   const [darkMode, setDarkMode] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -35,8 +39,7 @@ const QuantumRoadmap2026 = () => {
     e.preventDefault();
     
     // Google Form submission URL - Replace with your actual Google Form URL
-    const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfYOUR_FORM_ID_HERE/viewform";
-    
+   
     // Create form data for Google Form
     const form = document.createElement('form');
     form.method = 'POST';
@@ -413,10 +416,10 @@ const QuantumRoadmap2026 = () => {
   ];
 
   const contactLinks = [
-    { name: 'ۋاتسئاپ', url: 'https://chat.whatsapp.com/your-link', icon: '💬' },
-    { name: 'تىلېگرام', url: 'https://t.me/QML2026_Uyghur', icon: '📱' },
-    { name: 'GitHub', url: 'https://github.com/QML-Uyghur', icon: '💻' },
-    { name: 'Discord', url: 'https://discord.gg/your-link', icon: '🎮' }
+    { name: 'ۋاتسئاپ', url: 'https://chat.whatsapp.com/FLaJ33cp8qv0iwLNvRwZjC?mode=gi_t', icon: '💬' },
+    { name: 'تىلېگرام', url: 'https://t.me/+5uXhIZoVzPxmNGE1', icon: '📱' },
+    { name: 'GitHub', url: 'https:uyhub.qutadguai.com', icon: '💻' },
+    { name: 'Discord', url: 'https://discord.gg/pdPryBn5', icon: '🎮' }
   ];
 
   // Pricing and discounts
@@ -518,11 +521,11 @@ const QuantumRoadmap2026 = () => {
                   يول خەرىتىسىنى كۆرۈش
                 </button>
                 <button
-                  onClick={() => setActiveSection('register')}
-                  className={`px-8 py-3 rounded-lg font-bold border transition ${darkMode ? 'border-cyan-500 text-cyan-400 hover:bg-cyan-500/10' : 'border-purple-500 text-purple-600 hover:bg-purple-50'}`}
-                >
-                  ھازىر تىزىملىتىڭ
-                </button>
+  onClick={handleGoogleForm}
+  className={`px-8 py-3 rounded-lg font-bold border transition ${darkMode ? 'border-cyan-500 text-cyan-400 hover:bg-cyan-500/10' : 'border-purple-500 text-purple-600 hover:bg-purple-50'}`}
+>
+  ھازىر تىزىملىتىڭ
+</button>
               </div>
             </div>
           </div>
