@@ -128,6 +128,11 @@ const Blog116 = lazy(() => import('../components/blog/posts/Blog116'));
 const Blog117 = lazy(() => import('../components/blog/posts/Blog117'));
 const Blog118 = lazy(() => import('../components/blog/posts/Blog118'));
 const Blog119 = lazy(() => import('../components/blog/posts/Blog119'));
+const Blog120 = lazy(() => import('../components/blog/posts/Blog120'));
+const Blog121 = lazy(() => import('../components/blog/posts/Blog121'));
+const Blog122 = lazy(() => import('../components/blog/posts/Blog122'));
+
+
 
 
 // Fallback for missing components
@@ -204,6 +209,9 @@ const MyBlog = () => {
   // كومپونېنتنى قايتۇرۇش (ئىشلەتكەن component نامى بويىچە)
   const getPostComponent = (componentName) => {
     switch (componentName) {
+      case 'Blog122': return Blog122;
+      case 'Blog121': return Blog121;
+      case 'Blog120': return Blog120;
       case 'Blog01': return Blog01;
       case 'Blog02': return Blog02;
       case 'Blog03': return Blog03;
