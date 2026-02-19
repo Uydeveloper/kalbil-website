@@ -131,6 +131,8 @@ const Blog119 = lazy(() => import('../components/blog/posts/Blog119'));
 const Blog120 = lazy(() => import('../components/blog/posts/Blog120'));
 const Blog121 = lazy(() => import('../components/blog/posts/Blog121'));
 const Blog122 = lazy(() => import('../components/blog/posts/Blog122'));
+const Blog123 = lazy(() => import('../components/blog/posts/Blog123'));
+const Blog124 = lazy(() => import('../components/blog/posts/Blog124'));
 
 
 
@@ -209,6 +211,8 @@ const MyBlog = () => {
   // كومپونېنتنى قايتۇرۇش (ئىشلەتكەن component نامى بويىچە)
   const getPostComponent = (componentName) => {
     switch (componentName) {
+      case 'Blog124': return Blog124;
+      case 'Blog123': return Blog123;
       case 'Blog122': return Blog122;
       case 'Blog121': return Blog121;
       case 'Blog120': return Blog120;

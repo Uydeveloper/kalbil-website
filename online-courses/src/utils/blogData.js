@@ -1,6 +1,36 @@
 // utils/blogData.js
 export const BLOG_POSTS = [
   {   
+     id: 124,
+    title: '    4-قىسىم: ئالەمنىڭ قايتا جانلىنىشى   ',
+    author: 'قاۋۇلجان',
+    date: '2026-يىلى 1-ئاينىڭ 1-كۈنى',
+    readTime: ' 12.2',
+    category: '           پەلسەپە       ',
+    tags: ['  سۇنئي ئەقىل  ', ' پەلسەپە  ', '   كىۋانىت فىزىكىسى ', '   ئىنسانىيەت '],
+    image: 'https://windowscustomization.com/wp-content/uploads/2019/10/The-Nebula.gif',
+    summary: '  كونفورمال دەۋرىيلىك كوسمولوگىيە ۋە ئالدىنقى ئالەمنىڭ ئىزلىرى ',
+    likes: 112,
+    comments: 5,
+    views: 1690,
+    component: 'Blog124'
+  },
+  {   
+     id: 123,
+    title: '    3-قىسىم: ھاۋكىڭ رادىئاتسىيەسى ۋە دې سىتتېر رادىئاتسىيەسى   ',
+    author: 'قاۋۇلجان',
+    date: '2026-يىلى 1-ئاينىڭ 1-كۈنى',
+    readTime: ' 12.2',
+    category: '           پەلسەپە       ',
+    tags: ['  سۇنئي ئەقىل  ', ' پەلسەپە  ', '   كىۋانىت فىزىكىسى ', '   ئىنسانىيەت '],
+    image: 'https://cdn.dribbble.com/userupload/22948793/file/original-7979b524d9cd9eda6ed6b999aa1b9f3f.gif',
+    summary: '  ئالەم ئۇپۇقىدىن تارقىلىدىغان رادىئاتسىيە ۋە ئۇنىڭ كۆزىتىلىشى ھەققىدە',
+    likes: 112,
+    comments: 5,
+    views: 1690,
+    component: 'Blog123'
+  },
+  {   
      id: 122,
     title: '    0-قىسىم: تارتىش كۈچى، ۋاقىت ۋە ئۇچۇر    ',
     author: 'قاۋۇلجان',
