@@ -1,5 +1,21 @@
 // utils/blogData.js
 export const BLOG_POSTS = [
+
+  {   
+     id: 128,
+    title: '    Quantum Neural Networks  ',
+    author: 'قاۋۇلجان',
+    date: '2026-يىلى 1-ئاينىڭ 1-كۈنى',
+    readTime: ' 12.6',
+    category: '           پەلسەپە       ',
+    tags: ['  سۇنئي ئەقىل  ', ' پەلسەپە  ', '   كىۋانىت فىزىكىسى ', '   ئىنسانىيەت '],
+    image: 'https://windowscustomization.com/wp-content/uploads/2019/10/The-Nebula.gif',
+    summary: ' Singularity نىڭ ھەقىقىي تەبىئىتى ۋە Fuzzball Theory ھەققىدە چوڭقۇر تەھلىل',
+    likes: 112,
+    comments: 5,
+    views: 1690,
+    component: 'Blog128'
+  },
    {   
      id: 127,
     title: '    7-قىسىم: يەككەلىك ۋە فۇز توپ نەزەرىيىسى    ',
