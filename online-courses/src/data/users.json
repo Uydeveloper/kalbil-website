@@ -14,7 +14,7 @@
     "avatar": "/avatars/Anwer.png",
     "password": "Anwer-K0001",
     "role": "student",
-    "email": "anwer@kalbil.edu",
+    "email": "anwer@kelbil.edu",
     "department": "ستاتىستىكا",
     "joinDate": "2024-01-15",
     "courses": [
@@ -229,18 +229,18 @@
     ]
   },
   {
-    "id": "RA-K010",
+    "id": "RA-K011",
     "name": "RA",
-    "avatar": "/avatars/stu-K0010.png",
+    "avatar": "/avatars/stu-K0011.png",
     "password": "RA-K0011",
     "role": "student",
-    "email": "RA@kelbil.edu",
-    "department": "machine learning",
+    "email": "ra@kelbil.edu",
+    "department": "Machine Learning",
     "joinDate": "2025-12-16",
     "courses": [
       {
         "id": "stat-001",
-        "title": "Statistics Beginner - سىتاستىكا ئاساسىي بىلىم, machine learning",
+        "title": "Statistics Beginner - سىتاستىكا ئاساسىي بىلىم, Machine Learning",
         "teacher": "Mr. KelBil",
         "duration": "1 ئاي",
         "progress": 70,

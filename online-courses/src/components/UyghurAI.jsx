@@ -19,7 +19,8 @@ import UyghurTab from './UyghurTab'; // ← يېڭى كومپونېنت
 import UyghurLetterFinder from './UyghurLetterFinder';
 import Ballada from './ballada';
 import Uyghurchatbot from './UyghurChatBot'; 
-import QuantumUyghurAi from './QuantumUyghurAi'; 
+import QuantumUyghurAi from './QuantumUyghurAi';
+import UyghurAIsecyrety from './UyghurAIsecyrety'; 
 
 
 // Default data
@@ -470,8 +471,8 @@ const UyghurAI = () => {
             { id: 'letter-finder', name: 'ھەرپ ئۈگنىش', icon: 'Search' },
             { id: 'ballada', name: 'باللادا', icon: 'Book' },
             { id: 'chatbot', name: 'پاراڭچى ', icon: 'Zap' },
-            { id: 'quantum-uyghur-ai', name: 'Quantum Uyghur AI', icon: 'Zap' }
-           
+            { id: 'quantum-uyghur-ai', name: 'Quantum Uyghur AI', icon: 'Zap' },
+            { id: 'uyghur-ai-security', name: 'Uyghur AI Security', icon: 'Shield' }
 
           ].map((tab) => (
             <button
@@ -639,6 +640,7 @@ const UyghurAI = () => {
         {activeTab === 'ballada' && <Ballada />}
         {activeTab === 'chatbot' && <Uyghurchatbot />}
         {activeTab === 'quantum-uyghur-ai' && <QuantumUyghurAi />}
+        {activeTab === 'uyghur-ai-security' && <UyghurAIsecyrety />}
         {customTabs.some(tab => tab.id === activeTab) && renderCustomTab(activeTab)}
         
         <div className="mt-8 text-center text-sm text-gray-500 space-y-1">
