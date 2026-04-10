@@ -373,7 +373,7 @@
         "description": " Shor algorithm, Turing machine"
       },{
         "title": "كىۋانىت مىخانىكىسى ئۆگىنىش",
-        "url": "https://www.youtube.com/watch?v=zI_sxmV6fis",
+        "url": "https://www.youtube.com/watch?v=zI_sxmV6fis&list=PLcbhS-igw3X2pvApUYOX0x_-mHBSfjyB0&index=3",
         "description": "Grover algorithm"
       },
       {
@@ -382,7 +382,7 @@
         "description": "ئاساسىي ئۇچۇرلار"
       },{
         "title": "كىۋانىت مىخانىكىسى ئۆگىنىش",
-        "url": "https://www.youtube.com/watch?v=r02l1mr-sA0",
+        "url": "https://www.youtube.com/watch?v=B04zJaPa-VQ&list=PLcbhS-igw3X2pvApUYOX0x_-mHBSfjyB0&index=4",
         "description": "ئاساسىي ئۇچۇرلار"
       },
       {
@@ -404,7 +404,12 @@
     "videos": [
       {
         "title": "كىۋانىت ماشىنا ئۆگىنىش",
-        "url": "https://www.youtube.com/watch?v=XDQofg5vjrY&t=15s",
+        "url": "https://www.youtube.com/watch?v=haZldAohiYA&list=PLcbhS-igw3X2pvApUYOX0x_-mHBSfjyB0&index=2",
+        "description": "ئاساسىي ئۇچۇرلار"
+      },
+      {
+        "title": "كىۋانىت ماشىنا ئۆگىنىش",
+        "url": "https://www.youtube.com/watch?v=kFyR5CzwQZo&list=PLcbhS-igw3X2pvApUYOX0x_-mHBSfjyB0&index=1",
         "description": "ئاساسىي ئۇچۇرلار"
       }
     ]

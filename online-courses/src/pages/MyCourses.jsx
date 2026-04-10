@@ -180,13 +180,13 @@ export default function MyCourses() {
       { "title": "كىۋانىت مىخانىكىسى 5-باب - Measurement", "file": "html/quantum-mechanics-measurement.html" }
     ],
     "stat108": [
-      { "title": "كىۋانىت ماشىنا ئۆگىنىش 1-باب - كىرىش", "file": "html/qml-intro.html" },
-      { "title": "كىۋانىت ماشىنا ئۆگىنىش 2-باب - Qubit ۋە Gate", "file": "html/qml-qubit-gate.html" },
-      { "title": "كىۋانىت ماشىنا ئۆگىنىش 3-باب - Quantum Circuits", "file": "html/qml-circuits.html" },
-      { "title": "كىۋانىت ماشىنا ئۆگىنىش 4-باب - Variational Algorithms", "file": "html/qml-variational.html" },
-      { "title": "كىۋانىت ماشىنا ئۆگىنىش 5-باب - Quantum Neural Networks", "file": "html/qml-qnn.html" },
-      { "title": "كىۋانىت ماشىنا ئۆگىنىش 6-باب - QML + Classical ML", "file": "html/qml-hybrid.html" },
-      { "title": "كىۋانىت ماشىنا ئۆگىنىش 7-باب - ئامالىي مەسىلىلەر", "file": "html/qml-applications.html" }
+      { "title": "كىۋانىت ماشىنا ئۆگىنىش 1-باب - كىرىش", "file": "quantummachinelearning/Qubit.html" },
+      { "title": "كىۋانىت ماشىنا ئۆگىنىش 2-باب - Quantum Circuits", "file": "quantummachinelearning/QuantumGates.html" },
+      { "title": "كىۋانىت ماشىنا ئۆگىنىش 3-باب - Qubit ۋە Gate", "file": "quantummachinelearning/QuantumCircuits.html" },
+      { "title": "كىۋانىت ماشىنا ئۆگىنىش 4-باب - ئامالىي مەسىلىلەر", "file": "quantummachinelearning/VariationalAlgorithms.html" },
+      { "title": "كىۋانىت ماشىنا ئۆگىنىش 5-باب - Variational Algorithms", "file": "quantummachinelearning/QuantumNeuralNetworks.html" },
+      { "title": "كىۋانىت ماشىنا ئۆگىنىش 6-باب - Quantum Neural Networks", "file": "quantummachinelearning/QML + Classical ML.html" },
+      { "title": "كىۋانىت ماشىنا ئۆگىنىش 7-باب - QML + Classical ML", "file": "quantummachinelearning/QuantumSamples.html" },
     ],
     "stat109": [
       { title: "ئاساسىي ئۇچۇرلار", file: "kalbil.html" }
