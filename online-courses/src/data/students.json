@@ -74,50 +74,8 @@
       }
     ]
   },
-  {
-    "id": "Ablimit-K004",
-    "name": "Ablimit",
-    "avatar": "/avatars/Ablimit.png",
-    "password": "Idkut-K0004",
-    "role": "student",
-    "email": "ablimit@kelbil.edu",
-    "department": "ستاتىستىكا",
-    "joinDate": "2024-01-18",
-    "courses": [
-      {
-        "id": "stat-001",
-        "title": "Statistics Beginner - سىتاستىكا ئاساسىي بىلىم",
-        "teacher": "Mr. KelBil",
-        "duration": "1 ئاي",
-        "progress": 70,
-        "image": "/courses/statistics.png",
-        "startDate": "2024-01-20",
-        "endDate": "2024-02-20"
-      }
-    ]
-  },
-  {
-    "id": "Parhat-K005",
-    "name": "Parhat",
-    "avatar": "/avatars/Parhat.png",
-    "password": "Parhat-K0005",
-    "role": "student",
-    "email": "parhat@kelbil.edu",
-    "department": "ستاتىستىكا",
-    "joinDate": "2024-01-19",
-    "courses": [
-      {
-        "id": "stat-001",
-        "title": "Statistics Beginner - سىتاستىكا ئاساسىي بىلىم",
-        "teacher": "Mr. KelBil",
-        "duration": "1 ئاي",
-        "progress": 70,
-        "image": "/courses/statistics.png",
-        "startDate": "2024-01-20",
-        "endDate": "2024-02-20"
-      }
-    ]
-  },
+  
+  
   {
     "id": "Arkin-K006",
     "name": "ArkinBeg",
@@ -162,28 +120,7 @@
       }
     ]
   },
-  {
-    "id": "Ahmetjan-K008",
-    "name": "Ahmetjan Abdullah",
-    "avatar": "/avatars/Ahmetjan.png",
-    "password": "Ahmetjan-K0008",
-    "role": "student",
-    "email": "ahmetjan@kelbil.edu",
-    "department": "ستاتىستىكا",
-    "joinDate": "2024-01-22",
-    "courses": [
-      {
-        "id": "stat-001",
-        "title": "Statistics Beginner - سىتاستىكا ئاساسىي بىلىم",
-        "teacher": "Mr. KelBil",
-        "duration": "1 ئاي",
-        "progress": 70,
-        "image": "/courses/statistics.png",
-        "startDate": "2024-01-20",
-        "endDate": "2024-02-20"
-      }
-    ]
-  },
+  
   {
     "id": "togirak-K009",
     "name": "Togirak",
@@ -206,28 +143,7 @@
       }
     ]
   },
-  {
-    "id": "Abdulkerem-K010",
-    "name": "Abdul Aziz Abdulkerem",
-    "avatar": "/avatars/stu-K0010.png",
-    "password": "AbdulAziz-K0010",
-    "role": "student",
-    "email": "abdulkerem@kelbil.edu",
-    "department": "ستاتىستىكا",
-    "joinDate": "2024-01-24",
-    "courses": [
-      {
-        "id": "stat-001",
-        "title": "Statistics Beginner - سىتاستىكا ئاساسىي بىلىم",
-        "teacher": "Mr. KelBil",
-        "duration": "1 ئاي",
-        "progress": 70,
-        "image": "/courses/statistics.png",
-        "startDate": "2024-01-20",
-        "endDate": "2024-02-20"
-      }
-    ]
-  },
+  
   {
     "id": "RA-K010",
     "name": "RA",

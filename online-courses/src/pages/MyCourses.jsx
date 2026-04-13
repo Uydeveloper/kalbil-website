@@ -189,7 +189,8 @@ export default function MyCourses() {
       { "title": "كىۋانىت ماشىنا ئۆگىنىش 7-باب - QML + Classical ML", "file": "quantummachinelearning/QuantumSamples.html" },
     ],
     "stat109": [
-      { title: "ئاساسىي ئۇچۇرلار", file: "kalbil.html" }
+      { "title": "ئاساسىي ئۇچۇرلار", "file": "kalbil.html" },
+      { "title": " گۇۋاھنامە  Certification ", "file": "گۇۋاھنامە.html" }
     ]
   };
 
