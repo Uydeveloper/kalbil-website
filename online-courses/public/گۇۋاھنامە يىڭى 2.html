@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Certificate - Uyghur Quantum AI Academy</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+            font-family: 'Inter', 'Cormorant Garamond', sans-serif;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5f2a;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(26, 95, 42, 0.2);
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .control-panel {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(26, 95, 42, 0.1);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a5f2a;
+            font-size: 0.9em;
+            letter-spacing: 0.3px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #1a5f2a;
+            box-shadow: 0 0 0 4px rgba(26, 95, 42, 0.1);
+            background: white;
+        }
+        
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        button {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-generate {
+            background: linear-gradient(135deg, #1a5f2a 0%, #2d7a3e 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(26, 95, 42, 0.3);
+        }
+        
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(26, 95, 42, 0.4);
+        }
+        
+        .btn-pdf {
+            background: linear-gradient(135deg, #c75b12 0%, #e67e22 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(199, 91, 18, 0.3);
+        }
+        
+        .btn-pdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(199, 91, 18, 0.4);
+        }
+        
+        /* ===== Professional Certificate Styles ===== */
+        .certificate-wrapper {
+            background: white;
+            width: 297mm;
+            height: 210mm;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-radius: 4px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+        
+        .certificate {
+            width: 297mm;
+            height: 210mm;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+        
+        /* Header Bar */
+        .header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8mm;
+            background: linear-gradient(90deg, #1a5f2a 0%, #2d7a3e 50%, #c75b12 100%);
+        }
+        
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 15mm 20mm 5mm 20mm;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .institution-logo {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #1a5f2a 0%, #2d7a3e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: 900;
+            box-shadow: 0 4px 15px rgba(26, 95, 42, 0.3);
+            border: 3px solid #c75b12;
+            flex-shrink: 0;
+        }
+        
+        .institution-text {
+            text-align: left;
+        }
+        
+        .institution-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1a5f2a;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .institution-sub {
+            font-size: 11px;
+            color: #c75b12;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 3px;
+            font-weight: 600;
+        }
+        
+        .batch-badge {
+            background: linear-gradient(135deg, #c75b12 0%, #e67e22 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(199, 91, 18, 0.3);
+            margin-top: 8mm;
+        }
+        
+        /* Certificate ID Badge */
+        .cert-id-badge {
+            position: absolute;
+            top: 12mm;
+            right: 20mm;
+            background: rgba(26, 95, 42, 0.1);
+            padding: 2mm 4mm;
+            border-radius: 4px;
+            font-size: 9px;
+            color: #1a5f2a;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: 1px;
+            z-index: 15;
+        }
+        
+        /* Main Content Area - increased top margin to prevent overlap */
+        .content-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 8mm 25mm 0 25mm;
+        }
+        
+        .intro-text {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 4mm;
+            font-weight: 500;
+        }
+        
+        .recipient-section {
+            margin: 4mm 0;
+            padding: 4mm 15mm;
+            border-top: 1px solid rgba(26, 95, 42, 0.2);
+            border-bottom: 1px solid rgba(26, 95, 42, 0.2);
+            width: 80%;
+        }
+        
+        .recipient-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2mm;
+        }
+        
+        /* ئۇيغۇرچە ئىسىم توغرا كۆرسىتىلىدۇ - Unicode character preserving */
+        .recipient-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a2e;
+            font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+            word-break: keep-all;
+            white-space: normal;
+            line-height: 1.3;
+        }
+        
+        .main-title {
+            font-size: 16px;
+            color: #c75b12;
+            font-weight: 600;
+            margin: 6mm 0 5mm 0;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+        
+        /* Course Title - FIXED: Removed problematic gradient text effect */
+        .course-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a5f2a;
+            margin: 8mm 0 10mm 0;
+            line-height: 1.4;
+            font-family: 'Playfair Display', serif;
+            /* Gradient text نى ئېلىۋەتتۇق، ئاددىي رەڭ ئىشلەتتۇق */
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+            max-width: 90%;
+            padding: 5mm 0;
+            clear: both;
+            display: block;
+            position: relative;
+            z-index: 20;
+            /* قوشۇمچە قوغداش */
+            text-shadow: none;
+            background-color: transparent !important;
+        }
+        
+        .details-box {
+            background: linear-gradient(135deg, rgba(26, 95, 42, 0.05) 0%, rgba(199, 91, 18, 0.05) 100%);
+            border-left: 4px solid #1a5f2a;
+            border-right: 4px solid #c75b12;
+            padding: 5mm 10mm;
+            margin: 4mm 0;
+            border-radius: 8px;
+            max-width: 85%;
+        }
+        
+        .details-text {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .highlights {
+            display: flex;
+            justify-content: center;
+            gap: 12mm;
+            margin: 5mm 0;
+            flex-wrap: wrap;
+        }
+        
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: #444;
+            font-weight: 500;
+        }
+        
+        .highlight-dot {
+            width: 6px;
+            height: 6px;
+            background: #c75b12;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        /* Footer Section */
+        .footer-section {
+            background: linear-gradient(90deg, rgba(26, 95, 42, 0.1) 0%, rgba(199, 91, 18, 0.1) 100%);
+            padding: 6mm 20mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            border-top: 2px solid rgba(26, 95, 42, 0.1);
+        }
+        
+        .footer-info {
+            display: flex;
+            gap: 15mm;
+        }
+        
+        .info-block {
+            text-align: left;
+        }
+        
+        .info-label {
+            font-size: 9px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        
+        .info-value {
+            font-size: 12px;
+            color: #1a5f2a;
+            font-weight: 700;
+        }
+        
+        .signatures-area {
+            display: flex;
+            gap: 12mm;
+        }
+        
+        .signature-item {
+            text-align: center;
+        }
+        
+        .signature-line {
+            width: 30mm;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #1a5f2a, transparent);
+            margin-bottom: 2mm;
+        }
+        
+        .signature-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        
+        .signature-title {
+            font-size: 9px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Decorative Elements */
+        .corner-decoration {
+            position: absolute;
+            width: 30mm;
+            height: 30mm;
+            border: 2px solid rgba(26, 95, 42, 0.15);
+            z-index: 5;
+        }
+        
+        .corner-tl { top: 12mm; left: 12mm; border-right: none; border-bottom: none; }
+        .corner-tr { top: 12mm; right: 12mm; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: 32mm; left: 12mm; border-right: none; border-top: none; }
+        .corner-br { bottom: 32mm; right: 12mm; border-left: none; border-top: none; }
+        
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 80px;
+            color: rgba(26, 95, 42, 0.03);
+            font-weight: 900;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            pointer-events: none;
+            z-index: 1;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Holographic Seal */
+        .hologram-seal {
+            position: absolute;
+            bottom: 18mm;
+            right: 22mm;
+            width: 22mm;
+            height: 22mm;
+            z-index: 20;
+        }
+        
+        .seal-outer {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, 
+                rgba(26, 95, 42, 0.9) 0%, 
+                rgba(45, 122, 62, 0.9) 25%, 
+                rgba(199, 91, 18, 0.9) 50%, 
+                rgba(230, 126, 34, 0.9) 75%, 
+                rgba(26, 95, 42, 0.9) 100%);
+            background-size: 200% 200%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            animation: hologramShift 3s ease infinite;
+        }
+        
+        @keyframes hologramShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .seal-inner {
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            border: 1px dashed rgba(255,255,255,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 6px;
+            text-align: center;
+            line-height: 1.2;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .seal-year {
+            font-size: 10px;
+            font-weight: 900;
+        }
+        
+        /* Print Styles */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+            
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                width: 297mm;
+                height: 210mm;
+            }
+            
+            .control-panel, h1 {
+                display: none !important;
+            }
+            
+            .container {
+                width: 297mm;
+                height: 210mm;
+                max-width: none;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .certificate-wrapper {
+                width: 297mm !important;
+                height: 210mm !important;
+                box-shadow: none;
+                border-radius: 0;
+                margin: 0;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                overflow: hidden !important;
+            }
+            
+            .certificate {
+                width: 297mm !important;
+                height: 210mm !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                overflow: hidden !important;
+            }
+            
+            .course-title {
+                color: #1a5f2a !important;
+                -webkit-text-fill-color: #1a5f2a !important;
+                background: transparent !important;
+            }
+            
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+        }
+        
+        /* Screen Responsive */
+        @media screen and (max-width: 1200px) {
+            .certificate-wrapper {
+                transform: scale(0.65);
+                transform-origin: top center;
+                margin-bottom: -180px;
+            }
+        }
+        
+        @media screen and (max-width: 800px) {
+            .certificate-wrapper {
+                transform: scale(0.45);
+                margin-bottom: -350px;
+            }
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Uyghur Quantum AI Academy 🎓</h1>
+        
+        <div class="control-panel">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>👤 Student Name / ئوقۇغۇچى ئىسمى</label>
+                    <input type="text" id="studentName" value="Akbar Domur Mamet" placeholder="Full name">
+                </div>
+                
+                <div class="form-group">
+                    <label>📅 Issue Date / چىقىرىلغان ۋاقىت</label>
+                    <input type="date" id="issueDate" value="2026-03-13">
+                </div>
+                
+                <div class="form-group">
+                    <label>🔢 Certificate ID / گۇۋاھنامە نومۇرى</label>
+                    <input type="text" id="certNumber" value="UQAI-2026-0042-XQ">
+                </div>
+                
+                <div class="form-group">
+                    <label>📚 Course Name / كۇرس ئىسمى</label>
+                    <input type="text" id="courseName" value="Quantum Computing and Machine Learning">
+                </div>
+                
+                <div class="form-group">
+                    <label>⏱️ Duration / ئۆگىنىش مۇددىتى</label>
+                    <select id="duration">
+                        <option value="6 months" selected>6 Months</option>
+                        <option value="12 weeks">12 Weeks (96 Hours)</option>
+                        <option value="8 weeks">8 Weeks (64 Hours)</option>
+                        <option value="16 weeks">16 Weeks (128 Hours)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>🎓 Batch / گۇرۇپ</label>
+                    <input type="text" id="batch" value="BATCH 01">
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn-generate" onclick="generateCertificate()">
+                    <span>✨</span> Generate Certificate
+                </button>
+                <button class="btn-pdf" onclick="downloadPDF()">
+                    <span>📥</span> Download PDF
+                </button>
+            </div>
+        </div>
+        
+        <div class="certificate-wrapper" id="certificatePreview">
+            <!-- Certificate will be generated here -->
+        </div>
+    </div>
+
+    <script>
+        // ئۇيغۇرچە ھەرپلەرنى ساقلايدىغان ۋە توغرا كۆرسىتىدىغان ئىقتىدار
+        function formatUyghurName(name) {
+            // ئۇيغۇرچە ھەرپلەرنى ئۆزگەرمەيدۇ، ھېچقانداق ئۆزگەرتىش قىلمايمىز
+            // بۇ يەردە ئۇيغۇرچە ھەرپلەر تولۇق ساقلىنىدۇ
+            return name;
+        }
+        
+        function generateCertificate() {
+            let name = document.getElementById('studentName').value || 'Student Name';
+            // ئۇيغۇرچە ئىسىمنى توغرا ساقلاش
+            name = formatUyghurName(name);
+            
+            const issueDate = document.getElementById('issueDate').value;
+            const certNumber = document.getElementById('certNumber').value || 'UQAI-2026-XXXX';
+            let courseName = document.getElementById('courseName').value || 'Course Name';
+            courseName = formatUyghurName(courseName);
+            const duration = document.getElementById('duration').value;
+            const batch = document.getElementById('batch').value || 'BATCH 01';
+            
+            const preview = document.getElementById('certificatePreview');
+            const formattedDate = formatDate(issueDate);
+            const year = new Date(issueDate).getFullYear();
+            
+            const certificateHTML = `
+                <div class="certificate" id="certificateContent">
+                    <!-- Header Bar -->
+                    <div class="header-bar"></div>
+                    
+                    <!-- Certificate ID Badge -->
+                    <div class="cert-id-badge">ID: ${escapeHtml(certNumber)}</div>
+                    
+                    <!-- Corner Decorations -->
+                    <div class="corner-decoration corner-tl"></div>
+                    <div class="corner-decoration corner-tr"></div>
+                    <div class="corner-decoration corner-bl"></div>
+                    <div class="corner-decoration corner-br"></div>
+                    
+                    <!-- Watermark -->
+                    <div class="watermark">UQAI</div>
+                    
+                    <!-- Header -->
+                    <div class="header-section">
+                        <div class="logo-area">
+                            <div class="institution-logo">⚛</div>
+                            <div class="institution-text">
+                                <div class="institution-name">Uyghur Quantum AI Academy</div>
+                                <div class="institution-sub">International Institute of Quantum Technology</div>
+                            </div>
+                        </div>
+                        <div class="batch-badge">${escapeHtml(batch)}</div>
+                    </div>
+                    
+                    <!-- Main Content - increased top padding -->
+                    <div class="content-section">
+                        <div class="intro-text">This is to certify that</div>
+                        
+                        <div class="recipient-section">
+                            <div class="recipient-label">Student Name</div>
+                            <!-- ئۇيغۇرچە ئىسىم بۇ يەردە توغرا كۆرسىتىلىدۇ -->
+                            <div class="recipient-name">${escapeHtmlPreserveUyghur(name)}</div>
+                        </div>
+                        
+                        <div class="main-title">has successfully completed the certification in</div>
+                        
+                        <!-- Course Title - FIXED: No more gradient text overlap -->
+                        <div class="course-title">${escapeHtmlPreserveUyghur(courseName)}</div>
+                        
+                        <div class="details-box">
+                            <div class="details-text">
+                                Duration: <strong>${escapeHtml(duration)}</strong> of intensive study including theoretical examinations 
+                                and practical quantum computing implementations. Accredited by the International Quantum Computing Association (IQCA).
+                            </div>
+                        </div>
+                        
+                        <div class="highlights">
+                            <div class="highlight-item">
+                                <div class="highlight-dot"></div>
+                                <span>Postulates of Quantum Computing</span>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-dot"></div>
+                                <span>Quantum Machine Learning</span>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-dot"></div>
+                                <span>Quantum Deep Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Footer -->
+                    <div class="footer-section">
+                        <div class="footer-info">
+                            <div class="info-block">
+                                <div class="info-label">Issue Date</div>
+                                <div class="info-value">${formattedDate}</div>
+                            </div>
+                            <div class="info-block">
+                                <div class="info-label">Certificate ID</div>
+                                <div class="info-value">${escapeHtml(certNumber)}</div>
+                            </div>
+                            <div class="info-block">
+                                <div class="info-label">Valid Until</div>
+                                <div class="info-value">Lifetime</div>
+                            </div>
+                        </div>
+                        
+                        <div class="signatures-area">
+                            <div class="signature-item">
+                                <div class="signature-line"></div>
+                                <div class="signature-name">Dr. Kawuljan Abuduryim</div>
+                                <div class="signature-title">President, UQAI</div>
+                            </div>
+                            <div class="signature-item">
+                                <div class="signature-line"></div>
+                                <div class="signature-name">Ay Abuduryim</div>
+                                <div class="signature-title">Lead Instructor</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Holographic Seal -->
+                    <div class="hologram-seal">
+                        <div class="seal-outer">
+                            <div class="seal-inner">
+                                <div>OFFICIAL</div>
+                                <div class="seal-year">${year}</div>
+                                <div>SEAL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            preview.innerHTML = certificateHTML;
+        }
+        
+        // ئۇيغۇرچە ھەرپلەرنى ساقلايدىغان escape ئىقتىدارى
+        function escapeHtmlPreserveUyghur(str) {
+            if (!str) return "";
+            // HTML ئامانلىقى ئۈچن، ئەمما ئۇيغۇرچە ھەرپلەرنى ئۆزگەرتمەيدۇ
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        function escapeHtml(str) {
+            if (!str) return "";
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        function formatDate(dateString) {
+            if (!dateString) return 'March 13, 2026';
+            
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            
+            const date = new Date(dateString);
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            return `${month} ${day}, ${year}`;
+        }
+        
+        function downloadPDF() {
+            const element = document.getElementById('certificateContent');
+            
+            if (!element) {
+                alert('Please generate the certificate first!');
+                return;
+            }
+            
+            const studentName = document.getElementById('studentName').value || 'Certificate';
+            
+            const opt = {
+                margin: [0, 0, 0, 0],
+                filename: `UQAI_Certificate_${studentName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`,
+                image: { 
+                    type: 'jpeg', 
+                    quality: 1 
+                },
+                html2canvas: { 
+                    scale: 3,
+                    letterRendering: true,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                    windowWidth: 1123,
+                    windowHeight: 794,
+                    x: 0,
+                    y: 0,
+                    scrollX: 0,
+                    scrollY: 0,
+                    width: 1123,
+                    height: 794
+                },
+                jsPDF: { 
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'landscape',
+                    precision: 16,
+                    compress: false
+                }
+            };
+            
+            const btn = document.querySelector('.btn-pdf');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>⏳</span> Generating PDF...';
+            btn.disabled = true;
+            
+            html2pdf()
+                .set(opt)
+                .from(element)
+                .toPdf()
+                .get('pdf')
+                .then(function (pdf) {
+                    const totalPages = pdf.internal.getNumberOfPages();
+                    if (totalPages > 1) {
+                        for (let i = totalPages; i > 1; i--) {
+                            pdf.deletePage(i);
+                        }
+                    }
+                    return pdf;
+                })
+                .save()
+                .then(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                })
+                .catch(err => {
+                    console.error('PDF generation error:', err);
+                    alert('Error generating PDF. Please try again.');
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                });
+        }
+        
+        window.onload = function() {
+            generateCertificate();
+        };
+        
+        let timeout;
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', function() {
+                clearTimeout(timeout);
+                timeout = setTimeout(generateCertificate, 300);
+            });
+        });
+    </script>
+</body>
+</html>

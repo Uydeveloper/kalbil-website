@@ -21,7 +21,7 @@ import Ballada from './ballada';
 import Uyghurchatbot from './UyghurChatBot'; 
 import QuantumUyghurAi from './QuantumUyghurAi';
 import UyghurAIsecyrety from './UyghurAIsecyrety'; 
-
+import QuantumTest from 'E:/UNIVERSITY-d/UNIVERSITY/online-courses/src/components/QunatumTest.jsx';
 
 // Default data
 const defaultUyghurPhrases = [
@@ -472,7 +472,8 @@ const UyghurAI = () => {
             { id: 'ballada', name: 'باللادا', icon: 'Book' },
             { id: 'chatbot', name: 'پاراڭچى ', icon: 'Zap' },
             { id: 'quantum-uyghur-ai', name: 'Quantum Uyghur AI', icon: 'Zap' },
-            { id: 'uyghur-ai-security', name: 'Uyghur AI Security', icon: 'Shield' }
+            { id: 'uyghur-ai-security', name: 'Uyghur AI Security', icon: 'Shield' },
+            { id: 'quantum-test', name: 'Quantum Test', icon: 'Brain' }
 
           ].map((tab) => (
             <button
@@ -641,6 +642,7 @@ const UyghurAI = () => {
         {activeTab === 'chatbot' && <Uyghurchatbot />}
         {activeTab === 'quantum-uyghur-ai' && <QuantumUyghurAi />}
         {activeTab === 'uyghur-ai-security' && <UyghurAIsecyrety />}
+        {activeTab === 'quantum-test' && <QuantumTest />}
         {customTabs.some(tab => tab.id === activeTab) && renderCustomTab(activeTab)}
         
         <div className="mt-8 text-center text-sm text-gray-500 space-y-1">

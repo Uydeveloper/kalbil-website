@@ -190,7 +190,12 @@ export default function MyCourses() {
     ],
     "stat109": [
       { "title": "ئاساسىي ئۇچۇرلار", "file": "kalbil.html" },
-      { "title": " گۇۋاھنامە  Certification ", "file": "گۇۋاھنامە.html" }
+      { "title": " گۇۋاھنامە  Certification ", "file": "گۇۋاھنامە.html" },
+      { "title": "ئاساسىي ئۇچۇرلار", "file": "گۇۋاھنامە2.html" },
+      { "title": " گۇۋاھنامە  Certification ", "file": "گۇۋاھنامە1.html" },
+      { "title": " گۇۋاھنامە  Certification ", "file": "گۇۋاھنامە ئۇيغۇرچە.html" },
+
+    
     ]
   };
 

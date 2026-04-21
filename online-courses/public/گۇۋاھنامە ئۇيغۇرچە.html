@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كەسپىي گۇۋاھنامە - ئۇيغۇر كۋانت سۇنئىي ئىدراك ئاكادېمىيەسى</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #e4e8ec;
+            min-height: 100vh;
+            padding: 20px;
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5f2a;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: 800;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .control-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+            color: #1a5f2a;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: 'Noto Naskh Arabic', serif;
+            direction: rtl;
+            text-align: right;
+        }
+        
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Noto Naskh Arabic', serif;
+            color: white;
+        }
+        
+        .btn-generate { background: #1a5f2a; }
+        .btn-pdf { background: #c75b12; }
+        
+        /* Certificate Styles - FIXED DIMENSIONS */
+        .certificate-wrapper {
+            background: white;
+            width: 297mm;
+            height: 210mm; /* Fixed height to ensure full page capture */
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden; /* Important for PDF capture */
+        }
+        
+        .certificate {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            display: flex;
+            flex-direction: column;
+            /* Padding handled by inner sections to avoid height overflow */
+        }
+        
+        .header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8mm;
+            background: linear-gradient(90deg, #1a5f2a 0%, #2d7a3e 50%, #c75b12 100%);
+        }
+        
+        .cert-id-badge {
+            position: absolute;
+            top: 12mm;
+            left: 20mm;
+            background: rgba(26, 95, 42, 0.1);
+            padding: 2mm 4mm;
+            border-radius: 4px;
+            font-size: 10px;
+            color: #1a5f2a;
+            font-family: monospace;
+            font-weight: bold;
+            z-index: 20;
+        }
+        
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12mm 20mm 5mm 20mm;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .institution-logo {
+            width: 55px;
+            height: 55px;
+            background: #1a5f2a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            border: 3px solid #c75b12;
+        }
+        
+        .institution-text {
+            text-align: right;
+        }
+        
+        .institution-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a5f2a;
+            line-height: 1.3;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .institution-sub {
+            font-size: 12px;
+            color: #c75b12;
+            font-weight: 600;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .batch-badge {
+            background: #c75b12;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 13px;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .content-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center;
+            text-align: center;
+            padding: 0 25mm;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .intro-text {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5mm;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .recipient-section {
+            margin: 5mm 0;
+            padding: 5mm 20mm;
+            border-top: 2px solid #1a5f2a;
+            border-bottom: 2px solid #1a5f2a;
+            width: 80%;
+        }
+        
+        .recipient-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 2mm;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .recipient-name {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1a1a2e;
+            font-family: 'Noto Naskh Arabic', serif;
+            line-height: 1.3;
+        }
+        
+        .main-title {
+            font-size: 18px;
+            color: #c75b12;
+            font-weight: 700;
+            margin: 6mm 0 4mm 0;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .course-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #1a5f2a;
+            margin: 4mm 0 8mm 0;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .details-box {
+            background: rgba(26, 95, 42, 0.05);
+            border-right: 4px solid #1a5f2a;
+            border-left: 4px solid #c75b12;
+            padding: 4mm 8mm;
+            margin: 4mm 0;
+            border-radius: 6px;
+            width: 85%;
+        }
+        
+        .details-text {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .highlights {
+            display: flex;
+            justify-content: center;
+            gap: 15mm;
+            margin: 5mm 0;
+        }
+        
+        .highlight-item {
+            font-size: 12px;
+            color: #444;
+            font-weight: 600;
+            font-family: 'Noto Naskh Arabic', serif;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .highlight-dot {
+            width: 6px;
+            height: 6px;
+            background: #c75b12;
+            border-radius: 50%;
+        }
+        
+        .footer-section {
+            background: rgba(26, 95, 42, 0.08);
+            padding: 5mm 20mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid rgba(26, 95, 42, 0.15);
+            margin-top: auto; /* Push to bottom */
+            position: relative;
+            z-index: 10;
+        }
+        
+        .footer-info {
+            display: flex;
+            gap: 15mm;
+        }
+        
+        .info-block {
+            text-align: right;
+        }
+        
+        .info-label {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 1px;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .info-value {
+            font-size: 12px;
+            color: #1a5f2a;
+            font-weight: 700;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .signatures-area {
+            display: flex;
+            gap: 12mm;
+        }
+        
+        .signature-item {
+            text-align: center;
+        }
+        
+        .signature-line {
+            width: 30mm;
+            height: 1px;
+            background: #1a5f2a;
+            margin-bottom: 2mm;
+        }
+        
+        .signature-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: #1a1a2e;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .signature-title {
+            font-size: 9px;
+            color: #666;
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .corner-decoration {
+            position: absolute;
+            width: 25mm;
+            height: 25mm;
+            border: 2px solid rgba(26, 95, 42, 0.15);
+            z-index: 5;
+        }
+        
+        .corner-tl { top: 12mm; right: 12mm; border-left: none; border-bottom: none; }
+        .corner-tr { top: 12mm; left: 12mm; border-right: none; border-bottom: none; }
+        .corner-bl { bottom: 30mm; right: 12mm; border-left: none; border-top: none; }
+        .corner-br { bottom: 30mm; left: 12mm; border-right: none; border-top: none; }
+        
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 80px;
+            color: rgba(26, 95, 42, 0.03);
+            font-weight: 900;
+            z-index: 1;
+        }
+        
+        .hologram-seal {
+            position: absolute;
+            bottom: 15mm;
+            left: 22mm;
+            width: 20mm;
+            height: 20mm;
+            z-index: 20;
+        }
+        
+        .seal-outer {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#1a5f2a, #c75b12, #1a5f2a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+        }
+        
+        .seal-inner {
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            border: 1px dashed white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 6px;
+            font-weight: bold;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .control-panel, h1 { display: none; }
+            .certificate-wrapper { 
+                width: 297mm; 
+                height: 210mm; 
+                box-shadow: none; 
+                margin: 0; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 ئۇيغۇر كۋانت سۈنئىي ئىدراك ئاكادېمىيەسى 🎓</h1>
+        
+        <div class="control-panel">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>👤 ئوقۇغۇچى ئىسمى</label>
+                    <input type="text" id="studentName" value="ئەكبەر دومۇر مامەت">
+                </div>
+                <div class="form-group">
+                    <label>📅 چىقىرىلغان ۋاقتى</label>
+                    <input type="date" id="issueDate" value="2026-03-13">
+                </div>
+                <div class="form-group">
+                    <label>🔢 گۇۋاھنامە نومۇرى</label>
+                    <input type="text" id="certNumber" value="UQAI-2026-0042-XQ">
+                </div>
+                <div class="form-group">
+                    <label>📚 كۇرس نامى</label>
+                    <input type="text" id="courseName" value="كۋانت ھېسابلاش ۋە ماشىنا ئۆگىنىش">
+                </div>
+                <div class="form-group">
+                    <label>⏱️ مۇددەت</label>
+                    <select id="duration">
+                        <option value="6 ئاي">6 ئاي</option>
+                        <option value="12 ھەپتە">12 ھەپتە</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>🎓 گۇرۇپپا</label>
+                    <input type="text" id="batch" value="1-گۇرۇپپا">
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn-generate" onclick="generateCertificate()">✨ گۇۋاھنامە ھاسىل قىلىش</button>
+                <button class="btn-pdf" onclick="downloadPDF()">📥 PDF چۈشۈرۈش</button>
+            </div>
+        </div>
+        
+        <div class="certificate-wrapper" id="certificatePreview">
+            <!-- Certificate renders here -->
+        </div>
+    </div>
+
+    <script>
+        function generateCertificate() {
+            const name = document.getElementById('studentName').value;
+            const date = document.getElementById('issueDate').value;
+            const certNum = document.getElementById('certNumber').value;
+            const course = document.getElementById('courseName').value;
+            const duration = document.getElementById('duration').value;
+            const batch = document.getElementById('batch').value;
+            
+            const year = new Date(date).getFullYear();
+            const formattedDate = date ? `${year}-يىلى ${new Date(date).getDate()}-${new Date(date).getMonth()+1}` : '2026-يىلى';
+
+            const html = `
+                <div class="certificate" id="certificateContent">
+                    <div class="header-bar"></div>
+                    <div class="cert-id-badge">ID: ${certNum}</div>
+                    
+                    <div class="corner-decoration corner-tl"></div>
+                    <div class="corner-decoration corner-tr"></div>
+                    <div class="corner-decoration corner-bl"></div>
+                    <div class="corner-decoration corner-br"></div>
+                    
+                    <div class="watermark">UQAI</div>
+                    
+                    <div class="header-section">
+                        <div class="logo-area">
+                            <div class="institution-logo">⚛</div>
+                            <div class="institution-text">
+                                <div class="institution-name">ئۇيغۇر كۋانت سۈنئىي ئىدراك ئاكادېمىيەسى</div>
+                                <div class="institution-sub">خەلقئارا كۋانت تېخنىكا ئىنستىتۇتى</div>
+                            </div>
+                        </div>
+                        <div class="batch-badge">${batch}</div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <div class="intro-text">بۇ گۇۋاھنامە بىلەن دەلىللىنىدۇكى</div>
+                        <div class="recipient-section">
+                            <div class="recipient-label">ئوقۇغۇچى ئىسمى</div>
+                            <div class="recipient-name">${name}</div>
+                        </div>
+                        <div class="main-title">تۆۋەندىكى كۇرسنى مۇۋەپپەقىيەتلىك تاماملىدى</div>
+                        <div class="course-title">${course}</div>
+                        
+                        <div class="details-box">
+                            <div class="details-text">
+                                داۋاملىشىش مۇددىتى: <strong>${duration}</strong> نەزەرىيەۋى ۋە ئەمەلىي كۋانت ھېسابلاش دەرسلىكلىرىنى ئۆز ئىچىگە ئالىدۇ.
+                                خەلقئارا كۋانت جەمئىيىتى (IQCA) تەرىپىدىن ئېتىراپ قىلىنغان.
+                            </div>
+                        </div>
+                        
+                        <div class="highlights">
+                            <div class="highlight-item"><div class="highlight-dot"></div>كۋانت پرىنسىپلىرى</div>
+                            <div class="highlight-item"><div class="highlight-dot"></div>ماشىنا ئۆگىنىش</div>
+                            <div class="highlight-item"><div class="highlight-dot"></div>چوڭقۇر ئۆگىنىش</div>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <div class="footer-info">
+                            <div class="info-block">
+                                <div class="info-label">چىقىرىلغان ۋاقتى</div>
+                                <div class="info-value">${formattedDate}</div>
+                            </div>
+                            <div class="info-block">
+                                <div class="info-label">گۇۋاھنامە نومۇرى</div>
+                                <div class="info-value">${certNum}</div>
+                            </div>
+                            <div class="info-block">
+                                <div class="info-label">ئىناۋەتلىك مۇددىتى</div>
+                                <div class="info-value">مەڭگۈلۈك</div>
+                            </div>
+                        </div>
+                        <div class="signatures-area">
+                            <div class="signature-item">
+                                <div class="signature-line"></div>
+                                <div class="signature-name">دوكتور كاۋۇلجان</div>
+                                <div class="signature-title">رەئىس</div>
+                            </div>
+                            <div class="signature-item">
+                                <div class="signature-line"></div>
+                                <div class="signature-name">ئاي ئابدۇرېھىم</div>
+                                <div class="signature-title">باش ئوقۇتقۇچى</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hologram-seal">
+                        <div class="seal-outer">
+                            <div class="seal-inner">
+                                <div>رەسمىي</div>
+                                <div style="font-size:9px; margin:2px 0">${year}</div>
+                                <div>مۆھۈر</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('certificatePreview').innerHTML = html;
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('certificateContent');
+            if (!element) return;
+
+            // Force exact dimensions for A4 Landscape in pixels (approx 96dpi)
+            // 297mm = 1122.5px, 210mm = 793.7px
+            const widthPx = 1123;
+            const heightPx = 794;
+
+            const opt = {
+                margin: 0,
+                filename: 'Uyghur_Certificate.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                    scale: 2, // High quality but not too heavy
+                    width: widthPx,
+                    height: heightPx,
+                    windowWidth: widthPx,
+                    windowHeight: heightPx,
+                    useCORS: true,
+                    letterRendering: true,
+                    scrollX: 0,
+                    scrollY: 0,
+                    x: 0,
+                    y: 0
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'landscape',
+                    putOnlyUsedFonts: true
+                }
+            };
+
+            // Temporarily remove shadow for cleaner PDF
+            const wrapper = document.getElementById('certificatePreview');
+            const originalShadow = wrapper.style.boxShadow;
+            wrapper.style.boxShadow = 'none';
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                wrapper.style.boxShadow = originalShadow;
+            });
+        }
+
+        window.onload = generateCertificate;
+    </script>
+</body>
+</html>
