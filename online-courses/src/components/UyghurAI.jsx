@@ -425,6 +425,11 @@ const UyghurAI = () => {
               {"\u200E"}AI{"\u200E"} قۇتئادغۇ
             </h1>
           </div>
+          <img
+            src={`${process.env.PUBLIC_URL}/images/icon.png`}
+            alt="QutadguAI Logo"
+            className="h-22 md:h-24 w-8 sm:h-26 md:h-52 w-auto  drop-shadow-md"
+          />
           <p className="text-gray-700  font-uyghur text-3xl">Complete Language Learning & Cultural Preservation Suite</p>
           <p className="font-uyghur text-3xl  text-gray-600 mt-1">ئۇيغۇر تىل ئۆگىنىش ۋە مەدەنىيەت ساقلاش تولۇق سىستېمىسى</p>
           

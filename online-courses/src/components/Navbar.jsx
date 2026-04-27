@@ -103,7 +103,7 @@ export default function Navbar() {
         backdropFilter: "blur(0px)",
       }}
       className={`sticky relative top-0 z-50 py-20 px-6 transition-all duration-300 ${
-        darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-800"
+        darkMode ? "bg-gray-900 text-white" : "bg-white-300 text-gray-800"
       }`}
     >
       {/* ✅ Frases Uyghur / English */}
@@ -162,16 +162,16 @@ text-xl md:text-3xl font-bold dark:text-yellow-400 text-blue-600 drop-shadow-lg 
         {/* Logo */}
         <Link to="/" className="flex mb-0 items-center gap-3 hover:opacity-90">
           <img
-            src={`${process.env.PUBLIC_URL}/images/image05.png`}
+            src={`${process.env.PUBLIC_URL}/images/image005.png`}
             alt="KelBiL Logo"
-            className="h-8 sm:h-10 md:h-14 w-auto object-contain drop-shadow-md"
+            className="h-12 md:h-20 w-8 sm:h-23 md:h-38 w-auto object-contain drop-shadow-md"
           />
           <span
             className={`font-extrabold tracking-wide transition-all duration-300 ${
               scrolled ? "text-xl sm:text-2xl md:text-4xl" : "text-lg sm:text-xl md:text-2xl"
             } text-blue-600 dark:text-blue-400 drop-shadow`}
           >
-            KelBiL
+            
           </span>
         </Link>
 
@@ -191,7 +191,7 @@ text-xl md:text-3xl font-bold dark:text-yellow-400 text-blue-600 drop-shadow-lg 
           
           {/* KeLBiLAI مۇندەرىجىسى */}
           <Link to="/UyghurAI" className={isActive("/UyghurAI") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-gray-200 hover:text-blue-500"}>
-            {t.UyghurAI?.[lang] || (lang === "ug" ? " AI قۇتئادغۇ" : "QutadguAI")}
+            {t.UyghurAI?.[lang] || (lang === "ug" ? " AI قۇتئادغۇ" : "QutadghuAI")}
           </Link>
           
           {/* My Blog مۇندەرىجىسى */}
