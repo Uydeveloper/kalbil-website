@@ -426,7 +426,7 @@ const UyghurAI = () => {
             </h1>
           </div>
           <img
-            src={`${process.env.PUBLIC_URL}/images/icon.png`}
+            src={`${process.env.PUBLIC_URL}/images/icon01.png`}
             alt="QutadguAI Logo"
             className="h-22 md:h-24 w-8 sm:h-26 md:h-52 w-auto  drop-shadow-md"
           />
