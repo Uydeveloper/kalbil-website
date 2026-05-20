@@ -2,7 +2,7 @@ export const t = {
   home: { ug: "باش بەت", en: "Home" },
   courses: { ug: "دەرسلەر", en: "Courses" },
   about: { ug: " ھەققمىزدە", en: "About" },
-  contact: { ug: "ئالاقىلىشىڭ", en: "Contact" },
+  contact: { ug: "دەرسم", en: "My Courses" },
   student: { ug: "ئوقۇغۇچىلار", en: "Students" },
   mycourses: { ug: "مىنىڭ دەرسلىرم", en: "My Courses" },
 

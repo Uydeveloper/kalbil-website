@@ -1,0 +1,188 @@
+[
+  {
+    "id": "admin001",
+    "name": "Uyghurjan",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "id": "student001",
+    "name": "ئەكبەر",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student002",
+    "name": "دىلنۇر",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student003",
+    "name": "ئانارگۈل",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student004",
+    "name": "ئەركىن",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student005",
+    "name": "مۇرات",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student006",
+    "name": "گۈلنەزەر",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student007",
+    "name": "ئالىم",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student008",
+    "name": "راھىلە",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student009",
+    "name": "بىلاد",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student010",
+    "name": "نۇربىيە",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student011",
+    "name": "ئېلشات",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student012",
+    "name": "زۇمرەت",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student013",
+    "name": "پەرھات",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student014",
+    "name": "مەلھەم",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "student015",
+    "name": "كامىل",
+    "password": "11111",
+    "role": "student"
+  },
+  {
+    "id": "user001",
+    "name": "ئابدۇللا",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user002",
+    "name": "ماھىرە",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user003",
+    "name": "نۇرسىمان",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user004",
+    "name": "غەيرەت",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user005",
+    "name": "شىرئەلى",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user006",
+    "name": "گۈلزار",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user007",
+    "name": "تۇرسۇن",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user008",
+    "name": "ئايگۈل",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user009",
+    "name": "مۇھەممەد",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user010",
+    "name": "سەبىيە",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user011",
+    "name": "ئادىل",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user012",
+    "name": "گۈلشەن",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user013",
+    "name": "مەمەت",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user014",
+    "name": "نەپىسە",
+    "password": "22222",
+    "role": "user"
+  },
+  {
+    "id": "user015",
+    "name": "ئۆمەر",
+    "password": "22222",
+    "role": "user"
+  }
+]

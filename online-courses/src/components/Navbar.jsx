@@ -294,7 +294,7 @@ text-xl md:text-3xl font-bold dark:text-yellow-400 text-blue-600 drop-shadow-lg 
           
           <Link to="/courses" className="block px-4 py-2 border-b hover:bg-gray-100 dark:hover:bg-gray-700">Courses</Link>
           <Link to="/about" className="block px-4 py-2 border-b hover:bg-gray-100 dark:hover:bg-gray-700">About</Link>
-          <Link to="/contact" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</Link>
+          <Link to="/contact" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">دەرسىم</Link>
         </div>
       )}
 
