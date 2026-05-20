@@ -1,3 +1,15 @@
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+
+import { Helmet } from "react-helmet";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
+
 import React, { useState, useEffect, useRef } from "react";
 import users from "../data/userscopy.json";
 import albums from "../data/albums.json";
@@ -103,47 +115,188 @@ export default function NewLabelCourses() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-between bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 select-none" dir="rtl">
-        <div />
-        <div className="w-full max-w-md flex flex-col items-center">
-          <div className="mb-8 flex flex-col items-center text-center group">
-            <div className="relative w-20 h-20 mb-3 flex items-center justify-center bg-slate-900 rounded-2xl border-2 border-cyan-500/60 shadow-[0_0_25px_rgba(6,182,212,0.15)]">
-              <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">K</span>
-            </div>
-            <h1 className="text-xl font-bold tracking-wide text-slate-100">KELBIL HIGH TECH</h1>
-            <p className="text-[10px] text-cyan-400/60 tracking-wider font-mono mt-0.5">Advanced Learning Hub</p>
+  <div
+    className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#020617] via-[#071126] to-[#020617] text-white flex flex-col justify-between items-center px-4 py-6"
+    dir="rtl"
+  >
+
+    {/* Animated Background */}
+    <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-3xl rounded-full animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 blur-3xl rounded-full animate-pulse"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.08),transparent_40%)]"></div>
+    </div>
+
+    {/* Top Space */}
+    <div />
+
+    {/* Main Container */}
+    <div className="relative z-10 w-full max-w-md">
+
+      {/* Logo Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="mb-10 flex flex-col items-center text-center"
+      >
+
+        {/* Logo */}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{
+            delay: 0.2,
+            type: "spring",
+            stiffness: 180
+          }}
+          className="relative w-28 h-28 rounded-[2rem] bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 border border-cyan-400/30 backdrop-blur-2xl flex items-center justify-center shadow-[0_0_50px_rgba(6,182,212,0.25)]"
+        >
+
+          {/* Glow */}
+          <div className="absolute inset-0 rounded-[2rem] bg-cyan-400/10 blur-2xl"></div>
+
+          {/* Letter */}
+          <span className="relative text-5xl font-black bg-gradient-to-r from-cyan-300 via-white to-emerald-300 bg-clip-text text-transparent">
+            K
+          </span>
+        </motion.div>
+
+        {/* Brand */}
+        <h1 className="mt-5 text-3xl sm:text-4xl font-black tracking-wide bg-gradient-to-r from-cyan-300 via-white to-emerald-300 bg-clip-text text-transparent">
+          KELBIL HIGH TECH
+        </h1>
+
+        {/* English */}
+        <p className="mt-2 text-xs tracking-[0.35em] uppercase text-cyan-400/70 font-mono">
+          Advanced AI Learning Hub
+        </p>
+
+        {/* Uyghur Slogan */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-6 text-lg sm:text-xl leading-loose text-slate-300 max-w-md font-uyghur"
+        >
+          «بىلىم بىلەن ئويغىنىمىز، سۈنئىي ئەقىل بىلەن كەلگۈسىنى قۇرىمىز»
+        </motion.p>
+
+        {/* Small Subtitle */}
+        <p className="mt-3 text-sm text-slate-500 leading-relaxed px-4">
+          ئۇيغۇر زېھنى • زامانىۋى تېخنىكا • رەقەملىك كەلگۈسى
+        </p>
+      </motion.div>
+
+      {/* Login Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 35 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="relative overflow-hidden bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-7 shadow-[0_0_40px_rgba(0,0,0,0.4)]"
+      >
+
+        {/* Card Glow */}
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-cyan-500/10 blur-3xl rounded-full"></div>
+        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-500/10 blur-3xl rounded-full"></div>
+
+        {/* Heading */}
+        <div className="relative z-10 text-center mb-6">
+          <h2 className="text-2xl font-bold text-white">
+            سىستېمىغا كىرىش
+          </h2>
+          <p className="text-sm text-slate-400 mt-2">
+            AI Education Platform Access
+          </p>
+        </div>
+
+        {/* Inputs */}
+        <div className="relative z-10 space-y-5">
+
+          {/* User */}
+          <div>
+            <label className="block text-sm text-slate-300 mb-2 mr-1">
+              ئىسمىڭىز ياكى كىملىك نومۇرى
+            </label>
+
+            <input
+              className="w-full bg-slate-950/70 border border-slate-800 text-slate-200 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all text-right"
+              placeholder="كىملىك كىرگۈزۈڭ..."
+              value={login.identifier}
+              onChange={(e) =>
+                setLogin((prev) => ({
+                  ...prev,
+                  identifier: e.target.value,
+                }))
+              }
+            />
           </div>
 
-          <div className="w-full bg-slate-900/60 backdrop-blur-xl border border-slate-800/60 rounded-2xl p-6 shadow-2xl">
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs text-slate-400 mb-1.5 mr-1">ئىسمىڭىز ياكى كىملىك ID نومۇرىڭىز</label>
-                <input
-                  className="w-full bg-slate-950 border border-slate-800 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500 transition-colors text-right"
-                  placeholder="كىملىك كىرگۈزۈڭ"
-                  value={login.identifier}
-                  onChange={(e) => setLogin((prev) => ({ ...prev, identifier: e.target.value }))}
-                />
-              </div>
-              <div>
-                <label className="block text-xs text-slate-400 mb-1.5 mr-1">مەخپىي نومۇر</label>
-                <input
-                  className="w-full bg-slate-950 border border-slate-800 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500 transition-colors text-left font-mono"
-                  placeholder="••••••••"
-                  type="password"
-                  value={login.password}
-                  onChange={(e) => setLogin((prev) => ({ ...prev, password: e.target.value }))}
-                />
-              </div>
-              <button onClick={handleLogin} className="w-full bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-400 text-slate-950 font-bold py-2.5 rounded-xl transition-all text-sm shadow-md">
-                سىستېمىغا كىرىش
-              </button>
-            </div>
+          {/* Password */}
+          <div>
+            <label className="block text-sm text-slate-300 mb-2 mr-1">
+              مەخپىي نومۇر
+            </label>
+
+            <input
+              type="password"
+              className="w-full bg-slate-950/70 border border-slate-800 text-slate-200 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/20 transition-all text-left font-mono tracking-widest"
+              placeholder="••••••••"
+              value={login.password}
+              onChange={(e) =>
+                setLogin((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }))
+              }
+            />
           </div>
+
+          {/* Remember */}
+          <div className="flex items-center justify-between text-sm">
+            <label className="flex items-center gap-2 text-slate-400 cursor-pointer">
+              <input type="checkbox" className="accent-cyan-500" />
+              <span>كىرىشنى ساقلاش</span>
+            </label>
+
+            <button className="text-cyan-400 hover:text-cyan-300 transition-colors">
+              پارول ئۇنتۇلدۇمۇ؟
+            </button>
+          </div>
+
+          {/* Login Button */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={handleLogin}
+            className="w-full relative overflow-hidden bg-gradient-to-r from-cyan-500 via-cyan-400 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-black py-3 rounded-2xl transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)]"
+          >
+            <span className="relative z-10">
+              سىستېمىغا كىرىش
+            </span>
+
+            <div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity"></div>
+          </motion.button>
+
         </div>
-        <footer className="mt-12 text-center text-xs text-slate-600 font-mono">© 2026 KELBIL ACADEMY</footer>
-      </div>
-    );
+      </motion.div>
+
+    </div>
+
+    {/* Footer */}
+    <footer className="relative z-10 mt-14 text-center">
+
+      <p className="text-xs text-slate-600 tracking-widest uppercase font-mono">
+        © 2026 KELBIL AI ACADEMY
+      </p>
+
+      <p className="mt-3 text-sm text-slate-500">
+        Powered by Uyghur Intelligence & Future Technology
+      </p>
+
+    </footer>
+  </div>
+);
   }
 
   const allowedAlbums = albums.filter((album) => {
@@ -158,274 +311,753 @@ export default function NewLabelCourses() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-200 p-4 md:p-6" dir="rtl">
       <div className="max-w-7xl mx-auto space-y-6">
-        
-        {/* باشقۇرۇش بالدىقى */}
-        <header className="flex items-center justify-between border-b border-slate-800 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center bg-slate-900 border border-cyan-500/30 rounded-xl font-bold text-cyan-400 text-lg">K</div>
-            <div>
-              <h1 className="text-base font-bold text-slate-100">كەلبىل ئوقۇتۇش باشقۇرۇش سىستېمىسى</h1>
-              <p className="text-xs text-slate-400 mt-0.5">ئىشلەتكۈچى: <span className="text-cyan-400 font-semibold">{user.name}</span> ({user.role})</p>
-            </div>
-          </div>
-          <button
-            onClick={() => { setUser(null); setOpenAlbum(null); }}
-            className="px-3 py-1.5 border border-slate-800 text-xs text-slate-400 hover:text-red-400 hover:border-red-500/20 rounded-xl transition-all bg-slate-900/30"
-          >
-            بىخەتەر چىكىنىش
-          </button>
-        </header>
+        <motion.div
+  initial={{ opacity: 0, y: 40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 1 }}
+  className="relative text-center mb-16 overflow-hidden"
+>
 
-        {/* ----------------- باشقۇرۇچى دوكلات تاختىسى (ADMIN PANEL) ----------------- */}
-        {user.role === "admin" && !openAlbum && (
-          <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-5 space-y-4 shadow-xl">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-              <h3 className="text-sm font-bold text-cyan-400">ئوقۇغۇچىلارنىڭ ئۆگىنىش مۇساپىسى دوكلاتى (Admin)</h3>
-            </div>
-            {Object.keys(progress).length === 0 ? (
-              <p className="text-xs text-slate-500 py-1">تېخى ئوقۇغۇچىلارنىڭ كۆرۈش خاتىرىسى يوق.</p>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-right text-xs border-collapse">
-                  <thead>
-                    <tr className="border-b border-slate-800 text-slate-400 bg-slate-950/40">
-                      <th className="p-3">ئوقۇغۇچى</th>
-                      <th className="p-3">كۇرس / ۋىدىئو تېمىسى</th>
-                      <th className="p-3">كۆرۈش پىرسەنتى</th>
-                      <th className="p-3">ھالىتى</th>
-                      <th className="p-3">ئاخىرقى كۆرگەن ۋاقتى</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-900/60">
-                    {Object.values(progress).map((item, idx) => (
-                      <tr key={idx} className="hover:bg-slate-900/20 transition-colors">
-                        <td className="p-3 font-semibold text-slate-300">{item.userName}</td>
-                        <td className="p-3 text-slate-400">{item.videoTitle}</td>
-                        <td className="p-3">
-                          <div className="flex items-center gap-2">
-                            <div className="w-20 bg-slate-950 h-1.5 rounded-full overflow-hidden border border-slate-800">
-                              <div className="bg-gradient-to-r from-cyan-500 to-teal-400 h-full" style={{ width: `${item.percent}%` }}></div>
-                            </div>
-                            <span className="font-mono text-[11px]">%{item.percent}</span>
-                          </div>
-                        </td>
-                        <td className="p-3">
-                          {item.completed ? (
-                            <span className="text-emerald-400 bg-emerald-500/5 border border-emerald-500/10 px-2 py-0.5 rounded-md text-[10px]">تۈگەتتى</span>
-                          ) : (
-                            <span className="text-amber-400 bg-amber-500/5 border border-amber-500/10 px-2 py-0.5 rounded-md text-[10px]">كۆرۈۋاتىدۇ</span>
-                          )}
-                        </td>
-                        <td className="p-3 text-slate-500 font-mono text-[11px]">{item.lastWatched}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        )}
+  {/* Background Glow */}
+  <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
+    <div className="w-[500px] h-[500px] bg-gradient-to-r from-blue-500/20 via-emerald-400/20 to-purple-500/20 blur-3xl rounded-full animate-pulse"></div>
+  </div>
 
-        {/* ----------------- كۆركەم ئەلبۇملار تىزىملىكى ----------------- */}
-        {!openAlbum && (
-          <div className="space-y-4 animate-fadeIn">
-            <h2 className="text-sm font-bold text-slate-300 mr-1">سىزگە ئېچىۋېتىلگەن ئاكادېمىك ئەلبۇملار</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {allowedAlbums.map((album) => (
-                <div 
-                  key={album.id} 
-                  className="bg-slate-900/30 border border-slate-800/80 hover:border-cyan-500/30 rounded-2xl overflow-hidden flex flex-col justify-between hover:bg-slate-900/50 shadow-lg group transition-all duration-300"
-                >
-                  {/* رەسىملىك رايون */}
-                  <div className="relative aspect-[16/10] w-full bg-slate-950 overflow-hidden border-b border-slate-900">
-                    <img 
-                      src={album.image || "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop"} 
-                      alt={album.title}
-                      className="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500"
-                    />
-                    {/* رەسمنىڭ ئۈستى سول تەرىپىدىكى ۋىدىئو سانى بەلگىسى */}
-                    <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md border border-slate-800 text-cyan-400 text-[10px] font-bold px-2.5 py-1 rounded-lg font-mono tracking-wide shadow-sm">
-                      {album.lessons?.length || 0} VIDEOS
+  {/* Logo */}
+  <div className="relative w-full flex justify-center mb-8 z-10">
+    <motion.img
+      initial={{ scale: 0, rotate: -10 }}
+      animate={{ scale: 1, rotate: 0 }}
+      transition={{
+        delay: 0.2,
+        type: "spring",
+        stiffness: 180,
+      }}
+      src={`${process.env.PUBLIC_URL}/images/image05.png`}
+      alt="KelBiL Logo"
+      className="w-36 sm:w-52 md:w-64 lg:w-72 h-auto object-contain drop-shadow-[0_0_40px_rgba(59,130,246,0.5)]"
+    />
+  </div>
+
+  {/* Small Label */}
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.4 }}
+    className="relative z-10 inline-block px-5 py-2 rounded-full border border-emerald-400/30 bg-white/10 backdrop-blur-md mb-6"
+  >
+    <span className="text-sm sm:text-base tracking-widest uppercase text-emerald-400 font-semibold">
+      AI • EDUCATION • FUTURE
+    </span>
+  </motion.div>
+
+  {/* Main Title */}
+  <motion.h2
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.5 }}
+    className="relative z-10 text-4xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight"
+    style={{ fontFamily: "Amiri, serif" }}
+  >
+    <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-emerald-400 to-purple-500 drop-shadow-lg">
+      KelBiL EduCourses
+    </span>
+  </motion.h2>
+
+  {/* Subtitle */}
+  <motion.p
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.7 }}
+    className="relative z-10 font-uyghur text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-200 leading-loose max-w-5xl mx-auto px-4"
+    dir="rtl"
+  >
+    «بىلىم بىلەن ئويغىنىمىز، سۈنئىي ئەقىل بىلەن كەلگۈسىنى قۇرىمىز.»
+  </motion.p>
+
+  {/* English Slogan */}
+  <motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.9 }}
+    className="relative z-10 mt-5 text-base sm:text-lg md:text-xl tracking-wide text-gray-500 dark:text-gray-400 italic"
+  >
+    Knowledge awakens us. AI builds our future.
+  </motion.p>
+
+  {/* Decorative Line */}
+  <motion.div
+    initial={{ width: 0 }}
+    animate={{ width: "220px" }}
+    transition={{ delay: 1.1, duration: 1 }}
+    className="relative z-10 h-1 mx-auto mt-8 rounded-full bg-gradient-to-r from-blue-500 via-emerald-400 to-purple-500"
+  />
+
+  {/* Bottom Glow Text */}
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1.3 }}
+    className="relative z-10 mt-8"
+  >
+    <span className="text-sm sm:text-base md:text-lg text-gray-400 tracking-[0.3em] uppercase">
+      Uyghur AI • Digital Future • Innovation
+    </span>
+  </motion.div>
+</motion.div>
+        {/* ========================= PROFESSIONAL HEADER ========================= */}
+<header className="relative overflow-hidden bg-[#0B1120]/85 backdrop-blur-2xl border border-cyan-500/10 rounded-[1.6rem] px-5 lg:px-6 py-4 shadow-[0_0_40px_rgba(0,0,0,0.28)]">
+
+  {/* Soft Background Glow */}
+  <div className="absolute top-0 right-0 w-52 h-52 bg-cyan-500/5 blur-3xl rounded-full"></div>
+  <div className="absolute bottom-0 left-0 w-52 h-52 bg-emerald-500/5 blur-3xl rounded-full"></div>
+
+  <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+
+    {/* ================= LEFT ================= */}
+    <div className="flex items-center gap-4 min-w-0">
+
+      {/* Professional Logo */}
+      <div className="relative flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/15 to-emerald-500/15 border border-cyan-400/15 flex items-center justify-center shadow-[0_0_25px_rgba(6,182,212,0.12)]">
+
+        {/* Glow */}
+        <div className="absolute inset-0 rounded-2xl bg-cyan-400/5 blur-xl"></div>
+
+        {/* Logo Text */}
+        <span className="relative text-2xl font-black bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">
+          K
+        </span>
+      </div>
+
+      {/* Academy Text */}
+      <div className="min-w-0">
+
+        {/* Top Label */}
+        <div className="flex items-center gap-2 flex-wrap">
+
+          <span className="text-[9px] uppercase tracking-[0.28em] text-cyan-400/60 font-mono">
+            KELBIL AI ACADEMY
+          </span>
+
+          <span className="hidden sm:block w-1 h-1 rounded-full bg-cyan-500/40"></span>
+
+          <span className="text-[9px] uppercase tracking-[0.2em] text-emerald-400/50">
+            EDUCATION SYSTEM
+          </span>
+
+        </div>
+
+        {/* Main Title */}
+        <h1 className="text-lg sm:text-xl font-black text-white mt-1 leading-tight truncate">
+          كەلبىل ئوقۇتۇش باشقۇرۇش سىستېمىسى
+        </h1>
+
+        {/* Slogan */}
+        <p className="text-xs text-slate-400 mt-1 leading-relaxed line-clamp-1">
+          «بىلىم بىلەن ئويغىنىمىز، سۈنئىي ئەقىل بىلەن كەلگۈسىنى قۇرىمىز»
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* ================= RIGHT ================= */}
+    <div className="flex items-center justify-between lg:justify-end gap-3 w-full lg:w-auto">
+
+      {/* User Card */}
+      <div className="flex items-center gap-3 bg-slate-950/50 border border-slate-800/80 rounded-2xl px-3 py-2">
+
+        {/* Avatar */}
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-sm shadow-md">
+          {user.name?.charAt(0)}
+        </div>
+
+        {/* User Info */}
+        <div className="leading-tight">
+
+          <p className="text-[10px] text-slate-500">
+            ئوقۇغۇچى
+          </p>
+
+          <h3 className="text-sm font-bold text-white max-w-[120px] truncate">
+            {user.name}
+          </h3>
+
+          <span className="inline-flex mt-1 px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/10 text-cyan-400 text-[9px] uppercase tracking-wide">
+            {user.role}
+          </span>
+
+        </div>
+
+      </div>
+
+      {/* Logout Button */}
+      <button
+        onClick={() => {
+          setUser(null);
+          setOpenAlbum(null);
+        }}
+        className="group relative overflow-hidden h-[56px] px-4 rounded-2xl bg-red-500/5 border border-red-500/10 hover:border-red-400/20 transition-all flex items-center justify-center"
+      >
+
+        {/* Hover Glow */}
+        <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/5 transition-all"></div>
+
+        <span className="relative text-xs font-bold text-red-400 whitespace-nowrap">
+          چىكىنىش
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+</header>
+
+{/* ========================= ADMIN PANEL ========================= */}
+{user.role === "admin" && !openAlbum && (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="relative overflow-hidden bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-6 shadow-2xl"
+  >
+
+    {/* Glow */}
+    <div className="absolute top-0 right-0 w-60 h-60 bg-cyan-500/10 blur-3xl rounded-full"></div>
+
+    {/* Header */}
+    <div className="relative z-10 flex items-center justify-between flex-wrap gap-4 border-b border-slate-800 pb-5">
+
+      <div>
+
+        <span className="text-[10px] uppercase tracking-[0.35em] text-cyan-400/70 font-mono">
+          ADMIN ANALYTICS
+        </span>
+
+        <h3 className="text-xl font-black text-white mt-2">
+          ئوقۇغۇچىلارنىڭ ئۆگىنىش دوكلاتى
+        </h3>
+
+      </div>
+
+      {/* Stats */}
+      <div className="flex items-center gap-3 flex-wrap">
+
+        <div className="bg-slate-950/60 border border-slate-800 rounded-2xl px-4 py-3">
+          <p className="text-xs text-slate-500">ئومۇمىي كۆرۈش</p>
+          <h4 className="text-xl font-black text-cyan-400">
+            {Object.keys(progress).length}
+          </h4>
+        </div>
+
+        <div className="bg-slate-950/60 border border-slate-800 rounded-2xl px-4 py-3">
+          <p className="text-xs text-slate-500">تاماملانغان</p>
+          <h4 className="text-xl font-black text-emerald-400">
+            {
+              Object.values(progress).filter((p) => p.completed).length
+            }
+          </h4>
+        </div>
+
+      </div>
+
+    </div>
+
+    {/* Table */}
+    {Object.keys(progress).length === 0 ? (
+
+      <div className="text-center py-14">
+        <p className="text-slate-500">
+          تېخى ئوقۇغۇچىلارنىڭ كۆرۈش خاتىرىسى يوق
+        </p>
+      </div>
+
+    ) : (
+
+      <div className="overflow-x-auto mt-5">
+
+        <table className="w-full text-right border-separate border-spacing-y-2">
+
+          <thead>
+            <tr className="text-slate-500 text-xs">
+
+              <th className="px-4 py-3">ئوقۇغۇچى</th>
+              <th className="px-4 py-3">دەرس</th>
+              <th className="px-4 py-3">پىرسەنت</th>
+              <th className="px-4 py-3">ھالىتى</th>
+              <th className="px-4 py-3">ۋاقتى</th>
+
+            </tr>
+          </thead>
+
+          <tbody>
+
+            {Object.values(progress).map((item, idx) => (
+
+              <tr
+                key={idx}
+                className="bg-slate-950/40 border border-slate-800 hover:border-cyan-500/20 transition-all"
+              >
+
+                <td className="px-4 py-4 rounded-r-2xl">
+
+                  <div className="flex items-center gap-3">
+
+                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-500 to-emerald-400 flex items-center justify-center text-slate-950 font-black">
+                      {item.userName?.charAt(0)}
                     </div>
-                    {/* قاپلاش سايىسى */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
-                  </div>
 
-                  {/* رەسمنىڭ ئاستىدىكى تەپسىلات ئۇچۇرلىرى */}
-                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                     <div>
-                      <h3 className="text-sm font-bold text-slate-100 group-hover:text-cyan-400 transition-colors leading-snug">
-                        {album.title}
-                      </h3>
-                      <p className="text-xs text-slate-400 mt-2 leading-relaxed line-clamp-2">
-                        {album.desc || "مەزكۇر تەتقىقات يۆنىلىشى يۇقىرى تېخنىكىلىق ئۆلچەمدە تۈزۈلگەن سىستېمىلىق ئاكادېمىك كۇرسلارنى ئۆز ئىچىگە ئالىدۇ."}
+                      <h4 className="text-sm font-bold text-white">
+                        {item.userName}
+                      </h4>
+
+                      <p className="text-[11px] text-slate-500">
+                        Student
                       </p>
                     </div>
 
-                    {/* سۆزلىگۈچى ۋە يوللانغان ۋاقىت قىسمى */}
-                    <div className="pt-3 border-t border-slate-900 flex items-center justify-between text-[11px] text-slate-400">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-slate-500">مۇئەللىم:</span>
-                        <span className="font-semibold text-slate-300">{album.author || "ئاكادېمىيە گۇرۇپپىسى"}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-slate-500">ۋاقتى:</span>
-                        <span className="font-mono text-slate-400">{album.date || "2026-04"}</span>
-                      </div>
-                    </div>
                   </div>
 
-                  {/* كىرىش تۈگمىسى */}
-                  <div className="p-4 bg-slate-950/40 border-t border-slate-900/60">
-                    <button
-                      onClick={() => handleOpenAlbum(album.id)}
-                      className="w-full text-xs bg-slate-900 hover:bg-cyan-600 hover:text-slate-950 border border-slate-800 hover:border-cyan-500/40 text-slate-200 font-bold py-2 rounded-xl transition-all shadow-inner"
-                    >
-                      كۇرسنى باشلاش
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+                </td>
 
-        {/* ----------------- قويغۇچ ئورۇنلاشتۇرۇشى ----------------- */}
-        {openAlbum && selectedAlbumData && (
-          <div className="space-y-4 animate-fadeIn">
-            
-            <div className="flex items-center justify-between bg-slate-900/40 border border-slate-800 px-4 py-2.5 rounded-xl">
-              <h2 className="text-xs font-bold text-cyan-400">{selectedAlbumData.title}</h2>
-              <button
-                onClick={() => setOpenAlbum(null)}
-                className="flex items-center gap-1.5 px-3 py-1 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded-lg transition-all"
-              >
-                <span>← ئەلبۇملارغا قايتىش</span>
-              </button>
-            </div>
+                <td className="px-4 py-4 text-sm text-slate-300">
+                  {item.videoTitle}
+                </td>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              
-              {/* سول تەرەپ: چوڭ ۋىدىئو قويغۇچ */}
-              <div className="lg:col-span-2 space-y-4">
-                {currentVideo ? (
-                  <div className="bg-slate-900/20 border border-slate-800/60 rounded-2xl p-4 shadow-xl">
-                    
-                    <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-black border border-slate-900 shadow-2xl">
-                      {currentVideo.youtube ? (
-                        <iframe
-                          src={`${currentVideo.youtube}?autoplay=1`}
-                          title={currentVideo.title}
-                          className="w-full h-full border-0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        ></iframe>
-                      ) : (
-                        <video
-                          ref={videoRef}
-                          src={currentVideo.video}
-                          controls
-                          autoPlay
-                          onTimeUpdate={handleTimeUpdate}
-                          onEnded={handleVideoEnded}
-                          className="w-full h-full object-contain"
-                        />
-                      )}
+                <td className="px-4 py-4">
+
+                  <div className="flex items-center gap-3">
+
+                    <div className="w-28 h-2 rounded-full bg-slate-900 overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-cyan-400 to-emerald-400 rounded-full"
+                        style={{ width: `${item.percent}%` }}
+                      />
                     </div>
 
-                    <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-slate-900 pt-3">
-                      <div>
-                        <span className="text-[10px] bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded font-mono">
-                          LECTURE {(currentIndex + 1).toString().padStart(2, "0")}
-                        </span>
-                        <h3 className="text-sm font-bold text-slate-100 mt-1">{currentVideo.title}</h3>
-                      </div>
-
-                      <div className="flex items-center gap-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-900">
-                        <span className="text-xs text-slate-400">ئاپتوماتىك كېيىنكى سىنغا ئۆتۈش:</span>
-                        <button
-                          onClick={() => setAutoplay(!autoplay)}
-                          className={`text-xs font-bold px-2.5 py-1 rounded-md transition-all ${
-                            autoplay ? "bg-cyan-500 text-slate-950" : "bg-slate-800 text-slate-500"
-                          }`}
-                        >
-                          {autoplay ? "ئوچۇق" : "تاقاق"}
-                        </button>
-                      </div>
-                    </div>
-
-                    <p className="text-xs text-slate-400 mt-2 bg-slate-950/40 p-3 rounded-xl border border-slate-900/60 leading-relaxed">
-                      {currentVideo.desc || "مەزكۇر دەرسكە مۇناسىۋەتلىك تەجرىبە قوللانمىلىرى ئاستىدىكى ھۆججەتلەر قىسمىغا كىرگۈزۈلگەن."}
-                    </p>
-
-                    <div className="grid grid-cols-2 gap-3 mt-4">
-                      <a href={currentVideo.pdf || "#"} download className="flex items-center justify-center bg-slate-950 border border-slate-800 hover:border-emerald-500/30 text-slate-300 hover:text-emerald-400 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
-                        PDF ھۆججەت چۈشۈرۈش
-                      </a>
-                      <a href={currentVideo.html || "#"} download className="flex items-center justify-center bg-slate-950 border border-slate-800 hover:border-cyan-500/30 text-slate-300 hover:text-cyan-400 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
-                        HTML دەستۇر چۈشۈرۈش
-                      </a>
-                    </div>
+                    <span className="text-xs font-mono text-cyan-400">
+                      %{item.percent}
+                    </span>
 
                   </div>
-                ) : (
-                  <div className="text-center py-12 bg-slate-900/10 border border-dashed border-slate-800 rounded-2xl">
-                    <p className="text-xs text-slate-500">مەزكۇر ئەلبۇمدە قويىدىغان ۋىدىئو تېپىلمىدى.</p>
-                  </div>
-                )}
-              </div>
 
-              {/* ئوڭ تەرەپ: تىك كارتا تىزىملىكى */}
-              <div className="space-y-3 lg:max-h-[580px] lg:overflow-y-auto pr-1">
-                <h3 className="text-xs font-bold text-slate-400 mb-1 mr-1">ئەلبۇمدىكى بارلىق دەرسلەر:</h3>
-                
-                {selectedAlbumData.lessons?.map((lesson, idx) => {
-                  const isPlaying = currentIndex === idx;
-                  const videoKey = `${user.id}_${openAlbum}_${idx}`;
-                  const isCompleted = progress[videoKey]?.completed;
+                </td>
 
-                  return (
-                    <div
-                      key={idx}
-                      onClick={() => {
-                        setCurrentVideo(lesson);
-                        setCurrentIndex(idx);
-                      }}
-                      className={`cursor-pointer p-3 rounded-xl border transition-all flex items-center justify-between gap-3 ${
-                        isPlaying
-                          ? "bg-cyan-950/30 border-cyan-500/50 shadow-md"
-                          : isCompleted
-                          ? "bg-emerald-950/20 border-emerald-900/60 hover:border-emerald-700"
-                          : "bg-slate-900/30 border-slate-900 hover:border-slate-800"
-                      }`}
-                    >
-                      <div className="flex-1 min-w-0 text-right">
-                        <span className={`text-[9px] font-mono block ${isPlaying ? "text-cyan-400" : isCompleted ? "text-emerald-400" : "text-slate-500"}`}>
-                          LESSON {(idx + 1).toString().padStart(2, "0")} {isCompleted && "✓ كۆرۈلدى"}
-                        </span>
-                        <h4 className={`text-xs font-bold mt-0.5 truncate ${isPlaying ? "text-cyan-400" : "text-slate-200"}`}>
-                          {lesson.title}
-                        </h4>
-                      </div>
+                <td className="px-4 py-4">
 
-                      <div className="flex-shrink-0">
-                        {isPlaying ? (
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
-                        ) : isCompleted ? (
-                          <div className="w-4 h-4 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-[9px] text-emerald-400 font-bold">✓</div>
-                        ) : (
-                          <span className="text-[10px] text-slate-600 font-mono">%{progress[videoKey]?.percent || 0}</span>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+                  {item.completed ? (
+                    <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-bold">
+                      ✓ تاماملاندى
+                    </span>
+                  ) : (
+                    <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[11px] font-bold">
+                      ئۆگىنىۋاتىدۇ
+                    </span>
+                  )}
+
+                </td>
+
+                <td className="px-4 py-4 rounded-l-2xl text-xs text-slate-500 font-mono">
+                  {item.lastWatched}
+                </td>
+
+              </tr>
+
+            ))}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    )}
+
+  </motion.div>
+)}
+
+{/* ========================= ALBUMS ========================= */}
+{!openAlbum && (
+  <div className="space-y-6">
+
+    {/* Section Title */}
+    <div className="flex items-center justify-between flex-wrap gap-3">
+
+      <div>
+
+        <span className="text-[10px] uppercase tracking-[0.35em] text-cyan-400/70 font-mono">
+          PROFESSIONAL COURSES
+        </span>
+
+        <h2 className="text-2xl font-black text-white mt-2">
+          سىزگە ئېچىۋېتىلگەن ئاكادېمىك كۇرسلار
+        </h2>
+
+      </div>
+
+      <div className="bg-slate-950/50 border border-slate-800 rounded-2xl px-4 py-3">
+        <p className="text-xs text-slate-500">
+          ئومۇمىي كۇرس
+        </p>
+
+        <h3 className="text-xl font-black text-cyan-400">
+          {allowedAlbums.length}
+        </h3>
+      </div>
+
+    </div>
+
+    {/* Album Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
+
+      {allowedAlbums.map((album) => (
+
+        <motion.div
+          key={album.id}
+          whileHover={{ y: -5 }}
+          className="group relative overflow-hidden rounded-[2rem] bg-white/[0.03] backdrop-blur-2xl border border-white/10 hover:border-cyan-500/20 transition-all shadow-2xl"
+        >
+
+          {/* Glow */}
+          <div className="absolute top-0 right-0 w-60 h-60 bg-cyan-500/5 blur-3xl rounded-full"></div>
+
+          {/* Image */}
+          <div className="relative aspect-[16/10] overflow-hidden">
+
+            <img
+              src={
+                album.image ||
+                "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
+              }
+              alt={album.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-black/20 to-transparent"></div>
+
+            {/* Videos */}
+            <div className="absolute top-4 left-4">
+
+              <div className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-cyan-300 text-[11px] font-black tracking-wider">
+                {album.lessons?.length || 0} VIDEOS
               </div>
 
             </div>
+
+            {/* Category */}
+            <div className="absolute bottom-4 right-4">
+
+              <div className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] uppercase tracking-widest">
+                AI COURSE
+              </div>
+
+            </div>
+
           </div>
-        )}
+
+          {/* Content */}
+          <div className="relative z-10 p-6 space-y-5">
+
+            <div>
+
+              <h3 className="text-xl font-black text-white leading-relaxed group-hover:text-cyan-300 transition-colors">
+                {album.title}
+              </h3>
+
+              <p className="mt-3 text-sm text-slate-400 leading-loose line-clamp-3">
+                {album.desc ||
+                  "سۈنئىي ئەقىل، پروگرامما، تېخنىكا ۋە زامانىۋى رەقەملىك بىلىمگە ئائىت ئاكادېمىك دەرس."}
+              </p>
+
+            </div>
+
+            {/* Info */}
+            <div className="flex items-center justify-between border-t border-slate-800 pt-4 text-xs">
+
+              <div>
+                <p className="text-slate-500">
+                  مۇئەللىم
+                </p>
+
+                <h4 className="text-slate-300 font-bold mt-1">
+                  {album.author || "Kelbil Academy"}
+                </h4>
+              </div>
+
+              <div className="text-left">
+                <p className="text-slate-500">
+                  ۋاقتى
+                </p>
+
+                <h4 className="text-slate-300 font-mono mt-1">
+                  {album.date || "2026"}
+                </h4>
+              </div>
+
+            </div>
+
+            {/* Button */}
+            <button
+              onClick={() => handleOpenAlbum(album.id)}
+              className="relative overflow-hidden w-full py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-black transition-all shadow-[0_0_25px_rgba(6,182,212,0.25)]"
+            >
+
+              <span className="relative z-10">
+                كۇرسنى باشلاش
+              </span>
+
+            </button>
+
+          </div>
+
+        </motion.div>
+
+      ))}
+
+    </div>
+
+  </div>
+)}
+
+       {/* ----------------- Professional Video Learning Layout ----------------- */}
+{openAlbum && selectedAlbumData && (
+  <motion.div
+    initial={{ opacity: 0, y: 25 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="space-y-5"
+  >
+
+    {/* Top Header */}
+    <div className="relative overflow-hidden bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-cyan-950/40 border border-cyan-500/10 rounded-3xl px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_0_40px_rgba(6,182,212,0.08)]">
+
+      {/* Glow */}
+      <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-500/10 blur-3xl rounded-full"></div>
+
+      <div className="relative z-10">
+        <span className="text-[10px] uppercase tracking-[0.3em] text-cyan-400/70 font-mono">
+          KELBIL AI COURSE
+        </span>
+
+        <h2 className="text-lg sm:text-xl font-black text-white mt-1">
+          {selectedAlbumData.title}
+        </h2>
+
+        <p className="text-xs text-slate-400 mt-1">
+          ئۇيغۇرچە سۈنئىي ئەقىل دەرس سۇپىسى
+        </p>
+      </div>
+
+      <button
+        onClick={() => setOpenAlbum(null)}
+        className="relative z-10 px-4 py-2 rounded-2xl bg-slate-950/70 border border-slate-800 hover:border-cyan-500/40 hover:bg-slate-900 text-sm text-slate-300 transition-all"
+      >
+        ← ئەلبۇملارغا قايتىش
+      </button>
+    </div>
+
+   {/* Main Grid */}
+<div className="grid grid-cols-1 xl:grid-cols-4 gap-5">
+
+  {/* ---------------- LEFT BIG PLAYER ---------------- */}
+  <div className="xl:col-span-3 space-y-4">
+
+    {currentVideo ? (
+      <div className="relative overflow-hidden bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-5 shadow-2xl">
+
+        {/* Glow */}
+        <div className="absolute -top-20 -right-20 w-52 h-52 bg-cyan-500/10 blur-3xl rounded-full"></div>
+
+        {/* BIG VIDEO */}
+        <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-slate-800 bg-black shadow-[0_0_60px_rgba(0,0,0,0.55)]">
+
+          {currentVideo.youtube ? (
+            <iframe
+              src={`${currentVideo.youtube}?autoplay=1`}
+              title={currentVideo.title}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              src={currentVideo.video}
+              controls
+              autoPlay
+              onTimeUpdate={handleTimeUpdate}
+              onEnded={handleVideoEnded}
+              className="w-full h-full object-contain"
+            />
+          )}
+
+        </div>
+
+        {/* Bottom Info */}
+        <div className="mt-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+
+          <div>
+            <span className="inline-flex items-center px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[11px] tracking-wider font-mono">
+              LESSON {(currentIndex + 1).toString().padStart(2, "0")}
+            </span>
+
+            <h3 className="text-2xl font-black text-white mt-3 leading-relaxed">
+              {currentVideo.title}
+            </h3>
+          </div>
+
+          {/* Autoplay */}
+          <div className="flex items-center gap-3 bg-slate-950/70 border border-slate-800 rounded-2xl px-4 py-3">
+            <span className="text-xs text-slate-400">
+              ئاپتوماتىك كېيىنكى دەرس
+            </span>
+
+            <button
+              onClick={() => setAutoplay(!autoplay)}
+              className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                autoplay
+                  ? "bg-cyan-400 text-slate-950"
+                  : "bg-slate-800 text-slate-500"
+              }`}
+            >
+              {autoplay ? "ئوچۇق" : "تاقاق"}
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    ) : (
+      <div className="bg-slate-900/30 border border-dashed border-slate-700 rounded-3xl py-20 text-center">
+        <p className="text-slate-500">
+          ۋىدىئو تېپىلمىدى
+        </p>
+      </div>
+    )}
+  </div>
+
+  {/* ---------------- RIGHT SMALL VIDEO CARDS ---------------- */}
+  <div className="space-y-3 xl:max-h-[820px] overflow-y-auto pr-1 custom-scrollbar">
+
+    <div className="flex items-center justify-between px-1 mb-2">
+      <h3 className="text-sm font-bold text-slate-300">
+        دەرسلەر
+      </h3>
+
+      <span className="text-xs text-slate-500">
+        {selectedAlbumData.lessons?.length} Video
+      </span>
+    </div>
+
+    {selectedAlbumData.lessons?.map((lesson, idx) => {
+
+      const isPlaying = currentIndex === idx;
+
+      const videoKey = `${user.id}_${openAlbum}_${idx}`;
+
+      const isCompleted = progress[videoKey]?.completed;
+
+      return (
+        <motion.div
+          key={idx}
+          whileHover={{ y: -2 }}
+          onClick={() => {
+            setCurrentVideo(lesson);
+            setCurrentIndex(idx);
+          }}
+          className={`group relative overflow-hidden rounded-2xl border cursor-pointer transition-all ${
+            isPlaying
+              ? "border-cyan-400/40 bg-cyan-500/10"
+              : isCompleted
+              ? "border-emerald-500/20 bg-emerald-500/[0.03]"
+              : "border-slate-800 bg-slate-900/40 hover:border-slate-700"
+          }`}
+        >
+
+          {/* Small Thumbnail */}
+          <div className="relative aspect-video overflow-hidden">
+
+            <img
+              src={
+                lesson.thumbnail ||
+                "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
+              }
+              alt={lesson.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+            {/* Small Play */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md border ${
+                isPlaying
+                  ? "bg-cyan-400/20 border-cyan-300"
+                  : "bg-black/30 border-white/20"
+              }`}>
+                <span className="text-white text-sm ml-0.5">
+                  ▶
+                </span>
+              </div>
+            </div>
+
+            {/* Badge */}
+            <div className="absolute top-2 left-2">
+
+              {isPlaying ? (
+                <span className="px-2 py-1 rounded-full bg-cyan-400 text-slate-950 text-[9px] font-black">
+                  LIVE
+                </span>
+              ) : isCompleted ? (
+                <span className="px-2 py-1 rounded-full bg-emerald-500 text-white text-[9px] font-black">
+                  ✓
+                </span>
+              ) : (
+                <span className="px-2 py-1 rounded-full bg-black/40 backdrop-blur-md text-white text-[9px] font-mono">
+                  %{progress[videoKey]?.percent || 0}
+                </span>
+              )}
+
+            </div>
+
+          </div>
+
+          {/* Small Content */}
+          <div className="p-3">
+
+            <span className={`text-[10px] font-mono tracking-widest ${
+              isPlaying
+                ? "text-cyan-400"
+                : isCompleted
+                ? "text-emerald-400"
+                : "text-slate-500"
+            }`}>
+              LESSON {(idx + 1).toString().padStart(2, "0")}
+            </span>
+
+            <h4 className={`mt-1 text-xs font-bold leading-relaxed line-clamp-2 ${
+              isPlaying
+                ? "text-cyan-300"
+                : "text-white"
+            }`}>
+              {lesson.title}
+            </h4>
+
+          </div>
+
+        </motion.div>
+      );
+    })}
+
+  </div>
+</div>
+  </motion.div>
+)}
+
+        
 
       </div>
     </div>
