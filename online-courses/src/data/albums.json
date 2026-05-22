@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "title": "1-ئەلبۇم: ئۇچۇر تېخنىكىسى ئاساسلىرى",
+    "title": "1-ئەلبۇم:   28 كۇنلۇك سۇنئي ئەقىل دەرسى (28-Day AI Course)",
     "allowedRoles": ["admin", "student", "user"],
     "lessons": [
       {
         "title": "01-دەرس: كومپيۇتېر قۇرۇلمىسى بىلىملىرى",
         "video": "/videos/1/1.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "https://www.youtube.com/watch?v=MMbeeU7xM0k",
         "desc": "بۇ دەرستە كومپيۇتېرنىڭ ئاساسىي قاتتىق دېتال قۇرۇلمىسى ۋە ئىشلىتىش پرىنسىپى سۆزلىنىدۇ.",
         "pdf": "/pdfs/1/1.pdf",
         "html": "/htmls/1/1.html"
@@ -15,7 +15,7 @@
       {
         "title": "02-دەرس: تور بىخەتەرلىكى ئەقلىي ئىقتىدارى",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "شەخسىي ئۇچۇر بىخەتەرلىكىنى قوغداش ۋە رەقەملىك دۇنيادىكى يوشۇرۇن خەتەرلەر.",
         "pdf": "/pdfs/1/2.pdf",
         "html": "/htmls/1/2.html"
@@ -23,7 +23,7 @@
       {
         "title": "03-دەرس: مەشغۇلات سىستېمىلىرىنىڭ خىزمەت پرىنسىپى",
         "video": "/videos/1/3.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "Windows، Linux ۋە macOS سىستېمىلىرىنىڭ يادرولۇق باشقۇرۇش مېخانىزمى.",
         "pdf": "/pdfs/1/3.pdf",
         "html": "/htmls/1/3.html"
@@ -39,7 +39,7 @@
       {
         "title": "05-دەرس: سانلىق مەلۇمات ئامبىرى ئۇقۇمى",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "سانلىق مەلۇماتلارنى قۇرۇلمىلىق ساقلاش ۋە SQL تىلى بىلەن تۇنجى ئۇچرىشىش.",
         "pdf": "/pdfs/1/5.pdf",
         "html": "/htmls/1/5.html"
@@ -47,7 +47,7 @@
       {
         "title": "06-دەرس: كودلاشتۇرۇش دۇنياسىغا كىرىش",
         "video": "/videos/1/6.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "پروگرامما تىللىرىنىڭ تۈرلىرى، تەرجىمە قىلىنىش جەريانى ۋە ئاساسىي لوگىكا.",
         "pdf": "/pdfs/1/6.pdf",
         "html": "/htmls/1/6.html"
@@ -63,7 +63,7 @@
       {
         "title": "08-دەرس: ئالگورىزىم ۋە سانلىق مەلۇمات قۇرۇلمىسى",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "مەسىلىلەرنى ھەل قىلىشتىكى ئەڭ ئۈنۈملۈك قەدەملەر ۋە لوگىكىلىق قاتلاملار.",
         "pdf": "/pdfs/1/8.pdf",
         "html": "/htmls/1/8.html"
@@ -71,7 +71,7 @@
       {
         "title": "09-دەرس: تور بەت لايىھىلەش ئاساسلىرى (HTML & CSS)",
         "video": "/videos/1/9.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "ئىنتېرنېت دۇنياسىدىكى كۆرۈنمە يۈزلەرنىڭ قۇرۇلمىسىنى قۇرۇش تېخنىكىسى.",
         "pdf": "/pdfs/1/9.pdf",
         "html": "/htmls/1/9.html"
@@ -87,7 +87,7 @@
       {
         "title": "11-دەرس: نۇسخا باشقۇرۇش سىستېمىسى Git ئاساسلىرى",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "كودلارنى كوللېكتىپ ئېچىش، نۇسخىلارنى ساقلاش ۋە زاپاسلاش قوراللىرى.",
         "pdf": "/pdfs/1/11.pdf",
         "html": "/htmls/1/11.html"
@@ -95,7 +95,7 @@
       {
         "title": "12-دەرس: ئۇچۇر يەتكۈزۈش كېلىشىملىرى (HTTP / HTTPS)",
         "video": "/videos/1/12.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "براۋزېر بىلەن مۇلازىمېتىر ئوتتۇرىسىدىكى ئۇچۇر ئالماشتۇرۇش قائىدىلىرى.",
         "pdf": "/pdfs/1/12.pdf",
         "html": "/htmls/1/12.html"
@@ -111,7 +111,7 @@
       {
         "title": "14-دەرس: رەقەملىك ئىمزا ۋە شىفىرلاش تېخنىكىسى",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "ئاشكارە ۋە مەخپىي ئاچقۇچلۇق شىفىرلاش سىستېمىسىنىڭ ئاساسىي پرىنسىپلىرى.",
         "pdf": "/pdfs/1/14.pdf",
         "html": "/htmls/1/14.html"
@@ -119,7 +119,7 @@
       {
         "title": "15-دەرس: كەلگۈسى تېخنىكا يۈزلىنىشى",
         "video": "/videos/1/15.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "سۈنئىي ئەقىل، كىۋانت ھېسابلاش ۋە چوڭ سانلىق مەلۇماتلارنىڭ تەرەققىيات يۆنىلىشى.",
         "pdf": "/pdfs/1/15.pdf",
         "html": "/htmls/1/15.html"
@@ -128,13 +128,13 @@
   },
   {
     "id": 2,
-    "title": "2-ئەلبۇم: سىستېمىلىق كىرىش دەرستىن نەمۇنە",
+    "title": "2-ئەلبۇم:  گىت كىرىش دەرس (Introduction to Git)",
     "allowedRoles": ["admin", "student"],
     "lessons": [
       {
         "title": "01-دەرس: كودلاشتۇرۇش جەريانى تۈپ نېگىزى",
         "video": "/videos/2/1.mp4",
-        "youtube": "",
+        "youtube": "https://www.youtube.com/watch?v=MMbeeU7xM0k",
         "desc": "ئالگورىزىم قۇرۇلمىسىنى ئەلالاشتۇرۇش جەريانىدىكى تېخنىكىلىق نۇقتىلار.",
         "pdf": "/pdfs/2/1.pdf",
         "html": "/htmls/2/1.html"
@@ -142,7 +142,7 @@
       {
         "title": "02-دەرس: ئوبيېكتقا يۈزلەنگەن پروگرامما تۈزۈش (OOP)",
         "video": "/videos/2/2.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "كلاس ۋە ئوبيېكت ئۇقۇمى، ۋارىسلىق قىلىش ۋە كۆپ شەكىللىك خۇسۇسىيەتلەر.",
         "pdf": "/pdfs/2/2.pdf",
         "html": "/htmls/2/2.html"
@@ -150,7 +150,7 @@
       {
         "title": "03-دەرس: خاتالىق بىر تەرەپ قىلىش ۋە پروگرامما تۈزەش",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "كودتىكى لوگىكىلىق ۋە سىنتاكسىسلىق خاتالىقلارنى تېپىش ھەم تەڭشەش تېخنىكىسى.",
         "pdf": "/pdfs/2/3.pdf",
         "html": "/htmls/2/3.html"
@@ -159,13 +159,13 @@
   },
   {
     "id": 3,
-    "title": "3-ئەلبۇم: سىستېمىلىق ئىلغار ماتېماتىكا",
+    "title": "3-ئەلبۇم:   سىتاستىكا ئاساس دەرسى (Statistics Fundamentals)",
     "allowedRoles": ["admin", "student"],
     "lessons": [
       {
         "title": "01-دەرس: سىزىقلىق ئالگېبرا ۋە ماترىسا ھېسابلىرى",
         "video": "/videos/3/1.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "سۈنئىي ئەقىل ۋە يۆنىلىشلىك گرافىكلارنىڭ ئاساسى بولغان ماترىسا مەشقلىرى.",
         "pdf": "/pdfs/3/1.pdf",
         "html": "/htmls/3/1.html"
@@ -181,7 +181,7 @@
       {
         "title": "03-دەرس: ئېھتىماللىق نەزەرىيىسى ۋە ستاتىستىكا",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "سانلىق مەلۇماتلارنى تەھلىل قىلىش، پەرەز ۋە تارقىلىش مودېللىرى.",
         "pdf": "/pdfs/3/3.pdf",
         "html": "/htmls/3/3.html"
@@ -190,13 +190,13 @@
   },
   {
     "id": 4,
-    "title": "4-ئەلبۇم: تەبىئىي تىل بىر تەرەپ قىلىش (NLP)",
+    "title": "4-ئەلبۇم: پايسان ئاساسى بىلىم  (Python Basics)",
     "allowedRoles": ["admin", "student"],
     "lessons": [
       {
         "title": "01-دەرس: NLP غا كىرىش ۋە تېكىست ئالدىن بىر تەرەپ قىلىش",
         "video": "/videos/4/1.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "تېكىستنى پارچىلاش (Tokenization)، سۆز يۆزلىنىشى ۋە ئۇيغۇر تىلى تېكىست خۇسۇسىيىتى.",
         "pdf": "/pdfs/4/1.pdf",
         "html": "/htmls/4/1.html"
@@ -212,7 +212,7 @@
       {
         "title": "03-دەرس: ئۇيغۇرچە تېكىستلەرنى تۈرگە ئايرىش ۋە ئەخلەت ئۇچۇر ئېنىقلاش",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "ماشىنا ئۆگىنىشى ئارقىلىق ئۇيغۇرچە ئەخلەت ئۇچۇرلارنى ئاپتوماتىك پەرقلەندۈرۈش تۈرى.",
         "pdf": "/pdfs/4/3.pdf",
         "html": "/htmls/4/3.html"
@@ -221,13 +221,13 @@
   },
   {
     "id": 5,
-    "title": "5-ئەلبۇم: سۈنئىي ئەقىل ئالگورىزىملىرى",
+    "title": "5-ئەلبۇم:   پەنداس ئاساسى بىلىم (Pandas Basics)",
     "allowedRoles": ["admin", "student"],
     "lessons": [
       {
         "title": "01-دەرس: ماشىنا ئۆگىنىشى ئاساسىي ئالگورىزىملىرى",
         "video": "/videos/5/1.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "سىزىقلىق رېگرېسسىيە، قارار دەرىخى (Decision Tree) ۋە KNN ئالگورىزىمى.",
         "pdf": "/pdfs/5/1.pdf",
         "html": "/htmls/5/1.html"
@@ -243,7 +243,7 @@
       {
         "title": "03-دەرس: چوڭقۇر ئۆگىنىش ۋە تەسۋىر تونۇش",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "CNN تورى ئارقىلىق رەسىم ۋە شەكىللەرنى يۇقىرى ئېنىقلىقتا پەرقلەندۈرۈش تېخنىكىسى.",
         "pdf": "/pdfs/5/3.pdf",
         "html": "/htmls/5/3.html"
@@ -252,13 +252,13 @@
   },
   {
     "id": 6,
-    "title": "6-ئەلبۇم: كىۋانت ھېسابلاش تېخنىكىسى",
+    "title": "6-ئەلبۇم:   نامپاي ئاساسى بىلىم (NumPy Basics)",
     "allowedRoles": ["admin"],
     "lessons": [
       {
         "title": "01-دەرس: كىۋانت فىزىكىسىدىن كىۋانت بىتلىرىغىچە (Qubit)",
         "video": "/videos/6/1.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "سۇپېرپوزىتسىيە (Superposition) ۋە گىرەلىشىپ كېتىش (Entanglement) ئۇقۇملىرى.",
         "pdf": "/pdfs/6/1.pdf",
         "html": "/htmls/6/1.html"
@@ -274,7 +274,7 @@
       {
         "title": "03-دەرس: كىۋانت رادار ۋە ھەربىي قوللىنىشچانلىقى",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "كىۋانت سېنزورلىرىنىڭ زامانىۋى رادار ۋە مۇداپىئە سىستېمىلىرىدىكى رولى.",
         "pdf": "/pdfs/6/3.pdf",
         "html": "/htmls/6/3.html"
@@ -283,13 +283,13 @@
   },
   {
     "id": 7,
-    "title": "7-ئەلبۇم: LiDAR سانلىق مەلۇمات بىر تەرەپ قىلىش",
+    "title": "7-ئەلبۇم: ماتپۇلدت سىبورن ئاساسى بىلىم (Matplotlib & Seaborn Basics)",
     "allowedRoles": ["admin"],
     "lessons": [
       {
         "title": "01-دەرس: LiDAR تېخنىكىسى ۋە نۇقتا بۇلۇتى (Point Cloud)",
         "video": "/videos/7/1.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "لازېرلىق سكاننېرلاش سانلىق مەلۇماتلىرىنىڭ قۇرۇلمىسى ۋە .las فورماتى ئاساسلىرى.",
         "pdf": "/pdfs/7/1.pdf",
         "html": "/htmls/7/1.html"
@@ -305,7 +305,7 @@
       {
         "title": "03-دەرس: LAS تېكىستىنى CAD (DXF) غا ئايلاندۇرۇش سىستېمىسى",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "بىنا كوردىنادلىرىنى ئاپتوماتىك چىقىرىش ۋە ezdxf ئارقىلىق سىزما خەرىتە ھاسىل قىلىش.",
         "pdf": "/pdfs/7/3.pdf",
         "html": "/htmls/7/3.html"
@@ -314,13 +314,13 @@
   },
   {
     "id": 8,
-    "title": "8-ئەلبۇم: زامانىۋى تور ئارخىتېكتۇراسى",
+    "title": "8-ئەلبۇم:   ماشىنا ئۈگنىش ئىلغار تېخنىكىسى (Advanced Machine Learning)",
     "allowedRoles": ["admin"],
     "lessons": [
       {
         "title": "01-دەرس: يۇقىرى بېسىملىق تور سىستېمىلىرى لايىھەسى",
         "video": "/videos/8/1.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "مىليونلىغان زىيارەتنى بىر تەرەپ قىلىدىغان يۈك تەڭشەش (Load Balancing) تېخنىكىسى.",
         "pdf": "/pdfs/8/1.pdf",
         "html": "/htmls/8/1.html"
@@ -336,7 +336,7 @@
       {
         "title": "03-دەرس: دەل ۋاقتىدا ئالاقىلىشىش (WebSocket & WebRTC)",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "تېز سۈرئەتلىك سۆھبەت ۋە سىنلىق ئۇلىنىش سىستېمىلىرىنىڭ كودلاشتۇرۇلۇشى.",
         "pdf": "/pdfs/8/3.pdf",
         "html": "/htmls/8/3.html"
@@ -345,13 +345,13 @@
   },
   {
     "id": 9,
-    "title": "9-ئەلبۇم: چوڭ تىپتىكى تىل مودېللىرى (LLM)",
+    "title": "9-ئەلبۇم:    نىرۋاتورى ئۈگنىش    ",
     "allowedRoles": ["admin"],
     "lessons": [
       {
         "title": "01-دەرس: Transformer ئارخىتېكتۇراسىنىڭ تۈپ نېگىزى",
         "video": "/videos/9/1.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "نەزەر ئاغدۇرۇش مېخانىزمى (Self-Attention) ۋە GPT تىپىدىكى مودېللارنىڭ ئىشلەش پرىنسىپى.",
         "pdf": "/pdfs/9/1.pdf",
         "html": "/htmls/9/1.html"
@@ -367,22 +367,84 @@
       {
         "title": "03-دەرس: AI ئاگېنتلىرى (AI Agents) ۋە Prompt Engineering",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "چوڭ مودېللارنى قوراللار بىلەن باغلاپ، ئۆزلۈكىدىن ۋەزىپە ئىجرا قىلىدىغان سىستېما ياساش.",
         "pdf": "/pdfs/9/3.pdf",
         "html": "/htmls/9/3.html"
       }
     ]
   },
-  {
+   {
     "id": 10,
-    "title": "10-ئەلبۇم: كىبەر بىخەتەرلىك يۇقىرى تېخنىكىسى",
+    "title": "10-ئەلبۇم:    تېنسور فلو دەرسى (TensorFlow Course)    ",
+    "allowedRoles": ["admin"],
+    "lessons": [
+      {
+        "title": "01-دەرس: سىڭىپ كىرىش سىناقلىرى (Penetration Testing)",
+        "video": "/videos/13/1.mp4",
+        "youtube": "",
+        "desc": "سىستېمىلاردىكى يوشۇرۇن دەر MLC تېپىش ۋە بىخەتەرلىكنى باھالاش مېتودولوگىيەسى.",
+        "pdf": "/pdfs/13/1.pdf",
+        "html": "/htmls/13/1.html"
+      },
+      {
+        "title": "02-دەرس: نۆۋەتتىكى قارا تېخنىكىلار ۋە مۇداپىئە",
+        "video": "/videos/13/2.mp4",
+        "youtube": "",
+        "desc": "نۆل كۈنلۈك ھۇجۇم (Zero-day)، كىملىك ئوغرىلاش ۋە تور سىستېمىلىرىنى چىڭىتىش.",
+        "pdf": "/pdfs/13/2.pdf",
+        "html": "/htmls/13/2.html"
+      },
+      {
+        "title": "03-دەرس: شىفىرلىق ئىقتىساد ۋە بۆلەك زەنجىرى بىخەتەرلىكى",
+        "video": "",
+        "youtube": "",
+        "desc": "تارقاقلاشتۇرۇلغان سىستېمىلار، ئەقلىي توختام بىخەتەرلىك بوشلۇقلىرىنى تەكشۈرۈش.",
+        "pdf": "/pdfs/13/3.pdf",
+        "html": "/htmls/13/3.html"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "11-ئەلبۇم:      كىۋانىت فىزىكىسى دەرسى (Quantum Physics Course)      ",
+    "allowedRoles": ["admin"],
+    "lessons": [
+      {
+        "title": "01-دەرس: سىڭىپ كىرىش سىناقلىرى (Penetration Testing)",
+        "video": "/videos/11/1.mp4",
+        "youtube": "",
+        "desc": "سىستېمىلاردىكى يوشۇرۇن دەر MLC تېپىش ۋە بىخەتەرلىكنى باھالاش مېتودولوگىيەسى.",
+        "pdf": "/pdfs/11/1.pdf",
+        "html": "/htmls/11/1.html"
+      },
+      {
+        "title": "02-دەرس: نۆۋەتتىكى قارا تېخنىكىلار ۋە مۇداپىئە",
+        "video": "/videos/11/2.mp4",
+        "youtube": "",
+        "desc": "نۆل كۈنلۈك ھۇجۇم (Zero-day)، كىملىك ئوغرىلاش ۋە تور سىستېمىلىرىنى چىڭىتىش.",
+        "pdf": "/pdfs/11/2.pdf",
+        "html": "/htmls/11/2.html"
+      },
+      {
+        "title": "03-دەرس: شىفىرلىق ئىقتىساد ۋە بۆلەك زەنجىرى بىخەتەرلىكى",
+        "video": "",
+        "youtube": "",
+        "desc": "تارقاقلاشتۇرۇلغان سىستېمىلار، ئەقلىي توختام بىخەتەرلىك بوشلۇقلىرىنى تەكشۈرۈش.",
+        "pdf": "/pdfs/11/3.pdf",
+        "html": "/htmls/11/3.html"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "12-ئەلبۇم:      كىۋانىت مىخانىكىسى دەرسى (Quantum Mechanics Course)      ",
     "allowedRoles": ["admin"],
     "lessons": [
       {
         "title": "01-دەرس: سىڭىپ كىرىش سىناقلىرى (Penetration Testing)",
         "video": "/videos/10/1.mp4",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "سىستېمىلاردىكى يوشۇرۇن دەر MLC تېپىش ۋە بىخەتەرلىكنى باھالاش مېتودولوگىيەسى.",
         "pdf": "/pdfs/10/1.pdf",
         "html": "/htmls/10/1.html"
@@ -398,10 +460,72 @@
       {
         "title": "03-دەرس: شىفىرلىق ئىقتىساد ۋە بۆلەك زەنجىرى بىخەتەرلىكى",
         "video": "",
-        "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "youtube": "",
         "desc": "تارقاقلاشتۇرۇلغان سىستېمىلار، ئەقلىي توختام بىخەتەرلىك بوشلۇقلىرىنى تەكشۈرۈش.",
         "pdf": "/pdfs/10/3.pdf",
         "html": "/htmls/10/3.html"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "13-ئەلبۇم:     كىۋانىت ماشىنا ئۈگنىش دەرسى (Quantum Machine Learning Course)     ",
+    "allowedRoles": ["admin"],
+    "lessons": [
+      {
+        "title": "01-دەرس: سىڭىپ كىرىش سىناقلىرى (Penetration Testing)",
+        "video": "/videos/13/1.mp4",
+        "youtube": "",
+        "desc": "سىستېمىلاردىكى يوشۇرۇن دەر MLC تېپىش ۋە بىخەتەرلىكنى باھالاش مېتودولوگىيەسى.",
+        "pdf": "/pdfs/13/1.pdf",
+        "html": "/htmls/13/1.html"
+      },
+      {
+        "title": "02-دەرس: نۆۋەتتىكى قارا تېخنىكىلار ۋە مۇداپىئە",
+        "video": "/videos/13/2.mp4",
+        "youtube": "",
+        "desc": "نۆل كۈنلۈك ھۇجۇم (Zero-day)، كىملىك ئوغرىلاش ۋە تور سىستېمىلىرىنى چىڭىتىش.",
+        "pdf": "/pdfs/13/2.pdf",
+        "html": "/htmls/13/2.html"
+      },
+      {
+        "title": "03-دەرس: شىفىرلىق ئىقتىساد ۋە بۆلەك زەنجىرى بىخەتەرلىكى",
+        "video": "",
+        "youtube": "",
+        "desc": "تارقاقلاشتۇرۇلغان سىستېمىلار، ئەقلىي توختام بىخەتەرلىك بوشلۇقلىرىنى تەكشۈرۈش.",
+        "pdf": "/pdfs/13/3.pdf",
+        "html": "/htmls/13/3.html"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "14-ئەلبۇم:      سىزىقلىق ئالگىبىرا دەرسى   (Linear Algebra Course)      ",
+    "allowedRoles": ["admin"],
+    "lessons": [
+      {
+        "title": "01-دەرس: سىڭىپ كىرىش سىناقلىرى (Penetration Testing)",
+        "video": "/videos/14/1.mp4",
+        "youtube": "",
+        "desc": "سىستېمىلاردىكى يوشۇرۇن دەر MLC تېپىش ۋە بىخەتەرلىكنى باھالاش مېتودولوگىيەسى.",
+        "pdf": "/pdfs/14/1.pdf",
+        "html": "/htmls/14/1.html"
+      },
+      {
+        "title": "02-دەرس: نۆۋەتتىكى قارا تېخنىكىلار ۋە مۇداپىئە",
+        "video": "/videos/14/2.mp4",
+        "youtube": "",
+        "desc": "نۆل كۈنلۈك ھۇجۇم (Zero-day)، كىملىك ئوغرىلاش ۋە تور سىستېمىلىرىنى چىڭىتىش.",
+        "pdf": "/pdfs/14/2.pdf",
+        "html": "/htmls/14/2.html"
+      },
+      {
+        "title": "03-دەرس: شىفىرلىق ئىقتىساد ۋە بۆلەك زەنجىرى بىخەتەرلىكى",
+        "video": "",
+        "youtube": "",
+        "desc": "تارقاقلاشتۇرۇلغان سىستېمىلار، ئەقلىي توختام بىخەتەرلىك بوشلۇقلىرىنى تەكشۈرۈش.",
+        "pdf": "/pdfs/14/3.pdf",
+        "html": "/htmls/14/3.html"
       }
     ]
   }

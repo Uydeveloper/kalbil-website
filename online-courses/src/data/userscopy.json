@@ -2,187 +2,190 @@
   {
     "id": "admin001",
     "name": "Uyghurjan",
-    "password": "admin123",
+    "password": "u_kelbil2026",
     "role": "admin"
   },
+  
   {
     "id": "student001",
-    "name": "ئەكبەر",
-    "password": "11111",
+    "name": "musa.ismar",
+    "password": "musa.ismar@qml26",
     "role": "student"
   },
   {
     "id": "student002",
-    "name": "دىلنۇر",
-    "password": "11111",
+    "name": "hijrankiroran",
+    "password": "hijrankiroran@qml26",
     "role": "student"
   },
   {
     "id": "student003",
-    "name": "ئانارگۈل",
-    "password": "11111",
+    "name": "xukran123",
+    "password": "xukran123@qml26",
     "role": "student"
   },
   {
     "id": "student004",
-    "name": "ئەركىن",
-    "password": "11111",
+    "name": "ahirat1314",
+    "password": "ahirat1314@qml26",
     "role": "student"
   },
   {
     "id": "student005",
-    "name": "مۇرات",
-    "password": "11111",
+    "name": "varis.atasoy",
+    "password": "varis.atasoy@qml26",
     "role": "student"
   },
   {
     "id": "student006",
-    "name": "گۈلنەزەر",
-    "password": "11111",
+    "name": "husenjanobul",
+    "password": "husenjanobul@qml26",
     "role": "student"
   },
   {
     "id": "student007",
-    "name": "ئالىم",
-    "password": "11111",
+    "name": "asiya11reyim",
+    "password": "asiya11reyim@qml26",
     "role": "student"
   },
   {
     "id": "student008",
-    "name": "راھىلە",
-    "password": "11111",
+    "name": "uyghuromroep",
+    "password": "uyghuromroep@qml26",
     "role": "student"
   },
   {
     "id": "student009",
-    "name": "بىلاد",
-    "password": "11111",
+    "name": "ozluk.nl",
+    "password": "ozluk.nl@qml26",
     "role": "student"
   },
   {
     "id": "student010",
-    "name": "نۇربىيە",
-    "password": "11111",
+    "name": "mexrep",
+    "password": "mexrep@qml26",
     "role": "student"
   },
   {
     "id": "student011",
-    "name": "ئېلشات",
-    "password": "11111",
+    "name": "mhmdfath858",
+    "password": "mhmdfath858@qml26",
     "role": "student"
   },
   {
     "id": "student012",
-    "name": "زۇمرەت",
-    "password": "11111",
+    "name": "hezirtelii",
+    "password": "hezirtelii@qml26",
     "role": "student"
   },
   {
     "id": "student013",
-    "name": "پەرھات",
-    "password": "11111",
+    "name": "medine20171121",
+    "password": "medine20171121@qml26",
     "role": "student"
   },
   {
     "id": "student014",
-    "name": "مەلھەم",
-    "password": "11111",
+    "name": "izdan2746",
+    "password": "izdan2746@qml26",
     "role": "student"
   },
   {
     "id": "student015",
-    "name": "كامىل",
-    "password": "11111",
+    "name": "Test User",
+    "password": "TestUser@qml26",
     "role": "student"
   },
+
   {
     "id": "user001",
-    "name": "ئابدۇللا",
-    "password": "22222",
+    "name": "aycamal258",
+    "password": "aycamal258@kht26",
     "role": "user"
   },
   {
     "id": "user002",
-    "name": "ماھىرە",
-    "password": "22222",
+    "name": "bughra319",
+    "password": "bughra319@kht26",
     "role": "user"
   },
   {
     "id": "user003",
-    "name": "نۇرسىمان",
-    "password": "22222",
+    "name": "husenjanobul",
+    "password": "husenjanobul@kht26",
     "role": "user"
   },
   {
     "id": "user004",
-    "name": "غەيرەت",
-    "password": "22222",
+    "name": "yulgun353",
+    "password": "yulgun353@kht26",
     "role": "user"
   },
   {
     "id": "user005",
-    "name": "شىرئەلى",
-    "password": "22222",
+    "name": "miyzanui",
+    "password": "miyzanui@kht26",
     "role": "user"
   },
   {
     "id": "user006",
-    "name": "گۈلزار",
-    "password": "22222",
+    "name": "asiya11reyim",
+    "password": "asiya11reyim@kht26",
     "role": "user"
   },
   {
     "id": "user007",
-    "name": "تۇرسۇن",
-    "password": "22222",
+    "name": "abduqadir.abliz",
+    "password": "abduqadir.abliz@kht26",
     "role": "user"
   },
   {
     "id": "user008",
-    "name": "ئايگۈل",
-    "password": "22222",
+    "name": "musa.ismar",
+    "password": "musa.ismar@kht26",
     "role": "user"
   },
   {
     "id": "user009",
-    "name": "مۇھەممەد",
-    "password": "22222",
+    "name": "turukzat",
+    "password": "turukzat@kht26",
     "role": "user"
   },
   {
     "id": "user010",
-    "name": "سەبىيە",
-    "password": "22222",
+    "name": "yexiltrading",
+    "password": "yexiltrading@kht26",
     "role": "user"
   },
   {
     "id": "user011",
-    "name": "ئادىل",
-    "password": "22222",
+    "name": "anwar.aman5070",
+    "password": "anwar.aman5070@kht26",
     "role": "user"
   },
   {
     "id": "user012",
-    "name": "گۈلشەن",
-    "password": "22222",
+    "name": "ablizakbar",
+    "password": "ablizakbar@kht26",
     "role": "user"
   },
   {
     "id": "user013",
-    "name": "مەمەت",
-    "password": "22222",
+    "name": "aerk9674",
+    "password": "aerk9674@kht26",
     "role": "user"
   },
   {
     "id": "user014",
-    "name": "نەپىسە",
-    "password": "22222",
+    "name": "sabitbolgin0998",
+    "password": "sabitbolgin0998@kht26",
     "role": "user"
   },
   {
     "id": "user015",
-    "name": "ئۆمەر",
-    "password": "22222",
-    "role": "user"
+    "name": "kelbil",
+    "password": "kelbil@kht26",
+    "role": "admin"
   }
+
 ]

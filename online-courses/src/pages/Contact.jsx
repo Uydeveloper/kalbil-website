@@ -127,6 +127,106 @@ export default function NewLabelCourses() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.08),transparent_40%)]"></div>
     </div>
 
+   {/* SIDE IMAGES */}
+<div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+
+  {/* LEFT IMAGE */}
+  <div
+    className="
+      absolute
+      left-[20px]
+      top-[120px]
+      w-[380px]
+      h-[260px]
+      hidden xl:flex
+      items-center
+      justify-center
+    "
+  >
+
+    {/* Glow */}
+    <div className="absolute inset-0 bg-cyan-500/10 blur-3xl rounded-[2rem]"></div>
+
+    {/* Image */}
+    <img
+      src={`${process.env.PUBLIC_URL}/images/uyghur.png`}
+      alt="AI Left"
+      className="
+        max-w-full
+        max-h-full
+        object-contain
+        opacity-80
+        blur-[0.5px]
+        contrast-125
+        brightness-90
+        rounded-[2rem]
+        border border-cyan-400/10
+        shadow-[0_0_60px_rgba(6,182,212,0.20)]
+      "
+    />
+
+    {/* Overlay */}
+    <div className="
+      absolute inset-0
+      rounded-[2rem]
+      bg-gradient-to-r
+      from-[#020617]/10
+      via-transparent
+      to-transparent
+    "></div>
+
+  </div>
+
+  {/* RIGHT IMAGE */}
+  <div
+    className="
+      absolute
+      right-[20px]
+      top-[120px]
+      w-[380px]
+      h-[260px]
+      hidden xl:flex
+      items-center
+      justify-center
+    "
+  >
+
+    {/* Glow */}
+    <div className="absolute inset-0 bg-emerald-500/10 blur-3xl rounded-[2rem]"></div>
+
+    {/* Image */}
+    <img
+      src={`${process.env.PUBLIC_URL}/images/English.png`}
+      alt="AI Right"
+      className="
+        max-w-full
+        max-h-full
+        object-contain
+        opacity-80
+        blur-[0.5px]
+        contrast-125
+        brightness-90
+        rounded-[2rem]
+        border border-emerald-400/10
+        shadow-[0_0_60px_rgba(16,185,129,0.20)]
+      "
+    />
+
+    {/* Overlay */}
+    <div className="
+      absolute inset-0
+      rounded-[2rem]
+      bg-gradient-to-l
+      from-[#020617]/30
+      via-transparent
+      to-transparent
+    "></div>
+
+  </div>
+
+</div>
+
+
     {/* Top Space */}
     <div />
 
@@ -728,7 +828,7 @@ export default function NewLabelCourses() {
             <img
               src={
                 album.image ||
-                "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
+                "http://localhost:3000/kalbil-website/images/image05.png"
               }
               alt={album.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -873,14 +973,21 @@ export default function NewLabelCourses() {
         {/* BIG VIDEO */}
         <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-slate-800 bg-black shadow-[0_0_60px_rgba(0,0,0,0.55)]">
 
-          {currentVideo.youtube ? (
-            <iframe
-              src={`${currentVideo.youtube}?autoplay=1`}
-              title={currentVideo.title}
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+         {currentVideo.youtube ? (
+  <iframe
+    src={`${
+      currentVideo.youtube.includes('watch?v=')
+        ? currentVideo.youtube.replace('watch?v=', 'embed/')
+        : currentVideo.youtube.includes('youtu.be/')
+        ? currentVideo.youtube.replace('youtu.be/', 'youtube.com/embed/')
+        : currentVideo.youtube
+    }?autoplay=1`}
+    title={currentVideo.title}
+    className="w-full h-full"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+
           ) : (
             <video
               ref={videoRef}

@@ -1,5 +1,20 @@
 // utils/blogData.js
 export const BLOG_POSTS = [
+  {   
+     id: 129,
+    title: '   ئىدراك ئۇرۇشى  ',
+    author: 'قاۋۇلجان',
+    date: '2026-يىلى 21-ئاينىڭ 5-كۈنى',
+    readTime: ' 11.6',
+    category: '           تېخنىكا       ',
+    tags: ['  سۇنئي ئەقىل  ', ' پەلسەپە  ', '   كىۋانىت فىزىكىسى ', '   ئىنسانىيەت '],
+    image: 'https://windowscustomization.com/wp-content/uploads/2019/10/The-Nebula.gif',
+    summary: ' Singularity نىڭ ھەقىقىي تەبىئىتى ۋە Fuzzball Theory ھەققىدە چوڭقۇر تەھلىل',
+    likes: 122,
+    comments: 15,
+    views: 1790,
+    component: 'Blog129'
+  },
 
   {   
      id: 128,
