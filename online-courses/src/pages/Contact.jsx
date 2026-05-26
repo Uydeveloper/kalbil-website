@@ -149,13 +149,13 @@ export default function NewLabelCourses() {
 
     {/* Image */}
     <img
-      src={`${process.env.PUBLIC_URL}/images/uyghur.png`}
+      src={`${process.env.PUBLIC_URL}/images/28daysAI.jpg`}
       alt="AI Left"
       className="
         max-w-full
         max-h-full
         object-contain
-        opacity-80
+        opacity-210
         blur-[0.5px]
         contrast-125
         brightness-90
@@ -196,13 +196,13 @@ export default function NewLabelCourses() {
 
     {/* Image */}
     <img
-      src={`${process.env.PUBLIC_URL}/images/English.png`}
+      src={`${process.env.PUBLIC_URL}/images/QunatumAI.png`}
       alt="AI Right"
       className="
         max-w-full
         max-h-full
         object-contain
-        opacity-80
+        opacity-210
         blur-[0.5px]
         contrast-125
         brightness-90
