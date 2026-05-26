@@ -295,6 +295,27 @@ text-xl md:text-3xl font-bold dark:text-yellow-400 text-blue-600 drop-shadow-lg 
           <Link to="/courses" className="block px-4 py-2 border-b hover:bg-gray-100 dark:hover:bg-gray-700">Courses</Link>
           <Link to="/about" className="block px-4 py-2 border-b hover:bg-gray-100 dark:hover:bg-gray-700">About</Link>
           <Link to="/contact" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">دەرسىم</Link>
+          {user && (user.role === "admin" || user.role === "student") && (
+            <Link
+              to="/studntsinfo"
+              className={
+                isActive("/students") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-gray-200 hover:text-blue-500"
+              }
+            >
+              {t.student[lang]}
+            </Link>
+          )}
+
+          {user && (user.role === "admin" || user.role === "student") && (
+            <Link
+              to="/my-courses"
+              className={
+                isActive("/my-courses") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-gray-200 hover:text-blue-500"
+              }
+            >
+              {t.mycourses[lang]}
+            </Link>
+          )}
         </div>
       )}
 
