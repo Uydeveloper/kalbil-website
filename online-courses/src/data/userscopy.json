@@ -183,6 +183,13 @@
   },
   {
     "id": "user015",
+    "name": "Arslan",
+    "password": "terixqan@kht26",
+    "role": "user"
+  }
+  ,
+  {
+    "id": "user016",
     "name": "kelbil",
     "password": "kelbil@kht26",
     "role": "admin"

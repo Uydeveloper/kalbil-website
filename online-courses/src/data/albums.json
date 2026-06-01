@@ -5,10 +5,10 @@
     "allowedRoles": ["admin", "student", "user"],
     "lessons": [
       {
-        "title": "01-دەرس: كومپيۇتېر قۇرۇلمىسى بىلىملىرى",
+        "title": "01-دەرس: OpenAI ۋە سۈنئىي ئەقىلنىڭ ئاساسىي ئۇقۇمى",
         "video": "/videos/1/1.mp4",
-        "youtube": "https://www.youtube.com/watch?v=MMbeeU7xM0k",
-        "desc": "بۇ دەرستە كومپيۇتېرنىڭ ئاساسىي قاتتىق دېتال قۇرۇلمىسى ۋە ئىشلىتىش پرىنسىپى سۆزلىنىدۇ.",
+        "youtube": "https://www.youtube.com/watch?v=pPjw-YNbm1A",
+        "desc": "بۇ دەرستە OpenAI ۋە سۈنئىي ئەقلىنىڭ ئاساسىي   قۇرۇلمىسى ۋە ئىشلىتىش پرىنسىپى سۆزلىنىدۇ.",
         "pdf": "/pdfs/1/1.pdf",
         "html": "/htmls/1/1.html"
       },

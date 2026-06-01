@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Helmet } from "react-helmet";
@@ -15,6 +15,7 @@ import users from "../data/userscopy.json";
 import albums from "../data/albums.json";
 
 export default function NewLabelCourses() {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [login, setLogin] = useState({ identifier: "", password: "" });
   const [openAlbum, setOpenAlbum] = useState(null);
@@ -408,6 +409,110 @@ export default function NewLabelCourses() {
 
   const selectedAlbumData = albums.find(a => a.id === openAlbum);
 
+   // =================== 🎯 Professional StudentInfo Navigation ===================
+const goToStudentInfo = () => {
+  // 1️⃣ ئىشلەتكۈچى دەلىللەش ۋە خاتالىق تەكشۈرۈش
+  if (!user) {
+    console.warn('⚠️ ئىشلەتكۈچى كىرمىگەن، لىگىن بەتىگە قايتۇرۇلىدۇ');
+    alert('ئالدى بىلەن سىستېمىغا كىرىڭ!');
+    return;
+  }
+
+  // 2️⃣ رول تەكشۈرۈش (پەقەت ئوقۇغۇچى ۋە باشقۇرغۇچىلا كىرەلەيدۇ)
+  const allowedRoles = ['student', 'admin'];
+  if (!allowedRoles.includes(user.role)) {
+    console.error('❌ رۇخسەتسىز زىيارەت:', user.role);
+    alert('كەچۈرۈڭ، سىزنىڭ بۇ بەتكە كىرىش ھوقۇقىڭىز يوق!');
+    return;
+  }
+
+  // 3️⃣ يۆتكىلىش ئالدى تەييارلىق (ئىختىيارىي: يۈكلەش ھالىتى)
+  const prepareNavigation = () => {
+    // Analytics قوشۇش (ئەگەر لازىم بولسا)
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'navigate_to_student_info', {
+        user_id: user.id,
+        user_role: user.role,
+        from_page: 'NewLabelCourses'
+      });
+    }
+    
+    // localStorage غا ئاخىرقى زىيارەتنى خاتىرىلەش
+    try {
+      localStorage.setItem('kelbil_last_navigation', JSON.stringify({
+        to: '/student-info',
+        from: 'NewLabelCourses',
+        timestamp: new Date().toISOString(),
+        userId: user.id
+      }));
+    } catch (e) {
+      console.warn('⚠️ localStorage خاتىرىلەش مەغلۇب بولدى:', e);
+    }
+  };
+
+  // 4️⃣ بىخەتەر يۆتكىلىش فۇنكسىيىسى
+  const performNavigation = () => {
+    try {
+      // ✅ ئاساسلىق يۆتكىلىش: react-router-dom useNavigate
+      navigate('/student-info', {
+        state: {
+          user: {
+            id: user.id,
+            name: user.name,
+            role: user.role
+            // 🔐 مەخپىي نۇمۇرنى ھەرگىز يەتكۈزمەڭ!
+          },
+          from: 'NewLabelCourses',
+          timestamp: Date.now()
+        },
+        replace: false // قايتىش كۇنۇپكىسى ئۈچۈن тарىخقا ساقلاش
+      });
+
+      // ✅ مۇۋەپپەقىيەتلىك خاتىرىلەش
+      console.log('✅ مۇۋەپپەقىيەتلىك يۆتكەلدى:', {
+        to: '/student-info',
+        user: user.name,
+        role: user.role
+      });
+
+      return true;
+
+    } catch (error) {
+      // ❌ خاتالىق بىر تەرەپ قىلىش
+      console.error('❌ يۆتكىلىش خاتالىقى:', error);
+      
+      // 🔁 فۇلباك (fallback) ئۇسۇلى: توغرىدىن-توغرا يۆتكەش
+      try {
+        console.log('🔄 فۇلباك ئۇسۇلى ئىشلىتىلىۋاتىدۇ...');
+        window.location.href = '/student-info';
+        return true;
+      } catch (fallbackError) {
+        console.error('💥 فۇلباكمۇ مەغلۇب بولدى:', fallbackError);
+        alert('بەت يۆتكىلىشتە خاتالىق كۆرۈلدى، قايتا سىناپ بېقىڭ!');
+        return false;
+      }
+    }
+  };
+
+  // 5️⃣ ئىجرا قىلىش تەرتىپى
+  prepareNavigation();
+  const success = performNavigation();
+  
+  // 6️⃣ نەتىجە قايۇرۇش (ئىختىيارىي)
+  if (!success) {
+    // Analytics غا خاتالىق خاتىرىلەش
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'navigation_error', {
+        page: 'NewLabelCourses',
+        target: '/student-info'
+      });
+    }
+  }
+  
+  return success;
+};
+
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-200 p-4 md:p-6" dir="rtl">
       <div className="max-w-7xl mx-auto space-y-6">
@@ -658,6 +763,98 @@ export default function NewLabelCourses() {
             }
           </h4>
         </div>
+         {/* =================== STUDENT INFO BUTTON - يېڭى قوشۇلغان بۆلەك =================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="relative"
+        >
+          {/* Professional Student Info Card Button */}
+          <div className="group relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-cyan-500/10 via-emerald-500/10 to-purple-500/10 backdrop-blur-2xl border border-white/10 hover:border-cyan-400/30 transition-all duration-500 shadow-[0_0_40px_rgba(6,182,212,0.15)]">
+            
+            {/* Animated Glow */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/20 blur-3xl rounded-full animate-pulse"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/20 blur-3xl rounded-full animate-pulse"></div>
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 p-6 lg:p-8">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                
+                {/* Left: Icon + Text */}
+                <div className="flex items-center gap-5">
+                  {/* Animated Icon */}
+                  <motion.div
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                    className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.4)]"
+                  >
+                    <div className="absolute inset-0 rounded-2xl bg-white/20 blur-lg"></div>
+                    <svg className="relative w-8 h-8 lg:w-10 lg:h-10 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </motion.div>
+
+                  <div className="text-right">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 text-[10px] uppercase tracking-widest font-mono">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                      PERSONAL DASHBOARD
+                    </span>
+                    <h3 className="text-xl lg:text-2xl font-black text-white mt-3 leading-relaxed">
+                      مېنىڭ ئۇچۇرۇم ۋە دەرس ئەھۋالىم
+                    </h3>
+                    <p className="text-sm text-slate-400 mt-2 leading-loose max-w-md">
+                      قاتنىشىش خاتىرىسى، تاپشۇرۇق يۈكلەش، ئوقۇتقۇچى ئىنكاسى ۋە شەخسىي ئىلگىرىلەش دوكلاتىڭىزنى بۇ يەردىن كۆرۈڭ
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right: Action Button */}
+                <div className="flex items-center gap-4">
+                  {/* Stats Preview */}
+                  <div className="hidden md:flex items-center gap-3 bg-slate-950/50 border border-slate-800 rounded-2xl px-4 py-3">
+                    <div className="text-center">
+                      <p className="text-[10px] text-slate-500">تاماملانغان</p>
+                      <p className="text-lg font-black text-emerald-400">
+                        {Object.values(progress).filter(p => p.userId === currentUser?.id && p.completed).length}
+                      </p>
+                    </div>
+                    <div className="w-px h-8 bg-slate-800"></div>
+                    <div className="text-center">
+                      <p className="text-[10px] text-slate-500">ئومۇمىي</p>
+                      <p className="text-lg font-black text-cyan-400">
+                        {Object.values(progress).filter(p => p.userId === currentUser?.id).length}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Main Button - StudentInfo غا ئۇلاش */}
+                  <motion.button
+                    whileHover={{ scale: 1.03, boxShadow: "0 0 35px rgba(6,182,212,0.5)" }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={goToStudentInfo}
+                    className="relative overflow-hidden group/btn px-6 lg:px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-cyan-400 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-black text-sm lg:text-base transition-all shadow-[0_0_25px_rgba(6,182,212,0.3)]"
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      كىرىش ۋە كۆرۈش
+                      <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity"></div>
+                  </motion.button>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Decorative Corner */}
+            <div className="absolute top-4 left-4 w-20 h-20 border-t-2 border-l-2 border-cyan-400/30 rounded-tl-2xl"></div>
+            <div className="absolute bottom-4 right-4 w-20 h-20 border-b-2 border-r-2 border-emerald-400/30 rounded-br-2xl"></div>
+          </div>
+        </motion.div>
 
       </div>
 
