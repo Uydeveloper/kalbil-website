@@ -1207,7 +1207,7 @@ const goToStudentInfo = () => {
             <img
               src={
                 lesson.thumbnail ||
-                "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
+                "http://localhost:3000/kalbil-website/images/image05.png"
               }
               alt={lesson.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
