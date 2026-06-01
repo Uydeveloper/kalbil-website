@@ -1,25 +1,23 @@
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-
 import { Helmet } from "react-helmet";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import { useContext } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../context/UserContext";
-
-
-import React, { useState, useEffect, useRef } from "react";
 import users from "../data/userscopy.json";
 import albums from "../data/albums.json";
 
 export default function NewLabelCourses() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [login, setLogin] = useState({ identifier: "", password: "" });
-  const [openAlbum, setOpenAlbum] = useState(null);
   
+  // Login state with password visibility toggle
+  const [login, setLogin] = useState({ identifier: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false); // <-- Password visibility state
+  
+  const [openAlbum, setOpenAlbum] = useState(null);
   const [currentVideo, setCurrentVideo] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
@@ -53,7 +51,9 @@ export default function NewLabelCourses() {
       const savedTime = progress[videoKey]?.currentTime || 0;
       
       const handleLoadedMetadata = () => {
-        videoRef.current.currentTime = savedTime;
+        if (videoRef.current) {
+          videoRef.current.currentTime = savedTime;
+        }
       };
 
       videoRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
@@ -114,275 +114,196 @@ export default function NewLabelCourses() {
     setUser(found);
   };
 
+  // === LOGIN VIEW (No user logged in) ===
   if (!user) {
     return (
-  <div
-    className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#020617] via-[#071126] to-[#020617] text-white flex flex-col justify-between items-center px-4 py-6"
-    dir="rtl"
-  >
-
-    {/* Animated Background */}
-    <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-3xl rounded-full animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 blur-3xl rounded-full animate-pulse"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.08),transparent_40%)]"></div>
-    </div>
-
-   {/* SIDE IMAGES */}
-<div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-
-  {/* LEFT IMAGE */}
-  <div
-    className="
-      absolute
-      left-[20px]
-      top-[120px]
-      w-[380px]
-      h-[260px]
-      hidden xl:flex
-      items-center
-      justify-center
-    "
-  >
-
-    {/* Glow */}
-    <div className="absolute inset-0 bg-cyan-500/10 blur-3xl rounded-[2rem]"></div>
-
-    {/* Image */}
-    <img
-      src={`${process.env.PUBLIC_URL}/images/28daysAI.jpg`}
-      alt="AI Left"
-      className="
-        max-w-full
-        max-h-full
-        object-contain
-        opacity-210
-        blur-[0.5px]
-        contrast-125
-        brightness-90
-        rounded-[2rem]
-        border border-cyan-400/10
-        shadow-[0_0_60px_rgba(6,182,212,0.20)]
-      "
-    />
-
-    {/* Overlay */}
-    <div className="
-      absolute inset-0
-      rounded-[2rem]
-      bg-gradient-to-r
-      from-[#020617]/10
-      via-transparent
-      to-transparent
-    "></div>
-
-  </div>
-
-  {/* RIGHT IMAGE */}
-  <div
-    className="
-      absolute
-      right-[20px]
-      top-[120px]
-      w-[380px]
-      h-[260px]
-      hidden xl:flex
-      items-center
-      justify-center
-    "
-  >
-
-    {/* Glow */}
-    <div className="absolute inset-0 bg-emerald-500/10 blur-3xl rounded-[2rem]"></div>
-
-    {/* Image */}
-    <img
-      src={`${process.env.PUBLIC_URL}/images/QunatumAI.png`}
-      alt="AI Right"
-      className="
-        max-w-full
-        max-h-full
-        object-contain
-        opacity-210
-        blur-[0.5px]
-        contrast-125
-        brightness-90
-        rounded-[2rem]
-        border border-emerald-400/10
-        shadow-[0_0_60px_rgba(16,185,129,0.20)]
-      "
-    />
-
-    {/* Overlay */}
-    <div className="
-      absolute inset-0
-      rounded-[2rem]
-      bg-gradient-to-l
-      from-[#020617]/30
-      via-transparent
-      to-transparent
-    "></div>
-
-  </div>
-
-</div>
-
-
-    {/* Top Space */}
-    <div />
-
-    {/* Main Container */}
-    <div className="relative z-10 w-full max-w-md">
-
-      {/* Logo Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 25 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="mb-10 flex flex-col items-center text-center"
+      <div
+        className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#020617] via-[#071126] to-[#020617] text-white flex flex-col justify-between items-center px-4 py-6"
+        dir="rtl"
       >
-
-        {/* Logo */}
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{
-            delay: 0.2,
-            type: "spring",
-            stiffness: 180
-          }}
-          className="relative w-28 h-28 rounded-[2rem] bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 border border-cyan-400/30 backdrop-blur-2xl flex items-center justify-center shadow-[0_0_50px_rgba(6,182,212,0.25)]"
-        >
-
-          {/* Glow */}
-          <div className="absolute inset-0 rounded-[2rem] bg-cyan-400/10 blur-2xl"></div>
-
-          {/* Letter */}
-          <span className="relative text-5xl font-black bg-gradient-to-r from-cyan-300 via-white to-emerald-300 bg-clip-text text-transparent">
-            K
-          </span>
-        </motion.div>
-
-        {/* Brand */}
-        <h1 className="mt-5 text-3xl sm:text-4xl font-black tracking-wide bg-gradient-to-r from-cyan-300 via-white to-emerald-300 bg-clip-text text-transparent">
-          KELBIL HIGH TECH
-        </h1>
-
-        {/* English */}
-        <p className="mt-2 text-xs tracking-[0.35em] uppercase text-cyan-400/70 font-mono">
-          Advanced AI Learning Hub
-        </p>
-
-        {/* Uyghur Slogan */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-6 text-lg sm:text-xl leading-loose text-slate-300 max-w-md font-uyghur"
-        >
-          «بىلىم بىلەن ئويغىنىمىز، سۈنئىي ئەقىل بىلەن كەلگۈسىنى قۇرىمىز»
-        </motion.p>
-
-        {/* Small Subtitle */}
-        <p className="mt-3 text-sm text-slate-500 leading-relaxed px-4">
-          ئۇيغۇر زېھنى • زامانىۋى تېخنىكا • رەقەملىك كەلگۈسى
-        </p>
-      </motion.div>
-
-      {/* Login Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 35 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="relative overflow-hidden bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-7 shadow-[0_0_40px_rgba(0,0,0,0.4)]"
-      >
-
-        {/* Card Glow */}
-        <div className="absolute -top-20 -right-20 w-40 h-40 bg-cyan-500/10 blur-3xl rounded-full"></div>
-        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-500/10 blur-3xl rounded-full"></div>
-
-        {/* Heading */}
-        <div className="relative z-10 text-center mb-6">
-          <h2 className="text-2xl font-bold text-white">
-            سىستېمىغا كىرىش
-          </h2>
-          <p className="text-sm text-slate-400 mt-2">
-            AI Education Platform Access
-          </p>
+        {/* Animated Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-3xl rounded-full animate-pulse"></div>
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 blur-3xl rounded-full animate-pulse"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.08),transparent_40%)]"></div>
         </div>
 
-        {/* Inputs */}
-        <div className="relative z-10 space-y-5">
-
-          {/* User */}
-          <div>
-            <label className="block text-sm text-slate-300 mb-2 mr-1">
-              ئىسمىڭىز ياكى كىملىك نومۇرى
-            </label>
-
-            <input
-              className="w-full bg-slate-950/70 border border-slate-800 text-slate-200 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all text-right"
-              placeholder="كىملىك كىرگۈزۈڭ..."
-              value={login.identifier}
-              onChange={(e) =>
-                setLogin((prev) => ({
-                  ...prev,
-                  identifier: e.target.value,
-                }))
-              }
+        {/* SIDE IMAGES */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {/* LEFT IMAGE */}
+          <div className="absolute left-[20px] top-[120px] w-[380px] h-[260px] hidden xl:flex items-center justify-center">
+            <div className="absolute inset-0 bg-cyan-500/10 blur-3xl rounded-[2rem]"></div>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/28daysAI.jpg`}
+              alt="AI Left"
+              className="max-w-full max-h-full object-contain opacity-210 blur-[0.5px] contrast-125 brightness-90 rounded-[2rem] border border-cyan-400/10 shadow-[0_0_60px_rgba(6,182,212,0.20)]"
             />
+            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-[#020617]/10 via-transparent to-transparent"></div>
           </div>
 
-          {/* Password */}
-          <div>
-            <label className="block text-sm text-slate-300 mb-2 mr-1">
-              مەخپىي نومۇر
-            </label>
-
-            <input
-              type="password"
-              className="w-full bg-slate-950/70 border border-slate-800 text-slate-200 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/20 transition-all text-left font-mono tracking-widest"
-              placeholder="••••••••"
-              value={login.password}
-              onChange={(e) =>
-                setLogin((prev) => ({
-                  ...prev,
-                  password: e.target.value,
-                }))
-              }
+          {/* RIGHT IMAGE */}
+          <div className="absolute right-[20px] top-[120px] w-[380px] h-[260px] hidden xl:flex items-center justify-center">
+            <div className="absolute inset-0 bg-emerald-500/10 blur-3xl rounded-[2rem]"></div>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/QunatumAI.png`}
+              alt="AI Right"
+              className="max-w-full max-h-full object-contain opacity-210 blur-[0.5px] contrast-125 brightness-90 rounded-[2rem] border border-emerald-400/10 shadow-[0_0_60px_rgba(16,185,129,0.20)]"
             />
+            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-l from-[#020617]/30 via-transparent to-transparent"></div>
           </div>
+        </div>
 
-          {/* Remember */}
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center gap-2 text-slate-400 cursor-pointer">
-              <input type="checkbox" className="accent-cyan-500" />
-              <span>كىرىشنى ساقلاش</span>
-            </label>
+        {/* Top Space */}
+        <div />
 
-            <button className="text-cyan-400 hover:text-cyan-300 transition-colors">
-              پارول ئۇنتۇلدۇمۇ؟
-            </button>
-          </div>
-
-          {/* Login Button */}
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={handleLogin}
-            className="w-full relative overflow-hidden bg-gradient-to-r from-cyan-500 via-cyan-400 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-black py-3 rounded-2xl transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)]"
+        {/* Main Login Container */}
+        <div className="relative z-10 w-full max-w-md">
+          {/* Logo Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-10 flex flex-col items-center text-center"
           >
-            <span className="relative z-10">
-              سىستېمىغا كىرىش
-            </span>
+            {/* Logo */}
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 180 }}
+              className="relative w-28 h-28 rounded-[2rem] bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 border border-cyan-400/30 backdrop-blur-2xl flex items-center justify-center shadow-[0_0_50px_rgba(6,182,212,0.25)]"
+            >
+              <div className="absolute inset-0 rounded-[2rem] bg-cyan-400/10 blur-2xl"></div>
+              <span className="relative text-5xl font-black bg-gradient-to-r from-cyan-300 via-white to-emerald-300 bg-clip-text text-transparent">
+                K
+              </span>
+            </motion.div>
 
-            <div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity"></div>
-          </motion.button>
+            {/* Brand */}
+            <h1 className="mt-5 text-3xl sm:text-4xl font-black tracking-wide bg-gradient-to-r from-cyan-300 via-white to-emerald-300 bg-clip-text text-transparent">
+              KELBIL HIGH TECH
+            </h1>
+            <p className="mt-2 text-xs tracking-[0.35em] uppercase text-cyan-400/70 font-mono">
+              Advanced AI Learning Hub
+            </p>
 
+            {/* Uyghur Slogan */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-6 text-lg sm:text-xl leading-loose text-slate-300 max-w-md font-uyghur"
+            >
+              «بىلىم بىلەن ئويغىنىمىز، سۈنئىي ئەقىل بىلەن كەلگۈسىنى قۇرىمىز»
+            </motion.p>
+            <p className="mt-3 text-sm text-slate-500 leading-relaxed px-4">
+              ئۇيغۇر زېھنى • زامانىۋى تېخنىكا • رەقەملىك كەلگۈسى
+            </p>
+          </motion.div>
+
+          {/* Login Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="relative overflow-hidden bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-7 shadow-[0_0_40px_rgba(0,0,0,0.4)]"
+          >
+            {/* Card Glow */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-cyan-500/10 blur-3xl rounded-full"></div>
+            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-500/10 blur-3xl rounded-full"></div>
+
+            {/* Heading */}
+            <div className="relative z-10 text-center mb-6">
+              <h2 className="text-2xl font-bold text-white">سىستېمىغا كىرىش</h2>
+              <p className="text-sm text-slate-400 mt-2">AI Education Platform Access</p>
+            </div>
+
+            {/* Inputs Form */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* User Input */}
+              <div>
+                <label className="block text-sm text-slate-300 mb-2 mr-1 text-right">
+                  ئىسمىڭىز ياكى كىملىك نومۇرى
+                </label>
+                <input
+                  type="text"
+                  dir="rtl"
+                  className="w-full bg-slate-950/70 border border-slate-800 text-slate-200 rounded-2xl px-5 py-3 text-m focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all text-left"
+                  placeholder="كىملىك كىرگۈزۈڭ..."
+                  value={login.identifier}
+                  onChange={(e) => setLogin((prev) => ({ ...prev, identifier: e.target.value }))}
+                />
+              </div>
+
+              {/* Password Input with Toggle Visibility */}
+              <div>
+                <label className="block text-sm text-slate-300 mb-2 mr-1 text-right">
+                  مەخپىي نومۇر
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    dir="ltr"
+                    className="w-full bg-slate-950/70 border border-slate-800 text-slate-200 rounded-2xl px-5 py-3 pr-12 text-m focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/20 transition-all text-left font-mono tracking-widest"
+                    placeholder="••••••••"
+                    value={login.password}
+                    onChange={(e) => setLogin((prev) => ({ ...prev, password: e.target.value }))}
+                  />
+                  
+                  {/* Toggle Button */}
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-cyan-400 transition-colors focus:outline-none p-1"
+                    aria-label={showPassword ? "مەخپىي نومۇرنى يوشۇرۇش" : "مەخپىي نومۇرنى كۆرسىتىش"}
+                  >
+                    {showPassword ? (
+                      /* Eye Off Icon */
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+                        <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+                        <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+                        <line x1="2" x2="22" y1="2" y2="22"/>
+                      </svg>
+                    ) : (
+                      /* Eye Icon */
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Remember & Forgot */}
+              <div className="flex items-center justify-between text-sm">
+                <label className="flex items-center gap-2 text-slate-400 cursor-pointer">
+                  <input type="checkbox" className="accent-cyan-500" />
+                  <span>كىرىشنى ساقلاش</span>
+                </label>
+                <button type="button" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                  پارول ئۇنتۇلدۇمۇ؟
+                </button>
+              </div>
+
+              {/* Login Button */}
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={handleLogin}
+                className="w-full relative overflow-hidden bg-gradient-to-r from-cyan-500 via-cyan-400 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-black py-3 rounded-2xl transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)]"
+              >
+                <span className="relative z-10">سىستېمىغا كىرىش</span>
+                <div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity"></div>
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
 
-    </div>
+        {/* Bottom Space */}
+        <div />
+   
 
     {/* Footer */}
     <footer className="relative z-10 mt-14 text-center">

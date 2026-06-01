@@ -49,7 +49,7 @@ import { useEffect } from "react";
 import UyghurAI from "./components/UyghurAI";
 import CarCoursePage from './components/CarCoursePage';
 import MyBlog from './pages/MyBlog';
-import StudentInfoNew from "./pages/StudentInfo";
+import StudentInfoPage from './pages/StudentInfo';
 
 
 
@@ -114,7 +114,7 @@ function App() {
           <Route path="/UyghurAI" element={<UyghurAI />} />
           <Route path="/courses/quantum-car-2026" element={<CarCoursePage />} />
           <Route path="/MyBlog" element={<MyBlog />} />  
-          <Route path="/student-info" element={<StudentInfoNew />} />   
+          <Route path="/student-info" element={<StudentInfoPage />} />   
           
           
           {/* ✅ پەقەت admin role بولغانلارلا */}
@@ -142,7 +142,3 @@ function App() {
 }
 
 export default App;
-
-
-
-

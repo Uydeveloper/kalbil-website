@@ -6,7 +6,7 @@
     "role": "admin"
   },
   
-  {
+  { 
     "id": "student001",
     "name": "musa.ismar",
     "password": "musa.ismar@qml26",
@@ -93,7 +93,7 @@
   {
     "id": "student015",
     "name": "Test User",
-    "password": "TestUser@qml26",
+    "password": "K_TestUser@qml26",
     "role": "student"
   },
 
