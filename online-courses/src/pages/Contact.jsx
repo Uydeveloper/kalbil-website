@@ -180,7 +180,7 @@ export default function NewLabelCourses() {
 
             {/* Brand */}
             <h1 className="mt-5 text-3xl sm:text-4xl font-black tracking-wide bg-gradient-to-r from-cyan-300 via-white to-emerald-300 bg-clip-text text-transparent">
-              KELBIL HIGH TECH
+              KeLBiL UYGHUR HIGH TECH
             </h1>
             <p className="mt-2 text-xs tracking-[0.35em] uppercase text-cyan-400/70 font-mono">
               Advanced AI Learning Hub
@@ -321,12 +321,18 @@ export default function NewLabelCourses() {
 );
   }
 
-  const allowedAlbums = albums.filter((album) => {
-    if (user.role === "admin") return true; 
-    if (user.role === "student") return album.id !== 1; 
-    if (user.role === "user") return album.id === 1; 
-    return false;
-  });
+ const allowedAlbums = albums.filter((album) => {
+
+    if (user.roles.includes("admin")) {
+        return true;
+    }
+
+    return (
+        (user.roles.includes("user") && album.id === 1) ||
+        (user.roles.includes("student") && album.id !== 1)
+    );
+
+});
 
   const selectedAlbumData = albums.find(a => a.id === openAlbum);
 

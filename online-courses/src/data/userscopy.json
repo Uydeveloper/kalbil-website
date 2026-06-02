@@ -76,13 +76,13 @@
     "id": "student012",
     "name": "hezirtelii",
     "password": "hezirtelii@qml26",
-    "role": "student"
+    "roles": ["student", "user"]
   },
   {
     "id": "student013",
     "name": "medine20171121",
     "password": "medine20171121@qml26",
-    "role": "student"
+    "role": "student,user"
   },
   {
     "id": "student014",
@@ -101,7 +101,7 @@
     "id": "user001",
     "name": "aycamal258",
     "password": "aycamal258@kht26",
-    "role": "user"
+    "roles": ["student", "user"]
   },
   {
     "id": "user002",
