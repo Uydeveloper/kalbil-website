@@ -7,7 +7,7 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [avatar, setAvatar] = useState(null);
 
-  // Load user from localStorage on mount
+  // 1. بەت تۇنجى يۈكلەنگەندە localStorage دىن ئەزانى ئوقۇش
   useEffect(() => {
     try {
       const storedUser = localStorage.getItem("loggedInUser");
@@ -19,21 +19,25 @@ export function UserProvider({ children }) {
         }
       }
     } catch (err) {
-      console.error("Failed to load user:", err);
+      console.error("Failed to load user from localStorage:", err);
     }
   }, []);
 
-  // Update avatar and sync with user + localStorage
+  // 2. ئاۋاتارنى يېڭىلاش فۇنكسىيەسى (Side Effect سىرتىغا چىقىرىلدى)
   const updateAvatar = (newAvatar) => {
     setAvatar(newAvatar);
-    setUser((prev) => {
-      const updatedUser = { ...prev, avatar: newAvatar };
-      localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
-      return updatedUser;
-    });
+    
+    // يېڭى يۈزلىنىشنى ئالدى بىلەن ھېسابلاپ چىقىمىز
+    const updatedUser = user ? { ...user, avatar: newAvatar } : { avatar: newAvatar };
+    
+    // State نى يېڭىلايمىز
+    setUser(updatedUser);
+    
+    // localStorage غا بىخەتەر ھالەتتە ساقلايمىز
+    localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
   };
 
-  // Optional: logout function
+  // 3. سىستېمىدىن چىقىش (Logout)
   const logout = () => {
     localStorage.removeItem("loggedInUser");
     setUser(null);
