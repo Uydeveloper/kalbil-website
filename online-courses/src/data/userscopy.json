@@ -3,74 +3,73 @@
     "id": "admin001",
     "name": "Uyghurjan",
     "password": "u_kelbil2026",
-    "role": "admin"
+    "roles": ["admin"]
   },
-  
   { 
     "id": "student001",
     "name": "musa.ismar",
     "password": "musa.ismar@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student002",
     "name": "hijrankiroran",
     "password": "hijrankiroran@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student003",
     "name": "xukran123",
     "password": "xukran123@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student004",
     "name": "ahirat1314",
     "password": "ahirat1314@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student005",
     "name": "varis.atasoy",
     "password": "varis.atasoy@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student006",
     "name": "husenjanobul",
     "password": "husenjanobul@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student007",
     "name": "asiya11reyim",
     "password": "asiya11reyim@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student008",
     "name": "uyghuromroep",
     "password": "uyghuromroep@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student009",
     "name": "ozluk.nl",
     "password": "ozluk.nl@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student010",
     "name": "mexrep",
     "password": "mexrep@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student011",
     "name": "mhmdfath858",
     "password": "mhmdfath858@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student012",
@@ -82,21 +81,20 @@
     "id": "student013",
     "name": "medine20171121",
     "password": "medine20171121@qml26",
-    "role": "student,user"
+    "roles": ["student", "user"]
   },
   {
     "id": "student014",
     "name": "izdan2746",
     "password": "izdan2746@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
   {
     "id": "student015",
     "name": "Test User",
     "password": "K_TestUser@qml26",
-    "role": "student"
+    "roles": ["student"]
   },
-
   {
     "id": "user001",
     "name": "aycamal258",
@@ -107,92 +105,90 @@
     "id": "user002",
     "name": "bughra319",
     "password": "bughra319@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user003",
     "name": "husenjanobul",
     "password": "husenjanobul@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user004",
     "name": "yulgun353",
     "password": "yulgun353@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user005",
     "name": "miyzanui",
     "password": "miyzanui@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user006",
     "name": "asiya11reyim",
     "password": "asiya11reyim@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user007",
     "name": "abduqadir.abliz",
     "password": "abduqadir.abliz@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user008",
     "name": "musa.ismar",
     "password": "musa.ismar@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user009",
     "name": "turukzat",
     "password": "turukzat@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user010",
     "name": "yexiltrading",
     "password": "yexiltrading@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user011",
     "name": "anwar.aman5070",
     "password": "anwar.aman5070@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user012",
     "name": "ablizakbar",
     "password": "ablizakbar@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user013",
     "name": "aerk9674",
     "password": "aerk9674@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user014",
     "name": "sabitbolgin0998",
     "password": "sabitbolgin0998@kht26",
-    "role": "user"
+    "roles": ["user"]
   },
   {
     "id": "user015",
     "name": "Arslan",
     "password": "terixqan@kht26",
-    "role": "user"
-  }
-  ,
+    "roles": ["user"]
+  },
   {
     "id": "user016",
-    "name": "kelbil",
-    "password": "kelbil@kht26",
-    "role": "admin"
+    "name": "alyar",
+    "password": "alyar@kht26",
+    "roles": ["user"]
   }
-
 ]

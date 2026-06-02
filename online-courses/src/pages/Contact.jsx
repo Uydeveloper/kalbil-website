@@ -321,17 +321,16 @@ export default function NewLabelCourses() {
 );
   }
 
- const allowedAlbums = albums.filter((album) => {
-
-    if (user.roles.includes("admin")) {
+const allowedAlbums = albums.filter((album) => {
+    // ئەگەر user ياكى user.roles تېخى يۈكلەنمىگەن بولسا خاتالىق چىقىپ كەتمەيدۇ
+    if (user?.roles?.includes("admin")) {
         return true;
     }
 
     return (
-        (user.roles.includes("user") && album.id === 1) ||
-        (user.roles.includes("student") && album.id !== 1)
+        (user?.roles?.includes("user") && album.id === 1) ||
+        (user?.roles?.includes("student") && album.id !== 1)
     );
-
 });
 
   const selectedAlbumData = albums.find(a => a.id === openAlbum);
