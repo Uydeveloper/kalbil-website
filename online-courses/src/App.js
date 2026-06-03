@@ -5,6 +5,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Toast ئۇسلۇبى جەزملەندى
 
 // Context
 import { UserProvider } from './context/UserContext';
@@ -20,7 +21,7 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import StudentList from "./components/StudentList";
 import JoinClass from "./components/JoinClass";
 import UyghurAI from "./components/UyghurAI";
-import CarCoursePage from './components/CarCoursePage';
+
 
 // Pages
 import Home from "./pages/Home";
@@ -35,11 +36,11 @@ import TopicDetails from "./pages/TopicDetails";
 import MyCourses from "./pages/MyCourses";
 import Profile from "./pages/Profile";
 import CourseStart from "./pages/CourseStart";
-import MessagesPage from "./pages/MessagesPage";
-import MessageDetail from "./pages/MessageDetail";
 import TopicDetail from "./pages/TopicDetail";
 import AdminMessages from './pages/AdminMessages';
 import EditMessagePage from './pages/EditMessagePage';
+import MessagesPage from "./pages/MessagesPage";
+import MessageDetail from "./pages/MessageDetail";
 import CourseDetailWrapper from "./pages/CourseDetailWrapper";
 import QuantumMachineLearning from "./pages/QuantumMachineLearning";
 import TopicSlides from "./pages/TopicSlides";
@@ -63,17 +64,20 @@ function App() {
   const [students, setStudents] = useState([]);
   const API_BASE_URL = "http://localhost:5000/api"; 
 
-  // Backend دىن مەلۇمات ئوقۇش (خاتالىق تۇتۇش قوشۇلدى)
+  // Backend دىن مەلۇمات ئوقۇش (خاتالىق يۈز بەرسە سىستېما قېتىپ قالمايدۇ)
   useEffect(() => {
     axios.get(`${API_BASE_URL}/students`)
       .then(response => {
-        if (Array.isArray(response.data)) {
+        if (response.data && Array.isArray(response.data)) {
           setStudents(response.data);
+        } else {
+          setStudents([]);
         }
       })
       .catch(error => {
-        console.error('Error fetching students:', error);
-        // ئەگەر تور ئۈزۈلگەن بولسا سىستېما جىم تۇرىدۇ، Crash بولمايدۇ
+        console.warn('Backend server is not running on port 5000 yet. Live data disabled.', error.message);
+        // بېكەند ئۆچۈك بولسا سىستېما Crash بولماي، جىم تۇرىدۇ
+        setStudents([]); 
       });
   }, []);
 
@@ -82,7 +86,7 @@ function App() {
       <LanguageProvider>
         <UserProvider>
           <Router>
-            <ToastContainer />
+            <ToastContainer position="top-right" autoClose={3000} />
 
             {/* ✅ Navbar + Login Modal */}
             <Navbar onLoginClick={() => setShowLogin(true)} />
@@ -95,7 +99,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/courses" element={<Courses />} />
               
-              {/* بىرلا ئوخشاش ئادرېس قالدۇرۇلدى */}
+              {/* بىرلا ئۆلچەملىك ئادرېس قالدۇرۇلدى */}
               <Route path="/course/:id" element={<CourseDetailWrapper />} /> 
               
               <Route path="/courses/:id/topic/:topicId" element={<TopicDetails />} />
@@ -120,16 +124,15 @@ function App() {
               <Route path="/join-class" element={<JoinClass />} />
               <Route path="/lecture/:id" element={<LectureDetail />} />
               <Route path="/students/:id" element={<Students />} />
-              <Route path="/studentsinfo" element={<StudentInfo />} /> {/* ئىملا تۈزىتىلدى */}
-              <Route path="/studentinfosys" element={<Studentinfosys/>} />
-              <Route path="/newcourses" element={<NewCourses/>} />
+              <Route path="/studentsinfo" element={<StudentInfo />} /> 
+              <Route path="/studentinfosys" element={<Studentinfosys />} />
+              <Route path="/newcourses" element={<NewCourses />} />
               <Route path="/posts" element={<Posts />} />
               <Route path="/UyghurAI" element={<UyghurAI />} />
-              <Route path="/courses/quantum-car-2026" element={<CarCoursePage />} />
               <Route path="/MyBlog" element={<MyBlog />} />  
               <Route path="/student-info" element={<StudentInfoPage />} />   
               
-              {/* ✅ پەقەت admin role بولغانلارلا */}
+              {/* ✅ پەقەت Admin ھوقۇقى بارلار ئۈچۈن قوغدالغان روت */}
               <Route
                 path="/view-registration"
                 element={
@@ -148,7 +151,9 @@ function App() {
           </Router>
         </UserProvider>
       </LanguageProvider>
-      <FontAwesomeIcon icon={faCoffee} />
+      <div className="hidden">
+        <FontAwesomeIcon icon={faCoffee} />
+      </div>
     </>
   );
 }
