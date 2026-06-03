@@ -1,12 +1,12 @@
 // MyBlog.jsx
 import React, { useState, lazy, Suspense } from 'react';
-import { FaNewspaper } from 'react-icons/fa';
+import { FaNewspaper, FaCharBar} from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import BlogPostCard from '../components/blog/BlogPostCard';
 import BlogDetailModal from '../components/blog/BlogDetailModal';
 import CategoryFilter from '../components/common/CategoryFilter';
 import { BLOG_POSTS, categories } from '../utils/blogData';
-
+import { FaChartBar, FaHeart, FaComment, FaEye, FaBookOpen, FaPaperPlane } from 'react-icons/fa';
 
 // Lazy loading
 const Blog01 = lazy(() => import('../components/blog/posts/Blog01'));
@@ -359,46 +359,61 @@ const MyBlog = () => {
   // PostContent نى كومپونېنت قىلىپ تەييارلاش
   const PostContent = selectedPost ? getPostComponent(selectedPost.component) : null;
 
+
+
+
+
   return (
-    <div className="font-uyghur text-xl min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800" style={{ direction: 'rtl' }}>
+    // 🌟 text-lg قوشۇلۇپ، ئومۇمىي ئاساسىي خەت چوڭلۇقى كۆتۈرۈلدى
+    <div 
+      className="font-uyghur antialiased text-lg md:text-xl min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300 relative overflow-x-hidden" 
+      style={{ direction: 'rtl' }}
+    >
+      {/* 🔮 ئارقا كۆرۈنۈش بېزەك نۇرلىرى */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-500/5 dark:bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-purple-500/5 dark:bg-purple-500/5 rounded-full blur-[140px] pointer-events-none" />
+
       <AnimatePresence mode="wait">
         {selectedPost ? (
+          /* 📌 1-قىسىم: تولۇق مەزمۇن كۆزنىكى يۈكلىنىش گىرۋىكى */
           <Suspense fallback={
-            <div className="font-uyghur text-2xl fixed inset-0 z-50 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center" style={{ direction: 'rtl' }}>
+            <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xl flex items-center justify-center">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="font-uyghur text-2xl text-center"
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="text-center p-8 bg-slate-900/50 rounded-3xl border border-white/5 max-w-sm w-full mx-4"
               >
-                <div className="font-uyghur text-2xl w-20 h-20 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                <div className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                
+                {/* text-xl گە چوڭايتىلدى */}
                 <motion.h3 
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="font-uyghur text-2xl font-bold mb-2 text-gray-900 dark:text-white"
+                  transition={{ delay: 0.1 }}
+                  className="text-xl md:text-2xl font-black mb-2 text-white"
                 >
-                  مەزمۇن يۈكلەۋاتىدۇ
+                  مەزمۇن يۈكلىنىۋاتىدۇ
                 </motion.h3>
+                
                 <motion.p 
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-gray-600 dark:text-gray-300"
+                  transition={{ delay: 0.2 }}
+                  className="text-base text-slate-400 font-medium truncate px-4"
                 >
                   {selectedPost.title}
                 </motion.p>
+                
                 <motion.div 
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="mt-6"
+                  transition={{ delay: 0.3 }}
+                  className="mt-6 flex justify-center gap-2"
                 >
-                  <div className="font-uyghur text-2xl flex justify-center gap-4">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  </div>
+                  <div className="w-2 h-2 bg-cyan-500 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                 </motion.div>
               </motion.div>
             </div>
@@ -410,80 +425,73 @@ const MyBlog = () => {
             />
           </Suspense>
         ) : (
+          /* 📌 2-قىسىم: ئاساسىي تىزىملىك يۈزى */
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="font-uyghur container mx-auto px-4 py-8"
-            style={{ direction: 'rtl' }}
+            transition={{ duration: 0.4 }}
+            className="container mx-auto px-4 py-12 relative z-10"
           >
-            {/* باش بەلگە */}
-            <div className="text-center mb-12">
+            {/* 🏛️ باش بەلگە قىسمى (Hero Header) */}
+            <div className="text-center mb-16 max-w-3xl mx-auto">
               <motion.div
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6 }}
-                className="inline-block mb-6"
+                className="inline-block mb-6 relative group"
               >
-                <div className="relative">
-                 <img   src= {`${process.env.PUBLIC_URL}/images/image05.png` } 
-  /> 
-                
-                  {/* <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl">
-                    <FaNewspaper className="w-12 h-12 text-white" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">✓</span>
-                  </div> */}
+                <div className="relative z-10 max-w-[180px] md:max-w-[220px] mx-auto filter drop-shadow-xl transition-transform duration-500 group-hover:scale-105">
+                  <img 
+                    src={`${process.env.PUBLIC_URL}/images/image05.png`} 
+                    alt="تورخاتىرەم بېزەك" 
+                    className="w-full h-auto object-contain"
+                  />
                 </div>
               </motion.div>
 
+              {/* تېما text-5xl دىن text-6xl غىچە چوڭايتىلدى */}
               <motion.h1 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                className="text-1xl md:text-5xl font-bold mb-10 mt-10 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent select-none tracking-wide"
               >
-                 تورخاتىرەم
-
+                تورخاتىرەم
               </motion.h1>
-
               
+              {/* چۈشەندۈرۈش text-lg دىن text-2xl غىچە كەڭەيتىلدى، leading-relaxed قوشۇلدى */}
               <motion.p 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto  mb-8"
+                className="text-lg md:text-2xl text-slate-600 dark:text-slate-400 leading-loose font-medium mb-8 px-4"
               >
                 ئۇيغۇر مەدەنىيىتى، تېخنىكا ۋە سەنئەت ھەققىدىكى ئەڭ يېڭى خەۋەرلەر ۋە تەھلىللەر
               </motion.p>
               
+              {/* سىتاتىستىكا بەلگىلىرىنىڭ تېكىستى چوڭايتىلدى */}
               <motion.div 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="font-uyghur text-2xl  flex flex-wrap justify-center gap-4"
+                className="flex flex-wrap justify-center gap-3 text-sm md:text-base font-bold"
               >
-                <div className="font-uyghur text-2xl flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full">
-                  <span className="text-blue-700 dark:text-blue-300 font-medium">
-                    {BLOG_POSTS.length} ماقالى
-                  </span>
+                <div className="flex items-center gap-2 px-5 py-2.5 bg-blue-50 dark:bg-blue-950/40 border border-blue-100/60 dark:border-blue-900/40 rounded-xl text-blue-600 dark:text-blue-400 shadow-sm">
+                  <span>{BLOG_POSTS.length} ماقالە</span>
                 </div>
-                <div className=" flex items-center gap-2 px-4 py-2 bg-purple-100 dark:bg-purple-900/30 rounded-full">
-                  <span className="text-purple-700 dark:text-purple-300 font-medium">
-                    {BLOG_POSTS.reduce((sum, post) => sum + post.views, 0).toLocaleString()} كۆرۈش
-                  </span>
+                <div className="flex items-center gap-2 px-5 py-2.5 bg-purple-50 dark:bg-purple-950/40 border border-purple-100/60 dark:border-purple-900/40 rounded-xl text-purple-600 dark:text-purple-400 shadow-sm">
+                  <span>{BLOG_POSTS.reduce((sum, post) => sum + post.views, 0).toLocaleString()} قېتىم كۆرۈلگەن</span>
                 </div>
               </motion.div>
             </div>
 
-            {/* تۈرلەر تاللاش */}
+            {/* 🏷️ تۈرلەر تاللاش تاختىسى */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="font-uyghur text-2xl mb-12"
+              transition={{ delay: 0.45 }}
+              className="mb-10"
             >
               <CategoryFilter
                 categories={categories}
@@ -492,20 +500,19 @@ const MyBlog = () => {
               />
             </motion.div>
 
-            {/* بىلوگ كارتىلىرى */}
+            {/* 🗂️ بىلوگ كارتىلىرى رېشاتكىسى */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="font-uyghur text-2xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+              transition={{ delay: 0.5 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
             >
               {filteredPosts.map((post, index) => (
                 <motion.div
                   key={post.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  transition={{ delay: index * 0.05, duration: 0.5, ease: 'easeOut' }}
                 >
                   <BlogPostCard
                     post={post}
@@ -515,60 +522,69 @@ const MyBlog = () => {
               ))}
             </motion.div>
 
-            {/* ئۇچۇر خاتىرىسى */}
+            {/* 📊 چوڭ ستاتىستىكىلىق ئۇچۇر تاختىسى */}
             {filteredPosts.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="font-uyghur text-2xl bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-8 shadow-lg mb-12 overflow-hidden relative"
+                transition={{ delay: 0.6 }}
+                className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/60 rounded-[2rem] p-6 md:p-10 shadow-xl mb-16 overflow-hidden relative"
               >
-                <div className="font-uyghur text-2xl absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-500/10 to-purple-500/10 rounded-full -translate-y-16 translate-x-16"></div>
-                <div className="font-uyghur text-2xl absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-full translate-y-20 -translate-x-20"></div>
+                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-blue-500/5 to-purple-500/5 rounded-full -translate-y-16 translate-x-16" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-purple-500/5 to-pink-500/5 rounded-full translate-y-20 -translate-x-20" />
                 
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-white">
-                    ستاتىستىكىلىق مەلۇماتلار
+                  <h3 className="text-xl md:text-3xl font-black mb-10 text-center text-slate-800 dark:text-slate-100 flex items-center justify-center gap-2">
+                    <FaChartBar className="text-blue-500 w-6 h-6" />
+                    <span>مۇنبەر ستاتىستىكىلىق مەلۇماتلىرى</span>
                   </h3>
                   
-                  <div className="font-uyghur text-2xl grid grid-cols-2 md:grid-cols-4 gap-8">
-                    <div className="text-center">
-                      <div className="font-uyghur text-2xl  text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+                  {/* تۆت چوڭ سانلىق مەلۇمات - تېكىست چوڭلۇقى تېخىمۇ كۆرۈنەرلىك قىلىندى */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+                    <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-2xl border border-slate-100 dark:border-slate-800/50">
+                      <div className="text-3xl md:text-5xl font-black text-blue-600 dark:text-blue-400 font-sans mb-2">
                         {BLOG_POSTS.length}
                       </div>
-                      <div className="text-gray-700 dark:text-gray-300">تولۇق خەۋەر</div>
+                      <div className="text-sm md:text-base font-bold text-slate-500 dark:text-slate-400">ئومۇمىي ماقالە</div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+                    <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-2xl border border-slate-100 dark:border-slate-800/50">
+                      <div className="text-3xl md:text-5xl font-black text-purple-600 dark:text-purple-400 font-sans mb-2">
                         {BLOG_POSTS.reduce((sum, post) => sum + post.views, 0).toLocaleString()}
                       </div>
-                      <div className="text-gray-700 dark:text-gray-300">ئومۇمىي كۆرۈش</div>
+                      <div className="text-sm md:text-base font-bold text-slate-500 dark:text-slate-400">ئۇمۇمىي كۆرۈلۈش</div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
+                    <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-2xl border border-slate-100 dark:border-slate-800/50">
+                      <div className="text-3xl md:text-5xl font-black text-rose-500 dark:text-rose-400 font-sans mb-2">
                         {BLOG_POSTS.reduce((sum, post) => sum + post.likes, 0).toLocaleString()}
                       </div>
-                      <div className="text-gray-700 dark:text-gray-300">ئومۇمىي لايىك</div>
+                      <div className="text-sm md:text-base font-bold text-slate-500 dark:text-slate-400">ئومۇمىي لايىك</div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                    <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-2xl border border-slate-100 dark:border-slate-800/50">
+                      <div className="text-3xl md:text-5xl font-black text-amber-500 dark:text-amber-400 font-sans mb-2">
                         {BLOG_POSTS.reduce((sum, post) => sum + post.comments, 0).toLocaleString()}
                       </div>
-                      <div className="text-gray-700 dark:text-gray-300">ئومۇمىي باھا</div>
+                      <div className="text-sm md:text-base font-bold text-slate-500 dark:text-slate-400">ئومۇمىي باھا</div>
                     </div>
                   </div>
                   
-                  <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+                  {/* ئەڭ كۆپ كۆرۈلگەن قۇرلارنىڭ ئورۇنلىرى ۋە خەتلىرى كۆتۈرۈلدى */}
+                  <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800/80">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                      <div className="text-center md:text-right">
-                        <h4 className="font-bold text-gray-900 dark:text-white mb-2">ئەڭ كۆپ كۆرۈلگەن ماقالى</h4>
-                        <p className="text-gray-600 dark:text-gray-300">
+                      <div className="text-center md:text-right bg-slate-50 dark:bg-slate-950 px-6 py-4 rounded-2xl border border-slate-100 dark:border-slate-800/40 w-full md:w-auto flex-1">
+                        <h4 className="font-black text-xs md:text-sm text-slate-400 dark:text-slate-500 mb-1 flex items-center gap-1 md:justify-start justify-center">
+                          <FaEye className="text-blue-500/80" />
+                          <span>ئەڭ كۆپ كۆرۈلگەن ماقالە</span>
+                        </h4>
+                        <p className="text-base md:text-lg font-bold text-slate-700 dark:text-slate-300 truncate">
                           {BLOG_POSTS.reduce((max, post) => post.views > max.views ? post : max, BLOG_POSTS[0]).title}
                         </p>
                       </div>
-                      <div className="text-center md:text-left">
-                        <h4 className="font-bold text-gray-900 dark:text-white mb-2">ئەڭ كۆپ لايىك تاپقان</h4>
-                        <p className="text-gray-600 dark:text-gray-300">
+                      <div className="text-center md:text-right bg-slate-50 dark:bg-slate-950 px-6 py-4 rounded-2xl border border-slate-100 dark:border-slate-800/40 w-full md:w-auto flex-1">
+                        <h4 className="font-black text-xs md:text-sm text-slate-400 dark:text-slate-500 mb-1 flex items-center gap-1 md:justify-start justify-center">
+                          <FaHeart className="text-rose-500/80" />
+                          <span>ئەڭ كۆپ لايىك تاپقان ماقالە</span>
+                        </h4>
+                        <p className="text-base md:text-lg font-bold text-slate-700 dark:text-slate-300 truncate">
                           {BLOG_POSTS.reduce((max, post) => post.likes > max.likes ? post : max, BLOG_POSTS[0]).title}
                         </p>
                       </div>
@@ -578,69 +594,71 @@ const MyBlog = () => {
               </motion.div>
             )}
 
-            {/* ئىزدەش ۋە قوشۇمچە ئۇچۇر */}
+            {/* ✉️ ئاستى قىسىم: خەۋەر تۈرلىرى ۋە ئەزا بولۇش */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+              transition={{ delay: 0.7 }}
+              className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16"
             >
-              <div className="font-uyghur text-3xl bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-                <h4 className="font-uyghur text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-                  تېخىمۇ كۆپ ماقالىلەر كېلەۋاتىدۇ
-                </h4>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  بىز تېخىمۇ كۆپ ئۇيغۇر مەدەنىيىتى ۋە تېخنىكا مەزمۇنلىرىنى تەييارلاۋاتىمىز.
-                </p>
-                <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
-                  <span className="text-sm font-medium">مۇناسىۋەتلىك تېمىلار:</span>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 rounded-full text-sm">دىجىتال سەنئەت</span>
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 rounded-full text-sm">تىل تېخنىكىسى</span>
-                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 rounded-full text-sm">مۇزىكا تېخنىكىسى</span>
-                  </div>
+              <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/60 rounded-3xl p-6 shadow-md flex flex-col justify-between">
+                <div>
+                  <h4 className="text-xl font-black mb-3 text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                    <FaBookOpen className="text-indigo-500 w-5 h-5" />
+                    <span>يېڭى تېمىلار تەييارلىنىۋاتىدۇ</span>
+                  </h4>
+                  <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 leading-relaxed font-medium mb-4">
+                    بىز ئۇيغۇر رەقەملىك مەدەنىيىتى، كىۋانت ھېسابلاش تېخنىكىسى ۋە سۈنئىي ئەقىل مودېللىرى توغرىسىدا ئەڭ يېڭى تەتقىقاتلارنى يېزىۋاتىمىز.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+                  <span className="px-3.5 py-1.5 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 rounded-xl text-xs md:text-sm font-bold">دىجىتال سەنئەت</span>
+                  <span className="px-3.5 py-1.5 bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 rounded-xl text-xs md:text-sm font-bold">تىل تېخنىكىسى</span>
+                  <span className="px-3.5 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 rounded-xl text-xs md:text-sm font-bold">ماشىنا ئۆگىنىش</span>
                 </div>
               </div>
               
-              <div className="font-uyghur text-3xl bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 shadow-lg text-white">
-                <h4 className="text-xl font-bold mb-4">ئەزا بولۇڭ</h4>
-                <p className="mb-4 opacity-90">
-                  يېڭى ماقالىلەرگە ۋاقىتا ئېرىشىش ئۈچۈن ئەزا بولۇڭ.
+              <div className="lg:col-span-3 bg-gradient-to-br from-blue-600 to-indigo-700 dark:from-blue-700 dark:to-slate-900 rounded-3xl p-6 shadow-xl text-white flex flex-col justify-center relative overflow-hidden">
+                <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/5 rounded-full blur-md" />
+                <h4 className="text-xl font-black mb-3 flex items-center gap-2">
+                  <FaPaperPlane className="text-cyan-300 w-5 h-5" />
+                  <span>يېڭىلانمىلارغا ئېرىشىڭ</span>
+                </h4>
+                <p className="text-sm md:text-base mb-5 opacity-90 leading-relaxed font-medium">
+                  يېڭى ماقالىلەر تورغا چىققان ھامان ئېلېكترونلۇق خەت ساندۇقىڭىزدا ۋاقتىدا ئوقۇڭ.
                 </p>
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-3 font-sans">
                   <input 
                     type="email" 
-                    placeholder="ئېلېكترونلۇق خەت ئادرېسىڭىز"
-                    className="flex-1 px-4 py-2 rounded-lg bg-white/20 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
+                    placeholder="ئېلېكترونلۇق خەت ئادرېسىڭىز..."
+                    className="flex-1 px-4 py-3.5 text-base rounded-xl bg-white/10 placeholder-white/60 text-white focus:outline-none focus:ring-2 focus:ring-white/40 border border-white/10 backdrop-blur-sm font-uyghur"
                   />
-                  <button className="px-4 py-2 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-colors">
-                  ئەزا بولۇش
+                  <button className="px-6 py-3.5 bg-white hover:bg-slate-100 text-blue-600 font-black rounded-xl text-base transition-all duration-200 shadow-md active:scale-95 font-uyghur cursor-pointer">
+                    ئەزا بولۇش
                   </button>
                 </div>
               </div>
             </motion.div>
 
-            {/* ئاستىدىكى ئۇچۇر */}
+            {/* 📜 بەت ئاستى قىسمى */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
-              className="font-uyghur text-2xl text-center text-gray-500 dark:text-gray-400 text-sm"
+              transition={{ delay: 0.8 }}
+              className="text-center text-slate-400 dark:text-slate-500 border-t border-slate-200/50 dark:border-slate-800/50 pt-8"
             >
-              <p className="font-uyghur text-2xl mb-2">© 2024 ئۇيغۇر رەقەملىك مەدەنىيەت بىلوگى. بارلىق ھوقۇقلار مەخپىي.</p>
-              <p className="font-uyghur text-2xl ">بىلوگنىڭ بارلىق مەزمۇنلىرى ئەسلىي ۋە ئىجادىيەت مەھسۇلاتىدۇر.</p>
-              <div className="flex justify-center gap-4 mt-4">
-                <button className="font-uyghur text-2xl text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-xs">
-                  ئىشلىتىش شەرتلىرى
-                </button>
-                <button className="font-uyghur text-2xl text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-xs">
-                  مەخپىيەتلىك سىياسىتى
-                </button>
-                <button className="font-uyghur text-2xl text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-xs">
-                  ئالاقە
-                </button>
+              <p className="text-sm md:text-base font-bold mb-1">© 2026 ئۇيغۇر رەقەملىك مەدەنىيەت بىلوگى. بارلىق ھوقۇقلار قوغدىلىدۇ.</p>
+              <p className="text-xs font-medium opacity-80">بىلوگنىڭ بارلىق مەزمۇنلىرى ئەسلىي ۋە ئىجادىيەت مەھسۇلاتىدۇر.</p>
+              
+              <div className="flex justify-center gap-6 mt-5 text-sm font-bold text-slate-400 dark:text-slate-500">
+                <button className="hover:text-blue-500 dark:hover:text-cyan-400 transition-colors cursor-pointer">ئىشلىتىش شەرتلىرى</button>
+                <div className="w-px h-4 bg-slate-300 dark:bg-slate-800 align-middle mt-0.5" />
+                <button className="hover:text-blue-500 dark:hover:text-cyan-400 transition-colors cursor-pointer">مەخپىيەتلىك سىياسىتى</button>
+                <div className="w-px h-4 bg-slate-300 dark:bg-slate-800 align-middle mt-0.5" />
+                <button className="hover:text-blue-500 dark:hover:text-cyan-400 transition-colors cursor-pointer">ئالاقىلىشىڭ</button>
               </div>
             </motion.div>
+
           </motion.div>
         )}
       </AnimatePresence>

@@ -3,79 +3,79 @@ export const qmlTopics = [
   /* ---------------------- Quantum Machine Learning (QML) ---------------------- */
   {
     id: "qml",
-    title: "Quantum Machine Learning (QML) كىۋانىت ماشىنا ئۈگنىش",
+    title: "Quantum Machine Learning (QML) كىۋانت ماشىنا ئۆگىنىشى",
     slides: [
-      { heading: "What is QML?", content: `Quantum Machine Learning (QML) combines quantum computing with machine learning to process and analyze data in ways classical systems cannot. It uses qubits, superposition, and entanglement.` },
-      { heading: "Key Quantum Concepts", content: `Qubit, superposition, measurement, entanglement, unitary evolution.` },
-      { heading: "Quantum Data Encoding", content: `Amplitude encoding, basis encoding, angle encoding. Choose encoding that balances qubit count and expressivity.` },
-      { heading: "Example: Angle Encoding (Code)", content: `# Python (PennyLane) example\nimport pennylane as qml\nfrom pennylane import numpy as np\ndef feature_map(x):\n    for i, xi in enumerate(x):\n        qml.RY(xi, wires=i)` },
-      { heading: "Variational Quantum Circuits (VQC)", content: `Hybrid circuits: parameterized gates + classical optimizer (parameter-shift rule).` },
-      { heading: "QML Algorithms", content: `Quantum SVM (kernel methods), VQC classifiers, Quantum PCA.` },
-      { heading: "Training & Optimization", content: `Loss functions, parameter-shift gradients, gradient-free optimizers (COBYLA), batch strategies.` },
-      { heading: "Hardware vs Simulation", content: `Noise, limited qubits, transpilation, error mitigation.` },
-      { heading: "Use Case: Image Classification", content: `PCA -> angle encoding -> VQC -> measure expectation -> class label.` },
-      { heading: "Limitations & Future", content: `NISQ constraints, hybrid approaches, roadmap to advantage.` },
-      { heading: "Resources & Libraries", content: `PennyLane, Qiskit, Cirq, TorchQuantum. Read QML reviews on arXiv.` },
+      { heading: "What is QML?", content: "Quantum Machine Learning (QML) integrates quantum computing paradigms into machine learning pipelines. By leveraging quantum mechanical properties like superposition, entanglement, and interference, QML aims to process information in high-dimensional Hilbert spaces, potentially offering exponential computational advantages over classical systems for specific algorithmic tasks." },
+      { heading: "Key Quantum Concepts", content: "The bedrock of QML relies on properties of Quantum Mechanics: Qubits represent the fundamental data unit. Superposition allows a state to exist in a linear combination of |0⟩ and |1⟩. Entanglement creates non-classical, multi-qubit correlations. Measurement projects a quantum state into a classical probability distribution. Unitary Evolution ensures energy conservation and mathematical reversibility through U·U† = I." },
+      { heading: "Quantum Data Encoding", content: "To process classical data on quantum hardware, it must be mapped via a quantum feature map. Core paradigms include: Basis Encoding (mapping binary strings to computational basis states), Amplitude Encoding (storing normalized data vectors into the amplitudes of a quantum state, compact but costly to prepare), and Angle Encoding (rotating qubits by angles proportional to feature values, highly performant for NISQ devices)." },
+      { heading: "Example: Angle Encoding (Code)", content: "# Python (PennyLane) Advanced Quantum Feature Mapping\nimport pennylane as qml\nfrom pennylane import numpy as np\n\ndef feature_map(x):\n    # Iterates over features and applies parameterized rotations\n    for i, xi in enumerate(x):\n        qml.Hadamard(wires=i)  # Create initial superposition\n        qml.RY(xi, wires=i)    # Encode data into state space" },
+      { heading: "Variational Quantum Circuits (VQC)", content: "Variational Quantum Circuits (VQCs) function as the quantum analogue of neural networks. They comprise a fixed ansatz with trainable parameters (θ). The quantum state is evaluated, a cost function is calculated on classical hardware, and classical optimizers update parameters using the Parameter-Shift Rule: d/dθ [f(θ)] = 0.5 * [f(θ + π/2) - f(θ - π/2)]." },
+      { heading: "QML Algorithms", content: "Primary architectures include: Quantum Support Vector Machines (QSVM) which use quantum kernels to map linearly inseparable classical data into an infinite-dimensional Hilbert space; Variational Quantum Classifiers (VQC) using parameterized gate optimization; and Quantum Principal Component Analysis (QPCA) for exponential efficiency in processing high-density quantum state matrices." },
+      { heading: "Training & Optimization", content: "Training VQCs presents unique challenges such as 'Barren Plateaus' (vanishing gradients in high dimensions). Mitigation strategies involve using local cost functions, careful initialization of parameters, using analytical gradient methods (Parameter-Shift), and deploying robust optimizers like Adam, COBYLA, or Quantum Natural Gradient (QNG)." },
+      { heading: "Hardware vs Simulation", content: "Modern computing operates in the Noisy Intermediate-Scale Quantum (NISQ) era. Physical QPUs suffer from environmental decoherence, high gate error rates, and limited qubit connectivity. Current research focuses on Error Mitigation (e.g., zero-noise extrapolation) and building state-of-the-art simulators using GPU-acceleration before full fault-tolerant systems are built." },
+      { heading: "Use Case: Image Classification", content: "A typical end-to-end industry pipeline: 1. Dimension reduction via classical PCA. 2. Mapping features using Angle or Amplitude Encoding. 3. Execution of an entangled Variational Ansatz. 4. Measuring expectation values ⟨Z⟩ on specific target qubits. 5. Classical post-processing to map outputs to categorical classification labels." },
+      { heading: "Limitations & Future", content: "Major current roadblocks include data ingestion bottlenecks (the challenge of loading classical data efficiently onto quantum states) and physical gate noise. The industry roadmap targets Fault-Tolerant Quantum Computing (FTQC) utilizing logical qubits, which promises definitive quantum advantage across deep logistics, biochemistry, and AI." },
+      { heading: "Resources & Libraries", content: "The global ecosystem is anchored by open-source SDKs: Xanadu's PennyLane (built for quantum differentiability and ML integration), IBM's Qiskit (robust enterprise stack for physical QPU interaction), Google's Cirq (optimized for NISQ research), and TorchQuantum. Peer-reviewed research is primary tracked via the arXiv quant-ph domain." },
     ]
   },
 
   /* ---------------------- Quantum Physics ---------------------- */
   {
     id: "quantum_physics",
-    title: "Quantum Physics كىۋانىت فىزىكىسى",
+    title: "Quantum Physics كىۋانت فىزىكىسى",
     slides: [
-      { heading: "Scope & Motivation", content: `Quantum physics studies behavior of matter and energy at atomic/subatomic scales. Motivation: explain spectra, bonding, tunneling.` },
-      { heading: "Wave-Particle Duality", content: `Particles exhibit wave-like behaviors (de Broglie wavelength λ = h/p).` },
-      { heading: "Schrödinger Equation (time-dependent)", content: `iħ ∂ψ/∂t = Ĥ ψ — cornerstone of non-relativistic QM.` },
-      { heading: "Operators & Observables", content: `Observables are Hermitian operators; measurement returns eigenvalues.` },
-      { heading: "Potential Wells & Bound States", content: `Solve 1D infinite well: ψ_n(x) = sqrt(2/L) sin(nπx/L).` },
-      { heading: "Tunneling & Barriers", content: `Tunneling probability through barrier — important for quantum devices.` },
-      { heading: "Spin & Angular Momentum", content: `Spin-1/2 systems, Pauli matrices σ_x, σ_y, σ_z, spin measurement.` },
-      { heading: "Perturbation Theory (intro)", content: `Non-degenerate perturbation theory for small Hamiltonian corrections.` },
-      { heading: "Identical Particles & Statistics", content: `Bosons vs Fermions; Pauli exclusion principle.` },
-      { heading: "Quantum Experiments", content: `Double-slit, Stern-Gerlach, Bell tests demonstrating nonlocal correlations.` },
-      { heading: "Mathematical Tools", content: `Linear algebra: Hilbert spaces, eigen-decomposition, Dirac notation |ψ⟩.` },
-      { heading: "Further Reading", content: `Griffiths, Sakurai, Cohen-Tannoudji; online Qiskit and Pennylane tutorials.` },
+      { heading: "Scope & Motivation", content: "Quantum Physics investigates the fundamental mechanics governing matter and radiation at atomic and subatomic scales (~10^-10 m). It emerged to resolve catastrophic failures in classical mechanics, such as the ultraviolet catastrophe in blackbody radiation, the photoelectric effect, and the discrete emission lines of atomic spectra." },
+      { heading: "Wave-Particle Duality", content: "Every moving entity exhibits both corpuscular and wave-like characteristics. Quantified by the de Broglie relationship (λ = h/p, where h is Planck's constant and p is momentum). This duality explains electron diffraction patterns and underpins the Heisenberg Uncertainty Principle: Δx · Δp ≥ ħ/2, stating position and momentum cannot be simultaneously measured with absolute precision." },
+      { heading: "Schrödinger Equation", content: "The fundamental dynamic equation of non-relativistic quantum systems is the Time-Dependent Schrödinger Equation: iħ ∂/∂t |ψ(t)⟩ = Ĥ |ψ(t)⟩. Here, Ĥ represents the Hamiltonian operator (total system energy), ħ is the reduced Planck constant, and |ψ⟩ represents the wave function containing all accessible state information." },
+      { heading: "Operators & Observables", content: "In quantum mechanics, physical properties (observables like momentum, position, spin) are mathematically represented by linear, Hermitian operators. Hermitian operators guarantee real eigenvalues upon measurement. Post-measurement, the state collapses into the corresponding eigenstate, as defined by Born's statistical probability rule." },
+      { heading: "Potential Wells & Bound States", content: "Solving the 1D Infinite Potential Well (particle in a box) demonstrates spatial quantization. Boundaries force the wave function to zero at the walls, yielding discrete energy states En = (n²π²ħ²) / (2mL²) and orthonormal stationary wave functions: ψ_n(x) = sqrt(2/L) · sin(nπx/L)." },
+      { heading: "Tunneling & Barriers", content: "Quantum Tunneling occurs when a wave function encounters a finite potential energy barrier higher than the total energy of the particle. Instead of reflecting deterministically (classical behavior), the wave function decays exponentially within the barrier, leaving a non-zero transmission probability on the opposite side. This underpins flash memory, scanning tunneling microscopes, and alpha decay." },
+      { heading: "Spin & Angular Momentum", content: "Spin is an intrinsic, non-classical form of angular momentum independent of spatial motion. Spin-1/2 systems (such as electrons) are described using a two-dimensional complex Hilbert space. The algebraic components are defined via the Pauli Matrices: σ_x = [[0, 1], [1, 0]], σ_y = [[0, -i], [i, 0]], σ_z = [[1, 0], [0, -1]], which satisfy fundamental SU(2) commutation relations." },
+      { heading: "Perturbation Theory (Intro)", content: "Since exact analytical solutions to the Schrödinger equation are rare, perturbation theory decomposes a complex Hamiltonian into an exactly solvable component (Ĥ0) and a minute correction term (λV̂). It evaluates first and second-order corrections to energy eigenvalues and eigenstates, vital for analyzing effects like the Zeeman or Stark shifts." },
+      { heading: "Identical Particles & Statistics", content: "Subatomic particles are fundamentally indistinguishable. Multi-particle wave functions must be symmetric under particle exchange for Bosons (integer spin, obeying Bose-Einstein statistics), or anti-symmetric for Fermions (half-integer spin, obeying Fermi-Dirac statistics). This anti-symmetry gives rise to the Pauli Exclusion Principle." },
+      { heading: "Quantum Experiments", content: "The profound paradoxes of quantum mechanics are proven via foundational physics experiments: The Stern-Gerlach experiment (proving spin quantization), the Double-Slit experiment with single photons (proving self-interference), and modern Bell Test experiments confirming non-local quantum correlations and ruling out local hidden variable theories." },
+      { heading: "Mathematical Tools", content: "Quantum mechanics is natively formulated in the language of linear algebra over complex Vector Spaces (Hilbert Spaces). States are expressed using Dirac Notation (Bras ⟨ψ| and Kets |ψ⟩). Inner products ⟨φ|ψ⟩ represent probability amplitudes, while outer products |ψ⟩⟨ψ| function as projection operators." },
+      { heading: "Further Reading", content: "Standard academic literature includes: 'Introduction to Quantum Mechanics' by David J. Griffiths (for foundational mechanics), 'Modern Quantum Mechanics' by J.J. Sakurai (for advanced algebraic treatments), and 'Quantum Mechanics' by Cohen-Tannoudji. Supplemental labs can be conducted via Qiskit Runtime and PennyLane platforms." },
     ]
   },
 
   /* ---------------------- Quantum Mechanics (Advanced concepts) ---------------------- */
   {
     id: "quantum_mechanics",
-    title: "Quantum Mechanics — كىۋانىت مىخانىكىسى",
+    title: "Quantum Mechanics — كىۋانت مېخانىكىسى (ئالىي سەۋىيە)",
     slides: [
-      { heading: "Postulates of Quantum Mechanics", content: `State vectors, observables, measurement postulate, time evolution.` },
-      { heading: "Eigenvalue Problems", content: `Solving Ĥ ψ = E ψ for bound states (harmonic oscillator, hydrogen atom simplifications).` },
-      { heading: "Quantum Harmonic Oscillator", content: `Ladder operators a, a†; energy levels E_n = ħω(n + 1/2).` },
-      { heading: "Angular Momentum Algebra", content: `Commutation relations [J_i, J_j] = iħ ε_ijk J_k; spherical harmonics.` },
-      { heading: "Spin Systems & Density Matrices", content: `Pure vs mixed states; density operator ρ and partial trace.` },
-      { heading: "Open Quantum Systems", content: `Decoherence, Lindblad master equation (intro).` },
-      { heading: "Scattering Theory (intro)", content: `S-matrix, cross-sections — qualitative view.` },
-      { heading: "Symmetries and Conservation Laws", content: `Noether’s theorem connection in QM contexts.` },
-      { heading: "Approximation Methods", content: `WKB, variational principle, perturbation theory deeper examples.` },
-      { heading: "Computational QM", content: `Numerical integration of Schrödinger eq., finite difference methods.` },
-      { heading: "Example: Numerically Solve 1D well (Python)", content: `# Python: finite-difference solver skeleton\nimport numpy as np\n# build Hamiltonian matrix H and diagonalize\nE, psi = np.linalg.eigh(H)` },
-      { heading: "Next Steps", content: `Quantum field theory intro, computational chemistry packages.` },
+      { heading: "Postulates of Quantum Mechanics", content: "Advanced QM is formalized via rigorous axioms: Postulate 1: Physical states are unit vectors in a Hilbert space. Postulate 2: Observables are self-adjoint operators. Postulate 3: The expectation value is given by ⟨Ĥ⟩ = ⟨ψ|Ĥ|ψ⟩. Postulate 4: Time evolution is deterministic and governed by a unitary operator U(t) = exp(-iĤt/ħ)." },
+      { heading: "Eigenvalue Problems", content: "Solving the Time-Independent Schrödinger Equation Ĥ|ψ⟩ = E|ψ⟩ constitutes a complex boundary-value differential equation. Advanced models require solving the radial and angular equations for the Hydrogen Atom, deriving the fine structure constant, and mapping spherical potentials using confluent hypergeometric functions." },
+      { heading: "Quantum Harmonic Oscillator", content: "The Quantum Harmonic Oscillator (QHO) is solved elegantly using Dirac's algebraic method via Ladder Operators: the annihilation operator (a) and creation operator (a†). Defined by the commutation relation [a, a†] = 1. The Hamiltonian is rewritten as Ĥ = ħω(a†a + 1/2), proving the existence of a non-zero zero-point ground state energy E0 = 1/2 · ħω." },
+      { heading: "Angular Momentum Algebra", content: "Total angular momentum operators satisfy the foundational Lie algebra commutation framework: [J_i, J_j] = iħ ε_ijk J_k. Simultaneous eigenstates are mapped to the operators J² and J_z, leading to the derivation of Spherical Harmonics Y_l^m(θ, φ), which govern the spatial configurations of atomic orbitals." },
+      { heading: "Spin Systems & Density Matrices", content: "When dealing with statistical mixtures or entangled sub-systems where pure state vectors fail, the Density Operator (ρ = ∑ p_i |ψ_i⟩⟨ψ_i|) is required. It satisfies ρ = ρ†, Tr(ρ) = 1, and Tr(ρ²) ≤ 1 (where equality indicates a pure state). Subsystem properties are extracted via the Partial Trace operator: ρ_A = Tr_B(ρ_AB)." },
+      { heading: "Open Quantum Systems", content: "Real-world quantum architectures are never perfectly isolated; they interact with an external environment causing decoherence. This is mathematically modeled by tracking density matrix dynamics via the Lindblad Master Equation: dρ/dt = -i/ħ [Ĥ, ρ] + ∑ (L_k ρ L_k† - 1/2 {L_k† L_k, ρ}), capturing non-unitary energy dissipation." },
+      { heading: "Scattering Theory", content: "Scattering theory analyzes the collisions of particles and fields to probe subatomic structures. Expressed using the Lippmann-Schwinger equation, it derives the Scattering Matrix (S-Matrix) and computes differential cross-sections via Born Approximations, converting complex wave-packet impacts into predictable mathematical probabilities." },
+      { heading: "Symmetries and Conservation Laws", content: "Applying Noether's Theorem to quantum systems reveals deep mathematical invariances: Continuous Spatial Translation invariance implies the conservation of linear momentum. Rotational symmetry implies the conservation of angular momentum. Time translation invariance implies the strict conservation of total system energy." },
+      { heading: "Approximation Methods", content: "When handling multi-electron systems, physicists employ advanced analytical approximations: The Variational Principle (minimizing expectation energy to find upper bounds for the ground state), the WKB (Wentzel-Kramers-Brillouin) approximation for slowly varying spatial potentials, and time-dependent perturbation theory (deriving Fermi's Golden Rule)." },
+      { heading: "Computational QM", content: "Solving high-order many-body wave functions requires shifting from analytical proofs to computational architectures. This involves numerical discretization of the Hamiltonian matrix over custom coordinate grids, and deploying advanced algorithms like Hartree-Fock or Density Functional Theory (DFT) to map molecular structures." },
+      { heading: "Example: Numerically Solve 1D Well (Python)", content: "# Python: Finite-Difference Hamiltonian Diagonalizer\nimport numpy as np\nimport scipy.linalg as la\n\ndef solve_well(N, dx, V_array):\n    # Construct 2nd derivative kinetic matrix (finite-difference)\n    K = (-0.5 / dx**2) * (np.diag(np.ones(N-1), -1) - 2*np.diag(np.ones(N), 0) + np.diag(np.ones(N-1), 1))\n    H = K + np.diag(V_array) # Add potential energy diagonal\n    E, psi = la.eigh(H)     # Hermitian eigensolver\n    return E, psi" },
+      { heading: "Next Steps", content: "Mastery of advanced non-relativistic quantum mechanics leads directly to Quantum Field Theory (QFT)—which unifies special relativity with QM—as well as modern computational quantum chemistry packages like PySCF or OpenFermion for materials science." },
     ]
   },
 
   /* ---------------------- Quantum Technology ---------------------- */
   {
     id: "quantum_technology",
-    title: "Quantum Technology كىۋانىت تېخنىكىسى",
+    title: "Quantum Technology كىۋانت تېخنىكىسى",
     slides: [
-      { heading: "Overview of Quantum Tech", content: `Quantum sensors, quantum communication, quantum computing hardware types.` },
-      { heading: "Superconducting Qubits", content: `Transmon qubits, Josephson junctions, coherence times, control pulses.` },
-      { heading: "Trapped Ion Qubits", content: `Ions in electromagnetic traps, laser cooling, long coherence times.` },
-      { heading: "Photonic Qubits", content: `Encoding in polarization/paths; integrated photonics.` },
-      { heading: "Topological Qubits (overview)", content: `Majorana modes & topological protection (introductory).` },
-      { heading: "Quantum Error Correction", content: `QEC codes: Shor, Steane, surface codes — basic principles.` },
-      { heading: "Control Electronics & Cryogenics", content: `Microwave control, dilution refrigerators (mK temperatures).` },
-      { heading: "Quantum Networking", content: `QKD (BB84), entanglement distribution, quantum repeaters.` },
-      { heading: "Benchmarking & Calibration", content: `Randomized benchmarking, tomography basics.` },
-      { heading: "Industry & Roadmap", content: `Major providers: IBM, Rigetti, IonQ, Xanadu; commercialization pathways.` },
-      { heading: "Hands-on on Cloud QPUs", content: `Use IBM/Qiskit or IonQ cloud backends for simple circuits.` },
-      { heading: "Safety & Ethics", content: `Cryptography implications and responsible tech development.` },
+      { heading: "Overview of Quantum Tech", content: "Quantum Technology exploits quantum states to achieve breakthroughs across three primary pillars: 1. Quantum Sensing (using atomic properties to measure gravity, magnetic fields, and time with atomic-clock precision). 2. Quantum Communication (unbreakable cryptography via physical law). 3. Quantum Computing (massively parallel compute architectures)." },
+      { heading: "Superconducting Qubits", content: "Superconducting QPUs leverage macroscopic quantum phenomena in LC circuits. By embedding a non-linear, non-dissipative Josephson Junction, the circuit behaves as an artificial atom with an unharmonic energy spectrum. This isolates the two lowest energy levels to form a Transmon Qubit, controlled via microwave pulses and cooled in dilution refrigerators." },
+      { heading: "Trapped Ion Qubits", content: "Trapped Ion computing utilizes individual atomic ions (such as Yb-171 or Ba-137) suspended in ultra-high vacuum chambers by RF Paul electromagnetic traps. Qubits are initialized and manipulated with laser cooling and precisely targeted optical pulses. They boast exceptionally long coherence times and high-fidelity identical gate characteristics." },
+      { heading: "Photonic Qubits", content: "Photonic quantum computing utilizes individual photons as information carriers, encoding data in polarization states, time-bins, or discrete spatial paths. Information is manipulated via beam splitters, waveplates, and phase shifters. Since photons rarely interact with the environment, they excel at room-temperature processing but require complex measurement setups." },
+      { heading: "Topological Qubits", content: "Topological quantum computing seeks to achieve hardware-level fault tolerance by braiding exotic quasiparticles called Majorana Zero Modes. By storing information non-locally across topological phases, the data is naturally protected from local environmental noise, theoretically lowering the resource overhead needed for error correction." },
+      { heading: "Quantum Error Correction", content: "Because individual physical qubits are fragile, Quantum Error Correction (QEC) is essential. It distributes a single logical qubit's data across an entangled array of physical qubits. Foundational strategies include the Shor 9-qubit code, Steane code, and modern Surface Codes, which isolate phase and bit-flip errors without destroying the underlying superposition." },
+      { heading: "Control Electronics & Cryogenics", content: "Operating solid-state QPUs requires extreme environments. Dilution Refrigerators utilize stable helium isotope mixtures (He-3/He-4) to chill processor cores down to millikelvin temperatures (~10 mK), suppressing thermal noise. High-speed, phase-stable Arbitrary Waveform Generators (AWGs) then transmit micro-second control pulses." },
+      { heading: "Quantum Networking", content: "Quantum Networking enables the deterministic transfer of quantum states between distinct nodes. It deploys Quantum Key Distribution (QKD) algorithms like BB84 to achieve Information-Theoretic Security. Scaling these networks across long distances requires Quantum Repeaters equipped with high-efficiency quantum memories." },
+      { heading: "Benchmarking & Calibration", content: "Evaluating QPU capability requires strict mathematical tracking: Randomized Benchmarking (RB) isolates average gate errors by running sequences of random Clifford gates. Quantum State Tomography (QST) and Quantum Process Tomography (QPT) fully reconstruct density matrices and gate operations to debug systemic noise." },
+      { heading: "Industry & Roadmap", content: "The global commercial sector is driven by major providers: IBM (scaling superconducting concentric heavy-fluxonium arrays), Rigetti, IonQ and Quantinuum (trapped-ion architectures), and Xanadu (photonic continuous-variable clusters). The industry is transitioning from NISQ prototyping toward scalable logical QPUs." },
+      { heading: "Hands-on on Cloud QPUs", content: "Developers can write code locally and compile it to execute on real, physical quantum hardware via cloud access layers. Using frameworks like Qiskit Runtime, tasks are queued, sent to IBM quantum datacenters, compiled into native microwave pulses, executed on superconducting chips, and returned as classical datasets." },
+      { heading: "Safety & Ethics", content: "The maturation of Shor's Algorithm presents a critical systemic threat to global financial infrastructure by threatening RSA and ECC decryption. This necessitates an immediate transition to Post-Quantum Cryptography (PQC) standards (such as lattice-based algorithms) and demands strict ethical frameworks around high-performance computing." },
     ]
   },
 
@@ -84,298 +84,243 @@ export const qmlTopics = [
     id: "python_basic",
     title: "Python — Basics (Beginner) پايسان باشلانغۇچ",
     slides: [
-      { heading: "Python Intro", content: `Why Python? readable, large ecosystem (scientific computing, ML).` },
-      { heading: "Installation & Environments", content: `Install Python, pip, virtualenv/venv, conda.` },
-      { heading: "Basic Syntax", content: `Variables, expressions, indentation, comments.\nExample:\nx = 5\nprint(x)` },
-      { heading: "Data Types", content: `int, float, str, bool, list, tuple, dict, set — examples and usage.` },
-      { heading: "Control Flow", content: `if/elif/else, for loops, while loops — pattern examples.` },
-      { heading: "Functions", content: `def myfunc(a, b=1): return a+b` },
-      { heading: "File I/O", content: `open/read/write, CSV basic handling.` },
-      { heading: "Error Handling", content: `try/except/finally usage.` },
-      { heading: "Modules & Packages", content: `importing modules, pip installing packages.` },
-      { heading: "Best Practices", content: `PEP8, docstrings, simple testing with assert.` },
-      { heading: "Example: Simple Script", content: `# example\nimport math\nprint([math.sqrt(x) for x in range(1,6)])` },
-      { heading: "Next Steps", content: `move to NumPy, Pandas for data work.` },
+      { heading: "Python Intro", content: "Python is a high-level, interpreted, object-oriented programming language characterized by its emphasis on code readability. It has become the de facto standard for scientific computing, data science, machine learning, and quantum engineering due to its clean syntax and an expansive package ecosystem (PyPI)." },
+      { heading: "Installation & Environments", content: "To maintain system stability, python runtimes should be isolated. Developers use package managers like Anaconda or Miniconda, and create localized environments using standard tooling: `python -m venv myenv`. Packages are managed securely through the Python Package Index using `pip install package_name`." },
+      { heading: "Basic Syntax", content: "Python leverages clean semantic execution rules. Crucially, blocks of code are defined by explicit whitespace indentation rather than curly braces or semicolons. Variable declaration is dynamically typed, meaning data types are inferred automatically at runtime.\n\nx = 5\nif x > 0:\n    print(f'Positive value: {x}')" },
+      { heading: "Data Types", content: "Python contains robust built-in data types: Scalars include primitive integers (`int`), arbitrary precision floats (`float`), complex numbers (`complex`), and strings (`str`). Collections include `list` (mutable ordered arrays), `tuple` (immutable ordered sequences), `dict` (hash-mapped key-value stores), and `set` (unordered unique collections)." },
+      { heading: "Control Flow", content: "Execution flow is controlled via conditional branching structures (`if`, `elif`, `else`) and deterministic or conditional looping structures. Conditional loops deploy `while` logic, while sequence iteration utilizes `for item in iterable` loops, frequently enhanced by utility generators like `enumerate()` and `range()`." },
+      { heading: "Functions", content: "Functions are modular blocks of reusable code defined with the `def` keyword. Python functions support positional arguments, default keyword parameters, and variable-length argument unpacking via `*args` (positional tuple) and `**kwargs` (keyword dictionary), allowing for highly flexible API designs." },
+      { heading: "File I/O", content: "File input and output operations must handle operating system file descriptors carefully. This is achieved using the `with` statement context manager, which guarantees files are properly closed post-execution, even if runtime exceptions occur:\n\nwith open('data.txt', 'r', encoding='utf-8') as f:\n    content = f.read()" },
+      { heading: "Error Handling", content: "Robust applications manage runtime anomalies through structured exception handling. Code prone to failure is wrapped inside a `try` block. If an error occurs, execution shifts to an `except Exception as e` block, while code that must run regardless of success or failure is isolated within a `finally` block." },
+      { heading: "Modules & Packages", content: "Python code is structured hierarchically. Any standard `.py` file functions as a module. Related modules are grouped into packages containing an `__init__.py` file. Code functionality is imported across scopes using the structural `import module_name` or `from module_name import specific_function` syntax." },
+      { heading: "Best Practices", content: "Writing clean Python code requires adherence to official conventions defined in PEP 8 (Python Enhancement Proposal 8). This includes using 4 spaces per indentation level, writing descriptive modular docstrings, using snake_case for functions, and implementing basic sanity tests using explicit `assert` validations." },
+      { heading: "Example: Simple Script", content: "# Compiles a list of square roots using a List Comprehension\nimport math\n\ninputs = range(1, 6)\nsquare_roots = [math.sqrt(num) for num in inputs]\nprint(f'Processed outputs: {square_roots}')" },
+      { heading: "Next Steps", content: "Once foundational Python syntax, collection structures, and logical control loops are mastered, developers transition away from pure vanilla Python primitives toward vectorized arrays using NumPy and dataframes via Pandas." },
     ]
   },
-
   /* ---------------------- Python Intermediate ---------------------- */
   {
-    id: "python_intermediate  ",
+    id: "python_intermediate",
     title: "Python — Intermediate پايسان ئوتتۇرا سەۋىيە",
     slides: [
-      { heading: "Comprehensions & Generators", content: `List/dict comprehensions, generator expressions.` },
-      { heading: "Decorators & Context Managers", content: `@decorator pattern, with open(...).` },
-      { heading: "OOP in Python", content: `Classes, inheritance, dunder methods, properties.` },
-      { heading: "Iterators & Iterables", content: `__iter__, __next__, creating custom iterators.` },
-      { heading: "Concurrency Basics", content: `threading, multiprocessing, asyncio overview.` },
-      { heading: "Typing & Annotations", content: `type hints, mypy basic checks.` },
-      { heading: "Packaging", content: `setup.cfg, pyproject.toml, pip install -e .` },
-      { heading: "Testing", content: `pytest basics, fixtures, assertions.` },
-      { heading: "Profiling & Optimization", content: `cProfile, timeit, vectorization with NumPy.` },
-      { heading: "Interfacing with C/Fortran", content: `ctypes, cffi, or using compiled libs.` },
-      { heading: "Example: Async HTTP (aiohttp)", content: `import aiohttp\n# basic async fetch pattern` },
-      { heading: "Next Steps", content: `move to data science stacks and ML libs.` },
+      { heading: "Comprehensions & Generators", content: "Intermediate Python leverages optimized syntax for data transformation. List, Dictionary, and Set Comprehensions replace verbose multi-line loops. For massive datasets, Generator Expressions yield memory-efficient iterators using the lazy evaluation pattern, consuming memory elements on-demand via `yield`." },
+      { heading: "Decorators & Context Managers", content: "Decorators are high-order functions that take another function as an argument and extend its behavior without modifying its source code (using the `@decorator` syntax). Context managers manage resources cleanly by implementing the dual lifecycle methods `__enter__` and `__exit__`." },
+      { heading: "OOP in Python", content: "Object-Oriented Programming (OOP) encapsulates data and behavior into custom Classes. Python supports multiple inheritance, encapsulation, and polymorphism. Advanced classes utilize Double Underscore (Dunder) magic methods like `__init__`, `__str__`, and `__repr__` to customize native class behavior." },
+      { heading: "Iterators & Iterables", content: "Behind Python's loop abstractions lies the explicit Iterator Protocol. An 'Iterable' is an object that yields an iterator via the `__iter__` method. The returned 'Iterator' object maintains internal traversal state and sequentially retrieves successive elements when its `__next__` method is invoked." },
+      { heading: "Concurrency Basics", content: "Python accommodates concurrent execution through three paradigms: Multi-threading (ideal for I/O-bound tasks, constrained by the Global Interpreter Lock - GIL), Multi-processing (spawning distinct OS processes to achieve true multi-core CPU parallelization), and Cooperative Multitasking via `asyncio`." },
+      { heading: "Typing & Annotations", content: "While Python remains a dynamically typed language at runtime, modern development relies on static type hinting to catch bugs early. Using the native `typing` module, parameters and return types are explicitly annotated. Codebases are then validated prior to deployment using type-checking tools like `mypy`." },
+      { heading: "Packaging", content: "To distribute intermediate python software commercially, code structures must be standardized. This involves authoring professional project layout files such as `pyproject.toml` or `setup.cfg`. These files declare build systems, dependencies, and enable editable developer installations via `pip install -e .`." },
+      { heading: "Testing", content: "Professional code bases enforce automated quality gates. While `unittest` is built-in, the industry standard is `pytest`. Pytest simplifies testing architectures through highly dynamic, reusable dependency-injection frameworks called Fixtures, alongside detailed, native `assert` evaluations." },
+      { heading: "Profiling & Optimization", content: "Optimizing code requires pinpointing exact compute bottlenecks rather than guessing. Developers use standard libraries like `cProfile` to measure execution frequency and time, alongside the `timeit` module for benchmarking micro-operations, before refactoring slow code paths." },
+      { heading: "Interfacing with C/Fortran", content: "When maximum compute velocity is required, Python can act as a high-level wrapper around low-level compiled languages. Developers optimize performance-critical bottlenecks by compiling extensions in C, C++, or Fortran, and binding them to Python runtimes using `ctypes` or `cffi` structures." },
+      { heading: "Example: Async HTTP (aiohttp)", content: "import asyncio\nimport aiohttp\n\nasync def fetch_endpoint(url):\n    # Concurrent asynchronous I/O context pool management\n    async with aiohttp.ClientSession() as session:\n        async with session.get(url) as response:\n            return await response.json()\n\n# Run via: asyncio.run(fetch_endpoint('https://api.kelbil.com'))" },
+      { heading: "Next Steps", content: "With structural mastery over object orientation, concurrency models, and packaging architectures, developers possess the prerequisites required to manage production-grade machine learning pipelines and scientific computing arrays." },
     ]
   },
 
   /* ---------------------- NumPy ---------------------- */
   {
     id: "numpy",
-    title: "NumPy — Numerical Python  نانپاي",
+    title: "NumPy — Numerical Python نانپاي",
     slides: [
-      { heading: "Introduction to NumPy", content: `ndarray, vectorized operations, broadcasting.` },
-      { heading: "Creating Arrays", content: `np.array, np.zeros, np.ones, arange, linspace.` },
-      { heading: "Indexing & Slicing", content: `1D/2D indexing, boolean masks, fancy indexing.` },
-      { heading: "Broadcasting Rules", content: `How arrays of different shapes interact.` },
-      { heading: "Linear Algebra with NumPy", content: `dot, matmul, eig, svd examples.` },
-      { heading: "Random & Statistics", content: `np.random, mean, std, histogram.` },
-      { heading: "Performance Tips", content: `avoid Python loops, use ufuncs, memory views.` },
-      { heading: "Example: Vectorized Computation", content: `# compute pairwise distances\nimport numpy as np\nX = np.random.randn(100,3)\ndists = np.sqrt(((X[:,None,:]-X[None,:,:])**2).sum(-1))` },
-      { heading: "Interoperability", content: `works with SciPy, Pandas, scikit-learn.` },
-      { heading: "Next Steps", content: `NumPy internals, C extensions.` },
-      { heading: "Sample Code: SVD PCA", content: `import numpy as np\nX_center = X - X.mean(axis=0)\nU, S, Vt = np.linalg.svd(X_center, full_matrices=False)\nPCs = U[:,:2]` },
-      { heading: "Edge Cases", content: `NaN handling, dtype promotion, memory order (C vs F).` },
+      { heading: "Introduction to NumPy", content: "NumPy is the foundational framework for scientific computing in Python. It introduces the `ndarray` (N-dimensional array), an optimized, contiguous memory structure written in C. NumPy eliminates slow Python loops by leveraging Vectorization, running mathematics at compiled-level velocities." },
+      { heading: "Creating Arrays", content: "Arrays are initialized through explicit numerical specifications: `np.array()` converts standard python iterables. Specialized constructors include `np.zeros()` and `np.ones()` for tensor initialization, `np.arange()` for discrete integer sequences, and `np.linspace()` for generating linearly spaced intervals." },
+      { heading: "Indexing & Slicing", content: "NumPy provides powerful slicing mechanisms that return memory views rather than deep data copies. It supports multidimensional notation `array[row, col]`, Fancy Indexing via custom integer arrays, and Boolean Masking (filtering multi-gigabyte arrays based on logical operations)." },
+      { heading: "Broadcasting Rules", content: "Broadcasting defines how NumPy handles operations on arrays of different shapes during arithmetic operations. The smaller array is conceptually stretched across larger compatible dimensions if they either share identical dimensions, or if one of the dimensions is exactly equal to 1." },
+      { heading: "Linear Algebra with NumPy", content: "NumPy wraps around high-performance BLAS and LAPACK libraries inside its `np.linalg` submodule. It provides optimized execution paths for matrix multiplication (`np.matmul` or `@`), matrix inversions, calculating determinants, Singular Value Decomposition (`np.linalg.svd`), and Eigen-decompositions." },
+      { heading: "Random & Statistics", content: "The `np.random` submodule provides robust pseudo-random number generation, supporting sampling across diverse statistical distributions (Normal, Uniform, Poisson). Numerical aggregations are executed via lightning-fast array methods including `mean()`, `std()`, `var()`, `sum()`, and `min()`." },
+      { heading: "Performance Tips", content: "To maximize throughput, developers must avoid looping over array rows using standard Python syntax. Instead, compute tasks should utilize Universal Functions (ufuncs) which execute element-wise math in compiled C code, while managing memory carefully to minimize unnecessary tensor copies." },
+      { heading: "Example: Vectorized Computation", content: "# Vectorized pairwise distance calculation across multi-point sets\nimport numpy as np\n\nX = np.random.randn(100, 3) # 100 points in 3D space\n# Leverages broadcasting mechanics to compute a 100x100 distance matrix\ndiffs = X[:, np.newaxis, :] - X[np.newaxis, :, :]\ndistances = np.sqrt((diffs ** 2).sum(axis=-1))" },
+      { heading: "Interoperability", content: "NumPy's memory array layout functions as the universal translation layer for data science. Because it adheres to consistent contiguous memory pointers, it integrates natively with SciPy, Pandas dataframes, Scikit-Learn pipelines, and Deep Learning tensors." },
+      { heading: "Sample Code: SVD PCA", content: "import numpy as np\n\n# Manual Principal Component Analysis implementation using SVD\nX_centered = X - X.mean(axis=0)\nU, S, Vt = np.linalg.svd(X_centered, full_matrices=False)\n# Extract first two principal component projections\nprincipal_components = U[:, :2] * S[:2]" },
+      { heading: "Edge Cases", content: "Production numerical computing demands handling dirty data structures: NumPy handles missing values via `np.nan` (Not a Number) and `np.inf` (Infinity). Managing these states requires using specialized numerical functions such as `np.isnan()` and `np.nanmean()` to prevent runtime math failures." },
     ]
   },
-
   /* ---------------------- Pandas ---------------------- */
   {
     id: "pandas",
-    title: "Pandas — DataFrames & Data Wrangling  پەنداس",
+    title: "Pandas — DataFrames & Data Wrangling پەنداس",
     slides: [
-      { heading: "Introduction to Pandas", content: `Series and DataFrame core concepts.` },
-      { heading: "Reading/Writing Data", content: `pd.read_csv, to_csv, read_excel examples.` },
-      { heading: "Indexing & Selection", content: `loc, iloc, boolean indexing.` },
-      { heading: "Missing Data", content: `isnull, dropna, fillna strategies.` },
-      { heading: "GroupBy & Aggregation", content: `groupby().agg(), transform(), pivot_table.` },
-      { heading: "Merging & Joining", content: `merge, concat, join usage scenarios.` },
-      { heading: "Time Series Basics", content: `resample, rolling, datetime index handling.` },
-      { heading: "Apply & Vectorization", content: `avoid slow row-wise apply where possible.` },
-      { heading: "Performance Tips", content: `categorical dtype, chunked reading, use NumPy when possible.` },
-      { heading: "Example: Data Cleaning Pipeline (code)", content:
-`import pandas as pd
-df = pd.read_csv('data.csv')
-df['date'] = pd.to_datetime(df['date'])
-df = df.dropna(subset=['target'])
-df['category'] = df['category'].astype('category')
-agg = df.groupby('category')['value'].mean().reset_index()` },
-      { heading: "Next Steps", content: `Dask for larger-than-memory workflows.` },
-      { heading: "Common Pitfalls", content: `chained indexing, silent dtype changes.` },
+      { heading: "Introduction to Pandas", content: "Pandas is the premier library for relational, tabular data analysis in Python. It introduces two primary data structures built on top of NumPy arrays: the `Series` (a one-dimensional labeled array) and the `DataFrame` (a two-dimensional, size-mutable, heterogeneous tabular structure)." },
+      { heading: "Reading/Writing Data", content: "Pandas provides high-efficiency I/O parsing utilities. It reads data from diverse formats into active memory using functions like `pd.read_csv()`, `pd.read_excel()`, `pd.read_json()`, and `pd.read_parquet()`. It outputs data cleanly using matching methods like `to_csv()` or `to_parquet()`." },
+      { heading: "Indexing & Selection", content: "Navigating dataframes requires precise indexing methods: `.loc[]` enables pure label-based alignment and selection across index names, while `.iloc[]` enforces integer-based positioning. Both support multi-axis conditional filtering via Boolean indexing arrays." },
+      { heading: "Missing Data", content: "Real-world production data is frequently incomplete. Pandas tracks missing values using `NaN`. It provides structural pipelines to handle these gaps, including `isna()` for isolation, `dropna()` to discard invalid records, and `fillna()` to impute values using mean, median, or forward-fill strategies." },
+      { heading: "GroupBy & Aggregation", content: "Pandas implements the foundational Split-Apply-Combine database pattern. The `.groupby()` method partitions dataframes based on specific keys. From there, users can run `.agg()` to compute grouped statistics, or use `.transform()` to apply advanced custom operations." },
+      { heading: "Merging & Joining", content: "Combining distinct tabular data repositories is handled through relational algebra operations. `pd.merge()` provides database-style SQL merge capabilities, accommodating Inner, Outer, Left, and Right joins based on common relational keys, while `pd.concat()` handles axis-wise concatenation." },
+      { heading: "Time Series Basics", content: "Pandas features exceptional support for temporal data tracking. It parses date strings into specialized `DatetimeIndex` structures using `pd.to_datetime()`. This unlocks advanced operations like temporal resampling via `.resample()`, frequency conversions, and rolling window operations via `.rolling()`." },
+      { heading: "Apply & Vectorization", content: "A common beginner mistake is using `.apply()` with custom lambda functions for row-wise iteration, which acts as a slow loop. High-performance wrangling utilizes native vectorized string methods (`.str`) or mathematical transformations that execute directly on the underlying NumPy structures." },
+      { heading: "Performance Tips", content: "When working with massive datasets, memory footprints must be tightly managed. Performance strategies include declaring text columns as the memory-efficient `category` datatype rather than generic object strings, processing massive files in batches using `chunksize`, and using fast Parquet file formats." },
+      { heading: "Example: Data Cleaning Pipeline", content: "import pandas as pd\n\ndef clean_pipeline(path):\n    df = pd.read_csv(path)\n    df['timestamp'] = pd.to_datetime(df['timestamp'])\n    df = df.dropna(subset=['target_metric'])\n    df['status'] = df['status'].astype('category')\n    return df.groupby('status')['target_metric'].mean().reset_index()" },
+      { heading: "Next Steps", content: "When memory requirements expand beyond local RAM limits, developers transition from standard Pandas architectures to distributed processing frameworks like Dask, Polars, or Apache Spark to handle multi-terabyte data pipelines." },
+      { heading: "Common Pitfalls", content: "Developers must look out for Chained Indexing errors (e.g., `df[df['A'] > 2]['B'] = 0`), which triggers a `SettingWithCopyWarning` due to ambiguous memory references. Resolving this requires using explicit, label-based indexing via `.loc` to guarantee reliable data updates." },
     ]
   },
 
   /* ---------------------- Matplotlib ---------------------- */
   {
     id: "matplotlib",
-    title: "Matplotlib — Visualization Basics",
+    title: "Matplotlib — Visualization Basics ماتپلوتلىب",
     slides: [
-      { heading: "Introduction & Philosophy", content: `Figure, axis, artist model.` },
-      { heading: "Basic Plots", content: `plot, scatter, bar, hist examples.` },
-      { heading: "Customization", content: `labels, titles, legends, colors.` },
-      { heading: "Subplots & Layouts", content: `plt.subplots, gridspec usage.` },
-      { heading: "Styling", content: `rcParams, style.use('seaborn'), saving figures.` },
-      { heading: "Annotation & Text", content: `annotate, text positioning.` },
-      { heading: "3D & Image Plots", content: `mplot3d, imshow.` },
-      { heading: "Interactive Backends", content: `notebook, ipympl, interactive zoom.` },
-      { heading: "Example: Plotting Training Loss", content:
-`import matplotlib.pyplot as plt
-plt.plot(losses)
-plt.xlabel('epoch'); plt.ylabel('loss')` },
-      { heading: "Best Practices", content: `clear labels, readable fonts, vector formats for publication.` },
-      { heading: "Next Steps", content: `Seaborn for statistical visuals.` },
-      { heading: "Exporting", content: `savefig with dpi and bbox_inches='tight'.` },
+      { heading: "Introduction & Philosophy", content: "Matplotlib is the bedrock data visualization engine in Python. It is engineered around an explicit object-oriented hierarchy. The top-level container is the `Figure` (the canvas), which contains one or more `Axes` objects (individual plots containing coordinate systems, titles, and labels)." },
+      { heading: "Basic Plots", content: "Matplotlib generates distinct scientific plots across its `pyplot` abstraction layer: `plt.plot()` maps continuous lines, `plt.scatter()` renders point distributions, `plt.bar()` compiles discrete categorical frequencies, and `plt.hist()` partitions continuous variables into frequency bins." },
+      { heading: "Customization", content: "Matplotlib provides granular control over plot elements. Every structural artist element—including axis bounds (`set_xlim`), tick placement, labels (`plt.xlabel`), customized legends, line weights, color maps, and grid lines—can be modified programmatically." },
+      { heading: "Subplots & Layouts", content: "Complex figure configurations are built using grid partitioning. `plt.subplots(rows, cols)` initializes structured matrix layouts. For highly asymmetric or complex multi-plot arrangements, developers use `GridSpec` to span plots across arbitrary row and column intervals." },
+      { heading: "Styling", content: "Matplotlib charts can be styled using global configuration files via `plt.rcParams`. Global themes can be applied instantly with `plt.style.use()`. Figures are rendered and saved locally to disk using `plt.savefig()`, supporting vector formats like PDF or high-DPI rasterized PNGs." },
+      { heading: "Annotation & Text", content: "To enhance data communication, specific chart points can be annotated using `plt.annotate()`. This function positions text labels dynamically and draws connecting arrows targeting specific (x, y) coordinates, perfect for highlighting anomalies or milestones." },
+      { heading: "3D & Image Plots", content: "Advanced visualization capabilities include 3D plotting by registering the `mplot3d` toolkit on the active axes canvas, enabling 3D surface mapping. Image processing and matrix density maps are rendered using `plt.imshow()`, a core tool for visualizing heatmaps." },
+      { heading: "Interactive Backends", content: "Matplotlib routes its output through targeted rendering backends. In development environments like Jupyter, switching to interactive widgets via `%matplotlib ipympl` enables real-time panning, localized zooming, and precise dimension scaling." },
+      { heading: "Example: Plotting Training Loss", content: "import matplotlib.pyplot as plt\n\nfig, ax = plt.subplots(figsize=(8, 4))\nax.plot(training_losses, label='Train Loss', color='indigo', lw=2)\nax.set_xlabel('Epochs', fontsize=12)\nax.set_ylabel('MSE Loss', fontsize=12)\nax.grid(True, linestyle='--')\nax.legend()" },
+      { heading: "Best Practices", content: "Academic publication demands clean presentation: avoid chart clutter, use high-contrast color palettes for accessibility, ensure text fonts are sized legibly relative to document scaling, and export assets using lossless vector formats." },
+      { heading: "Next Steps", content: "While Matplotlib offers deep granular control, building complex statistical visualizations from scratch can be verbose. To simplify workflow syntax, developers shift toward Seaborn, which wraps around Matplotlib to provide high-level APIs." },
     ]
   },
 
   /* ---------------------- Seaborn ---------------------- */
   {
     id: "seaborn",
-    title: "Seaborn — Statistical Visualization",
+    title: "Seaborn — Statistical Visualization سىبورن",
     slides: [
-      { heading: "Intro to Seaborn", content: `Built on Matplotlib, high-level API for stats plots.` },
-      { heading: "Relational Plots", content: `scatterplot, relplot, lineplot with hue, style.` },
-      { heading: "Categorical Plots", content: `boxplot, violinplot, barplot, countplot.` },
-      { heading: "Distribution Plots", content: `histplot, kdeplot, distplot (deprecated).` },
-      { heading: "Matrix Plots", content: `heatmap, clustermap.` },
-      { heading: "PairGrid & Pairplot", content: `pairwise relationships and quick EDA.` },
-      { heading: "Styling & Themes", content: `set_theme, color palettes.` },
-      { heading: "Example: Pairplot for EDA", content:
-`import seaborn as sns
-sns.pairplot(df[['a','b','c','target']], hue='target')` },
-      { heading: "Combining with Matplotlib", content: `fine-grained control using plt.` },
-      { heading: "Performance Tips", content: `sample large datasets, use rasterized images for large heatmaps.` },
-      { heading: "Next Steps", content: `interactive libs: plotly, altair.` },
-      { heading: "Common Use Cases", content: `EDA, model diagnostics, publication plots.` },
+      { heading: "Intro to Seaborn", content: "Seaborn is a statistical data visualization library built directly on top of Matplotlib. It integrates natively with Pandas DataFrames, automating complex statistical transformations (like computing confidence intervals or fitting regression lines) through concise high-level syntax." },
+      { heading: "Relational Plots", content: "Visualizing relationships between continuous variables is handled via `sns.relplot()`. This encompasses `scatterplot()` and `lineplot()`, which allow developers to map multi-dimensional data onto a 2D plane by mapping additional categories to hue, style, or size aesthetics." },
+      { heading: "Categorical Plots", content: "Seaborn simplifies categorical data comparisons via `sns.catplot()`. This abstraction includes `boxplot()` for quantile tracking, `violinplot()` (combining boxplots with kernel density estimations), and optimized categorical distribution scatter plots like `swarmplot()`." },
+      { heading: "Distribution Plots", content: "Understanding data distribution is critical for exploratory data analysis (EDA). Seaborn provides unified distribution pipelines via `sns.displot()`, which handles univariate or bivariate distributions through `histplot()` histograms, `kdeplot()` smooth curves, and empirical cumulative distributions." },
+      { heading: "Matrix Plots", content: "Matrix data structures are visualized using `sns.heatmap()`, which maps values to color gradients and can annotate individual cells with numeric values. `sns.clustermap()` extends this by applying hierarchical clustering to group similar rows and columns together automatically." },
+      { heading: "PairGrid & Pairplot", content: "To accelerate exploratory data analysis across high-dimensional datasets, `sns.pairplot()` computes a matrix of pairwise relationships across all numerical columns in a dataframe, rendering scatter plots on off-diagonals and univariate distributions along the main diagonal." },
+      { heading: "Styling & Themes", content: "Seaborn provides beautiful default aesthetics. Global themes are modified across structural parameters using `sns.set_theme()`. It offers predefined backgrounds (`whitegrid`, `dark`) and specialized color palettes tailored for sequential, diverging, or categorical datasets." },
+      { heading: "Example: Pairplot for EDA", content: "import seaborn as sns\nimport matplotlib.pyplot as plt\n\n# Generates a matrix of pairwise distributions segmented by categorical target\nsns.set_theme(style='whitegrid')\ng = sns.pairplot(dataframe, vars=['feature_1', 'feature_2'], hue='label_class', palette='crest')\nplt.show()" },
+      { heading: "Combining with Matplotlib", content: "Seaborn does not replace Matplotlib; it enhances it. Because every Seaborn function returns standard Matplotlib `Axes` objects, developers can use native Matplotlib commands to modify titles, labels, and fine-tune chart elements." },
+      { heading: "Performance Tips", content: "When plotting millions of rows, complex statistical calculations (like bootstrap confidence intervals in line plots) can cause performance lag. Developers can optimize performance by downsampling datasets, setting `errorbar=None`, or passing `rasterized=True` for high-density matrix heatmaps." },
+      { heading: "Next Steps", content: "For applications requiring modern web dashboards with dynamic zooming, tooltips, and interactive filtering, developers build upon Seaborn insights and transition to interactive graphics engines like Plotly or Altair." },
     ]
   },
 
   /* ---------------------- scikit-learn ---------------------- */
   {
     id: "scikit_learn",
-    title: "scikit-learn — Practical ML in Python",
+    title: "scikit-learn — Practical ML in Python سىكىت-لەرن",
     slides: [
-      { heading: "Introduction to scikit-learn", content: `Unified API for ML algorithms (fit/predict).` },
-      { heading: "Preprocessing", content: `StandardScaler, OneHotEncoder, Pipelines.` },
-      { heading: "Supervised Models", content: `LinearRegression, LogisticRegression, RandomForest.` },
-      { heading: "Unsupervised Models", content: `KMeans, PCA, DBSCAN.` },
-      { heading: "Model Selection", content: `train_test_split, cross_val_score, GridSearchCV.` },
-      { heading: "Pipelines & Transformers", content: `construct repeatable pipelines for production.` },
-      { heading: "Evaluation Metrics", content: `accuracy, precision, recall, ROC-AUC, confusion matrix.` },
-      { heading: "Example: End-to-End Pipeline (code)", content:
-`import pandas as pd
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
-
-pipe = Pipeline([('scaler', StandardScaler()), ('clf', RandomForestClassifier())])
-pipe.fit(X_train, y_train)
-print(pipe.score(X_test, y_test))` },
-      { heading: "Feature Importance & SHAP", content: `Inspecting model explainability.` },
-      { heading: "Deployment Considerations", content: `serialization with joblib, reproducibility.` },
-      { heading: "Next Steps", content: `move to specialized libraries (XGBoost, LightGBM).` },
-      { heading: "Common Pitfalls", content: `data leakage, overfitting, improper cross-validation.` },
+      { heading: "Introduction to scikit-learn", content: "Scikit-Learn is Python's premier framework for classical machine learning. Built on NumPy, SciPy, and Matplotlib, it features an elegant, unified object-oriented API organized around three primary design patterns: Estimators (`.fit()`), Transformers (`.transform()`), and Predictors (`.predict()`)." },
+      { heading: "Preprocessing", content: "Raw data must be processed before training. Scikit-Learn provides modular transformers to handle these transformations: `StandardScaler` for continuous feature standardization, `OneHotEncoder` for mapping categorical text strings into numeric matrices, and `SimpleImputer` for handling missing data." },
+      { heading: "Supervised Models", content: "Supervised learning maps inputs to known targets. Scikit-Learn implements a wide array of robust estimators, including `LinearRegression` for continuous forecasting, `LogisticRegression` for discrete classification, alongside ensemble powerhouses like `RandomForest` and Support Vector Machines." },
+      { heading: "Unsupervised Models", content: "Unsupervised learning uncovers latent structures within unlabeled data. Algorithms include `KMeans` for cluster assignment, `DBSCAN` for density-based grouping, and Principal Component Analysis (`PCA`) for dimensionality reduction and feature compression." },
+      { heading: "Model Selection", content: "To safeguard models against overfitting, data evaluation must be handled carefully. Scikit-learn provides automated data partitioning tools like `train_test_split()`, automated cross-validation scoring via `cross_val_score()`, and hyperparameter optimization tools like `GridSearchCV`." },
+      { heading: "Pipelines & Transformers", content: "To prevent data leakage during preprocessing and ensure clean production deployments, operations should be wrapped inside a `Pipeline`. Pipelines chain preprocessing transformers and a final estimator together into a single, cohesive executable object." },
+      { heading: "Evaluation Metrics", content: "Model validation is tracked using specialized metric submodules. Classification performance is evaluated via accuracy, precision, recall, F1-score, and area under the ROC curve (`roc_auc_score`), while regression tasks are monitored via Mean Squared Error (MSE) and R-squared values." },
+      { heading: "Example: End-to-End Pipeline", content: "from sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.model_selection import train_test_split\n\n# Construct preprocessing and modeling pipeline\npipe = Pipeline([('scaler', StandardScaler()), ('clf', RandomForestClassifier(max_depth=5))])\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)\npipe.fit(X_train, y_train)\nprint(f'Model Accuracy Validation: {pipe.score(X_test, y_test)}')" },
+      { heading: "Feature Importance & Explainability", content: "Tree-based estimators provide native lookups for feature importances (`.feature_importances_`), allowing developers to identify key predictive drivers. For advanced model explainability, these outputs feed into model-agnostic attribution toolkits like SHAP." },
+      { heading: "Deployment Considerations", content: "Once a model is trained, it must be saved for production inference. Developers serialize trained scikit-learn pipeline objects into compressed binary files using `joblib`. These files can then be loaded by REST APIs or microservices to run real-time inference on new data." },
+      { heading: "Common Pitfalls", content: "Key development risks include Data Leakage (allowing information from the test set to leak into preprocessing steps during training), failing to scale distance-sensitive algorithms, and evaluating highly imbalanced classes using pure accuracy metrics." },
     ]
   },
 
   /* ---------------------- TensorFlow (expanded) ---------------------- */
   {
     id: "tensorflow_expanded",
-    title: "TensorFlow & Deep Learning (Comprehensive)",
+    title: "TensorFlow & Deep Learning تېنزورپلوۋ ۋە چوڭقۇر ئۆگىنىش",
     slides: [
-      { heading: "TensorFlow Overview", content: `Eager execution, Keras API, computational graphs.` },
-      { heading: "Tensors & Operations", content: `tf.constant, tf.Variable, broadcasting rules.` },
-      { heading: "Building Models (Keras Sequential)", content: `model = tf.keras.Sequential([...])` },
-      { heading: "Functional API & Subclassing", content: `tf.keras.Model subclass for complex models.` },
-      { heading: "Custom Layers & Losses", content: `build custom tf.keras.layers.Layer and tf.keras.losses.Loss.` },
-      { heading: "Training Loops & tf.GradientTape", content: `custom training loops for research.` },
-      { heading: "Callbacks & Checkpoints", content: `EarlyStopping, ModelCheckpoint.` },
-      { heading: "Transfer Learning", content: `Use pretrained models (ResNet, EfficientNet) and fine-tune.` },
-      { heading: "TF Data Pipeline", content: `tf.data for performant input pipelines.` },
-      { heading: "Distributed Training", content: `tf.distribute strategies for multi-GPU/TPU.` },
-      { heading: "Model Deployment", content: `TensorFlow Serving, TF Lite, TF.js.` },
-      { heading: "Example: Custom Training (code)", content:
-`import tensorflow as tf
-
-model = tf.keras.Sequential([tf.keras.layers.Dense(64, activation='relu'), tf.keras.layers.Dense(1)])
-optimizer = tf.keras.optimizers.Adam()
-loss_fn = tf.keras.losses.MeanSquaredError()
-
-# custom training step
-@tf.function
-def train_step(x, y):
-    with tf.GradientTape() as tape:
-        preds = model(x, training=True)
-        loss = loss_fn(y, preds)
-    grads = tape.gradient(loss, model.trainable_variables)
-    optimizer.apply_gradients(zip(grads, model.trainable_variables))
-    return loss` },
+      { heading: "TensorFlow Overview", content: "TensorFlow is Google's open-source end-to-end platform for deep learning. It executes operations across hardware backends (CPUs, GPUs, and TPUs) using high-performance C++ kernels. It features Eager Execution for immediate debugging alongside the high-level object-oriented Keras API." },
+      { heading: "Tensors & Operations", content: "Tensors are the core data structures in TensorFlow, acting as multi-dimensional arrays. Immutable arrays are declared via `tf.constant()`, while trainable parameters (like neural network weights) use `tf.Variable()`. Tensors support mathematical operations with automatic graph execution." },
+      { heading: "Keras Sequential API", content: "The `tf.keras.Sequential` architecture is the most intuitive pipeline for building standard, feedforward neural networks. It chains layers together in a linear stack, passing the output tensor of one layer directly as the input tensor to the next layer." },
+      { heading: "Functional API & Subclassing", content: "For advanced neural networks requiring multiple inputs, shared layers, or non-linear residual connections, developers shift away from Sequential models to the Functional API, or inherit from `tf.keras.Model` to implement custom forward passes." },
+      { heading: "Custom Layers & Losses", content: "Research applications require custom components. Developers can build custom layers by subclassing `tf.keras.layers.Layer` and overriding the `build()` and `call()` methods, or author custom objective metrics by subclassing `tf.keras.losses.Loss`." },
+      { heading: "Training Loops & GradientTape", content: "For granular control over backpropagation, developers skip the standard `.fit()` abstraction and write custom loops using `tf.GradientTape()`. This context manager records mathematical operations to automatically compute derivatives using reverse-mode automatic differentiation." },
+      { heading: "Callbacks & Checkpoints", content: "To protect models during long training windows, execution is monitored via `tf.keras.callbacks`. Key operations include `EarlyStopping` (halting training when validation loss stops improving) and `ModelCheckpoint` to save optimal weights incrementally." },
+      { heading: "Transfer Learning", content: "Transfer learning accelerates development by loading cutting-edge neural architectures (like ResNet, MobileNet, or EfficientNet) pre-trained on massive datasets like ImageNet. The base weights are frozen, and custom dense layers are appended to train on domain-specific tasks." },
+      { heading: "TF Data Pipeline", content: "Deep learning models can face disk I/O bottlenecks. The `tf.data` API addresses this by constructing asynchronous input pipelines, utilizing features like `tf.data.Dataset.from_tensor_slices()`, `.map()` parsing, batching, and `.prefetch()` to stream data to GPUs efficiently." },
+      { heading: "Distributed Training", content: "Training massive neural networks requires scaling across multiple computing resources. This is managed through `tf.distribute.Strategy` APIs, which parallelize workloads across multiple local GPUs or cloud TPU clusters using synchronous data parallelism." },
+      { heading: "Model Deployment", content: "TensorFlow models scale cleanly across production ecosystems: `TensorFlow Serving` deploys high-throughput models via gRPC/REST APIs, `TF Lite` compresses weights for low-power edge and mobile devices, and `TF.js` enables client-side in-browser inference." },
+      { heading: "Example: Custom Training Loop", content: "import tensorflow as tf\n\nmodel = tf.keras.Sequential([tf.keras.layers.Dense(32, activation='relu'), tf.keras.layers.Dense(1)])\nopt = tf.keras.optimizers.Adam()\nloss_fn = tf.keras.losses.MeanSquaredError()\n\n@tf.function # Compiles code into a high-performance computation graph\ndef train_step(x, y):\n    with tf.GradientTape() as tape:\n        logits = model(x, training=True)\n        loss_value = loss_fn(y, logits)\n    grads = tape.gradient(loss_value, model.trainable_variables)\n    opt.apply_gradients(zip(grads, model.trainable_variables))\n    return loss_value" },
     ]
   },
 
   /* ---------------------- Big Data (expanded) ---------------------- */
   {
     id: "big_data_expanded",
-    title: " چوڭ سانلىق مەلۇمات ئانالىزى(Big Data) ",
+    title: "چوڭ سانلىق مەلۇمات ئانالىزى (Big Data Architecture)",
     slides: [
-      { heading: "Big Data Landscape", content: `Hadoop ecosystem, Spark, cloud data platforms.` },
-      { heading: "HDFS & Distributed Storage", content: `HDFS architecture, replication.` },
-      { heading: "Apache Spark Core", content: `RDDs, DataFrames, lazy evaluation.` },
-      { heading: "Spark SQL & MLlib", content: `SQL on big data, scalable ML with MLlib.` },
-      { heading: "Streaming: Kafka & Flink", content: `Real-time pipelines and stream processing.` },
-      { heading: "NoSQL Systems", content: `Cassandra, MongoDB design trade-offs.` },
-      { heading: "Data Lakes vs Warehouses", content: `Raw ingestion vs curated analytics.` },
-      { heading: "Cloud Data Services", content: `AWS/GCP/Azure managed services.` },
-      { heading: "Scaling ML Pipelines", content: `Feature stores, batch/stream feature engineering.` },
-      { heading: "Case Study: Recommendation Systems", content: `Architecture for large-scale recommendations.` },
-      { heading: "Hands-on Example (PySpark)", content:
-`from pyspark.sql import SparkSession
-spark = SparkSession.builder.appName('example').getOrCreate()
-df = spark.read.parquet('s3://bucket/data.parquet')
-df.groupBy('category').count().show()` },
-      { heading: "Next Steps", content: `Data governance, security, cost optimization.` },
+      { heading: "Big Data Landscape", content: "Big Data engineering addresses infrastructure scale when data volume, velocity, and variety exceed traditional database processing limits. Architectural solutions rely on distributed storage clusters and parallelized computing frameworks." },
+      { heading: "HDFS & Distributed Storage", content: "The Hadoop Distributed File System (HDFS) is designed to store massive, multi-terabyte files across groups of standard commodity hardware. It achieves fault tolerance by splitting files into discrete blocks and replicating them redundantly across multiple storage nodes." },
+      { heading: "Apache Spark Core", content: "Apache Spark is an open-source, in-memory cluster-computing framework. It bypasses Hadoop's slow, disk-bound MapReduce paradigm by caching intermediate datasets directly in RAM. Computations are structured around Resilient Distributed Datasets (RDDs) using Lazy Evaluation." },
+      { heading: "Spark SQL & MLlib", content: "Spark provides robust high-level abstractions: Spark SQL enables developers to run optimized relational database queries directly across petabytes of unstructured data, while Spark MLlib provides scalable, parallel implementations of core machine learning algorithms." },
+      { heading: "Streaming: Kafka & Flink", content: "Real-time analytics require continuous streaming architectures. Apache Kafka functions as a highly scalable, fault-tolerant event streaming platform that ingests data streams, which are then processed in real-time by stream-processing engines like Apache Flink." },
+      { heading: "NoSQL Systems", content: "When strict relational structures fail to scale, applications transition to NoSQL databases. Key implementations include wide-column key-value stores like Apache Cassandra for massive write throughput, and document-oriented databases like MongoDB for highly flexible schemas." },
+      { heading: "Data Lakes vs Warehouses", content: "Modern data platform design splits storage roles: Data Lakes (e.g., AWS S3, Azure ADLS) ingest raw, unstructured data in its native format, whereas Data Warehouses (e.g., Snowflake, Google BigQuery) store structured, curated data optimized for business intelligence queries." },
+      { heading: "Cloud Data Services", content: "Enterprise data scaling often utilizes fully managed cloud infrastructures. This shifts operational maintenance to automated cloud services, such as AWS EMR for managing cluster deployments, Google Cloud Dataproc for serverless big data execution, and Databricks workspaces." },
+      { heading: "Scaling ML Pipelines", content: "Deploying machine learning models across big data infrastructures requires robust data orchestration. This involves setting up centralized Feature Stores to guarantee consistent metrics across training and inference, alongside automated batch data pipelines." },
+      { heading: "Case Study: Recommendation Systems", content: "A typical high-throughput recommendation engine architecture utilizes Apache Kafka to capture live user clicks, streams data into a Spark cluster for real-time feature extraction, runs distributed collaborative filtering, and updates user profiles in Cassandra." },
+      { heading: "Hands-on Example (PySpark)", content: "from pyspark.sql import SparkSession\n\n# Initialize a distributed cluster session\nspark = SparkSession.builder.appName('KeLBiLBigData').getOrCreate()\ndf = spark.read.parquet('s3://kelbil-data-lake/analytics.parquet')\n# Parallel execution across cluster nodes\nsummary_stats = df.groupBy('category_id').count()\summary_stats.write.mode('overwrite').saveAsTable('summary_metrics')" },
+      { heading: "Next Steps", content: "Mastering big data systems leads to the implementation of automated Data Governance policies, deploying fine-grained security encryption protocols, and enforcing cost-optimization strategies to monitor cloud infrastructure spend." },
     ]
   },
-
   /* ---------------------- Git & GitHub (expanded) ---------------------- */
   {
     id: "git_expanded",
-    title: "Git & GitHub گىت ۋە گىتخاب",
+    title: "Git & GitHub گىت ۋە گىتخاب ئارخىپ باشقۇرۇش",
     slides: [
-      { heading: "Why Version Control?", content: `Collaboration, history, branching.` },
-      { heading: "Git Basics & Setup", content: `git config, SSH keys, .gitignore.` },
-      { heading: "Branching Models", content: `GitFlow, trunk-based development.` },
-      { heading: "Pull Requests & Code Review", content: `PR etiquette, templates.` },
-      { heading: "CI/CD Basics", content: `GitHub Actions for testing and deployment.` },
-      { heading: "Rebasing & Merge Strategies", content: `git rebase vs merge pros/cons.` },
-      { heading: "Monorepos & Submodules", content: `Managing large repos.` },
-      { heading: "Protecting Branches & Policies", content: `Required reviews, status checks.` },
-      { heading: "Open Source Workflow", content: `fork → PR → maintainers review.` },
-      { heading: "Example: GitHub Actions (YAML)", content:
-`name: CI
-on: [push, pull_request]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with: python-version: '3.10'` },
-      { heading: "Best Practices", content: `Small commits, descriptive messages, code style checks.` },
+      { heading: "Why Version Control?", content: "Version Control Systems (VCS) track changes to source code over time. They enable non-destructive historical rollbacks, provide detailed auditing of code modifications, and empower distributed engineering teams to develop software concurrently without risk of data loss." },
+      { heading: "Git Basics & Setup", content: "Git is a distributed version control tool. Configuration begins by declaring developer metadata via `git config --global user.name`. Communication with remote repositories like GitHub is secured using SSH keys, while unwanted build artifacts are excluded via `.gitignore` files." },
+      { heading: "Branching Models", content: "Software teams maintain codebase stability using structured branching strategies: GitFlow isolates development, staging, and production features across long-lived branches, while Trunk-Based Development prioritizes short-lived feature branches merged directly into a main branch." },
+      { heading: "Pull Requests & Code Review", content: "Pull Requests (PRs) function as formal gateways for code quality assurance. A PR requests permission to merge changes from a feature branch into the stable main branch, providing a platform for automated test runs, peer code reviews, and architectural discussion." },
+      { heading: "CI/CD Basics", content: "Continuous Integration and Continuous Delivery (CI/CD) automates software integration. Using GitHub Actions, developers configure automated event triggers (like code pushes) to spin up virtual runtimes, execute test suites, run linters, and deploy code to servers automatically." },
+      { heading: "Rebasing vs Merge Strategies", content: "Integrating changes across branches is handled via two main approaches: `git merge` appends a dedicated merge commit, preserving historical development paths, whereas `git rebase` rewrites git history by reapplying feature commits sequentially on top of the target branch." },
+      { heading: "Monorepos & Submodules", content: "Large organizations manage complex project dependencies through distinct structural layouts: Monorepos store multiple independent projects inside a single git repository, while Git Submodules embed external git repositories inside a parent repository." },
+      { heading: "Protecting Branches & Policies", content: "To safeguard production software, repositories enforce branch protection rules on the main branch. These rules require code to pass all automated unit tests and secure peer approvals before code can be merged." },
+      { heading: "Open Source Workflow", content: "The global open-source contribution lifecycle follows a standardized pattern: a developer Forks an upstream project to their profile, clones it locally, develops modifications on a feature branch, pushes the changes, and submits a cross-repository Pull Request." },
+      { heading: "Example: GitHub Actions (YAML)", content: "name: Python Application CI\non: [push, pull_request]\njobs:\n  test-suite:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n      - name: Set up Python Environment\n        uses: actions/setup-python@v4\n        with:\n          python-version: '3.10'\n      - name: Run Unit Tests\n        run: pip install pytest && pytest" },
+      { heading: "Best Practices", content: "Maintain high git hygiene by enforcing clean standards: write atomized, single-purpose commits, craft descriptive commit messages using imperative verbs, and run pre-commit hooks to validate code style automatically before pushing changes." },
     ]
   },
-   /* ---------------------- Statistics (Basic to Advanced) ---------------------- */
-{
-  id: "statistics",
-  title: "Statistics (Basic to Advanced)سىتاستىكا باشلانغۇچ ۋە ئوتتۇرا سەۋىيە",
-  slides: [
-    { heading: "What is Statistics?", content: "Statistics is the science of collecting, analyzing, interpreting, and presenting data." },
-    { heading: "Types of Data", content: "Quantitative vs Qualitative, Discrete vs Continuous." },
-    { heading: "Descriptive Statistics", content: "Mean, median, mode, variance, standard deviation." },
-    { heading: "Probability Basics", content: "Sample space, events, conditional probability, Bayes’ theorem." },
-    { heading: "Distributions", content: "Normal, binomial, Poisson, uniform distributions." },
-    { heading: "Inferential Statistics", content: "Hypothesis testing, confidence intervals, p-values." },
-    { heading: "Regression Analysis", content: "Linear regression, multiple regression, assumptions, R²." },
-    { heading: "ANOVA & Chi-Square", content: "Comparing means and categorical variables." },
-    { heading: "Advanced Topics", content: "Time series, multivariate analysis, PCA." },
-    { heading: "Tools & Libraries", content: "NumPy, SciPy, pandas, statsmodels." },
-  ]
-},
 
+  /* ---------------------- Statistics ---------------------- */
+  {
+    id: "statistics",
+    title: "Statistics (Basic to Advanced) ستاتىستىكا ئاساسلىرى",
+    slides: [
+      { heading: "What is Statistics?", content: "Statistics is the mathematical science focused on collecting, organizing, analyzing, interpreting, and presenting empirical data. It serves as the mathematical foundation for scientific research, data science, and machine learning models." },
+      { heading: "Types of Data", content: "Data structures are classified mathematically into distinct categories: Quantitative Data measures numerical values (further split into Discrete counts or Continuous measurements), while Qualitative Data handles non-numeric labels (Nominal or Ordinal scales)." },
+      { heading: "Descriptive Statistics", content: "Descriptive statistics summarize data profiles. Measures of Central Tendency include the mean (average), median (middle value), and mode. Measures of Dispersion track data spread, computed via variance and standard deviation (σ)." },
+      { heading: "Probability Basics", content: "Probability quantifies uncertainty. It maps possible outcomes onto a Sample Space. Core theorems include Conditional Probability (evaluating event likelihood based on prior conditions) and Bayes' Theorem: P(A|B) = [P(B|A) · P(A)] / P(B), the cornerstone of Bayesian inference." },
+      { heading: "Distributions", content: "Probability distributions map data frequencies. Continuous variables often mirror the symmetric, bell-shaped Normal (Gaussian) Distribution governed by the Central Limit Theorem. Discrete events are modeled using Binomial or Poisson distributions." },
+      { heading: "Inferential Statistics", content: "Inferential statistics enables making predictions about a population based on sample data. This is executed through structured Hypothesis Testing, computing Confidence Intervals, evaluating Type I/II errors, and interpreting statistical P-values." },
+      { heading: "Regression Analysis", content: "Regression models evaluate relationships between dependent and independent variables. Ordinary Least Squares (OLS) Linear Regression computes a line of best fit by minimizing squared errors, measuring predictive strength via the Coefficient of Determination (R²)." },
+      { heading: "ANOVA & Chi-Square", content: "Specialized statistical tests compare categorical variances: Analysis of Variance (ANOVA) evaluates whether the means of multiple independent groups are statistically different, while the Chi-Square test evaluates dependencies between categorical features." },
+      { heading: "Advanced Topics", content: "Advanced statistical frameworks focus on temporal and high-dimensional spaces, including Time Series analysis (forecasting trends using models like ARIMA), Multivariate Analysis, and Principal Component Analysis (PCA) to compress feature dimensions." },
+      { heading: "Tools & Libraries", content: "Python developers execute complex statistical workflows by deploying optimized open-source libraries: NumPy handles fast vector array operations, Pandas runs tabular aggregation, SciPy handles advanced distributions, and `statsmodels` runs comprehensive diagnostic modeling." },
+    ]
+  },
 /* ---------------------- Machine Learning (ML) ---------------------- */
 {
-  id: "ml",
-  title: "Machine Learning (ML)  ماشىنا ئۈگنىش",
-  slides: [
-    { heading: "What is ML?", content: "Machine Learning enables systems to learn patterns from data and make predictions." },
-    { heading: "Types of ML", content: "Supervised, unsupervised, reinforcement learning." },
-    { heading: "Supervised Learning", content: "Regression and classification using labeled data." },
-    { heading: "Unsupervised Learning", content: "Clustering, dimensionality reduction (PCA, t-SNE)." },
-    { heading: "Model Evaluation", content: "Accuracy, precision, recall, F1-score, confusion matrix." },
-    { heading: "Overfitting & Underfitting", content: "Bias-variance tradeoff, cross-validation." },
-    { heading: "Feature Engineering", content: "Scaling, encoding, selection, extraction." },
-    { heading: "Popular Algorithms", content: "Linear regression, decision trees, SVM, k-NN, Naive Bayes." },
-    { heading: "Tools & Libraries", content: "scikit-learn, XGBoost, LightGBM, pandas." },
-    { heading: "ML Workflow", content: "Data → preprocessing → training → evaluation → deployment." },
-  ]
-},
+    id: "ml",
+    title: "Machine Learning (ML) ماشىنا ئۆگىنىشى نېگىزلىرى",
+    slides: [
+      { heading: "What is ML?", content: "Machine Learning is a subset of artificial intelligence focused on building algorithms that discover hidden mathematical patterns in data to make automated predictions, improving accuracy incrementally over time without explicit rules." },
+      { heading: "Types of ML", content: "Machine learning workflows scale across three core paradigms: 1. Supervised Learning (training on historical, labeled targets). 2. Unsupervised Learning (discovering structural patterns in unlabeled data). 3. Reinforcement Learning (optimizing agent behavior via reward functions)." },
+      { heading: "Supervised Learning", content: "Supervised architectures handle two primary challenges: Continuous target forecasting via Regression models (such as Ridge or Lasso regression), and discrete category assignment via Classification models (such as Support Vector Machines)." },
+      { heading: "Unsupervised Learning", content: "Unsupervised setups analyze data without predefined targets. This includes grouping similar profiles together using Clustering algorithms like KMeans or hierarchical clusters, alongside Dimensionality Reduction techniques like t-SNE or PCA." },
+      { heading: "Model Evaluation", content: "Evaluating model capability requires rigorous metrics: classification tasks are measured using precision, recall, and F1-score derived from a Confusion Matrix, while regression precision is evaluated via Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE)." },
+      { heading: "Overfitting & Underfitting", content: "The core challenge in ML is balancing the Bias-Variance Tradeoff. Underfitting (high bias) fails to capture underlying data structures, while overfitting (high variance) memorizes training noise. Developers fix this using Cross-Validation and Regularization." },
+      { heading: "Feature Engineering", content: "Model performance is heavily determined by feature quality. Feature engineering pipelines apply data transformations like `StandardScaler` normalization, handling categorical attributes via One-Hot encoding, and selecting optimal feature subsets." },
+      { heading: "Popular Algorithms", content: "A versatile data scientist must understand diverse algorithmic tools: interpretability-focused Decision Trees, ensemble frameworks like Random Forests, geometric Support Vector Machines (SVM), instance-based k-NN, and probabilistic Naive Bayes models." },
+      { heading: "Tools & Libraries", content: "The industry standard stack centers around Scikit-Learn for classical machine learning workflows, supplemented by gradient-boosting frameworks like XGBoost and LightGBM for tabular classification, alongside Pandas and NumPy." },
+      { heading: "ML Workflow", content: "A production-grade machine learning lifecycle follows a cyclical pipeline: raw data ingestion → preprocessing and feature scaling → iterative model training → evaluation against validation sets → deployment to cloud endpoints." },
+    ]
+  },
 
-/* ---------------------- Neural Networks (Deep Learning) ---------------------- */
-{
-  id: "nn",
-  title: "Neural Networks نىرۋا تورى ",
-  slides: [
-    { heading: "What is a Neural Network?", content: "A neural network is a series of interconnected nodes that mimic the human brain." },
-    { heading: "Perceptron & Activation", content: "Sigmoid, ReLU, tanh functions. Forward pass and activation." },
-    { heading: "Backpropagation", content: "Gradient descent, chain rule, weight updates." },
-    { heading: "Loss Functions", content: "MSE, cross-entropy, hinge loss." },
-    { heading: "Network Architectures", content: "Feedforward, CNN, RNN, LSTM, Transformer." },
-    { heading: "Regularization", content: "Dropout, L2/L1 penalties, batch normalization." },
-    { heading: "Optimization Algorithms", content: "SGD, Adam, RMSprop." },
-    { heading: "Training Strategies", content: "Epochs, batch size, learning rate scheduling." },
-    { heading: "Frameworks", content: "TensorFlow, PyTorch, Keras." },
-    { heading: "Use Cases", content: "Image classification, NLP, speech recognition, recommendation systems.", codeexplore: "Example: Simple Neural Network in Keras\n```python\nimport tensorflow as tf\nfrom tensorflow import keras\nmodel = keras.Sequential([\n    keras.layers.Dense(64, activation='relu', input_shape=(input_dim,)),\n    keras.layers.Dense(10, activation='softmax')\n])\nmodel.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])\n```" },
-  ]
-},
+  /* ---------------------- Neural Networks (Deep Learning) ---------------------- */
+  {
+    id: "nn",
+    title: "Neural Networks نىرۋا تورى ۋە چوڭقۇر ئۆگىنىش",
+    slides: [
+      { heading: "What is a Neural Network?", content: "A Neural Network (Deep Learning) is a computational architecture inspired by biological neural networks. It features layered configurations of artificial neurons (nodes) that map non-linear relationships across massive datasets." },
+      { heading: "Perceptron & Activation", content: "The Perceptron computes a weighted sum of inputs plus a bias term. This value is passed to a non-linear Activation Function—such as Sigmoid, Tanh, or Rectified Linear Unit (ReLU)—which determines the neuron's firing threshold." },
+      { heading: "Backpropagation", content: "Neural networks learn via backpropagation. During the forward pass, predictions are made; a loss function calculates error. The network then executes a backward pass, computing gradients via the Chain Rule to update weights using Gradient Descent." },
+      { heading: "Loss Functions", content: "Loss functions measure error to guide optimization. Regression tasks deploy Mean Squared Error (MSE), binary classifications use Binary Cross-Entropy, while multi-class tasks rely on Categorical Cross-Entropy." },
+      { heading: "Network Architectures", content: "Different tasks require specific architectures: Convolutional Neural Networks (CNNs) excel at spatial processing like image recognition, Recurrent Neural Networks (RNN/LSTM) handle sequential text data, and Transformers power generative AI." },
+      { heading: "Regularization", content: "To prevent deep neural networks from overfitting, developers deploy regularization techniques: Dropout randomly deactivates specific nodes during training, L1/L2 penalties penalize large weights, and Batch Normalization stabilizes layer inputs." },
+      { heading: "Optimization Algorithms", content: "Standard Gradient Descent can get stuck in local minima. Production models utilize advanced adaptive optimizers like Stochastic Gradient Descent (SGD) with momentum, RMSprop, or Adam (Adaptive Moment Estimation), which adjust learning rates dynamically." },
+      { heading: "Training Strategies", content: "Fine-tuning model performance involves adjusting core hyperparameters: defining Epochs (complete passes over the dataset), optimizing Batch Size for memory throughput, and managing learning rates to prevent exploding gradients." },
+      { heading: "Frameworks", content: "The production ecosystem is led by open-source deep learning platforms: Meta's PyTorch (highly favored in research for its dynamic execution graphs) and Google's TensorFlow/Keras framework (optimized for industrial deployments)." },
+      { heading: "Use Cases", content: "Deep learning powers cutting-edge computer vision tasks (object detection, facial recognition), automated Speech Recognition systems, personalized recommendation systems, and state-of-the-art Large Language Models (LLMs).", codeexplore: "import tensorflow as tf\nfrom tensorflow import keras\n\n# Construct a structural Feedforward Neural Network\nmodel = keras.Sequential([\n    keras.layers.Dense(128, activation='relu', input_shape=(64,)),\n    keras.layers.Dropout(0.2),\n    keras.layers.Dense(10, activation='softmax')\n])\nmodel.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])" },
+    ]
+  },
 ];

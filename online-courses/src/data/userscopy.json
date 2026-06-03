@@ -39,7 +39,7 @@
     "id": "student006",
     "name": "husenjanobul",
     "password": "husenjanobul@qml26",
-    "roles": ["student"]
+    "roles": ["user"]
   },
   {
     "id": "student007",
