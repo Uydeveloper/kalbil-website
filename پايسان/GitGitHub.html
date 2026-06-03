@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git قوللانمىسى - تودو لىستىسى</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            padding: 40px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .section-title {
+            color: #4f46e5;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.5rem;
+        }
+        
+        .command-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .command-box .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .code-block {
+            background: #f8fafc;
+            border-left: 4px solid #4f46e5;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .terminal {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+        }
+        
+        .terminal-line {
+            margin: 5px 0;
+        }
+        
+        .terminal-line .prompt {
+            color: #10b981;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+        
+        .visualization {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .branch {
+            position: absolute;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid;
+            width: 200px;
+        }
+        
+        .branch-main {
+            left: 20%;
+            top: 50%;
+            border-color: #4f46e5;
+        }
+        
+        .branch-feature {
+            left: 40%;
+            top: 30%;
+            border-color: #10b981;
+        }
+        
+        .branch-hotfix {
+            left: 60%;
+            top: 70%;
+            border-color: #ef4444;
+        }
+        
+        .arrow {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: #4f46e5;
+        }
+        
+        .arrow:after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: -4px;
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid #4f46e5;
+            border-top: 2px solid #4f46e5;
+            transform: rotate(45deg);
+        }
+        
+        .commit-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #4f46e5;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin: 10px;
+        }
+        
+        .commit-line {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #3730a3;
+        }
+        
+        .todo-app {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .todo-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .todo-input input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+        
+        .todo-item.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+        
+        .git-status {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .status-added {
+            color: #10b981;
+        }
+        
+        .status-modified {
+            color: #f59e0b;
+        }
+        
+        .status-untracked {
+            color: #ef4444;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Git ۋە GitHub تولۇق قوللانمىسى</h1>
+            <div class="subtitle">دەسلەپكىدىن باشلاپ ئىلغار سەۋىيىگىچە - Private Fork System</div>
+        </header>
+
+        <!-- 1-بۆلەك: Git نىمە؟ -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i> 1. Git نىمە؟ نېمىگە ئىشلىتىمىز؟</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>📚 تارىخنى ساقلاش</h3>
+                    <p>ھەر بىر ئۆزگەرتىشنى خاتىرىلەپ، قاچان نېمە ئۆزگەرتكەنلىكىڭىزنى كۆرەلەيسىز.</p>
+                    <div class="commit-line">
+                        <div class="commit-circle">A1</div>
+                        <div>Initial commit</div>
+                    </div>
+                    <div class="commit-line">
+                        <div class="commit-circle">B2</div>
+                        <div>Login feature added</div>
+                    </div>
+                    <div class="commit-line">
+                        <div class="commit-circle">C3</div>
+                        <div>Bug fix for login</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>🔄 خاتالىقتىن قايتىش</h3>
+                    <p>خاتا كود يازسىڭىز، ئالدىنقى توغرا ھالەتكە قايتىپ كېتەلەيسىز.</p>
+                    <div class="git-status">
+                        $ git log --oneline<br>
+                        c3f2a5f (HEAD -> main) Added buggy code<br>
+                        <span style="color: #10b981">a1b2c3d Previous working version</span><br>
+                        $ git reset --hard a1b2c3d
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>👥 ھەمكارلىق</h3>
+                    <p>بىر نەچچە پروگراممىر بىر كودتا ئىشلىشى مۇمكىن.</p>
+                    <div class="visualization" style="height: 150px;">
+                        <div class="branch branch-main">Main Branch</div>
+                        <div class="branch branch-feature">Feature A</div>
+                        <div class="branch branch-hotfix">Feature B</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2-بۆلەك: Git قۇرۇش -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-download"></i> 2. Git نى قۇرۇش (دەسلەپكى)</h2>
+            
+            <div class="terminal">
+                <div class="terminal-line"><span class="prompt">$</span> # 1. Git نى قاچىلايمىز</div>
+                <div class="terminal-line"><span class="prompt">$</span> # Windows ئىشلەتكۈچىلەر: git-scm.com دىن چۈشۈرۈڭ</div>
+                <div class="terminal-line"><span class="prompt">$</span> # Mac ئىشلەتكۈچىلەر:</div>
+                <div class="terminal-line"><span class="prompt">$</span> brew install git</div>
+                <br>
+                <div class="terminal-line"><span class="prompt">$</span> # 2. ئىشلەتكۈچى ئارخىپىنى تەڭشەڭ</div>
+                <div class="terminal-line"><span class="prompt">$</span> git config --global user.name "ئىسمىڭىز"</div>
+                <div class="terminal-line"><span class="prompt">$</span> git config --global user.email "email@example.com"</div>
+                <br>
+                <div class="terminal-line"><span class="prompt">$</span> # 3. تەكشۈرۈڭ</div>
+                <div class="terminal-line"><span class="prompt">$</span> git --version</div>
+                <div class="terminal-line" style="color: #10b981">git version 2.34.1</div>
+            </div>
+            
+            <button onclick="showTerminalOutput('gitConfig')">ئارخىپنى تەڭشەشنى كۆرۈش</button>
+            <div id="gitConfigOutput" class="terminal" style="display:none; margin-top:10px;">
+                <div class="terminal-line"><span class="prompt">$</span> git config --global user.name "ئەخمەت"</div>
+                <div class="terminal-line"><span class="prompt">$</span> git config --global user.email "ahmet@example.com"</div>
+                <div class="terminal-line"><span class="prompt">$</span> git config --list</div>
+                <div class="terminal-line">user.name=ئەخمەت</div>
+                <div class="terminal-line">user.email=ahmet@example.com</div>
+            </div>
+        </section>
+
+        <!-- 3-بۆلەك: Git ئاساسىي كۇنۇپكىلىرى -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-keyboard"></i> 3. Git نىڭ ئاساسىي 10 كۇنۇپكىسى</h2>
+            
+            <div class="todo-app">
+                <h3>🎯 تودو لىستىسى پروگراممىسى ئارقىلىق Git نى ئۆگىنىش</h3>
+                
+                <div class="todo-input">
+                    <input type="text" id="todoInput" placeholder="يېڭى ۋەزىپە كىرگۈزۈڭ...">
+                    <button onclick="addTodo()"><i class="fas fa-plus"></i> قوشۇش</button>
+                </div>
+                
+                <div id="todoList"></div>
+                
+                <div class="git-status" id="gitStatus">
+                    <strong>Git Status:</strong><br>
+                    <span class="status-untracked">Untracked files: 0</span><br>
+                    <span class="status-modified">Modified files: 0</span><br>
+                    <span class="status-added">Changes to be committed: 0</span>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <button onclick="simulateGitAdd()"><i class="fas fa-plus-square"></i> git add</button>
+                    <button onclick="simulateGitCommit()"><i class="fas fa-save"></i> git commit</button>
+                    <button onclick="simulateGitStatus()"><i class="fas fa-info-circle"></i> git status</button>
+                    <button onclick="simulateGitLog()"><i class="fas fa-history"></i> git log</button>
+                </div>
+                
+                <div id="gitOutput" class="terminal" style="margin-top: 20px; display: none;"></div>
+            </div>
+            
+            <div class="grid" style="margin-top: 30px;">
+                <div class="card">
+                    <h3>git init</h3>
+                    <p>يېڭى Git repository قۇرۇش</p>
+                    <div class="command-box">
+                        git init projectA
+                        <button class="copy-btn" onclick="copyCommand('git init projectA')">كۆچۈرۈش</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>git add</h3>
+                    <p>ئۆزگەرتىشلەرنى قوشۇش (Staging area)</p>
+                    <div class="command-box">
+                        git add .  # ھەممە فايللارنى
+                        <button class="copy-btn" onclick="copyCommand('git add .')">كۆچۈرۈش</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>git commit</h3>
+                    <p>ئۆزگەرتىشلەرنى ساقلاش</p>
+                    <div class="command-box">
+                        git commit -m "تودو لىستىسى قوشۇلدى"
+                        <button class="copy-btn" onclick="copyCommand('git commit -m \"تودو لىستىسى قوشۇلدى\"')">كۆچۈرۈش</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>git status</h3>
+                    <p>فايللارنىڭ ھازىرقى ھالىتىنى كۆرۈش</p>
+                    <div class="code-block">
+$ git status
+On branch main
+Changes not staged for commit:
+  modified:   todo.html
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>git log</h3>
+                    <p>commit تارىخىنى كۆرۈش</p>
+                    <div class="code-block">
+$ git log --oneline
+a1b2c3d (HEAD -> main) تودو قوشۇش كۇنۇپكىسى
+f4e5d6c دەسلەپكى تودو لىستىسى
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>git branch</h3>
+                    <p>Branch لارنى باشقۇرۇش</p>
+                    <div class="code-block">
+$ git branch          # بارلىق branch لارنى كۆرسەت
+$ git branch feature  # يېڭى branch قۇر
+$ git checkout feature # feature branch قا ئالماشتۇر
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4-بۆلەك: GitHub ۋە Collaboration -->
+        <section class="section">
+            <h2 class="section-title"><i class="fab fa-github"></i> 4. GitHub: Repo قۇرۇش ۋە Team Collaboration</h2>
+            
+            <div class="visualization">
+                <div class="branch branch-main" style="left: 10%; top: 40%;">
+                    <strong>Main Repo</strong><br>
+                    (Private)
+                </div>
+                
+                <div class="arrow" style="top: 45%; left: 25%; width: 100px;"></div>
+                
+                <div class="branch branch-feature" style="left: 40%; top: 20%;">
+                    <strong>User1 Fork</strong><br>
+                    (Private)
+                </div>
+                
+                <div class="branch branch-feature" style="left: 40%; top: 40%;">
+                    <strong>User2 Fork</strong><br>
+                    (Private)
+                </div>
+                
+                <div class="branch branch-feature" style="left: 40%; top: 60%;">
+                    <strong>User3 Fork</strong><br>
+                    (Private)
+                </div>
+                
+                <div class="arrow" style="top: 30%; left: 65%; width: 100px; transform: rotate(180deg);"></div>
+                <div class="arrow" style="top: 50%; left: 65%; width: 100px; transform: rotate(180deg);"></div>
+                <div class="arrow" style="top: 70%; left: 65%; width: 100px; transform: rotate(180deg);"></div>
+                
+                <div class="branch branch-hotfix" style="left: 80%; top: 40%;">
+                    <strong>Manager View</strong><br>
+                    ھەممىنى كۆرەلەيدۇ
+                </div>
+            </div>
+            
+            <h3>Team Collaboration نىڭ 3 مودېلى:</h3>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>1. Shared Repo مودېلى</h3>
+                    <p><strong>مۇناسىۋىتى:</strong> ھەممە ئادەم بىر repo دا ئىشلەيدۇ</p>
+                    <p><strong>مەسىلىسى:</strong> كۆپ خەتەر، ئادەمنىڭ خاتا كودى ھەممىگە تەسىر قىلىدۇ</p>
+                </div>
+                
+                <div class="card">
+                    <h3>2. Branch Workflow</h3>
+                    <p><strong>مۇناسىۋىتى:</strong> ھەر بىر ئادەم ئۆزىنىڭ branch دا ئىشلەيدۇ</p>
+                    <p><strong>مەسىلىسى:</strong> ھەممە ئادەم ھەممە كودنى كۆرەلەيدۇ</p>
+                </div>
+                
+                <div class="card" style="border: 3px solid #4f46e5;">
+                    <h3 style="color: #4f46e5;">3. Private Fork System</h3>
+                    <p><strong>مۇناسىۋىتى:</strong> ھەر بىر ئادەم ئۆزىنىڭ private repo سىدا ئىشلەيدۇ</p>
+                    <p><strong>ئارتۇقچىلىقى:</strong> باشقىلارنىڭ كودىنى كۆرەلمەيدۇ، پەقەت Manager كۆرەلەيدۇ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5-بۆلەك: Private Fork System -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-lock"></i> 5. "Manager-only visibility" - Private Fork System</h2>
+            
+            <h3>بۇ مودېلنىڭ 4 قەدەملىك قۇرۇلۇشى:</h3>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>1. Main Repo نى Private قىلىش</h3>
+                    <p>GitHub → Settings → General → Private</p>
+                    <div class="code-block">
+Visibility: 🔒 Private
+✓ Only you and people you give access
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>2. Forking نى قوزغىتىش</h3>
+                    <p>Settings → General → Features</p>
+                    <div class="code-block">
+✓ Allow forking
+✓ Private forks are private
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>3. Collaborator قوشۇش</h3>
+                    <p>Settings → Collaborators → Add people</p>
+                    <div class="code-block">
+Role: Write
+✓ Can push to repository
+✓ Can create forks
+✗ Cannot merge to main
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>4. Pull Request قوبۇل قىلىش</h3>
+                    <p>Manager Pull Request نى تەكشۈرۈپ، merge قىلىدۇ</p>
+                    <div class="code-block">
+✓ Review code
+✓ Add comments
+✓ Approve and merge
+                    </div>
+                </div>
+            </div>
+            
+            <h3>ئەملىي Simulation:</h3>
+            
+            <div class="terminal">
+                <div class="terminal-line"><span class="prompt"># User1 (Developer)</span></div>
+                <div class="terminal-line"><span class="prompt">$</span> git clone https://github.com/user1/projectA-fork.git</div>
+                <div class="terminal-line"><span class="prompt">$</span> git checkout -b feature-login</div>
+                <div class="terminal-line"><span class="prompt">$</span> echo "// Login function" > login.js</div>
+                <div class="terminal-line"><span class="prompt">$</span> git add .</div>
+                <div class="terminal-line"><span class="prompt">$</span> git commit -m "Login feature added"</div>
+                <div class="terminal-line"><span class="prompt">$</span> git push origin feature-login</div>
+                <br>
+                <div class="terminal-line"><span class="prompt"># GitHub دا Pull Request قىلىدۇ</span></div>
+                <div class="terminal-line"><span class="prompt"># Manager Pull Request نى كۆرۈپ، تەكشۈرىدۇ</span></div>
+                <br>
+                <div class="terminal-line"><span class="prompt"># Manager (سەن)</span></div>
+                <div class="terminal-line"><span class="prompt">$</span> git checkout main</div>
+                <div class="terminal-line"><span class="prompt">$</span> git pull origin main</div>
+                <div class="terminal-line"><span class="prompt">$</span> # PR نى تەكشۈرۈپ، approve قىلىدۇ</div>
+                <div class="terminal-line"><span class="prompt">$</span> git merge feature-login</div>
+                <div class="terminal-line"><span class="prompt">$</span> git push origin main</div>
+            </div>
+        </section>
+
+        <!-- 6-بۆلەك: تولۇق Simulation -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-users"></i> 6. تولۇق Simulation: 3 ئەزا بىلەن تىم خىزمىتى</h2>
+            
+            <div id="simulation" class="terminal" style="height: 400px; overflow-y: auto;">
+                <div class="terminal-line"><span class="prompt">#</span> ============ SIMULATION START ============</div>
+                <div class="terminal-line"><span class="prompt">#</span> Project: Todo List Application</div>
+                <div class="terminal-line"><span class="prompt">#</span> Team: Manager, Developer1, Developer2</div>
+                <br>
+                <div class="terminal-line"><span class="prompt">👑 Manager</span> creates main repository</div>
+                <div class="terminal-line"><span class="prompt">$</span> git init todo-app</div>
+                <div class="terminal-line"><span class="prompt">$</span> echo "# Todo App" > README.md</div>
+                <div class="terminal-line"><span class="prompt">$</span> git add . && git commit -m "Initial commit"</div>
+                <br>
+                <div class="terminal-line"><span class="prompt">👨‍💻 Developer1</span> forks the repository</div>
+                <div class="terminal-line"><span class="prompt">$</span> # Creates private fork: todo-app-dev1</div>
+                <div class="terminal-line"><span class="prompt">$</span> git clone https://github.com/dev1/todo-app-dev1.git</div>
+                <div class="terminal-line"><span class="prompt">$</span> git checkout -b add-dark-mode</div>
+                <br>
+                <div class="terminal-line"><span class="prompt">👩‍💻 Developer2</span> also forks the repository</div>
+                <div class="terminal-line"><span class="prompt">$</span> # Creates private fork: todo-app-dev2</div>
+                <div class="terminal-line"><span class="prompt">$</span> git clone https://github.com/dev2/todo-app-dev2.git</div>
+                <div class="terminal-line"><span class="prompt">$</span> git checkout -b add-notifications</div>
+                <br>
+                <div class="terminal-line" id="simLine1"><span class="prompt">⏳</span> Both developers work independently...</div>
+                <div class="terminal-line" id="simLine2" style="display:none;"><span class="prompt">👨‍💻 Dev1</span> creates dark mode feature</div>
+                <div class="terminal-line" id="simLine3" style="display:none;"><span class="prompt">👨‍💻 Dev1</span> git add . && git commit -m "Added dark mode"</div>
+                <div class="terminal-line" id="simLine4" style="display:none;"><span class="prompt">👨‍💻 Dev1</span> Creates Pull Request to main repo</div>
+                <div class="terminal-line" id="simLine5" style="display:none;"><span class="prompt">👩‍💻 Dev2</span> Creates notification system</div>
+                <div class="terminal-line" id="simLine6" style="display:none;"><span class="prompt">👩‍💻 Dev2</span> git add . && git commit -m "Added notifications"</div>
+                <div class="terminal-line" id="simLine7" style="display:none;"><span class="prompt">👩‍💻 Dev2</span> Creates Pull Request to main repo</div>
+                <div class="terminal-line" id="simLine8" style="display:none;"><span class="prompt">🔍 Manager</span> reviews both PRs</div>
+                <div class="terminal-line" id="simLine9" style="display:none;"><span class="prompt">✅ Manager</span> approves and merges dark mode</div>
+                <div class="terminal-line" id="simLine10" style="display:none;"><span class="prompt">✅ Manager</span> approves and merges notifications</div>
+                <div class="terminal-line" id="simLine11" style="display:none;"><span class="prompt">🎉 RESULT</span> Main repo now has both features</div>
+                <div class="terminal-line" id="simLine12" style="display:none;"><span class="prompt">👁️ VISIBILITY</span> Dev1 cannot see Dev2's code, Dev2 cannot see Dev1's code</div>
+                <div class="terminal-line" id="simLine13" style="display:none;"><span class="prompt">👑 MANAGER</span> Can see all code from both developers</div>
+            </div>
+            
+            <button id="simButton" style="margin-top: 20px;">
+                <i class="fas fa-play"></i> Simulation نى باشلاش
+            </button>
+        </section>
+
+        <!-- 7-بۆلەك: قوشۇمچە تەكشۈرۈش -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-code-review"></i> 7. Code Review قانداق قىلىنىدۇ؟</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>1. Pull Request دا چۈشەندۈرۈش</h3>
+                    <p>نېمە ئۆزگەرتىلگەنلىكىنى، نېمە ئۈچۈن ئۆزگەرتىلگەنلىكىنى چۈشەندۈرۈش</p>
+                    <div class="code-block">
+Title: Add user authentication
+Description:
+- Added login form
+- Added validation
+- Added error handling
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>2. Inline Comments</h3>
+                    <p>كودنىڭ ئايرىم بۆلەكلىرىگە باھا بېرىش</p>
+                    <div class="code-block">
+// Consider using const instead of let
+const user = getCurrentUser();
+
+// Good: Error handling added
+try {
+  await login(user);
+} catch (error) {
+  showError(error.message);
+}
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>3. Required Reviews</h3>
+                    <p>تەڭشەش: Pull Request merge قىلىشتىن ئىلگىرى review تەلەپ قىلىش</p>
+                    <div class="code-block">
+Settings → Branches → 
+Branch protection rules:
+✓ Require pull request reviews
+✓ Required approving reviews: 1
+✓ Dismiss stale reviews
+✓ Require review from Code Owners
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 30px;">ئەڭ مۇھىم 10 كۇنۇپكا خۇلاسىسى:</h3>
+            
+            <table style="width:100%; border-collapse: collapse; margin-top: 20px;">
+                <tr style="background: #4f46e5; color: white;">
+                    <th style="padding: 10px;">كۇنۇپكا</th>
+                    <th>مەنىسى</th>
+                    <th>ئەمەلىي ئىشلىتىش</th>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 10px;"><strong>git init</strong></td>
+                    <td>يېڭى repo قۇرۇش</td>
+                    <td>ھەر قانداق پروژېكتىنى باشلاش</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #f8fafc;">
+                    <td style="padding: 10px;"><strong>git add</strong></td>
+                    <td>ئۆزگەرتىشلەرنى قوشۇش</td>
+                    <td>commit قىلىشتىن ئىلگىرى</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 10px;"><strong>git commit</strong></td>
+                    <td>ئۆزگەرتىشلەرنى ساقلاش</td>
+                    <td>version يارىتىش</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #f8fafc;">
+                    <td style="padding: 10px;"><strong>git push</strong></td>
+                    <td>GitHub غا يوللاش</td>
+                    <td>كودنى ساقلاش ۋە ھەمبەھىرلەش</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 10px;"><strong>git pull</strong></td>
+                    <td>يېڭىلاش</td>
+                    <td>باشقىلارنىڭ ئۆزگەرتىشلىرىنى ئېلىش</td>
+                </tr>
+            </table>
+        </section>
+    </div>
+
+    <script>
+    let todos = [];
+    let commitHistory = [];
+    let untrackedFiles = 0;
+    let modifiedFiles = 0;
+    let stagedFiles = 0;
+    let simulationStep = 0;
+
+    // تودو قوشۇش
+    function addTodo() {
+        const input = document.getElementById('todoInput');
+        if (input.value.trim() === '') return;
+        
+        todos.push({
+            id: Date.now(),
+            text: input.value,
+            completed: false
+        });
+        
+        input.value = '';
+        untrackedFiles++;
+        updateTodoList();
+        updateGitStatus();
+    }
+
+    // تودو لىستىسىنى يېڭىلاش
+    function updateTodoList() {
+        const todoList = document.getElementById('todoList');
+        todoList.innerHTML = '';
+        
+        todos.forEach(todo => {
+            const div = document.createElement('div');
+            div.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+            div.innerHTML = `
+                <span>${todo.text}</span>
+                <div>
+                    <button onclick="toggleTodo(${todo.id})" style="background: #10b981; padding: 5px 10px; font-size: 0.8rem;">
+                        ${todo.completed ? 'قايتا قوزغىتىش' : 'تاماملاش'}
+                    </button>
+                    <button onclick="deleteTodo(${todo.id})" style="background: #ef4444; padding: 5px 10px; font-size: 0.8rem;">
+                        ئۆچۈرۈش
+                    </button>
+                </div>
+            `;
+            todoList.appendChild(div);
+        });
+    }
+
+    // تودو تاماملاش/قايتا قوزغىتىش
+    function toggleTodo(id) {
+        const todo = todos.find(t => t.id === id);
+        if (todo) {
+            todo.completed = !todo.completed;
+            modifiedFiles++;
+            updateTodoList();
+            updateGitStatus();
+        }
+    }
+
+    // تودو ئۆچۈرۈش
+    function deleteTodo(id) {
+        todos = todos.filter(t => t.id !== id);
+        modifiedFiles++;
+        updateTodoList();
+        updateGitStatus();
+    }
+
+    // Git status نى يېڭىلاش
+    function updateGitStatus() {
+        const status = document.getElementById('gitStatus');
+        status.innerHTML = `
+            <strong>Git Status:</strong><br>
+            <span class="status-untracked">Untracked files: ${untrackedFiles}</span><br>
+            <span class="status-modified">Modified files: ${modifiedFiles}</span><br>
+            <span class="status-added">Changes to be committed: ${stagedFiles}</span>
+        `;
+    }
+
+    // git add سىمۇلاسىيەسى
+    function simulateGitAdd() {
+        if (untrackedFiles > 0 || modifiedFiles > 0) {
+            stagedFiles += untrackedFiles + modifiedFiles;
+            untrackedFiles = 0;
+            modifiedFiles = 0;
+            
+            showGitOutput(`
+<span class="prompt">$</span> git add .<br>
+<span class="prompt">$</span> git status<br>
+On branch main<br>
+Changes to be committed:<br>
+  (use "git reset HEAD <file>..." to unstage)<br>
+<br>
+<span class="status-added">        modified:   todo.html</span><br>
+<span class="status-added">        new file:   todo.js</span>
+            `);
+            
+            updateGitStatus();
+        }
+    }
+
+    // git commit سىمۇلاسىيەسى
+    function simulateGitCommit() {
+        if (stagedFiles > 0) {
+            const commitMessage = prompt("Commit ئۇچۇرىنى كىرگۈزۈڭ:", "تودو لىستىسى ئۆزگەرتىلدى");
+            const filesChanged = stagedFiles;
+            
+            if (commitMessage) {
+                commitHistory.push({
+                    hash: Math.random().toString(36).substr(2, 8),
+                    message: commitMessage,
+                    date: new Date().toLocaleTimeString()
+                });
+                
+                stagedFiles = 0;
+                
+                showGitOutput(`
+<span class="prompt">$</span> git commit -m "${commitMessage}"<br>
+[main ${commitHistory[commitHistory.length-1].hash}] ${commitMessage}<br>
+ ${filesChanged} file${filesChanged !== 1 ? 's' : ''} changed
+                `);
+                
+                updateGitStatus();
+            }
+        }
+    }
+
+    // git status سىمۇلاسىيەسى
+    function simulateGitStatus() {
+        let output = `<span class="prompt">$</span> git status<br>`;
+        
+        if (untrackedFiles === 0 && modifiedFiles === 0 && stagedFiles === 0) {
+            output += `On branch main<br>nothing to commit, working tree clean`;
+        } else {
+            output += `On branch main<br>`;
+            
+            if (untrackedFiles > 0) {
+                output += `<br>Untracked files:<br>  (use "git add <file>..." to include in what will be committed)<br>`;
+                output += `<span class="status-untracked">        todo.html</span><br>`;
+            }
+            
+            if (modifiedFiles > 0) {
+                output += `<br>Changes not staged for commit:<br>  (use "git add <file>..." to update what will be committed)<br>`;
+                output += `<span class="status-modified">        modified:   todo.js</span><br>`;
+            }
+            
+            if (stagedFiles > 0) {
+                output += `<br>Changes to be committed:<br>  (use "git reset HEAD <file>..." to unstage)<br>`;
+                output += `<span class="status-added">        new file:   style.css</span><br>`;
+            }
+        }
+        
+        showGitOutput(output);
+    }
+
+    // git log سىمۇلاسىيەسى
+    function simulateGitLog() {
+        let output = `<span class="prompt">$</span> git log --oneline<br>`;
+        
+        if (commitHistory.length === 0) {
+            output += `No commits yet`;
+        } else {
+            commitHistory.slice().reverse().forEach(commit => {
+                output += `${commit.hash} ${commit.message}<br>`;
+            });
+        }
+        
+        showGitOutput(output);
+    }
+
+    // Git خىرىجىسىنى كۆرسىتىش
+    function showGitOutput(content) {
+        const output = document.getElementById('gitOutput');
+        output.innerHTML = content;
+        output.style.display = 'block';
+    }
+
+    // كۇنۇپكىنى كۆچۈرۈش
+    function copyCommand(command) {
+        navigator.clipboard.writeText(command);
+        alert("كۇنۇپكا كۆچۈرۈلدى: " + command);
+    }
+
+    // Terminal خىرىجىسىنى كۆرسىتىش
+    function showTerminalOutput(type) {
+        if (type === 'gitConfig') {
+            const output = document.getElementById('gitConfigOutput');
+            output.style.display = output.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+
+    // Simulation نى باشلاش
+    function startSimulation() {
+        simulationStep = 0;
+        const lines = document.querySelectorAll('#simulation .terminal-line[id^="simLine"]');
+        lines.forEach(line => line.style.display = 'none');
+        
+        const interval = setInterval(() => {
+            if (simulationStep < 13) {
+                const line = document.getElementById(`simLine${simulationStep + 1}`);
+                if (line) line.style.display = 'block';
+                simulationStep++;
+                
+                const simulationDiv = document.getElementById('simulation');
+                simulationDiv.scrollTop = simulationDiv.scrollHeight;
+            } else {
+                clearInterval(interval);
+            }
+        }, 1000);
+    }
+
+    // باشلانغۇچ قىممەت
+    updateTodoList();
+    updateGitStatus();
+
+    // Simulation button غا event listener قوشۇش
+    document.addEventListener('DOMContentLoaded', function() {
+        const simButton = document.getElementById('simButton');
+        if (simButton) {
+            simButton.addEventListener('click', startSimulation);
+        }
+    });
+</script>
+</body>
+</html>

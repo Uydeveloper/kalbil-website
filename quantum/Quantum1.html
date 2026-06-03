@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>كىۋانىت فىزىكىسى 1-باب – كىرىش</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/python/python.min.js"></script>
+  <!-- KaTeX for formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+  <style>
+    :root {
+      --bg: #f9f7f0;
+      --text-ug: #2a2a2a;
+      --text-en: #333;
+      --primary: #1a237e;
+      --card: #ffffff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg); font-family:'Amiri',serif; color:var(--text-ug);
+      line-height:1.7; padding:20px; direction:rtl;
+    }
+    h1 { text-align:center; color:var(--primary); font-size:2.3rem; margin:0 0 25px; }
+    .intro {
+      background: #e8eaf6; padding:25px; border-radius:14px; margin-bottom:30px;
+      border-right:5px solid var(--primary); text-align:center;
+    }
+    .section {
+      background: var(--card); padding:22px; margin-bottom:28px;
+      border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.06);
+      border-right:4px solid var(--primary);
+    }
+    .title-ug { font-size:1.6rem; font-weight:bold; color:var(--primary); margin-bottom:10px; }
+    .title-en { font-size:1.25rem; font-family:'Inter',sans-serif; color:#555;
+      direction:ltr; text-align:left; margin-bottom:15px; }
+    .en { font-family:'Inter',sans-serif; direction:ltr; text-align:left;
+      background:#f8f9fa; padding:12px; border-radius:8px; margin-top:12px;
+      border-left:3px solid #607d8b; }
+    .formula {
+      background:#f0f4ff; padding:12px; border-radius:8px; text-align:center;
+      font-family:monospace; margin:12px 0; direction:ltr;
+    }
+    .graph {
+      text-align:center; margin:18px 0; padding:15px; background:#f5f7ff;
+      border-radius:10px; direction:ltr;
+    }
+    .code-container { margin:18px 0; }
+    .CodeMirror {
+      direction:ltr !important; font-family:'Fira Code',monospace; font-size:14px;
+      border-radius:8px; overflow:hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>كىۋانىت فىزىكىسى 1-باب – كىرىش</h1>
+  <p>
+    <strong>كىۋانىت فىزىكىسى</strong> — ماكرو دۇنيادىن ھېچقانداق ئوخشاشلىقى يوق بولغان،
+    <span style="background:#d1c4e9;padding:2px 6px;border-radius:4px;">مىكرو دۇنيا</span> (ئېلېكترون، فوتون، ئاتوم) نى تەسۋىرلەيدىغان فىزىكىنىڭ بىر سالاھىيىتى.
+    بۇ دۇنيادا جىسىم «بۇ يەردىمۇ، ئۇ يەردىمۇ» بولۇشى مۇمكىن، ياكى «ئۆلچىمەسلىك» قانۇنى بار.
+  </p>
+  <div class="en">Quantum Physics describes the behavior of particles at atomic and subatomic scales — where classical intuition fails, and probability rules.</div>
+</div>
+
+<div class="section">
+  <div class="title-ug">1. نېمە ئۈچۈن كىۋانىت فىزىكىسى كېرەك؟</div>
+  <div class="title-en">1. Why Quantum Physics?</div>
+  <p>
+    نىيوتىن فيزىكىسى (كۇلاسسىك فيزىكا) ماشىنا، سۇ، ھاۋا كۆرۈنۈشىنى تەسۋىرلىيەلەيدۇ،
+    لېكىن <strong>ئاتوم ئىچىدىكى ئېلېكترون</strong> نى تەسۋىرلىيەلمەيدۇ.
+    كىۋانىت فىزىكىسى — لېزېر، كومپيۇتېر، MRI، كىۋانىت كومپيۇتېر قاتارلىق زامانىۋى تېخنىكىنىڭ ئاساسى.
+  </p>
+  <p class="en">
+    Classical physics fails at atomic scales. Quantum physics enables modern tech: lasers, semiconnductors, MRI, and quantum computers.
+  </p>
+</div>
+
+<div class="section">
+  <div class="title-ug">2. ئاساسىي كونتىسېپتىلار</div>
+  <div class="title-en">2. Core Concepts</div>
+  <ul>
+    <li><strong>كىۋانىت</strong> (Quantum): ئېنېرگىيىنىڭ ئەڭ كىچىك بۆلەكچىسى. ئېنېرگىيە «داۋاملىق» ئەمەس، «بۆلەك-بۆلەك».</li>
+    <li><strong>ئىمكىدارىيەت</strong> (Probability): زەررىنىڭ قايدا بولۇشى «مۇقىم» ئەمەس، «ئىمكىدارىيەت» بىلەن بايان قىلىنىدۇ.</li>
+    <li><strong>ئۆلچەش تەسىرى</strong>: ئۆلچىمەكچى بولغاندا، زەررىنىڭ ھالىتى ئۆزگىرىدۇ.</li>
+  </ul>
+  <ul class="en">
+    <li><strong>Quantization</strong>: Energy comes in discrete packets (quanta).</li>
+    <li><strong>Probability Waves</strong>: Particles exist as probability distributions.</li>
+    <li><strong>Measurement Collapse</strong>: Observing a system changes its state.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="title-ug">3. سادە گىرافىك: كىلاسسىك vs كىۋانىت</div>
+  <div class="title-en">3. Simple Visualization</div>
+  <div class="graph">
+    <svg width="400" height="120" style="background:#fff;border-radius:8px;padding:10px;">
+      <!-- Classical -->
+      <text x="50" y="25" font-family="Amiri" font-size="16" fill="#1a237e">كىلاسسىك فيزىكا</text>
+      <circle cx="100" cy="60" r="10" fill="#4caf50" />
+      <text x="85" y="90" font-family="Amiri" font-size="14">ماشىنا</text>
+      <text x="80" y="110" font-family="Amiri" font-size="12" fill="#555">قەتئىي يەر</text>
+      
+      <!-- Quantum -->
+      <text x="250" y="25" font-family="Amiri" font-size="16" fill="#1a237e">كىۋانىت فيزىكىسى</text>
+      <circle cx="300" cy="60" r="8" fill="#f44336" opacity="0.3" />
+      <circle cx="310" cy="65" r="8" fill="#f44336" opacity="0.5" />
+      <circle cx="290" cy="55" r="8" fill="#f44336" opacity="0.4" />
+      <text x="285" y="90" font-family="Amiri" font-size="14">ئېلېكترون</text>
+      <text x="270" y="110" font-family="Amiri" font-size="12" fill="#555">ئىمكىدارىيەت</text>
+    </svg>
+  </div>
+</div>
+
+<div class="section">
+  <div class="title-ug">4. مىسال كود: كىۋانىت ھالەت سىمىلاتسىيىسى</div>
+  <div class="title-en">4. Code Simulation</div>
+  <div class="code-container">
+    <textarea id="c1" style="display:none;">
+# كىۋانىت زەررىنىڭ ھالىتى — ئىمكىدارىيەتلىك
+import random
+
+def quantum_particle():
+    # 60% ئىمكىدارىيەت بىلەن "يۇقىرى"، 40% "تۆۋەن"
+    return "يۇقىرى" if random.random() < 0.6 else "تۆۋەن"
+
+# ئۆلچىمەك (ھەر قېتىم نەتىجە ئوخشىمايدۇ!)
+print("ئۆلچەش نەتىجىسى:", quantum_particle())
+    </textarea>
+  </div>
+</div>
+
+<footer style="text-align:center; margin-top:40px; padding:20px; color:#666;">
+  <p>كىۋانىت فىزىكىسى 1-باب – كىرىش</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textareas = document.querySelectorAll('textarea[id^="c"]');
+  textareas.forEach(ta => {
+    CodeMirror.fromTextArea(ta, {
+      mode: "python", readOnly: true, lineNumbers: true,
+      theme: "default", direction: "ltr", viewportMargin: Infinity
+    });
+  });
+});
+</script>
+</body>
+</html>

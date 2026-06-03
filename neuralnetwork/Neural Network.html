@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نېرۋاتور 1-باب – ئاساسىي ئۇچۇرلار</title>
+
+  <!-- Amiri for Uyghur, Inter for English -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text-ug: #2d2d2d;
+      --text-en: #444;
+      --primary: #4a148c; /* deep purple for "neural" theme */
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      padding: 20px;
+      font-family: 'Amiri', serif;
+      color: var(--text-ug);
+      line-height: 1.7;
+      direction: rtl;
+    }
+
+    .bilingual-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-right: 4px solid var(--primary);
+    }
+
+    .section-title-ug {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .section-title-en {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 15px;
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 20px;
+      background: #f3e5f5;
+      border-radius: 12px;
+      border-right: 4px solid var(--primary);
+    }
+
+    .intro h1 {
+      color: var(--primary);
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+    }
+
+    .intro-en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: center;
+      color: var(--text-en);
+      margin-top: 10px;
+    }
+
+    ul, ol {
+      padding-right: 25px;
+      margin: 12px 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+      color: var(--text-en);
+      margin-top: 12px;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 3px solid #ccc;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .highlight {
+      background-color: #e1bee7;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f3e5f5;
+    }
+
+    .diagram {
+      text-align: center;
+      margin: 15px 0;
+      padding: 15px;
+      background: #f8f0ff;
+      border-radius: 8px;
+      direction: ltr;
+    }
+
+    .diagram-ug {
+      direction: rtl;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro">
+    <h1>نېرۋاتور 1-باب – ئاساسىي ئۇچۇرلار</h1>
+    <p>
+      <strong>نېرۋاتور</strong> (Neural Network) — <strong>ئىنسان نېرۋا تىزىمىنى سۈنئىي ماشىنا ئارقىلىق تەقلىد قىلىش</strong> ئۇسلۇبى.
+      بۇ ماشىنا ئۈگىنىش (Machine Learning) نىڭ ئەڭ قۇۋۋەتلىك، زامانىۋى تارماقى بولۇپ،
+      <span class="highlight">تېكىست، رەسىم، ئۈن، ۋىديو</span> كۆرۈنۈشىدەك مۇرەككەپ مەلۇماتلارنى تەھلىل قىلىش ئىقتىدارىغا ئىگە.
+    </p>
+    <div class="intro-en">
+      <strong>Neural Networks</strong> are computational models inspired by the <strong>human brain's nervous system</strong>.
+      They are the backbone of modern <strong>Machine Learning</strong> and <strong>Deep Learning</strong>,
+      capable of processing complex data like <strong>text, images, audio, and video</strong>.
+    </div>
+  </div>
+
+  <!-- ============ 1. نېرۋاتور نېمە؟ ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">1. نېرۋاتور نېمە؟</div>
+    <div class="section-title-en">1. What is a Neural Network?</div>
+    <p>
+      نېرۋاتور — <strong>نېرۋا سېللىرى</strong> (Neurons) دېگەن بىر قانچە ئۇچۇر بىرلىكلىرىدىن تۈزۈلگەن ماتېماتىك مودېل.
+      ھەر بىر سېل — كىرگۈزگۈچ مەلۇماتنى قوبۇل قىلىپ، ئۇنى چىقىرىشقا ئايلاندۇرىدۇ.
+      بۇ سېللار <strong>قەۋەتلەر</strong> (Layers) شەكلىدە تىزىلغان بولۇپ، مۇرەككەپ مۇناسىۋەتلەرنى ئۆگىنىدۇ.
+    </p>
+    <p class="en">
+      A neural network is a mathematical model composed of interconnected <strong>artificial neurons</strong>.
+      Each neuron receives input, processes it, and produces output.
+      Neurons are organized into <strong>layers</strong>, enabling the network to learn complex patterns.
+    </p>
+
+    <div class="diagram diagram-ug">
+      <strong>نېرۋاتورنىڭ سادە تۈزۈلمىسى:</strong><br>
+      كىرگۈزگۈچ قەۋىتى → يوشۇرۇن قەۋىتى(lar) → چىقىرىش قەۋىتى
+    </div>
+    <div class="diagram en">
+      <strong>Simple Neural Network Structure:</strong><br>
+      Input Layer → Hidden Layer(s) → Output Layer
+    </div>
+  </div>
+
+  <!-- ============ 2. نېرۋاتورنىڭ تارىخى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">2. نېرۋاتورنىڭ تارىخى</div>
+    <div class="section-title-en">2. Historical Background</div>
+    <ul>
+      <li><strong>1943-يىلى</strong>: Warren McCulloch ۋە Walter Pitts «نېرۋا سېلىنىڭ ماتېماتىك مودېلى» نى ئىلىپ چىقتى.</li>
+      <li><strong>1957-يىلى</strong>: Frank Rosenblatt «Perceptron» نى تەقدىم قىلدى — بۇ بىر قەۋەتلىك نېرۋاتور.</li>
+      <li><strong>1986-يىلى</strong>: Backpropagation (خەتەرگە قايتۇرۇش) ئۇسلۇبى قايتا تېرىلىپ، Multi-layer Networks يېڭىدىن ئۆسۈش باشلىدى.</li>
+      <li><strong>2010-يىللاردىن باشلاپ</strong>: Deep Learning، GPU لار، چوڭ مەلۇمات بىلەن بىرلەشتۈرۈلۈپ، نېرۋاتور زامانىۋى تەتقىقاتنىڭ تۆۋەندىكى تىزى بولۇپ قالدى.</li>
+    </ul>
+    <ul class="en">
+      <li><strong>1943</strong>: McCulloch & Pitts proposed the first mathematical model of a neuron.</li>
+      <li><strong>1957</strong>: Rosenblatt introduced the <strong>Perceptron</strong>.</li>
+      <li><strong>1986</strong>: Backpropagation revived interest in multi-layer networks.</li>
+      <li><strong>2010s–present</strong>: With GPUs and big data, <strong>Deep Learning</strong> became the engine of AI.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 3. نېرۋاتورنىڭ تۈزۈلمىسى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">3. نېرۋاتورنىڭ تۈزۈلمىسى</div>
+    <div class="section-title-en">3. Structure of a Neural Network</div>
+
+    <h3>ئاساسىي قەۋەتلەر:</h3>
+    <ul>
+      <li><strong>كىرگۈزگۈچ قەۋىتى</strong> (Input Layer): مەلۇماتنى قوبۇل قىلىدۇ (مەسىلەن: رەسىم پىكسېللىرى).</li>
+      <li><strong>يوشۇرۇن قەۋىتى</strong> (Hidden Layer): مۇرەككەپ ئالاھىدىلىكلەرنى ئۆگىنىدۇ.</li>
+      <li><strong>چىقىرىش قەۋىتى</strong> (Output Layer): نەتىجىنى چىقىرىدۇ (مەسىلەن: "مۇشۇك" ياكى "ئىت").</li>
+    </ul>
+
+    <h3 class="en">Core Layers:</h3>
+    <ul class="en">
+      <li><strong>Input Layer</strong>: Receives raw data (e.g., image pixels).</li>
+      <li><strong>Hidden Layer(s)</strong>: Learns complex features through weighted connections.</li>
+      <li><strong>Output Layer</strong>: Produces final prediction (e.g., "cat" or "dog").</li>
+    </ul>
+
+    <div class="diagram">
+      <pre style="font-family: monospace; font-size: 14px;">
+        [x1]     [h1]     [o1]
+        [x2] --> [h2] --> [o2]
+        [x3]     [h3]     [o3]
+      </pre>
+      <p class="en" style="margin-top: 5px;">Example: 3-input → 3-hidden → 3-output</p>
+    </div>
+  </div>
+
+  <!-- ============ 4. نېرۋاتور قانداق ئىشلەيدۇ؟ ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">4. نېرۋاتور قانداق ئىشلەيدۇ؟</div>
+    <div class="section-title-en">4. How Does It Work?</div>
+    <ol>
+      <li><strong>كىرگۈزگۈچ مەلۇمات</strong> ھەر بىر نېرۋا سېلىغا يېتىپ كېلىدۇ.</li>
+      <li>ھەر بىر سېل <strong>ۋازىن</strong> (Weight) ۋە <strong>بىئاس</strong> (Bias) بىلەن مەلۇماتنى كۆپەيتىپ، قوشۇپ چىقىرىش ئالىدۇ.</li>
+      <li>چىقىرىش <strong>ئاكتىۋاتسىيە فۇنكسىيىسى</strong> (Activation Function) دىن ئۆتىدۇ (مەسىلەن: ReLU, Sigmoid).</li>
+      <li>بۇ جەريان ھەر بىر قەۋەتتە تەكرارلىنىدۇ.</li>
+      <li><strong>ئۈگىنىش</strong> جەريانىدا، مودېل <strong>خاتالىق</strong> (Loss) نى كىچىكلىتىش ئۈچۈن ۋازىن ۋە بىئاسنى <strong>Backpropagation</strong> ئارقىلىق يېڭىلايدۇ.</li>
+    </ol>
+    <ol class="en">
+      <li>Input data flows to the first layer of neurons.</li>
+      <li>Each neuron computes: <code>output = activation(weight * input + bias)</code>.</li>
+      <li>This passes through multiple layers.</li>
+      <li>During training, the model uses <strong>backpropagation</strong> to adjust weights and minimize <strong>loss</strong>.</li>
+    </ol>
+  </div>
+
+  <!-- ============ 5. ماشىنا ئۈگىنىش، Deep Learning ۋە نېرۋاتور ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">5. ماشىنا ئۈگىنىش، Deep Learning ۋە نېرۋاتور</div>
+    <div class="section-title-en">5. Relationship: ML, DL, and Neural Networks</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>تۈر</th>
+          <th>تەسۋىر</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ماشىنا ئۈگىنىش (ML)</td>
+          <td>ماشىنىنىڭ مەلۇماتتىن ئۆزى ئۈگىنىش ئۇسۇلى</td>
+          <td>Machine Learning (ML)</td>
+          <td>Algorithms that learn from data without explicit programming.</td>
+        </tr>
+        <tr>
+          <td>نېرۋاتور (ANN)</td>
+          <td>ML نىڭ بىر تارماقى، نېرۋا سېلىغا ئوخشاش</td>
+          <td>Artificial Neural Network (ANN)</td>
+          <td>A subset of ML inspired by the brain.</td>
+        </tr>
+        <tr>
+          <td>Deep Learning (DL)</td>
+          <td>2 ياكى ئۇندىن ئارتۇق يوشۇرۇن قەۋەتلىك نېرۋاتور</td>
+          <td>Deep Learning (DL)</td>
+          <td>Neural networks with **many hidden layers**.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============ 6. ئىشلىتىش دائىرىسى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">6. ئىشلىتىش دائىرىسى</div>
+    <div class="section-title-en">6. Applications</div>
+    <ul>
+      <li>رەسىم تانىش (مۇشۇك/ئىت، چىقىرىش خەتتىكى خەت تانىش).</li>
+      <li>ئاۋاز تانىش (Siri، Google Assistant).</li>
+      <li>تېكىست تەھلىلى (ئۇيغۇرچە ماشىنا تەرجىمىسى).</li>
+      <li>تىبابەت (رەڭگەك، MRI رەسىمىدىن كىسىلنى بايان قىلىش).</li>
+      <li>ئۆي سەۋەتكۈچ مەھسۇلاتلىرى (مەسىلەن: Tesla نىڭ ئاپتوماتىك قوزغىلىشى).</li>
+    </ul>
+    <ul class="en">
+      <li>Image recognition (cat/dog, handwritten digit recognition).</li>
+      <li>Speech recognition (Siri, Alexa).</li>
+      <li>Text analysis (Uyghur machine translation).</li>
+      <li>Healthcare (tumor detection from MRI scans).</li>
+      <li>Autonomous vehicles (Tesla Autopilot).</li>
+    </ul>
+  </div>
+
+  <!-- ============ 7. ئالاھىدىلىكى ۋە كەمچىلىكى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">7. ئالاھىدىلىكى ۋە كەمچىلىكى</div>
+    <div class="section-title-en">7. Advantages and Disadvantages</div>
+
+    <h3>ئالاھىدىلىكى:</h3>
+    <ul>
+      <li>مۇرەككەپ، غىيرمۇرەككەپ مۇناسىۋەتلەرنى ئۆگىنىدۇ.</li>
+      <li>تېكىست، رەسىم، ئۈن قاتارلىق ھەممە مەلۇمات تۈرى بىلەن ئىشلەيدۇ.</li>
+      <li>زامانىۋى AI نىڭ ئاساسى.</li>
+    </ul>
+
+    <h3 class="en">Advantages:</h3>
+    <ul class="en">
+      <li>Learns complex, non-linear patterns.</li>
+      <li>Works with all data types (text, image, audio).</li>
+      <li>Foundation of modern AI.</li>
+    </ul>
+
+    <h3>كەمچىلىكى:</h3>
+    <ul>
+      <li>چوڭ مەلۇمات ۋە كومپيۇتېر قۇۋۋىتى تەلەپ قىلىدۇ.</li>
+      <li>«قارا كۈتكۈچ» شەكلىدە — نەمە ئۈچۈن شۇنداق باھالىغانىنى تۈسۈنىش قىيىن.</li>
+      <li>ئاشۇرۇپ ئۈگىنىش (Overfitting) خەۋىپى بار.</li>
+    </ul>
+
+    <h3 class="en">Disadvantages:</h3>
+    <ul class="en">
+      <li>Requires large datasets and computational power.</li>
+      <li>Acts as a <strong>"black box"</strong> — hard to interpret decisions.</li>
+      <li>Prone to <strong>overfitting</strong> without regularization.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>نېرۋاتور 1-باب – ئاساسىي ئۇچۇرلار</p>
+    <p>دەرسلىك: ئۇيغۇرچە | English • تەييارلاندى: 2025-يىلى 4-دېكابىر</p>
+    <p>كۆچۈرۈش، ئىشلىتىش ۋە تارقىتىش ھەققى ھەممىگە بار</p>
+  </footer>
+</body>
+</html>

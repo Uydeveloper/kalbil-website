@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ئارلىق باھالاش (Interval Estimation) </title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #2980b9;
+            --bg-light: #f9f9f9;
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 50px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+        }
+        .tab-btn {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        .tab-btn:hover {
+            background: var(--light);
+        }
+        .tab-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        .bilingual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+        .uyghur, .english {
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--bg-light);
+            font-size: 1.05rem;
+        }
+        .uyghur {
+            border-right: 4px solid var(--accent);
+            direction: rtl;
+            text-align: right;
+            font-family: "Microsoft Uighur", "Segoe UI", sans-serif;
+        }
+        .english {
+            border-left: 4px solid var(--info);
+            direction: ltr;
+            text-align: left;
+            font-family: "Georgia", "Times New Roman", serif;
+        }
+        .formula {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            overflow-x: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+        }
+        .example {
+            background: linear-gradient(to right, #fffde7, #e8f4f8);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px dashed var(--warning);
+        }
+        .term {
+            font-weight: bold;
+            color: var(--success);
+            padding: 3px 5px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 5px;
+            margin: 0 2px;
+        }
+        .calculator {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+        }
+        .input-group {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .input-group label {
+            width: 250px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .input-group input, .input-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 150px;
+            font-size: 1rem;
+        }
+        .btn {
+            padding: 12px 25px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: var(--transition);
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--success);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            font-size: 1.2rem;
+        }
+        .diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .diagram img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .card h3 i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1rem;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        @media (max-width: 768px) {
+            .bilingual {
+                grid-template-columns: 1fr;
+            }
+            .nav-tabs {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            .tab-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .input-group label {
+                width: 100%;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+        .confidence-interval {
+            background: linear-gradient(to right, #e8f4f8, #f0f7ff);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            border-left: 5px solid var(--info);
+        }
+        .step {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--secondary);
+        }
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .step-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* ئۇيغۇرچە خەتكە ماس كېلىدىغان فونت تەڭشىكى */
+        @font-face {
+            font-family: 'UKIJ Tuz Tom';
+            src: local('UKIJ Tuz Tom'), local('UKIJ Tuz'), url('https://cdn.jsdelivr.net/gh/UyghurKitabxana/fonts/UKIJTuzTom.ttf') format('truetype');
+        }
+
+        .uyghur {
+            font-family: 'UKIJ Tuz Tom', 'Microsoft Uighur', 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ئارلىق باھالاش | Interval Estimation</h1>
+        <p class="subtitle">توپلام پارامېتىرىنى ئىشەنچلىك ئارلىقى بىلەن باھالاش ئۇسۇلى | A method for estimating population parameters with confidence intervals</p>
+    </header>
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab(0)"><i class="fas fa-home"></i> كىرىش</button>
+            <button class="tab-btn" onclick="showTab(1)"><i class="fas fa-calculator"></i> ئاساسىي چۈشەنچە</button>
+            <button class="tab-btn" onclick="showTab(2)"><i class="fas fa-chart-bar"></i> توپلام تارقىلىشى بىلىنسە</button>
+            <button class="tab-btn" onclick="showTab(3)"><i class="fas fa-microscope"></i> ئەمەلىي مىسال</button>
+            <button class="tab-btn" onclick="showTab(4)"><i class="fas fa-calculator"></i> ھېسابلاش قورالى</button>
+            <button class="tab-btn" onclick="showTab(5)"><i class="fas fa-project-diagram"></i> ئىشەنچلىك ئارلىقىنىڭ چۈشەندۈرۈلۈشى</button>
+        </div>
+
+        <!-- كىرىش قىسمى -->
+        <div class="tab-content active">
+            <h2 class="section-title"><i class="fas fa-home"></i> ئارلىق باھالاش نېمە؟</h2>
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p><span class="term">ئارلىق باھالاش</span> بولسا، توپلام  نورمال تارقىلىشقا ئۇيغۇن كېلىدىغانلىقىنىڭ ئالدى بىلەن بەلگىلەنگەن ھالىتىدە، نۇمونىدىن ئېلىنغان قىممەتلەرنى ئىشلىتىپ توپلام ئوتتۇرا قىممەت قاتارلىق توپلام پارامېتىرلارنى بىر ئارلىق ئىچىدە باھالاش ئۇسۇلىدۇر. بۇ ئارلىققا <span class="term">ئىشەنچلىك ئارلىقى</span> دېيىلىدۇ، ماقالىلەردە «CI» دەپ قىسقارتىلىدۇ.</p>
+                    <p>ئارلىق باھالاشتا، توپلام تارقىلىشى بىلىنسە ياكى بىلىنمەسلىكىگە قاراپ، ھېسابلاش ئۇسۇلى ئوخشىمايدۇ:</p>
+                    <ul>
+                        <li><span class="term">توپلام تارقىلىشى بىلىنسە</span>: توپلام تارقىلىشىنىڭ قىممىتىنى ئىشلىتىپ، نورمال تارقىلىشنى قوللىنىپ ئىشەنچلىك ئارلىقىنى ھېسابلايمىز.</li>
+                        <li><span class="term">توپلام تارقىلىشى بىلىنمەس</span>: ئىناۋەتسىز تارقىلىش قىممىتىنى ئىشلىتىپ، t-تارقىلىشنى قوللىنىپ ئىشەنچلىك ئارلىقىنى ھېسابلايمىز.</li>
+                    </ul>
+                </div>
+                <div class="english">
+                    <p><span class="term">Interval estimation</span> is a method for estimating population parameters such as the population mean using values obtained from a sample, assuming that the population follows a normal distribution. This interval is called a <span class="term">confidence interval</span>, and is abbreviated as "CI" in papers and other publications.</p>
+                    <p>In interval estimation, the calculation method differs depending on whether the population variance is known or unknown:</p>
+                    <ul>
+                        <li><span class="term">Known population variance</span>: Use the population variance value and calculate the confidence interval using the standard normal distribution</li>
+                        <li><span class="term">Unknown population variance</span>: Use the unbiased variance value and calculate the confidence interval using the t-distribution</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="diagram">
+                <svg width="100%" height="250" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10%" y="30" width="80%" height="180" fill="#f8f9fa" stroke="#3498db" stroke-width="2" rx="10" />
+                    <text x="50%" y="60" text-anchor="middle" fill="#2c3e50" font-size="18" font-weight="bold">ئارلىق باھالاش جەريانى | Interval Estimation Process</text>
+                    <rect x="15%" y="100" width="20%" height="40" fill="#e74c3c" rx="5" />
+                    <text x="25%" y="122" text-anchor="middle" fill="white">توپلام </text>
+                    <text x="25%" y="142" text-anchor="middle" fill="white" font-size="12">Population</text>
+                    <rect x="45%" y="100" width="20%" height="40" fill="#3498db" rx="5" />
+                    <text x="55%" y="122" text-anchor="middle" fill="white">نەمونە تاللاش</text>
+                    <text x="55%" y="142" text-anchor="middle" fill="white" font-size="12">Sampling</text>
+                    <rect x="75%" y="100" width="20%" height="40" fill="#2ecc71" rx="5" />
+                    <text x="85%" y="122" text-anchor="middle" fill="white">باھالاش</text>
+                    <text x="85%" y="142" text-anchor="middle" fill="white" font-size="12">Estimation</text>
+                    <path d="M25% 140 L35% 140 L35% 180 L45% 180" stroke="#2c3e50" stroke-width="2" fill="none" />
+                    <path d="M55% 140 L65% 140 L65% 180 L75% 180" stroke="#2c3e50" stroke-width="2" fill="none" />
+                    <rect x="35%" y="180" width="40%" height="40" fill="#9b59b6" rx="5" />
+                    <text x="55%" y="202" text-anchor="middle" fill="white">ئىشەنچلىك ئارلىقى</text>
+                    <text x="55%" y="222" text-anchor="middle" fill="white" font-size="12">Confidence Interval</text>
+                </svg>
+            </div>
+            <div class="summary-cards">
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> ئىشەنچلىك ئارلىقىنىڭ مەنىسى</h3>
+                    <p>95% ئىشەنچلىك ئارلىقى دېگەندە، «ئوخشاش نۇمونە تاللاش ۋە ئارلىق باھالاشنى 100 قېتىم قىلساق، 95 قېتىم بۇ ئارلىق ئىچىدە توپلام ئوتتۇرا قىممەت بولىدۇ» دېگەن مەنى.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> ئېھتىيات</h3>
+                    <p>ئانا ئوتتۇرا قىممەت بىلىنمىسە، توپلام تارقىلىشىلا بىلىنىدىغان ھالەت ھەقىقەتتە دېگەندە يوق. ئادەتتە t-تارقىلىشنى قوللىنىدىغان ئۇسۇل ئىشلىتىلىدۇ.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> قوللىنىش</h3>
+                    <p>ئارلىق باھالاش، تىببىي تەتقىقات، بازار تەكشۈرۈشى، سىپات باشقۇرۇش قاتارلىق تۈرلۈك ساھەلەردە كەڭ قوللىنىلىدۇ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ئاساسىي تۈشۈنچە قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-calculator"></i> ئارلىق باھالاشنىڭ ئاساسىي تۈشۈنچىلىرى</h2>
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>ئارلىق باھالاشنى چۈشىنىش ئۈچۈن، تۆۋەندىكى ئاساسىي تۈشۈنچىلەرنى چۈشىنىش مۇھىم:</p>
+                    <ul>
+                        <li><span class="term">نۇقتا باھالاش</span>: نۇمونە ئىستاتىستىكا مىقدارىنى ئىشلىتىپ ئانا پارامېتىرنى بىر خىل قىممەت بىلەن باھالاش.</li>
+                        <li><span class="term">ئارلىق باھالاش</span>: توپلام پارامېتىر ئىچىدىكى بىر ئارلىقنى باھالاش.</li>
+                        <li><span class="term">ئىشەنچلىك دەرىجىسى</span>: باھالانغان ئارلىق ئىچىدە توپلام پارامېتىرنىڭ بولۇش ئېھتىماللىقى (95%، 99% قاتارلىقلار).</li>
+                        <li><span class="term">ئىشەنچلىك ئارلىقى</span>: ئىشەنچلىك دەرىجىسىگە ماس كېلىدىغان ئارلىق.</li>
+                    </ul>
+                </div>
+                <div class="english">
+                    <p>To understand interval estimation, it is important to understand the following basic concepts:</p>
+                    <ul>
+                        <li><span class="term">Point estimation</span>: Estimating a population parameter with a single value using sample statistics</li>
+                        <li><span class="term">Interval estimation</span>: Estimating an interval that is expected to contain the population parameter</li>
+                        <li><span class="term">Confidence level</span>: The probability that the estimated interval contains the population parameter (95%, 99%, etc.)</li>
+                        <li><span class="term">Confidence interval</span>: The interval corresponding to the confidence level</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula">
+                \[ \text{ئىشەنچلىك ئارلىقى} = \text{نۇقتا باھالاش قىممىتى} \pm \text{خاتالىق چېگرىسى} \]
+                \[ \text{Confidence Interval} = \text{Point Estimate} \pm \text{Margin of Error} \]
+            </div>
+            <div class="diagram">
+                <svg width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Normal distribution curve -->
+                    <path d="M50,250 Q200,50 350,250" stroke="#3498db" stroke-width="3" fill="none" />
+                    <!-- Mean line -->
+                    <line x1="200" y1="250" x2="200" y2="50" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,5" />
+                    <text x="210" y="40" fill="#e74c3c">توپلام ئوتتۇرا قىممەت</text>
+                    <text x="210" y="60" fill="#e74c3c">Population Mean</text>
+                    <!-- Confidence interval -->
+                    <line x1="150" y1="220" x2="150" y2="150" stroke="#2ecc71" stroke-width="2" />
+                    <line x1="250" y1="220" x2="250" y2="150" stroke="#2ecc71" stroke-width="2" />
+                    <line x1="150" y1="220" x2="250" y2="220" stroke="#2ecc71" stroke-width="4" />
+                    <text x="120" y="240" fill="#2ecc71">ئىشەنچلىك ئارلىقى ئاستىن</text>
+                    <text x="120" y="260" fill="#2ecc71">CI Lower Limit</text>
+                    <text x="260" y="240" fill="#2ecc71">ئىشەنچلىك ئارلىقى ئۈستىن</text>
+                    <text x="260" y="260" fill="#2ecc71">CI Upper Limit</text>
+                    <!-- Shaded area for confidence level -->
+                    <path d="M150,220 Q200,50 250,220 L250,250 L150,250 Z" fill="rgba(46, 204, 113, 0.2)" />
+                    <text x="200" y="280" fill="#2c3e50">95% ئىشەنچلىك ئارلىقى | 95% Confidence Interval</text>
+                </svg>
+            </div>
+            <div class="confidence-interval">
+                <h3>ئىشەنچلىك ئارلىقى فورمىلىسى (ئانا تارقىلىشى بىلىنسە)</h3>
+                <div class="formula">
+                    \[ \bar{x} - z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{x} + z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \]
+                </div>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>بۇ يەردە:</p>
+                        <ul>
+                            <li>\(\bar{x}\): نۇمونە ئوتتۇرا قىممىتى</li>
+                            <li>\(z_{\alpha/2}\): نورمال تارقىلىشنىڭ ئۈستىدىكى \(\alpha/2\) نۇقتىسى</li>
+                            <li>\(\sigma\): ئانا قاتتىقلىق</li>
+                            <li>\(n\): نۇمونە چوڭلۇقى</li>
+                            <li>\(\mu\): توپلام ئوتتۇرا قىممەت</li>
+                        </ul>
+                    </div>
+                    <div class="english">
+                        <p>Where:</p>
+                        <ul>
+                            <li>\(\bar{x}\): Sample mean</li>
+                            <li>\(z_{\alpha/2}\): Upper \(\alpha/2\) point of the standard normal distribution</li>
+                            <li>\(\sigma\): Population standard deviation</li>
+                            <li>\(n\): Sample size</li>
+                            <li>\(\mu\): Population mean</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- توپلام تارقىلىشى بىلىنسە قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-chart-bar"></i> توپلام تارقىلىشى بىلىنسە ئارلىق باھالاش</h2>
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>ئانا تارقىلىشى بىلىنسە، توپلام ئوتتۇرا قىممەتنىڭ ئىشەنچلىك ئارلىقى تۆۋەندىكى باسقۇچ بويىچە ھېسابلىنىدۇ:</p>
+                </div>
+                <div class="english">
+                    <p>When the population variance is known, the confidence interval for the population mean is calculated as follows:</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">1</span>
+                    نەمونە ئوتتۇرا قىممىتىنى ھېسابلاش
+                </div>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>چىقىرىلغان نەمونىنىڭ ئوتتۇرا قىممىتىنى ھېسابلايمىز:</p>
+                        <div class="formula">
+                            \[ \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n} \]
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>Calculate the mean of the extracted sample:</p>
+                        <div class="formula">
+                            \[ \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n} \]
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">2</span>
+                    نەمونە ئوتتۇرا قىممىتىنى نورماللاشتۇرۇش
+                </div>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>مەركەزىي چېگرا تېئورىمىسى بويىچە، نۇمونە ئوتتۇرا قىممىتىنىڭ تارقىلىشى نورمال تارقىلىشقا ئۇيغۇن كېلىدۇ. نەمونە ئوتتۇرا قىممىتىنى نورماللاشتۇرىمىز:</p>
+                        <div class="formula">
+                            \[ Z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} \]
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>By the central limit theorem, the distribution of sample means follows a normal distribution. Standardize the sample mean:</p>
+                        <div class="formula">
+                            \[ Z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} \]
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">3</span>
+                    ئىشەنچلىك دەرىجىسىگە ماس كېلىدىغان z-قىممىتىنى تاپىش
+                </div>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>نورمال تارقىلىش جەدۋىلىدىن، ئىشەنچلىك دەرىجىسىگە ماس كېلىدىغان z-قىممىتىنى تاپىمىز:</p>
+                        <ul>
+                            <li>90% ئىشەنچلىك ئارلىقى: \(z_{\alpha/2} = 1.645\)</li>
+                            <li>95% ئىشەنچلىك ئارلىقى: \(z_{\alpha/2} = 1.960\)</li>
+                            <li>99% ئىشەنچلىك ئارلىقى: \(z_{\alpha/2} = 2.576\)</li>
+                        </ul>
+                    </div>
+                    <div class="english">
+                        <p>From the standard normal distribution table, find the z-value corresponding to the confidence level:</p>
+                        <ul>
+                            <li>90% confidence interval: \(z_{\alpha/2} = 1.645\)</li>
+                            <li>95% confidence interval: \(z_{\alpha/2} = 1.960\)</li>
+                            <li>99% confidence interval: \(z_{\alpha/2} = 2.576\)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">4</span>
+                    ئىشەنچلىك ئارلىقىنى ھېسابلاش
+                </div>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>تۆۋەندىكى فورمىلا ئارقىلىق ئىشەنچلىك ئارلىقىنى ھېسابلايمىز:</p>
+                        <div class="formula">
+                            \[ \bar{x} - z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{x} + z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \]
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>Calculate the confidence interval using the following formula:</p>
+                        <div class="formula">
+                            \[ \bar{x} - z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{x} + z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \]
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="diagram">
+                <svg width="100%" height="350" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Normal distribution curve -->
+                    <path d="M50,300 Q200,50 350,300" stroke="#3498db" stroke-width="3" fill="none" />
+                    <!-- Mean line -->
+                    <line x1="200" y1="300" x2="200" y2="50" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,5" />
+                    <text x="210" y="40" fill="#e74c3c">μ</text>
+                    <!-- Confidence intervals -->
+                    <line x1="130" y1="270" x2="130" y2="180" stroke="#2ecc71" stroke-width="2" />
+                    <line x1="270" y1="270" x2="270" y2="180" stroke="#2ecc71" stroke-width="2" />
+                    <line x1="130" y1="270" x2="270" y2="270" stroke="#2ecc71" stroke-width="4" />
+                    <text x="200" y="290" fill="#2ecc71">95% ئىشەنچلىك ئارلىقى</text>
+                    <line x1="110" y1="250" x2="110" y2="150" stroke="#f39c12" stroke-width="2" />
+                    <line x1="290" y1="250" x2="290" y2="150" stroke="#f39c12" stroke-width="2" />
+                    <line x1="110" y1="250" x2="290" y2="250" stroke="#f39c12" stroke-width="4" />
+                    <text x="200" y="240" fill="#f39c12">99% ئىشەنچلىك ئارلىقى</text>
+                    <line x1="150" y1="230" x2="150" y2="120" stroke="#9b59b6" stroke-width="2" />
+                    <line x1="250" y1="230" x2="250" y2="120" stroke="#9b59b6" stroke-width="2" />
+                    <line x1="150" y1="230" x2="250" y2="230" stroke="#9b59b6" stroke-width="4" />
+                    <text x="200" y="220" fill="#9b59b6">90% ئىشەنچلىك ئارلىقى</text>
+                    <text x="200" y="330" fill="#2c3e50" text-anchor="middle">ئىشەنچلىك دەرىجىسى بىلەن ئارلىق كەڭلىكىنىڭ مۇناسىۋىتى</text>
+                    <text x="200" y="350" fill="#2c3e50" text-anchor="middle">Relationship between Confidence Level and Interval Width</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- ئەمەلىي مىسال قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-microscope"></i> ئەمەلىي مىسال: فلم ئېكرانلىرى</h2>
+            <div class="example">
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p><span class="term">مىسال</span>: 2015-يىل 12-ئاينىڭ ئاخىرىدىكى ھەر بىر ۋىلايەت ئىچىدىكى فلم ئېكرانلىرىنىڭ سانىنىڭ ئارلىق باھالىشىنى ئېلىپ بارىمىز. 47 ۋىلايەتنىڭ ھەممىسىنىڭ مەلۇماتىنى تەكشۈرۈش قىيىن بولغاچقا، تەۋەككۈللىك 10 ۋىلايەتنىڭ مەلۇماتىنى چىقىرىۋېتىپ ئالدىق. توپلام تارقىلىشى σ²=5560 بولۇپ بىلىنىدۇ، ئېكران سانىنىڭ تارقىلىشى نورمال تارقىلىشقا ئۇيغۇن كېلىدۇ دەپ قارايمىز.</p>
+                    </div>
+                    <div class="english">
+                        <p><span class="term">Example</span>: We will perform interval estimation of the total number of movie theater screens in each prefecture as of the end of December 2015. Since it is difficult to investigate data for all 47 prefectures, we randomly extracted data for 10 prefectures. The population variance is known to be σ²=5560, and the distribution of the number of screens is assumed to follow a normal distribution.</p>
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                        <th>No.</th>
+                        <th>ۋىلايەت</th>
+                        <th>ئېكران سانى</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>ھيوگو</td>
+                        <td>126</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>ئوساكا</td>
+                        <td>224</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>نارا</td>
+                        <td>34</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>ئىۋاتې</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>چىبا</td>
+                        <td>199</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>ئىباراكى</td>
+                        <td>89</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>فوكوكا</td>
+                        <td>178</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>يانچى</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>شىگا</td>
+                        <td>38</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>توتتورى</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">ئوتتۇرا</td>
+                        <td>93.8</td>
+                    </tr>
+                </table>
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">1</span>
+                        نەمونە ئوتتۇرا قىممىتىنى ھېسابلاش
+                    </div>
+                    <div class="bilingual">
+                        <div class="uyghur">
+                            <p>نەمونە ئوتتۇرا قىممىتى تۆۋەندىكىدەك ھېسابلىنىدۇ:</p>
+                            <div class="formula">
+                                \[ \bar{x} = \frac{126 + 224 + 34 + 25 + 199 + 89 + 178 + 14 + 38 + 11}{10} = \frac{938}{10} = 93.8 \]
+                            </div>
+                        </div>
+                        <div class="english">
+                            <p>The sample mean is calculated as follows:</p>
+                            <div class="formula">
+                                \[ \bar{x} = \frac{126 + 224 + 34 + 25 + 199 + 89 + 178 + 14 + 38 + 11}{10} = \frac{938}{10} = 93.8 \]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">2</span>
+                        توپلام قاتتىقلىقنى ھېسابلاش
+                    </div>
+                    <div class="bilingual">
+                        <div class="uyghur">
+                            <p>توپلام تارقىلىشى σ²=5560 بولغاچقا، توپلام قاتتىقلىق:</p>
+                            <div class="formula">
+                                \[ \sigma = \sqrt{5560} \approx 74.57 \]
+                            </div>
+                        </div>
+                        <div class="english">
+                            <p>Since the population variance is σ²=5560, the population standard deviation is:</p>
+                            <div class="formula">
+                                \[ \sigma = \sqrt{5560} \approx 74.57 \]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">3</span>
+                        95% ئىشەنچلىك ئارلىقىنى ھېسابلاش
+                    </div>
+                    <div class="bilingual">
+                        <div class="uyghur">
+                            <p>95% ئىشەنچلىك ئارلىقى ئۈچۈن، z₀.₀₂₅=1.96:</p>
+                            <div class="formula">
+                                \[ \bar{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}} = 93.8 \pm 1.96 \times \frac{74.57}{\sqrt{10}} \]
+                                \[ = 93.8 \pm 1.96 \times \frac{74.57}{3.162} = 93.8 \pm 1.96 \times 23.58 \]
+                                \[ = 93.8 \pm 46.22 \]
+                            </div>
+                            <p>شۇڭا، 95% ئىشەنچلىك ئارلىقى:</p>
+                            <div class="formula">
+                                \[ 47.58 \leq \mu \leq 140.02 \]
+                            </div>
+                        </div>
+                        <div class="english">
+                            <p>For a 95% confidence interval, z₀.₀₂₅=1.96:</p>
+                            <div class="formula">
+                                \[ \bar{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}} = 93.8 \pm 1.96 \times \frac{74.57}{\sqrt{10}} \]
+                                \[ = 93.8 \pm 1.96 \times \frac{74.57}{3.162} = 93.8 \pm 1.96 \times 23.58 \]
+                                \[ = 93.8 \pm 46.22 \]
+                            </div>
+                            <p>Therefore, the 95% confidence interval is:</p>
+                            <div class="formula">
+                                \[ 47.58 \leq \mu \leq 140.02 \]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">
+                        <span class="step-number">4</span>
+                        خىلماخىل ئىشەنچلىك دەرىجىسى بويىچە سېلىشتۇرۇش
+                    </div>
+                    <table>
+                        <tr>
+                            <th>ئىشەنچلىك دەرىجىسى</th>
+                            <th>ئىشەنچلىك ئارلىقى</th>
+                            <th>ئارلىق كەڭلىكى</th>
+                        </tr>
+                        <tr>
+                            <td>90%</td>
+                            <td>55.1 - 132.5</td>
+                            <td>77.4</td>
+                        </tr>
+                        <tr>
+                            <td>95%</td>
+                            <td>47.6 - 140.0</td>
+                            <td>92.4</td>
+                        </tr>
+                        <tr>
+                            <td>99%</td>
+                            <td>33.0 - 154.6</td>
+                            <td>121.6</td>
+                        </tr>
+                    </table>
+                    <div class="bilingual">
+                        <div class="uyghur">
+                            <p>ئىشەنچلىك دەرىجىسى يۇقىرى بولغان سايرىق، ئىشەنچلىك ئارلىقىنىڭ كەڭلىكىمۇ كەڭ بولىدىغانلىقىنى كۆرۈۋېلىمىز.</p>
+                        </div>
+                        <div class="english">
+                            <p>It can be seen that the higher the confidence level, the wider the confidence interval.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ھېسابلاش قورالى قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-calculator"></i> ئىشەنچلىك ئارلىقى ھېسابلاش قورالى</h2>
+            <div class="calculator">
+                <h3>توپلام ئوتتۇرا قىممەتنىڭ ئىشەنچلىك ئارلىقىنى ھېسابلاش (ئانا تارقىلىشى بىلىنسە)</h3>
+                <div class="input-group">
+                    <label for="sampleMean">نەمونە ئوتتۇرا قىممىتى (\(\bar{x}\)):</label>
+                    <input type="number" id="sampleMean" step="0.001" value="93.8">
+                </div>
+                <div class="input-group">
+                    <label for="popVariance">توپلام تارقىلىشى (\(\sigma^2\)):</label>
+                    <input type="number" id="popVariance" step="0.001" value="5560">
+                </div>
+                <div class="input-group">
+                    <label for="sampleSize">نەمونە چوڭلۇقى (n):</label>
+                    <input type="number" id="sampleSize" step="1" value="10">
+                </div>
+                <div class="input-group">
+                    <label for="confidenceLevel">ئىشەنچلىك دەرىجىسى:</label>
+                    <select id="confidenceLevel">
+                        <option value="0.90">90%</option>
+                        <option value="0.95" selected>95%</option>
+                        <option value="0.99">99%</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="calculateCI()">
+                    <i class="fas fa-calculator"></i> ئىشەنچلىك ئارلىقىنى ھېسابلاش
+                </button>
+                <div class="result" id="ciResult">
+                    <p>ئىشەنچلىك ئارلىقى: <span id="ciValue">47.58 ≤ μ ≤ 140.02</span></p>
+                </div>
+            </div>
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>بۇ ھېسابلاش قورالى ئانا تارقىلىشى بىلىنسە، ئانا ئوتتۇرا قىممەتنىڭ ئىشەنچلىك ئارلىقىنى ھېسابلايدۇ. خىلماخىل قىممەتلەرنى كىرگۈزۈپ، ئىشەنچلىك ئارلىقىنىڭ قانداق ئۆزگىرىشىنى كۆزىتەلەيسىز.</p>
+                </div>
+                <div class="english">
+                    <p>This calculator computes the confidence interval for the population mean when the population variance is known. You can enter different values to see how the confidence interval changes.</p>
+                </div>
+            </div>
+            <div class="diagram">
+                <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10%" y="30" width="80%" height="140" fill="#f8f9fa" stroke="#3498db" stroke-width="2" rx="10" />
+                    <text x="50%" y="60" text-anchor="middle" fill="#2c3e50" font-size="16" font-weight="bold">ئىشەنچلىك ئارلىقىنىڭ كەڭلىكىگە تەسىر قىلغۇچى سەۋەبلەر</text>
+                    <text x="50%" y="80" text-anchor="middle" fill="#2c3e50" font-size="16" font-weight="bold">Factors Affecting Confidence Interval Width</text>
+                    <circle cx="25%" cy="120" r="40" fill="rgba(231, 76, 60, 0.3)" stroke="#e74c3c" stroke-width="2" />
+                    <text x="25%" y="120" text-anchor="middle" fill="#2c3e50">ئىشەنچلىك دەرىجىسى</text>
+                    <text x="25%" y="140" text-anchor="middle" fill="#2c3e50">Confidence Level</text>
+                    <circle cx="50%" cy="120" r="40" fill="rgba(46, 204, 113, 0.3)" stroke="#2ecc71" stroke-width="2" />
+                    <text x="50%" y="120" text-anchor="middle" fill="#2c3e50">نەمونە چوڭلۇقى</text>
+                    <text x="50%" y="140" text-anchor="middle" fill="#2c3e50">Sample Size</text>
+                    <circle cx="75%" cy="120" r="40" fill="rgba(155, 89, 182, 0.3)" stroke="#9b59b6" stroke-width="2" />
+                    <text x="75%" y="120" text-anchor="middle" fill="#2c3e50">توپلام تارقىلىشى</text>
+                    <text x="75%" y="140" text-anchor="middle" fill="#2c3e50">Population Variance</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- ئىشەنچلىك ئارلىقىنىڭ چۈشەندۈرۈلۈشى قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> ئىشەنچلىك ئارلىقىنىڭ توغرا چۈشەندۈرۈلۈشى</h2>
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>95% ئىشەنچلىك ئارلىقى توغرىسىدا، كۆپچىلىكنىڭ يېنىلماقچى بولغان جەھەتلىرى «ئېلىنغان ئىشەنچلىك ئارلىقى ئىچىدە توپلام ئوتتۇرا قىممەتنىڭ 95% ئېھتىماللىق بىلەن بولۇشى» دېگەندەك. لېكىن بۇ توغرا چۈشەندۈرۈش ئەمەس.</p>
+                    <p>توپلام ئوتتۇرا قىممەت بىر بەلگىلىك قىممەت (سان) بولۇپ، ئېھتىماللىقىي ئۆزگىرىشى مۇمكىن ئەمەس. شۇڭا، بىر خىل ئىشەنچلىك ئارلىقى ئۈچۈن «ئانا ئوتتۇرا قىممەتنىڭ 95% ئېھتىماللىق بىلەن بۇ ئارلىق ئىچىدە بولۇشى» دېيىشكە بولمايدۇ.</p>
+                </div>
+                <div class="english">
+                    <p>A common misconception about the 95% confidence interval is that "there is a 95% probability that the population mean is contained within the obtained confidence interval." However, this is not a correct interpretation.</p>
+                    <p>The population mean is a fixed value (constant) and does not fluctuate probabilistically. Therefore, for a specific confidence interval, we cannot say that "there is a 95% probability that the population mean is contained in this interval."</p>
+                </div>
+            </div>
+            <div class="confidence-interval">
+                <h3>توغرا چۈشەندۈرۈش</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>95% ئىشەنچلىك ئارلىقىنىڭ توغرا چۈشەندۈرۈشى:</p>
+                        <p>«ئوخشاش توپلام  ئوخشاش چوڭلۇقتىكى نۇمونىنى چىقىرىۋېتىپ، ئىشەنچلىك ئارلىقىنى ھېسابلاش ئىشىنى 100 قېتىم قايتۇرساق، ھېسابلىغان 100 خىل ئىشەنچلىك ئارلىقىنىڭ ئىچىدىن تەخمىنەن 95 خىلى ئانا ئوتتۇرا قىممەتنى ئۆز ئىچىگە ئالىدۇ»</p>
+                    </div>
+                    <div class="english">
+                        <p>The correct interpretation of a 95% confidence interval is:</p>
+                        <p>"If we repeat the process of extracting samples of the same size from the same population and calculating confidence intervals 100 times, approximately 95 of the 100 calculated confidence intervals will contain the population mean."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="diagram">
+                <svg width="100%" height="400" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="50" y1="350" x2="550" y2="350" stroke="#2c3e50" stroke-width="2" />
+                    <line x1="300" y1="350" x2="300" y2="50" stroke="#e74c3c" stroke-width="3" stroke-dasharray="5,5" />
+                    <text x="310" y="40" fill="#e74c3c">توپلام ئوتتۇرا قىممەت (μ)</text>
+                    <!-- 信頼区間の表示 -->
+                    <g id="confidenceIntervals"></g>
+                    <text x="300" y="390" fill="#2c3e50" text-anchor="middle">ئىشەنچلىك ئارلىقىنىڭ توغرا چۈشەندۈرۈلۈشىنى كۆرسىتىش</text>
+                    <text x="300" y="410" fill="#2c3e50" text-anchor="middle">Visualization of Correct Interpretation of Confidence Intervals</text>
+                </svg>
+            </div>
+            <div class="example">
+                <h3>ئەمەلىي مىسال بىلەن چۈشەندۈرۈش</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>ياپونىيەلىكلەرنىڭ ئومۇمىي ئوتتۇرا بويى (توپلام ئوتتۇرا قىممەت) 170cm دەپ قارايسۇن. بۇ ۋاقىتتا، تەۋەككۈللىك تاللانغان 100 كىشىنىڭ بويىدىن 95% ئىشەنچلىك ئارلىقىنى ھېسابلاش تەجرىبىسىنى 100 قېتىم قىلساق:</p>
+                        <ul>
+                            <li>تەخمىنەن 95 قېتىم تەجرىبىدە، ئىشەنچلىك ئارلىقى 170cm نى ئۆز ئىچىگە ئالىدۇ</li>
+                            <li>تەخمىنەن 5 قېتىم تەجرىبىدە، ئىشەنچلىك ئارلىقى 170cm نى ئۆز ئىچىگە ئالمىدۇ</li>
+                        </ul>
+                        <p>مەسىلەن:</p>
+                        <ul>
+                            <li>1-تەجرىبە: 150-175cm (170cm نى ئۆز ئىچىگە ئالىدۇ)</li>
+                            <li>2-تەجرىبە: 162-172cm (170cm نى ئۆز ئىچىگە ئالىدۇ)</li>
+                            <li>3-تەجرىبە: 171-179cm (170cm نى ئۆز ئىچىگە ئالمىدۇ)</li>
+                            <li>...</li>
+                            <li>100-تەجرىبە: 145-180cm (170cm نى ئۆز ئىچىگە ئالىدۇ)</li>
+                        </ul>
+                    </div>
+                    <div class="english">
+                        <p>Suppose the average height of the entire Japanese population (population mean) is 170cm. If we conduct an experiment 100 times to calculate a 95% confidence interval from the heights of 100 randomly selected people:</p>
+                        <ul>
+                            <li>In approximately 95 experiments, the confidence interval will contain 170cm</li>
+                            <li>In approximately 5 experiments, the confidence interval will not contain 170cm</li>
+                        </ul>
+                        <p>For example:</p>
+                        <ul>
+                            <li>1st experiment: 150-175cm (contains 170cm)</li>
+                            <li>2nd experiment: 162-172cm (contains 170cm)</li>
+                            <li>3rd experiment: 171-179cm (does not contain 170cm)</li>
+                            <li>...</li>
+                            <li>100th experiment: 145-180cm (contains 170cm)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>ئارلىق باھالاش دەرسلىكى | Interval Estimation Tutorial</p>
+        <p>© 2025 KaLBiL ئىستاتىستىكا ۋە ئىھتىماللىق كۇرسى | Statistics and Probability Course</p>
+    </footer>
+    <script>
+        // تەب كۆرسىتىش فۇنكسىيىسى
+        function showTab(index) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabContents.forEach(content => content.classList.remove('active'));
+            tabButtons.forEach(button => button.classList.remove('active'));
+            tabContents[index].classList.add('active');
+            tabButtons[index].classList.add('active');
+            // ئىشەنچلىك ئارلىقىنىڭ چۈشەندۈرۈلۈشى تەبى ئۈچۈن، كۆرۈنۈشنى يېتىلدۈرۈش
+            if (index === 5) {
+                generateCIVisualization();
+            }
+        }
+        // ئىشەنچلىك ئارلىقى ھېسابلاش فۇنكسىيىسى
+        function calculateCI() {
+            const sampleMean = parseFloat(document.getElementById('sampleMean').value);
+            const popVariance = parseFloat(document.getElementById('popVariance').value);
+            const sampleSize = parseFloat(document.getElementById('sampleSize').value);
+            const confidenceLevel = parseFloat(document.getElementById('confidenceLevel').value);
+            // z-قىممىتىنى بەلگىلەش
+            let zValue;
+            if (confidenceLevel === 0.90) {
+                zValue = 1.645;
+            } else if (confidenceLevel === 0.95) {
+                zValue = 1.960;
+            } else if (confidenceLevel === 0.99) {
+                zValue = 2.576;
+            }
+            // ئىناۋەتسىز خاتالىقنى ھېسابلاش
+            const stdError = Math.sqrt(popVariance) / Math.sqrt(sampleSize);
+            // خاتالىق چېگرىسىنى ھېسابلاش
+            const marginOfError = zValue * stdError;
+            // ئىشەنچلىك ئارلىقىنى ھېسابلاش
+            const lowerBound = sampleMean - marginOfError;
+            const upperBound = sampleMean + marginOfError;
+            // نەتىجىنى كۆرسىتىش
+            const resultElement = document.getElementById('ciResult');
+            const ciValueElement = document.getElementById('ciValue');
+            ciValueElement.textContent = `${lowerBound.toFixed(2)} ≤ μ ≤ ${upperBound.toFixed(2)}`;
+            resultElement.style.display = 'block';
+        }
+        // ئىشەنچلىك ئارلىقىنىڭ كۆرۈنۈشىنى يېتىلدۈرۈش
+        function generateCIVisualization() {
+            const svg = document.getElementById('confidenceIntervals');
+            svg.innerHTML = '';
+            const trueMean = 300; // SVG دىكى توپلام ئوتتۇرا قىممەتنىڭ ئورنى
+            let containsCount = 0;
+            for (let i = 0; i < 20; i++) {
+                const y = 30 + i * 18;
+                // ئىشەنچلىك ئارلىقىنىڭ كەڭلىكىنى تەۋەككۈللىك بەلگىلەش
+                const width = Math.random() * 100 + 50;
+                // ئىشەنچلىك ئارلىقىنىڭ مەركىزىنى تەۋەككۈللىك بەلگىلەش (لېكىن، 95% ئېھتىماللىق بىلەن ئانا ئوتتۇرا قىممەتنى ئۆز ئىچىگە ئالىدۇ)
+                const containsTrueMean = Math.random() < 0.95;
+                let center;
+                if (containsTrueMean) {
+                    containsCount++;
+                    center = trueMean + (Math.random() * 40 - 20);
+                } else {
+                    center = trueMean + (Math.random() * 100 + 60) * (Math.random() < 0.5 ? 1 : -1);
+                }
+                const x1 = center - width/2;
+                const x2 = center + width/2;
+                // ئىشەنچلىك ئارلىقىنىڭ سىزىقىنى سىزىش
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', x1);
+                line.setAttribute('y1', y);
+                line.setAttribute('x2', x2);
+                line.setAttribute('y2', y);
+                line.setAttribute('stroke', containsTrueMean ? '#2ecc71' : '#e74c3c');
+                line.setAttribute('stroke-width', '2');
+                svg.appendChild(line);
+                // ئىشەنچلىك ئارلىقىنىڭ ئۇچىدىكى سىزىقنى سىزىش
+                const leftLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                leftLine.setAttribute('x1', x1);
+                leftLine.setAttribute('y1', y-5);
+                leftLine.setAttribute('x2', x1);
+                leftLine.setAttribute('y2', y+5);
+                leftLine.setAttribute('stroke', containsTrueMean ? '#2ecc71' : '#e74c3c');
+                leftLine.setAttribute('stroke-width', '2');
+                svg.appendChild(leftLine);
+                const rightLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                rightLine.setAttribute('x1', x2);
+                rightLine.setAttribute('y1', y-5);
+                rightLine.setAttribute('x2', x2);
+                rightLine.setAttribute('y2', y+5);
+                rightLine.setAttribute('stroke', containsTrueMean ? '#2ecc71' : '#e74c3c');
+                rightLine.setAttribute('stroke-width', '2');
+                svg.appendChild(rightLine);
+                // نۇمونە ئوتتۇرا قىممىتىنىڭ نۇقتىسىنى سىزىش
+                const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                dot.setAttribute('cx', center);
+                dot.setAttribute('cy', y);
+                dot.setAttribute('r', '2');
+                dot.setAttribute('fill', '#3498db');
+                svg.appendChild(dot);
+            }
+            // ئىزاھاتنى قوشۇش
+            const legend = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            legend.setAttribute('x', '50');
+            legend.setAttribute('y', '390');
+            legend.setAttribute('fill', '#2c3e50');
+            legend.setAttribute('font-size', '12');
+            legend.textContent = `كۆرسىتىلگەن 20 خىل ئىشەنچلىك ئارلىقىنىڭ ئىچىدىن، ${containsCount} خىلى ئانا ئوتتۇرا قىممەتنى ئۆز ئىچىگە ئالىدۇ (${(containsCount/20*100).toFixed(0)}%)`;
+            svg.appendChild(legend);
+        }
+        // بەتكۈچنىڭ ئوقۇلۇشى
+        window.onload = function() {
+            calculateCI();
+            generateCIVisualization();
+        };
+    </script>
+</body>
+</html>

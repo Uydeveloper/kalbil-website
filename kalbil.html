@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaLBil پەن - تېخنىكا ئاكادىېمىيەسى </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .top-quote {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-right: 5px solid #3498db;
+        }
+        
+        .top-quote p {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .top-quote .author {
+            margin-top: 10px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .student-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-header {
+            background: linear-gradient(90deg, #3498db, #2c3e50);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 15px;
+            object-fit: cover;
+            background-color: #ecf0f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .student-name {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .student-id {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+        
+        .info-value {
+            text-align: left;
+        }
+        
+        .password-field {
+            position: relative;
+        }
+        
+        .password-value {
+            filter: blur(5px);
+            transition: filter 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .password-value.revealed {
+            filter: none;
+        }
+        
+        .password-hint {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            background: #34495e;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .password-field:hover .password-hint {
+            opacity: 1;
+        }
+        
+        .course-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+        }
+        
+        .course-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .course-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            border-radius: 4px;
+            width: 0;
+            transition: width 1s ease;
+        }
+        
+        .role-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .admin-badge {
+            background: #e74c3c;
+        }
+        
+        .student-badge {
+            background: #3498db;
+        }
+        
+        /* يېڭى قوشۇلغان ئۇسلۇب */
+        .info-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .info-section h4 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .grid-12 {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+
+        .grid-item {
+            background: #f1f1f1;
+            padding: 8px 0;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .present { background: #d4edda; color: #155724; }
+        .absent { background: #f8d7da; color: #721c24; }
+        .pending { background: #fff3cd; color: #856404; }
+
+        .login-required {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .bottom-quote {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #e74c3c;
+            margin-top: 30px;
+        }
+        
+        .bottom-quote p {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .bottom-quote .author {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+            .grid-12 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-btn.active {
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .inspiring-text {
+            text-align: center;
+            color: white;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            direction: rtl;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-content input,
+        .modal-content textarea,
+        .modal-content select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .modal-content button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 5px 10px 5px;
+        }
+
+        #backFromLogin, #backFromEdit {
+            background: #95a5a6;
+        }
+
+        #backFromLogin:hover, #backFromEdit:hover {
+            background: #7f8c8d;
+        }
+
+        .modal-content button:hover {
+            background: #2980b9;
+        }
+
+        .close {
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .edit-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .edit-item {
+            text-align: center;
+        }
+
+        .edit-item label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-quote">
+            <p>"بىلىم ئىنساننى ئەركىن قىلىدۇ، بىلىملىك مىللەتلەر دۇنيانى ئىدارە قىلىدۇ."</p>
+            <div class="author">— ئالىم ئىبنى سىنا</div>
+        </div>
+        
+        <div class="inspiring-text">
+            <p>✧ ھەر بىر ئوقۇغۇچى بىزنىڭ كەلگۈسىمىز ✧</p>
+        </div>
+        
+        <header>
+            <h1>KaLBil پەن - تېخنىكا ئاكادىېمىيەسى </h1>
+            <p class="subtitle">ئوقۇغۇچىلارنىڭ تولۇق ئۇچۇرلىرى</p>
+        </header>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">ھەممىسى</button>
+            <button class="filter-btn" data-filter="admin">باشقۇرغۇچى</button>
+            <button class="filter-btn" data-filter="student">ئوقۇغۇچىلار</button>
+        </div>
+        
+        <div class="students-grid" id="studentsContainer">
+        </div>
+        
+        <div class="bottom-quote">
+            <p>"بىلىم ئالغان مىللەتلەر تارىخ يازىدۇ، بىلىم بەرگەن مۇئەللىملەر كەلگۈسى يارىتىدۇ."</p>
+            <div class="author">— ئۇيغۇر ئەقىل-پاراسەت سۆزى —</div>
+        </div>
+        
+        <div class="inspiring-text">
+            <p>✧ ئوقۇش ھەمىشە داۋاملىشىدىغان سەپەر ✧</p>
+        </div>
+    </div>
+
+    <!-- ئوقۇغۇچى لوگىن مودالى -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>مەخپىي نومۇرنى كۆرۈش ئۈچۈن كىرگۈزۈڭ</h3>
+            <p id="modalStudentName" style="font-weight: bold; margin: 10px 0;"></p>
+            <label>ئىشلەتكۈچى ID:</label>
+            <input type="text" id="loginId" placeholder="مەسىلەن: Aniwer-K001" readonly>
+            <label>مەخپىي نومۇر:</label>
+            <input type="password" id="loginPassword" placeholder="مەخپىي نومۇرنى كىرگۈزۈڭ">
+            <button id="submitLogin">كىرگۈزۈش</button>
+            <button id="backFromLogin">كەينىگە قايتىش</button>
+            <p id="loginMessage" style="color: red; margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <!-- باشقۇرغۇچى لوگىن مودالى -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <span class="close admin-close">&times;</span>
+            <h3>باشقۇرغۇچى سۈپىتىدە كىرگۈزۈش</h3>
+            <p>باشقۇرغۇچى مەخپىي نومۇرىنى كىرگۈزۈپ، ھەممىنى كۆرۈڭ</p>
+            <input type="password" id="adminPasswordInput" placeholder="باشقۇرغۇچى مەخپىي نومۇرى">
+            <button id="adminLoginBtn">كىرگۈزۈش</button>
+            <p id="adminLoginMessage" style="color: red; margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <!-- باشقۇرغۇچى تەھرىرلەش مودالى -->
+    <div id="editStudentModal" class="modal">
+      <div class="modal-content">
+        <span class="close edit-close">&times;</span>
+        <h3 id="editStudentName">ئوقۇغۇچىنى تەھرىرلەش</h3>
+        
+        <h4>دەرسكە قاتنىشىش (12 دەرس)</h4>
+        <div id="editAttendanceGrid" class="edit-grid"></div>
+
+        <h4>تاپشۇرۇقلار (12)</h4>
+        <div id="editAssignmentsGrid" class="edit-grid"></div>
+
+        <h4>پروژېكتلار (12)</h4>
+        <div id="editProjectsGrid" class="edit-grid"></div>
+
+        <button id="saveStudentBtn">ساقلاش</button>
+        <button id="backFromEdit">كەينىگە قايتىش</button>
+        <p id="editMessage" style="color: green; margin-top: 10px;"></p>
+      </div>
+    </div>
+
+    <script>
+        const studentsData = [
+          {
+            "id": "KaLBiL-001",
+            "name": "KaLBiL",
+            "avatar": "/avatars/admin.png",
+            "password": "KaLBiLedu001",
+            "role": "admin"
+          },
+          {
+            "id": "Anwer-K001",
+            "name": "Anwer Uyghur",
+            "avatar": "/avatars/Aniwer.png",
+            "password": "Anwer-K0001",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, true, false, true, true, true, false, true, true, true, true, true],
+            "assignments": [
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 93},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 86}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 90}
+            ]
+          },
+          {
+            "id": "Muzaffer-K0002",
+            "name": "Muzaffer",
+            "avatar": "/avatars/Muzaffer.png",
+            "password": "MuzafferRobot-K0002",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, false, true, false, true, true, true, false, true, true, false, true],
+            "assignments": [
+              {"status": "تامام", "score": 82},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 78},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 80},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 79},
+              {"status": "تامام بولمىدى", "score": 0}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 80},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 82},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 81},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام بولمىدى", "score": 0}
+            ]
+          },
+          {
+            "id": "Enver-K0003",
+            "name": "Enver",
+            "avatar": "/avatars/Enver.png",
+            "password": "Enver-Ke0003",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, true, true, true, true, true, true, true, true, true, true, true],
+            "assignments": [
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95},
+              {"status": "تامام", "score": 95}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 92}
+            ]
+          },
+          {
+            "id": "Ablimit-K0004",
+            "name": "Ablimit",
+            "avatar": "/avatars/Ablimit.png",
+            "password": "Idkut-Kt0004",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, true, true, false, true, true, false, true, true, false, true, true],
+            "assignments": [
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام", "score": 88}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 90},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 82},
+              {"status": "تامام", "score": 85}
+            ]
+          },
+          {
+            "id": "Parhat-K0005",
+            "name": "Parhat",
+            "avatar": "/avatars/Parhat.png",
+            "password": "Parhat-Kp0005",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, false, true, true, false, true, true, true, false, true, true, true],
+            "assignments": [
+              {"status": "تامام", "score": 80},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 82},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام", "score": 88}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 82},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 80},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام", "score": 88}
+            ]
+          },
+          {
+            "id": "Arkin-K0006",
+            "name": "ArkinBeg",
+            "avatar": "/avatars/ArkinBeg.png",
+            "password": "ArkinBeg-K0006",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, true, true, true, true, false, true, true, true, true, false, true],
+            "assignments": [
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام", "score": 94},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام", "score": 93},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 89}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 94},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام", "score": 93},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام", "score": 93},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 92}
+            ]
+          },
+          {
+            "id": "Osman-K0007",
+            "name": "Osman Omar",
+            "avatar": "/avatars/OsmanOmar.png",
+            "password": "Osman-Ko0007",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, true, false, true, true, true, true, false, true, true, true, false],
+            "assignments": [
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 82},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام بولمىدى", "score": 0}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 82},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام بولمىدى", "score": 0}
+            ]
+          },
+          {
+            "id": "Ahmetjan-K0008",
+            "name": "Ahmentjan Abdullah",
+            "avatar": "/avatars/Ahmetjan.png",
+            "password": "Ahmetjan-Ka0007",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, false, true, true, true, false, true, true, false, true, true, true],
+            "assignments": [
+              {"status": "تامام", "score": 80},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 82},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام", "score": 88}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 82},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 80},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام", "score": 88}
+            ]
+          },
+          {
+            "id": "togirak-K0009",
+            "name": "Togirak-K0009",
+            "avatar": "/avatars/stu-K0009.png",
+            "password": "Togirak-Tr0009",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, true, true, true, false, true, true, true, true, false, true, true],
+            "assignments": [
+              {"status": "تامام", "score": 90},
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام", "score": 93},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام", "score": 88}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 92},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام", "score": 93},
+              {"status": "تامام", "score": 90},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 91},
+              {"status": "تامام", "score": 88}
+            ]
+          },
+          {
+            "id": "Adbulkerem-K00010",
+            "name": "Abdul Aziz Adbulkerem",
+            "avatar": "/avatars/stu-K0009.png",
+            "password": "Abdul-Aziz0007",
+            "role": "student",
+            "courses": [{
+              "title": "Statistics Beginner سىتاستىكا ئاساسى بىلم",
+              "teacher": "Mr. KaLBil",
+              "duration": "1 ئاي",
+              "progress": 70,
+              "image": "/courses/devops.png"
+            }],
+            "attendance": [true, true, false, true, true, true, false, true, true, true, false, true],
+            "assignments": [
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 82},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 89},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 88}
+            ],
+            "projects": [
+              {"status": "تامام", "score": 87},
+              {"status": "تامام", "score": 84},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 82},
+              {"status": "تامام", "score": 85},
+              {"status": "تامام", "score": 88},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 86},
+              {"status": "تامام", "score": 83},
+              {"status": "تامام", "score": 87},
+              {"status": "تامام بولمىدى", "score": 0},
+              {"status": "تامام", "score": 84}
+            ]
+          }
+        ];
+
+        let isAdminLoggedIn = false;
+        let loggedInStudentId = null;
+        let currentFilter = 'all';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderStudents(currentFilter);
+            setupFilterButtons();
+            setupAdminAccess();
+            setupStudentPasswordReveal();
+
+            // === كەينىگە قايتىش تۇغماقلىرى ===
+            const backFromLogin = document.getElementById('backFromLogin');
+            if (backFromLogin) {
+                backFromLogin.onclick = () => {
+                    document.getElementById('loginModal').style.display = 'none';
+                };
+            }
+
+            const backFromEdit = document.getElementById('backFromEdit');
+            if (backFromEdit) {
+                backFromEdit.onclick = () => {
+                    document.getElementById('editStudentModal').style.display = 'none';
+                };
+            }
+        });
+
+        function renderStudents(filter) {
+            currentFilter = filter;
+            const container = document.getElementById('studentsContainer');
+            container.innerHTML = '';
+            
+            const filteredStudents = filter === 'all' 
+                ? studentsData 
+                : studentsData.filter(student => student.role === filter);
+            
+            filteredStudents.forEach(student => {
+                const card = createStudentCard(student);
+                container.appendChild(card);
+                
+                setTimeout(() => {
+                    const progressFill = card.querySelector('.progress-fill');
+                    if (progressFill) {
+                        const progress = student.courses ? student.courses[0].progress : 0;
+                        progressFill.style.width = `${progress}%`;
+                    }
+                }, 100);
+            });
+        }
+
+        function createStudentCard(student) {
+            const card = document.createElement('div');
+            card.className = 'student-card';
+            
+            const isAdmin = student.role === 'admin';
+            const badgeClass = isAdmin ? 'admin-badge' : 'student-badge';
+            const badgeText = isAdmin ? 'باشقۇرغۇچى' : 'ئوقۇغۇچى';
+            
+            const isLoggedIn = (student.role === 'student' && student.id === loggedInStudentId) || isAdminLoggedIn;
+            
+            let extraInfo = '';
+
+            if (student.role === 'student') {
+              if (isLoggedIn) {
+                const attGrid = student.attendance && student.attendance.length === 12 
+                  ? student.attendance.map((a, i) => 
+                      `<div class="grid-item ${a ? 'present' : 'absent'}">${i+1}</div>`
+                    ).join('')
+                  : Array(12).fill().map((_, i) => `<div class="grid-item absent">${i+1}</div>`).join('');
+
+                const assignGrid = student.assignments && student.assignments.length === 12
+                  ? student.assignments.map((a, i) => 
+                      `<div class="grid-item ${a.status === 'تامام' ? 'present' : 'absent'}">
+                        ${i+1}<br>${a.score}
+                      </div>`
+                    ).join('')
+                  : Array(12).fill().map((_, i) => `<div class="grid-item pending">${i+1}<br>0</div>`).join('');
+
+                const projGrid = student.projects && student.projects.length === 12
+                  ? student.projects.map((p, i) => 
+                      `<div class="grid-item ${p.status === 'تامام' ? 'present' : 'absent'}">
+                        ${i+1}<br>${p.score}
+                      </div>`
+                    ).join('')
+                  : Array(12).fill().map((_, i) => `<div class="grid-item pending">${i+1}<br>0</div>`).join('');
+
+                extraInfo = `
+                  <div class="info-section">
+                    <h4>دەرسكە قاتنىشىش (12 دەرس)</h4>
+                    <div class="grid-12">${attGrid}</div>
+                  </div>
+
+                  <div class="info-section">
+                    <h4>تاپشۇرۇقلار (12)</h4>
+                    <div class="grid-12">${assignGrid}</div>
+                  </div>
+
+                  <div class="info-section">
+                    <h4>پروژېكتلار (12)</h4>
+                    <div class="grid-12">${projGrid}</div>
+                  </div>
+                `;
+              } else {
+                extraInfo = `
+                  <div class="info-section">
+                    <div class="login-required">
+                      دەرسكە قاتنىشىش، تاپشۇرۇق ۋە پروژېكت ئۇچۇرلىرىنى كۆرۈش ئۈچۈن لوگىن قىلىڭ
+                    </div>
+                  </div>
+                `;
+              }
+            }
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <span class="role-badge ${badgeClass}">${badgeText}</span>
+                    <div class="avatar">
+                        ${student.avatar ? `<img src="${student.avatar}" alt="${student.name}">` : '<i class="fas fa-user"></i>'}
+                    </div>
+                    <h2 class="student-name">${student.name}</h2>
+                    <p class="student-id">ID: ${student.id}</p>
+                </div>
+                <div class="card-body">
+                    <div class="info-item">
+                        <span class="info-label">رولى:</span>
+                        <span class="info-value">${student.role}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">مەخپى نومۇر:</span>
+                        <div class="password-field">
+                            <span class="password-value">${student.password}</span>
+                            <span class="password-hint">چېكىپ كۆرۈڭ</span>
+                        </div>
+                    </div>
+                    ${student.courses ? `
+                    <div class="course-item">
+                        <div class="course-title">${student.courses[0].title}</div>
+                        <div class="course-details">
+                            <span>ئوقۇتقۇچى: ${student.courses[0].teacher}</span>
+                            <span>ۋاقتى: ${student.courses[0].duration}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="course-details">
+                            <span>ئوقۇش دەرىجىسى:</span>
+                            <span>${student.courses[0].progress}%</span>
+                        </div>
+                    </div>
+                    ` : ''}
+                    ${extraInfo}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function setupFilterButtons() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    renderStudents(filter);
+                });
+            });
+        }
+
+        function setupAdminAccess() {
+            const adminModal = document.getElementById('adminLoginModal');
+            
+            const openAdminBtn = document.createElement('button');
+            openAdminBtn.textContent = 'باشقۇرغۇچى سۈپىتىدە كىرگۈزۈش';
+            openAdminBtn.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                z-index: 999;
+                font-weight: bold;
+                font-size: 14px;
+            `;
+            document.body.appendChild(openAdminBtn);
+
+            openAdminBtn.addEventListener('click', () => {
+                adminModal.style.display = 'block';
+            });
+
+            document.querySelectorAll('.admin-close').forEach(btn => {
+                btn.onclick = () => adminModal.style.display = 'none';
+            });
+
+            window.onclick = (e) => {
+                if (e.target === adminModal) adminModal.style.display = 'none';
+            };
+
+            document.getElementById('adminLoginBtn').addEventListener('click', () => {
+                const pwd = document.getElementById('adminPasswordInput').value;
+                const msg = document.getElementById('adminLoginMessage');
+
+                const admin = studentsData.find(s => s.role === 'admin');
+                if (admin && pwd === admin.password) {
+                    isAdminLoggedIn = true;
+                    loggedInStudentId = null;
+                    adminModal.style.display = 'none';
+                    revealAllPasswords();
+                    openAdminBtn.textContent = 'باشقۇرغۇچى كىرگەن ✅';
+                    openAdminBtn.style.background = '#2ecc71';
+                    renderStudents(currentFilter);
+                    setupAdminEdit();
+                } else {
+                    msg.textContent = 'خاتا مەخپىي نومۇر! قايتا سىناڭ.';
+                }
+            });
+        }
+
+        function revealAllPasswords() {
+            document.querySelectorAll('.password-value').forEach(el => {
+                el.classList.add('revealed');
+            });
+        }
+
+        function setupStudentPasswordReveal() {
+            document.addEventListener('click', function(e) {
+                if (!isAdminLoggedIn && e.target.closest('.password-field')) {
+                    const card = e.target.closest('.student-card');
+                    const studentId = card.querySelector('.student-id').textContent.replace('ID: ', '');
+                    const studentName = card.querySelector('.student-name').textContent;
+
+                    document.getElementById('modalStudentName').textContent = `ئوقۇغۇچى: ${studentName}`;
+                    document.getElementById('loginId').value = studentId;
+                    document.getElementById('loginPassword').value = '';
+                    document.getElementById('loginMessage').textContent = '';
+
+                    document.getElementById('loginModal').style.display = 'block';
+                    window.currentStudentCard = card;
+                }
+            });
+
+            document.getElementById('submitLogin').onclick = function() {
+                const enteredId = document.getElementById('loginId').value;
+                const enteredPassword = document.getElementById('loginPassword').value;
+                const messageEl = document.getElementById('loginMessage');
+
+                const student = studentsData.find(s => s.id === enteredId);
+                if (student && student.password === enteredPassword) {
+                    const passwordValueEl = window.currentStudentCard.querySelector('.password-value');
+                    passwordValueEl.textContent = student.password;
+                    passwordValueEl.classList.add('revealed');
+                    loggedInStudentId = enteredId;
+                    document.getElementById('loginModal').style.display = 'none';
+                    renderStudents(currentFilter);
+                } else {
+                    messageEl.textContent = "خاتا ID ياكى مەخپىي نومۇر! قايتا سىناڭ.";
+                }
+            };
+
+            document.querySelector('.close').onclick = () => {
+                document.getElementById('loginModal').style.display = 'none';
+            };
+
+            window.onclick = (e) => {
+                if (e.target.id === 'loginModal') {
+                    document.getElementById('loginModal').style.display = 'none';
+                }
+            };
+        }
+
+        function setupAdminEdit() {
+          document.addEventListener('click', function(e) {
+            if (isAdminLoggedIn && 
+                e.target.closest('.student-card') && 
+                !e.target.closest('.password-field') &&
+                !e.target.closest('.password-value') &&
+                !e.target.closest('.password-hint')) {
+              
+              const card = e.target.closest('.student-card');
+              const studentId = card.querySelector('.student-id').textContent.replace('ID: ', '');
+              const student = studentsData.find(s => s.id === studentId);
+              
+              if (student && student.role === 'student') {
+                openEditModal(student);
+              }
+            }
+          });
+        }
+
+        function openEditModal(student) {
+          document.getElementById('editStudentName').textContent = `تەھرىرلەش: ${student.name}`;
+          
+          const att = student.attendance || Array(12).fill(false);
+          const assigns = student.assignments || Array(12).fill({ status: "تامام بولمىدى", score: 0 });
+          const projs = student.projects || Array(12).fill({ status: "تامام بولمىدى", score: 0 });
+
+          let attHTML = '';
+          for (let i = 0; i < 12; i++) {
+            attHTML += `
+              <div class="edit-item">
+                <label>دەرس ${i+1}</label>
+                <select class="att-select" data-index="${i}">
+                  <option value="true" ${att[i] ? 'selected' : ''}>بار (✅)</option>
+                  <option value="false" ${!att[i] ? 'selected' : ''}>يوق (❌)</option>
+                </select>
+              </div>
+            `;
+          }
+          document.getElementById('editAttendanceGrid').innerHTML = attHTML;
+
+          let assignHTML = '';
+          for (let i = 0; i < 12; i++) {
+            const a = assigns[i] || { status: "تامام بولمىدى", score: 0 };
+            assignHTML += `
+              <div class="edit-item">
+                <label>تاپشۇرۇق ${i+1}</label>
+                <select class="status-select" data-index="${i}" data-type="assign">
+                  <option value="تامام" ${a.status === "تامام" ? 'selected' : ''}>تامام</option>
+                  <option value="تامام بولمىدى" ${a.status === "تامام بولمىدى" ? 'selected' : ''}>تامام بولمىدى</option>
+                </select>
+                <input type="number" class="score-input" data-index="${i}" data-type="assign" value="${a.score}" min="0" max="100">
+              </div>
+            `;
+          }
+          document.getElementById('editAssignmentsGrid').innerHTML = assignHTML;
+
+          let projHTML = '';
+          for (let i = 0; i < 12; i++) {
+            const p = projs[i] || { status: "تامام بولمىدى", score: 0 };
+            projHTML += `
+              <div class="edit-item">
+                <label>پروژېكت ${i+1}</label>
+                <select class="status-select" data-index="${i}" data-type="proj">
+                  <option value="تامام" ${p.status === "تامام" ? 'selected' : ''}>تامام</option>
+                  <option value="تامام بولمىدى" ${p.status === "تامام بولمىدى" ? 'selected' : ''}>تامام بولمىدى</option>
+                </select>
+                <input type="number" class="score-input" data-index="${i}" data-type="proj" value="${p.score}" min="0" max="100">
+              </div>
+            `;
+          }
+          document.getElementById('editProjectsGrid').innerHTML = projHTML;
+
+          document.getElementById('editMessage').textContent = '';
+          document.getElementById('editStudentModal').style.display = 'block';
+
+          document.getElementById('saveStudentBtn').onclick = () => {
+            try {
+              const newAtt = Array.from(document.querySelectorAll('.att-select')).map(sel => sel.value === 'true');
+              const newAssigns = Array.from(document.querySelectorAll('.score-input[data-type="assign"]')).map((inp, i) => {
+                const status = document.querySelector(`.status-select[data-index="${i}"][data-type="assign"]`).value;
+                return { status, score: parseInt(inp.value) || 0 };
+              });
+              const newProjs = Array.from(document.querySelectorAll('.score-input[data-type="proj"]')).map((inp, i) => {
+                const status = document.querySelector(`.status-select[data-index="${i}"][data-type="proj"]`).value;
+                return { status, score: parseInt(inp.value) || 0 };
+              });
+
+              student.attendance = newAtt;
+              student.assignments = newAssigns;
+              student.projects = newProjs;
+
+              renderStudents(currentFilter);
+              document.getElementById('editMessage').textContent = 'مۇۋەپپەقىيەتلىك ساقلاندى!';
+              document.getElementById('editMessage').style.color = 'green';
+            } catch (err) {
+              document.getElementById('editMessage').textContent = 'ساقلاش خاتالىقى!';
+              document.getElementById('editMessage').style.color = 'red';
+            }
+          };
+        }
+
+        document.querySelectorAll('.edit-close').forEach(btn => {
+          btn.onclick = () => document.getElementById('editStudentModal').style.display = 'none';
+        });
+        window.onclick = (e) => {
+          if (e.target.id === 'editStudentModal') document.getElementById('editStudentModal').style.display = 'none';
+        };
+    </script>
+</body>
+</html>

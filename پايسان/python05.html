@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+<meta charset="UTF-8">
+<title>پايسان 5-باب - فۇنكسىيە ۋە مودۇل</title>
+<style>
+body { font-family: "Arial", sans-serif; line-height: 1.6; padding: 20px; background-color: #f7f7f7; }
+h1, h2 { color: #2c3e50; }
+pre { background-color: #ecf0f1; padding: 10px; border-radius: 5px; overflow-x: auto; }
+.code-example { background-color: #dfe6e9; padding: 10px; border-left: 4px solid #0984e3; }
+</style>
+</head>
+<body>
+
+<h1>پايسان 5-باب - فۇنكسىيە ۋە مودۇل</h1>
+
+<h2>دەرس بايانى</h2>
+<p>بۇ بابتا Python دا فۇنكسىيە قۇرۇش، ئۇنى چاقىرىش ۋە مودۇللارنى ئىشلىتىشنى ئۆگىنىمىز. فۇنكسىيە پروگراممىڭىزنى قۇراللار بىلەن بۆلۈش، قايتىدىن ئىشلىتىشكە قولايلىق بولىدۇ.</p>
+
+<h2>فۇنكسىيە قۇرۇش</h2>
+<pre class="code-example">
+# فۇنكسىيە ئېلان قىلىش
+def greet(name):
+    print("ياخشىمۇسىز, " + name + "!")
+
+# فۇنكسىيەنى چاقىرىش
+greet("قاۋۇلجان")
+</pre>
+
+<h2>قايتۇرۇش قىممىتى</h2>
+<pre class="code-example">
+def add(a, b):
+    return a + b
+
+sum = add(5, 7)
+print("جەمئىي:", sum)
+</pre>
+
+<h2>مودۇل ئىشلىتىش</h2>
+<p>Python نىڭ بىرىنچى قوشۇمچە قۇراللىرىنى ئىشلىتىپ، مودۇلدىن پايدىلىنىش:</p>
+<pre class="code-example">
+# math مودۇلنى چاقىرىش
+import math
+
+print("π قىممىتى:", math.pi)
+print("كىچىك سان:", math.sqrt(16))
+</pre>
+
+<h2>from ... import ...</h2>
+<pre class="code-example">
+# پەقەت sqrt فۇنكسىيەنى import قىلىش
+from math import sqrt
+
+print("كىچىك سان:", sqrt(25))
+</pre>
+
+<h2>مەسىل</h2>
+<p>ئىككى ساننى قوشۇش ۋە ھەرىكىتىنى باشقۇرۇش فۇنكسىيەسى:</p>
+<pre class="code-example">
+def compare_numbers(a, b):
+    if a > b:
+        return "a چوڭ"
+    elif a < b:
+        return "b چوڭ"
+    else:
+        return "a ۋە b تەڭ"
+
+result = compare_numbers(12, 15)
+print(result)
+</pre>
+
+<h2>چۈشەندۈرۈش</h2>
+<p>بۇ بابتا Python دا فۇنكسىيە قۇرۇش، قايتۇرۇش قىممىتى ۋە مودۇللارنى ئىشلىتىشنى چۈشەندۇق. بۇ ئۇسۇل پروگراممىڭىزنى بۆلەك بۆلەك قىلىپ ئىشلىتىش، قايتىدىن ئىشلىتىش ۋە كۆپ فۇنكسىيەلىك كودلارنى باشقۇرۇشقا قولايلىق.</p>
+
+</body>
+</html>

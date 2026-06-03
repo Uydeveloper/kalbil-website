@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>كىۋانىت ماشىنا ئۆگىنىش 1-باب – Qubit ۋە Gate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/python/python.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+  <style>
+    :root {
+      --bg: #f9f7f0;
+      --text-ug: #2a2a2a;
+      --text-en: #333;
+      --primary: #00695c;
+      --card: #ffffff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg); font-family:'Amiri',serif; color:var(--text-ug);
+      line-height:1.7; padding:20px; direction:rtl;
+    }
+    h1 { text-align:center; color:var(--primary); font-size:2.3rem; margin:0 0 25px; }
+    .intro {
+      background: #e0f2f1; padding:25px; border-radius:14px; margin-bottom:30px;
+      border-right:5px solid var(--primary); text-align:center;
+    }
+    .section {
+      background: var(--card); padding:22px; margin-bottom:28px;
+      border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.06);
+      border-right:4px solid var(--primary);
+    }
+    .title-ug { font-size:1.6rem; font-weight:bold; color:var(--primary); margin-bottom:10px; }
+    .title-en { font-size:1.25rem; font-family:'Inter',sans-serif; color:#555;
+      direction:ltr; text-align:left; margin-bottom:15px; }
+    .en { font-family:'Inter',sans-serif; direction:ltr; text-align:left;
+      background:#f8f9fa; padding:12px; border-radius:8px; margin-top:12px;
+      border-left:3px solid #00796b; }
+    .graph {
+      text-align:center; margin:18px 0; padding:15px; background:#f0f9f8;
+      border-radius:10px; direction:ltr;
+    }
+    .code-container { margin:18px 0; }
+    .CodeMirror {
+      direction:ltr !important; font-family:'Fira Code',monospace; font-size:14px;
+      border-radius:8px; overflow:hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>كىۋانىت ما شىنا ئۆگىنىش 1-باب – Qubit ۋە Gate</h1>
+  <p>
+    <strong>Qubit</strong> — كىۋانىت كومپيۇتېرنىڭ ئاساسىي بىتى. بۇ «0» ياكى «1» دە ئەمەس،
+    بەلكى <strong>قۇشۇلۇش ھالىتى</strong>دە بولۇشى مۇمكىن.
+    <strong>Gate</strong> (قەۋەت) — Qubit نىڭ ھالىتىنى ئۆزگەرتىدىغان ئامال.
+  </p> 
+  <div class="en">Qubit is the basic unit of quantum computation. Unlike classical bits, it can be in superposition. Quantum gates manipulate qubit states.</div>
+</div>
+
+<div class="section">
+  <div class="title-ug">1. Qubit نىڭ ماتېماتىك فورماتى</div>
+  <div class="title-en">1. Qubit Representation</div>
+  <div class="katex-display" style="direction:ltr;text-align:center;">
+    \( |\psi\rangle = \alpha |0\rangle + \beta |1\rangle, \quad |\alpha|^2 + |\beta|^2 = 1 \)
+  </div>
+  <p>بۇ يەردە \( \alpha, \beta \) — كومپلېكس سانلار. \( |\alpha|^2 \) = «0» بولۇش ئىمكىدارىيىتى.</p>
+</div>
+
+<div class="section">
+  <div class="title-ug">2. مۇھىم Gates</div>
+  <div class="title-en">2. Key Quantum Gates</div>
+  <table style="width:100%; border-collapse:collapse; margin:15px 0; direction:ltr;">
+    <thead><tr style="background:#e0f2f1;"><th>Gate</th><th>ماتىرسىس</th><th>تەسىرى</th></tr></thead>
+    <tbody>
+      <tr><td style="border:1px solid #ccc; padding:8px;">X (NOT)</td><td style="border:1px solid #ccc; padding:8px;">\(\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\)</td><td style="border:1px solid #ccc; padding:8px;">|0> → |1>, |1> → |0></td></tr>
+      <tr><td style="border:1px solid #ccc; padding:8px;">H (Hadamard)</td><td style="border:1px solid #ccc; padding:8px;">\(\frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1 \\ 1 & -1\end{bmatrix}\)</td><td style="border:1px solid #ccc; padding:8px;">|0> → (|0>+|1>)/√2</td></tr>
+      <tr><td style="border:1px solid #ccc; padding:8px;">Z</td><td style="border:1px solid #ccc; padding:8px;">\(\begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}\)</td><td style="border:1px solid #ccc; padding:8px;">|1> نى -|1> قىلىدۇ</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="title-ug">3. گىرافىك: Bloch Sphere</div>
+  <div class="title-en">3. Bloch Sphere Visualization</div>
+  <div class="graph">
+    <svg width="250" height="250" style="background:#fff;border-radius:8px;padding:10px;">
+      <!-- Sphere -->
+      <circle cx="125" cy="125" r="100" fill="none" stroke="#00796b" stroke-width="2"/>
+      <!-- Axes -->
+      <line x1="125" y1="25" x2="125" y2="225" stroke="#333" stroke-dasharray="4,4"/>
+      <line x1="25" y1="125" x2="225" y2="125" stroke="#333" stroke-dasharray="4,4"/>
+      <!-- Z-axis labels -->
+      <text x="115" y="15" font-family="Amiri" font-size="14">|0></text>
+      <text x="115" y="240" font-family="Amiri" font-size="14">|1></text>
+      <!-- Qubit vector -->
+      <line x1="125" y1="125" x2="175" y2="75" stroke="#c2185b" stroke-width="3"/>
+      <circle cx="175" cy="75" r="5" fill="#c2185b"/>
+      <text x="180" y="70" font-family="Amiri" font-size="14">|\psi></text>
+    </svg>
+    <p style="font-family:Amiri; margin-top:10px;">Bloch Sphere — Qubit ھالىتىنى 3D دا كۆرسىتىدۇ</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="title-ug">4. مىسال كود: Qiskit دا Qubit ۋە Gate</div>
+  <div class="title-en">4. Code Example</div>
+  <div class="code-container">
+    <textarea id="c1" style="display:none;">
+from qiskit import QuantumCircuit, Aer, execute
+
+# 1 Qubit قۇرۇش
+qc = QuantumCircuit(1)
+
+# Hadamard Gate قىستۇرۇش — قۇشۇلۇش ھالىتىگە كىرگۈزىدۇ
+qc.h(0)
+
+# X Gate قىستۇرۇش — NOT ئامالى
+# qc.x(0)
+
+# قەۋەتلەرنى كۆرسىتىش
+print(qc)
+
+# سىمىلاتوردا ئىجرا قىلىش
+simulator = Aer.get_backend('statevector_simulator')
+result = execute(qc, simulator).result()
+statevector = result.get_statevector()
+
+print("ھالەت فېكتورى:", statevector)
+    </textarea>
+  </div>
+</div>
+
+<footer style="text-align:center; margin-top:40px; padding:20px; color:#666;">
+  <p>كىۋانىت ماشىنا ئۆگىنىش 2-باب – Qubit ۋە Gate</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textareas = document.querySelectorAll('textarea[id^="c"]');
+  textareas.forEach(ta => {
+    CodeMirror.fromTextArea(ta, {
+      mode: "python", readOnly: true, lineNumbers: true,
+      theme: "default", direction: "ltr", viewportMargin: Infinity
+    });
+  });
+});
+</script>
+</body>
+</html>

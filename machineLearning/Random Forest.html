@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ماشىنا ئۈگىنىش 5-باب – ئەۋەت دەرىخلىرى (Random Forest)</title>
+
+  <!-- Amiri for Uyghur, Inter for English -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text-ug: #2d2d2d;
+      --text-en: #444;
+      --primary: #388e3c;
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      padding: 20px;
+      font-family: 'Amiri', serif;
+      color: var(--text-ug);
+      line-height: 1.7;
+      direction: rtl;
+    }
+
+    .bilingual-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-right: 4px solid var(--primary);
+    }
+
+    .section-title-ug {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .section-title-en {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 15px;
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-radius: 12px;
+      border-right: 4px solid var(--primary);
+    }
+
+    .intro h1 {
+      color: var(--primary);
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+    }
+
+    .intro-en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: center;
+      color: var(--text-en);
+      margin-top: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.4rem;
+    }
+
+    ul, ol {
+      padding-right: 25px;
+      margin: 12px 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+      color: var(--text-en);
+      margin-top: 12px;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 3px solid #ccc;
+    }
+
+    .code-container {
+      margin: 15px 0;
+    }
+
+    .CodeMirror {
+      direction: ltr !important;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .code-label {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .highlight {
+      background-color: #dcedc8;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e8f5e9;
+    }
+
+    @media (max-width: 768px) {
+      .bilingual-section {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro">
+    <h1>ماشىنا ئۈگىنىش 5-باب – ئەۋەت دەرىخلىرى (Random Forest)</h1>
+    <p>
+      <strong>Random Forest</strong> (ئەۋەت دەرىخلىرى) — ماشىنا ئۈگىنىشنىڭ ئەڭ قۇۋۋەتلىك، ئىشقا سېلىش ئاسان، ئىشەنچلىك ئالگورىتملىرىنىڭ بىرىدۇر.
+      بۇ ئالگورىتم <strong>بىر قانچە قەرر دەرىخىنى</strong> (Decision Tree) بىرلەشتۈرۈپ،
+      <span class="highlight">ئەڭ ياخشى نەتىجىنى</span> (majority vote ياكى o'rtacha) چىقىرىدۇ.
+    </p>
+    <p>
+      Decision Tree نىڭ ئاشۇرۇپ ئۈگىنىش (overfitting) قىلىش كەمچىلىكىنى <strong>ئەۋەت دەرىخلىرى</strong> ئەقىللىق ئۇسۇل بىلەن تۈزەيدۇ.
+    </p>
+    <div class="intro-en">
+      <strong>Random Forest</strong> is one of the most powerful, easy-to-use, and reliable algorithms in machine learning.
+      It combines <strong>multiple Decision Trees</strong> and outputs the best result via <strong>majority voting</strong> (for classification) or <strong>averaging</strong> (for regression).
+      It effectively fixes the <strong>overfitting</strong> weakness of a single Decision Tree.
+    </div>
+  </div>
+
+  <!-- ============ 1. نېمە؟ / What is it? ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">1. Random Forest نېمە؟</div>
+    <div class="section-title-en">1. What is Random Forest?</div>
+    <p>
+      Random Forest — <strong>باغلىنىش ئۇسلۇبى</strong> (Ensemble Learning) نىڭ بىر تۈرى.
+      بۇ ئۇسلۇب <strong>بىر قانچە ئالگورىتمنى بىرلەشتۈرۈپ</strong>، ئۇلارنىڭ جەمئىي قۇۋۋىتى بىلەن نەتىجىنى ياخشىلايدۇ.
+    </p>
+    <ul>
+      <li>كۆپ سانلىق قەرر دەرىخلىرى قۇرۇش.</li>
+      <li>ھەر بىر دەرىخ <strong>مەلۇماتنىڭ تەصادۇفىي بولۇقى</strong> (Bootstrap sample) بىلەن تەربىيەلەيدۇ.</li>
+      <li>ھەر بىر دەرىختىكى ھەر بىر نۇرۇقتا <strong>تەصادۇفىي ئۆزگەرگۈچ تاللاش</strong> قىلىنىدۇ.</li>
+      <li>كلاسسىفىكاتسىيە بولسا — <strong>كۆپچىلىك قەررى</strong> (Majority Vote) ئېلىنىدۇ.</li>
+      <li>رېگرېسسىيە بولسا — <strong>ئوتتۇرا قىممەت</strong> (Average) ھېسابلىنىدۇ.</li>
+    </ul>
+    <p class="en">
+      Random Forest is a type of <strong>Ensemble Learning</strong> that combines multiple models to improve overall performance.
+    </p>
+    <ul class="en">
+      <li>Builds many Decision Trees.</li>
+      <li>Each tree is trained on a <strong>random bootstrap sample</strong> of the data (sampling with replacement).</li>
+      <li>At each split, only a <strong>random subset of features</strong> is considered.</li>
+      <li>For classification: final prediction = <strong>majority vote</strong>.</li>
+      <li>For regression: final prediction = <strong>average</strong> of all trees.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 2. قانداق ئىشلەيدۇ؟ / How it works ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">2. قانداق ئىشلەيدۇ؟</div>
+    <div class="section-title-en">2. How Does It Work?</div>
+    <ol>
+      <li><strong>Boostrap Sampling</strong>: بىرلىك مەلۇماتتىن <em>n</em> دانە مەلۇماتنى <strong>قايتا قويۇش بىلەن</strong> (with replacement) تەصادۇفىي تاللايدۇ.</li>
+      <li><strong>Decision Tree قۇرۇش</strong>: ھەر بىر تاللانغان بولۇق بويىچە بىر قەرر دەرىخى قۇرۇش.</li>
+      <li><strong>Feature Randomness</strong>: ھەر بىر نۇرۇق بولۇپ ئايرىلغاندا، بارلىق ئۆزگەرگۈچنى ئەمەس، <strong>تەصادۇفىي چەكلىمىلىك ئۆزگەرگۈچ</strong> (مەسىلەن: <code>sqrt(features)</code>) نىلا تاللايدۇ.</li>
+      <li><strong>بىرلەشتۈرۈش</strong>: بارلىق دەرىخلەرنىڭ نەتىجىسىنى جەملايدۇ.</li>
+    </ol>
+    <p>مەسىلەن: 100 دەرىخ بار. ھەر بىر دەرىخ "ھەئە" ياكى "ياق" دەيدۇ. ئەگەر 70 دەرىخ "ھەئە" دېسە، نەتىجە — **"ھەئە"**.</p>
+    <ol class="en">
+      <li><strong>Bootstrap Sampling</strong>: Randomly select <em>n</em> samples from the dataset <strong>with replacement</strong>.</li>
+      <li><strong>Build a Decision Tree</strong> for each sampled subset.</li>
+      <li><strong>Feature Randomness</strong>: At each node split, consider only a <strong>random subset of features</strong> (e.g., <code>sqrt(total_features)</code>).</li>
+      <li><strong>Aggregate Predictions</strong>: Combine all tree outputs.</li>
+    </ol>
+    <p class="en">Example: With 100 trees, if 70 predict "Yes" and 30 predict "No", the final prediction is <strong>"Yes"</strong>.</p>
+  </div>
+
+  <!-- ============ 3. نېمە ئۈچۈن ئىشلىتىلىدۇ؟ / Use Cases ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">3. نېمە ئۈچۈن ئىشلىتىلىدۇ؟</div>
+    <div class="section-title-en">3. When to Use Random Forest?</div>
+    <ul>
+      <li><strong>كلاسسىفىكاتسىيە</strong>: كرېدىت مۇۋاپىقلىقى، كىسىلدىك باھالاش، كىشى تەلىپى.</li>
+      <li><strong>رېگرېسسىيە</strong>: ئۈي باھاسى، ماشىنا باھاسى، ئىقتىسادىي كۆرگۈزگۈچ.</li>
+      <li>مەلۇماتتىكى <strong>تەسىرگۈچ ئۆزگەرگۈچلەرنى</strong> (Feature Importance) بايان قىلىش.</li>
+    </ul>
+    <ul class="en">
+      <li><strong>Classification</strong>: Credit approval, disease diagnosis, customer churn prediction.</li>
+      <li><strong>Regression</strong>: House pricing, car valuation, economic forecasting.</li>
+      <li>Identify <strong>important features</strong> that drive predictions.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 4. ئالاھىدىلىكى ۋە كەمچىلىكى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">4. ئالاھىدىلىكى ۋە كەمچىلىكى</div>
+    <div class="section-title-en">4. Advantages and Disadvantages</div>
+
+    <h3>ئالاھىدىلىكى:</h3>
+    <ul>
+      <li>Decision Tree گە قارىغاندا <strong>ئاشۇرۇپ ئۈگىنىش</strong> (Overfitting) نىڭ خەۋىپى بەك تۆۋەن.</li>
+      <li>سانلىق ۋە كاتېگورىيىلىك مەلۇمات بىلەن ئىشلەيدۇ.</li>
+      <li>مەلۇماتنى نورماللاشتۇرۇش كېرەك ئەمەس.</li>
+      <li><strong>Feature Importance</strong> ئىقتىدارى بار.</li>
+    </ul>
+
+    <h3 class="en">Advantages:</h3>
+    <ul class="en">
+      <li>Very low risk of <strong>overfitting</strong> compared to a single Decision Tree.</li>
+      <li>Works with both <strong>numerical and categorical data</strong>.</li>
+      <li>No need for <strong>feature scaling or normalization</strong>.</li>
+      <li>Provides built-in <strong>feature importance</strong> scores.</li>
+    </ul>
+
+    <h3>كەمچىلىكى:</h3>
+    <ul>
+      <li>Decision Tree گە قارىغاندا <strong>تۈسۈنىش قىيىن</strong>.</li>
+      <li>چوڭ مەلۇماتدا <strong>ئەمەلگە ئاشۇرۇش ۋاقتى ئۇزۇن</strong>.</li>
+    </ul>
+
+    <h3 class="en">Disadvantages:</h3>
+    <ul class="en">
+      <li>Less <strong>interpretable</strong> than a single Decision Tree ("black-box" nature).</li>
+      <li>Slower prediction speed on <strong>very large datasets</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 5. مىسال كود ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">5. مىسال كود (Scikit-learn بىلەن)</div>
+    <div class="section-title-en">5. Code Examples (with Scikit-learn)</div>
+    <p>تۆۋەندىكىدە <strong>Iris Dataset</strong> بىلەن كلاسسىفىكاتسىيە، <strong>California Housing Dataset</strong> بىلەن رېگرېسسىيە مىسالى كۆرسىتىلگەن.</p>
+    <p class="en">Below are examples using the <strong>Iris Dataset</strong> (classification) and <strong>California Housing Dataset</strong> (regression).</p>
+
+    <div class="code-container">
+      <div class="code-label">مېسال 1: Random Forest – كلاسسىفىكاتسىيە</div>
+      <div class="code-label en" style="direction: ltr; text-align: left;">Example 1: Random Forest – Classification</div>
+      <textarea id="c1" style="display:none;">
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+rf = RandomForestClassifier(n_estimators=100, max_depth=3, random_state=42)
+rf.fit(X_train, y_train)
+
+y_pred = rf.predict(X_test)
+print("دەللىك:", accuracy_score(y_test, y_pred))
+print("\\nتەپسىلى باھا:")
+print(classification_report(y_test, y_pred, target_names=iris.target_names))
+
+# Feature Importance
+importances = rf.feature_importances_
+for name, imp in zip(iris.feature_names, importances):
+    print(f"{name}: {imp:.3f}")
+      </textarea>
+    </div>
+
+    <div class="code-container">
+      <div class="code-label">مېسال 2: Random Forest – رېگرېسسىيە</div>
+      <div class="code-label en" style="direction: ltr; text-align: left;">Example 2: Random Forest – Regression</div>
+      <textarea id="c2" style="display:none;">
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+import numpy as np
+
+data = fetch_california_housing()
+X, y = data.data, data.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+rf_reg = RandomForestRegressor(n_estimators=100, max_depth=10, random_state=42)
+rf_reg.fit(X_train, y_train)
+
+y_pred = rf_reg.predict(X_test)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+print(f"RMSE: {rmse:.2f}")
+      </textarea>
+    </div>
+  </div>
+
+  <!-- ============ 6. مۇھىم پارامېترلار ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">6. مۇھىم پارامېترلار</div>
+    <div class="section-title-en">6. Key Parameters</div>
+    <ul>
+      <li><strong>n_estimators</strong>: قانچە دەرىخ قۇرۇش كېرەك؟ (ئادەتتە 100–500).</li>
+      <li><strong>max_depth</strong>: ھەر بىر دەرىخنىڭ ئېگىزلىكى.</li>
+      <li><strong>max_features</strong>: ھەر بىر نۇرۇقتا تاللىنىدىغان ئۆزگەرگۈچ سانى.</li>
+    </ul>
+    <ul class="en">
+      <li><strong>n_estimators</strong>: Number of trees to build (typically 100–500).</li>
+      <li><strong>max_depth</strong>: Maximum depth of each tree.</li>
+      <li><strong>max_features</strong>: Number of features to consider at each split.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 7. Decision Tree vs Random Forest ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">7. Decision Tree ۋە Random Forest نىڭ پەرقى</div>
+    <div class="section-title-en">7. Decision Tree vs Random Forest</div>
+    <table>
+      <thead>
+        <tr>
+          <th>خاسلىق / Property</th>
+          <th>Decision Tree</th>
+          <th>Random Forest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ئالگورىتم تۈرى / Algorithm Type</td><td>يەككە / Single</td><td>باغلىنىش / Ensemble</td></tr>
+        <tr><td>ئاشۇرۇپ ئۈگىنىش / Overfitting</td><td>بەك كۆپ / High</td><td>نادىر / Low</td></tr>
+        <tr><td>تۈسۈنىش ئاسانلىقى / Interpretability</td><td>بەك ئاسان / Very Easy</td><td>قاتتىق / Hard</td></tr>
+        <tr><td>ئىشلەش سۈرئىتى / Speed</td><td>تېز / Fast</td><td>سىيىر / Slower</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>ماشىنا ئۈگىنىش 5-باب – ئەۋەت دەرىخلىرى (Random Forest)</p>
+    <p>دەرسلىك: ئۇيغۇرچە | English • 2025-يىلى 4-دېكابىر</p>
+    <p>كۆچۈرۈش، ئىشلىتىش ۋە تارقىتىش ھەققى ھەممىگە بار</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const textareas = document.querySelectorAll('textarea[id^="c"]');
+      textareas.forEach(ta => {
+        CodeMirror.fromTextArea(ta, {
+          mode: "python",
+          readOnly: true,
+          lineNumbers: true,
+          theme: "default",
+          direction: "ltr",
+          viewportMargin: Infinity
+        });
+      });
+    });
+  </script>
+</body>
+</html>

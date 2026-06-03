@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ئېھتىماللىق ئۆزگەرگۈچى ۋە ئېھتىماللىق تارقىلىشى — Probability Variable and Probability Distribution</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #2980b9;
+            --bg-light: #f9f9f9;
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+        .lang-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; font-weight: 300; }
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 50px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+        }
+        .tab-btn {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        .tab-btn:hover { background: var(--light); }
+        .tab-btn.active { background: var(--secondary); color: white; }
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+        .section-title i { margin-right: 10px; color: var(--secondary); }
+        .bilingual { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 25px 0; }
+        .uyghur, .english {
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--bg-light);
+            font-size: 1.05rem;
+        }
+        .uyghur {
+            border-right: 4px solid var(--accent);
+            direction: rtl;
+            text-align: right;
+            font-family: "UKIJ Tuz Tom", "Microsoft Uighur", sans-serif;
+        }
+        .english {
+            border-left: 4px solid var(--info);
+            direction: ltr;
+            text-align: left;
+            font-family: "Georgia", "Times New Roman", serif;
+        }
+        .formula {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            overflow-x: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+        }
+        .example {
+            background: linear-gradient(to right, #fffde7, #e8f4f8);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px dashed var(--warning);
+        }
+        .term {
+            font-weight: bold;
+            color: var(--success);
+            padding: 3px 5px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 5px;
+            margin: 0 2px;
+        }
+        .concept-box {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--success);
+        }
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .example-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 3px solid var(--warning);
+        }
+        .example-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .diagram { text-align: center; margin: 30px 0; }
+        .diagram canvas { max-width: 100%; border-radius: 10px; box-shadow: var(--shadow); }
+        .problem {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent);
+        }
+        .solution {
+            background: #e8f8f5;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--success);
+            display: none;
+        }
+        .show-solution {
+            background: var(--info);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .show-solution:hover { background: var(--primary); }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        @media (max-width: 768px) {
+            .bilingual { grid-template-columns: 1fr; }
+            .nav-tabs { flex-direction: column; border-radius: 10px; }
+            .tab-btn { width: 100%; margin: 5px 0; }
+            h1 { font-size: 2rem; }
+            .section-title { font-size: 1.3rem; }
+        }
+        @font-face {
+            font-family: 'UKIJ Tuz Tom';
+            src: local('UKIJ Tuz Tom'), url('https://cdn.jsdelivr.net/gh/UyghurKitabxana/fonts/UKIJTuzTom.ttf') format('truetype');
+        }
+        .uyghur { font-family: 'UKIJ Tuz Tom', 'Microsoft Uighur', sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 1rem; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 12px; text-align: center; }
+        th { background-color: var(--secondary); color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .step {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--secondary);
+        }
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .step-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .math-container {
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="lang-toggle" onclick="toggleLanguage()">ئۇيغۇرچە / English</button>
+        <h1>ئېھتىماللىق ئۆزگەرگۈچى ۋە ئېھتىماللىق تارقىلىشى</h1>
+        <p class="subtitle">Probability Variable and Probability Distribution</p>
+    </header>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab(0)"><i class="fas fa-home"></i> كىرىش</button>
+            <button class="tab-btn" onclick="showTab(1)"><i class="fas fa-dice"></i> ئېھتىماللىق ئۆزگەرگۈچى</button>
+            <button class="tab-btn" onclick="showTab(2)"><i class="fas fa-chart-bar"></i> دائىملىق تارقىلىش</button>
+            <button class="tab-btn" onclick="showTab(3)"><i class="fas fa-wave-square"></i> ئۈزلۈكسىز تارقىلىش</button>
+            <button class="tab-btn" onclick="showTab(4)"><i class="fas fa-flask"></i> ئېھتىماللىق زىچلىقى</button>
+            <button class="tab-btn" onclick="showTab(5)"><i class="fas fa-book"></i> تارقىلىش تۈرلىرى</button>
+        </div>
+
+        <!-- Introduction -->
+        <div class="tab-content active">
+            <h2 class="section-title"><i class="fas fa-home"></i> كىرىش | Introduction</h2>
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p><span class="term">ئېھتىماللىق ئۆزگەرگۈچى</span>: بىر ئۆزگەرگۈچىنىڭ قىممىتىنىڭ ئېلىنىش ئېھتىماللىقى بار بولغان ئۆزگەرگۈچى. مەسىلەن، زار ئاتقاندا چىققان نۇمۇر {1, 2, 3, 4, 5, 6} نىڭ ھەر قايسىسى بولۇپ، ھەر بىر نۇمۇرنىڭ چىقىش ئېھتىماللىقى بولغاچقا، زار ئاتقاندا چىققان نۇمۇر ئېھتىماللىق ئۆزگەرگۈچى دەپ ئېيتىلىدۇ.</p>
+                    <p><span class="term">ئېھتىماللىق تارقىلىشى</span>: ئېھتىماللىق ئۆزگەرگۈچىنىڭ ئېلىدىغان قىممىتى ۋە بۇ قىممەتنىڭ ئېلىنىش ئېھتىماللىقىنىڭ مۇناسىۋىتى. مەسىلەن، زار ئاتقاندا، 1 دىن 6 غىچە بولغان ئېھتىماللىق ئۆزگەرگۈچى قىممىتىگە ھەر قايسىسى ئېھتىماللىقى مۇناسىۋەتلىك بولغانلىقى ئۈچۈن، بۇ ئېختىماللىق تارقىلىشى دەپ ئېيتىلىدۇ.</p>
+                </div>
+                <div class="english">
+                    <p><span class="term">Random variable</span>: A variable whose value has a probability of occurrence. For example, when rolling a die, the outcome is one of {1, 2, 3, 4, 5, 6}, and since each number has a probability of occurring, the outcome of rolling a die is called a random variable.</p>
+                    <p><span class="term">Probability distribution</span>: The relationship between the values a random variable can take and the probability of taking those values. For example, when rolling a die, since each value from 1 to 6 is associated with a probability, this is called a probability distribution.</p>
+                </div>
+            </div>
+            <div class="note-box">
+                <strong>ئەھمىيەتلىك ئېسكەرتىش / Important Note:</strong> 
+                <div class="bilingual">
+                    <div class="uyghur">ئېھتىماللىق ئۆزگەرگۈچىنىڭ بارلىق مۇمكىن بولغان قىممەتلەرنىڭ ئېھتىماللىقىنىڭ جەمى 1 بولۇشى كېرەك.</div>
+                    <div class="english">The sum of probabilities of all possible values of a random variable must equal 1.</div>
+                </div>
+            </div>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h4>مىسال 1: زار ئاتقان | Example 1: Rolling a Die</h4>
+                    <p>زار ئاتقاندا چىققان نۇمۇر ئېھتىماللىق ئۆزگەرگۈچى. ھەر بىر نۇمۇرنىڭ چىقىش ئېھتىماللىقى بولىدۇ.</p>
+                    <p>The outcome of rolling a die is a random variable. Each number has a probability of occurring.</p>
+                </div>
+                <div class="example-card">
+                    <h4>مىسال 2: تەڭگە ئاتقان | Example 2: Coin Toss</h4>
+                    <p>تەڭگە ئاتقاندا، قارا يۈزگە «1»، ئارقى يۈزگە «0» دەپ قارايسۇن. قارا يۈز ۋە ئارقى يۈزنىڭ چىقىش ئېھتىماللىقى بولغاچقا، بۇمۇ ئېختىماللىق ئۆزگەرگۈچى.</p>
+                    <p>When tossing a coin, assign "1" to heads and "0" to tails. Since both heads and tails have a probability, this is also a random variable.</p>
+                </div>
+                <div class="example-card">
+                    <h4>مىسال 3: ئوقۇغۇچىلارنىڭ ئىمتىھان نەتىجىسى | Example 3: Student Exam Scores</h4>
+                    <p>بىر سىنىپتىكى ئوقۇغۇچىلارنىڭ ئىمتىھان نەتىجىسى ئېختىماللىق ئۆزگەرگۈچى بولۇپ، ھەر بىر نەتىجىنىڭ ئېلىنىش ئېختىماللىقى بار.</p>
+                    <p>The exam scores of students in a class are a random variable, with each score having a probability of occurrence.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Random Variable -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-dice"></i> ئېھتىماللىق ئۆزگەرگۈچى | Random Variable</h2>
+            <div class="concept-box">
+                <h3>ئېھتىماللىق ئۆزگەرگۈچى نېمە؟ | What is a Random Variable?</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p><span class="term">ئېختىماللىق ئۆزگەرگۈچى</span> دېگەندە، بىر ئۆزگەرگۈچىنىڭ قىممىتىنىڭ ئېلىنىش ئېختىماللىقى بار بولغان ئۆزگەرگۈچى. مەسىلەن، زار ئاتقاندا چىققان نۇمۇر {1, 2, 3, 4, 5, 6} نىڭ ھەر قايسىسى بولۇپ، ھەر بىر نۇمۇرنىڭ چىقىش ئېختىماللىقى بولغاچقا، زار ئاتقاندا چىققان نۇمۇر ئېختىماللىق ئۆزگەرگۈچى دەپ ئېيتىلىدۇ.</p>
+                        <div class="formula">
+                            X \in \{1, 2, 3, 4, 5, 6\}
+                        </div>
+                        <p>مەسىلەن، «زار ئاتقاندا 3 نۇمۇر چىقىش ئېختىماللىقى» تۆۋەندىكىدەك يېزىلىدۇ:</p>
+                        <div class="formula">
+                            P(X=3) = \frac{1}{6}
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>A <span class="term">random variable</span> is a variable whose value has a probability of occurrence. For example, when rolling a die, the outcome is one of {1, 2, 3, 4, 5, 6}, and each number has a probability of occurring, so it is called a random variable.</p>
+                        <div class="formula">
+                            X \in \{1, 2, 3, 4, 5, 6\}
+                        </div>
+                        <p>For example, "the probability of rolling a 3" is written as:</p>
+                        <div class="formula">
+                            P(X=3) = \frac{1}{6}
+                        </div>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <canvas id="randomVariableChart"></canvas>
+                </div>
+            </div>
+            <div class="concept-box">
+                <h3>سانسىز پەزىلەتلەرنىڭ ئېختىماللىق ئۆزگەرگۈچىسى | Random Variables for Non-Numeric Events</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>تەڭگە ئاتقاندا، قارا يۈزگە «1»، ئارقى يۈزگە «0» دەپ قارايمىز. قارا يۈز ۋە ئارقى يۈزنىڭ چىقىش ئېختىماللىقى بولغاچقا، بۇمۇ ئېختىماللىق ئۆزگەرگۈچى:</p>
+                        <div class="formula">
+                            P(X=1) = \frac{1}{2}, \quad P(X=0) = \frac{1}{2}
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>When tossing a coin, we assign "1" to heads and "0" to tails. Since both have a probability, this is a random variable:</p>
+                        <div class="formula">
+                            P(X=1) = \frac{1}{2}, \quad P(X=0) = \frac{1}{2}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discrete Probability Distribution -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-chart-bar"></i> دائىملىق ئېختىماللىق تارقىلىشى | Discrete Probability Distribution</h2>
+            <div class="concept-box">
+                <h3>دائىملىق ئېختىماللىق ئۆزگەرگۈچىسى | Discrete Random Variable</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p><span class="term">دائىملىق ئۆزگەرگۈچى</span> ئۈزۈلۈشلۈك قىممەتلەرنى ئېلىدۇ. مەسىلەن، زارنىڭ نۇمۇرى ياكى ئادەم سانى.</p>
+                        <table>
+                            <tr><th>X</th><th>\(x_1\)</th><th>\(x_2\)</th><th>...</th><th>\(x_n\)</th></tr>
+                            <tr><td>P(X)</td><td>\(p_1\)</td><td>\(p_2\)</td><td>...</td><td>\(p_n\)</td></tr>
+                        </table>
+                        <p>دائىملىق ئېختىماللىق تارقىلىشىنىڭ ئاساسىي شەرتى:</p>
+                        <div class="formula">
+                            \sum_{i=1}^{n} P(X = x_i) = 1
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>A <span class="term">discrete random variable</span> takes discrete values, like die outcomes or number of people.</p>
+                        <table>
+                            <tr><th>X</th><th>\(x_1\)</th><th>\(x_2\)</th><th>...</th><th>\(x_n\)</th></tr>
+                            <tr><td>P(X)</td><td>\(p_1\)</td><td>\(p_2\)</td><td>...</td><td>\(p_n\)</td></tr>
+                        </table>
+                        <p>The fundamental condition for discrete probability distribution:</p>
+                        <div class="formula">
+                            \sum_{i=1}^{n} P(X = x_i) = 1
+                        </div>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <canvas id="discreteDistributionChart"></canvas>
+                </div>
+            </div>
+            <div class="concept-box">
+                <h3>ئېختىماللىق مەسىلىسى فۇنكسىيىسى | Probability Mass Function</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>دائىملىق ئېختىماللىق ئۆزگەرگۈچىسىنىڭ ئېختىماللىقى:</p>
+                        <div class="formula">
+                            P(X=x) = f(x), \quad \sum_{i=1}^{n} f(x_i) = 1
+                        </div>
+                        <p>بۇ يەردىكى \(f(x)\) نى <span class="term">ئېختىماللىق مەسىلىسى فۇنكسىيىسى</span> (PMF) دەپ ئاتايدۇ.</p>
+                    </div>
+                    <div class="english">
+                        <p>The probability of a discrete random variable:</p>
+                        <div class="formula">
+                            P(X=x) = f(x), \quad \sum_{i=1}^{n} f(x_i) = 1
+                        </div>
+                        <p>Here, \(f(x)\) is called the <span class="term">Probability Mass Function</span> (PMF).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Continuous Probability Distribution -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-wave-square"></i> ئۈزلۈكسىز ئېختىماللىق تارقىلىشى | Continuous Probability Distribution</h2>
+            <div class="concept-box">
+                <h3>ئۈزلۈكسىز ئېختىماللىق ئۆزگەرگۈچىسى | Continuous Random Variable</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p><span class="term">ئۈزلۈكسىز ئۆزگەرگۈچى</span> چەكسىز قىممەتلەرنى ئېلىدۇ، مەسىلەن، سالماق ياكى تېمپېراتۇرا.</p>
+                        <p>ئۈزلۈكسىز ئۆزگەرگۈچىنىڭ ئاساسىي خۇسۇسىيىتى: بىر نۇقتىنىڭ ئېختىماللىقى نۆل بولىدۇ.</p>
+                    </div>
+                    <div class="english">
+                        <p>A <span class="term">continuous random variable</span> takes infinitely many values, e.g., weight or temperature.</p>
+                        <p>The key property of continuous variables: the probability at a single point is zero.</p>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <canvas id="continuousDistributionChart"></canvas>
+                </div>
+            </div>
+            <div class="example">
+                <h3>مىسال: ئۈزلۈكسىز ئېختىماللىق | Example: Continuous Probability</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>X نىڭ قىممىتى 1 دىن 6 غىچە. \(P(X=3) = 0\) چۈنكى ئۈزلۈكسىز تارقىلىشتا بىر نۇقتىنىڭ ئېختىماللىقى نۆل.</p>
+                        <p>لېكىن بىر ئارىلىقتىكى ئېختىماللىق نۆلدىن چوڭ بولىدۇ: \(P(2 \leq X \leq 4) > 0\)</p>
+                    </div>
+                    <div class="english">
+                        <p>X takes values from 1 to 6. \(P(X=3) = 0\) because in a continuous distribution, the probability at a single point is zero.</p>
+                        <p>However, the probability over an interval is positive: \(P(2 \leq X \leq 4) > 0\)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Probability Density Function -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-flask"></i> ئېختىماللىق زىچلىقى | Probability Density Function</h2>
+            <div class="concept-box">
+                <h3>ئېختىماللىق زىچلىقى | Probability Density</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>ئۈزلۈكسىز تارقىلىشتا، ئېختىماللىق زىچلىقى X نىڭ قىممىتىنىڭ نىسبىي چىقىش ئاسانلىقىنى كۆرسىتىدۇ.</p>
+                        <p>ئېختىماللىق زىچلىقى فۇنكسىيىسى (PDF) نىڭ ئاساسىي شەرتى:</p>
+                        <div class="formula">
+                            \int_{-\infty}^{\infty} f(x) \, dx = 1
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>In a continuous distribution, probability density shows the relative likelihood of X's values.</p>
+                        <p>The fundamental condition for Probability Density Function (PDF):</p>
+                        <div class="formula">
+                            \int_{-\infty}^{\infty} f(x) \, dx = 1
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="example">
+                <h3>مىسال 1: ئېختىماللىق زىچلىقى فۇنكسىيىسى | Example 1: Probability Density Function</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>X نىڭ قىممىتى 0 دىن 3 غىچە، فۇنكسىيە:</p>
+                        <div class="formula">
+                            f(x) = \frac{x}{3}, \quad (0 \leq x \leq 3)
+                        </div>
+                        <p>ھېسابلاش:</p>
+                        <div class="step">
+                            <div class="step-title"><span class="step-number">1</span> فۇنكسىيەنى تەكشۈرۈش</div>
+                            <p>فۇنكسىيەنىڭ توغرىلىقىنى تەكشۈرۈش ئۈچۈن، ئىنتېگرالى 1 گە تەڭ بولۇشى كېرەك:</p>
+                            <div class="formula">
+                                \int_0^3 \frac{x}{3} \, dx = \left[ \frac{x^2}{6} \right]_0^3 = \frac{3^2}{6} - \frac{0^2}{6} = \frac{9}{6} = 1.5
+                            </div>
+                            <p>ئىنتېگرال 1.5 بولغانلىقى ئۈچۈن، نورماللاش كېرەك:</p>
+                            <div class="formula">
+                                f(x) = \frac{x}{4.5}, \quad \int_0^3 \frac{x}{4.5} \, dx = 1
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-title"><span class="step-number">2</span> قىممەتلەرنى ھېسابلاش</div>
+                            <p>\(f(1) = \frac{1}{4.5} \approx 0.222\), \(f(3) = \frac{3}{4.5} \approx 0.667\)</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-title"><span class="step-number">3</span> ئېختىماللىق ھېسابلاش</div>
+                            <p>\(P(1 \leq X \leq 2) = \int_1^2 \frac{x}{4.5} \, dx = \left[ \frac{x^2}{9} \right]_1^2 = \frac{4}{9} - \frac{1}{9} = \frac{3}{9} = \frac{1}{3}\)</p>
+                        </div>
+                    </div>
+                    <div class="english">
+                        <p>X takes values from 0 to 3, function:</p>
+                        <div class="formula">
+                            f(x) = \frac{x}{3}, \quad (0 \leq x \leq 3)
+                        </div>
+                        <p>Calculation:</p>
+                        <div class="step">
+                            <div class="step-title"><span class="step-number">1</span> Verify the function</div>
+                            <p>The integral must equal 1:</p>
+                            <div class="formula">
+                                \int_0^3 \frac{x}{3} \, dx = \left[ \frac{x^2}{6} \right]_0^3 = \frac{9}{6} = 1.5
+                            </div>
+                            <p>Since the integral is 1.5, normalize:</p>
+                            <div class="formula">
+                                f(x) = \frac{x}{4.5}, \quad \int_0^3 \frac{x}{4.5} \, dx = 1
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-title"><span class="step-number">2</span> Calculate values</div>
+                            <p>\(f(1) = \frac{1}{4.5} \approx 0.222\), \(f(3) = \frac{3}{4.5} \approx 0.667\)</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-title"><span class="step-number">3</span> Calculate probability</div>
+                            <p>\(P(1 \leq X \leq 2) = \int_1^2 \frac{x}{4.5} \, dx = \left[ \frac{x^2}{9} \right]_1^2 = \frac{4}{9} - \frac{1}{9} = \frac{1}{3}\)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <canvas id="pdfChart1"></canvas>
+                </div>
+            </div>
+            <div class="example">
+                <h3>مىسال 2: يېشىل يورۇقلۇق چىراغ | Example 2: Green Light Duration</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>X يورۇقلۇق چىراغنىڭ يېشىل ۋاقتى (سېكۇنت)، \(f(x) = \frac{1}{30}\), \(0 \leq x \leq 30\). \(P(10 \leq X \leq 20)\) نى ھېسابلاش:</p>
+                        <div class="formula">
+                            P(10 \leq X \leq 20) = \int_{10}^{20} \frac{1}{30} \, dx = \frac{20-10}{30} = \frac{1}{3}
+                        </div>
+                        <p>بۇ <span class="term">بىر تەرەپلىمە تارقىلىش</span> (Uniform Distribution) نىڭ مىسالى.</p>
+                    </div>
+                    <div class="english">
+                        <p>X is the duration of a green light (seconds), \(f(x) = \frac{1}{30}\), \(0 \leq x \leq 30\). Calculate \(P(10 \leq X \leq 20)\):</p>
+                        <div class="formula">
+                            P(10 \leq X \leq 20) = \int_{10}^{20} \frac{1}{30} \, dx = \frac{20-10}{30} = \frac{1}{3}
+                        </div>
+                        <p>This is an example of <span class="term">Uniform Distribution</span>.</p>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <canvas id="pdfChart2"></canvas>
+                </div>
+            </div>
+            <div class="problem">
+                <h3>مەسىلە: تاسادىپىي ۋاقىت | Problem: Random Time</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>X 0 دىن 5 گىچە، \(f(x) = \frac{2x}{25}\). \(P(2 \leq X \leq 4)\) نى ھېسابلاش.</p>
+                    </div>
+                    <div class="english">
+                        <p>X from 0 to 5, \(f(x) = \frac{2x}{25}\). Calculate \(P(2 \leq X \leq 4)\).</p>
+                    </div>
+                </div>
+                <button class="show-solution" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">يېشىشنى كۆرسىتىش | Show Solution</button>
+                <div class="solution">
+                    <div class="step">
+                        <div class="step-title"><span class="step-number">1</span> فۇنكسىيەنى تەكشۈرۈش | Verify the function</div>
+                        <div class="formula">
+                            \int_0^5 \frac{2x}{25} \, dx = \left[ \frac{x^2}{25} \right]_0^5 = \frac{25}{25} = 1
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-title"><span class="step-number">2</span> ئېختىماللىق ھېسابلاش | Calculate probability</div>
+                        <div class="formula">
+                            P(2 \leq X \leq 4) = \int_2^4 \frac{2x}{25} \, dx = \left[ \frac{x^2}{25} \right]_2^4 = \frac{16}{25} - \frac{4}{25} = \frac{12}{25} = 0.48
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Distribution Types -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-book"></i> تارقىلىش تۈرلىرى | Types of Distributions</h2>
+            <div class="concept-box">
+                <h3>بىر تەرەپلىمە تارقىلىش | Uniform Distribution</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>باراۋەر ئېختىماللىق بىلەن تارقىلىدۇ. مەسىلەن، \(f(x) = \frac{1}{b-a}\), \(a \leq x \leq b\).</p>
+                        <p>ئاساسىي خۇسۇسىيىتى: ھەر بىر قىممەتنىڭ ئېختىماللىقى باراۋەر.</p>
+                    </div>
+                    <div class="english">
+                        <p>Distributed with equal probability, e.g., \(f(x) = \frac{1}{b-a}\), \(a \leq x \leq b\).</p>
+                        <p>Main property: every value has equal probability.</p>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <canvas id="uniformChart"></canvas>
+                </div>
+            </div>
+            <div class="concept-box">
+                <h3>نورمال تارقىلىش | Normal Distribution</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>قوڭغۇر شەكىلدىكى تارقىلىش، فۇنكسىيە:</p>
+                        <div class="formula">
+                            f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+                        </div>
+                        <p>ئاساسىي خۇسۇسىيىتى: ئوتتۇرىچە قىممەت (\(\mu\)) دىن ئىككى تەرەپكە سىممېتىرىك.</p>
+                    </div>
+                    <div class="english">
+                        <p>Bell-shaped distribution, function:</p>
+                        <div class="formula">
+                            f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+                        </div>
+                        <p>Main property: symmetric around the mean (\(\mu\)).</p>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <canvas id="normalChart"></canvas>
+                </div>
+            </div>
+            <div class="concept-box">
+                <h3>بىنومىيال تارقىلىش | Binomial Distribution</h3>
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>n قېتىم سىناقتىكى مۇۋەپپەقىيەت سانى، \(P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}\).</p>
+                        <p>ئاساسىي خۇسۇسىيىتى: ھەر بىر سىناقتىكى مۇۋەپپەقىيەت ئېھتىماللىقى باراۋەر.</p>
+                    </div>
+                    <div class="english">
+                        <p>Number of successes in n trials, \(P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}\).</p>
+                        <p>Main property: constant probability of success in each trial.</p>
+                    </div>
+                </div>
+                <div class="diagram">
+                    <canvas id="binomialChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Probability Tutorial | KaLBiL Edu</p>
+    </footer>
+
+    <script>
+        let currentLanguage = 'uyghur'; // 'uyghur' or 'english'
+        
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'uyghur' ? 'english' : 'uyghur';
+            const buttonText = currentLanguage === 'uyghur' ? 'ئۇيغۇرچە / English' : 'Uyghur / English';
+            document.querySelector('.lang-toggle').textContent = buttonText;
+            
+            // Toggle visibility of bilingual sections
+            const bilingualSections = document.querySelectorAll('.bilingual');
+            bilingualSections.forEach(section => {
+                const uyghurDiv = section.querySelector('.uyghur');
+                const englishDiv = section.querySelector('.english');
+                
+                if (currentLanguage === 'uyghur') {
+                    uyghurDiv.style.display = 'block';
+                    englishDiv.style.display = 'none';
+                } else {
+                    uyghurDiv.style.display = 'none';
+                    englishDiv.style.display = 'block';
+                }
+            });
+        }
+
+        function showTab(index) {
+            document.querySelectorAll('.tab-content').forEach((content, i) => {
+                content.classList.toggle('active', i === index);
+            });
+            document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+        }
+
+        // Chart.js Visualizations
+        new Chart(document.getElementById('randomVariableChart'), {
+            type: 'bar',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6'],
+                datasets: [{ label: 'Probability', data: [1/6, 1/6, 1/6, 1/6, 1/6, 1/6], backgroundColor: '#3498db' }]
+            },
+            options: { 
+                scales: { 
+                    y: { title: { display: true, text: 'Probability' } }, 
+                    x: { title: { display: true, text: 'Die Outcome' } } 
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Die Roll Probability Distribution'
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('discreteDistributionChart'), {
+            type: 'bar',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6'],
+                datasets: [{ label: 'Probability', data: [1/6, 1/6, 1/6, 1/6, 1/6, 1/6], backgroundColor: '#3498db' }]
+            },
+            options: { 
+                scales: { 
+                    y: { title: { display: true, text: 'Probability' } }, 
+                    x: { title: { display: true, text: 'Random Variable' } } 
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Discrete Probability Distribution'
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('continuousDistributionChart'), {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 100}, (_, i) => -3 + i*6/99),
+                datasets: [{ 
+                    label: 'Normal Density', 
+                    data: Array.from({length: 100}, (_, i) => Math.exp(-((-3 + i*6/99)**2)/2)/(Math.sqrt(2*Math.PI))), 
+                    borderColor: '#3498db', 
+                    fill: false,
+                    tension: 0.4
+                }]
+            },
+            options: { 
+                scales: { 
+                    y: { title: { display: true, text: 'Probability Density' } }, 
+                    x: { title: { display: true, text: 'Random Variable' } } 
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Continuous Probability Distribution (Normal)'
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('pdfChart1'), {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 100}, (_, i) => i*3/99),
+                datasets: [{ 
+                    label: 'f(x) = x/4.5', 
+                    data: Array.from({length: 100}, (_, i) => (i*3/99)/4.5), 
+                    borderColor: '#3498db', 
+                    fill: false,
+                    tension: 0.4
+                }]
+            },
+            options: { 
+                scales: { 
+                    y: { title: { display: true, text: 'Density' } }, 
+                    x: { title: { display: true, text: 'x' } } 
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Probability Density Function Example 1'
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('pdfChart2'), {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 100}, (_, i) => i*30/99),
+                datasets: [{ 
+                    label: 'f(x) = 1/30', 
+                    data: Array(100).fill(1/30), 
+                    borderColor: '#3498db', 
+                    fill: false,
+                    tension: 0
+                }]
+            },
+            options: { 
+                scales: { 
+                    y: { title: { display: true, text: 'Density' } }, 
+                    x: { title: { display: true, text: 'x (seconds)' } } 
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Uniform Distribution - Green Light Duration'
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('uniformChart'), {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 100}, (_, i) => i*5/99),
+                datasets: [{ 
+                    label: 'Uniform f(x) = 1/5', 
+                    data: Array(100).fill(1/5), 
+                    borderColor: '#3498db', 
+                    fill: false,
+                    tension: 0
+                }]
+            },
+            options: { 
+                scales: { 
+                    y: { title: { display: true, text: 'Density' } }, 
+                    x: { title: { display: true, text: 'x' } } 
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Uniform Distribution'
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('normalChart'), {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 100}, (_, i) => -3 + i*6/99),
+                datasets: [{ 
+                    label: 'Normal Distribution', 
+                    data: Array.from({length: 100}, (_, i) => Math.exp(-((-3 + i*6/99)**2)/2)/(Math.sqrt(2*Math.PI))), 
+                    borderColor: '#3498db', 
+                    fill: false,
+                    tension: 0.4
+                }]
+            },
+            options: { 
+                scales: { 
+                    y: { title: { display: true, text: 'Density' } }, 
+                    x: { title: { display: true, text: 'x' } } 
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Normal Distribution'
+                    }
+                }
+            }
+        });
+
+        function factorial(n) {
+            if (n === 0) return 1;
+            return n * factorial(n-1);
+        }
+
+        new Chart(document.getElementById('binomialChart'), {
+            type: 'bar',
+            data: {
+                labels: Array.from({length: 11}, (_, i) => i),
+                datasets: [{ 
+                    label: 'Binomial (n=10, p=0.5)', 
+                    data: Array.from({length: 11}, (_, k) => (Math.pow(0.5, 10) * factorial(10)/(factorial(k)*factorial(10-k)))), 
+                    backgroundColor: '#3498db' 
+                }]
+            },
+            options: { 
+                scales: { 
+                    y: { title: { display: true, text: 'Probability' } }, 
+                    x: { title: { display: true, text: 'Number of Successes' } } 
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Binomial Distribution'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

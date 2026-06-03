@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نۇقتا باھالاش | Point Estimation</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #2980b9;
+            --bg-light: #f9f9f9;
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 50px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        
+        .tab-btn:hover {
+            background: var(--light);
+        }
+        
+        .tab-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .bilingual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+        
+        .uyghur, .english {
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--bg-light);
+            font-size: 1.05rem;
+        }
+        
+        .uyghur {
+            border-right: 4px solid var(--accent);
+            direction: rtl;
+            text-align: right;
+            font-family: "UKIJ Tuz Tom", "Microsoft Uighur", "Segoe UI", sans-serif;
+        }
+        
+        .english {
+            border-left: 4px solid var(--info);
+            direction: ltr;
+            text-align: left;
+            font-family: "Georgia", "Times New Roman", serif;
+        }
+        
+        .formula {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            overflow-x: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+        }
+        
+        .example {
+            background: linear-gradient(to right, #fffde7, #e8f4f8);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px dashed var(--warning);
+        }
+        
+        .term {
+            font-weight: bold;
+            color: var(--success);
+            padding: 3px 5px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 5px;
+            margin: 0 2px;
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .example-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--warning);
+        }
+        
+        .example-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .diagram img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3 i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        @media (max-width: 768px) {
+            .bilingual {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* ئۇيغۇرچە خەتكە ماس كېلىدىغان فونت تەڭشىكى */
+        @font-face {
+            font-family: 'UKIJ Tuz Tom';
+            src: local('UKIJ Tuz Tom'), local('UKIJ Tuz'), url('https://cdn.jsdelivr.net/gh/UyghurKitabxana/fonts/UKIJTuzTom.ttf') format('truetype');
+        }
+
+        .uyghur {
+            font-family: 'UKIJ Tuz Tom', 'Microsoft Uighur', 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>نۇقتا باھالاش | Point Estimation</h1>
+        <p class="subtitle">ئىستاتىستىكا ئارقىلىق پارامېتىرلارنى باھالاش | Estimating Parameters through Statistics</p>
+    </header>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab(0)"><i class="fas fa-home"></i> كىرىش</button>
+            <button class="tab-btn" onclick="showTab(1)"><i class="fas fa-bullseye"></i> نۇقتا باھالاش</button>
+            <button class="tab-btn" onclick="showTab(2)"><i class="fas fa-ruler-combined"></i> باھالاشچان ۋە باھا</button>
+            <button class="tab-btn" onclick="showTab(3)"><i class="fas fa-balance-scale"></i> باھالاشچان خۇسۇسىيىتى</button>
+            <button class="tab-btn" onclick="showTab(4)"><i class="fas fa-chart-line"></i> تەرەپسزلىك ۋە خاتالىق</button>
+        </div>
+
+        <!-- كىرىش قىسمى -->
+        <div class="tab-content active">
+            <h2 class="section-title"><i class="fas fa-home"></i> ئىستاتىستىكا ۋە باھالاش</h2>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>ئىستاتىستىكا ئىككى خىل: «چۈشەندۈرگۈچى ئىستاتىستىكا» ۋە «باھالاشچان ئىستاتىستىكا».</p>
+                    <ul>
+                        <li><span class="term">چۈشەندۈرگۈچى ئىستاتىستىكا</span>: سانلىق مەلۇماتنى تەرتىپلەپ، جەدۋەل ياكى گرافىك ئارقىلىق كۆرسىتىش.</li>
+                        <li><span class="term">باھالاشچان ئىستاتىستىكا</span>:  توپلام «بىر قىسىمى (نەمونە)» نى قوللىنىپ، توپلام  ئۇچۇرلىرىنى باھالاش.</li>
+                    </ul>
+                    <p>باھالاشچان ئىستاتىستىكانىڭ ئىككى خىل ئۇسۇلى بار:</p>
+                    <ul>
+                        <li><span class="term">باھالاش</span>: توپلامنىڭ ئالاھىدەلىكلىرىنى (ئوتتۇرا قىممەت قاتارلىق) ئىستاتىستىكا ئارقىلىق باھالاش.</li>
+                        <li><span class="term">سىناش</span>:  توپلامدىن  چىقىرىلغان نۇمونىنىڭ ئىستاتىستىكا ئۇچۇرلىرىغا ئىلىكتىن قويۇلغان گۇماننىڭ توغرىسىنى ئىستاتىستىكا ئارقىلىق بەلگىلەش.</li>
+                    </ul>
+                </div>
+                <div class="english">
+                    <p>Statistics is divided into two types: "Descriptive Statistics" and "Inferential Statistics".</p>
+                    <ul>
+                        <li><span class="term">Descriptive Statistics</span>: Organizing and presenting data through tables and graphs.</li>
+                        <li><span class="term">Inferential Statistics</span>: Using a sample from the population to make inferences about the population.</li>
+                    </ul>
+                    <p>Inferential statistics includes two main methods:</p>
+                    <ul>
+                        <li><span class="term">Estimation</span>: Statistically estimating population parameters (like mean).</li>
+                        <li><span class="term">Hypothesis Testing</span>: Statistically determining whether a hypothesis about sample statistics is valid.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h4><i class="fas fa-users"></i> ئەمەلىي مىسال</h4>
+                    <p>ياپونىيەلىكلەرنىڭ ھەممىسىدىن ( توپلام) تەۋەككۈللىك 100 كىشىنى ئېلىپ:</p>
+                    <ul>
+                        <li>باھالاش: 100 كىشىنىڭ بوي ئۇزۇنلۇقىدىن ياپونىيەلىكلەرنىڭ ئوتتۇرا بوي ئۇزۇنلۇقىنى باھالاش.</li>
+                        <li>سىناش: ياپونىيەلىكلەرنىڭ ئوتتۇرا بوي ئۇزۇنلۇقى 165cm دەپ ئېيتىلىدۇ، ئېلىنغان 100 كىشىنىڭ ئوتتۇرىسى 167cm. بۇ قىممەت توغرىسىنى بەلگىلەش.</li>
+                    </ul>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-industry"></i> كەسپىي مىسال</h4>
+                    <p>بىر زاۋۇتنىڭ ھەممە مەھسۇلاتىدىن 1000 تال ئېلىپ:</p>
+                    <ul>
+                        <li>باھالاش: بۇ 1000 تالدىن  توپلام ئوتتۇرا چوقۇملىقىنى باھالاش.</li>
+                        <li>سىناش: مەھسۇلاتنىڭ ئوتتۇرا چوقۇملىقى 5mm دەپ بەلگىلەنگەن، ئېلىنغان نۇمونىنىڭ ئوتتۇرىسى 5.2mm. بۇ قىممەتنىڭ قوبۇل قىلىنىشىنى بەلگىلەش.</li>
+                    </ul>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-heartbeat"></i> تىببىي مىسال</h4>
+                    <p>بىر شەھەردىكى ھەممە بالىلاردىن 500 بالىنى ئېلىپ:</p>
+                    <ul>
+                        <li>باھالاش: بۇ 500 بالىنىڭ قان باسىمىدىن شەھەردىكى ھەممە بالىلارنىڭ ئوتتۇرا قان باسىمىنى باھالاش.</li>
+                        <li>سىناش: بالىلارنىڭ ئوتتۇرا قان باسىمى 90/60 دەپ بەلگىلەنگەن، ئېلىنغان نەمونىنىڭ ئوتتۇرىسى 92/62. بۇ ئوخشىمايدىغانلىقنىڭ ئەھمىيىتىنى بەلگىلەش.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="summary-cards">
+                <div class="card">
+                    <h3><i class="fas fa-map-marker-alt"></i> نۇقتا باھالاش</h3>
+                    <p>ئوتتۇرا قىممەتنى بىر خىل قىممەت بىلەن باھالاش. مەسىلەن:  توپلام ئوتتۇرا قىممىتى 93.8.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-arrows-alt-h"></i> ئارىلىق باھالاش</h3>
+                    <p>ئوتتۇرا قىممەتنى بىر ئارىلىق بىلەن باھالاش. مەسىلەن:  توپلامنىڭ ئوتتۇرا قىممىتى 90-97 ئارىلىقىدا.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-book"></i> توپلام سان ۋە مەخرەج</h3>
+                    <p>توپلام سان:  توپلامنىڭ ئالاھىدەلىكلىرى (ئوتتۇرا، چېچىلما). مەخرەج: كەسرنىڭ ئاستىدىكى سان.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- نۇقتا باھالاش قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-bullseye"></i> نۇقتا باھالاش نېمە؟</h2>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p><span class="term">نۇقتا باھالاش</span> دېگەنلىك  توپلامدىن  چىقىرىلغان نەمونىنى قوللىنىپ،  توپلامنىڭ پارامېتىرىنى (ئانا سان) باھالاش دېگەنلىك.</p>
+                    <p>بۇ بۆلەكتە، توپلام ئوتتۇرا قىممەتنىڭ نۇقتا باھالىشىنى چۈشەندۈرىمىز.</p>
+                    <p>47 ۋىلايەتتىكى كىنو زاللىرىنىڭ جەمئىي ئېكران سانىنى نۇقتا باھالاش قىلىپ بېقەيدۇ. 47 ۋىلايەتنىڭ ھەممە مەلۇماتىنى تەكشۈرۈش قىيىن بولغاچقا، تەۋەككۈللىك 10 ۋىلايەتنىڭ مەلۇماتىنى ئېلىپ چىقتۇق.</p>
+                </div>
+                <div class="english">
+                    <p><span class="term">Point Estimation</span> is the process of using sample data to calculate a single value (known as a point estimate) which serves as the "best guess" for an unknown population parameter.</p>
+                    <p>In this section, we'll focus on point estimation of the population mean.</p>
+                    <p>To estimate the total number of screens in cinemas across 47 prefectures, we randomly selected 10 prefectures since collecting data from all 47 would be time-consuming.</p>
+                </div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>ۋىلايەت</th>
+                        <th>جەمئىي ئېكران سانى</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>ھيوگو</td><td>126</td></tr>
+                    <tr><td>2</td><td>ئوساكا</td><td>224</td></tr>
+                    <tr><td>3</td><td>نارا</td><td>34</td></tr>
+                    <tr><td>4</td><td>ئىۋاتې</td><td>25</td></tr>
+                    <tr><td>5</td><td>چىبا</td><td>199</td></tr>
+                    <tr><td>6</td><td>ئىباراكى</td><td>89</td></tr>
+                    <tr><td>7</td><td>فۇكۇئوكا</td><td>178</td></tr>
+                    <tr><td>8</td><td>يا مەن</td><td>14</td></tr>
+                    <tr><td>9</td><td>شىگا</td><td>38</td></tr>
+                    <tr><td>10</td><td>توتتۇرى</td><td>11</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="formula">
+                \[ \bar{x} = \frac{126 + 224 + 34 + 25 + 199 + 89 + 178 + 14 + 38 + 11}{10} = 93.8 \]
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>بۇ 10 ۋىلايەتتىكى كىنو زاللىرىنىڭ جەمئىي ئېكران سانىنىڭ ئوتتۇرىسى «93.8» بولۇپ قالدى. بۇ «93.8» نى 47 ۋىلايەت (ئانا جامائەت) نىڭ ئوتتۇرا قىممىتى (توپلام ئوتتۇرا) دەپ قاراش — بۇ توپلام ئوتتۇرا قىممەتنىڭ نۇقتا باھالىشىدۇر.</p>
+                    <p>بۇ بىر قەدەر مەجبۇرىي ئىش بولۇپ كۆرۈنسىمۇ، 17-2-بۆلەكتە ئۆگىنىۋالغان «توپلام ئوتتۇرا قىممىتى μ بولغان جامائەتتىن نۇمونە چىقىرىلغاندا، نۇمونە چوڭلۇقى (نۇمونىنىڭ چوڭلۇقى) چوڭايشى بىلەن، نۇمونە ئوتتۇرىسى ئانا ئوتتۇرا μ غا يېقىنلاشقان» دېگەن خۇسۇسىيەتنى قوللىنىمىز.</p>
+                </div>
+                <div class="english">
+                    <p>The average number of screens in these 10 prefectures is 93.8. We use this value (93.8) as our point estimate for the population mean (average across all 47 prefectures).</p>
+                    <p>While this might seem somewhat arbitrary, we rely on the Law of Large Numbers learned in Chapter 17-2: "When sampling from a population with mean μ, as the sample size increases, the sample mean approaches the population mean μ."</p>
+                </div>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h4><i class="fas fa-school"></i> ئەمەلىي مىسال</h4>
+                    <p>بىر مەكتەپتىكى 1000 ئوقۇغۇچىنىڭ ئوتتۇرا بەھرىنى باھالاش ئۈچۈن، 50 ئوقۇغۇچىنىڭ بەھرىنى ئېلىپ، ئۇلارنىڭ ئوتتۇرىسىنى مەكتەپنىڭ ئومۇمىي ئوتتۇرا بەھرى دەپ قارايمىز.</p>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-car"></i> كەسپىي مىسال</h4>
+                    <p>بىر ئاپتوموبىل زاۋۇتىنىڭ ھەر بىر ماشىنىسىنىڭ ئوتتۇرا يوقۇتۇشىنى باھالاش ئۈچۈن، 100 ماشىنىنىڭ يوقۇتۇشىنى ئۆلچەپ، ئۇلارنىڭ ئوتتۇرىسىنى زاۋۇتنىڭ ئومۇمىي ئوتتۇرا يوقۇتۇشى دەپ قارايمىز.</p>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-utensils"></i> ھاياتىي مىسال</h4>
+                    <p>بىر رېستوراننىڭ ھەر بىر تەييارلىقنىڭ ئوتتۇرا باھاسىنى باھالاش ئۈچۈن، 20 تەييارلىقنىڭ باھاسىنى ئېلىپ، ئۇلارنىڭ ئوتتۇرىسىنى رېستوراننىڭ ئومۇمىي ئوتتۇرا باھاسى دەپ قارايمىز.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- باھالاشچان ۋە باھا قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-ruler-combined"></i> باھالاشچان ۋە باھا</h2>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>باھالاشچان: پارامېتىرلارنى باھالاش ئۈچۈن قوللىنىدىغان سانلىق قىممەتنى ھېسابلاش ئۇسۇلى ياكى ھېسابلاش فورمىلىسى.</p>
+                    <p>باھا: ھەقىقىيەتەن تەجرىبە قىلىپ ھېسابلىغان قىممەت.</p>
+                </div>
+                <div class="english">
+                    <p>Estimator: The formula or method used to calculate the point estimate of a parameter.</p>
+                    <p>Estimate: The actual numerical value calculated from sample data.</p>
+                </div>
+            </div>
+            
+            <div class="formula">
+                \[ \hat{\mu} = \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i \]
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>بۇ يەردە:</p>
+                    <ul>
+                        <li><span class="term">\(\hat{\mu}\)</span> - توپلام ئوتتۇرا قىممەتنىڭ باھالاشچانى (باھا)</li>
+                        <li><span class="term">\(\bar{x}\)</span> - نۇمونە ئوتتۇرىسى</li>
+                        <li><span class="term">\(x_i\)</span> - نۇمونىدىكى ھەر بىر قىممەت</li>
+                        <li><span class="term">\(n\)</span> - نۇمونە چوڭلۇقى</li>
+                    </ul>
+                    <p>بۇ فورمۇلا ئۆزى «باھالاشچان» دۇر. ھەقىقىيەتەن ھېسابلىغان «93.8» قىممىتى «باھا» دۇر.</p>
+                </div>
+                <div class="english">
+                    <p>Where:</p>
+                    <ul>
+                        <li><span class="term">\(\hat{\mu}\)</span> - Estimator of population mean (the hat symbol indicates estimation)</li>
+                        <li><span class="term">\(\bar{x}\)</span> - Sample mean</li>
+                        <li><span class="term">\(x_i\)</span> - Individual data points in the sample</li>
+                        <li><span class="term">\(n\)</span> - Sample size</li>
+                    </ul>
+                    <p>The formula itself is the "estimator". The calculated value "93.8" is the "estimate".</p>
+                </div>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h4><i class="fas fa-graduation-cap"></i> ئەمەلىي مىسال</h4>
+                    <p>باھالاشچان: \(\hat{\mu} = \frac{1}{n} \sum x_i\)<br>
+                    باھا: 50 ئوقۇغۇچىنىڭ ئوتتۇرىسى 85 بولسا، \(\hat{\mu} = 85\)</p>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-building"></i> كەسپىي مىسال</h4>
+                    <p>باھالاشچان: \(\hat{\sigma}^2 = \frac{1}{n-1} \sum (x_i - \bar{x})^2\)<br>
+                    باھا: 100 ماشىنىنىڭ يوقۇتۇشىدىكى ئىناقلىق 2.5 لىتىر/100km بولسا، \(\hat{\sigma}^2 = 6.25\)</p>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-shopping-cart"></i> ھاياتىي مىسال</h4>
+                    <p>باھالاشچان: \(\hat{p} = \frac{x}{n}\)<br>
+                    باھا: 200 مۇشۇتىدىن 40 نىڭ ياخشى بولۇشى، \(\hat{p} = 0.20\) (20%)</p>
+                </div>
+            </div>
+            
+            <div class="diagram">
+                <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10%" y="50" width="80%" height="100" fill="#e8f4f8" stroke="#3498db" stroke-width="2" rx="10" />
+                    <circle cx="30%" cy="100" r="30" fill="rgba(231, 76, 60, 0.3)" stroke="#e74c3c" stroke-width="2" />
+                    <circle cx="70%" cy="100" r="30" fill="rgba(46, 204, 113, 0.3)" stroke="#2ecc71" stroke-width="2" />
+                    <text x="30%" y="100" text-anchor="middle" fill="#333" dy=".3em" font-weight="bold">فورمۇلا</text>
+                    <text x="30%" y="120" text-anchor="middle" fill="#333" font-size="12">باھالاشچان</text>
+                    <text x="70%" y="100" text-anchor="middle" fill="#333" dy=".3em" font-weight="bold">قىممەت</text>
+                    <text x="70%" y="120" text-anchor="middle" fill="#333" font-size="12">باھا</text>
+                    <path d="M40% 100 L60% 100" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#2c3e50" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+
+        <!-- باھالاشچان خۇسۇسىيىتى قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-balance-scale"></i> باھالاشچان خۇسۇسىيىتى</h2>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>توپلام ئوتتۇرا قىممەتنى نۇقتا باھالاشتا، نۇمونە ئوتتۇرىسىنىڭ «توپلام ئوتتۇرا قىممىتى μ بولغان جامائەتتىن نۇمونە چىقىرىلغاندا، نۇمونە چوڭلۇقى چوڭايشى بىلەن، نۇمونە ئوتتۇرىسى ئانا ئوتتۇرا μ غا يېقىنلاشقان» دېگەن خۇسۇسىيىتىنى قوللىنىمىز. بۇ خۇسۇسىيەتنىڭ سەۋەبى، ئانا ئوتتۇرا باھالاشچانىنىڭ «ئوخشىماشلىق» ۋە «تەرەپسىزلىك» دېگەن ئىككى خۇسۇسىيىتىنى قاندۇرۇشىدۇر.</p>
+                </div>
+                <div class="english">
+                    <p>When performing point estimation of the population mean, we use the property that "as sample size increases, the sample mean approaches the population mean μ". This works because the population mean estimator satisfies two key properties: "consistency" and "unbiasedness".</p>
+                </div>
+            </div>
+            
+            <h3>ئوخشىماشلىق (Consistency)</h3>
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>باھالاشچان ئارقىلىق ئانا ئوتتۇرا ياكى ئانا چېچىلما قاتارلىق تارقىلىش پارامېتىرىنى باھالىغاندا، بۇ باھالاش توغرىسىغا كېلىشى كېرەك. چوڭ سان قانۇنى: نۇمونە چوڭلۇقى n چوڭايشى بىلەن، نۇمونە ئوتتۇرىسى ئانا ئوتتۇرىغا يېقىنلاشقان. بۇنداق، n چوڭايشى بىلەن، باھالاشچان ھەقىقىي پارامېتىرغا يېقىنلاشقان خۇسۇسىيەتكە «ئوخشىماشلىق» دېيىلىدۇ.</p>
+                </div>
+                <div class="english">
+                    <p>When using an estimator to estimate population parameters like mean or variance, the estimation should be accurate. The Law of Large Numbers states that as sample size n increases, the sample mean approaches the population mean. This property, where the estimator approaches the true parameter as n increases, is called "consistency".</p>
+                </div>
+            </div>
+            
+            <div class="formula">
+                \[ \lim_{n \to \infty} P(|\hat{\theta}_n - \theta| < \epsilon) = 1 \]
+            </div>
+            
+            <h3>تەرەپسىزلىك (Unbiasedness)</h3>
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>باھالاشچان ئارقىلىق توپلام ئوتتۇرا ياكى توپلام چېچىلما قاتارلىق تارقىلىش پارامېتىرىنى باھالىغاندا، بۇ باھالاش ھەقىقىي پارامېتىردىن ناھايىتى ئېغىر بولۇپ كەتسە، مەنىسىز. باشقاچە ئېيتقاندا، باھالاشچاننىڭ كۈتۈلگەن قىممىتى پارامېتىر بىلەن ماس كېلىشى كېرەك. بۇ خۇسۇسىيەتكە «تەرەپسىزلىك» دېيىلىدۇ.</p>
+                </div>
+                <div class="english">
+                    <p>When using an estimator to estimate population parameters, if the estimate is far from the true parameter, it's meaningless. In other words, the expected value of the estimator should equal the parameter. This property is called "unbiasedness".</p>
+                </div>
+            </div>
+            
+            <div class="formula">
+                \[ E(\hat{\theta}) = \theta \]
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>بۇ «n نىڭ قىممىتىگە باغلىق بولماي، \(\hat{\theta}\) نىڭ كۈتۈلگەن قىممىتى \(\theta\) بولۇشى» نى كۆرسىتىدۇ. يەنى، n كىچىك بولغاندا ياكى چوڭ بولغاندا، باھالاشچاننىڭ خاتالىق دەرىجىسى تەرەپسىز (ئاستىغا ياكى ئۈستىگە ئوخشىمايدۇ).</p>
+                </div>
+                <div class="english">
+                    <p>This shows that "regardless of the value of n, the expected value of \(\hat{\theta}\) equals \(\theta\)". This means whether n is small or large, the estimator's error is unbiased (equally likely to be above or below the true value).</p>
+                </div>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h4><i class="fas fa-chart-bar"></i> ئەمەلىي مىسال</h4>
+                    <p>نۇمونە ئوتتۇرىسى: ئوخشىماشلىق ۋە تەرەپسىزلىك خۇسۇسىيىتىگە ئىگە. شۇڭا ئانا ئوتتۇرا باھالاشچانى سۈپىتىدە قوللىنىلىدۇ.</p>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-microscope"></i> كەسپىي مىسال</h4>
+                    <p>ئىناقلىق باھالاشچانى: ئوخشىماشلىق خۇسۇسىيىتىگە ئىگە، لېكىن تەرەپسىزلىك خۇسۇسىيىتىگە ئىگە ئەمەس. شۇڭا «تەرەپسىز ئىناقلىق» دېگەن تۈر بار.</p>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-database"></i> ھاياتىي مىسال</h4>
+                    <p>بىر شەھەردىكى ئوتتۇرا ماھىيەتنى باھالاشتا، نۇمونە چوڭلۇقى چوڭ بولغاندا باھا توغرىسىغا كېلىدۇ (ئوخشىماشلىق)، نۇمونە چوڭلۇقى كىچىك بولغاندا باھا ئاستىغا ياكى ئۈستىگە بارمايدۇ (تەرەپسىزلىك).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ئىناقلىق ۋە خاتالىق قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> تەرەپسزلىك ۋە خاتالىق</h2>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>توپلام ئوتتۇرا قىممەتنى نۇقتا باھالاش قىلغاندا، «تەرەپسىز ئىناقلىق» چىقىرىلىدۇ. 6-1-بۆلەكتە ئۆگىنىۋالغان ئىناقلىق (نۇمونە ئىناقلىقى) بىلەن ئوخشاشلىقىغا تېگىشىپ، تەرەپسىز ئىناقلىقنى چۈشەندۈرىمىز.</p>
+                </div>
+                <div class="english">
+                    <p>When performing point estimation of the population mean, "unbiased variance" is output. Let's explain unbiased variance in relation to sample variance learned in Chapter 6-1.</p>
+                </div>
+            </div>
+            
+            <h3>نۇمونە ئىناقلىقى (Sample Variance)</h3>
+            <div class="formula">
+                \[ s^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^2 \]
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>لېكىن، نۇمونە ئىناقلىقى ئوخشىماشلىق باھالاشچان بولسىمۇ، تەرەپسىز باھالاشچان ئەمەس. يەنى، n يېتەرلىك چوڭ بولمىغاندا، نۇمونە ئىناقلىقىنىڭ كۈتۈلگەن قىممىتى ئانا ئىناقلىقى بىلەن ماس كەلمەيدۇ، ئانا ئىناقلىقىدىن كىچىك بولۇپ قالىدۇ.</p>
+                </div>
+                <div class="english">
+                    <p>However, while sample variance is a consistent estimator, it is not an unbiased estimator. That is, when n is not sufficiently large, the expected value of sample variance does not equal the population variance; it tends to be smaller than the population variance.</p>
+                </div>
+            </div>
+            
+            <h3>تەرەپسىز ئىناقلىق (Unbiased Variance)</h3>
+            <div class="formula">
+                \[ \hat{\sigma}^2 = s^2_{unbiased} = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2 \]
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>نۇمونە ئىناقلىقىنىڭ كۈتۈلگەن قىممىتى توپلام ئىناقلىقى بىلەن ماس كەلمەيدىغانلىقىنى تۈزىتىش ئۈچۈن، نۇمونە ئىناقلىقى ھېسابلاش فورمىلىسىغا n/(n-1) كۆپەيتىمىز. شۇڭا، تەرەپسىز ئىناقلىق ئوخشىماشلىق ۋە تەرەپسىزلىك خۇسۇسىيىتىگە ئىگە باھالاشچان بولۇپ قالىدۇ.</p>
+                </div>
+                <div class="english">
+                    <p>To correct for the bias in sample variance, we multiply the sample variance formula by n/(n-1). Therefore, unbiased variance is an estimator that possesses both consistency and unbiasedness.</p>
+                </div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>ۋىلايەت</th>
+                        <th>جەمئىي ئېكران سانى</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>ھيوگو</td><td>126</td></tr>
+                    <tr><td>2</td><td>ئوساكا</td><td>224</td></tr>
+                    <tr><td>3</td><td>نارا</td><td>34</td></tr>
+                    <tr><td>4</td><td>ئىۋاتې</td><td>25</td></tr>
+                    <tr><td>5</td><td>چىبا</td><td>199</td></tr>
+                    <tr><td>6</td><td>ئىباراكى</td><td>89</td></tr>
+                    <tr><td>7</td><td>فۇكۇئوكا</td><td>178</td></tr>
+                    <tr><td>8</td><td>يا مەن</td><td>14</td></tr>
+                    <tr><td>9</td><td>شىگا</td><td>38</td></tr>
+                    <tr><td>10</td><td>توتتۇرى</td><td>11</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="formula">
+                \[ \hat{\sigma}^2 = \frac{1}{10-1} \sum_{i=1}^{10} (x_i - 93.8)^2 = 6547.51 \]
+            </div>
+            
+            <h3>ئادەتتىكى ئېغىش ۋە ئادەتتىكى خاتالىق</h3>
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p><span class="term">ئادەتتىكى ئېغىش (Standard Deviation)</span>:  توپلامدىن  ئېلىنغان ھەر بىر ساننىڭ چېچىلمىسىنى كۆرسىتىدۇ، ئىناقلىقنىڭ مۇسبەت كىۋادرات ئىلدىزى بىلەن بەلگىلىنىدۇ.</p>
+                    <div class="formula">
+                        \[ s = \sqrt{\hat{\sigma}^2} = \sqrt{6547.51} = 80.92 \]
+                    </div>
+                    <p><span class="term">ئادەتتىكى خاتالىق (Standard Error)</span>: باھالاشچاننىڭ ئادەتتىكى ئېغىشى بولۇپ، نۇمونىدىن ئېلىنغان باھالاشچاننىڭ چېچىلمىسىنى (ئىناۋەتلىكلىكىنى) كۆرسىتىدۇ. ئادەتتە «نۇمونە ئوتتۇرىسىنىڭ ئادەتتىكى ئېغىشى» نى كۆرسىتىدۇ.</p>
+                    <div class="formula">
+                        \[ SE = \frac{s}{\sqrt{n}} = \frac{80.92}{\sqrt{10}} = 25.59 \]
+                    </div>
+                </div>
+                <div class="english">
+                    <p><span class="term">Standard Deviation</span>: Measures the dispersion of individual data points from the population, defined as the positive square root of variance.</p>
+                    <div class="formula">
+                        \[ s = \sqrt{\hat{\sigma}^2} = \sqrt{6547.51} = 80.92 \]
+                    </div>
+                    <p><span class="term">Standard Error</span>: The standard deviation of the estimator, indicating the variability (precision) of the estimator itself. Typically refers to "the standard deviation of the sample mean".</p>
+                    <div class="formula">
+                        \[ SE = \frac{s}{\sqrt{n}} = \frac{80.92}{\sqrt{10}} = 25.59 \]
+                    </div>
+                </div>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h4><i class="fas fa-chart-pie"></i> ئەمەلىي مىسال</h4>
+                    <p>ئوقۇغۇچىلارنىڭ بەھرىنىڭ ئادەتتىكى ئېغىشى 15 بولسا، ئادەتتىكى خاتالىق = 15/√50 ≈ 2.12. بۇ توپلام ئوتتۇرىغا نىسبەتەن نۇمونە ئوتتۇرىسىنىڭ چېچىلمىسىنى كۆرسىتىدۇ.</p>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-car-side"></i> كەسپىي مىسال</h4>
+                    <p>ماشىنىلارنىڭ يوقۇتۇشىنىڭ ئادەتتىكى ئېغىشى 3 لىتىر/100km بولسا، 100 ماشىنىنىڭ ئادەتتىكى خاتالىقى = 3/√100 = 0.3. بۇ باھالاشنىڭ ئىناۋەتلىكلىكىنى كۆرسىتىدۇ.</p>
+                </div>
+                <div class="example-card">
+                    <h4><i class="fas fa-clipboard-list"></i> ھاياتىي مىسال</h4>
+                    <p>بىر رېستوراننىڭ تەييارلىق باھىسىنىڭ ئادەتتىكى ئېغىشى 10 يۈەن بولسا، 20 تەييارلىقنىڭ ئادەتتىكى خاتالىقى = 10/√20 ≈ 2.24. بۇ ئومۇمىي ئوتتۇرا باھا باھالىشىنىڭ ئىناۋەتلىكلىكىنى كۆرسىتىدۇ.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>نۇقتا باھالاش دەرسلىكى | Point Estimation Tutorial</p>
+        <p>© 2025 KaLBiL ئىستاتىستىكا ۋە ئىھتىماللىق كۇرسى | Statistics and Probability Course</p>
+    </footer>
+
+    <script>
+        function showTab(index) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            
+            tabContents.forEach(content => content.classList.remove('active'));
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            tabContents[index].classList.add('active');
+            tabButtons[index].classList.add('active');
+        }
+        
+        window.onload = function() {
+            // بەلگىلەنگەن ھېسابلاش
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مۇندەرىجە ھۆججەت ئۇلاش پانېلى</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            direction: rtl;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 0;
+            padding-right: 10px;
+            border-right: 4px solid #3498db;
+        }
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .subject-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #3498db;
+        }
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .subject-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .subject-icon {
+            font-size: 2rem;
+            margin-left: 15px;
+        }
+        .subject-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .content-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .content-item {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content-item:hover {
+            background: #e3f2fd;
+            border-color: #bbdefb;
+        }
+        .content-link {
+            text-decoration: none;
+            color: #1976d2;
+            font-weight: 500;
+            flex-grow: 1;
+        }
+        .content-link:hover {
+            color: #0d47a1;
+            text-decoration: underline;
+        }
+        .file-icon {
+            margin-left: 10px;
+            color: #757575;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+        }
+        @media (max-width: 768px) {
+            .subject-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>مۇندەرىجە ھۆججەت ئۇلاش پانېلى</h1>
+        
+        <h2>سۇبېكتلار ۋە مەزمۇنلار</h2>
+        
+        <div class="subject-grid">
+            <!-- ئىستاتىستىكا سۇبېكتى -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon">📊</div>
+                    <div class="subject-title">ئىستاتىستىكا</div>
+                </div>
+                <ul class="content-list">
+                    <li class="content-item">
+                        <a href="statistics-basics.html" class="content-link" target="_blank">ئاساسىي ئۇسۇللار</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="statistics-mean.html" class="content-link" target="_blank">ئوتتۇرىچە ۋە چەتنەش</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="statistics-distribution.html" class="content-link" target="_blank">گىستوگرامما ۋە تارقىلىش</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 45%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="statistics-correlation.html" class="content-link" target="_blank">كوررېلياتسىيە تەھلىلى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- ماشىنا ئۈگىنىش سۇبېكتى -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon">🤖</div>
+                    <div class="subject-title">ماشىنا ئۈگىنىش</div>
+                </div>
+                <ul class="content-list">
+                    <li class="content-item">
+                        <a href="ml-basics.html" class="content-link" target="_blank">ئاساسىي مەسىلىلەر</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="ml-classification.html" class="content-link" target="_blank">تۈرلەرنى ئايرىش</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="ml-algorithms.html" class="content-link" target="_blank">ئۆگىنىش ئالگورىتىملىرى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 50%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="ml-testing.html" class="content-link" target="_blank">تەكشۈرۈش ۋە ئېغىش</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 40%"></div></div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- كىۋانىت سۇبېكتى -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon">⚛️</div>
+                    <div class="subject-title">كىۋانىت</div>
+                </div>
+                <ul class="content-list">
+                    <li class="content-item">
+                        <a href="quantum-basics.html" class="content-link" target="_blank">كىۋانىت ئاساسى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="quantum-ml.html" class="content-link" target="_blank">كىۋانىت ماشىنا ئۈگىنىش</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 55%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="quantum-algorithms.html" class="content-link" target="_blank">كىۋانىت ئالگورىتىملىرى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 40%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="quantum-programming.html" class="content-link" target="_blank">كىۋانىت پروگراممىلاش</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 25%"></div></div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- تور بەت ياساش سۇبېكتى -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon">💻</div>
+                    <div class="subject-title">تور بەت ياساش</div>
+                </div>
+                <ul class="content-list">
+                    <li class="content-item">
+                        <a href="web-html.html" class="content-link" target="_blank">HTML ئاساسى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="web-css.html" class="content-link" target="_blank">CSS ئۇسلۇبلىرى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="web-js.html" class="content-link" target="_blank">JavaScript پروگراممىلاش</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="web-react.html" class="content-link" target="_blank">React فرېيمىۋوركى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- سانلىق مەلۇمات ئىلمى سۇبېكتى -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon">📈</div>
+                    <div class="subject-title">سانلىق مەلۇمات ئىلمى</div>
+                </div>
+                <ul class="content-list">
+                    <li class="content-item">
+                        <a href="ds-intro.html" class="content-link" target="_blank">كىرىش سۆز</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="ds-cleaning.html" class="content-link" target="_blank">سانلىق مەلۇمات تازىلاش</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="ds-visualization.html" class="content-link" target="_blank">كۆرۈنۈش تەھلىلى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="ds-ml.html" class="content-link" target="_blank">ماشىنا ئۈگىنىش بىلەن باغلىنىش</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 50%"></div></div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- سايبىر بىخەتەرلىك سۇبېكتى -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon">🔒</div>
+                    <div class="subject-title">سايبىر بىخەتەرلىك</div>
+                </div>
+                <ul class="content-list">
+                    <li class="content-item">
+                        <a href="cyber-intro.html" class="content-link" target="_blank">كىرىش سۆز</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="cyber-threats.html" class="content-link" target="_blank">خەۋپ-خەتەرلەر</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="cyber-protection.html" class="content-link" target="_blank">قوغداش ئۇسۇللىرى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 55%"></div></div>
+                    </li>
+                    <li class="content-item">
+                        <a href="cyber-encryption.html" class="content-link" target="_blank">شىفىرلاش تېخنىكىسى</a>
+                        <span class="file-icon">📄</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 40%"></div></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 ئۇيغۇر تېخنىكا ئاكادېمىيىسى - بارلىق ھوقۇقلار قوغدىلىدى</p>
+        </div>
+    </div>
+
+    <script>
+        // ھەر بىر تۈرنىڭ ئارقىدىن پىروگرېس بارىنى ھەرىكەتلىتىش
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نېرۋاتور 7-باب – LSTM/GRU</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+  <style>:root{--bg:#fafafa;--text-ug:#2d2d2d;--text-en:#444;--primary:#c2185b;--card-bg:#ffffff}body{background:var(--bg);padding:20px;font-family:'Amiri',serif;color:var(--text-ug);line-height:1.7;direction:rtl}h1{text-align:center;color:var(--primary);font-size:2.4rem;margin:0 0 20px}.bilingual-section{background:var(--card-bg);border-radius:12px;padding:20px;margin-bottom:30px;box-shadow:0 4px 12px rgba(0,0,0,.05);border-right:4px solid var(--primary)}.section-title-ug{font-size:1.6rem;font-weight:bold;color:var(--primary);margin-bottom:8px}.section-title-en{font-size:1.3rem;font-weight:600;color:#555;margin-bottom:15px;font-family:'Inter',sans-serif;direction:ltr;text-align:left}.en{font-family:'Inter',sans-serif;direction:ltr;text-align:left;color:var(--text-en);margin-top:12px;padding:12px;background:#f9f9f9;border-radius:8px;border-left:3px solid #ccc}.code-container{margin:15px 0}.CodeMirror{direction:ltr!important;font-family:'Fira Code',monospace;font-size:14px;border-radius:8px;overflow:hidden}.code-label{font-weight:bold;margin-top:15px;color:#555}ul,ol{padding-right:25px;margin:12px 0}li{margin-bottom:8px}footer{text-align:center;margin-top:40px;padding:20px;color:#666;font-size:.95rem}.highlight{background:#f8bbd0;padding:3px 6px;border-radius:4px;font-weight:bold}</style>
+</head>
+<body>
+
+<div style="text-align:center;max-width:800px;margin:0 auto 30px;padding:20px;background:#fce4ec;border-radius:12px;border-right:4px solid var(--primary)">
+  <h1>نېرۋاتور 7-باب – LSTM/GRU</h1>
+  <p><strong>LSTM</strong> (Long Short-Term Memory) ۋە <strong>GRU</strong> (Gated Recurrent Unit) — RNN نىڭ ياخشىلانغان نۇسخىلىرى. بۇلار <strong>ئۇزۇن مۇددەتلىك بايلىنىش</strong> (Long-term Dependencies) نى ساقلاش ئۈچۈن <strong>ئىشىقچا</strong> (Gates) ئىشلىتىدۇ.</p>
+  <div class="en" style="margin-top:10px">LSTM and GRU solve RNN’s vanishing gradient problem using <strong>gating mechanisms</strong> to control information flow over long sequences.</div>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">1. LSTM نېمە؟</div>
+  <div class="section-title-en">1. What is LSTM?</div>
+  <p>LSTM — ئۈچ خىل ئىشىقچا بار:  
+    <strong>Forget Gate</strong> (ئۇنتۇش ئىشىقچىسى)،  
+    <strong>Input Gate</strong> (كىرگۈزگۈچ ئىشىقچىسى)،  
+    <strong>Output Gate</strong> (چىقىرىش ئىشىقچىسى).  
+    بۇ ئىشىقچىلار بىلەن مەلۇماتنىڭ قاچىلا ساقلىنىشى، قاچىلا ئۇنتۇلۇشى باشقۇرۇلىدۇ.</p>
+  <p class="en">LSTM uses three gates to regulate memory:
+    <strong>Forget Gate</strong> (what to discard),
+    <strong>Input Gate</strong> (what new info to store),
+    <strong>Output Gate</strong> (what to output).</p>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">2. GRU نېمە؟</div>
+  <div class="section-title-en">2. What is GRU?</div>
+  <p>GRU — LSTM نىڭ سادىرەك نۇسخىسى. ئۇ <strong>ئىككى ئىشىقچا</strong> (Reset Gate, Update Gate) ئىشلىتىدۇ. ھېسابلاش تېز، لېكىن ئىقتىدارى LSTM دىن بىر قەدەر كىچىك.</p>
+  <p class="en">GRU simplifies LSTM with two gates: <strong>Reset</strong> and <strong>Update</strong>. Faster, slightly less powerful.</p>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">3. قوللىنىش ساھەلىرى</div>
+  <div class="section-title-en">3. Applications</div>
+  <ul>
+    <li>ئۇزۇن ماقالەلەرنى تەرجىمە قىلىش</li>
+    <li>مۇزىكا تۈزۈش</li>
+    <li>چېتئىل تىلى ئۆگىتىش سىستېمىلىرى</li>
+  </ul>
+  <ul class="en">
+    <li>Machine translation (e.g., Uyghur ↔ English)</li>
+    <li>Music generation</li>
+    <li>Language learning apps</li>
+  </ul>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">4. مىسال كود</div>
+  <div class="section-title-en">4. Code Example</div>
+  <div class="code-container">
+    <textarea id="c1" style="display:none">
+# LSTM مىسالى
+from tensorflow.keras.layers import LSTM, Dense
+model = Sequential([
+    LSTM(64, return_sequences=False, input_shape=(10, 1)),
+    Dense(1)
+])
+
+# GRU مىسالى
+from tensorflow.keras.layers import GRU
+model = Sequential([
+    GRU(64, input_shape=(10, 1)),
+    Dense(1)
+])
+    </textarea>
+  </div>
+</div>
+
+<footer>
+  <p>نېرۋاتور 7-باب – LSTM/GRU</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textareas = document.querySelectorAll('textarea[id^="c"]');
+  textareas.forEach(ta => {
+    CodeMirror.fromTextArea(ta, {
+      mode: "python",
+      readOnly: true,
+      lineNumbers: true,
+      theme: "default",
+      direction: "ltr",
+      viewportMargin: Infinity
+    });
+  });
+});
+</script>
+</body>
+</html>

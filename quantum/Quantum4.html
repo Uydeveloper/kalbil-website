@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>كىۋانىت فىزىكىسى 4-باب – Entanglement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/python/python.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+  <style>
+    :root {
+      --bg: #f9f7f0;
+      --text-ug: #2a2a2a;
+      --text-en: #333;
+      --primary: #1a237e;
+      --card: #ffffff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg); font-family:'Amiri',serif; color:var(--text-ug);
+      line-height:1.7; padding:20px; direction:rtl;
+    }
+    h1 { text-align:center; color:var(--primary); font-size:2.3rem; margin:0 0 25px; }
+    .intro {
+      background: #e8eaf6; padding:25px; border-radius:14px; margin-bottom:30px;
+      border-right:5px solid var(--primary); text-align:center;
+    }
+    .section {
+      background: var(--card); padding:22px; margin-bottom:28px;
+      border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.06);
+      border-right:4px solid var(--primary);
+    }
+    .title-ug { font-size:1.6rem; font-weight:bold; color:var(--primary); margin-bottom:10px; }
+    .title-en { font-size:1.25rem; font-family:'Inter',sans-serif; color:#555;
+      direction:ltr; text-align:left; margin-bottom:15px; }
+    .en { font-family:'Inter',sans-serif; direction:ltr; text-align:left;
+      background:#f8f9fa; padding:12px; border-radius:8px; margin-top:12px;
+      border-left:3px solid #607d8b; }
+    .graph {
+      text-align:center; margin:18px 0; padding:15px; background:#f5f7ff;
+      border-radius:10px; direction:ltr;
+    }
+    .code-container { margin:18px 0; }
+    .CodeMirror {
+      direction:ltr !important; font-family:'Fira Code',monospace; font-size:14px;
+      border-radius:8px; overflow:hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>كىۋانىت فىزىكىسى 4-باب – Entanglement (چېتىلش ھالىتى)</h1>
+  <p>
+    ئىككى ياكى ئۇندىن ئارتۇق كىۋانىت زەررىسى بىر-بىرى بىلەن <strong>چېتىلگەن</strong> بولسا،
+    بىرەننى ئۆلچىگەندە، يەنە بىرەننىڭ ھالىتى <strong>دەرھال بېكىتىلىدۇ</strong> —
+    ھەتتا ئۇلار <strong>يەر-ئايمىق</strong> بولسىمۇ!
+    بۇ ئىككى زەررىنىڭ ئارىسىدا «خەۋەر» يوق، لېكىن نەتىجە مۇناسىۋەتلىك.
+  </p>
+  <div class="en">Entanglement is a quantum phenomenon where particles become correlated such that the state of one instantly influences the other, regardless of distance — Einstein called it "spooky action at a distance."</div>
+</div>
+
+<div class="section">
+  <div class="title-ug">1. ماتېماتىك فورماتى</div>
+  <div class="title-en">1. Bell State (Example)</div>
+  <div class="katex-display" style="direction:ltr;text-align:center;">
+    \( |\Phi^+\rangle = \frac{1}{\sqrt{2}} (|00\rangle + |11\rangle) \)
+  </div>
+  <p>ئەگەر زەررى A = 0 بولسا، زەررى B = 0؛ A = 1 بولسا، B = 1. ھەرگىز 01 ياكى 10 بولمايدۇ.</p>
+</div>
+
+<div class="section">
+  <div class="title-ug">2. گىرافىك: چېتىلش ھالىتى</div>
+  <div class="title-en">2. Visualization</div>
+  <div class="graph">
+    <svg width="400" height="120" style="background:#fff;border-radius:8px;padding:10px;">
+      <!-- Particle A -->
+      <circle cx="80" cy="50" r="20" fill="#4db6ac" />
+      <text x="70" y="55" font-family="Amiri" font-size="18" fill="white">A</text>
+      
+      <!-- Particle B -->
+      <circle cx="320" cy="50" r="20" fill="#4db6ac" />
+      <text x="310" y="55" font-family="Amiri" font-size="18" fill="white">B</text>
+      
+      <!-- Entanglement line -->
+      <path d="M100,50 Q200,20 300,50" stroke="#7b1fa2" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
+      
+      <text x="190" y="100" font-family="Amiri" font-size="14" fill="#7b1fa2">چېتىلش باغلىنىشى</text>
+    </svg>
+  </div>
+</div>
+
+<div class="section">
+  <div class="title-ug">3. مىسال كود: Qiskit بىلەن چېتىلش ھالىتى قۇرۇش</div>
+  <div class="title-en">3. Code Example</div>
+  <div class="code-container">
+    <textarea id="c1" style="display:none;">
+# چېتىلش ھالىتى قۇرۇش (Bell State)
+from qiskit import QuantumCircuit, Aer, execute
+
+qc = QuantumCircuit(2, 2)
+
+# كىرگۈزگۈچ ھالىتى: |00>
+qc.h(0)        # زەررى A نى قۇشۇلۇش ھالىتىگە قويۇش
+qc.cx(0, 1)    # CNOT قەۋىتى — چېتىلش ھالىتىنى ھاسىل قىلىش
+
+qc.measure([0,1], [0,1])
+
+# سىمىلاتوردا ئىجرا قىلىش
+simulator = Aer.get_backend('qasm_simulator')
+result = execute(qc, simulator, shots=1000).result()
+counts = result.get_counts(qc)
+
+print("نەتىجە:", counts)  # چوقۇم {00: ~500, 11: ~500}
+    </textarea>
+  </div>
+</div>
+
+<footer style="text-align:center; margin-top:40px; padding:20px; color:#666;">
+  <p>كىۋانىت فىزىكىسى 4-باب – Entanglement</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textareas = document.querySelectorAll('textarea[id^="c"]');
+  textareas.forEach(ta => {
+    CodeMirror.fromTextArea(ta, {
+      mode: "python", readOnly: true, lineNumbers: true,
+      theme: "default", direction: "ltr", viewportMargin: Infinity
+    });
+  });
+});
+</script>
+</body>
+</html>

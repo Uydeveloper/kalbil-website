@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نېرۋاتور 2-باب – Perceptron</title>
+
+  <!-- Amiri for Uyghur, Inter for English -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text-ug: #2d2d2d;
+      --text-en: #444;
+      --primary: #0288d1; /* blue for neural theme */
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      padding: 20px;
+      font-family: 'Amiri', serif;
+      color: var(--text-ug);
+      line-height: 1.7;
+      direction: rtl;
+    }
+
+    .bilingual-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-right: 4px solid var(--primary);
+    }
+
+    .section-title-ug {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .section-title-en {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 15px;
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 20px;
+      background: #e1f5fe;
+      border-radius: 12px;
+      border-right: 4px solid var(--primary);
+    }
+
+    .intro h1 {
+      color: var(--primary);
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+    }
+
+    .intro-en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: center;
+      color: var(--text-en);
+      margin-top: 10px;
+    }
+
+    ul, ol {
+      padding-right: 25px;
+      margin: 12px 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .en {
+      font-family: 'Inter', sans-serif;
+      direction: ltr;
+      text-align: left;
+      color: var(--text-en);
+      margin-top: 12px;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 3px solid #ccc;
+    }
+
+    .code-container {
+      margin: 15px 0;
+    }
+
+    .CodeMirror {
+      direction: ltr !important;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .code-label {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .highlight {
+      background-color: #b3e5fc;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .example-box {
+      background: #f0f7ff;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 12px 0;
+      border-right: 2px solid #0288d1;
+    }
+
+    .example-box.en {
+      background: #f8fbff;
+      border-left: 2px solid #0288d1;
+      direction: ltr;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro">
+    <h1>نېرۋاتور 2-باب – Perceptron</h1>
+    <p>
+      <strong>Perceptron</strong> (پېرسېپترون) — <strong>نېرۋاتورنىڭ ئەڭ سادە، ئاساسىي بۆلىكى</strong> ھىسابلىنىدۇ.
+      بۇ 1957-يىلى Frank Rosenblatt تەرىپىدىن تەقدىم قىلىنغان بولۇپ،
+      <span class="highlight">بىر قەۋەتلىك سۈنئىي نېرۋا تورى</span> (Single-layer Neural Network) دۇر.
+    </p>
+    <p>
+      Perceptron — <strong>چىزىقلىق ئايرىشچان مەسىلىلەرنى</strong> (Linearly Separable Problems) ھەل قىلىش ئۈچۈن ئىشلىتىلىدۇ.
+      بۇ نېرۋاتورنىڭ <strong>تۇخۇمى</strong> دېيىش مۇمكىن.
+    </p>
+    <div class="intro-en">
+      <strong>Perceptron</strong> is the simplest and foundational unit of a neural network.
+      Introduced by <strong>Frank Rosenblatt in 1957</strong>, it is a <strong>single-layer neural network</strong>.
+      <br><br>
+      It can only solve <strong>linearly separable problems</strong> — the "egg" from which deep learning hatched.
+    </div>
+  </div>
+
+  <!-- ============ 1. Perceptron نېمە؟ ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">1. Perceptron نېمە؟</div>
+    <div class="section-title-en">1. What is a Perceptron?</div>
+    <p>
+      Perceptron — <strong>بىر ياكى بىر قانچە كىرگۈزگۈچ</strong> (Inputs)، <strong>ۋازىن</strong> (Weights)، <strong>چىقىرىش</strong> (Output) قانچىلىك بولغان ماتېماتىك مودېل.
+      بۇ مودېلنىڭ چىقىرىشى — <strong>بىنار</strong> (Binary): 0 ياكى 1.
+    </p>
+    <p>
+      <strong>ماتېماتىك فورماتى:</strong>  
+      \( z = w_1x_1 + w_2x_2 + \dots + w_nx_n + b \)  
+      \( \text{Output} = \begin{cases} 1 & \text{ئەگەر } z \geq 0 \\ 0 & \text{ئەگەر } z < 0 \end{cases} \)
+    </p>
+    <p class="en">
+      A Perceptron takes <strong>inputs</strong> \(x_1, x_2, \dots\), multiplies them by <strong>weights</strong> \(w_1, w_2, \dots\), adds a <strong>bias</strong> \(b\), and applies a <strong>step function</strong> to produce a binary output (0 or 1).
+    </p>
+    <p class="en">
+      <strong>Mathematical Form:</strong>  
+      \( z = \sum_{i=1}^{n} w_i x_i + b \)  
+      \( \text{Output} = \begin{cases} 1 & \text{if } z \geq 0 \\ 0 & \text{if } z < 0 \end{cases} \)
+    </p>
+  </div>
+
+  <!-- ============ 2. قانداق ئىشلەيدۇ؟ ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">2. قانداق ئىشلەيدۇ؟</div>
+    <div class="section-title-en">2. How Does It Work?</div>
+    <ol>
+      <li>كىرگۈزگۈچ مەلۇماتلارنى \(x_1, x_2, \dots\) قوبۇل قىلىدۇ.</li>
+      <li>ھەر بىر كىرگۈزگۈچكە <strong>ۋازىن</strong> (Weight) بېكىتىلىدۇ.</li>
+      <li>ۋازىن ۋە كىرگۈزگۈچنىڭ كۆپەيتمىسى + بىئاس (bias) ھېسابلىنىدۇ.</li>
+      <li>نەتىجە <strong>0 گە سېلىشتۇرۇلىدۇ</strong> — ئەگەر نۆل ياكى ئۇنىڭدىن چوڭ بولسا، 1؛ ئەگەر كىچىك بولسا، 0.</li>
+      <li>ئۈگىنىش جەريانىدا، ئالگورىتم <strong>خاتالىق بويىچە ۋازىن ۋە بىئاسنى يېڭىلايدۇ</strong>.</li>
+    </ol>
+    <ol class="en">
+      <li>Receive inputs \(x_1, x_2, \dots\).</li>
+      <li>Multiply each input by its weight \(w_i\).</li>
+      <li>Compute the weighted sum + bias: \(z = \sum w_i x_i + b\).</li>
+      <li>Apply step function: output = 1 if \(z \geq 0\), else 0.</li>
+      <li>During training, update weights and bias based on prediction error.</li>
+    </ol>
+  </div>
+
+  <!-- ============ 3. مۇھىملىقى ۋە چەكلىمىسى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">3. مۇھىملىقى ۋە چەكلىمىسى</div>
+    <div class="section-title-en">3. Importance and Limitations</div>
+
+    <h3>مۇھىملىقى:</h3>
+    <ul>
+      <li>نېرۋاتورنىڭ <strong>ئاساسىي بۆلىكى</strong>.</li>
+      <li>چىزىقلىق كلاسسىفىكاتسىيە مەسىلىلىرىنى ھەل قىلىدۇ (مەسىلەن: AND، OR دېگەن مەنتىقىي دورا).</li>
+      <li>ئۈگىنىش ئۇسلۇبى سادە — <strong>Weight Update Rule</strong> بىلەن.</li>
+    </ul>
+
+    <h3 class="en">Importance:</h3>
+    <ul class="en">
+      <li>Foundational building block of neural networks.</li>
+      <li>Solves linear classification (e.g., AND, OR logic gates).</li>
+      <li>Simple learning rule: adjust weights based on error.</li>
+    </ul>
+
+    <h3>چەكلىمىسى:</h3>
+    <ul>
+      <li><strong>XOR مەسىلىسىنى ھەل قىلالمايدۇ</strong> — چۈنكى XOR چىزىقلىق ئايرىشچان ئەمەس.</li>
+      <li>پەقەت <strong>بىنار كلاسسىفىكاتسىيە</strong> (2 سىنىپ) غا ئىشلىتىشكە بولىدۇ.</li>
+      <li>چوڭ مەلۇمات ياكى مۇرەككەپ مۇناسىۋەتلەرگە ئىشلىتىشكە بولمايدۇ.</li>
+    </ul>
+
+    <h3 class="en">Limitations:</h3>
+    <ul class="en">
+      <li><strong>Cannot solve XOR</strong> — because it’s not linearly separable.</li>
+      <li>Only handles <strong>binary classification</strong> (two classes).</li>
+      <li>Fails on complex, non-linear patterns.</li>
+    </ul>
+  </div>
+
+  <!-- ============ 4. مىساللار (5 دانە) ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">4. مىساللار</div>
+    <div class="section-title-en">4. Examples (5 Levels)</div>
+
+    <!-- Example 1 -->
+    <div class="example-box">
+      <strong>مىسال 1: AND دورا (سانلىق ھېسابلاش)</strong><br>
+      كىرگۈزگۈچ: (x1, x2) = (1, 1)<br>
+      ۋازىن: w1=1, w2=1, b=-1.5<br>
+      z = 1×1 + 1×1 - 1.5 = 0.5 ≥ 0 → چىقىرىش = 1 ✅
+    </div>
+    <div class="example-box en">
+      <strong>Example 1: AND Gate (Numerical)</strong><br>
+      Input: (1, 1)<br>
+      Weights: w1=1, w2=1, b=-1.5<br>
+      z = 1×1 + 1×1 - 1.5 = 0.5 ≥ 0 → Output = 1 ✅
+    </div>
+
+    <!-- Example 2 -->
+    <div class="example-box">
+      <strong>مىسال 2: OR دورا</strong><br>
+      ۋازىن: w1=1, w2=1, b=-0.5<br>
+      (0,0): z = -0.5 → 0<br>
+      (1,0): z = 0.5 → 1 ✅
+    </div>
+    <div class="example-box en">
+      <strong>Example 2: OR Gate</strong><br>
+      Weights: w1=1, w2=1, b=-0.5<br>
+      (0,0): z = -0.5 → 0<br>
+      (1,0): z = 0.5 → 1 ✅
+    </div>
+
+    <!-- Example 3 -->
+    <div class="code-container">
+      <div class="code-label">مىسال 3: Python دا سادە Perceptron</div>
+      <div class="code-label en" style="direction: ltr; text-align: left;">Example 3: Simple Perceptron in Python</div>
+      <textarea id="c1" style="display:none;">
+import numpy as np
+
+class Perceptron:
+    def __init__(self, learning_rate=0.1, n_iters=1000):
+        self.lr = learning_rate
+        self.n_iters = n_iters
+        self.weights = None
+        self.bias = None
+
+    def fit(self, X, y):
+        n_samples, n_features = X.shape
+        self.weights = np.zeros(n_features)
+        self.bias = 0
+
+        for _ in range(self.n_iters):
+            for idx, x_i in enumerate(X):
+                linear_output = np.dot(x_i, self.weights) + self.bias
+                y_pred = 1 if linear_output >= 0 else 0
+                update = self.lr * (y[idx] - y_pred)
+                self.weights += update * x_i
+                self.bias += update
+
+    def predict(self, X):
+        linear_output = np.dot(X, self.weights) + self.bias
+        return np.where(linear_output >= 0, 1, 0)
+
+# AND دورا مەلۇماتى
+X = np.array([[0,0], [0,1], [1,0], [1,1]])
+y = np.array([0, 0, 0, 1])
+
+p = Perceptron()
+p.fit(X, y)
+print("AND دورا نەتىجىسى:", p.predict(X))  # [0 0 0 1]
+      </textarea>
+    </div>
+
+    <!-- Example 4 -->
+    <div class="code-container">
+      <div class="code-label">مىسال 4: 2D گىرافىك بىلەن Perceptron سىزىش</div>
+      <div class="code-label en" style="direction: ltr; text-align: left;">Example 4: Plot Decision Boundary</div>
+      <textarea id="c2" style="display:none;">
+import matplotlib.pyplot as plt
+from sklearn.linear_model import Perceptron
+
+X = np.array([[0,0], [0,1], [1,0], [1,1]])
+y = np.array([0, 0, 0, 1])
+
+clf = Perceptron(tol=1e-3, random_state=0)
+clf.fit(X, y)
+
+# گىرافىك
+plt.scatter(X[:,0], X[:,1], c=y, cmap='bwr', s=100)
+ax = plt.gca()
+xlim = ax.get_xlim()
+ylim = ax.get_ylim()
+
+xx = np.linspace(xlim[0], xlim[1], 30)
+yy = np.linspace(ylim[0], ylim[1], 30)
+YY, XX = np.meshgrid(yy, xx)
+xy = np.vstack([XX.ravel(), YY.ravel()]).T
+Z = clf.decision_function(xy).reshape(XX.shape)
+
+ax.contour(XX, YY, Z, colors='k', levels=[0], alpha=0.5, linestyles=['-'])
+plt.title('Perceptron: AND دورا چىزىقلىق سىزىقى')
+plt.show()
+      </textarea>
+    </div>
+
+    <!-- Example 5 -->
+    <div class="example-box">
+      <strong>مىسال 5: XOR مەسىلىسىنى Perceptron ھەل قىلالمايدۇ</strong><br>
+      XOR: (0,0)→0, (0,1)→1, (1,0)→1, (1,1)→0<br>
+      بۇ مەلۇمات <strong>چىزىق بىلەن ئايرىش مۇمكىن ئەمەس</strong>.<br>
+      شۇڭا Perceptron نىڭ چەكلىمىسى ئانىق كۆرۈنىدۇ.
+    </div>
+    <div class="example-box en">
+      <strong>Example 5: XOR Cannot Be Solved by Perceptron</strong><br>
+      XOR: (0,0)→0, (0,1)→1, (1,0)→1, (1,1)→0<br>
+      This data is <strong>not linearly separable</strong>.<br>
+      Hence, Perceptron fails — revealing its fundamental limitation.
+    </div>
+  </div>
+
+  <!-- ============ 5. تارىخى ۋە ئەھمىيىتى ============ -->
+  <div class="bilingual-section">
+    <div class="section-title-ug">5. تارىخى ۋە ئەھمىيىتى</div>
+    <div class="section-title-en">5. Historical Context</div>
+    <p>
+      1957-يىلى Frank Rosenblatt «Perceptron» نى تەقدىم قىلغاندا، بۇ «ئىنسان مېڭىسىنى ماشىنا بىلەن قايتۇرۇش» دېگەن ئۈمىد بولۇپ قالغان.
+      لېكىن 1969-يىلى Minsky ۋە Papert «Perceptrons» كىتابىدا، بۇنىڭ <strong>XOR مەسىلىسىنى ھەل قىلالمايدىغانلىقىنى</strong> ئىسپاتلىغان.
+      بۇ نېرۋاتورنىڭ كېيىنكى 15 يىلغا يېقىن ۋاقىت «قىشقا چۈشۈشىگە» سەۋەب بولغان.
+      1980-يىللاردا <strong>Multi-layer Perceptron (MLP)</strong> ۋە <strong>Backpropagation</strong> ئىشلىتىلگەندىن كېيىن، Perceptron نىڭ ئۇزارتىلمىسى ئىلىپ بېرىلدى.
+    </p>
+    <p class="en">
+      When Frank Rosenblatt introduced the Perceptron in 1957, it sparked hopes of "mimicking the human mind."
+      But in 1969, Minsky & Papert proved in their book <em>Perceptrons</em> that it <strong>cannot solve XOR</strong>.
+      This led to the first "AI winter" — a 15-year stagnation in neural network research.
+      Only in the 1980s, with <strong>multi-layer networks</strong> and <strong>backpropagation</strong>, did neural networks revive.
+    </p>
+  </div>
+
+  <footer>
+    <p>نېرۋاتور 2-باب – Perceptron</p>
+    <p>دەرسلىك: ئۇيغۇرچە | English • تەييارلاندى: 2025-يىلى 4-دېكابىر</p>
+    <p>كۆچۈرۈش، ئىشلىتىش ۋە تارقىتىش ھەققى ھەممىگە بار</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const textareas = document.querySelectorAll('textarea[id^="c"]');
+      textareas.forEach(ta => {
+        CodeMirror.fromTextArea(ta, {
+          mode: "python",
+          readOnly: true,
+          lineNumbers: true,
+          theme: "default",
+          direction: "ltr",
+          viewportMargin: Infinity
+        });
+      });
+    });
+  </script>
+</body>
+</html>

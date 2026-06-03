@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ug">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Linear Regression - ئاددىي رېگرېسسىيە تەھلىلى</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft Yahei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .wisdom-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .wisdom-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .wisdom-author {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+            opacity: 0.9;
+        }
+        
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .card-title {
+            color: #2d3748;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: right;
+        }
+        
+        .card-title-en {
+            color: #4a5568;
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-top: 5px;
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-right: 5px solid #667eea;
+            border-left: none;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: right;
+        }
+        
+        .formula-en {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-top: 10px;
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .calculation-box {
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            border: 3px solid #38b2ac;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 6px 20px rgba(56, 178, 172, 0.3);
+            text-align: right;
+        }
+        
+        .calculation-en {
+            font-size: 0.95rem;
+            color: #234e52;
+            margin-top: 8px;
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-radius: 12px;
+            border-right: 5px solid #48bb78;
+            border-left: none;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.2);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            justify-content: flex-end;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(72, 187, 120, 0.3);
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .step-title-en {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            border: 2px solid #cbd5e0;
+            padding: 16px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2d3748;
+        }
+        
+        .table-caption {
+            text-align: right;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .table-caption-en {
+            text-align: right;
+            margin-bottom: 15px;
+            color: #4a5568;
+            font-style: italic;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #fffacd 0%, #faf089 100%);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #744210;
+            box-shadow: 0 2px 8px rgba(116, 66, 16, 0.2);
+        }
+        
+        .result {
+            background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-right: 5px solid #38a169;
+            border-left: none;
+            box-shadow: 0 6px 20px rgba(56, 161, 105, 0.3);
+            text-align: right;
+        }
+        
+        .interpretation {
+            background: linear-gradient(135deg, #bee3f8 0%, #90cdf4 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-right: 5px solid #3182ce;
+            border-left: none;
+            box-shadow: 0 6px 20px rgba(49, 130, 206, 0.3);
+            text-align: right;
+        }
+        
+        .interpretation-en {
+            font-size: 0.95rem;
+            color: #2c5282;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-right: 5px solid #e53e3e;
+            border-left: none;
+            text-align: right;
+        }
+        
+        .bilingual-text {
+            margin: 10px 0;
+        }
+        
+        .ug-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        
+        .en-text {
+            font-size: 1rem;
+            color: #4a5568;
+            font-style: italic;
+            margin-top: 5px;
+            padding-right: 10px;
+        }
+        
+        .term {
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .exercise {
+            background: #e6fffa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #38b2ac;
+        }
+        
+        .exercise-title {
+            color: #234e52;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #5a6fd8;
+        }
+        
+        .btn-check {
+            background: #38b2ac;
+        }
+        
+        .btn-check:hover {
+            background: #319795;
+        }
+        
+        .answer {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #c6f6d5;
+            border-radius: 5px;
+            border-left: 4px solid #38a169;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.6rem;
+            }
+            
+            .header p {
+                font-size: 1.2rem;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 12px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .wisdom-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- ئۇستىدىكى ئۇيغۇر ئاتا سۆزى -->
+        <div class="wisdom-section">
+            <div class="wisdom-text">"بىلىملىق كىشى چۈشىنىدۇ، ئەقىللىق كىشى سۆزلەيدۇ، ئەقىللىق كىشى ئاڭلايدۇ."</div>
+            <div class="wisdom-author">— ئۇيغۇر ئاتا سۆزى</div>
+            <div class="wisdom-text" style="font-size: 1.1rem; margin-top: 10px;">"The knowledgeable understands, the wise speaks, the intelligent listens."</div>
+        </div>
+        
+        <div class="header">
+            <h1>ئاددىي رېگرېسسىيە تەھلىلى</h1>
+            <h2>Simple Linear Regression Analysis</h2>
+            <p>بىر ئۆزگەرگۈچى بىلەن باشقا بىر ئۆزگەرگۈچى ئارىسىدىكى مۇناسىۋەتنى چۈشىنىش</p>
+            <p>Understanding the relationship between one variable and another variable</p>
+        </div>
+        
+        <!-- 1. رېگرېسسىيە نىمە؟ -->
+        <div class="card">
+            <h2 class="card-title">1. رېگرېسسىيە نىمە؟ (回帰とは)</h2>
+            <div class="card-title-en">1. What is Regression? (回帰とは)</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>رېگرېسسىيە</strong> دېگەن نىمە؟ رېگرېسسىيە دېگەن بىر نىشان ئۆزگەرگۈچىنى (باغلىنىشلىق ئۆزگەرگۈچى) چۈشەندۈرگۈچى ئۆزگەرگۈچىلەر ئارقىلىق ئىپادىلەش ئۇسۇلىدۇر.</div>
+                <div class="en-text"><strong>Regression</strong> is a method to express a target variable (dependent variable) using explanatory variables.</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>رېگرېسسىيە فورمۇلىسى:</strong> Y = β₀ + β₁X + ε
+                <div class="formula-en"><strong>Regression Formula:</strong> Y = β₀ + β₁X + ε</div>
+            </div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text">بۇ يەردە:</div>
+                <div class="en-text">Where:</div>
+            </div>
+            
+            <ul style="text-align: right; padding-right: 20px;">
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>Y</strong> - نىشان ئۆزگەرگۈچى (باغلىنىشلىق ئۆزگەرگۈچى)</span>
+                    <span class="en-text"><strong>Y</strong> - Target variable (dependent variable)</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>X</strong> - چۈشەندۈرگۈچى ئۆزگەرگۈچى (مۇستەقىل ئۆزگەرگۈچى)</span>
+                    <span class="en-text"><strong>X</strong> - Explanatory variable (independent variable)</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>β₀</strong> - قىيىپ (ئۇزۇنلۇق كېسىش نۇقتىسى)</span>
+                    <span class="en-text"><strong>β₀</strong> - Intercept (y-intercept)</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>β₁</strong> - ئېگىزلىك (رېگرېسسىيە كوئېففىتسېنتى)</span>
+                    <span class="en-text"><strong>β₁</strong> - Slope (regression coefficient)</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>ε</strong> - خاتالىق (ئۈزۈلۈش)</span>
+                    <span class="en-text"><strong>ε</strong> - Error (residual)</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 2. ئاددىي رېگرېسسىيە -->
+        <div class="card">
+            <h2 class="card-title">2. ئاددىي رېگرېسسىيە (単回帰分析)</h2>
+            <div class="card-title-en">2. Simple Linear Regression (単回帰分析)</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>ئاددىي رېگرېسسىيە</strong> دېگەن بىر چۈشەندۈرگۈچى ئۆزگەرگۈچى (X) بىلەن بىر نىشان ئۆزگەرگۈچى (Y) ئارىسىدىكى سىزىقلىق مۇناسىۋەتنى تەھلىل قىلىش ئۇسۇلىدۇر.</div>
+                <div class="en-text"><strong>Simple Linear Regression</strong> is a method to analyze the linear relationship between one explanatory variable (X) and one target variable (Y).</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>ئاددىي رېگرېسسىيە فورمۇلىسى:</strong> Ŷ = b₀ + b₁X
+                <div class="formula-en"><strong>Simple Linear Regression Formula:</strong> Ŷ = b₀ + b₁X</div>
+            </div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text">بۇ يەردە:</div>
+                <div class="en-text">Where:</div>
+            </div>
+            
+            <ul style="text-align: right; padding-right: 20px;">
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>Ŷ</strong> - Y نىڭ باھالىنىش قىممىتى</span>
+                    <span class="en-text"><strong>Ŷ</strong> - Estimated value of Y</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>b₀</strong> - قىيىپنىڭ باھالىنىش قىممىتى</span>
+                    <span class="en-text"><strong>b₀</strong> - Estimated value of intercept</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>b₁</strong> - ئېگىزلىكنىڭ باھالىنىش قىممىتى</span>
+                    <span class="en-text"><strong>b₁</strong> - Estimated value of slope</span>
+                </li>
+            </ul>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>ئاددىي رېگرېسسىيە ۋە كۆپ رېگرېسسىيە پەرقى:</strong></div>
+                <div class="en-text"><strong>Difference between Simple and Multiple Regression:</strong></div>
+            </div>
+            
+            <ul style="text-align: right; padding-right: 20px;">
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>ئاددىي رېگرېسسىيە:</strong> بىر چۈشەندۈرگۈچى ئۆزگەرگۈچى + بىر نىشان ئۆزگەرگۈچى</span>
+                    <span class="en-text"><strong>Simple Regression:</strong> One explanatory variable + One target variable</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>كۆپ رېگرېسسىيە:</strong> كۆپ چۈشەندۈرگۈچى ئۆزگەرگۈچى + بىر نىشان ئۆزگەرگۈچى</span>
+                    <span class="en-text"><strong>Multiple Regression:</strong> Multiple explanatory variables + One target variable</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 3. ئەڭ كىچىك كۋادراتلار ئۇسۇلى -->
+        <div class="card">
+            <h2 class="card-title">3. ئەڭ كىچىك كۋادراتلار ئۇسۇلى (最小二乗法)</h2>
+            <div class="card-title-en">3. Least Squares Method (最小二乗法)</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>ئەڭ كىچىك كۋادراتلار ئۇسۇلى</strong> دېگەن رېگرېسسىيە سىزىقىنى ھېسابلاش ئۇسۇلى بولۇپ، ھەقىقىي مەلۇمات نۇقتىلىرى بىلەن رېگرېسسىيە سىزىقى ئارىسىدىكى ئۇزۇنلۇقلارنىڭ كۋادراتلىرىنىڭ يىغىندىسىنى ئەڭ كىچىك قىلىدىغان سىزىقنى تېپىش ئۇسۇلىدۇر.</div>
+                <div class="en-text"><strong>Least Squares Method</strong> is a method to calculate the regression line by finding the line that minimizes the sum of squared distances between actual data points and the regression line.</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>ئەڭ كىچىك كۋادراتلار فورمۇلىسى:</strong><br>
+                b₁ = Σ[(Xᵢ - X̄)(Yᵢ - Ȳ)] / Σ[(Xᵢ - X̄)²]<br>
+                b₀ = Ȳ - b₁X̄
+                <div class="formula-en"><strong>Least Squares Formula:</strong><br>
+                b₁ = Σ[(Xᵢ - X̄)(Yᵢ - Ȳ)] / Σ[(Xᵢ - X̄)²]<br>
+                b₀ = Ȳ - b₁X̄</div>
+            </div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text">بۇ يەردە:</div>
+                <div class="en-text">Where:</div>
+            </div>
+            
+            <ul style="text-align: right; padding-right: 20px;">
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>X̄</strong> - X نىڭ ئوتتۇرىچە قىممىتى</span>
+                    <span class="en-text"><strong>X̄</strong> - Mean value of X</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>Ȳ</strong> - Y نىڭ ئوتتۇرىچە قىممىتى</span>
+                    <span class="en-text"><strong>Ȳ</strong> - Mean value of Y</span>
+                </li>
+                <li class="bilingual-text">
+                    <span class="ug-text"><strong>Xᵢ, Yᵢ</strong> - ھەر بىر مەلۇمات نۇقتىسى</span>
+                    <span class="en-text"><strong>Xᵢ, Yᵢ</strong> - Each data point</span>
+                </li>
+            </ul>
+            
+            <div class="chart-container">
+                <canvas id="regressionChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- 4. مىسال 1: ئوقۇش ۋاقتى بىلەن نەتىجە مۇناسىۋىتى -->
+        <div class="card">
+            <h2 class="card-title">4. مىسال 1: ئوقۇش ۋاقتى بىلەن نەتىجە مۇناسىۋىتى</h2>
+            <div class="card-title-en">4. Example 1: Relationship between Study Time and Exam Scores</div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text">10 ئوقۇغۇچىنىڭ كۈندىلىك ئوقۇش ۋاقتى (سائەت) ۋە ئىمتىھان نەتىجىسى (%):</div>
+                <div class="en-text">Daily study time (hours) and exam scores (%) of 10 students:</div>
+            </div>
+            
+            <div class="table-caption">مەلۇمات جەدۋىلى | Data Table</div>
+            <table>
+                <tr>
+                    <th>ئوقۇغۇچى<br>Student</th>
+                    <th>ئوقۇش ۋاقتى (X)<br>Study Time (X)</th>
+                    <th>نەتىجە (Y)<br>Score (Y)</th>
+                    <th>X - X̄</th>
+                    <th>Y - Ȳ</th>
+                    <th>(X - X̄)(Y - Ȳ)</th>
+                    <th>(X - X̄)²</th>
+                </tr>
+                <tr><td>1</td><td>2</td><td>60</td><td>-3</td><td>-18.5</td><td>55.5</td><td>9</td></tr>
+                <tr><td>2</td><td>3</td><td>65</td><td>-2</td><td>-13.5</td><td>27</td><td>4</td></tr>
+                <tr><td>3</td><td>4</td><td>70</td><td>-1</td><td>-8.5</td><td>8.5</td><td>1</td></tr>
+                <tr><td>4</td><td>5</td><td>75</td><td>-0.6</td><td>-3.5</td><td>2.1</td><td>0.36</td></tr>
+                <tr><td>5</td><td>5</td><td>80</td><td>-0.6</td><td>1.5</td><td>-0.9</td><td>0.36</td></tr>
+                <tr><td>6</td><td>6</td><td>85</td><td>0.4</td><td>6.5</td><td>2.6</td><td>0.16</td></tr>
+                <tr><td>7</td><td>7</td><td>80</td><td>1.4</td><td>1.5</td><td>2.1</td><td>1.96</td></tr>
+                <tr><td>8</td><td>7</td><td>85</td><td>1.4</td><td>6.5</td><td>9.1</td><td>1.96</td></tr>
+                <tr><td>9</td><td>8</td><td>90</td><td>2.4</td><td>11.5</td><td>27.6</td><td>5.76</td></tr>
+                <tr><td>10</td><td>9</td><td>95</td><td>3.4</td><td>16.5</td><td>56.1</td><td>11.56</td></tr>
+                <tr>
+                    <td><strong>جەمئىي<br>Total</strong></td>
+                    <td><strong>56</strong></td>
+                    <td><strong>785</strong></td>
+                    <td><strong>-</strong></td>
+                    <td><strong>-</strong></td>
+                    <td><strong>190.7</strong></td>
+                    <td><strong>36.12</strong></td>
+                </tr>
+            </table>
+            
+            <div class="formula-box">
+                <strong>ھېسابلاش:</strong><br>
+                X̄ = 56/10 = 5.6<br>
+                Ȳ = 785/10 = 78.5<br>
+                b₁ = 190.7 / 36.12 = 5.28<br>
+                b₀ = 78.5 - (5.28 × 5.6) = 48.93
+                <div class="formula-en"><strong>Calculation:</strong><br>
+                X̄ = 56/10 = 5.6<br>
+                Ȳ = 785/10 = 78.5<br>
+                b₁ = 190.7 / 36.12 = 5.28<br>
+                b₀ = 78.5 - (5.28 × 5.6) = 48.93</div>
+            </div>
+            
+            <div class="formula-box">
+                <strong>رېگرېسسىيە فورمۇلىسى:</strong> Ŷ = 48.93 + 5.28X
+                <div class="formula-en"><strong>Regression Formula:</strong> Ŷ = 48.93 + 5.28X</div>
+            </div>
+            
+            <div class="bilingual-text">
+                <div class="ug-text"><strong>چۈشەندۈرۈش:</strong> ئوقۇش ۋاقتى ھەر بىر سائەت ئاشقاندا، نەتىجە تەخمىنەن 5.28% ئاشىدۇ.</div>
+                <div class="en-text"><strong>Interpretation:</strong> For each additional hour of study time, the exam score increases by approximately 5.28%.</div>
+            </div>
+        </div>
+
+        <!-- ئاستىدىكى ئۇيغۇر ئاتا سۆزى -->
+        <div class="wisdom-section">
+            <div class="wisdom-text">"بىلىم سۇغا ئوخشايدۇ، چۆكتە قالسا بۇزۇلۇپ قالىدۇ، ئېقىپ تۇرسا پاكلىقىدا قالىدۇ."</div>
+            <div class="wisdom-author">— ئۇيغۇر ئاتا سۆزى</div>
+            <div class="wisdom-text" style="font-size: 1.1rem; margin-top: 10px;">"Knowledge is like water - if it stagnates, it becomes corrupted; if it flows, it remains pure."</div>
+        </div>
+    </div>
+
+    <script>
+        // جاۋاب كۆرسىتىش فۇنكسىيەسى
+        function toggleAnswer(id) {
+            const answer = document.getElementById(id);
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+            } else {
+                answer.style.display = 'block';
+            }
+        }
+        
+        // رېگرېسسىيە گرافىكى
+        const ctx = document.getElementById('regressionChart').getContext('2d');
+        
+        // مەلۇمات نۇقتىلىرى
+        const dataPoints = [
+            {x: 2, y: 60},
+            {x: 3, y: 65},
+            {x: 4, y: 70},
+            {x: 5, y: 75},
+            {x: 5, y: 80},
+            {x: 6, y: 85},
+            {x: 7, y: 80},
+            {x: 7, y: 85},
+            {x: 8, y: 90},
+            {x: 9, y: 95}
+        ];
+        
+        // رېگرېسسىيە سىزىقى ھېسابلاش
+        const n = dataPoints.length;
+        const sumX = dataPoints.reduce((sum, point) => sum + point.x, 0);
+        const sumY = dataPoints.reduce((sum, point) => sum + point.y, 0);
+        const meanX = sumX / n;
+        const meanY = sumY / n;
+        
+        const numerator = dataPoints.reduce((sum, point) => {
+            return sum + (point.x - meanX) * (point.y - meanY);
+        }, 0);
+        
+        const denominator = dataPoints.reduce((sum, point) => {
+            return sum + Math.pow(point.x - meanX, 2);
+        }, 0);
+        
+        const slope = numerator / denominator;
+        const intercept = meanY - slope * meanX;
+        
+        // رېگرېسسىيە سىزىقى ئۈچۈن مەلۇمات
+        const regressionLine = [];
+        for (let x = 0; x <= 10; x++) {
+            regressionLine.push({x: x, y: intercept + slope * x});
+        }
+        
+        const regressionChart = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'مەلۇمات نۇقتىلىرى / Data Points',
+                        data: dataPoints,
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    },
+                    {
+                        label: 'رېگرېسسىيە سىزىقى / Regression Line',
+                        data: regressionLine,
+                        type: 'line',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'ئوقۇش ۋاقتى (سائەت) / Study Time (hours)'
+                        },
+                        min: 0,
+                        max: 10
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'نەتىجە (%) / Score (%)'
+                        },
+                        min: 50,
+                        max: 100
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'ئوقۇش ۋاقتى بىلەن نەتىجە ئارىسىدىكى رېگرېسسىيە سىزىقى / Regression Line between Study Time and Scores',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                if (context.datasetIndex === 0) {
+                                    return `ئوقۇش ۋاقتى: ${context.parsed.x} سائەت, نەتىجە: ${context.parsed.y}% / Study Time: ${context.parsed.x} hours, Score: ${context.parsed.y}%`;
+                                } else {
+                                    return `رېگرېسسىيە سىزىقى: ${context.parsed.y.toFixed(1)}% / Regression Line: ${context.parsed.y.toFixed(1)}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

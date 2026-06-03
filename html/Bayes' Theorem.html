@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بېيز نەزەرىيىسى — مۇكەممەل دەرسلىك (Uyghur & English)</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #2980b9;
+            --bg-light: #f9f9f9;
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 50px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        
+        .tab-btn:hover {
+            background: var(--light);
+        }
+        
+        .tab-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .bilingual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+        
+        .uyghur, .english {
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--bg-light);
+            font-size: 1.05rem;
+        }
+        
+        .uyghur {
+            border-right: 4px solid var(--accent);
+            direction: rtl;
+            text-align: right;
+            font-family: "Microsoft Uighur", "Segoe UI", sans-serif;
+        }
+        
+        .english {
+            border-left: 4px solid var(--info);
+            direction: ltr;
+            text-align: left;
+            font-family: "Georgia", "Times New Roman", serif;
+        }
+        
+        .formula {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            overflow-x: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+        }
+        
+        .example {
+            background: linear-gradient(to right, #fffde7, #e8f4f8);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px dashed var(--warning);
+        }
+        
+        .term {
+            font-weight: bold;
+            color: var(--success);
+            padding: 3px 5px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 5px;
+            margin: 0 2px;
+        }
+        
+        .calculator {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .input-group {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .input-group label {
+            width: 250px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .input-group input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 150px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: var(--transition);
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--success);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            font-size: 1.2rem;
+        }
+        
+        .diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .diagram img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+        
+        .card h3 i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        @media (max-width: 768px) {
+            .bilingual {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .input-group label {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* ئۇيغۇرچە خەتكە ماس كېلىدىغان فونت تەڭشىكى */
+        @font-face {
+            font-family: 'UKIJ Tuz Tom';
+            src: local('UKIJ Tuz Tom'), local('UKIJ Tuz'), url('https://cdn.jsdelivr.net/gh/UyghurKitabxana/fonts/UKIJTuzTom.ttf') format('truetype');
+        }
+
+        .uyghur {
+            font-family: 'UKIJ Tuz Tom', 'Microsoft Uighur', 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>بېيز نەزەرىيىسى | Bayes' Theorem</h1>
+        <p class="subtitle">نەتىجىلەردىن سەۋەبلەرنى باھالاش ئۇسۇلى | A method for estimating causes from results</p>
+    </header>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab(0)"><i class="fas fa-home"></i> كىرىش</button>
+            <button class="tab-btn" onclick="showTab(1)"><i class="fas fa-calculator"></i> فورمۇلا</button>
+            <button class="tab-btn" onclick="showTab(2)"><i class="fas fa-basketball-ball"></i> توپ مىسالى</button>
+            <button class="tab-btn" onclick="showTab(3)"><i class="fas fa-microscope"></i> تىببىي مىسال</button>
+            <button class="tab-btn" onclick="showTab(4)"><i class="fas fa-calculator"></i> ھېسابلاش</button>
+        </div>
+
+        <!-- كىرىش قىسمى -->
+        <div class="tab-content active">
+            <h2 class="section-title"><i class="fas fa-home"></i> بېيز نەزەرىيىسى نېمە؟</h2>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>بېيز نەزەرىيىسى بىر پەزىلەت كۆرۈلگەندىن كېيىن، باشقا بىر پەزىلەتنىڭ كۆرۈلۈش ئېھتىماللىقىنى ھېسابلاش ئۇسۇلىدۇر. بۇ نەزەرىيە ئىنگلىز ماتېماتىكىچىسى توماس بېيز (Thomas Bayes) تەرىپىدىن ئوتتۇرىغا قويۇلغان بولۇپ، ئىھتىماللىق نەزەرىيىسىدە مۇھىم رول ئوينايدۇ.</p>
+                    <p>بۇ نەزەرىيە نەتىجىلەردىن سەۋەبلەرنى باھالاش ئىمكانىيىتى بىلەن تەمىنلەيدۇ. مەسىلەن، بىرەر كىشىنىڭ سىناق نەتىجىسى مۇسبەت چىققاندا، ئۇنىڭ ھەقىقەتەن كېسەل بولۇش ئېھتىماللىقىنى ھېسابلاشقا ياردەم بېرىدۇ.</p>
+                    <p>بېيز نەزەرىيىسىنىڭ ئەڭ مۇھىم خۇسۇسىيىتى، يېڭى كۆزىتىش نەتىجىلىرى كەلگەندە، بىزنىڭ ئالدىنقى ئىشەنچلىرىمىزنى يېڭىلاش ئىمكانىيىتىنى بېرىشىدۇر.</p>
+                </div>
+                <div class="english">
+                    <p>Bayes' Theorem is a mathematical formula for determining conditional probability — the likelihood of an event occurring given that another event has already occurred. Developed by English mathematician Thomas Bayes, it plays a crucial role in probability theory.</p>
+                    <p>This theorem provides a way to revise existing predictions or theories given new evidence. For example, it helps calculate the probability that a person actually has a disease given that their test result is positive.</p>
+                    <p>The most important feature of Bayes' Theorem is its ability to update our prior beliefs when new observational evidence becomes available.</p>
+                </div>
+            </div>
+            
+            <div class="diagram">
+                <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10%" y="50" width="80%" height="100" fill="#e8f4f8" stroke="#3498db" stroke-width="2" rx="10" />
+                    <circle cx="30%" cy="100" r="40" fill="rgba(231, 76, 60, 0.3)" stroke="#e74c3c" stroke-width="2" />
+                    <circle cx="50%" cy="100" r="40" fill="rgba(46, 204, 113, 0.3)" stroke="#2ecc71" stroke-width="2" />
+                    <circle cx="70%" cy="100" r="40" fill="rgba(155, 89, 182, 0.3)" stroke="#9b59b6" stroke-width="2" />
+                    <text x="30%" y="100" text-anchor="middle" fill="#333" dy=".3em" font-weight="bold">B₁</text>
+                    <text x="50%" y="100" text-anchor="middle" fill="#333" dy=".3em" font-weight="bold">B₂</text>
+                    <text x="70%" y="100" text-anchor="middle" fill="#333" dy=".3em" font-weight="bold">B₃</text>
+                    <text x="50%" y="40" text-anchor="middle" fill="#333" font-weight="bold">ئۆزئارا ئايرىم پەزىلەتلەر | Mutually Exclusive Events</text>
+                </svg>
+            </div>
+            
+            <div class="summary-cards">
+                <div class="card">
+                    <h3><i class="fas fa-history"></i> تارىخى</h3>
+                    <p>بېيز نەزەرىيىسى 18-ئەسىردە توماس بېيز تەرىپىدىن ئوتتۇرىغا قويۇلغان. رىچارد پرېيس بۇ نەزەرىيىنى تەرەققىي قىلدۇرغان.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-cogs"></i> قوللىنىش ساھەلىرى</h3>
+                    <p>تىببىي دىياغنوزا، ماشىنا ئۆگىنىش، تەبىئىي تىل بىر تەرەپ قىلىش، ئىقتىساد ۋە كارۋان سىستېمىلىرى.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> ئاساسىي چۈشەنچە</h3>
+                    <p>يېڭى مەلۇماتلار كەلگەندە، بىزنىڭ ئالدىنقى ئىشەنچلىرىمىزنى يېڭىلاش ئۇسۇلى.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- فورمۇلا قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-calculator"></i> بېيز نەزەرىيىسى فورمۇلىسى</h2>
+            
+            <div class="formula">
+                \[ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \]
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>بۇ يەردە:</p>
+                    <ul>
+                        <li><span class="term">P(A|B)</span> - B يۈز بەرگەندە A يۈز بېرىش ئىھتىماللىقى (كېيىنكى ئېھتىماللىق)</li>
+                        <li><span class="term">P(B|A)</span> - A يۈز بەرگەندە B يۈز بېرىش ئىھتىماللىقى (شەرتلىك ئېھتىماللىق)</li>
+                        <li><span class="term">P(A)</span> - A نىڭ ئىھتىماللىقى (ئالدىنقى ئېھتىماللىق)</li>
+                        <li><span class="term">P(B)</span> - B نىڭ ئىھتىماللىقى (نۆرماللىشىش ئېھتىماللىقى)</li>
+                    </ul>
+                    <p>بۇ فورمۇلا بىزگە يېڭى كۆزىتىش نەتىجىسى (B) كەلگەندە، بىزنىڭ ئالدىنقى ئىشەنچىمىز (A) نى يېڭىلاش ئىمكانىيىتىنى بېرىدۇ.</p>
+                </div>
+                <div class="english">
+                    <p>Where:</p>
+                    <ul>
+                        <li><span class="term">P(A|B)</span> is the probability of A given B is true (posterior probability)</li>
+                        <li><span class="term">P(B|A)</span> is the probability of B given A is true (likelihood)</li>
+                        <li><span class="term">P(A)</span> is the probability of A (prior probability)</li>
+                        <li><span class="term">P(B)</span> is the probability of B (normalizing constant)</li>
+                    </ul>
+                    <p>This formula allows us to update our prior belief (A) when new evidence (B) becomes available.</p>
+                </div>
+            </div>
+            
+            <div class="formula">
+                \[ P(B) = P(B|A) \cdot P(A) + P(B|\neg A) \cdot P(\neg A) \]
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>بۇ كېڭەيتىلگەن فورمۇلا B ۋەقەسىنىڭ تولۇق ئىھتىماللىقىنى ھېسابلاش ئۇسۇلىدۇر.</p>
+                    <p>كۆپ ھاللار ئۈچۈن كېڭەيتىلگەن فورمۇلا:</p>
+                    \[ P(B_i|A) = \frac{P(A|B_i) \cdot P(B_i)}{\sum_{j=1}^{n} P(A|B_j) \cdot P(B_j)} \]
+                    <p>بۇ فورمۇلا بىر نەچچە سەۋەب (B₁, B₂, ..., Bₙ) بار بولغان ھالدا، نەتىجە (A) كۆرۈلگەندىن كېيىن، ھەر بىر سەۋەبنىڭ ئېھتىماللىقىنى ھېسابلايدۇ.</p>
+                </div>
+                <div class="english">
+                    <p>This extended formula calculates the total probability of event B by considering all possible scenarios.</p>
+                    <p>For multiple cases, the extended formula:</p>
+                    \[ P(B_i|A) = \frac{P(A|B_i) \cdot P(B_i)}{\sum_{j=1}^{n} P(A|B_j) \cdot P(B_j)} \]
+                    <p>This formula calculates the probability of each cause (B₁, B₂, ..., Bₙ) given that the effect (A) has been observed.</p>
+                </div>
+            </div>
+            
+            <div class="diagram">
+                <svg width="100%" height="250" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10%" y="30" width="80%" height="180" fill="#f8f9fa" stroke="#3498db" stroke-width="2" rx="10" />
+                    <text x="50%" y="60" text-anchor="middle" fill="#2c3e50" font-size="18" font-weight="bold">بېيز نەزەرىيىسى فورمۇلا سىستېمىسى | Bayes' Theorem Formula System</text>
+                    
+                    <rect x="15%" y="100" width="20%" height="40" fill="#e74c3c" rx="5" />
+                    <text x="25%" y="122" text-anchor="middle" fill="white">P(A)</text>
+                    <text x="25%" y="142" text-anchor="middle" fill="white" font-size="12">ئالدىنقى ئېھتىماللىق</text>
+                    
+                    <rect x="45%" y="100" width="20%" height="40" fill="#3498db" rx="5" />
+                    <text x="55%" y="122" text-anchor="middle" fill="white">P(B|A)</text>
+                    <text x="55%" y="142" text-anchor="middle" fill="white" font-size="12">شەرتلىك ئېھتىماللىق</text>
+                    
+                    <rect x="75%" y="100" width="20%" height="40" fill="#2ecc71" rx="5" />
+                    <text x="85%" y="122" text-anchor="middle" fill="white">P(B)</text>
+                    <text x="85%" y="142" text-anchor="middle" fill="white" font-size="12">نۆرماللىشىش</text>
+                    
+                    <path d="M25% 140 L35% 140 L35% 180 L45% 180" stroke="#2c3e50" stroke-width="2" fill="none" />
+                    <path d="M55% 140 L65% 140 L65% 180 L75% 180" stroke="#2c3e50" stroke-width="2" fill="none" />
+                    
+                    <rect x="35%" y="180" width="40%" height="40" fill="#9b59b6" rx="5" />
+                    <text x="55%" y="202" text-anchor="middle" fill="white">P(A|B)</text>
+                    <text x="55%" y="222" text-anchor="middle" fill="white" font-size="12">كېيىنكى ئېھتىماللىق</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- توپ مىسالى قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-basketball-ball"></i> توپ ۋە ساقچۇق مىسالى</h2>
+            
+            <div class="example">
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p><span class="term">مىسال:</span> ئۈچ ساقچۇق بار، تۆۋەندىكىدەك قىزىل ۋە ئاق تۆپلەر بار:</p>
+                        <ul>
+                            <li>ساقچۇق 1: 4 قىزىل، 1 ئاق</li>
+                            <li>ساقچۇق 2: 3 قىزىل، 3 ئاق</li>
+                            <li>ساقچۇق 3: 2 قىزىل، 4 ئاق</li>
+                        </ul>
+                        <p>قەيسى بىر ساقچۇقتىن بىر تۆپ چىقىرىۋېلىندى، ئاق تۆپ چىقتى. بۇ تۆپنىڭ ساقچۇق 2 دىن چىقىرىۋېلىنغانلىقىنىڭ ئېھتىماللىقى قانچە؟</p>
+                    </div>
+                    <div class="english">
+                        <p><span class="term">Example:</span> There are 3 bags with red and white balls as follows:</p>
+                        <ul>
+                            <li>Bag 1: 4 red, 1 white</li>
+                            <li>Bag 2: 3 red, 3 white</li>
+                            <li>Bag 3: 2 red, 4 white</li>
+                        </ul>
+                        <p>One ball is drawn from one of the bags, and it is white. What is the probability that it came from Bag 2?</p>
+                    </div>
+                </div>
+                
+                <div class="formula">
+                    \[ P(B_2|A) = \frac{P(A|B_2) \cdot P(B_2)}{P(A)} \]
+                </div>
+                
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>ئالدىنقى ئېھتىماللىقلار:</p>
+                        <ul>
+                            <li>P(B₁) = P(B₂) = P(B₃) = 1/3</li>
+                            <li>P(A|B₁) = 1/5</li>
+                            <li>P(A|B₂) = 3/6 = 1/2</li>
+                            <li>P(A|B₃) = 4/6 = 2/3</li>
+                        </ul>
+                        
+                        <p>ئاق تۆپ چىقىشىنىڭ ئومۇمىي ئېھتىماللىقى:</p>
+                    </div>
+                    <div class="english">
+                        <p>Prior probabilities:</p>
+                        <ul>
+                            <li>P(B₁) = P(B₂) = P(B₃) = 1/3</li>
+                            <li>P(A|B₁) = 1/5</li>
+                            <li>P(A|B₂) = 3/6 = 1/2</li>
+                            <li>P(A|B₃) = 4/6 = 2/3</li>
+                        </ul>
+                        
+                        <p>Total probability of drawing a white ball:</p>
+                    </div>
+                </div>
+                
+                <div class="formula">
+                    \[ P(A) = \sum_{i=1}^{3} P(A|B_i) \cdot P(B_i) = \left(\frac{1}{5} \cdot \frac{1}{3}\right) + \left(\frac{1}{2} \cdot \frac{1}{3}\right) + \left(\frac{2}{3} \cdot \frac{1}{3}\right) \]
+                    \[ = \frac{1}{15} + \frac{1}{6} + \frac{2}{9} = \frac{6 + 15 + 20}{90} = \frac{41}{90} \]
+                </div>
+                
+                <div class="formula">
+                    \[ P(B_2|A) = \frac{\frac{1}{2} \cdot \frac{1}{3}}{\frac{41}{90}} = \frac{\frac{1}{6}}{\frac{41}{90}} = \frac{1}{6} \times \frac{90}{41} = \frac{15}{41} \approx 0.366 \]
+                </div>
+                
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>نەتىجە: ئاق تۆپ چىققاندا، ئۇنىڭ ساقچۇق 2 دىن چىققانلىقى ئېھتىماللىقى <strong>36.6%</strong>.</p>
+                        <p>بۇ مىسالدا، بىز ئالدىنقى ئېھتىماللىق (ھەر بىر ساقچۇقنى تاللاش ئېھتىماللىقى) ۋە شەرتلىك ئېھتىماللىق (ھەر بىر ساقچۇقتىن ئاق تۆپ چىقىش ئېھتىماللىقى) نى قوللىنىپ، كېيىنكى ئېھتىماللىقنى (ئاق تۆپ چىققاندا، ساقچۇق 2 دىن چىققانلىقى) ھېسابلىدىق.</p>
+                    </div>
+                    <div class="english">
+                        <p>Result: The probability that the white ball came from Bag 2 is approximately <strong>36.6%</strong>.</p>
+                        <p>In this example, we used prior probabilities (probability of selecting each bag) and likelihoods (probability of drawing a white ball from each bag) to calculate the posterior probability (probability that the ball came from Bag 2 given that it was white).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="diagram">
+                <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5%" y="30" width="25%" height="140" fill="#f8f9fa" stroke="#e74c3c" stroke-width="2" rx="10" />
+                    <circle cx="10%" cy="70" r="15" fill="#e74c3c" />
+                    <circle cx="15%" cy="70" r="15" fill="#e74c3c" />
+                    <circle cx="20%" cy="70" r="15" fill="#e74c3c" />
+                    <circle cx="25%" cy="70" r="15" fill="#e74c3c" />
+                    <circle cx="17.5%" cy="110" r="15" fill="#ecf0f1" />
+                    <text x="17.5%" y="160" text-anchor="middle" fill="#2c3e50">ساقچۇق 1 | Bag 1</text>
+                    
+                    <rect x="37.5%" y="30" width="25%" height="140" fill="#f8f9fa" stroke="#3498db" stroke-width="2" rx="10" />
+                    <circle cx="42.5%" cy="70" r="15" fill="#e74c3c" />
+                    <circle cx="47.5%" cy="70" r="15" fill="#e74c3c" />
+                    <circle cx="52.5%" cy="70" r="15" fill="#e74c3c" />
+                    <circle cx="47.5%" cy="110" r="15" fill="#ecf0f1" />
+                    <circle cx="52.5%" cy="110" r="15" fill="#ecf0f1" />
+                    <circle cx="57.5%" cy="110" r="15" fill="#ecf0f1" />
+                    <text x="50%" y="160" text-anchor="middle" fill="#2c3e50">ساقچۇق 2 | Bag 2</text>
+                    
+                    <rect x="70%" y="30" width="25%" height="140" fill="#f8f9fa" stroke="#2ecc71" stroke-width="2" rx="10" />
+                    <circle cx="75%" cy="70" r="15" fill="#e74c3c" />
+                    <circle cx="80%" cy="70" r="15" fill="#e74c3c" />
+                    <circle cx="80%" cy="110" r="15" fill="#ecf0f1" />
+                    <circle cx="85%" cy="110" r="15" fill="#ecf0f1" />
+                    <circle cx="90%" cy="110" r="15" fill="#ecf0f1" />
+                    <circle cx="95%" cy="110" r="15" fill="#ecf0f1" />
+                    <text x="82.5%" y="160" text-anchor="middle" fill="#2c3e50">ساقچۇق 3 | Bag 3</text>
+                    
+                    <circle cx="50%" cy="190" r="20" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" />
+                    <text x="50%" y="195" text-anchor="middle" fill="#2c3e50">ئاق تۆپ | White Ball</text>
+                    <path d="M17.5% 130 L45% 190" stroke="#2c3e50" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+                    <path d="M50% 130 L50% 170" stroke="#2c3e50" stroke-width="2" fill="none" />
+                    <path d="M82.5% 130 L55% 190" stroke="#2c3e50" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- تىببىي مىسال قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-microscope"></i> تىببىي تەكشۈرۈش مىسالى</h2>
+            
+            <div class="example">
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p><span class="term">مىسال:</span> يەپونىيە خەلقىنىڭ 0.01% نىڭ بىر خىل كېسەلگە چاللىنىشى مۇقىم. بۇ كېسەلنىڭ تەكشۈرۈش ئۇسۇلىدا، چوقۇم كېسەلگە چاللىنىپ قالغانلارنىڭ 95% نىڭ مۇسبەت دېگەن ھۆكۈمگە ئېرىشىش ئېھتىماللىقى بار، كېسەلگە چاللىنمىغانلارنىڭ 80% نىڭ سالبىي دېگەن ھۆكۈمگە ئېرىشىش ئېھتىماللىقى بار دېيىلگەن. بىر كىشى بۇ كېسەلنى تەكشۈرتۈپ، مۇسبەت دېگەن ھۆكۈمگە ئېرىشكەن بولسا، بۇ كىشى چوقۇم بۇ كېسەلگە چاللىنىپ قالغانلىقىنىڭ ئېھتىماللىقى قانچە؟</p>
+                    </div>
+                    <div class="english">
+                        <p><span class="term">Example:</span> 0.01% of Japanese people have a certain disease. In the test for this disease, 95% of those who actually have the disease test positive, and 80% of those who do not have the disease test negative. If a person tests positive, what is the probability that they actually have the disease?</p>
+                    </div>
+                </div>
+                
+                <div class="formula">
+                    \[ P(D|+) = \frac{P(+|D) \cdot P(D)}{P(+)} \]
+                </div>
+                
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>قىممەتلەر:</p>
+                        <ul>
+                            <li>P(D) = 0.0001 (كېسەللىك ئېھتىماللىقى)</li>
+                            <li>P(¬D) = 0.9999 (ساغلاملىق ئېھتىماللىقى)</li>
+                            <li>P(+|D) = 0.95 (ھېسسىيات - كېسەللىك بولغاندا مۇسبەت نەتىجە)</li>
+                            <li>P(-|¬D) = 0.80 (ئالاھىدىلىك - ساغلام بولغاندا سالبىي نەتىجە)</li>
+                            <li>P(+|¬D) = 0.20 (يالغان مۇسبەت - ساغلام بولغاندا مۇسبەت نەتىجە)</li>
+                        </ul>
+                    </div>
+                    <div class="english">
+                        <p>Values:</p>
+                        <ul>
+                            <li>P(D) = 0.0001 (Disease prevalence)</li>
+                            <li>P(¬D) = 0.9999 (Probability of being healthy)</li>
+                            <li>P(+|D) = 0.95 (Sensitivity - probability of positive test given disease)</li>
+                            <li>P(-|¬D) = 0.80 (Specificity - probability of negative test given no disease)</li>
+                            <li>P(+|¬D) = 0.20 (False positive rate - probability of positive test given no disease)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="formula">
+                    \[ P(+) = P(+|D) \cdot P(D) + P(+|¬D) \cdot P(¬D) \]
+                    \[ = (0.95 \cdot 0.0001) + (0.20 \cdot 0.9999) = 0.000095 + 0.19998 = 0.200075 \]
+                </div>
+                
+                <div class="formula">
+                    \[ P(D|+) = \frac{0.95 \cdot 0.0001}{0.200075} = \frac{0.000095}{0.200075} \approx 0.000475 \]
+                </div>
+                
+                <div class="bilingual">
+                    <div class="uyghur">
+                        <p>نەتىجە: تەكشۈرۈشتە مۇسبەت دېگەن ھۆكۈمگە ئېرىشكەندە، چوقۇم بۇ كېسەلگە چاللىنىپ قالغانلىقىنىڭ ئېھتىماللىقى <strong>0.0475%</strong> بولۇپ قالىدۇ.</p>
+                        <p>بۇ نەتىجە بىزگە كۆرسىتىدۇكى، ناھايىتى ئاز تارقالغان كېسەللىكلەر ئۈچۈن، تەكشۈرۈش نەتىجىسى مۇسبەت چىقسىمۇ، ھەقىقىي كېسەللىك ئېھتىماللىقى ناھايىتى تۆۋەن بولۇشى مۇمكىن. شۇڭا مۇسبەت نەتىجە چىققاندا، قايتا تەكشۈرۈش قىلىش مۇھىم.</p>
+                    </div>
+                    <div class="english">
+                        <p>Result: If someone tests positive, the probability they actually have the disease is only <strong>0.0475%</strong>.</p>
+                        <p>This result demonstrates that for very rare diseases, even with a positive test result, the actual probability of having the disease can be extremely low. Therefore, follow-up testing is crucial when a positive result is obtained.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="summary-cards">
+                <div class="card">
+                    <h3><i class="fas fa-vial"></i> ھېسسىيات (Sensitivity)</h3>
+                    <p>چوقۇم كېسەلگە چاللىنىپ قالغانلار ئىچىدە، تەكشۈرۈشتە مۇسبەت نەتىجە ئالغانلارنىڭ نىسبىتى.</p>
+                    <div class="formula" style="padding: 10px; margin: 10px 0; font-size: 14px;">
+                        \[ \text{Sensitivity} = \frac{\text{True Positive}}{\text{True Positive} + \text{False Negative}} \]
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-filter"></i> ئالاھىدىلىك (Specificity)</h3>
+                    <p>كېسەلگە چاللىنمىغانلار ئىچىدە، تەكشۈرۈشتە سالبىي نەتىجە ئالغانلارنىڭ نىسبىتى.</p>
+                    <div class="formula" style="padding: 10px; margin: 10px 0; font-size: 14px;">
+                        \[ \text{Specificity} = \frac{\text{True Negative}}{\text{True Negative} + \text{False Positive}} \]
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> يالغان مۇسبەت (False Positive)</h3>
+                    <p>كېسەلگە چاللىنمىغانلار ئىچىدە، تەكشۈرۈشتە مۇسبەت نەتىجە ئالغانلارنىڭ نىسبىتى.</p>
+                    <p>بۇ نىسبەت ناھايىتى مۇھىم، چۈنكى يۇقىرى يالغان مۇسبەت نىسبىتى ناھايىتى ئاز تارقالغان كېسەللىكلەر ئۈچۈن ناھايىتى تۆۋەن كېسەللىك ئېھتىماللىقىغا سەۋەب بولىدۇ.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-exclamation-circle"></i> يالغان سالبىي (False Negative)</h3>
+                    <p>چوقۇم كېسەلگە چاللىنىپ قالغانلار ئىچىدە، تەكشۈرۈشتە سالبىي نەتىجە ئالغانلارنىڭ نىسبىتى.</p>
+                    <p>بۇ نىسبەت مۇھىم، چۈنكى يالغان سالبىي نەتىجە كېسەللىكنىڭ ۋاقىتلىق داۋالىنىشىنىڭ قېتىلىشىغا سەۋەب بولالايدۇ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ھېسابلاش قورالى قىسمى -->
+        <div class="tab-content">
+            <h2 class="section-title"><i class="fas fa-calculator"></i> بېيز نەزەرىيىسى ھېسابلاش قورالى</h2>
+            
+            <div class="calculator">
+                <h3>كېسەللىك تەكشۈرۈش ئېھتىماللىقىنى ھېسابلاش</h3>
+                
+                <div class="input-group">
+                    <label for="prevalence">كېسەللىك تارقىلىشى (%):</label>
+                    <input type="number" id="prevalence" min="0" max="100" step="0.001" value="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label for="sensitivity">تەكشۈرۈش ھېسسىياتى (%):</label>
+                    <input type="number" id="sensitivity" min="0" max="100" step="0.1" value="95">
+                </div>
+                
+                <div class="input-group">
+                    <label for="specificity">تەكشۈرۈش ئالاھىدىلىكى (%):</label>
+                    <input type="number" id="specificity" min="0" max="100" step="0.1" value="80">
+                </div>
+                
+                <button class="btn" onclick="calculateProbability()">
+                    <i class="fas fa-calculator"></i> ئېھتىماللىقنى ھېسابلاش
+                </button>
+                
+                <div class="result" id="result">
+                    <p>مۇسبەت تەكشۈرۈش نەتىجىسىدىن كېيىن كېسەل بولۇش ئېھتىماللىقى: <span id="probability">0.0475%</span></p>
+                </div>
+            </div>
+            
+            <div class="bilingual">
+                <div class="uyghur">
+                    <p>بۇ ھېسابلاش قورالى بېيز نەزەرىيىسى ئارقىلىق تەكشۈرۈش نەتىجىسىگە ئاساسەن كېسەللىك ئېھتىماللىقىنى ھېسابلاش ئۈچۈن ئىشلىتىلىدۇ.</p>
+                    <p>يۇقىرىدىكى قىممەتلەرنى ئۆزگەرتسىڭىز، ھەر خىل سېنارىيەلەر ئۈستىدە تەكشۈرۈش ئېلىپ بارالايسىز.</p>
+                    <p>مەسىلەن، كېسەللىك تارقىلىشىنى 1% قا كۆتۈرۈپ، نەتىجىنىڭ قانداق ئۆزگىرىشىنى كۆرۈڭ. ياكى ھېسسىيات ۋە ئالاھىدىلىكنى 99% قا كۆتۈرۈپ، نەتىجىنىڭ قانداق ياخشىلىنىشىنى بېقىڭ.</p>
+                </div>
+                <div class="english">
+                    <p>This calculator uses Bayes' Theorem to calculate the probability of having a disease based on test results.</p>
+                    <p>You can experiment with different values to see how prevalence, sensitivity, and specificity affect the results.</p>
+                    <p>For example, increase the disease prevalence to 1% and see how the result changes. Or increase sensitivity and specificity to 99% and observe how the result improves.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>بېيز نەزەرىيىسى دەرسلىكى | Bayes' Theorem Tutorial</p>
+        <p>© 2025  KaLBiL ئىستاتىستىكا ۋە ئىھتىماللىق كۇرسى | Statistics and Probability Course</p>
+    </footer>
+
+    <script>
+        // تەب ئالماشتۇرۇش
+        function showTab(index) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            
+            tabContents.forEach(content => content.classList.remove('active'));
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            tabContents[index].classList.add('active');
+            tabButtons[index].classList.add('active');
+        }
+        
+        // ھېسابلاش فۇنكسىيىسى
+        function calculateProbability() {
+            const prevalence = parseFloat(document.getElementById('prevalence').value) / 100;
+            const sensitivity = parseFloat(document.getElementById('sensitivity').value) / 100;
+            const specificity = parseFloat(document.getElementById('specificity').value) / 100;
+            
+            const pDisease = prevalence;
+            const pNoDisease = 1 - prevalence;
+            const pPositiveGivenDisease = sensitivity;
+            const pPositiveGivenNoDisease = 1 - specificity;
+            
+            const pPositive = (pPositiveGivenDisease * pDisease) + (pPositiveGivenNoDisease * pNoDisease);
+            const pDiseaseGivenPositive = (pPositiveGivenDisease * pDisease) / pPositive;
+            
+            const resultElement = document.getElementById('result');
+            const probabilityElement = document.getElementById('probability');
+            
+            probabilityElement.textContent = (pDiseaseGivenPositive * 100).toFixed(4) + '%';
+            resultElement.style.display = 'block';
+        }
+        
+        // قۇرۇلۇشتىكى ھېسابلاش
+        window.onload = function() {
+            calculateProbability();
+        };
+    </script>
+</body>
+</html>

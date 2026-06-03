@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ug" dir="rtl" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نېرۋاتور 5-باب – CNN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+  <style>:root{--bg:#fafafa;--text-ug:#2d2d2d;--text-en:#444;--primary:#00796b;--card-bg:#ffffff}body{background:var(--bg);padding:20px;font-family:'Amiri',serif;color:var(--text-ug);line-height:1.7;direction:rtl}h1{text-align:center;color:var(--primary);font-size:2.4rem;margin:0 0 20px}.bilingual-section{background:var(--card-bg);border-radius:12px;padding:20px;margin-bottom:30px;box-shadow:0 4px 12px rgba(0,0,0,.05);border-right:4px solid var(--primary)}.section-title-ug{font-size:1.6rem;font-weight:bold;color:var(--primary);margin-bottom:8px}.section-title-en{font-size:1.3rem;font-weight:600;color:#555;margin-bottom:15px;font-family:'Inter',sans-serif;direction:ltr;text-align:left}.en{font-family:'Inter',sans-serif;direction:ltr;text-align:left;color:var(--text-en);margin-top:12px;padding:12px;background:#f9f9f9;border-radius:8px;border-left:3px solid #ccc}.code-container{margin:15px 0}.CodeMirror{direction:ltr!important;font-family:'Fira Code',monospace;font-size:14px;border-radius:8px;overflow:hidden}.code-label{font-weight:bold;margin-top:15px;color:#555}ul,ol{padding-right:25px;margin:12px 0}li{margin-bottom:8px}footer{text-align:center;margin-top:40px;padding:20px;color:#666;font-size:.95rem}.highlight{background:#b2dfdb;padding:3px 6px;border-radius:4px;font-weight:bold}</style>
+</head>
+<body>
+
+<div style="text-align:center;max-width:800px;margin:0 auto 30px;padding:20px;background:#e0f2f1;border-radius:12px;border-right:4px solid var(--primary)">
+  <h1>نېرۋاتور 5-باب – CNN (Convolutional Neural Network)</h1>
+  <p><strong>CNN</strong> — رەسىم، ۋىديو كۆرۈنۈشىدەك <strong>مىكانىي ئۇچۇرلار</strong> (Spatial Data) نى تەھلىل قىلىش ئۈچۈن ئىشلىتىلىدىغان نېرۋاتور. بۇ نېرۋاتور <strong>كونۋولۇتسىيە</strong> (Convolution) ئامالى بىلەن رەسىمدىكى ئالاھىدىلىكلەرنى (كىرە، كۆز، چىش) ئايرىپ چىقىرىدۇ.</p>
+  <div class="en" style="margin-top:10px">CNNs are specialized neural networks for processing <strong>grid-like data</strong> (e.g., images). They use <strong>convolutional layers</strong> to automatically detect edges, textures, and patterns.</div>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">1. CNN نېمە؟</div>
+  <div class="section-title-en">1. What is a CNN?</div>
+  <p>CNN — رەسىم تانىش، ئوبىكىت بايان قىلىش، مېدىتسىنا رەڭگەك تەھلىلى قاتارلىق ساھەلەردە كەڭ قوللىنىلىدىغان نېرۋاتور. بۇ نېرۋاتورنىڭ ئاساسىي ئۇچۇرى — <strong>كونۋولۇتسىيە قەۋىتى</strong> (Convolutional Layer)، بۇ قەۋەت رەسىمنىڭ يەرلىك ئالاھىدىلىكىنى بايان قىلىدۇ.</p>
+  <p class="en">A CNN uses convolutional layers to scan images with filters (kernels), capturing local patterns like edges and corners, regardless of their position.</p>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">2. ئاساسىي قەۋەتلەر</div>
+  <div class="section-title-en">2. Core Layers</div>
+  <ul>
+    <li><strong>Convolutional Layer</strong>: رەسىمنى كىچىك فىلتىر (kernel) بىلەن تاراپ، ئالاھىدىلىكلەرنى چىقىرىدۇ.</li>
+    <li><strong>ReLU</strong>: سالبىت قىممەتلەرنى 0 قىلىدۇ، مودېلنىڭ مۇرەككەپلىكىنى ئاشۇرۇش ئۈچۈن.</li>
+    <li><strong>Pooling Layer</strong> (مەسىلەن: Max Pooling): رەسىمنى كىچىكلىتىپ، مۇھىم ئالاھىدىلىكنى ساقلايدۇ.</li>
+    <li><strong>Fully Connected Layer</strong>: ئاخىرقى قەرر قىلىش (مەسىلەن: "بۇ مۇشۇق").</li>
+  </ul>
+  <ul class="en">
+    <li><strong>Convolutional Layer</strong>: Applies filters to detect features.</li>
+    <li><strong>ReLU</strong>: Introduces non-linearity (sets negatives to zero).</li>
+    <li><strong>Pooling Layer</strong> (e.g., Max Pooling): Reduces spatial size, retains important info.</li>
+    <li><strong>Fully Connected Layer</strong>: Final classification output.</li>
+  </ul>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">3. كونۋولۇتسىيە قانداق ئىشلەيدۇ؟</div>
+  <div class="section-title-en">3. How Convolution Works</div>
+  <p>مەسىلەن: 5×5 رەسىم، 3×3 فىلتىر بىلەن كونۋولۇتسىيە قىلىنسا، 3×3 چىقىرىش ھاسىل بولىدۇ. ھەر بىر چىقىرىش نۇقتىسى — فىلتىر بىلەن رەسىمنىڭ كۆپەيتمىسىنىڭ جەمئىي قىممىتى.</p>
+  <p class="en">Example: A 5×5 image convolved with a 3×3 filter produces a 3×3 feature map. Each output pixel = sum of element-wise multiplication.</p>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">4. مىسال كود (TensorFlow/Keras)</div>
+  <div class="section-title-en">4. Code Example (TensorFlow/Keras)</div>
+  <div class="code-container">
+    <div class="code-label">ئۇيغۇرچە</div>
+    <div class="code-label en" style="direction:ltr;text-align:left">English</div>
+    <textarea id="c1" style="display:none">
+from tensorflow.keras import layers, models
+
+model = models.Sequential([
+    layers.Conv2D(32, (3,3), activation='relu', input_shape=(28,28,1)),
+    layers.MaxPooling2D((2,2)),
+    layers.Conv2D(64, (3,3), activation='relu'),
+    layers.MaxPooling2D((2,2)),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(10, activation='softmax')  # 10 سىنىپ (مەسىلەن: 0-9)
+])
+
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+    </textarea>
+  </div>
+</div>
+
+<div class="bilingual-section">
+  <div class="section-title-ug">5. قوللىنىش ساھەلىرى</div>
+  <div class="section-title-en">5. Applications</div>
+  <ul>
+    <li>مۇشۇك/ئىت تانىش</li>
+    <li>خەت تانىش (OCR)</li>
+    <li>مېدىتسىنا رەڭگەك تەھلىلى</li>
+    <li>ئاۋتوموبىلنىڭ ئاپتوماتىك قوزغىلىش سىستېمىسى</li>
+  </ul>
+  <ul class="en">
+    <li>Face recognition</li>
+    <li>Handwritten digit recognition (e.g., MNIST)</li>
+    <li>Medical image diagnosis</li>
+    <li>Self-driving cars (object detection)</li>
+  </ul>
+</div>
+
+<footer>
+  <p>نېرۋاتور 5-باب – CNN (Convolutional Neural Network)</p>
+  <p>دەرسلىك: ئۇيغۇرچە | English • 2025-12-04</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const textareas = document.querySelectorAll('textarea[id^="c"]');
+  textareas.forEach(ta => {
+    CodeMirror.fromTextArea(ta, {
+      mode: "python",
+      readOnly: true,
+      lineNumbers: true,
+      theme: "default",
+      direction: "ltr",
+      viewportMargin: Infinity
+    });
+  });
+});
+</script>
+</body>
+</html>

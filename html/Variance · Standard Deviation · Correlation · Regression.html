@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ug" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variance · Std Dev · Correlation · Regression — ئوقۇتۇش دەرسى</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #0b1220;
+            --muted: #9aa4b2;
+            --accent: #7c3aed;
+            --accent-light: #a78bfa;
+            --glass: rgba(255, 255, 255, 0.03);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Scheherazade New', system-ui, sans-serif;
+            background: linear-gradient(180deg, #07102b 0%, #081428 100%);
+            color: #e6eef8;
+            margin: 0;
+            padding: 24px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--accent-light);
+        }
+
+        .lang-switch {
+            margin-left: auto;
+        }
+
+        select {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .badge {
+            background: var(--glass);
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        h2 {
+            margin: 8px 0;
+            color: #ffffff;
+        }
+
+        pre {
+            background: #071027;
+            padding: 16px;
+            border-radius: 10px;
+            overflow: auto;
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-top: 12px;
+            color: #ffffff;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            color: inherit;
+            font-size: 14px;
+        }
+
+        button {
+            background: var(--accent);
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #9366ee;
+            transform: scale(1.03);
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .example {
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.08), transparent);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            border: 1px dashed var(--accent-light);
+        }
+
+        .quiz .option {
+            display: block;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .quiz .option:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .quiz .option.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .quiz .option.wrong {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        .steps {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            margin-top: 30px;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .kbd {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .formula-box {
+            background: rgba(124, 58, 237, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        @media (max-width: 980px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><rect rx='10' width='48' height='48' fill='%237c3aed'/><text x='50%' y='58%' font-size='24' text-anchor='middle' fill='white' font-family='Arial'>Σ</text></svg>" alt="logo"/>
+            <div>
+                <h1>Variance · Standard Deviation · Correlation · Regression</h1>
+                <div class="subtitle">مۇكەممەل، ئىنتېراكتىپ، قوش تىل — ئۇيغۇرچە + English</div>
+            </div>
+            <div class="lang-switch">
+                <select id="langSelect">
+                    <option value="ug">ئۇيغۇرچە + English (ئاساسىي)</option>
+                    <option value="en">English فقط</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="card">
+            <div class="section-title">
+                <div class="badge">Outline</div>
+                <div class="muted">قىسىم: Variance → Std Dev → Correlation → Regression</div>
+            </div>
+
+            <div class="grid">
+                <main>
+                    <!-- كىرىش -->
+                    <section id="intro" class="card">
+                        <div class="section-title"><div class="badge">1</div><div class="muted">Introduction / كىرىش</div></div>
+                        <p id="introText">بۇ دەرسلىك سىزگە <strong>Variance (ۋارىيانس)</strong>, <strong>Standard Deviation (ئۆلچەملىك ئېغىش)</strong>, <strong>Correlation (مۇناسىۋەت)</strong>, ۋە <strong>Regression (قايتۇرما)</strong> نى قەدەم بەپ قەدەم باشقۇرۇپ، ئەملىي مىساللار ۋە ئىنتېرئاكتىپ قۇراللار بىلەن ئۆگىتىدۇ. <span class="muted">This lesson uses interactive calculators and plots so you can experiment instantly.</span></p>
+                        <div class="steps">
+                            <div class="step">0–10 min: Variance</div>
+                            <div class="step">10–20 min: Std Dev</div>
+                            <div class="step">20–35 min: Correlation</div>
+                            <div class="step">35–55 min: Regression</div>
+                        </div>
+                    </section>
+
+                    <!-- سانلىق مەلۇمات -->
+                    <section id="dataSection" class="card">
+                        <div class="section-title"><div class="badge">2</div><div class="muted">Interactive dataset / ئەملىي سانلىق مەلۇمات</div></div>
+                        <div style="display:flex;gap:16px;flex-wrap:wrap">
+                            <div style="flex:1;min-width:260px">
+                                <label>Dataset (coma bilen ayrilghan) — سانلارنى كاما بىلەن ئايرىڭ:</label>
+                                <textarea id="dataInput" rows="3">10,12,23,23,16,23,21,16</textarea>
+                                <div style="display:flex;gap:10px;margin-top:10px">
+                                    <button onclick="loadExample(0)">مۇستەقىل مىسال 1</button>
+                                    <button onclick="loadExample(1)">مۇستەقىل مىسال 2</button>
+                                    <button onclick="loadExample(2)">مۇستەقىل مىسال 3</button>
+                                </div>
+                                <div class="muted" style="margin-top:10px">
+                                    مىساللار: 1) بالىلار باھالىرى؛ 2) سىزىقلىق ئۆسۈش؛ 3) تىنىشلىق سىزىقلىق
+                                </div>
+                            </div>
+
+                            <div style="width:340px">
+                                <label>تېز تەكشۈرۈش / Quick stats</label>
+                                <div style="display:flex;gap:10px;margin-top:10px">
+                                    <button onclick="computeStats()">ھېسابلاش</button>
+                                    <button onclick="clearOutput()">تازىلاش</button>
+                                </div>
+                                <pre id="statsOut">ھېسابلاش تۇگمىسىنى بېسىڭ</pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- تارقاقلىق ۋە ستاندارت ئائىلىش -->
+                    <section id="varSection" class="card">
+                        <div class="section-title"><div class="badge">3</div><div class="muted">Variance & Standard Deviation / وارىيانس ۋە ئۆلچەملىك ئېغىش</div></div>
+                        <div class="formula-box">
+                            \[ \text{تارقاقلىق} = \frac{1}{n}\sum (x_i - \bar{x})^2 \quad \text{SD} = \sqrt{\text{تارقاقلىق}} \]
+                        </div>
+
+                        <div style="display:flex;gap:16px;flex-wrap:wrap">
+                            <div style="flex:1;min-width:260px">
+                                <label>قەدەم ـ قەدەم كۆرسەت:</label>
+                                <button onclick="showVarianceSteps()">قەدەملەرنى كۆرسەت</button>
+                                <pre id="varSteps" style="height:180px;overflow:auto"></pre>
+                            </div>
+                            <div style="width:340px">
+                                <label>ھىستوگرام / Visualization</label>
+                                <canvas id="histChart" height="240"></canvas>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- سېلىشتۇرۇش -->
+                    <section id="corrSection" class="card">
+                        <div class="section-title"><div class="badge">4</div><div class="muted">Correlation / مۇناسىۋەت</div></div>
+                        <div class="formula-box">
+                            \[ r = \dfrac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum (x_i-\bar{x})^2 \sum (y_i-\bar{y})^2}} \]
+                        </div>
+
+                        <div style="display:flex;gap:16px;flex-wrap:wrap">
+                            <div style="flex:1;min-width:260px">
+                                <label>X قىممەتلىرى (كاما بىلەن)</label>
+                                <textarea id="xInput" rows="2">1,2,3,4,5</textarea>
+                                <label style="margin-top:10px">Y قىممەتلىرى (كاما بىلەن)</label>
+                                <textarea id="yInput" rows="2">2,4,5,4,5</textarea>
+                                <div style="display:flex;gap:10px;margin-top:10px">
+                                    <button onclick="computeCorrelation()">r ھېسابلاش</button>
+                                    <button onclick="clearCorr()">تازىلاش</button>
+                                </div>
+                                <pre id="corrOut">ھېسابلاش تۇگمىسىنى بېسىڭ</pre>
+                            </div>
+
+                            <div style="width:340px">
+                                <label>سېلىشتۇرۇش چىگىرىشى ۋە رېگرېسىيا تۈرلى</label>
+                                <canvas id="scatterChart" height="240"></canvas>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- رېگرېسىيا -->
+                    <section id="regSection" class="card">
+                        <div class="section-title"><div class="badge">5</div><div class="muted">Linear Regression / سىزىقلىق قايتۇرما</div></div>
+                        <div class="formula-box">
+                            \[ y = a + bx \]
+                        </div>
+
+                        <div style="display:flex;gap:16px;flex-wrap:wrap">
+                            <div style="flex:1;min-width:260px">
+                                <label>يۇقىرىدىكى X ۋە Y نى ئىشلىتىڭ. كېپىپ، كېپىپ.</label>
+                                <div style="display:flex;gap:10px;margin-top:10px">
+                                    <button onclick="computeRegression()">تۈرلىنى تەڭشەش</button>
+                                    <button onclick="predictExample()">بىر مۇستەقىل مىسال</button>
+                                </div>
+                                <pre id="regOut">تۈرلىنى تەڭشەش تۇگمىسىنى بېسىڭ</pre>
+
+                                <div style="margin-top:16px">
+                                    <label>تېست: قايسى دېگەن گەپ توغرا؟</label>
+                                    <div class="quiz" id="quiz">
+                                        <div class="option" data-correct="false" onclick="answerQuiz(this)">يۇقىرى مۇناسىۋەت سەۋەبىيەت بولۇشىنى دېلىتىدۇ.</div>
+                                        <div class="option" data-correct="true" onclick="answerQuiz(this)">0.9 مۇناسىۋەت كۈچلۈك مۇناسىۋەتنى كۆرسىتىدۇ، لېكىن سەۋەبىيەت ئەمەس.</div>
+                                        <div class="option" data-correct="false" onclick="answerQuiz(this)">قايتۇرما ھەر دائىم نەزەرىيەنى ئىسپاتلايدۇ.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width:340px">
+                                <label>ھېسابلاش قەدەملىرى</label>
+                                <pre id="regSteps" style="height:240px;overflow:auto">تۈرلىنى تەڭشەپ، كۆرسىتىلىدۇ.</pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- مەشغۇلات -->
+                    <section id="exSection" class="card">
+                        <div class="section-title"><div class="badge">6</div><div class="muted">مەشغۇلات ۋە ئىلگىرىلىشىش / Exercises</div></div>
+                        <ol>
+                            <li>تۈرلۈك چوڭلۇقتىكى سانلىق مەلۇماتلارنىڭ تارقاقلىقىنى ھېسابلاڭ، نامايىن ۋە جەمئىيەت فورمۇلىسىنى سېلىشتۇرۇڭ.</li>
+                            <li>ئىككى مۇئاۋىنلىقنى سىمۇلىيىت قىلىڭ: بىرى سەۋەبىيەتلىك، بىرى ئارا قوشۇلغان. سېلىشتۇرۇش چىگىرىشىنى چىزىپ، r نى ھېسابلاڭ.</li>
+                            <li>قايتۇرما بىلەن پىروگنوز قىلىڭ، RMSE ھېسابلاڭ.</li>
+                        </ol>
+
+                        <div class="example">
+                            <strong>يۈكلەش / Save:</strong> بۇ بېتنى .html فېيلى قىلىپ ساقلاپ، ئاچقاندا سېتىلمايدىغاندا ئىشلىتەلەيسىز.
+                        </div>
+                    </section>
+                </main>
+
+                <aside>
+                    <div class="card">
+                        <h3>قىسىقىچە / Cheat sheet</h3>
+                        <p class="muted">ئوتتۇرىچە: \(\bar{x}=\frac{1}{n}\sum x_i\)</p>
+                        <p class="muted">تارقاقلىق: \(\frac{1}{n}\sum (x_i-\bar{x})^2\) (نامايىن: \(n-1\))</p>
+                        <p class="muted">SD: \(\sqrt{\text{تارقاقلىق}}\)</p>
+                        <p class="muted">مۇناسىۋەت: يۇقىرىدا كۆرسىتىلگەن.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>تېزچە / Quick tips</h3>
+                        <ul class="muted">
+                            <li>ئالدى بىلەن چىزىڭ: ھىستوگرام ۋە سېلىشتۇرۇش چىگىرىشى.</li>
+                            <li>مۇناسىۋەت سەۋەبىيەت دېگەن مەنىنى بىلدۈرمەيدۇ.</li>
+                            <li>تۈرلۈك بىرلىكى بولسا، نورماللاشتۇرۇڭ (z-score).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>تېز تۇيۇملار</h3>
+                        <p class="muted"><span class="kbd">Ctrl+S</span> بىلەن ساقلاڭ.</p>
+                        <p class="muted"><span class="kbd">F12</span> بىلەن كونسولنى ئاچىڭ.</p>
+                    </div>
+                </aside>
+            </div>
+
+            <footer>
+                Created for you — مۇشۇ دەرسلىك سىز ئۈچۈن تەييارلاندى. <span class="muted">KaLBiL 2025 (Uyghur + English)</span>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const langSelect = document.getElementById('langSelect');
+        langSelect.addEventListener('change', () => {
+            const v = langSelect.value;
+            if (v === 'en') {
+                document.getElementById('introText').innerHTML = 'This interactive lesson teaches Variance, Standard Deviation, Correlation and Regression with step-by-step calculators, plots and quizzes.';
+            } else {
+                document.getElementById('introText').innerHTML = 'بۇ دەرسلىك سىزگە <strong>Variance (ۋارىيانس)</strong>, <strong>Standard Deviation (ئۆلچەملىك ئېغىش)</strong>, <strong>Correlation (مۇناسىۋەت)</strong>, ۋە <strong>Regression (قايتۇرما)</strong> نى قەدەم بەپ قەدەم باشقۇرۇپ، ئەملىي مىساللار ۋە ئىنتېرئاكتىپ قۇراللار بىلەن ئۆگىتىدۇ. <span class="muted">This lesson uses interactive calculators and plots so you can experiment instantly.</span>';
+            }
+        });
+
+        function parseNumbers(text) {
+            return text.split(',').map(s => parseFloat(s.trim())).filter(x => !Number.isNaN(x));
+        }
+
+        function mean(arr) {
+            return arr.reduce((a, b) => a + b, 0) / arr.length;
+        }
+
+        function variance(arr, sample = false) {
+            const mu = mean(arr);
+            const s = arr.reduce((acc, x) => acc + Math.pow(x - mu, 2), 0);
+            return s / (arr.length - (sample ? 1 : 0));
+        }
+
+        function stddev(arr, sample = false) {
+            return Math.sqrt(variance(arr, sample));
+        }
+
+        let histChart = null, scatterChart = null;
+
+        function loadExample(i) {
+            const examples = [
+                '10,12,23,23,16,23,21,16', // نامايىن
+                '1,2,3,4,5,6,7,8', // سىزىقلىق
+                '1,2.2,2.9,4.1,5.0,6.2' // تىنىشلىق
+            ];
+            document.getElementById('dataInput').value = examples[i];
+            computeStats();
+        }
+
+        function computeStats() {
+            const arr = parseNumbers(document.getElementById('dataInput').value);
+            if (arr.length === 0) { alert('سان كىرگۈزۈڭ'); return }
+            const mu = mean(arr);
+            const varPop = variance(arr, false);
+            const varSample = variance(arr, true);
+            const sdPop = Math.sqrt(varPop);
+            const sdSample = Math.sqrt(varSample);
+            const out = `n = ${arr.length}\nئوتتۇرىچە = ${mu.toFixed(4)}\nتارقاقلىق (جەمئىيەت) = ${varPop.toFixed(4)}\nSD (جەمئىيەت) = ${sdPop.toFixed(4)}\nتارقاقلىق (نامايىن) = ${varSample.toFixed(4)}\nSD (نامايىن) = ${sdSample.toFixed(4)}`;
+            document.getElementById('statsOut').textContent = out;
+            showHistogram(arr);
+            document.getElementById('varSteps').textContent = '';
+        }
+
+        function clearOutput() {
+            document.getElementById('statsOut').textContent = 'ھېسابلاش تۇگمىسىنى بېسىڭ';
+            if (histChart) { histChart.destroy(); histChart = null }
+            document.getElementById('varSteps').textContent = '';
+        }
+
+        function showVarianceSteps() {
+            const arr = parseNumbers(document.getElementById('dataInput').value);
+            if (arr.length === 0) { alert('سان كىرگۈزۈڭ'); return }
+            const mu = mean(arr);
+            const diffs = arr.map(x => ({ x, diff: (x - mu), sq: Math.pow(x - mu, 2) }));
+            let text = `ئوتتۇرىچە = ${mu.toFixed(6)}\n\nئىندېكس\tx\tdiff\tdiff^2\n`;
+            diffs.forEach((d, i) => { text += `${i + 1}\t${d.x}\t${d.diff.toFixed(6)}\t${d.sq.toFixed(6)}\n` });
+            const s = diffs.reduce((a, b) => a + b.sq, 0);
+            const varPop = s / arr.length;
+            text += `\nكۆپەيتىلگەنلەرنىڭ يىغىندىسى = ${s.toFixed(6)}\nتارقاقلىق = ${varPop.toFixed(6)}\nSD = ${Math.sqrt(varPop).toFixed(6)}`;
+            document.getElementById('varSteps').textContent = text;
+            showHistogram(arr);
+        }
+
+        function showHistogram(arr) {
+            const ctx = document.getElementById('histChart').getContext('2d');
+            const counts = {};
+            arr.forEach(v => { counts[v] = (counts[v] || 0) + 1 });
+            const labels = Object.keys(counts);
+            const data = labels.map(l => counts[l]);
+            if (histChart) histChart.destroy();
+            histChart = new Chart(ctx, {
+                type: 'bar',
+                data: { labels, datasets: [{ label: 'تەكرار', data: data, backgroundColor: '#7c3aed' }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        function computeCorrelation() {
+            const x = parseNumbers(document.getElementById('xInput').value);
+            const y = parseNumbers(document.getElementById('yInput').value);
+            if (x.length === 0 || y.length === 0 || x.length !== y.length) { alert('X ۋە Y بىر خىل ئۇزۇنلۇقىدا بولۇشى كېرەك'); return }
+            const mx = mean(x); const my = mean(y);
+            let num = 0; let sx2 = 0; let sy2 = 0;
+            for (let i = 0; i < x.length; i++) { num += (x[i] - mx) * (y[i] - my); sx2 += Math.pow(x[i] - mx, 2); sy2 += Math.pow(y[i] - my, 2) }
+            const r = num / Math.sqrt(sx2 * sy2);
+            document.getElementById('corrOut').textContent = `r = ${r.toFixed(6)}`;
+            renderScatter(x, y);
+        }
+
+        function clearCorr() {
+            document.getElementById('corrOut').textContent = 'ھېسابلاش تۇگمىسىنى بېسىڭ';
+            if (scatterChart) { scatterChart.destroy(); scatterChart = null }
+        }
+
+        function renderScatter(x, y) {
+            const ctx = document.getElementById('scatterChart').getContext('2d');
+            const points = x.map((xi, i) => ({ x: xi, y: y[i] }));
+            const reg = linearRegression(x, y);
+            const minX = Math.min(...x); const maxX = Math.max(...x);
+            const lineData = [{ x: minX, y: reg.a + reg.b * minX }, { x: maxX, y: reg.a + reg.b * maxX }];
+            if (scatterChart) scatterChart.destroy();
+            scatterChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        { label: 'نۇقتىلار', data: points, backgroundColor: '#f72585', pointRadius: 6 },
+                        { label: 'تەڭشەش', data: lineData, type: 'line', borderColor: '#4cc9f0', borderWidth: 2, pointRadius: 0 }
+                    ]
+                },
+                options: { scales: { x: { type: 'linear', position: 'bottom' }, y: { beginAtZero: true } } }
+            });
+        }
+
+        function linearRegression(x, y) {
+            const n = x.length;
+            const mx = mean(x); const my = mean(y);
+            let num = 0; let den = 0;
+            for (let i = 0; i < n; i++) { num += (x[i] - mx) * (y[i] - my); den += Math.pow(x[i] - mx, 2) }
+            const b = num / den; const a = my - b * mx;
+            return { a, b };
+        }
+
+        function computeRegression() {
+            const x = parseNumbers(document.getElementById('xInput').value);
+            const y = parseNumbers(document.getElementById('yInput').value);
+            if (x.length === 0 || y.length === 0 || x.length !== y.length) { alert('X ۋە Y بىر خىل ئۇزۇنلۇقىدا بولۇشى كېرەك'); return }
+            const { a, b } = linearRegression(x, y);
+            document.getElementById('regOut').textContent = `كەسىش (a) = ${a.toFixed(6)}\nكىلىش (b) = ${b.toFixed(6)}`;
+            const rmse = computeRMSE(x, y, a, b);
+            document.getElementById('regOut').textContent += `\nRMSE = ${rmse.toFixed(6)}`;
+            document.getElementById('regSteps').textContent = `كىلىش (b) = Σ[(x-x̄)(y-ȳ)] / Σ(x-x̄)²\nكەسىش (a) = ȳ - b*x̄\n\nھېسابلانغان:\na = ${a.toFixed(6)}\nb = ${b.toFixed(6)}`;
+            renderScatter(x, y);
+        }
+
+        function computeRMSE(x, y, a, b) {
+            let s = 0;
+            for (let i = 0; i < x.length; i++) {
+                const pred = a + b * x[i];
+                s += Math.pow(pred - y[i], 2);
+            }
+            return Math.sqrt(s / x.length);
+        }
+
+        function predictExample() {
+            const a = parseFloat(document.getElementById('regOut').textContent.match(/a = ([\-0-9\.]+)/)?.[1] || NaN);
+            const b = parseFloat(document.getElementById('regOut').textContent.match(/b = ([\-0-9\.]+)/)?.[1] || NaN);
+            if (Number.isNaN(a) || Number.isNaN(b)) { alert('ئالدى بىلەن تۈرلىنى تەڭشەڭ'); return }
+            const xval = parseFloat(prompt('پىروگنوز قىلىش ئۈچۈن x قىممىتىنى كىرگۈزۈڭ:', '6'));
+            if (Number.isNaN(xval)) return;
+            alert(`x=${xval} ئۈچۈن پىروگنوز: y = ${ (a + b * xval).toFixed(4) }`);
+        }
+
+        function answerQuiz(el) {
+            const correct = el.getAttribute('data-correct') === 'true';
+            const options = document.querySelectorAll('#quiz .option');
+            options.forEach(o => o.classList.remove('correct', 'wrong'));
+            if (correct) {
+                el.classList.add('correct');
+                alert('توغرا! / Correct!');
+            } else {
+                el.classList.add('wrong');
+                alert('خاتا — نېمىگە شۇنداق؟ / Not correct');
+            }
+        }
+
+        // باشلىنىش
+        loadExample(0);
+    </script>
+</body>
+</html>
