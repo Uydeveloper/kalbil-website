@@ -102,6 +102,12 @@
     "roles": ["student", "user"]
   },
   {
+    "id": "user016",
+    "name": "dilnur",
+    "password": "dilnurkadir@kht26",
+    "roles": ["student"]
+  },
+  {
     "id": "user002",
     "name": "bughra319",
     "password": "bughra319@kht26",
