@@ -1081,102 +1081,145 @@ const goToStudentInfo = () => {
 
     </div>
 
-    {/* Main Grid Layout */}
-    <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
 
-      {/* ---------------- LEFT BIG PLAYER AREA (ۋىدىئو قويغۇچ رايونى) ---------------- */}
-      <div className="xl:col-span-3 space-y-5">
+                  
+                  {/* ==================== MAIN GRID LAYOUT ==================== */}
+                  <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
 
-        {currentVideo ? (
-          <div className="relative overflow-hidden bg-[#0B1120]/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2.2rem] p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+                    {/* ---------------- LEFT BIG PLAYER AREA ---------------- */}
+                    <div className="xl:col-span-3 space-y-5">
 
-            <div className="absolute -top-24 -right-24 w-60 h-60 bg-cyan-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+                      {currentVideo ? (
+                        <div className="relative overflow-hidden bg-[#0B1120]/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2.2rem] p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
 
-            {/* BIG VIDEO FRAME WITH ANTI-YOUTUBE MASK (يۇتۇب ئۇچۇرلىرىنى توسۇش تاختىسى قوشۇلدى) */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-slate-900 bg-black shadow-[0_20px_60px_rgba(0,0,0,0.65)] group">
-              
-              {/* تاشقى قاپارتما تاختا: ئابونتلارنىڭ ۋىدىيونى چىكىپ يۇتۇبقا ئۆتۈپ كېتىشىنى تامامەن چەكلەيدۇ */}
-              <div className="absolute inset-0 z-20 pointer-events-none border border-white/5 rounded-2xl" />
-              
-              {/* ئاستى قىسىمدىكى يۇتۇب بەلگىسىنى تۇتۇپ تۇرىدىغان قارا سايە بېزەكلىك توساق */}
-              <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none opacity-90 transition-opacity group-hover:opacity-100" />
-              <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none" />
+                          <div className="absolute -top-24 -right-24 w-60 h-60 bg-cyan-500/5 blur-[100px] rounded-full pointer-events-none"></div>
 
-              {currentVideo.youtube ? (
-                <iframe
-                  src={`${
-                    currentVideo.youtube.includes('watch?v=')
-                      ? currentVideo.youtube.replace('watch?v=', 'embed/')
-                      : currentVideo.youtube.includes('youtu.be/')
-                      ? currentVideo.youtube.replace('youtu.be/', 'youtube.com/embed/')
-                      : currentVideo.youtube
-                  }?autoplay=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&controls=1&vq=hd1080&disablekb=1`}
-                  title={currentVideo.title}
-                  className="relative z-0 w-full h-full border-0 scale-[1.01] origin-center"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              ) : (
-                <video
-                  ref={videoRef}
-                  src={currentVideo.video}
-                  controls
-                  autoPlay
-                  onTimeUpdate={handleTimeUpdate}
-                  onEnded={handleVideoEnded}
-                  className="w-full h-full object-contain"
-                />
-              )}
-            </div>
+                          {/* BIG VIDEO FRAME WITH ANTI-YOUTUBE MASK */}
+                          <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-slate-900 bg-black shadow-[0_20px_60px_rgba(0,0,0,0.65)] group">
+                            
+                            {/* Outer glare overlay mask frame */}
+                            <div className="absolute inset-0 z-20 pointer-events-none border border-white/5 rounded-2xl" />
+                            
+                            {/* Bottom YouTube brand/logo concealment overlay banner */}
+                            <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none opacity-90 transition-opacity group-hover:opacity-100" />
+                            <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none" />
 
-            {/* Bottom Info Section */}
-            <div className="mt-6 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                            {currentVideo.youtube ? (
+                              <iframe
+                                src={`${
+                                  currentVideo.youtube.includes('watch?v=')
+                                    ? currentVideo.youtube.replace('watch?v=', 'embed/')
+                                    : currentVideo.youtube.includes('youtu.be/')
+                                    ? currentVideo.youtube.replace('youtu.be/', 'youtube.com/embed/')
+                                    : currentVideo.youtube
+                                }?autoplay=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&controls=1&vq=hd1080&disablekb=1`}
+                                title={currentVideo.title}
+                                className="relative z-0 w-full h-full border-0 scale-[1.01] origin-center"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              />
+                            ) : (
+                              <video
+                                ref={videoRef}
+                                src={currentVideo.video}
+                                controls
+                                autoPlay
+                                onTimeUpdate={handleTimeUpdate}
+                                onEnded={handleVideoEnded}
+                                className="w-full h-full object-contain"
+                              />
+                            )}
+                          </div>
 
-              {/* Lesson Title & Number */}
-              <div className="text-right order-1 lg:order-2" style={{ direction: 'rtl' }}>
-                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 text-xs font-mono font-bold tracking-wider">
-                  LESSON {(currentIndex + 1).toString().padStart(2, "0")}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-black text-slate-100 mt-3 leading-relaxed tracking-wide">
-                  {currentVideo.title}
-                </h3>
-              </div>
+                          {/* Bottom Info Section - دەرس ئۇچۇرى ۋە ھۆججەت يۈكلەش رايونى */}
+                          <div className="mt-6 flex flex-col lg:flex-row lg:items-start justify-between gap-5 border-t border-slate-900 pt-5" style={{ direction: 'rtl' }}>
 
-              {/* Autoplay Toggle Switcher */}
-              <div className="flex items-center gap-4 bg-slate-950/60 border border-slate-800/80 rounded-2xl px-4 py-3 shadow-inner self-start lg:self-center order-2 lg:order-1 select-none">
-                <span className="text-xs font-bold text-slate-400">
-                  ئاپتوماتىك كېيىنكى دەرس
-                </span>
-                <button
-                  onClick={() => setAutoplay(!autoplay)}
-                  className={`relative px-4 py-1.5 rounded-xl text-xs font-black transition-all duration-300 cursor-pointer ${
-                    autoplay
-                      ? "bg-gradient-to-r from-cyan-500 to-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.3)]"
-                      : "bg-slate-800 text-slate-500 border border-slate-700/50"
-                  }`}
-                >
-                  {autoplay ? "ئوچۇق" : "تاقاق"}
-                </button>
-              </div>
+                            <div className="text-right order-1 flex-1 space-y-3">
+                              <div className="flex items-center gap-2">
+                                <span className="inline-flex items-center px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 text-xs font-mono font-bold tracking-wider">
+                                  LESSON {(currentIndex + 1).toString().padStart(2, "0")}
+                                </span>
+                              </div>
+                              <h3 className="text-xl sm:text-2xl font-black text-slate-100 leading-relaxed tracking-wide">
+                                {currentVideo.title}
+                              </h3>
+                              {currentVideo.desc && (
+                                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-3xl">
+                                  {currentVideo.desc}
+                                </p>
+                              )}
+                            </div>
 
-            </div>
+                            <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch sm:items-center gap-3 order-2 flex-shrink-0">
+                              
+                              {/* 1. PDF نى بىۋاسىتە چۈشۈرۈش كۇنۇپكىسى (download خۇسۇسىيىتى قوشۇلدى) */}
+                              {currentVideo.pdf && (
+                                <a
+                                  href={currentVideo.pdf}
+                                  download={`Lesson-${currentIndex + 1}.pdf`}
+                                  className="group flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 hover:border-rose-500/40 text-rose-400 text-xs font-bold transition-all duration-200"
+                                >
+                                  <svg className="w-4 h-4 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                  </svg>
+                                  PDF قوللانما چۈشۈرۈش
+                                </a>
+                              )}
 
-          </div>
-        ) : (
-          <div className="bg-[#0B1120]/40 border border-dashed border-slate-800/80 rounded-[2rem] py-24 text-center select-none shadow-sm">
-            <div className="w-16 h-16 rounded-full bg-slate-950 flex items-center justify-center mx-auto mb-4 border border-slate-800">
-              <svg className="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <p className="text-slate-500 font-medium text-base">
-              نۆۋەتتە قويىدىغان ۋىدىئو تېپىلمىدى
-            </p>
-          </div>
-        )}
+                              {/* 2. HTML نى تور بەتنىڭ ئۆزىدە ئېچىش كۇنۇپكىسى (target="_blank" ئۆچۈرۈلدى) */}
+                              {/* 2. HTML نى يېڭى بەتتە پاكىز ئېچىش */}
+{/* 2. HTML نى بىۋاسىتە چۈشۈرۈش */}
+{currentVideo.html && (
+  <a
+    href={currentVideo.html}
+    download={`Lesson-${currentIndex + 1}.html`} // بۇ يەرگە download قوشۇلدى
+    className="group flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 hover:border-amber-500/40 text-amber-400 text-xs font-bold transition-all duration-200"
+  >
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    </svg>
+    ھۆججەتنى چۈشۈرۈش (HTML)
+  </a>
+)}
 
-      </div>
+                              {(currentVideo.pdf || currentVideo.html) && (
+                                <div className="hidden sm:block lg:hidden xl:block w-px h-6 bg-slate-800" />
+                              )}
 
+                              <div className="flex items-center justify-between gap-4 bg-slate-950/60 border border-slate-800/80 rounded-xl px-3.5 py-2.5 shadow-inner">
+                                <span className="text-[11px] font-bold text-slate-400 whitespace-nowrap">
+                                  ئاپتوماتىك كېيىنكى دەرس
+                                </span>
+                                <button
+                                  onClick={() => setAutoplay(!autoplay)}
+                                  className={`relative px-3 py-1 rounded-lg text-[11px] font-black transition-all duration-300 cursor-pointer ${
+                                    autoplay
+                                      ? "bg-gradient-to-r from-cyan-500 to-cyan-400 text-slate-950 shadow-[0_0_12px_rgba(6,182,212,0.25)]"
+                                      : "bg-slate-800 text-slate-500 border border-slate-700/50"
+                                  }`}
+                                >
+                                  {autoplay ? "ئوچۇق" : "تاقاق"}
+                                </button>
+                              </div>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      ) : (
+                        <div className="bg-[#0B1120]/40 border border-dashed border-slate-800/80 rounded-[2rem] py-24 text-center select-none shadow-sm">
+                          <div className="w-16 h-16 rounded-full bg-slate-950 flex items-center justify-center mx-auto mb-4 border border-slate-800">
+                            <svg className="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                            </svg>
+                          </div>
+                          <p className="text-slate-500 font-medium text-base">
+                            نۆۋەتتە قويىدىغان ۋىدىئو تېپىلمىدى
+                          </p>
+                        </div>
+                      )}
+
+                    </div>
    
    {/* ---------------- RIGHT SMALL VIDEO CARDS (ئوڭ تەرەپ دەرسلىك تىزىملىك تاختىسى) ---------------- */}
 <div className="space-y-4 xl:max-h-[780px] overflow-y-auto pl-1 pr-1 custom-scrollbar select-none">
