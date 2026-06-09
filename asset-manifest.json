@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/kalbil-website/static/css/main.ec629d0c.css",
-    "main.js": "/kalbil-website/static/js/main.ce6d8408.js",
+    "main.css": "/kalbil-website/static/css/main.4b7a054a.css",
+    "main.js": "/kalbil-website/static/js/main.7293b1d8.js",
     "static/js/3264.84b2d8dd.chunk.js": "/kalbil-website/static/js/3264.84b2d8dd.chunk.js",
     "static/js/8635.14c7d9d2.chunk.js": "/kalbil-website/static/js/8635.14c7d9d2.chunk.js",
     "static/js/2734.61c5440d.chunk.js": "/kalbil-website/static/js/2734.61c5440d.chunk.js",
@@ -164,8 +164,8 @@
     "static/media/slick.eot": "/kalbil-website/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/kalbil-website/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/kalbil-website/static/media/slick.295183786cd8a1389865.woff",
-    "main.ec629d0c.css.map": "/kalbil-website/static/css/main.ec629d0c.css.map",
-    "main.ce6d8408.js.map": "/kalbil-website/static/js/main.ce6d8408.js.map",
+    "main.4b7a054a.css.map": "/kalbil-website/static/css/main.4b7a054a.css.map",
+    "main.7293b1d8.js.map": "/kalbil-website/static/js/main.7293b1d8.js.map",
     "3264.84b2d8dd.chunk.js.map": "/kalbil-website/static/js/3264.84b2d8dd.chunk.js.map",
     "8635.14c7d9d2.chunk.js.map": "/kalbil-website/static/js/8635.14c7d9d2.chunk.js.map",
     "2734.61c5440d.chunk.js.map": "/kalbil-website/static/js/2734.61c5440d.chunk.js.map",
@@ -325,7 +325,7 @@
     "6311.68bbd921.chunk.css.map": "/kalbil-website/static/css/6311.68bbd921.chunk.css.map"
   },
   "entrypoints": [
-    "static/css/main.ec629d0c.css",
-    "static/js/main.ce6d8408.js"
+    "static/css/main.4b7a054a.css",
+    "static/js/main.7293b1d8.js"
   ]
 }
