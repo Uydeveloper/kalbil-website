@@ -1,0 +1,2 @@
+"use strict";(globalThis.webpackChunk=globalThis.webpackChunk||[]).push([[2430],{62430(s){s.exports=import("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.js")}}]);
+//# sourceMappingURL=2430.ff0006bf.chunk.js.map
